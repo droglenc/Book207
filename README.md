@@ -1,1 +1,1 @@
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "Get Started" at https://bookdown.org/home/about/ for how to compile this example.
+Repository of the readings for [the MTH207 course](https://derekogle.com/NCMTH207/) taught by [Derek Ogle](https://derekogle.com/) at [Northland College](https://www.northland.edu/). See [http://derekogle.com/Book207/] for the compiled "book."
