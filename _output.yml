@@ -1,7 +1,7 @@
 bookdown::gitbook:
   css: style.css
   fontsettings:
-    theme:night
+    theme: night
   toc_depth: 2
   number_sections: true
   split_by: chapter

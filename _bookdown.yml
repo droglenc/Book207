@@ -3,7 +3,7 @@ book_filename: "Book207"
 delete_merged_file: true
 language:
   ui:
-    chapter_name: "Chapter "
+    chapter_name: "Module "
     label:
       fig: "Figure "
       tab: "Table "

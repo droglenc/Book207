@@ -54,16 +54,16 @@ For example, tomorrow's temperature may be 74<sup>o</sup>F, which is the predict
 
 In statistics, one model for predicting the response variable for an individual in a group is to use the mean for the group. My best guess at the height of an unknown student is to guess that they are average for "their group." Obviously, most individuals are not truly average, so the specific individual will deviate from the mean. In Figure \@ref(fig:FullResid1) an observation is shown as a red point, the predicted value for that individual is shown as a horizontal line at the mean for the individual's group, and the "error" from this prediction is shown as the vertical red line.
 
-::: {.tip data-latex=""}
-We always predict the **response** variable with a model.
-:::
-
 ```{r FullResid1, echo=FALSE, fig.cap='Biological oxygen demand versus sample location (points) with group means shown by horizontal segments. The residual from a model that uses a separate mean for both groups is shown.'}
 t2 +
   geom_point(data=aqua[7,],mapping=aes(x=srcjit,y=BOD),color="red") +
   geom_segment(data=aqua[7,],mapping=aes(x=srcjit,xend=srcjit,y=BOD,yend=mn),
                color="red",linetype="dashed")
 ```
+
+::: {.tip data-latex=""}
+We always predict the **response** variable with a model.
+:::
 
 In the context of a simple linear regression, the predicted value is obtained by plugging the observed value of the explanatory variable into the regression equation. Thus, the "error" is the vertical distance between an observed point and the corresponding point on the line (Figure \@ref(fig:FullResid2)).
 
