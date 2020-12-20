@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.2 Method Purposes | Readings for MTH207</title>
+  <title>Chapter 1 Model Types &amp; Methods | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.2 Method Purposes | Readings for MTH207" />
+  <meta property="og:title" content="Chapter 1 Model Types &amp; Methods | Readings for MTH207" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://derekogle.com/Book207/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="droglenc/Book207" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.2 Method Purposes | Readings for MTH207" />
+  <meta name="twitter:title" content="Chapter 1 Model Types &amp; Methods | Readings for MTH207" />
   
   <meta name="twitter:description" content="This book contains the readings for MTH207 at Northland College." />
   
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="distinguishing-methods.html"/>
+<link rel="prev" href="index.html"/>
 <link rel="next" href="model-concepts.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -75,19 +75,18 @@
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="model-types.html"><a href="model-types.html"><i class="fa fa-check"></i><b>1</b> Model Types &amp; Methods</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="distinguishing-methods.html"><a href="distinguishing-methods.html"><i class="fa fa-check"></i><b>1.1</b> Distinguishing Methods</a></li>
-<li class="chapter" data-level="1.2" data-path="method-purposes.html"><a href="method-purposes.html"><i class="fa fa-check"></i><b>1.2</b> Method Purposes</a></li>
+<li class="chapter" data-level="1.1" data-path="model-types.html"><a href="model-types.html#distinguishing-methods"><i class="fa fa-check"></i><b>1.1</b> Distinguishing Methods</a></li>
+<li class="chapter" data-level="1.2" data-path="model-types.html"><a href="model-types.html#method-purposes"><i class="fa fa-check"></i><b>1.2</b> Method Purposes</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="model-concepts.html"><a href="model-concepts.html"><i class="fa fa-check"></i><b>2</b> Model Concepts</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="what-is-a-model.html"><a href="what-is-a-model.html"><i class="fa fa-check"></i><b>2.1</b> What is a Model</a></li>
-<li class="chapter" data-level="2.2" data-path="assessing-fit-ss.html"><a href="assessing-fit-ss.html"><i class="fa fa-check"></i><b>2.2</b> Assessing Fit (SS)</a></li>
-<li class="chapter" data-level="2.3" data-path="residual-degrees-of-freedom.html"><a href="residual-degrees-of-freedom.html"><i class="fa fa-check"></i><b>2.3</b> Residual Degrees-of-Freedom</a></li>
-<li class="chapter" data-level="2.4" data-path="mean-squares.html"><a href="mean-squares.html"><i class="fa fa-check"></i><b>2.4</b> Mean-Squares</a></li>
+<li class="chapter" data-level="2.1" data-path="model-concepts.html"><a href="model-concepts.html#what-is-a-model"><i class="fa fa-check"></i><b>2.1</b> What is a Model</a></li>
+<li class="chapter" data-level="2.2" data-path="model-concepts.html"><a href="model-concepts.html#assessing-fit-ss"><i class="fa fa-check"></i><b>2.2</b> Assessing Fit (SS)</a></li>
+<li class="chapter" data-level="2.3" data-path="model-concepts.html"><a href="model-concepts.html#residual-degrees-of-freedom"><i class="fa fa-check"></i><b>2.3</b> Residual Degrees-of-Freedom</a></li>
+<li class="chapter" data-level="2.4" data-path="model-concepts.html"><a href="model-concepts.html#mean-squares"><i class="fa fa-check"></i><b>2.4</b> Mean-Squares</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
-<li style="padding: 10px 15px; font-weight: bold;">Open access book-in-progress</li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
 <li><a href="https://bookdown.org" target="_blank">Built with Bookdown + RStudio</a></li>
 
@@ -108,6 +107,100 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
+<div id="model-types" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Model Types &amp; Methods</h1>
+<p>During this course we will examine a variety of models called either <em>general linear</em> or <em>generalIZED linear</em> models. General linear models have a quantitative <a href="https://deepai.org/machine-learning-glossary-and-terms/response-variable">response variable</a> and generally assume that the “errors” around the model follow a normal distribution. General linear models that we will discuss are a <strong>One-Way ANOVA</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, <strong>Two-WAY ANOVA</strong>, <strong>Simple Linear Regression</strong>, and <strong>Indicator Variable Regression</strong>. GeneralIZED linear models do not require a quantitative response variable nor “errors” that are normally distributed. Thus, generalIZED linear models are more flexible than general linear models. The only generalIZED linear model that we will encounter in this course is <strong>Logistic Regression</strong>, but the chi-square test from your introductory statistics course can also be cast as a generalIZED linear model.</p>
+<div class="defn">
+<p><strong>Response Variable</strong>: The variable thought to depend upon, be explained by, or be predicted by other variables.</p>
+</div>
+<div class="tip">
+<p>All models covered in this course will have <strong>only one</strong> response variable</p>
+</div>
+<p>Both general and generalIZED linear models can have a single explanatory variable that can be either quantitative or categorical, or multiple explanatory variables that can be all quantitative, all categorical, or a mixture of both quantitative and categorical. Ultimately, there can be several explanatory variables in a model, but we will only consider one or two explanatory variables in this course.</p>
+<div class="defn">
+<p><strong>Explanatory Variable</strong>: A variable thought to explained or be able to predict the response variable.</p>
+</div>
+<p> </p>
+<div id="distinguishing-methods" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Distinguishing Methods</h2>
+<p>The five methods that will be covered in this course can be distinguished by considering only the type of response variable and the types and number of explanatory variables (Table <a href="model-types.html#tab:ModelCharacteristics">1.1</a>). Thus, you will want to review <a href="http://derekogle.com/NCMTH107/modules/FoundationalDefns.html">variable types</a> and <a href="http://derekogle.com/NCMTH107/modules/DataProduction.html">definitions and distinctions of response and explanatory variables</a> from your introductory statistics course.</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:ModelCharacteristics">Table 1.1: </span>Response and explanatory variables types for the linear models considered in this course.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Response
+</th>
+<th style="text-align:left;">
+Explanatory
+</th>
+<th style="text-align:left;">
+Linear.Model
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Quantitative
+</td>
+<td style="text-align:left;">
+Categorical (only one)
+</td>
+<td style="text-align:left;">
+One-Way ANOVA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Quantitative
+</td>
+<td style="text-align:left;">
+Categorical (two)
+</td>
+<td style="text-align:left;">
+Two-Way ANOVA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Quantitative
+</td>
+<td style="text-align:left;">
+Quantitative (only one)
+</td>
+<td style="text-align:left;">
+Simple Linear Regression
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Quantitative
+</td>
+<td style="text-align:left;">
+Quantitative (one) &amp; Categorical (one)
+</td>
+<td style="text-align:left;">
+Indicator Variable Regression
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Binomial
+</td>
+<td style="text-align:left;">
+Quantitative (or Both)
+</td>
+<td style="text-align:left;">
+(Binary) Logistic Regression
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+</div>
 <div id="method-purposes" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Method Purposes</h2>
 <p>As seen above, each method uses different types of data. Not surprisingly then, each method is used to test different hypotheses or has a different analytical purpose. These purposes will be discussed in detail in subsequent modules. However, the major objective of each method is explained briefly below (in the order that we will cover them).</p>
@@ -154,16 +247,17 @@ Figure 1.5: The probability that the mirex concentration exceed the 0.1 mg/kg th
 </div>
 <p> </p>
 <p>From these examples it should be apparent that “ANOVAs” are about <strong>comparing means</strong> among groups and will look like means (usually with confidence intervals) plotted as points for each group. In contrast “regressions” are about exploring <strong>relationships</strong> and will look like a line or a curve when plotted.</p>
-<div class="warn">
+<div class="tip">
 <p>ANOVAs compare means; regressions examine relationships.</p>
 </div>
 
 </div>
-<!-- </div> -->
+</div>
 <div class="footnotes">
 <hr />
-<ol start="2">
-<li id="fn2"><p>Binary means there are only two categories – generically “success” and “failure.”<a href="method-purposes.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<ol start="1">
+<li id="fn1"><p>ANOVA is short for ANalysis Of VAriance<a href="model-types.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Binary means there are only two categories – generically “success” and “failure.”<a href="model-types.html#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -171,7 +265,7 @@ Figure 1.5: The probability that the mirex concentration exceed the 0.1 mg/kg th
           </div>
         </div>
       </div>
-<a href="distinguishing-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="model-concepts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

@@ -12,3 +12,27 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+div.tip, div.defn {
+  padding: 1em;
+  margin: 1em 0;
+  padding-left: 60px;
+  background-size: 50px;
+  background-repeat: no-repeat;
+  background-position: 5px center;
+  min-height: 60px;
+  color: SteelBlue;
+  background-color: #bed3ec;
+}
+
+div.tip {
+ background-image: url("zimgs/tip.png");
+ background-color: CornSilk;
+}
+
+div.defn {
+  background-image: url("zimgs/defn.png");
+  background-color: HoneyDew;
+}
+
+

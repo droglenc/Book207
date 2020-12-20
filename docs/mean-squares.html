@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Model Types &amp; Methods | Readings for MTH207</title>
+  <title>2.4 Mean-Squares | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Model Types &amp; Methods | Readings for MTH207" />
+  <meta property="og:title" content="2.4 Mean-Squares | Readings for MTH207" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://derekogle.com/Book207/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="droglenc/Book207" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Model Types &amp; Methods | Readings for MTH207" />
+  <meta name="twitter:title" content="2.4 Mean-Squares | Readings for MTH207" />
   
   <meta name="twitter:description" content="This book contains the readings for MTH207 at Northland College." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="distinguishing-methods.html"/>
+<link rel="prev" href="residual-degrees-of-freedom.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -73,10 +73,17 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="ModelTypes.html"><a href="ModelTypes.html"><i class="fa fa-check"></i><b>1</b> Model Types &amp; Methods</a>
+<li class="chapter" data-level="1" data-path="model-types.html"><a href="model-types.html"><i class="fa fa-check"></i><b>1</b> Model Types &amp; Methods</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="distinguishing-methods.html"><a href="distinguishing-methods.html"><i class="fa fa-check"></i><b>1.1</b> Distinguishing Methods</a></li>
 <li class="chapter" data-level="1.2" data-path="method-purposes.html"><a href="method-purposes.html"><i class="fa fa-check"></i><b>1.2</b> Method Purposes</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="model-concepts.html"><a href="model-concepts.html"><i class="fa fa-check"></i><b>2</b> Model Concepts</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-a-model.html"><a href="what-is-a-model.html"><i class="fa fa-check"></i><b>2.1</b> What is a Model</a></li>
+<li class="chapter" data-level="2.2" data-path="assessing-fit-ss.html"><a href="assessing-fit-ss.html"><i class="fa fa-check"></i><b>2.2</b> Assessing Fit (SS)</a></li>
+<li class="chapter" data-level="2.3" data-path="residual-degrees-of-freedom.html"><a href="residual-degrees-of-freedom.html"><i class="fa fa-check"></i><b>2.3</b> Residual Degrees-of-Freedom</a></li>
+<li class="chapter" data-level="2.4" data-path="mean-squares.html"><a href="mean-squares.html"><i class="fa fa-check"></i><b>2.4</b> Mean-Squares</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -101,28 +108,22 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ModelTypes" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Model Types &amp; Methods</h1>
-<p>During this course we will examine a variety of models called either <em>general linear</em> or <em>generalIZED linear</em> models. General linear models have a quantitative <a href="https://deepai.org/machine-learning-glossary-and-terms/response-variable">response variable</a> and generally assume that the “errors” around the model follow a normal distribution. General linear models that we will discuss are a <strong>One-Way ANOVA</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, <strong>Two-WAY ANOVA</strong>, <strong>Simple Linear Regression</strong>, and <strong>Indicator Variable Regression</strong>. GeneralIZED linear models do not require a quantitative response variable nor “errors” that are normally distributed. Thus, generalIZED linear models are more flexible than general linear models. The only generalIZED linear model that we will encounter in this course is <strong>Logistic Regression</strong>, but the chi-square test from your introductory statistics course can also be cast as a generalIZED linear model.</p>
-<p>Both general and generalIZED linear models can have a single explanatory variable that can be either quantitative or categorical, or multiple explanatory variables that can be all quantitative, all categorical, or a mixture of both quantitative and categorical. Ultimately, there can be several explanatory variables in a model, but we will only consider one or two explanatory variables in this course.</p>
+<div id="mean-squares" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Mean-Squares</h2>
+<p>Sums-of-squares are useful measures of model fit, but they are largely uninterpretible on their own. However, if a sum-of-squares is divided by its corresponding degrees-of-freedom it is called a <strong>Mean-Square (MS)</strong>. Mean-squares are the <strong>variance</strong> (i.e., squared standard deviation) of individuals around a given model. Mean-squares have useful mathematical properties as you will see in future modules. However, visually the square root of a mean square loosely describes how far each point is from the model (i.e., the “errors”), on average. The mean-squares are thus a measure of the “noise” around each model.</p>
 <div class="warn">
-<p>All models covered in this course will have <strong>only one</strong> response variable</p>
+<p>MS are variances; thus, the square root of MS are standard deviations</p>
 </div>
-<p> </p>
+
 </div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>ANOVA is short for ANalysis Of VAriance<a href="ModelTypes.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="distinguishing-methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="residual-degrees-of-freedom.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -174,6 +175,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
