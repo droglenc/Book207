@@ -1,4 +1,4 @@
-# Model Types & Methods {#model-types}
+# Model Types & Methods {#ModelTypes}
 
 ```{r ModelTypes-setup, include=FALSE}
 data(Mirex)

@@ -1,4 +1,4 @@
-# Model Concepts
+# Model Concepts {#ModelConcepts}
 
 ```{r ModelConcepts-setup, include=FALSE}
 ## Set randome number seed for consistent jittering

@@ -9,10 +9,10 @@ fig:FullResid1
 fig:FullResid2
 fig:FullResid3
 fig:RSS1
-model-types
+ModelTypes
 distinguishing-methods
 method-purposes
-model-concepts
+ModelConcepts
 what-is-a-model
 assessing-fit-ss
 a-residual
