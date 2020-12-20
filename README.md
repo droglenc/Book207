@@ -1,1 +1,1 @@
-Repository of the readings for [the MTH207 course](https://derekogle.com/NCMTH207/) taught by [Derek Ogle](https://derekogle.com/) at [Northland College](https://www.northland.edu/). See [http://derekogle.com/Book207/] for the compiled "book."
+Repository of the readings for [the MTH207 course](https://derekogle.com/NCMTH207/) taught by [Derek Ogle](https://derekogle.com/) at [Northland College](https://www.northland.edu/). See http://derekogle.com/Book207/ for the compiled "book."
