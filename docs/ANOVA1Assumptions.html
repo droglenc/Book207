@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 7 One-Way ANOVA Assumptions | Readings for MTH207</title>
+  <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 7 One-Way ANOVA Assumptions | Readings for MTH207" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://derekogle.com/Book207/" />
+  
+  <meta property="og:description" content="This book contains the readings for MTH207 at Northland College." />
+  <meta name="github-repo" content="droglenc/Book207" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 7 One-Way ANOVA Assumptions | Readings for MTH207" />
+  
+  <meta name="twitter:description" content="This book contains the readings for MTH207 at Northland College." />
+  
+
+<meta name="author" content="Derek H. Ogle" />
+
+
+<meta name="date" content="2020-12-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ANOVA1MultipleComparisons.html"/>
+<link rel="next" href="ANOVA1Transformations.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Readings for MTH207</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>FOUNDATIONS</b></span></li>
+<li class="chapter" data-level="1" data-path="ModelTypes.html"><a href="ModelTypes.html"><i class="fa fa-check"></i><b>1</b> Model Types &amp; Methods</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="ModelTypes.html"><a href="ModelTypes.html#distinguishing-methods"><i class="fa fa-check"></i><b>1.1</b> Distinguishing Methods</a></li>
+<li class="chapter" data-level="1.2" data-path="ModelTypes.html"><a href="ModelTypes.html#method-purposes"><i class="fa fa-check"></i><b>1.2</b> Method Purposes</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="T2Review.html"><a href="T2Review.html"><i class="fa fa-check"></i><b>2</b> 2-Sample t Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="T2Review.html"><a href="T2Review.html#review"><i class="fa fa-check"></i><b>2.1</b> Review</a></li>
+<li class="chapter" data-level="2.2" data-path="T2Review.html"><a href="T2Review.html#T2analysis"><i class="fa fa-check"></i><b>2.2</b> Analysis in R</a></li>
+<li class="chapter" data-level="2.3" data-path="T2Review.html"><a href="T2Review.html#signal-to-noise"><i class="fa fa-check"></i><b>2.3</b> Signal-to-Noise</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ModelConcepts.html"><a href="ModelConcepts.html"><i class="fa fa-check"></i><b>3</b> Model Concepts</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ModelConcepts.html"><a href="ModelConcepts.html#what-is-a-model"><i class="fa fa-check"></i><b>3.1</b> What is a Model</a></li>
+<li class="chapter" data-level="3.2" data-path="ModelConcepts.html"><a href="ModelConcepts.html#assessing-fit-ss"><i class="fa fa-check"></i><b>3.2</b> Assessing Fit (SS)</a></li>
+<li class="chapter" data-level="3.3" data-path="ModelConcepts.html"><a href="ModelConcepts.html#residual-degrees-of-freedom"><i class="fa fa-check"></i><b>3.3</b> Residual Degrees-of-Freedom</a></li>
+<li class="chapter" data-level="3.4" data-path="ModelConcepts.html"><a href="ModelConcepts.html#mean-squares"><i class="fa fa-check"></i><b>3.4</b> Mean-Squares</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ModelComparison.html"><a href="ModelComparison.html"><i class="fa fa-check"></i><b>4</b> Model Comparison</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ModelComparison.html"><a href="ModelComparison.html#competing-models"><i class="fa fa-check"></i><b>4.1</b> Competing Models</a></li>
+<li class="chapter" data-level="4.2" data-path="ModelComparison.html"><a href="ModelComparison.html#measuring-increase-in-fit"><i class="fa fa-check"></i><b>4.2</b> Measuring Increase in Fit</a></li>
+<li class="chapter" data-level="4.3" data-path="ModelComparison.html"><a href="ModelComparison.html#measuring-increase-in-complexity"><i class="fa fa-check"></i><b>4.3</b> Measuring Increase in Complexity</a></li>
+<li class="chapter" data-level="4.4" data-path="ModelComparison.html"><a href="ModelComparison.html#noise-variances"><i class="fa fa-check"></i><b>4.4</b> “Noise” Variances</a></li>
+<li class="chapter" data-level="4.5" data-path="ModelComparison.html"><a href="ModelComparison.html#signal-variance-benefit-to-cost"><i class="fa fa-check"></i><b>4.5</b> “Signal” Variance (Benefit-to-Cost)</a></li>
+<li class="chapter" data-level="4.6" data-path="ModelComparison.html"><a href="ModelComparison.html#ratio-of-variances-signal-to-noise"><i class="fa fa-check"></i><b>4.6</b> Ratio of Variances (Signal-to-Noise)</a></li>
+<li class="chapter" data-level="4.7" data-path="ModelComparison.html"><a href="ModelComparison.html#anova-table"><i class="fa fa-check"></i><b>4.7</b> ANOVA Table</a></li>
+<li class="chapter" data-level="4.8" data-path="ModelComparison.html"><a href="ModelComparison.html#two-sample-t-test-revisited-using-linear-models"><i class="fa fa-check"></i><b>4.8</b> Two-Sample t-Test Revisited: Using Linear Models</a></li>
+<li class="chapter" data-level="4.9" data-path="ModelComparison.html"><a href="ModelComparison.html#one-more-look-at-ms-and-f-test"><i class="fa fa-check"></i><b>4.9</b> One More Look at MS and F-test</a></li>
+</ul></li>
+<li class="part"><span><b>ONE-WAY ANOVA</b></span></li>
+<li class="chapter" data-level="5" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html"><i class="fa fa-check"></i><b>5</b> One-Way ANOVA Foundations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#analytical-foundation"><i class="fa fa-check"></i><b>5.1</b> Analytical Foundation</a></li>
+<li class="chapter" data-level="5.2" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#one-way-anova-in-r"><i class="fa fa-check"></i><b>5.2</b> One-Way ANOVA in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html"><i class="fa fa-check"></i><b>6</b> Multiple Comparisons</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#multiple-comparison-problem"><i class="fa fa-check"></i><b>6.1</b> Multiple Comparison Problem</a></li>
+<li class="chapter" data-level="6.2" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#correction-methods"><i class="fa fa-check"></i><b>6.2</b> Correction Methods</a></li>
+<li class="chapter" data-level="6.3" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r"><i class="fa fa-check"></i><b>6.3</b> Multiple Comparisons in R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html"><i class="fa fa-check"></i><b>7</b> One-Way ANOVA Assumptions</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#independence"><i class="fa fa-check"></i><b>7.1</b> Independence</a></li>
+<li class="chapter" data-level="7.2" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#equal-variances"><i class="fa fa-check"></i><b>7.2</b> Equal Variances</a></li>
+<li class="chapter" data-level="7.3" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#normality"><i class="fa fa-check"></i><b>7.3</b> Normality</a></li>
+<li class="chapter" data-level="7.4" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#no-outliers"><i class="fa fa-check"></i><b>7.4</b> No Outliers</a></li>
+<li class="chapter" data-level="7.5" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#testing-assumptions-in-r"><i class="fa fa-check"></i><b>7.5</b> Testing Assumptions in R</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html"><i class="fa fa-check"></i><b>8</b> One-Way ANOVA Transformations</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#power-transformations"><i class="fa fa-check"></i><b>8.1</b> Power Transformations</a></li>
+<li class="chapter" data-level="8.2" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#transformations-from-theory"><i class="fa fa-check"></i><b>8.2</b> Transformations from Theory</a></li>
+<li class="chapter" data-level="8.3" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#interpretations-after-transformations"><i class="fa fa-check"></i><b>8.3</b> Interpretations After Transformations</a></li>
+<li class="chapter" data-level="8.4" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#back-transformations-in-r"><i class="fa fa-check"></i><b>8.4</b> Back-Transformations in R</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html"><i class="fa fa-check"></i><b>9</b> One-Way ANOVA Summary</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#suggested-workflow"><i class="fa fa-check"></i><b>9.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="9.2" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#nematodes-no-transformation"><i class="fa fa-check"></i><b>9.2</b> Nematodes (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="9.3" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#ant-foraging-transformation"><i class="fa fa-check"></i><b>9.3</b> Ant Foraging (<em>Transformation</em>)</a></li>
+<li class="chapter" data-level="9.4" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#peak-discharge-transformation"><i class="fa fa-check"></i><b>9.4</b> Peak Discharge (<em>Transformation</em>)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
+<li><a href="https://bookdown.org" target="_blank">Built with Bookdown + RStudio</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Readings for MTH207</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ANOVA1Assumptions" class="section level1" number="7">
+<h1><span class="header-section-number">Module 7</span> One-Way ANOVA Assumptions</h1>
+<p>As with most statistical methods, the One-Way ANOVA requires that four assumptions be met so that the calculations made in Modules <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a> and <a href="ANOVA1MultipleComparisons.html#ANOVA1MultipleComparisons">6</a> mean what we said they would mean. The four assumptions for a One-Way ANOVA are:<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a></p>
+<ol style="list-style-type: decimal">
+<li>independence of individuals within and among groups,</li>
+<li>equal variances among groups,</li>
+<li>normality of residuals within each group, and</li>
+<li>no outliers</li>
+</ol>
+<p>Each of these assumptions in more detail below.</p>
+<p> </p>
+<div id="independence" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Independence</h2>
+<p>In a One-Way ANOVA the individuals <strong>must be</strong> independent both within and among groups. In other words, there must be no connection between individuals within a group or between individuals in one group and individuals in other groups.</p>
+<div class="tip">
+<p>Independence of individuals is a <strong>critical</strong> assumption of one-way ANOVAs. Violations of this assumption cannot be corrected.</p>
+</div>
+<p>A lack of independence may include applying multiple treatments to the same individual, having related individuals either within the same group or specifically spread across the groups, or having individuals that are not separated in space or time. Below are examples where there was a <em>lack of independence</em>.</p>
+<ul>
+<li>Researchers measured the self-esteem at three time points – beginning, middle, and end – for 10 people following a specific diet. They wanted to determine if self-esteem increased over the time that individuals were on the diet. This example illustrates a lack of <em>among-group</em> independence because the same 10 people were in each of the “groups” (i.e., beginning, middle, and end time period).</li>
+<li>Zoo keepers were interested in whether the activity rate of lions differed by time of day. For this study, they recorded the activity rate of all five lions at the same random times in the morning, afternoon, evening, and night across several days. This example illustrates a lack of <em>among-group</em> independence because the same lions were recorded in each period. This also illustrates a lack of <em>within-group</em> independence because the activity rates were recorded at the same times for each lion. Thus, the lions may be affecting each others’ activity rates. For example, if one lion gets up to roam around then the other lions may be more likely to get up to roam around as well.</li>
+<li>Researchers with the LoonWatch program wanted to determine if mean density of loons differs among Bayfield, Ashland, and Iron counties. For this they asked local volunteers to record the number of loons they observed on several lakes during the same weekend in June. This example illustrates a lack of <em>within-group</em> independence as different observers were used in each county. It is possible that the observers in one county are more adept at observing loons on their lakes (for whatever reason – they know their lakes better, their lakes are smaller, they are more motivated, they spend more time).</li>
+</ul>
+<p>There are methods to detect violations of the independence assumption if the assumption is related to time (e.g., the first situation above), but for most other situations a violation is only detected by careful consideration of the design of the data collection. Violations that are discovered after the data are collected cannot be corrected and the data have to be analyzed with techniques specific to dependent data.<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a> In other words, designing data collections with independence among individuals is critical and needs to be ascertained before the data are collected.</p>
+<div class="tip">
+<p>Independence is generally assessed by considering how the individuals were obtained.</p>
+</div>
+<p>In this course, the data will have already been collected for you and, at times, the description of that data collection may be sparse. To address independence you will be asked to explain why you think dependencies do not exist in the data collection. This may take several sentences. Examples will be provided below and in future analyses.</p>
+<p> </p>
+</div>
+<div id="equal-variances" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Equal Variances</h2>
+<p>The variances among groups must be equal because the estimate of MS<sub>Within</sub> is based on pooling estimates across the groups. In other words, if the variances among each group are equal, then the variance (or MS) for each group is an estimate of the overall MS<sub>Within</sub>. If the variances are equal across groups then combining the variances from each group provides a robust estimate of the overall variance within groups.</p>
+<div class="tip">
+<p>Equal variances among groups is a critical assumption of a one-way ANOVA. Violations of this assumption should be corrected.</p>
+</div>
+<p>The assumption of equal variances can be tested with Levene’s homogeneity of variances test.<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a> The hypotheses tested by Levene’s test are</p>
+<p><span class="math display">\[
+\begin{split}
+   \text{H}_{\text{0}} &amp;: \sigma_{1}^{2}=\sigma_{2}^{2}=\cdots=\sigma_{I}^{2} \\
+   \text{H}_{\text{A}} &amp;: \text{At least one pair of variances differ}
+\end{split}
+\]</span></p>
+<p>Thus, a p-value less than α means that the variances are not equal and the assumption of the one-way ANOVA has not been met.<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a></p>
+<p>The equality of variances may be visually examined with a boxplot of full model residuals<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a> by group. If the “boxes” on this boxplot are not roughly the same, then the equal variances assumption may be violated. I will usually examine the boxplots rather than use a Levene’s Test when the sample size is very large because Levene’s test can be hyper-sensitive with large samples sizes (i.e., reject H<sub>0</sub> of equal variances when the variances are not practically different).</p>
+<p> </p>
+</div>
+<div id="normality" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Normality</h2>
+<p>The normality of residuals WITHIN each group is difficult to test because there may be many groups being considered or relatively few individuals in each group. Thus the normality of all residuals taken as a whole is often tested. As most linear models are resilient to slight departures from normality, it is thought that if all of the residuals as a whole appear approximately normal then the residuals within each group are likely “normal enough.”</p>
+<div class="tip">
+<p>A one-way ANOVA is resilient to slight violations of the normality assumption. Severe violations of this assumption should be corrected.</p>
+</div>
+<p>Normality is often tested by simply viewing a histogram of residuals or a so-called Q-Q plot. For an adequate sample size, a histogram that is not strongly skewed is probably adequate for a One-Way ANOVA.</p>
+<p>The normality of residuals may also be tested with the Anderson-Darling Normality Test.<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a> The hypotheses for this test are</p>
+<p><span class="math display">\[ 
+\begin{split}
+   \text{H}_{\text{0}}&amp;: \text{Residuals are normally distributed} \\
+   \text{H}_{\text{A}}&amp;: \text{Residuals are not normally distributed} \\
+\end{split}
+\]</span></p>
+<p>An Anderson-Darling p-value greater than α indicates that the residuals appear to be normally distributed and the normality assumption is met. An Anderson-Darling p-value less than α suggests that the normality assumption has been violated.</p>
+<p>The results of an Anderson-Darling test should be interpreted cautiously for both small and very large sample sizes. At small sample sizes, the distribution would need to be wildly non-normal for the Anderson-Darling Test to suggest that it is not normal. At very large sample sizes, very small and insubstantial differences from normality may result in the test indicating that the distribution is not normal. Thus, it is important to always examine the histogram of residuals to decide whether this assumption is adequately met or not.</p>
+<p> </p>
+</div>
+<div id="no-outliers" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> No Outliers</h2>
+<p>The one-way ANOVA is very sensitive to outliers. Outliers should be corrected if possible (usually if there is a data transcription or entry problem) or deleted if it is determined that the outlier is clearly in error or is not part of the population of interest. If the outlier is not corrected or deleted, then the relative effect of the outlier on the analysis should be determined by completing the analysis with and without the outlier present. Any differences in results or interpretations due to the presence of the outlier should be clearly explained to the reader.</p>
+<div class="tip">
+<p>A one-way ANOVA is very sensitive to outliers.</p>
+</div>
+<p>Outliers may be detected by visual examination of a histogram of residuals.</p>
+<p>Potential outliers can be more objectively detected with externally Studentized residuals,<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a> which essentially measure how many standard deviations an individual is from its group mean. Studentized residuals follow a t-distribution with df<sub>Within</sub>-1 degrees-of-freedom.<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a> A p-value for testing whether an individual residual is an outlier or not is calculated by converting the Studentized residual to a two-tailed p-value using a t-distribution. As these p-values are computed for each residual, this process suffers from the “multiple comparison problem” (see Section <a href="#multiple-comparisons-problem"><strong>??</strong></a>). Thus, the p-values use a Bonferroni method<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a> to correct for multiple comparisons so that the likelihood of mistakingly identifying an outlier is controlled at a desirable level. If the Bonferroni adjusted p-value for the most extreme residual is less than α, then that individual is considered to be a significant outlier and should be flagged for further inspection as described above.</p>
+<p> </p>
+</div>
+<div id="testing-assumptions-in-r" class="section level2" number="7.5">
+<h2><span class="header-section-number">7.5</span> Testing Assumptions in R</h2>
+<p>All plots and tests of assumptions can be completed by submitting the saved <code>lm</code> object from when the One-Way ANOVA was computed to <code>assumptionCheck()</code>. For example, the code below fits the One-Way ANOVA for testing if the mean immunoglobulin levels of New Zealand opossums differs among seasons (the <code>opp</code> data frame was created in Module <a href="ANOVA1MultipleComparisons.html#ANOVA1MultipleComparisons">6</a>) and then performs the calculations needed to check the assumptions.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="ANOVA1Assumptions.html#cb27-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
+<span id="cb27-2"><a href="ANOVA1Assumptions.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1)</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>For a One-Way ANOVA, <code>assumptionCheck()</code> produces a histogram of residuals with the Anderson-Darling and outlier test p-values on the left and a boxplot of residuals for each group with the Levene’s Test p-value on the right.</p>
+<p>In this case the boxes on the boxplot are similarly sized and the Levene’s test p-value (=0.3708) is greater than α suggesting that the group variances are equal. The histogram of residuals is difficult to assess because the sample size is so small, but it does not appear strongly skewed and the Anderson-Darling p-value (=0.0609) is (barely) greater than α, which weakly suggests that the residuals are normally distributed. The histogram does not show any “odd” individuals and the outlier test p-value (=0.0402) is greater than α which suggests that there are not any significant outliers in these data. Thus, the three assumptions that can be tested with the data all appear to be met.</p>
+<p>The independence assumption cannot be assessed from the data and must be reasoned through. While there is not much information about this study, I will assume between group independence as there is no suggestion that the same opossums were sampled in each of the three seasons (i.e., no indication that they were tagged or otherwise individually identified). This is particularly clear because the sample size differs across seasons (see table below). I will also assume that there is within-group independence because there is no evidence that the opossums within any given season were somehow related or connected.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="ANOVA1Assumptions.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>season,<span class="at">data=</span>opp)</span></code></pre></div>
+<pre><code>#R&gt;   season
+#R&gt;   feb may nov 
+#R&gt;    12   7   8</code></pre>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="24">
+<li id="fn24"><p>Note that the first three are the same three assumptions you learned for a <a href="T2Review.html#T2Review">2-Sample t-test</a>.<a href="ANOVA1Assumptions.html#fnref24" class="footnote-back">↩︎</a></p></li>
+<li id="fn25"><p>Such methods may include repeated measures ANOVA, mixed-models, and hierarchical models.<a href="ANOVA1Assumptions.html#fnref25" class="footnote-back">↩︎</a></p></li>
+<li id="fn26"><p>There are a wide variety of statistical tests for examining equality of variances. We will use the Levene’s test in this class because it is common in the literature and simple to implement in most statistical software packages.<a href="ANOVA1Assumptions.html#fnref26" class="footnote-back">↩︎</a></p></li>
+<li id="fn27"><p>Methods for “working around” this assumption violation are discussed in Module <a href="ANOVA1Transformations.html#ANOVA1Transformations">8</a>.<a href="ANOVA1Assumptions.html#fnref27" class="footnote-back">↩︎</a></p></li>
+<li id="fn28"><p>Recall that these are the vertical differences between observations and their group mean.<a href="ANOVA1Assumptions.html#fnref28" class="footnote-back">↩︎</a></p></li>
+<li id="fn29"><p>There are also a wide variety of normality tests. Some authors even argue against the use of hypothesis tests for testing normality and suggest the use of graphical methods instead. For simplicity, the Anderson-Darling normality test will be used throughout this course.<a href="ANOVA1Assumptions.html#fnref29" class="footnote-back">↩︎</a></p></li>
+<li id="fn30"><p>A residual divided by the standard deviation of the residual, where the standard deviation is computed with that individual removed.<a href="ANOVA1Assumptions.html#fnref30" class="footnote-back">↩︎</a></p></li>
+<li id="fn31"><p>The extra one is subtracted because the individual residual is not included in the calculation of the standard deviation of residuals.<a href="ANOVA1Assumptions.html#fnref31" class="footnote-back">↩︎</a></p></li>
+<li id="fn32"><p>An adjusted p-value is computed by multiplying the original p-value by the number of comparisons made (in this case n).<a href="ANOVA1Assumptions.html#fnref32" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ANOVA1MultipleComparisons.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ANOVA1Transformations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Book207.pdf", "Book207.epub"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

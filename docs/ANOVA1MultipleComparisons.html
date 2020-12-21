@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2020-12-20" />
+<meta name="date" content="2020-12-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="ANOVA1Foundations.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="ANOVA1Assumptions.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -180,6 +180,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#correction-methods"><i class="fa fa-check"></i><b>6.2</b> Correction Methods</a></li>
 <li class="chapter" data-level="6.3" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r"><i class="fa fa-check"></i><b>6.3</b> Multiple Comparisons in R</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html"><i class="fa fa-check"></i><b>7</b> One-Way ANOVA Assumptions</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#independence"><i class="fa fa-check"></i><b>7.1</b> Independence</a></li>
+<li class="chapter" data-level="7.2" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#equal-variances"><i class="fa fa-check"></i><b>7.2</b> Equal Variances</a></li>
+<li class="chapter" data-level="7.3" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#normality"><i class="fa fa-check"></i><b>7.3</b> Normality</a></li>
+<li class="chapter" data-level="7.4" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#no-outliers"><i class="fa fa-check"></i><b>7.4</b> No Outliers</a></li>
+<li class="chapter" data-level="7.5" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#testing-assumptions-in-r"><i class="fa fa-check"></i><b>7.5</b> Testing Assumptions in R</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html"><i class="fa fa-check"></i><b>8</b> One-Way ANOVA Transformations</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#power-transformations"><i class="fa fa-check"></i><b>8.1</b> Power Transformations</a></li>
+<li class="chapter" data-level="8.2" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#transformations-from-theory"><i class="fa fa-check"></i><b>8.2</b> Transformations from Theory</a></li>
+<li class="chapter" data-level="8.3" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#interpretations-after-transformations"><i class="fa fa-check"></i><b>8.3</b> Interpretations After Transformations</a></li>
+<li class="chapter" data-level="8.4" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#back-transformations-in-r"><i class="fa fa-check"></i><b>8.4</b> Back-Transformations in R</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html"><i class="fa fa-check"></i><b>9</b> One-Way ANOVA Summary</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#suggested-workflow"><i class="fa fa-check"></i><b>9.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="9.2" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#nematodes-no-transformation"><i class="fa fa-check"></i><b>9.2</b> Nematodes (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="9.3" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#ant-foraging-transformation"><i class="fa fa-check"></i><b>9.3</b> Ant Foraging (<em>Transformation</em>)</a></li>
+<li class="chapter" data-level="9.4" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#peak-discharge-transformation"><i class="fa fa-check"></i><b>9.4</b> Peak Discharge (<em>Transformation</em>)</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
@@ -212,24 +234,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="multiple-comparison-problem" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Multiple Comparison Problem</h2>
 <p>The most obvious solution to identify which pairs of means differ is to perform a 2-sample t-test for each pair of groups. Unfortunately, this seemingly simple answer has at least two major problems. First, the number of 2-sample t-tests needed increases dramatically with increasing numbers of groups. Second, the probability of incorrectly concluding that at least one pair of means differs when no pairs actually differ increases dramatically with increasing numbers of groups. Of these two issues, the second is much more problematic and needs to be better understood.</p>
-<p>In any one comparison of two means the probability of incorrectly concluding that the means are different when they are actually not different is α. This incorrect conclusion is called a <strong>pairwise Type I error</strong><a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a> because it relates to only one comparison of a pair of means.</p>
-<p>In a situation with three (<span class="math inline">\(I\)</span>=3) groups (say A, B, C) then there are three pairwise comparisons (<span class="math inline">\(k\)</span>=3) to be made (A to B, A to C, and B to C). A pairwise error could be made on any of these three tests. Making a Type I error on <em>at least one</em> of these multiple pairwise tests is called an <strong>experiment-wise Type I error</strong><a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> because it involves all pairwise comparisons in the experiment at hand.</p>
+<p>In any one comparison of two means the probability of incorrectly concluding that the means are different when they are actually not different is α. This incorrect conclusion is called a <strong>pairwise Type I error</strong> because it relates to only one comparison of a pair of means.</p>
+<p>In a situation with three (<span class="math inline">\(I\)</span>=3) groups (say A, B, C) then there are three pairwise comparisons (<span class="math inline">\(k\)</span>=3) to be made (A to B, A to C, and B to C). A pairwise error could be made on any of these three tests. Making a Type I error on <em>at least one</em> of these multiple pairwise tests is called an <strong>experiment-wise Type I error</strong> because it involves all pairwise comparisons in the experiment at hand.</p>
 <p>It is important that you notice <em>at least</em> in the definition of the experiment-wise error rate. For example, in three comparisons, the incorrect conclusion could be for the first pair, the second pair, the third pair, the first and second pair, the first and third pair, the second and third pair, or all three pairs!!</p>
-<p>Figure <a href="ANOVA1MultipleComparisons.html#fig:MCProblem">6.1</a> demonstrates the two issues related to multiple comparisons. First, the x-axis labels show how the number of pairwise comparisons (<span class="math inline">\(k\)</span>) increases quickly with increasing number of groups (<span class="math inline">\(I\)</span>) in the study. For example, six groups (<span class="math inline">\(I\)</span>=6) is not a complicated study, but it results in fifteen pairwise comparisons (<span class="math inline">\(k\)</span>=15). More importantly the line and point labels in the figure show how the experiment-wise error rate increases quickly and dramatically with increasing number of groups. For example, the experiment-wise error rate for six (<span class="math inline">\(I\)</span>=6) groups is over 0.50.<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> Thus, it is nearly a coin flip that at least one error will be made in all paired comparisons among six groups. Making an error more than 50% of the time in such a simple study is not acceptable and must be corrected.</p>
 <div class="tip">
-<p>The experiment-wise error rate increases dramatically with increasing numbers of treatment groups.</p>
+<p>A Type I error is rejecting H<sub>0</sub> when H<sub>0</sub> is actually true. In a two-sample t-test, a Type I error is concluding that two means are significantly different when they are not different.</p>
 </div>
+<div class="tip">
+<p><strong>Pairwise error rate:</strong> The probability of a Type I error in a single comparison of two means. Sometimes called an comparison-, individual-, or test-wise error.</p>
+</div>
+<div class="tip">
+<p><strong>Experiment-wise error rate:</strong> The probability of <em>at least one</em> Type I error in a set of comparisons of two means. Sometimes called the family-wise error.</p>
+</div>
+<p>Figure <a href="ANOVA1MultipleComparisons.html#fig:MCProblem">6.1</a> demonstrates the two issues related to multiple comparisons. First, the x-axis labels show how the number of pairwise comparisons (<span class="math inline">\(k\)</span>) increases quickly with increasing number of groups (<span class="math inline">\(I\)</span>) in the study. For example, six groups (<span class="math inline">\(I\)</span>=6) is not a complicated study, but it results in fifteen pairwise comparisons (<span class="math inline">\(k\)</span>=15). More importantly the line and point labels in the figure show how the experiment-wise error rate increases quickly and dramatically with increasing number of groups. For example, the experiment-wise error rate for six (<span class="math inline">\(I\)</span>=6) groups is over 0.50.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a> Thus, it is nearly a coin flip that at least one error will be made in all paired comparisons among six groups. Making an error more than 50% of the time in such a simple study is not acceptable and must be corrected.</p>
 <div class="figure" style="text-align: center"><span id="fig:MCProblem"></span>
 <img src="Book207_files/figure-html/MCProblem-1.png" alt="Relationship between the number of groups (I) in an analysis, the number of pairs of means that would need to be tested (k), and the probability of making one or more Type I errors in all comparisons. Note that alpha=0.05." width="336" />
 <p class="caption">
 Figure 6.1: Relationship between the number of groups (I) in an analysis, the number of pairs of means that would need to be tested (k), and the probability of making one or more Type I errors in all comparisons. Note that alpha=0.05.
 </p>
 </div>
+<div class="tip">
+<p>The experiment-wise error rate increases dramatically with increasing numbers of treatment groups.</p>
+</div>
 <p> </p>
 </div>
 <div id="correction-methods" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Correction Methods</h2>
-<p>There are many procedures designed to attempt to control experiment-wise error rate at a desired level (usually α). You will here a variety of names like Tukey’s HSD, Bonferroni’s adjustment, Sidak’s method, and Scheffe’s method.<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a> For simplicity, only the Tukey-Kramer honestly significantly different (i.e., Tukey’s HSD or Tukey’s) method will be used here.</p>
+<p>There are many procedures designed to attempt to control experiment-wise error rate at a desired level (usually α). You will here a variety of names like Tukey’s HSD, Bonferroni’s adjustment, Sidak’s method, and Scheffe’s method.<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> For simplicity, only the Tukey-Kramer honestly significantly different (i.e., Tukey’s HSD or Tukey’s) method will be used here.</p>
 <p>As simplistically as possible, Tukey’s test computes the t test statistic for each pair of means as if conducting a 2-sample t-test. However, this test statistic is compared to a “Studentized range” rather than a t distribution to compute the p-value. These “adjusted” p-values are then simply compared to α to make a decision about the means of each pair. The net result of this modification however is that the experiment-wise error rate across all comparisions is controlled at the desired level when the group sample sizes are equal and is slightly conservative when the group sample sizes are different.</p>
 <p> </p>
 </div>
@@ -300,10 +331,8 @@ Figure 6.1: Relationship between the number of groups (I) in an analysis, the nu
 <div class="footnotes">
 <hr />
 <ol start="22">
-<li id="fn22"><p>This is sometimes called an comparison-individual-, or test-wise error.<a href="ANOVA1MultipleComparisons.html#fnref22" class="footnote-back">↩︎</a></p></li>
-<li id="fn23"><p>This is sometimes called a family-wise error.<a href="ANOVA1MultipleComparisons.html#fnref23" class="footnote-back">↩︎</a></p></li>
-<li id="fn24"><p>Using α=0.05<a href="ANOVA1MultipleComparisons.html#fnref24" class="footnote-back">↩︎</a></p></li>
-<li id="fn25"><p>See <a href="https://en.wikipedia.org/wiki/Family-wise_error_rate#Controlling_procedures">here</a> for a short list of methods.<a href="ANOVA1MultipleComparisons.html#fnref25" class="footnote-back">↩︎</a></p></li>
+<li id="fn22"><p>Using α=0.05<a href="ANOVA1MultipleComparisons.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<li id="fn23"><p>See <a href="https://en.wikipedia.org/wiki/Family-wise_error_rate#Controlling_procedures">here</a> for a short list of methods.<a href="ANOVA1MultipleComparisons.html#fnref23" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -312,7 +341,7 @@ Figure 6.1: Relationship between the number of groups (I) in an analysis, the nu
         </div>
       </div>
 <a href="ANOVA1Foundations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ANOVA1Assumptions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

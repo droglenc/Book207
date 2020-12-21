@@ -20,17 +20,25 @@ A significant one-way ANOVA only indicates that at least one pair of means diffe
 ## Multiple Comparison Problem
 The most obvious solution to identify which pairs of means differ is to perform a 2-sample t-test for each pair of groups. Unfortunately, this seemingly simple answer has at least two major problems. First, the number of 2-sample t-tests needed increases dramatically with increasing numbers of groups. Second, the probability of incorrectly concluding that at least one pair of means differs when no pairs actually differ increases dramatically with increasing numbers of groups. Of these two issues, the second is much more problematic and needs to be better understood.
 
-In any one comparison of two means the probability of incorrectly concluding that the means are different when they are actually not different is &alpha;. This incorrect conclusion is called a **pairwise Type I error**^[This is sometimes called an comparison-individual-, or test-wise error.] because it relates to only one comparison of a pair of means.
+In any one comparison of two means the probability of incorrectly concluding that the means are different when they are actually not different is &alpha;. This incorrect conclusion is called a **pairwise Type I error** because it relates to only one comparison of a pair of means.
 
-In a situation with three ($I$=3) groups (say A, B, C) then there are three pairwise comparisons ($k$=3) to be made (A to B, A to C, and B to C). A pairwise error could be made on any of these three tests. Making a Type I error on *at least one* of these multiple pairwise tests is called an **experiment-wise Type I error**^[This is sometimes called a family-wise error.] because it involves all pairwise comparisons in the experiment at hand.
+In a situation with three ($I$=3) groups (say A, B, C) then there are three pairwise comparisons ($k$=3) to be made (A to B, A to C, and B to C). A pairwise error could be made on any of these three tests. Making a Type I error on *at least one* of these multiple pairwise tests is called an **experiment-wise Type I error** because it involves all pairwise comparisons in the experiment at hand.
 
 It is important that you notice *at least* in the definition of the experiment-wise error rate. For example, in three comparisons, the incorrect conclusion could be for the first pair, the second pair, the third pair, the first and second pair, the first and third pair, the second and third pair, or all three pairs!!
 
-Figure \@ref(fig:MCProblem) demonstrates the two issues related to multiple comparisons. First, the x-axis labels show how the number of pairwise comparisons ($k$) increases quickly with increasing number of groups ($I$) in the study. For example, six groups ($I$=6) is not a complicated study, but it results in fifteen pairwise comparisons ($k$=15). More importantly the line and point labels in the figure show how the experiment-wise error rate increases quickly and dramatically with increasing number of groups. For example, the experiment-wise error rate for six ($I$=6) groups is over 0.50.^[Using &alpha;=0.05] Thus, it is nearly a coin flip that at least one error will be made in all paired comparisons among six groups. Making an error more than 50% of the time in such a simple study is not acceptable and must be corrected.
+::: {.tip data-latex=""}
+A Type I error is rejecting H<sub>0</sub> when H<sub>0</sub> is actually true. In a two-sample t-test, a Type I error is concluding that two means are significantly different when they are not different.
+:::
 
 ::: {.tip data-latex=""}
-The experiment-wise error rate increases dramatically with increasing numbers of treatment groups.
+**Pairwise error rate:** The probability of a Type I error in a single comparison of two means. Sometimes called an comparison-, individual-, or test-wise error.
 :::
+
+::: {.tip data-latex=""}
+**Experiment-wise error rate:** The probability of *at least one* Type I error in a set of comparisons of two means. Sometimes called the family-wise error.
+:::
+
+Figure \@ref(fig:MCProblem) demonstrates the two issues related to multiple comparisons. First, the x-axis labels show how the number of pairwise comparisons ($k$) increases quickly with increasing number of groups ($I$) in the study. For example, six groups ($I$=6) is not a complicated study, but it results in fifteen pairwise comparisons ($k$=15). More importantly the line and point labels in the figure show how the experiment-wise error rate increases quickly and dramatically with increasing number of groups. For example, the experiment-wise error rate for six ($I$=6) groups is over 0.50.^[Using &alpha;=0.05] Thus, it is nearly a coin flip that at least one error will be made in all paired comparisons among six groups. Making an error more than 50% of the time in such a simple study is not acceptable and must be corrected.
 
 ```{r MCProblem, echo=FALSE, fig.cap="Relationship between the number of groups (I) in an analysis, the number of pairs of means that would need to be tested (k), and the probability of making one or more Type I errors in all comparisons. Note that alpha=0.05."}
 mcprob <- tibble(I=2:6,
@@ -49,6 +57,10 @@ ggplot(data=mcprob,mapping=aes(x=I,y=ewise05)) +
                      expand=expansion(mult=c(0,0.02))) +
   theme_NCStats()
 ```
+
+::: {.tip data-latex=""}
+The experiment-wise error rate increases dramatically with increasing numbers of treatment groups.
+:::
 
 &nbsp;
 

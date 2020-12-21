@@ -39,4 +39,7 @@ div.defn {
   background-color: HoneyDew;
 }
 
-
+.footnotes {
+  font-size: 0.75em;
+  line-height: 0.8;
+}
