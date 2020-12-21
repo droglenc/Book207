@@ -1,3 +1,5 @@
+# (PART\*) FOUNDATIONS {-}
+
 # Model Types & Methods {#ModelTypes}
 
 ```{r ModelTypes-setup, include=FALSE}

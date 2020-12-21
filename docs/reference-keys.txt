@@ -18,12 +18,14 @@ fig:FullModelResids1
 fig:SimpleModelResids1
 fig:BothModelResids
 tab:ANOVA1
+fig:SS
+tab:oppANOVA
 ModelTypes
 distinguishing-methods
 method-purposes
 T2Review
 review
-analysis-in-r
+T2analysis
 data-format
 assumption-checking
 analysis
@@ -49,3 +51,6 @@ ratio-of-variances-signal-to-noise
 anova-table
 two-sample-t-test-revisited-using-linear-models
 one-more-look-at-ms-and-f-test
+ANOVA1Foundations
+analytical-foundation
+one-way-anova-in-r

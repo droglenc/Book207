@@ -34,7 +34,7 @@ knitr::kable(booktabs=TRUE,caption="Differences between the two generic model ty
 &nbsp;
 
 ### 2-Sample t-Test
-Recall that H<sub>0</sub> in a two-sample t-test is that the two population means do not differ (i.e., they are equal). In this hypothesis, if the two means do not differ than a single mean would adequately represent both groups. The [general model from the previous module](ModelConcepts.html#what-is-a-model) ^[Generally, Observation = Model Prediction + Error] could be specified for this situation as
+Recall that H<sub>0</sub> in a two-sample t-test is that the two population means do not differ (i.e., they are equal). In this hypothesis, if the two means do not differ than a single mean would adequately represent both groups. The general model from Section \@ref(what-is-a-model) ^[Generally, Observation = Model Prediction + Error] could be specified for this situation as
 
 $$ Y_{ij} = \mu + \epsilon_{ij} $$
 
@@ -63,7 +63,7 @@ In the ensuing sections we will develop a method to determine if the increase in
 
 ## Measuring Increase in Fit
 ### SS<sub>Total</sub> and SS<sub>Within</sub>
-In Section \ref(#residual-sum-of-squares) the idea of using the residual sum-of-squares (RSS) to measure the lack-of-fit of a model was introduced. Here we apply that concept to measure the lack-of-fit of the simple and full models, which we will then use to see how much "better" the full model fits than the simple model.
+In Section \@ref(residual-sum-of-squares) the idea of using the residual sum-of-squares (RSS) to measure the lack-of-fit of a model was introduced. Here we apply that concept to measure the lack-of-fit of the simple and full models, which we will then use to see how much "better" the full model fits than the simple model.
 
 ::: {.tip data-latex=""}
 Remember that the full model will always fit better than the simple model, even if by just a small amount.
@@ -203,7 +203,7 @@ SS<sub>Among</sub> is the **signal** (i.e., relative difference in group means) 
 
 This can be seen in the interactive graphic below. You can adjust the amount of "signal" in the data by increasing or decreasing the difference between the group means and the grand mean. As you do this note how SS<sub>Among</sub> (and SS<sub>Total</sub>) change.
 
-```{r echo=FALSE}
+```{r echo=FALSE, out.width="95%"}
 knitr::include_app("https://derek-ogle.shinyapps.io/App_SSTotal_Partitioning/",height='800px')
 ```
 
@@ -234,7 +234,7 @@ df<sub>Among</sub> is the extra **cost** (i.e., loss of df) from using the full 
 &nbsp;
 
 ## "Noise" Variances
-MS<sub>Total</sub> and MS<sub>Within</sub> are measures of the variance ^[As discussed in Section \@ref(#mean-squares), SS are not true variances until they are divided by their df and become mean-squares (MS).] of **individuals** around the grand mean and group means, respectively. Thus, MS<sub>Total</sub> measures the variance or "noise" around the full model, whereas MS<sub>Within</sub> measures the variance or "noise" around the simple model.
+MS<sub>Total</sub> and MS<sub>Within</sub> are measures of the variance ^[As discussed in Section \@ref(mean-squares), SS are not true variances until they are divided by their df and become mean-squares (MS).] of **individuals** around the grand mean and group means, respectively. Thus, MS<sub>Total</sub> measures the variance or "noise" around the full model, whereas MS<sub>Within</sub> measures the variance or "noise" around the simple model.
 
 ::: {.tip data-latex=""}
 MS<sub>Total</sub> and MS<sub>Within</sub> measure "noise" -- i.e., variability of observations around a model
@@ -247,7 +247,7 @@ $$ \text{MS}_{\text{Total}} = \frac{\text{SS}_{\text{Total}}}{\text{df}_{\text{T
 Realizing that the double summation simply means to "sum across all individuals" it is seen that this is the variance ($s^{2}$) from your introductory statistics course. In other words it is just the variability of the individuals around a mean that ignores that there are groups.
 
 ::: {.tip data-latex=""}
-MS<sub>Total</sub>=s<sup>2</sup>
+MS<sub>Total</sub>=$s^{2}$
 :::
 
 Similarly, MS<sub>Within</sub> is
@@ -313,7 +313,7 @@ b + labs(x="F-Ratio") +
 
 From this it can be seen that a small p-value comes from a large F-ratio, which comes from a large MS<sub>Among</sub> relative to MS<sub>Within</sub>, which means both that the full model explains more variability than is left unexplained and the "signal" is much greater than the "noise", which means that the full model does fit significantly better than the simple model (even given the increased complexity), and, thus, the means are indeed different, which is what we would conclude from a small p-value. This cascade of measures can be explored with the dynamic graphic below.
 
-```{r echo=FALSE}
+```{r echo=FALSE, out.width="95%"}
 knitr::include_app("https://derek-ogle.shinyapps.io/App_F_Meaning/",height='800px')
 ```
 
@@ -345,7 +345,7 @@ In addition to the primary objective of comparing the full and simple models, se
 &nbsp;
 
 ## Two-Sample t-Test Revisited: Using Linear Models
-The models for a two-sample t-test can be fit and assessed with `lm()`. This function requires the same type of formula for its first argument -- `response~factor` -- and a data.frame in the `data=` argument as described for `t.test()` in [a previous module](2TReview.html#analysis). The results of `lm()` should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted from the `lm()` object with `anova()`. In addition, coefficient results^[The coefficient results will be discussed in more detail in the next module.] can be extracted with `coef()`, `confint()`, and `summary()`. Note that I like to "column-bind" the coefficients and confidence intervals together for a more succinct representation.
+The models for a two-sample t-test can be fit and assessed with `lm()`. This function requires the same type of formula for its first argument -- `response~factor` -- and a data.frame in the `data=` argument as described for `t.test()` in Section \@ref(T2analysis). The results of `lm()` should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted from the `lm()` object with `anova()`. In addition, coefficient results^[The coefficient results will be discussed in more detail in Module \@ref(ANOVA1Foundations).] can be extracted with `coef()`, `confint()`, and `summary()`. Note that I like to "column-bind" the coefficients and confidence intervals together for a more succinct representation.
 
 ```{r echo=TRUE}
 aqua.lm <- lm(BOD~src,data=aqua)

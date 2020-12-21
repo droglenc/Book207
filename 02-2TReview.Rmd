@@ -23,7 +23,7 @@ The t test statistic is converted to a p-value using a t-distribution with $n_{1
 
 &nbsp;
 
-## Analysis in R
+## Analysis in R {#T2analysis}
 ### Data Format
 Data for a 2-sample t-test must be in stacked format, where measurements are in one column and a label for the populations is in another column. Each row corresponds to the measurement and population of a single individual.
 

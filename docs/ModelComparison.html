@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="ModelConcepts.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="ANOVA1Foundations.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -137,6 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>FOUNDATIONS</b></span></li>
 <li class="chapter" data-level="1" data-path="ModelTypes.html"><a href="ModelTypes.html"><i class="fa fa-check"></i><b>1</b> Model Types &amp; Methods</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="ModelTypes.html"><a href="ModelTypes.html#distinguishing-methods"><i class="fa fa-check"></i><b>1.1</b> Distinguishing Methods</a></li>
@@ -145,7 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="T2Review.html"><a href="T2Review.html"><i class="fa fa-check"></i><b>2</b> 2-Sample t Review</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="T2Review.html"><a href="T2Review.html#review"><i class="fa fa-check"></i><b>2.1</b> Review</a></li>
-<li class="chapter" data-level="2.2" data-path="T2Review.html"><a href="T2Review.html#analysis-in-r"><i class="fa fa-check"></i><b>2.2</b> Analysis in R</a></li>
+<li class="chapter" data-level="2.2" data-path="T2Review.html"><a href="T2Review.html#T2analysis"><i class="fa fa-check"></i><b>2.2</b> Analysis in R</a></li>
 <li class="chapter" data-level="2.3" data-path="T2Review.html"><a href="T2Review.html#signal-to-noise"><i class="fa fa-check"></i><b>2.3</b> Signal-to-Noise</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="ModelConcepts.html"><a href="ModelConcepts.html"><i class="fa fa-check"></i><b>3</b> Model Concepts</a>
@@ -166,6 +167,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7" data-path="ModelComparison.html"><a href="ModelComparison.html#anova-table"><i class="fa fa-check"></i><b>4.7</b> ANOVA Table</a></li>
 <li class="chapter" data-level="4.8" data-path="ModelComparison.html"><a href="ModelComparison.html#two-sample-t-test-revisited-using-linear-models"><i class="fa fa-check"></i><b>4.8</b> Two-Sample t-Test Revisited: Using Linear Models</a></li>
 <li class="chapter" data-level="4.9" data-path="ModelComparison.html"><a href="ModelComparison.html#one-more-look-at-ms-and-f-test"><i class="fa fa-check"></i><b>4.9</b> One More Look at MS and F-test</a></li>
+</ul></li>
+<li class="part"><span><b>ONE-WAY ANOVA</b></span></li>
+<li class="chapter" data-level="5" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html"><i class="fa fa-check"></i><b>5</b> One-Way ANOVA Foundations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#analytical-foundation"><i class="fa fa-check"></i><b>5.1</b> Analytical Foundation</a></li>
+<li class="chapter" data-level="5.2" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#one-way-anova-in-r"><i class="fa fa-check"></i><b>5.2</b> One-Way ANOVA in R</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -270,7 +277,7 @@ Alternative
 </div>
 <div id="sample-t-test" class="section level3" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> 2-Sample t-Test</h3>
-<p>Recall that H<sub>0</sub> in a two-sample t-test is that the two population means do not differ (i.e., they are equal). In this hypothesis, if the two means do not differ than a single mean would adequately represent both groups. The <a href="ModelConcepts.html#what-is-a-model">general model from the previous module</a><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> could be specified for this situation as</p>
+<p>Recall that H<sub>0</sub> in a two-sample t-test is that the two population means do not differ (i.e., they are equal). In this hypothesis, if the two means do not differ than a single mean would adequately represent both groups. The general model from Section <a href="ModelConcepts.html#what-is-a-model">3.1</a><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> could be specified for this situation as</p>
 <p><span class="math display">\[ Y_{ij} = \mu + \epsilon_{ij} \]</span></p>
 <p>where <span class="math inline">\(Y_{ij}\)</span> is the <span class="math inline">\(j\)</span>th observation of the response variable in the <span class="math inline">\(i\)</span>th group, <span class="math inline">\(\mu\)</span> is the population grand mean, and <span class="math inline">\(\epsilon_{ij}\)</span> is the “error” for the <span class="math inline">\(j\)</span>th observation in the <span class="math inline">\(i\)</span>th group. This model means that μ is the predicted response value for each observation and the model looks like the red line in Figure <a href="ModelComparison.html#fig:Models1">4.1</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:Models1"></span>
@@ -291,7 +298,7 @@ Figure 4.1: Biological oxygen demand versus sample location with group means sho
 <h2><span class="header-section-number">4.2</span> Measuring Increase in Fit</h2>
 <div id="sstotal-and-sswithin" class="section level3" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> SS<sub>Total</sub> and SS<sub>Within</sub></h3>
-<p>In Section (#residual-sum-of-squares) the idea of using the residual sum-of-squares (RSS) to measure the lack-of-fit of a model was introduced. Here we apply that concept to measure the lack-of-fit of the simple and full models, which we will then use to see how much “better” the full model fits than the simple model.</p>
+<p>In Section <a href="ModelConcepts.html#residual-sum-of-squares">3.2.2</a> the idea of using the residual sum-of-squares (RSS) to measure the lack-of-fit of a model was introduced. Here we apply that concept to measure the lack-of-fit of the simple and full models, which we will then use to see how much “better” the full model fits than the simple model.</p>
 <div class="tip">
 <p>Remember that the full model will always fit better than the simple model, even if by just a small amount.</p>
 </div>
@@ -349,7 +356,7 @@ Figure 4.4: Mean biological oxygen demand versus sample location with the grand 
 <p>SS<sub>Among</sub> is the <strong>signal</strong> (i.e., relative difference in group means) in the data</p>
 </div>
 <p>This can be seen in the interactive graphic below. You can adjust the amount of “signal” in the data by increasing or decreasing the difference between the group means and the grand mean. As you do this note how SS<sub>Among</sub> (and SS<sub>Total</sub>) change.</p>
-<iframe src="https://derek-ogle.shinyapps.io/App_SSTotal_Partitioning/?showcase=0" width="336" height="800px">
+<iframe src="https://derek-ogle.shinyapps.io/App_SSTotal_Partitioning/?showcase=0" width="95%" height="800px">
 </iframe>
 <p> </p>
 <p>So, SS<sub>Among</sub> is immensely useful – it is a measure of “benefit” that will be used in a “benefit-to-cost” ratio and it is the “signal” that will be used in a “signal-to-noise” ratio. These ratios are discussed further below. Next we discuss how to measure the “cost” of using the more complex full model.</p>
@@ -379,7 +386,7 @@ Figure 4.4: Mean biological oxygen demand versus sample location with the grand 
 <p><span class="math display">\[ \text{MS}_{\text{Total}} = \frac{\text{SS}_{\text{Total}}}{\text{df}_{\text{Total}}} = \frac{\sum_{i=1}^{I}\sum_{j=1}^{n_{i}}\left(Y_{ij}-\bar{Y}_{\cdot\cdot}\right)^{2}}{n-1} \]</span></p>
 <p>Realizing that the double summation simply means to “sum across all individuals” it is seen that this is the variance (<span class="math inline">\(s^{2}\)</span>) from your introductory statistics course. In other words it is just the variability of the individuals around a mean that ignores that there are groups.</p>
 <div class="tip">
-<p>MS<sub>Total</sub>=s<sup>2</sup></p>
+<p>MS<sub>Total</sub>=<span class="math inline">\(s^{2}\)</span></p>
 </div>
 <p>Similarly, MS<sub>Within</sub> is</p>
 <p><span class="math display">\[ \text{MS}_{\text{Within}} = \frac{\text{SS}_{\text{Within}}}{\text{df}_{\text{Within}}} = \frac{\sum_{i=1}^{I}\sum_{j=1}^{n_{i}}\left(Y_{ij}-\bar{Y}_{i\cdot}\right)^{2}}{\sum_{i=1}^{I}n_{i}-I} \]</span></p>
@@ -409,7 +416,7 @@ Figure 4.4: Mean biological oxygen demand versus sample location with the grand 
 <p><img src="Book207_files/figure-html/Fpvalue-1.png" width="336" style="display: block; margin: auto;" /></p>
 <p> </p>
 <p>From this it can be seen that a small p-value comes from a large F-ratio, which comes from a large MS<sub>Among</sub> relative to MS<sub>Within</sub>, which means both that the full model explains more variability than is left unexplained and the “signal” is much greater than the “noise,” which means that the full model does fit significantly better than the simple model (even given the increased complexity), and, thus, the means are indeed different, which is what we would conclude from a small p-value. This cascade of measures can be explored with the dynamic graphic below.</p>
-<iframe src="https://derek-ogle.shinyapps.io/App_F_Meaning/?showcase=0" width="336" height="800px">
+<iframe src="https://derek-ogle.shinyapps.io/App_F_Meaning/?showcase=0" width="95%" height="800px">
 </iframe>
 <p> </p>
 </div>
@@ -496,7 +503,7 @@ Residuals
 </div>
 <div id="two-sample-t-test-revisited-using-linear-models" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Two-Sample t-Test Revisited: Using Linear Models</h2>
-<p>The models for a two-sample t-test can be fit and assessed with <code>lm()</code>. This function requires the same type of formula for its first argument – <code>response~factor</code> – and a data.frame in the <code>data=</code> argument as described for <code>t.test()</code> in <a href="2TReview.html#analysis">a previous module</a>. The results of <code>lm()</code> should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted from the <code>lm()</code> object with <code>anova()</code>. In addition, coefficient results<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> can be extracted with <code>coef()</code>, <code>confint()</code>, and <code>summary()</code>. Note that I like to “column-bind” the coefficients and confidence intervals together for a more succinct representation.</p>
+<p>The models for a two-sample t-test can be fit and assessed with <code>lm()</code>. This function requires the same type of formula for its first argument – <code>response~factor</code> – and a data.frame in the <code>data=</code> argument as described for <code>t.test()</code> in Section <a href="T2Review.html#T2analysis">2.2</a>. The results of <code>lm()</code> should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted from the <code>lm()</code> object with <code>anova()</code>. In addition, coefficient results<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> can be extracted with <code>coef()</code>, <code>confint()</code>, and <code>summary()</code>. Note that I like to “column-bind” the coefficients and confidence intervals together for a more succinct representation.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="ModelComparison.html#cb10-1" aria-hidden="true" tabindex="-1"></a>aqua.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span>
 <span id="cb10-2"><a href="ModelComparison.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(aqua.lm)</span></code></pre></div>
 <pre><code>#R&gt;   Analysis of Variance Table
@@ -528,19 +535,22 @@ Residuals
 
 </div>
 </div>
+
+
+
 <div class="footnotes">
 <hr />
 <ol start="6">
 <li id="fn6"><p>Generally, Observation = Model Prediction + Error<a href="ModelComparison.html#fnref6" class="footnote-back">↩︎</a></p></li>
 <li id="fn7"><p>We will be more objective in the following sections, but an examination of the plot above clearly shows that the red line does not represent the observations well.<a href="ModelComparison.html#fnref7" class="footnote-back">↩︎</a></p></li>
 <li id="fn8"><p>The “cost” is obviously 1 in this simple case.<a href="ModelComparison.html#fnref8" class="footnote-back">↩︎</a></p></li>
-<li id="fn9"><p>As discussed in Section @ref(#mean-squares), SS are not true variances until they are divided by their df and become mean-squares (MS).<a href="ModelComparison.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>As discussed in Section <a href="ModelConcepts.html#mean-squares">3.4</a>, SS are not true variances until they are divided by their df and become mean-squares (MS).<a href="ModelComparison.html#fnref9" class="footnote-back">↩︎</a></p></li>
 <li id="fn10"><p>An F-distribution occurs whenever the ratio of two variances is calculated.<a href="ModelComparison.html#fnref10" class="footnote-back">↩︎</a></p></li>
 <li id="fn11"><p>If the F-ratio is computed by hand, then <code>distrib()</code> with <code>distrib="f"</code>, <code>df1=</code>, <code>df2=</code>, and <code>lower.tail=FALSE</code> may be used to calculate the corresponding p-value.<a href="ModelComparison.html#fnref11" class="footnote-back">↩︎</a></p></li>
 <li id="fn12"><p>An ANOVA table does not necessarily mean that an “analysis of variance” method was used. It turns out that all general linear models are summarized with an ANOVA table, regardless of whether a one- or two-way ANOVA method was used.<a href="ModelComparison.html#fnref12" class="footnote-back">↩︎</a></p></li>
 <li id="fn13"><p>Labeled as the factor variable in most statistical software packages including R – that variable was called <code>src</code> in this example.<a href="ModelComparison.html#fnref13" class="footnote-back">↩︎</a></p></li>
 <li id="fn14"><p>Labeled as residuals in R and error in other statistical software packages.<a href="ModelComparison.html#fnref14" class="footnote-back">↩︎</a></p></li>
-<li id="fn15"><p>The coefficient results will be discussed in more detail in the next module.<a href="ModelComparison.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>The coefficient results will be discussed in more detail in Module <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a>.<a href="ModelComparison.html#fnref15" class="footnote-back">↩︎</a></p></li>
 <li id="fn16"><p>This derivation is beyond the scope of this course.<a href="ModelComparison.html#fnref16" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
@@ -550,7 +560,7 @@ Residuals
         </div>
       </div>
 <a href="ModelConcepts.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ANOVA1Foundations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
