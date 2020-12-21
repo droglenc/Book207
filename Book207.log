@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7250 64-bit) (preloaded format=xelatex 2020.12.20)  21 DEC 2020 07:22
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7250 64-bit) (preloaded format=xelatex 2020.12.20)  21 DEC 2020 15:02
 entering extended mode
 **./Book207.tex
 (Book207.tex
@@ -1237,17 +1237,17 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[3])
+[3] [4])
 \tf@toc=\write4
 \openout4 = `Book207.toc'.
 
-[4] [5
+[5] [6
 
-] [6
+] [7] [8
 
-] [7] [8]
+] [9] [10]
 Chapter 1.
-[9
+[11
 
 ]
 Overfull \hbox (46.66003pt too wide) in paragraph at lines 219--230
@@ -1256,7 +1256,7 @@ Overfull \hbox (46.66003pt too wide) in paragraph at lines 219--230
 
 File: Book207_files/figure-latex/OneWay-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/OneWay-1.pdf>
-[10] [11]
+[12] [13]
 File: Book207_files/figure-latex/TwoWay-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/TwoWay-1.pdf>
 File: Book207_files/figure-latex/SLR-1.pdf Graphic file (type pdf)
@@ -1265,13 +1265,13 @@ File: Book207_files/figure-latex/IVR-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/IVR-1.pdf>
 File: Book207_files/figure-latex/LogReg-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/LogReg-1.pdf>
-[12] [13] [14] [15] [16
+[14] [15] [16] [17] [18
 
 ]
 Chapter 2.
-[17]
+[19]
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
-[18]
+[20]
 File: Book207_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/unnamed-chunk-4-1.pdf>
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
@@ -1287,7 +1287,7 @@ Underfull \hbox (badness 1043) in paragraph at lines 410--411
 /lmtt/m/n/10 response \TU/lmr/m/n/10 represents the
  []
 
-[19]
+[21]
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
 
 Overfull \hbox (33.0pt too wide) in paragraph at lines 451--451
@@ -1295,22 +1295,22 @@ Overfull \hbox (33.0pt too wide) in paragraph at lines 451--451
  equal to 0[] 
  []
 
-[20]
+[22]
 File: Book207_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/unnamed-chunk-7-1.pdf>
-[21]
+[23]
 File: Book207_files/figure-latex/SignalNoise1-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/SignalNoise1-1.pdf>
 File: Book207_files/figure-latex/SignalNoise2-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/SignalNoise2-1.pdf>
-[22] [23]
+[24] [25]
 File: Book207_files/figure-latex/SignalNoise3-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/SignalNoise3-1.pdf>
-[24]
+[26]
 Chapter 3.
 File: Book207_files/figure-latex/TwoModelsEx-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/TwoModelsEx-1.pdf>
-[25
+[27
 
 ]
 File: Book207_files/figure-latex/FullResid1-1.pdf Graphic file (type pdf)
@@ -1320,13 +1320,13 @@ File: Book207_files/figure-latex/FullResid2-1.pdf Graphic file (type pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[26] [27] [28]
+[28] [29] [30]
 File: Book207_files/figure-latex/FullResid3-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/FullResid3-1.pdf>
-[29]
+[31]
 File: Book207_files/figure-latex/RSS1-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/RSS1-1.pdf>
-[30] [31] [32]
+[32] [33] [34]
 Chapter 4.
 
 Overfull \hbox (8.51999pt too wide) in paragraph at lines 713--721
@@ -1336,80 +1336,86 @@ Overfull \hbox (8.51999pt too wide) in paragraph at lines 713--721
 
 Underfull \vbox (badness 6944) has occurred while \output is active []
 
-[33
+[35
 
 ]
 Missing character: There is no μ in font [lmroman10-regular]:mapping=tex-text;!
 File: Book207_files/figure-latex/Models1-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/Models1-1.pdf>
-[34] [35]
+[36] [37]
 File: Book207_files/figure-latex/FullModelResids1-1.pdf Graphic file (type pdf)
 
 <use Book207_files/figure-latex/FullModelResids1-1.pdf>
-[36]
+[38]
 File: Book207_files/figure-latex/SimpleModelResids1-1.pdf Graphic file (type pd
 f)
 <use Book207_files/figure-latex/SimpleModelResids1-1.pdf>
 Missing character: There is no μ in font [lmroman10-regular]:mapping=tex-text;!
-[37]
+[39]
 File: Book207_files/figure-latex/BothModelResids-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/BothModelResids-1.pdf>
-[38] [39]
+[40] [41]
 File: Book207_files/figure-latex/unnamed-chunk-9-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/unnamed-chunk-9-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[40] [41] [42] [43]
+[42] [43] [44] [45]
 File: Book207_files/figure-latex/Fpvalue-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/Fpvalue-1.pdf>
-[44]
+[46]
 File: Book207_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type pdf)
 
 <use Book207_files/figure-latex/unnamed-chunk-10-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[45]
+[47] [48]
 Missing character: There is no ≠ in font [lmroman10-regular]:mapping=tex-text;!
-[46] [47]
+[49] [50]
 Missing character: There is no μ in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no μ in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no μ in font [lmroman10-regular]:mapping=tex-text;!
-[48] [49] [50
-
-] [51] [52]
-Chapter 5.
-[53
+[51] [52] [53
 
 ] [54]
+Chapter 5.
+
+Underfull \vbox (badness 1303) has occurred while \output is active []
+
+[55
+
+] [56]
 File: Book207_files/figure-latex/SS-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/SS-1.pdf>
-[55]
+[57]
 Underfull \hbox (badness 1221) in paragraph at lines 1204--1206
 []\TU/lmr/m/n/10 dfTotal=dfAmong+dfWithin=2+24=26. Because dfTotal=$[]$-1, then
 
  []
 
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
-[56]
+[58]
 File: Book207_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (type pdf)
 
 <use Book207_files/figure-latex/unnamed-chunk-15-1.pdf>
-[57] [58
+[59] [60
 
 ]
 Chapter 6.
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
-[59]
+[61]
 Missing character: There is no α in font [lmroman8-regular]:mapping=tex-text;!
 File: Book207_files/figure-latex/MCProblem-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/MCProblem-1.pdf>
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
-[60] [61]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[62] [63]
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
-[62]
+[64]
 Overfull \hbox (17.25pt too wide) in paragraph at lines 1396--1396
 []\TU/lmtt/m/n/10 #R>    contrast  estimate     SE df lower.CL upper.CL t.ratio
  p.value[] 
@@ -1445,25 +1451,22 @@ Overfull \hbox (54.0pt too wide) in paragraph at lines 1396--1396
  of 3 estimates[] 
  []
 
-[63]
+[65] [66]
 File: Book207_files/figure-latex/unnamed-chunk-20-1.pdf Graphic file (type pdf)
 
 <use Book207_files/figure-latex/unnamed-chunk-20-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[64] [65] [66
+[67] [68
 
 ]
 Chapter 7.
-[67] [68]
+[69] [70]
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
-[69]
+[71]
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
-[70]
+[72]
 
-LaTeX Warning: Reference `multiple-comparisons-problem' on page 71 undefined on
+LaTeX Warning: Reference `multiple-comparisons-problem' on page 73 undefined on
  input line 1561.
 
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
@@ -1473,29 +1476,29 @@ File: Book207_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (type pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[71]
+[73]
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
-[72]
+[74]
 Chapter 8.
-[73
+[75
 
 ]
 File: Book207_files/figure-latex/OWATransformLog-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/OWATransformLog-1.pdf>
-[74] [75]
+[76] [77]
 File: Book207_files/figure-latex/OWATransformSqrt-1.pdf Graphic file (type pdf)
 
 <use Book207_files/figure-latex/OWATransformSqrt-1.pdf>
 File: Book207_files/figure-latex/OWATransformSqrt2-1.pdf Graphic file (type pdf
 )
 <use Book207_files/figure-latex/OWATransformSqrt2-1.pdf>
-[76] [77] [78]
+[78] [79] [80]
 File: Book207_files/figure-latex/unnamed-chunk-24-1.pdf Graphic file (type pdf)
 
 <use Book207_files/figure-latex/unnamed-chunk-24-1.pdf>
-[79] [80] [81]
+[81] [82] [83]
 Overfull \hbox (17.25pt too wide) in paragraph at lines 1827--1827
 []\TU/lmtt/m/n/10 #R>    contrast  estimate     SE df lower.CL upper.CL t.ratio
  p.value[] 
@@ -1537,7 +1540,7 @@ Overfull \hbox (1.5pt too wide) in paragraph at lines 1858--1858
 value[] 
  []
 
-[82]
+[84]
 Overfull \hbox (17.25pt too wide) in paragraph at lines 1858--1858
 []\TU/lmtt/m/n/10 #R>    contrast  estimate     SE df lower.CL upper.CL t.ratio
  p.value[] 
@@ -1579,7 +1582,7 @@ File: Book207_files/figure-latex/unnamed-chunk-29-1.pdf Graphic file (type pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[83]
+[85]
 Overfull \hbox (17.25pt too wide) in paragraph at lines 1912--1912
 []\TU/lmtt/m/n/10 #R>    contrast  estimate     SE df lower.CL upper.CL t.ratio
  p.value[] 
@@ -1603,7 +1606,7 @@ Overfull \hbox (12.0pt too wide) in paragraph at lines 1912--1912
  0.0001[] 
  []
 
-[84]
+[86]
 Overfull \hbox (69.75pt too wide) in paragraph at lines 1912--1912
 []\TU/lmtt/m/n/10 #R>   Conf-level adjustment: tukey method for comparing a fam
 ily of 3 estimates[] 
@@ -1639,45 +1642,388 @@ Overfull \hbox (54.0pt too wide) in paragraph at lines 1944--1944
  of 3 estimates[] 
  []
 
-[85] [86
+[87] [88
 
 ]
 Chapter 9.
-[87]
+[89]
 Underfull \hbox (badness 3199) in paragraph at lines 2003--2004
 \TU/lmr/m/n/10 and \TU/lmtt/m/n/10 type="response" \TU/lmr/m/n/10 in \TU/lmtt/m
 /n/10 summary() \TU/lmr/m/n/10 to computed the back-
  []
 
-[88]
+[90]
 File: Book207_files/figure-latex/TNAssumptions-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/TNAssumptions-1.pdf>
 Missing character: There is no ≤ in font [lmroman10-regular]:mapping=tex-text;!
-[89] [90]
+[91] [92]
 File: Book207_files/figure-latex/TNMeansPlot-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/TNMeansPlot-1.pdf>
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \vbox (1.67389pt too high) detected at line 2150
+ []
 
-[91] [92]
+[93] [94]
 File: Book207_files/figure-latex/AFAssumptions1-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/AFAssumptions1-1.pdf>
 File: Book207_files/figure-latex/AFAssumptions2-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/AFAssumptions2-1.pdf>
-[93] [94]
+[95] [96]
 File: Book207_files/figure-latex/AFMeansPlot-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/AFMeansPlot-1.pdf>
-[95] [96]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[97] [98]
 File: Book207_files/figure-latex/PDAssumptions1-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/PDAssumptions1-1.pdf>
+[99]
 File: Book207_files/figure-latex/PDAssumptions2-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/PDAssumptions2-1.pdf>
-[97]
 Missing character: There is no ≤ in font [lmroman10-regular]:mapping=tex-text;!
-[98]
+[100] [101]
 File: Book207_files/figure-latex/PDMeansPlot-1.pdf Graphic file (type pdf)
 <use Book207_files/figure-latex/PDMeansPlot-1.pdf>
-[99]
+[102] [103] [104
+
+] [105] [106]
+Chapter 10.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[107
+
+]
+Overfull \hbox (53.03001pt too wide) in paragraph at lines 2512--2520
+ [][] 
+ []
+
+[108]
+File: Book207_files/figure-latex/TadpoleInteraction-1.pdf Graphic file (type pd
+f)
+<use Book207_files/figure-latex/TadpoleInteraction-1.pdf>
+[109]
+File: Book207_files/figure-latex/TadpoleInteraction2-1.pdf Graphic file (type p
+df)
+<use Book207_files/figure-latex/TadpoleInteraction2-1.pdf>
+[110] [111]
+File: Book207_files/figure-latex/TadpoleNoInteraction2-1.pdf Graphic file (type
+ pdf)
+<use Book207_files/figure-latex/TadpoleNoInteraction2-1.pdf>
+
+Underfull \vbox (badness 1708) has occurred while \output is active []
+
+[112] [113] [114
+
+]
+Chapter 11.
+[115]
+File: Book207_files/figure-latex/TadpoleObs-1.pdf Graphic file (type pdf)
+<use Book207_files/figure-latex/TadpoleObs-1.pdf>
+[116]
+File: Book207_files/figure-latex/TadpoleObs2-1.pdf Graphic file (type pdf)
+<use Book207_files/figure-latex/TadpoleObs2-1.pdf>
+
+LaTeX Warning: Reference `ANOVA1Foundations1' on page 117 undefined on input li
+ne 2710.
+
+File: Book207_files/figure-latex/TadpoleTMNS-1.pdf Graphic file (type pdf)
+<use Book207_files/figure-latex/TadpoleTMNS-1.pdf>
+File: Book207_files/figure-latex/TadpoleLMNS-1.pdf Graphic file (type pdf)
+<use Book207_files/figure-latex/TadpoleLMNS-1.pdf>
+[117] [118]
+File: Book207_files/figure-latex/TadpoleGMN-1.pdf Graphic file (type pdf)
+<use Book207_files/figure-latex/TadpoleGMN-1.pdf>
+[119]
+File: Book207_files/figure-latex/2WayModels-1.pdf Graphic file (type pdf)
+<use Book207_files/figure-latex/2WayModels-1.pdf>
+[120] [121]
+File: Book207_files/figure-latex/2WayAmong-1.pdf Graphic file (type pdf)
+<use Book207_files/figure-latex/2WayAmong-1.pdf>
+[122] [123]
+File: Book207_files/figure-latex/2WayAB-1.pdf Graphic file (type pdf)
+<use Book207_files/figure-latex/2WayAB-1.pdf>
+[124]
+Overfull \hbox (7.23003pt too wide) in paragraph at lines 2896--2898
+[]\TU/lmr/m/n/10 The variance of individuals around the treatment means is MSWi
+thin=0.117. 
+ []
+
+
+Underfull \hbox (badness 3375) in paragraph at lines 2902--2904
+[]\TU/lmr/m/n/10 The variance of UV-B level means around the grand mean is
+ []
+
+[125] [126]
+Chapter 12.
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 2934--2934
+[]\TU/lmtt/m/n/10 #R>    $ density: Factor w/ 3 levels "1","2","4": 1 1 1 1 1 1
+ 1 1 1 1 ...[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 2934--2934
+[]\TU/lmtt/m/n/10 #R>    $ mass   : num  0.91 0.65 1.58 0.98 1.07 0.84 0.88 1.4
+7 0.94 0.72 ...[] 
+ []
+
+[127
+
+]
+File: Book207_files/figure-latex/unnamed-chunk-43-1.pdf Graphic file (type pdf)
+
+<use Book207_files/figure-latex/unnamed-chunk-43-1.pdf>
+[128] [129]
+Overfull \hbox (12.0pt too wide) in paragraph at lines 3077--3077
+[]\TU/lmtt/m/n/10 #R>    contrast estimate     SE df lower.CL upper.CL t.ratio 
+p.value[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 3077--3077
+[]\TU/lmtt/m/n/10 #R>    1 - 2      0.3287 0.0887 86    0.117    0.540 3.706   
+0.0011[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 3077--3077
+[]\TU/lmtt/m/n/10 #R>    1 - 4      0.3660 0.0887 86    0.154    0.578 4.127   
+0.0002[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 3077--3077
+[]\TU/lmtt/m/n/10 #R>    2 - 4      0.0373 0.0887 86   -0.174    0.249 0.421   
+0.9070[] 
+ []
+
+[130]
+Overfull \hbox (69.75pt too wide) in paragraph at lines 3077--3077
+[]\TU/lmtt/m/n/10 #R>   Conf-level adjustment: tukey method for comparing a fam
+ily of 3 estimates[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 3077--3077
+[]\TU/lmtt/m/n/10 #R>   P value adjustment: tukey method for comparing a family
+ of 3 estimates[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    density uvb  emmean     SE df lower.CL upper.CL t.rati
+o p.value[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    1       High  1.023 0.0884 84    0.848    1.199 11.576
+  <.0001[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    2       High  0.784 0.0884 84    0.608    0.960  8.869
+  <.0001[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    4       High  0.797 0.0884 84    0.621    0.972  9.012
+  <.0001[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    1       Low   1.291 0.0884 84    1.116    1.467 14.608
+  <.0001[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    2       Low   0.873 0.0884 84    0.698    1.049  9.879
+  <.0001[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    4       Low   0.786 0.0884 84    0.610    0.962  8.892
+  <.0001[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    contrast        estimate    SE df lower.CL upper.CL t.
+ratio p.value[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    1 High - 2 High   0.2393 0.125 84  -0.1253   0.6039  1
+.914  0.4007[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    1 High - 4 High   0.2267 0.125 84  -0.1379   0.5913  1
+.813  0.4631[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    1 High - 1 Low   -0.2680 0.125 84  -0.6326   0.0966 -2
+.144  0.2754[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    1 High - 2 Low    0.1500 0.125 84  -0.2146   0.5146  1
+.200  0.8357[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    1 High - 4 Low    0.2373 0.125 84  -0.1273   0.6019  1
+.898  0.4103[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    2 High - 4 High  -0.0127 0.125 84  -0.3773   0.3519 -0
+.101  1.0000[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    2 High - 1 Low   -0.5073 0.125 84  -0.8719  -0.1427 -4
+.058  0.0015[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    2 High - 2 Low   -0.0893 0.125 84  -0.4539   0.2753 -0
+.715  0.9797[] 
+ []
+
+[131]
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    2 High - 4 Low   -0.0020 0.125 84  -0.3666   0.3626 -0
+.016  1.0000[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    4 High - 1 Low   -0.4947 0.125 84  -0.8593  -0.1301 -3
+.957  0.0021[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    4 High - 2 Low   -0.0767 0.125 84  -0.4413   0.2879 -0
+.613  0.9898[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    4 High - 4 Low    0.0107 0.125 84  -0.3539   0.3753  0
+.085  1.0000[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    1 Low - 2 Low     0.4180 0.125 84   0.0534   0.7826  3
+.344  0.0152[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    1 Low - 4 Low     0.5053 0.125 84   0.1407   0.8699  4
+.042  0.0016[] 
+ []
+
+
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>    2 Low - 4 Low     0.0873 0.125 84  -0.2773   0.4519  0
+.699  0.9816[] 
+ []
+
+
+Overfull \hbox (69.75pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>   Conf-level adjustment: tukey method for comparing a fam
+ily of 6 estimates[] 
+ []
+
+
+Overfull \hbox (54.0pt too wide) in paragraph at lines 3126--3126
+[]\TU/lmtt/m/n/10 #R>   P value adjustment: tukey method for comparing a family
+ of 6 estimates[] 
+ []
+
+
+Overfull \hbox (22.5pt too wide) in paragraph at lines 3164--3164
+[]\TU/lmtt/m/n/10 #R>    density uvb  emmean     SE df lower.CL upper.CL t.rati
+o p.value[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3164--3164
+[]\TU/lmtt/m/n/10 #R>    1       High  1.023 0.0884 84    0.848    1.199 11.576
+  <.0001[] 
+ []
+
+[132]
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3164--3164
+[]\TU/lmtt/m/n/10 #R>    2       High  0.784 0.0884 84    0.608    0.960  8.869
+  <.0001[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3164--3164
+[]\TU/lmtt/m/n/10 #R>    4       High  0.797 0.0884 84    0.621    0.972  9.012
+  <.0001[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3164--3164
+[]\TU/lmtt/m/n/10 #R>    1       Low   1.291 0.0884 84    1.116    1.467 14.608
+  <.0001[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3164--3164
+[]\TU/lmtt/m/n/10 #R>    2       Low   0.873 0.0884 84    0.698    1.049  9.879
+  <.0001[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 3164--3164
+[]\TU/lmtt/m/n/10 #R>    4       Low   0.786 0.0884 84    0.610    0.962  8.892
+  <.0001[] 
+ []
+
+
+LaTeX Warning: Reference `multiple-comparisons-r' on page 133 undefined on inpu
+t line 3174.
+
+File: Book207_files/figure-latex/unnamed-chunk-53-1.pdf Graphic file (type pdf)
+
+<use Book207_files/figure-latex/unnamed-chunk-53-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[133]
+File: Book207_files/figure-latex/unnamed-chunk-54-1.pdf Graphic file (type pdf)
+
+<use Book207_files/figure-latex/unnamed-chunk-54-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[134] [135] [136
+
+]
+Chapter 13.
+[137]
 No file Book207.bbl.
 The property list \polyglossia@langsetup contains the pairs (without outer
 braces):
@@ -1711,23 +2057,23 @@ braces):
 >  {english/babelname}  =>  {english}
 >  {english/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {english/Localnumeral}  =>  {polyglossia@C@localnumeral}.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2472.
-[100]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2472.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3323.
+[138]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3323.
 (Book207.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 2472.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2472.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3323.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 3323.
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 31245 strings out of 427240
- 563216 string characters out of 3145703
- 824388 words of memory out of 3000000
- 35338 multiletter control sequences out of 15000+200000
+ 31416 strings out of 427240
+ 568810 string characters out of 3145703
+ 826679 words of memory out of 3000000
+ 35495 multiletter control sequences out of 15000+200000
  538902 words of font info for 86 fonts, out of 3000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,18n,115p,1464b,504s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Book207.pdf (100 pages).
+Output written on Book207.pdf (138 pages).

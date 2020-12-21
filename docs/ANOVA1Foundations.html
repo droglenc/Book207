@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#peak-discharge-transformation"><i class="fa fa-check"></i><b>9.4</b> Peak Discharge (<em>Transformation</em>)</a></li>
 </ul></li>
 <li class="part"><span><b>TWO-WAY ANOVA</b></span></li>
-<li class="chapter" data-level="10" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html"><i class="fa fa-check"></i><b>10</b> Two-Way Conceptual Foundation"</a>
+<li class="chapter" data-level="10" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html"><i class="fa fa-check"></i><b>10</b> Two-Way Conceptual Foundation</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#two-factors"><i class="fa fa-check"></i><b>10.1</b> Two Factors</a></li>
 <li class="chapter" data-level="10.2" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#interaction-effects"><i class="fa fa-check"></i><b>10.2</b> Interaction Effects</a></li>
@@ -270,9 +270,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A one-way analysis of variance (ANOVA) is used to determine if a significant difference exists among the means of more than two populations.</p>
 </div>
 <p>In this module, we examine the immunoglobulin<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> measurements of opossums (<code>imm</code>) during three months of the same year (<code>season</code>). The data are loaded into R and a subset of rows is shown below.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ANOVA1Foundations.html#cb14-1" aria-hidden="true" tabindex="-1"></a>opp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Opossums.csv&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="ANOVA1Foundations.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(opp)</span></code></pre></div>
-<pre><code>#R&gt;       imm season
+<div class="sourceCode" id="cb14"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb14-1"><a href="ANOVA1Foundations.html#cb14-1" aria-hidden="true" tabindex="-1"></a>opp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Opossums.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb15-1"><a href="ANOVA1Foundations.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(opp)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;       imm season
 #R&gt;   1 0.640    feb
 #R&gt;   2 0.680    feb
 #R&gt;   3 0.731    feb
@@ -386,16 +386,16 @@ Residuals
 <div class="tip">
 <p>The <code>lm()</code> code is the same for a 2-Sample t-Test and a One-Way ANOVA.</p>
 </div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="ANOVA1Foundations.html#cb17-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb17-1"><a href="ANOVA1Foundations.html#cb17-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
 <span id="cb17-2"><a href="ANOVA1Foundations.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1)</span></code></pre></div>
-<pre><code>#R&gt;   Analysis of Variance Table
+<pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Response: imm
 #R&gt;             Df  Sum Sq  Mean Sq F value    Pr(&gt;F)
 #R&gt;   season     2 0.23401 0.117005  14.449 7.609e-05
 #R&gt;   Residuals 24 0.19435 0.008098</code></pre>
 <p>A graphic that illustrates the mean immunoglobulin value with 95% confidence intervals for each month is constructed below (as shown in Section <a href="T2Review.html#T2analysis">2.2</a>).</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="ANOVA1Foundations.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opp,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>imm)) <span class="sc">+</span></span>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb19-1"><a href="ANOVA1Foundations.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opp,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>imm)) <span class="sc">+</span></span>
 <span id="cb19-2"><a href="ANOVA1Foundations.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha=</span><span class="fl">0.5</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
 <span id="cb19-3"><a href="ANOVA1Foundations.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data=</span>mean_cl_normal,<span class="at">geom=</span><span class="st">&quot;errorbar&quot;</span>,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
 <span id="cb19-4"><a href="ANOVA1Foundations.html#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean,<span class="at">geom=</span><span class="st">&quot;point&quot;</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>

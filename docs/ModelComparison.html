@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#peak-discharge-transformation"><i class="fa fa-check"></i><b>9.4</b> Peak Discharge (<em>Transformation</em>)</a></li>
 </ul></li>
 <li class="part"><span><b>TWO-WAY ANOVA</b></span></li>
-<li class="chapter" data-level="10" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html"><i class="fa fa-check"></i><b>10</b> Two-Way Conceptual Foundation"</a>
+<li class="chapter" data-level="10" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html"><i class="fa fa-check"></i><b>10</b> Two-Way Conceptual Foundation</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#two-factors"><i class="fa fa-check"></i><b>10.1</b> Two Factors</a></li>
 <li class="chapter" data-level="10.2" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#interaction-effects"><i class="fa fa-check"></i><b>10.2</b> Interaction Effects</a></li>
@@ -562,16 +562,16 @@ Residuals
 <div id="two-sample-t-test-revisited-using-linear-models" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Two-Sample t-Test Revisited: Using Linear Models</h2>
 <p>The models for a two-sample t-test can be fit and assessed with <code>lm()</code>. This function requires the same type of formula for its first argument – <code>response~factor</code> – and a data.frame in the <code>data=</code> argument as described for <code>t.test()</code> in Section <a href="T2Review.html#T2analysis">2.2</a>. The results of <code>lm()</code> should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted from the <code>lm()</code> object with <code>anova()</code>. In addition, coefficient results<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> can be extracted with <code>coef()</code>, <code>confint()</code>, and <code>summary()</code>. Note that I like to “column-bind” the coefficients and confidence intervals together for a more succinct representation.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="ModelComparison.html#cb10-1" aria-hidden="true" tabindex="-1"></a>aqua.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb10-1"><a href="ModelComparison.html#cb10-1" aria-hidden="true" tabindex="-1"></a>aqua.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span>
 <span id="cb10-2"><a href="ModelComparison.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(aqua.lm)</span></code></pre></div>
-<pre><code>#R&gt;   Analysis of Variance Table
+<pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Response: BOD
 #R&gt;             Df  Sum Sq Mean Sq F value    Pr(&gt;F)
 #R&gt;   src        1 20.6756 20.6756  80.891 4.449e-08
 #R&gt;   Residuals 18  4.6008  0.2556</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="ModelComparison.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">ests=</span><span class="fu">coef</span>(aqua.lm),<span class="fu">confint</span>(aqua.lm))</span></code></pre></div>
-<pre><code>#R&gt;                 ests    2.5 %   97.5 %
+<div class="sourceCode" id="cb12"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb12-1"><a href="ModelComparison.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">ests=</span><span class="fu">coef</span>(aqua.lm),<span class="fu">confint</span>(aqua.lm))</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;                 ests    2.5 %   97.5 %
 #R&gt;   (Intercept) 6.6538 6.317917 6.989683
 #R&gt;   srcoutlet   2.0335 1.558489 2.508511</code></pre>
 <p>From these results, note:</p>

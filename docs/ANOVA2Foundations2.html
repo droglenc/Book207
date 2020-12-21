@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#peak-discharge-transformation"><i class="fa fa-check"></i><b>9.4</b> Peak Discharge (<em>Transformation</em>)</a></li>
 </ul></li>
 <li class="part"><span><b>TWO-WAY ANOVA</b></span></li>
-<li class="chapter" data-level="10" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html"><i class="fa fa-check"></i><b>10</b> Two-Way Conceptual Foundation"</a>
+<li class="chapter" data-level="10" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html"><i class="fa fa-check"></i><b>10</b> Two-Way Conceptual Foundation</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#two-factors"><i class="fa fa-check"></i><b>10.1</b> Two Factors</a></li>
 <li class="chapter" data-level="10.2" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#interaction-effects"><i class="fa fa-check"></i><b>10.2</b> Interaction Effects</a></li>
@@ -288,24 +288,24 @@ Figure 11.2: Tadpole body mass by density and UV-B light intensity factors. The 
 </div>
 <p>The mean response for the <span class="math inline">\(i\)</span>th level of Factor A and the <span class="math inline">\(j\)</span>th level of Factor B is denoted by <span class="math inline">\(\overline{Y}_{ij\cdot}\)</span>. The <span class="math inline">\(\overline{Y}_{ij\cdot}\)</span> are called <strong>treatment means</strong> in an experiment or <strong>group means</strong> in an observational study. The “dot” in <span class="math inline">\(\overline{Y}_{ij\cdot}\)</span> replaces the subscript in <span class="math inline">\(Y_{ijk}\)</span> that was summed across when computing the mean. Treatment means are calculated by summing across individuals in a treatment (the <span class="math inline">\(k\)</span> subscript), thus the <span class="math inline">\(k\)</span> subscript is replaced with a dot. As an example, the treatment mean body mass for tadpoles in the 1 tadpole density (<span class="math inline">\(i\)</span>=1) and low UV-B light intensity (<span class="math inline">\(k\)</span>=2) would be <span class="math inline">\(\overline{Y}_{12\cdot}\)</span> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleTMNS">11.3</a>).<a href="#fn45" class="footnote-ref" id="fnref45"><sup>45</sup></a></p>
 <div class="figure" style="text-align: center"><span id="fig:TadpoleTMNS"></span>
-<img src="Book207_files/figure-html/TadpoleTMNS-1.png" alt="Same as Figure \@ref(fig:TadpoleObs2) except that six treatments means are shown with horizontal blue segments." width="672" />
+<img src="Book207_files/figure-html/TadpoleTMNS-1.png" alt="Same as previous figure except that six treatments means are shown with horizontal blue segments." width="672" />
 <p class="caption">
-Figure 11.3: Same as Figure <a href="ANOVA2Foundations2.html#fig:TadpoleObs2">11.2</a> except that six treatments means are shown with horizontal blue segments.
+Figure 11.3: Same as previous figure except that six treatments means are shown with horizontal blue segments.
 </p>
 </div>
 <p>The mean response for the <span class="math inline">\(i\)</span>th level of Factor A is given by <span class="math inline">\(\overline{Y}_{i\cdot\cdot}\)</span>. These <strong>level means</strong> are calculated by first summing individuals in each treatment (the <span class="math inline">\(k\)</span> subscript) and then summing across UV-B light levels (the <span class="math inline">\(j\)</span> subscript); thus, both the <span class="math inline">\(k\)</span> and <span class="math inline">\(j\)</span> subscripts are replaced with a “dot.” For example, the mean body mass for tadpoles in the 1 tadpole density (<span class="math inline">\(i\)</span>=1) is <span class="math inline">\(\overline{Y}_{1\cdot\cdot}\)</span> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleLMNS">11.4</a>-Left).</p>
 <div class="figure" style="text-align: center"><span id="fig:TadpoleLMNS"></span>
-<img src="Book207_files/figure-html/TadpoleLMNS-1.png" alt="Same as Figure \@ref(fig:TadpoleObs2) except that three density level means are shown on the left and two UV-B light level means are shown on the right with horizontal orange segments." width="672" />
+<img src="Book207_files/figure-html/TadpoleLMNS-1.png" alt="Same as previous figure except that three density level means are shown on the left and two UV-B light level means are shown on the right with horizontal orange segments." width="672" />
 <p class="caption">
-Figure 11.4: Same as Figure <a href="ANOVA2Foundations2.html#fig:TadpoleObs2">11.2</a> except that three density level means are shown on the left and two UV-B light level means are shown on the right with horizontal orange segments.
+Figure 11.4: Same as previous figure except that three density level means are shown on the left and two UV-B light level means are shown on the right with horizontal orange segments.
 </p>
 </div>
 <p>Similarly, the mean response for the <span class="math inline">\(j\)</span>th level of Factor B is given by <span class="math inline">\(\overline{Y}_{\cdot j\cdot}\)</span>. These <strong>level means</strong> are calculated by first summing individuals in each treatment (the <span class="math inline">\(k\)</span> subscript) and then summing across tadpole density levels (the <span class="math inline">\(i\)</span> subscript); thus, both the <span class="math inline">\(k\)</span> and <span class="math inline">\(i\)</span> subscripts are replaced with a “dot.” For example, the mean body mass for tadpoles in the low UV-B light intensity (<span class="math inline">\(j\)</span>=2) is <span class="math inline">\(\overline{Y}_{\cdot2\cdot}\)</span> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleLMNS">11.4</a>-Right).</p>
 <p>Finally, the mean response regardless of level of any factor is given by <span class="math inline">\(\overline{Y}_{\cdot\cdot\cdot}\)</span> and is called the <strong>grand mean</strong> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleGMN">11.5</a>). The grand mean is calculated by summing individuals in each treatment, then summing across UV-B light intensities, and then summing across tadpole densities; thus, all three subscripts are replaced with a “dot.”</p>
 <div class="figure" style="text-align: center"><span id="fig:TadpoleGMN"></span>
-<img src="Book207_files/figure-html/TadpoleGMN-1.png" alt="Same as Figure \@ref(fig:TadpoleObs2) except that the grand means is shown with a horizontal red segment in each panel." width="672" />
+<img src="Book207_files/figure-html/TadpoleGMN-1.png" alt="Same as previous figure except that the grand means is shown with a horizontal red segment in each panel." width="672" />
 <p class="caption">
-Figure 11.5: Same as Figure <a href="ANOVA2Foundations2.html#fig:TadpoleObs2">11.2</a> except that the grand means is shown with a horizontal red segment in each panel.
+Figure 11.5: Same as previous figure except that the grand means is shown with a horizontal red segment in each panel.
 </p>
 </div>
 <div class="tip">

@@ -2,7 +2,7 @@
 In this module, a thorough Two-Way ANOVA will be performed using the experiment introduced in Module \@ref(ANOVA2Foundations2), where the effect of tadpole density and UV-B light intensity on tadpole body mass was examined. 
 
 ## Model Fitting in R
-The data are loaded into R below. Because `density` was recorded as a number (i.e., 1, 2, and 4) rather than as an obvious grouping (i.e., "one", "two", and "four"), it must be explicitly converted to a factor before using.
+The data are loaded into R below. Because `density` was recorded as a number (i.e., 1, 2, and 4) rather than as an obvious grouping (i.e., "one", "two", and "four"), it must be explicitly converted to a factor before it can be used in a Two-Way ANOVA Model.
 
 ```{r}
 tad <- read.csv("http://derekogle.com/Book207/data/Tadpoles.csv")
@@ -10,13 +10,17 @@ tad$density <- factor(tad$density)
 str(tad)
 ```
 
-When fitting a linear model in R the first argument to `lm()` must be a formula of the form `response~factorA+factorB+factorA:factorB`^[This exact model may also be entered with the shorthand `response~factorA*factorB`.] where `response` is the response variables, `factorA` and `factorB` are the two factor variables, and `factorA:factorB` tells `lm()` to include the interaction between the two factor variables. Thus, the Two-Way ANOVA model for the tadpole experiment is fit as follows.
+::: {.tip data-latex=""}
+An explanatory (or factor) variable must be a character or factor type in R before it can be used in `lm()` for a Two-Way ANOVA.
+:::
+
+When performing a Two-Way ANOVA with `lm()` the first argument must be a formula of the form `response~factorA+factorB+factorA:factorB`^[This exact model may also be entered with the shorthand `response~factorA*factorB`.] where `response` is the response variable, `factorA` and `factorB` are the two factor variables, and `factorA:factorB` tells `lm()` to include the interaction between the two factor variables. Thus, the Two-Way ANOVA model for the tadpole experiment is fit with
 
 ```{r}
 lm1 <- lm(mass~density+uvb+density:uvb,data=tad)
 ```
 
-As usual, the results are saved to an object for checking assumptions, creating an ANOVA table, and making multiple comparisons.
+As usual, the results are saved to an object that will be used to check assumptions, create an ANOVA table, and make multiple comparisons.
 
 &nbsp;
 
@@ -27,18 +31,22 @@ p.ad.tad <- adTest(lm1$residuals)$p.value
 p.out.tad <- outlierTest(lm1)$bonf.p[[1]]
 ```
 
-The assumptions for a Two-Way ANOVA are exactly the same as for a One-Way ANOVA as shown in Module \@ref(ANOVA1Assumptions). Thus, assumptions are checked in R in the exact same manner as described in that module (i.e., using `assumptionCheck()`).
+The assumptions for a Two-Way ANOVA are exactly the same as for a One-Way ANOVA as shown in Module \@ref(ANOVA1Assumptions). Thus, as described in that module, `assumptionCheck()` is used with the saved `lm()` object to compute tests and create graphics to assess the assumptions.
 
 ```{r fig.width=7}
 assumptionCheck(lm1)
 ```
 
-From these results it is seen that the variances across all treatments are equal (Levenes `r kPvalue(p.lev.tad,latex=FALSE)`), the residuals are normally distributed (`r kPvalue(p.ad.tad,latex=FALSE)`), and there are no significant outliers (`r kPvalue(p.out.tad,latex=FALSE)`). There was not much information given previously about this experiment, but as along as the tanks of tadpoles were kept separate such that no tank could impact any other tank then independence is likely adequately met.
+From these results it is seen that the variances across all treatments are equal (Levenes `r kPvalue(p.lev.tad,latex=FALSE)`), the residuals are normally distributed (`r kPvalue(p.ad.tad,latex=FALSE)`), and there are no significant outliers (`r kPvalue(p.out.tad,latex=FALSE)`). There was not much information given previously about this experiment, but as along as the tanks of tadpoles were kept separate such that no tank could impact any other tank then independence is likely adequately met. The analysis can continue with the untransformed data because all assumptions are adequately met.
+
+::: {.tip data-latex=""}
+If the equal variances and normality assumptions (and possibly the no outliers assumption) are not met then try to transform the response variable to a scale where those assumptions are met. As before, start with the log transformation.
+:::
 
 &nbsp;
 
 ## Main and Interaction Effects (ANOVA Table)
-```{r}
+```{r echo=FALSE}
 aov1 <- anova(lm1)
 ```
 
@@ -50,11 +58,15 @@ anova(lm1)
 
 These results indicate that the interaction effect is insignificant (`r kPvalue(aov1["density:uvb","Pr(>F)"],latex=FALSE)`). Because the interaction term is insignificant, the main effects can be interpreted. The density main effect is strongly significant (`r kPvalue(aov1["density","Pr(>F)"],latex=FALSE)`), but the UV-B main effect is not significant (`r kPvalue(aov1["uvb","Pr(>F)"],latex=FALSE)`). Thus, it appears that the mean body mass of tadpoles differs among some of the density treatments but not between the two UV-B light intensities.
 
+::: {.tip data-latex=""}
+Do not address main effects if there is a significant interaction effect.
+:::
+
 &nbsp;
 
 ## Multiple Comparisons
 ### Main Effects
-When an interaction is not present, as is the case here, then multiple comparisons can be conducted on the main effect factors (separately if they both exist). However, multiple comparisons on the main effects are compromised by the interaction term in the model. This is seen by the warning from `emmeans()` below, where I tried to perform multiple comparisons for just the density main effect.
+When an interaction is not present, as is the case here, then multiple comparisons can be conducted for factors related to any main effect that exists. However, multiple comparisons on the main effects are compromised by the interaction term in the model. This is seen by the warning from `emmeans()` below, where I tried to perform multiple comparisons for just the density main effect using `lm1` that contains the interaction term.
 
 ```{r warning=TRUE}
 mc1 <- emmeans(lm1,specs=pairwise~density)
@@ -67,7 +79,11 @@ lm1_noint <- lm(mass~density+uvb,data=tad)
 anova(lm1_noint)
 ```
 
-With this the multiple comparisons for a main effect factor variable is performed as described for a One-Way ANOVA in Module \@ref(ANOVA1MultipleComparisons).
+::: {.tip data-latex=""}
+To assess main effects with multiple comparisons, first fit (and then use) a model without the insignificant interaction term.
+:::
+
+Multiple comparisons for a main effect factor variable are performed as described for a One-Way ANOVA in Section \@ref(multiple-comparisons-in-r), but using the new model without the interaction term.
 
 ```{r}
 mc1_noint <- emmeans(lm1_noint,specs=pairwise~density)
@@ -78,37 +94,41 @@ mc1mns <- mc1sum_noint$emmeans
 mc1diffs <- mc1sum_noint$contrasts
 ```
 
-Again, results for the individual means are in the `$emmeans` portion of the output and the results for differences in paired means are in the `$contrasts` portion. From these results, it is seen that the mean body mass of tadpoles in the 1 tadpole treatment is between `r formatC(mc1diffs$lower.CL[1],format="f",digits=3)` and `r formatC(mc1diffs$upper.CL[1],format="f",digits=3)` g greater than the mean for the 2 tadpole treatment (`r kPvalue(mc1diffs$p.value[1],latex=FALSE)`) and between `r formatC(mc1diffs$lower.CL[2],format="f",digits=3)` and `r formatC(mc1diffs$upper.CL[2],format="f",digits=3)` g greater than the mean for the 2 tadpole treatment (`r kPvalue(mc1diffs$p.value[2],latex=FALSE)`). The mean body mass of tadpoles did not significantly differ between the 2 and 4 tadpole treatments (`r kPvalue(mc1diffs$p.value[3],latex=FALSE)`). 
+Again, results for the individual means are in the `$emmeans` portion of the output and the results for differences in paired means are in the `$contrasts` portion. From these results, it is seen that the mean body mass of tadpoles in the 1 tadpole treatment is between `r formatC(mc1diffs$lower.CL[1],format="f",digits=3)` and `r formatC(mc1diffs$upper.CL[1],format="f",digits=3)` g greater than the mean for the 2 tadpole treatment (`r kPvalue(mc1diffs$p.value[1],latex=FALSE)`) and between `r formatC(mc1diffs$lower.CL[2],format="f",digits=3)` and `r formatC(mc1diffs$upper.CL[2],format="f",digits=3)` g greater than the mean for the 4 tadpole treatment (`r kPvalue(mc1diffs$p.value[2],latex=FALSE)`). The mean body mass of tadpoles did not significantly differ between the 2 and 4 tadpole treatments (`r kPvalue(mc1diffs$p.value[3],latex=FALSE)`). 
 
 ### Interaction Effects
-If an interaction effect had been present in the original Two-Way ANOVA model, multiple comparisons must be carried out to determine which pairs of **treatment** means differ. This is easily accomplished with `emmeans()` by using the interaction variable in the `pairwise~` formula. For example, if `lm1` had had a significant interaction term, the multiple comparisons for all pairs of treatments would be computed as follows.
+If an interaction effect had been present in the original Two-Way ANOVA model, multiple comparisons must be carried out to determine which pairs of **treatment** means differ. This is easily accomplished with `emmeans()` by using the interaction variable in the `pairwise~` formula. For example, if `lm1` had had a significant interaction term, then multiple comparisons for all pairs of treatments would be computed as follows.
 
 ```{r}
 mc1 <- emmeans(lm1,specs=pairwise~density:uvb)
 ( mc1sum <- summary(mc1,infer=TRUE) )
 ```
 
-As before, results for the individual means are in the `$emmeans` portion of the output and the results for differences in paired means are in the `$contrasts` portion.
+As before, results for the individual means are in the `$emmeans` portion of the output and the results for differences in paired means are in the `$contrasts` portion. While this is not an appropriate for this hypothetical set of results, one can see in the results above that the mean body mass for tadpoles in the 4 tadpole and high UVB treatment is between `r formatC(-1*mc1sum$contrasts$upper.CL[10],format="f",digits=3)` and `r formatC(-1*mc1sum$contrasts$lower.CL[10],format="f",digits=3)` less than that for tadpoles in the 1 tadpole and low UVB treatment (`r kPvalue(mc1sum$contrasts$p.value[10],latex=FALSE)`).
+
+::: {.tip data-latex=""}
+If a significant interaction term is present, then use multiple comparisons (with the model that has the interaction term) to determine which **treatment** means differ.
+:::
 
 &nbsp;
 
 ## Graphing Results
 ### Interaction Plot
-The results of a Two-Way ANOVA are summarizaed in an **interaction plot** whether a significant interaction was present in the results or not. An interaction plot, which was introduced in Module \@ref(ANOVA2Foundations1), show each treatment mean with the levels of one factor on the x-axis and the levels of other other factor shown with different colors or symbols and sometimes connected with a line. The interaction plot made here will also include a confidence intervals for each treatment mean.
+The results of a Two-Way ANOVA are summarizaed in an **interaction plot** whether a significant interaction was present in the results or not. An interaction plot, which was introduced in Module \@ref(ANOVA2Foundations1), shows each treatment mean with the levels of one factor on the x-axis and the levels of other factor shown with different colors or symbols and sometimes connected with a line. The interaction plots made in this and subsequent modules will also include a confidence intervals for each treatment mean.
 
-The method shown below requires having saved the summary of the multiple comparisons procedure applied to the **model that included the interaction term.** This was created above and saved as `mc1sum`. The data we want to plot is in the `$emmeans` portion of this object.
+The method shown below requires having saved the summary of the multiple comparisons procedure applied to the **model that included the interaction term.** This was created above and saved as `mc1sum`. The data to be plotted is in the `$emmeans` portion of this object (shown below for convenience).
 
 ```{r}
 mc1sum$emmeans
 ```
 
-Specifically, we want to plot the results in the `emmean` column with the confidence intervals in `lower.CL` and `upper.CL` against one of the factor variables. One issue is that the confidence intervals for the multiple treatments defined by one level of the variable on the x-axis will overlap. Thus, before plotting we define a "dodge" amount with `position_dodge()` that will shift the levels of the other factor slightly left and right to eliminate the overlap. The `width=` argument defines the amount of shift. You may need to "play" with this value to get the exact look that you want.
+Specifically, we want to plot the results in the `emmean` column with the confidence intervals in `lower.CL` and `upper.CL` against one of the factor variables. One issue that arises is that the confidence intervals for the multiple treatments defined by one level of the variable on the x-axis overlap. Thus, before plotting, a "dodge" amount is defined with `position_dodge()` that will shift the levels slightly left and right to eliminate the overlap. The `width=` argument defines the amount of shift. You may need to "play" with this value to get the exact look that you want.
 
 ```{r}
 pd <- position_dodge(width=0.1)
 ```
 
-The summary graphic is constucted with the code below. This code is similar to what was used for the summary graphic of a One-Way ANOVA. However, in this code, note 
+The summary graphic is constructed with the code below. This code is similar to what was used for the summary graphic of a One-Way ANOVA in Section \@ref(multiple-comparisons-r). However, this code is somewhat simpler because the individual observations are not plotted to eliminate clutter. Further, note 
 
 - the use of `mc1sum$emmeans` as the data,
 - the use of `density` (i.e., one of the factor variables) as `x=`,
@@ -121,7 +141,8 @@ The summary graphic is constucted with the code below. This code is similar to w
 ggplot(data=mc1sum$emmeans,mapping=aes(x=density,group=uvb,color=uvb,
                                        y=emmean,ymin=lower.CL,ymax=upper.CL)) +
   geom_line(position=pd,size=1.1,alpha=0.25) +
-  geom_pointrange(position=pd,size=1,fatten=2,pch=21,fill="white") +
+  geom_errorbar(position=pd,size=2,width=0) +
+  geom_point(position=pd,size=2,pch=21,fill="white") +
   labs(y="Body Mass (g)",x="Density (Tadpoles per Tank)") +
   theme_NCStats()
 ```
@@ -130,10 +151,11 @@ ggplot(data=mc1sum$emmeans,mapping=aes(x=density,group=uvb,color=uvb,
 Some researchers prefer to plot just the main effects when there is no significant interaction effect in the data. Such a plot is called a **main effects** plot and can be constructed similarly from the multiple comparison results using the model without an interaction term. Note that `group=1` must be used as shown below so that `geom_line()` will work properly.
 
 ```{r}
-ggplot(data=mc1sum_noint$emmeans,mapping=aes(x=density,group=1,
-                                       y=emmean,ymin=lower.CL,ymax=upper.CL)) +
+ggplot(data=mc1sum_noint$emmeans,
+       mapping=aes(x=density,group=1,y=emmean,ymin=lower.CL,ymax=upper.CL)) +
   geom_line(size=1.1,alpha=0.25) +
-  geom_pointrange(size=1,fatten=2,pch=21,fill="white") +
+  geom_errorbar(size=2,width=0) +
+  geom_point(size=2,pch=21,fill="white") +
   labs(y="Body Mass (g)",x="Density (Tadpoles per Tank)") +
   theme_NCStats()
 ```

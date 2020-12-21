@@ -90,7 +90,7 @@ obs1_26 + obs2_26
 
 The mean response for the $i$th level of Factor A and the $j$th level of Factor B is denoted by $\overline{Y}_{ij\cdot}$. The $\overline{Y}_{ij\cdot}$ are called **treatment means** in an experiment or **group means** in an observational study. The "dot" in $\overline{Y}_{ij\cdot}$ replaces the subscript in $Y_{ijk}$ that was summed across when computing the mean. Treatment means are calculated by summing across individuals in a treatment (the $k$ subscript), thus the $k$ subscript is replaced with a dot. As an example, the treatment mean body mass for tadpoles in the 1 tadpole density ($i$=1) and low UV-B light intensity ($k$=2) would be $\overline{Y}_{12\cdot}$ (Figure \@ref(fig:TadpoleTMNS)).^[This figure is similar to the interaction plots from Module \@ref(ANOVA1Foundations1).] 
 
-```{r TadpoleTMNS, echo=FALSE, fig.width=7, fig.height=4, fig.cap="Same as Figure \\@ref(fig:TadpoleObs2) except that six treatments means are shown with horizontal blue segments."}
+```{r TadpoleTMNS, echo=FALSE, fig.width=7, fig.height=4, fig.cap="Same as previous figure except that six treatments means are shown with horizontal blue segments."}
 tmns1 <- obs1 +
   geom_crossbar(data=tadsum,mapping=aes(x=dpd,y=tmn,ymin=tmn,ymax=tmn),
                 width=0.3,color="blue") +
@@ -112,7 +112,7 @@ tmns1 + tmns2
 
 The mean response for the $i$th level of Factor A is given by $\overline{Y}_{i\cdot\cdot}$. These **level means** are calculated by first summing individuals in each treatment (the $k$ subscript) and then summing across UV-B light levels (the $j$ subscript); thus, both the $k$ and $j$ subscripts are replaced with a "dot." For example, the mean body mass for tadpoles in the 1 tadpole density ($i$=1) is $\overline{Y}_{1\cdot\cdot}$ (Figure \@ref(fig:TadpoleLMNS)-Left).
 
-```{r TadpoleLMNS, echo=FALSE, fig.width=7, fig.height=4, fig.cap="Same as Figure \\@ref(fig:TadpoleObs2) except that three density level means are shown on the left and two UV-B light level means are shown on the right with horizontal orange segments."}
+```{r TadpoleLMNS, echo=FALSE, fig.width=7, fig.height=4, fig.cap="Same as previous figure except that three density level means are shown on the left and two UV-B light level means are shown on the right with horizontal orange segments."}
 lmns1 <- obs1 +
   geom_crossbar(data=tadsum,mapping=aes(x=density,y=dmn,ymin=dmn,ymax=dmn),
                 width=0.6,color="orange2") +
@@ -138,7 +138,7 @@ Similarly, the mean response for the $j$th level of Factor B is given by $\overl
 
 Finally, the mean response regardless of level of any factor is given by $\overline{Y}_{\cdot\cdot\cdot}$ and is called the **grand mean** (Figure \@ref(fig:TadpoleGMN)). The grand mean is calculated by summing individuals in each treatment, then summing across UV-B light intensities, and then summing across tadpole densities; thus, all three subscripts are replaced with a "dot."
 
-```{r TadpoleGMN, echo=FALSE, fig.width=7, fig.height=4, fig.cap="Same as Figure \\@ref(fig:TadpoleObs2) except that the grand means is shown with a horizontal red segment in each panel."}
+```{r TadpoleGMN, echo=FALSE, fig.width=7, fig.height=4, fig.cap="Same as previous figure except that the grand means is shown with a horizontal red segment in each panel."}
 gmn1 <- obs1 +
   geom_crossbar(data=tadsum,mapping=aes(x=2,y=gmn,ymin=gmn,ymax=gmn),
                 width=2.5,color="red") +

@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#peak-discharge-transformation"><i class="fa fa-check"></i><b>9.4</b> Peak Discharge (<em>Transformation</em>)</a></li>
 </ul></li>
 <li class="part"><span><b>TWO-WAY ANOVA</b></span></li>
-<li class="chapter" data-level="10" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html"><i class="fa fa-check"></i><b>10</b> Two-Way Conceptual Foundation"</a>
+<li class="chapter" data-level="10" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html"><i class="fa fa-check"></i><b>10</b> Two-Way Conceptual Foundation</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#two-factors"><i class="fa fa-check"></i><b>10.1</b> Two Factors</a></li>
 <li class="chapter" data-level="10.2" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#interaction-effects"><i class="fa fa-check"></i><b>10.2</b> Interaction Effects</a></li>
@@ -332,14 +332,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="testing-assumptions-in-r" class="section level2" number="7.5">
 <h2><span class="header-section-number">7.5</span> Testing Assumptions in R</h2>
 <p>All plots and tests of assumptions can be completed by submitting the saved <code>lm</code> object from when the One-Way ANOVA was computed to <code>assumptionCheck()</code>. For example, the code below fits the One-Way ANOVA for testing if the mean immunoglobulin levels of New Zealand opossums differs among seasons (the <code>opp</code> data frame was created in Module <a href="ANOVA1MultipleComparisons.html#ANOVA1MultipleComparisons">6</a>) and then performs the calculations needed to check the assumptions.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="ANOVA1Assumptions.html#cb27-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb27-1"><a href="ANOVA1Assumptions.html#cb27-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
 <span id="cb27-2"><a href="ANOVA1Assumptions.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1)</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>For a One-Way ANOVA, <code>assumptionCheck()</code> produces a histogram of residuals with the Anderson-Darling and outlier test p-values on the left and a boxplot of residuals for each group with the Levene’s Test p-value on the right.</p>
 <p>In this case the boxes on the boxplot are similarly sized and the Levene’s test p-value (=0.3708) is greater than α suggesting that the group variances are equal. The histogram of residuals is difficult to assess because the sample size is so small, but it does not appear strongly skewed and the Anderson-Darling p-value (=0.0609) is (barely) greater than α, which weakly suggests that the residuals are normally distributed. The histogram does not show any “odd” individuals and the outlier test p-value (=0.0402) is greater than α which suggests that there are not any significant outliers in these data. Thus, the three assumptions that can be tested with the data all appear to be met.</p>
 <p>The independence assumption cannot be assessed from the data and must be reasoned through. While there is not much information about this study, I will assume between group independence as there is no suggestion that the same opossums were sampled in each of the three seasons (i.e., no indication that they were tagged or otherwise individually identified). This is particularly clear because the sample size differs across seasons (see table below). I will also assume that there is within-group independence because there is no evidence that the opossums within any given season were somehow related or connected.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="ANOVA1Assumptions.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>season,<span class="at">data=</span>opp)</span></code></pre></div>
-<pre><code>#R&gt;   season
+<div class="sourceCode" id="cb28"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb28-1"><a href="ANOVA1Assumptions.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>season,<span class="at">data=</span>opp)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   season
 #R&gt;   feb may nov 
 #R&gt;    12   7   8</code></pre>
 

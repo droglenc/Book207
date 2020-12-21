@@ -43,3 +43,23 @@ div.defn {
   font-size: 0.7em;
   line-height: normal;
 }
+
+.RCODE {
+  line-height: normal;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.ROUTPUT {
+  line-height: normal;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.RWARNING {
+  background-color: Khaki;
+}
+
+.RERROR {
+  background-color: Salmon;
+}
