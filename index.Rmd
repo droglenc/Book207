@@ -21,6 +21,7 @@ description: "This book contains the readings for MTH207 at Northland College."
 library(NCStats)
 library(ggplot2)
 library(patchwork)
+library(emmeans)
 knitr::opts_chunk$set(comment="#R>  ",message=FALSE,warning=FALSE,
                       fig.align='center',fig.width=3.5,fig.height=3.5)
 options(show.signif.stars=FALSE,knitr.kable.NA = '')

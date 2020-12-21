@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="ModelComparison.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="ANOVA1MultipleComparisons.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -174,6 +174,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#analytical-foundation"><i class="fa fa-check"></i><b>5.1</b> Analytical Foundation</a></li>
 <li class="chapter" data-level="5.2" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#one-way-anova-in-r"><i class="fa fa-check"></i><b>5.2</b> One-Way ANOVA in R</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html"><i class="fa fa-check"></i><b>6</b> Multiple Comparisons</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#multiple-comparison-problem"><i class="fa fa-check"></i><b>6.1</b> Multiple Comparison Problem</a></li>
+<li class="chapter" data-level="6.2" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#correction-methods"><i class="fa fa-check"></i><b>6.2</b> Correction Methods</a></li>
+<li class="chapter" data-level="6.3" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r"><i class="fa fa-check"></i><b>6.3</b> Multiple Comparisons in R</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
@@ -231,7 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[ \text{H}_{\text{0}}: \mu_{1} = \mu_{2} = \ldots = \mu_{I} \]</span></p>
 <p>where <span class="math inline">\(I\)</span> is the total number of groups or populations.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> The alternative hypothesis is complicated because not all pairs of means need differ for the null hypothesis to be rejected. Thus, the alternative hypothesis for a one-way ANOVA is “wordy” and is often written as</p>
 <p><span class="math display">\[ \text{H}_{\text{A}}:\text{At least one pair of means is different} \]</span></p>
-<p>A rejection of H<sub>0</sub> in favor of H<sub>A</sub> is a statement that <em>some</em> difference in group means exists. It does not clearly indicate which group means differ. Methods to identify which group means differ are in Module <a href="#ANOVA1MultipleComparisons"><strong>??</strong></a>.</p>
+<p>A rejection of H<sub>0</sub> in favor of H<sub>A</sub> is a statement that <em>some</em> difference in group means exists. It does not clearly indicate which group means differ. Methods to identify which group means differ are in Module <a href="ANOVA1MultipleComparisons.html#ANOVA1MultipleComparisons">6</a>.</p>
 <div class="tip">
 <p>Rejecting H<sub>0</sub> <strong>just</strong> means that <strong>some</strong> group means differ.</p>
 </div>
@@ -363,7 +369,7 @@ Residuals
         </div>
       </div>
 <a href="ModelComparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ANOVA1MultipleComparisons.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

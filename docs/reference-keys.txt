@@ -20,6 +20,7 @@ fig:BothModelResids
 tab:ANOVA1
 fig:SS
 tab:oppANOVA
+fig:MCProblem
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -54,3 +55,7 @@ one-more-look-at-ms-and-f-test
 ANOVA1Foundations
 analytical-foundation
 one-way-anova-in-r
+ANOVA1MultipleComparisons
+multiple-comparison-problem
+correction-methods
+multiple-comparisons-in-r
