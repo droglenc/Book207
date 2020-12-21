@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Module 9 One-Way ANOVA Summary | Readings for MTH207</title>
+  <title>Module 9 One-Way Summary | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Module 9 One-Way ANOVA Summary | Readings for MTH207" />
+  <meta property="og:title" content="Module 9 One-Way Summary | Readings for MTH207" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://derekogle.com/Book207/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="droglenc/Book207" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Module 9 One-Way ANOVA Summary | Readings for MTH207" />
+  <meta name="twitter:title" content="Module 9 One-Way Summary | Readings for MTH207" />
   
   <meta name="twitter:description" content="This book contains the readings for MTH207 at Northland College." />
   
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="ANOVA1Transformations.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="ANOVA2Foundations1.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -169,18 +169,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.9" data-path="ModelComparison.html"><a href="ModelComparison.html#one-more-look-at-ms-and-f-test"><i class="fa fa-check"></i><b>4.9</b> One More Look at MS and F-test</a></li>
 </ul></li>
 <li class="part"><span><b>ONE-WAY ANOVA</b></span></li>
-<li class="chapter" data-level="5" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html"><i class="fa fa-check"></i><b>5</b> One-Way ANOVA Foundations</a>
+<li class="chapter" data-level="5" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html"><i class="fa fa-check"></i><b>5</b> One-Way Foundations</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#analytical-foundation"><i class="fa fa-check"></i><b>5.1</b> Analytical Foundation</a></li>
 <li class="chapter" data-level="5.2" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#one-way-anova-in-r"><i class="fa fa-check"></i><b>5.2</b> One-Way ANOVA in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html"><i class="fa fa-check"></i><b>6</b> Multiple Comparisons</a>
+<li class="chapter" data-level="6" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html"><i class="fa fa-check"></i><b>6</b> One-Way Multiple Comparisons</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#multiple-comparison-problem"><i class="fa fa-check"></i><b>6.1</b> Multiple Comparison Problem</a></li>
 <li class="chapter" data-level="6.2" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#correction-methods"><i class="fa fa-check"></i><b>6.2</b> Correction Methods</a></li>
 <li class="chapter" data-level="6.3" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r"><i class="fa fa-check"></i><b>6.3</b> Multiple Comparisons in R</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html"><i class="fa fa-check"></i><b>7</b> One-Way ANOVA Assumptions</a>
+<li class="chapter" data-level="7" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html"><i class="fa fa-check"></i><b>7</b> One-Way Assumptions</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#independence"><i class="fa fa-check"></i><b>7.1</b> Independence</a></li>
 <li class="chapter" data-level="7.2" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#equal-variances"><i class="fa fa-check"></i><b>7.2</b> Equal Variances</a></li>
@@ -188,19 +188,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#no-outliers"><i class="fa fa-check"></i><b>7.4</b> No Outliers</a></li>
 <li class="chapter" data-level="7.5" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#testing-assumptions-in-r"><i class="fa fa-check"></i><b>7.5</b> Testing Assumptions in R</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html"><i class="fa fa-check"></i><b>8</b> One-Way ANOVA Transformations</a>
+<li class="chapter" data-level="8" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html"><i class="fa fa-check"></i><b>8</b> One-Way Transformations</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#power-transformations"><i class="fa fa-check"></i><b>8.1</b> Power Transformations</a></li>
 <li class="chapter" data-level="8.2" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#transformations-from-theory"><i class="fa fa-check"></i><b>8.2</b> Transformations from Theory</a></li>
 <li class="chapter" data-level="8.3" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#interpretations-after-transformations"><i class="fa fa-check"></i><b>8.3</b> Interpretations After Transformations</a></li>
 <li class="chapter" data-level="8.4" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#back-transformations-in-r"><i class="fa fa-check"></i><b>8.4</b> Back-Transformations in R</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html"><i class="fa fa-check"></i><b>9</b> One-Way ANOVA Summary</a>
+<li class="chapter" data-level="9" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html"><i class="fa fa-check"></i><b>9</b> One-Way Summary</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#suggested-workflow"><i class="fa fa-check"></i><b>9.1</b> Suggested Workflow</a></li>
 <li class="chapter" data-level="9.2" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#nematodes-no-transformation"><i class="fa fa-check"></i><b>9.2</b> Nematodes (<em>No Transformation</em>)</a></li>
 <li class="chapter" data-level="9.3" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#ant-foraging-transformation"><i class="fa fa-check"></i><b>9.3</b> Ant Foraging (<em>Transformation</em>)</a></li>
 <li class="chapter" data-level="9.4" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#peak-discharge-transformation"><i class="fa fa-check"></i><b>9.4</b> Peak Discharge (<em>Transformation</em>)</a></li>
+</ul></li>
+<li class="part"><span><b>TWO-WAY ANOVA</b></span></li>
+<li class="chapter" data-level="10" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html"><i class="fa fa-check"></i><b>10</b> Two-Way Conceptual Foundation"</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#two-factors"><i class="fa fa-check"></i><b>10.1</b> Two Factors</a></li>
+<li class="chapter" data-level="10.2" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#interaction-effects"><i class="fa fa-check"></i><b>10.2</b> Interaction Effects</a></li>
+<li class="chapter" data-level="10.3" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#main-effects"><i class="fa fa-check"></i><b>10.3</b> Main Effects</a></li>
+<li class="chapter" data-level="10.4" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#advantages-of-ccfd"><i class="fa fa-check"></i><b>10.4</b> Advantages of CCFD</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html"><i class="fa fa-check"></i><b>11</b> Two-Way Analytical Foundation</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#terminology"><i class="fa fa-check"></i><b>11.1</b> Terminology</a></li>
+<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#total-and-within-ss-df-and-ms"><i class="fa fa-check"></i><b>11.2</b> Total and Within SS, df, and MS</a></li>
+<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#among-ss-df-and-ms"><i class="fa fa-check"></i><b>11.3</b> Among SS, df, and MS</a></li>
+<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.4</b> ANOVA Table</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html"><i class="fa fa-check"></i><b>12</b> Two-Way Analysis</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#model-fitting-in-r"><i class="fa fa-check"></i><b>12.1</b> Model Fitting in R</a></li>
+<li class="chapter" data-level="12.2" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#assumptions"><i class="fa fa-check"></i><b>12.2</b> Assumptions</a></li>
+<li class="chapter" data-level="12.3" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#main-and-interaction-effects-anova-table"><i class="fa fa-check"></i><b>12.3</b> Main and Interaction Effects (ANOVA Table)</a></li>
+<li class="chapter" data-level="12.4" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#multiple-comparisons"><i class="fa fa-check"></i><b>12.4</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="12.5" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#graphing-results"><i class="fa fa-check"></i><b>12.5</b> Graphing Results</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html"><i class="fa fa-check"></i><b>13</b> Two-Way Summary</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#suggested-workflow-1"><i class="fa fa-check"></i><b>13.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="13.2" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#bacteria-no-transformation"><i class="fa fa-check"></i><b>13.2</b> Bacteria (No Transformation)</a></li>
+<li class="chapter" data-level="13.3" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#blood-pressure-no-transformation"><i class="fa fa-check"></i><b>13.3</b> Blood Pressure (No Transformation)</a></li>
+<li class="chapter" data-level="13.4" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#crayfish-foraging-transformation"><i class="fa fa-check"></i><b>13.4</b> Crayfish Foraging (Transformation)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -225,7 +255,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="ANOVA1Summary" class="section level1" number="9">
-<h1><span class="header-section-number">Module 9</span> One-Way ANOVA Summary</h1>
+<h1><span class="header-section-number">Module 9</span> One-Way Summary</h1>
 <p>Specific parts of a full One-Way ANOVA analysis have been described in Modules <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a>-<a href="ANOVA1Transformations.html#ANOVA1Transformations">8</a>. In this module, a workflow for a full analysis is offered and that workflow is demonstrated with several examples.</p>
 <div id="suggested-workflow" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> Suggested Workflow</h2>
@@ -1067,6 +1097,9 @@ Figure 9.8: <strong>Back-transformed</strong> mean (with 95% confidence interval
 </div>
 </div>
 </div>
+
+
+
 <div class="footnotes">
 <hr />
 <ol start="36">
@@ -1079,7 +1112,7 @@ Figure 9.8: <strong>Back-transformed</strong> mean (with 95% confidence interval
         </div>
       </div>
 <a href="ANOVA1Transformations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ANOVA2Foundations1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

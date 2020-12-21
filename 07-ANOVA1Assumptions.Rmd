@@ -1,4 +1,4 @@
-# One-Way ANOVA Assumptions {#ANOVA1Assumptions}
+# One-Way Assumptions {#ANOVA1Assumptions}
 
 As with most statistical methods, the One-Way ANOVA requires that four assumptions be met so that the calculations made in Modules \@ref(ANOVA1Foundations) and \@ref(ANOVA1MultipleComparisons) mean what we said they would mean. The four assumptions for a One-Way ANOVA are:^[Note that the first three are the same three assumptions you learned for a [2-Sample t-test](#T2Review).]
 

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 11 Two-Way Analytical Foundation | Readings for MTH207</title>
+  <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 11 Two-Way Analytical Foundation | Readings for MTH207" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://derekogle.com/Book207/" />
+  
+  <meta property="og:description" content="This book contains the readings for MTH207 at Northland College." />
+  <meta name="github-repo" content="droglenc/Book207" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 11 Two-Way Analytical Foundation | Readings for MTH207" />
+  
+  <meta name="twitter:description" content="This book contains the readings for MTH207 at Northland College." />
+  
+
+<meta name="author" content="Derek H. Ogle" />
+
+
+<meta name="date" content="2020-12-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ANOVA2Foundations1.html"/>
+<link rel="next" href="ANOVA2Analysis.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Readings for MTH207</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>FOUNDATIONS</b></span></li>
+<li class="chapter" data-level="1" data-path="ModelTypes.html"><a href="ModelTypes.html"><i class="fa fa-check"></i><b>1</b> Model Types &amp; Methods</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="ModelTypes.html"><a href="ModelTypes.html#distinguishing-methods"><i class="fa fa-check"></i><b>1.1</b> Distinguishing Methods</a></li>
+<li class="chapter" data-level="1.2" data-path="ModelTypes.html"><a href="ModelTypes.html#method-purposes"><i class="fa fa-check"></i><b>1.2</b> Method Purposes</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="T2Review.html"><a href="T2Review.html"><i class="fa fa-check"></i><b>2</b> 2-Sample t Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="T2Review.html"><a href="T2Review.html#review"><i class="fa fa-check"></i><b>2.1</b> Review</a></li>
+<li class="chapter" data-level="2.2" data-path="T2Review.html"><a href="T2Review.html#T2analysis"><i class="fa fa-check"></i><b>2.2</b> Analysis in R</a></li>
+<li class="chapter" data-level="2.3" data-path="T2Review.html"><a href="T2Review.html#signal-to-noise"><i class="fa fa-check"></i><b>2.3</b> Signal-to-Noise</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ModelConcepts.html"><a href="ModelConcepts.html"><i class="fa fa-check"></i><b>3</b> Model Concepts</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ModelConcepts.html"><a href="ModelConcepts.html#what-is-a-model"><i class="fa fa-check"></i><b>3.1</b> What is a Model</a></li>
+<li class="chapter" data-level="3.2" data-path="ModelConcepts.html"><a href="ModelConcepts.html#assessing-fit-ss"><i class="fa fa-check"></i><b>3.2</b> Assessing Fit (SS)</a></li>
+<li class="chapter" data-level="3.3" data-path="ModelConcepts.html"><a href="ModelConcepts.html#residual-degrees-of-freedom"><i class="fa fa-check"></i><b>3.3</b> Residual Degrees-of-Freedom</a></li>
+<li class="chapter" data-level="3.4" data-path="ModelConcepts.html"><a href="ModelConcepts.html#mean-squares"><i class="fa fa-check"></i><b>3.4</b> Mean-Squares</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ModelComparison.html"><a href="ModelComparison.html"><i class="fa fa-check"></i><b>4</b> Model Comparison</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ModelComparison.html"><a href="ModelComparison.html#competing-models"><i class="fa fa-check"></i><b>4.1</b> Competing Models</a></li>
+<li class="chapter" data-level="4.2" data-path="ModelComparison.html"><a href="ModelComparison.html#measuring-increase-in-fit"><i class="fa fa-check"></i><b>4.2</b> Measuring Increase in Fit</a></li>
+<li class="chapter" data-level="4.3" data-path="ModelComparison.html"><a href="ModelComparison.html#measuring-increase-in-complexity"><i class="fa fa-check"></i><b>4.3</b> Measuring Increase in Complexity</a></li>
+<li class="chapter" data-level="4.4" data-path="ModelComparison.html"><a href="ModelComparison.html#noise-variances"><i class="fa fa-check"></i><b>4.4</b> “Noise” Variances</a></li>
+<li class="chapter" data-level="4.5" data-path="ModelComparison.html"><a href="ModelComparison.html#signal-variance-benefit-to-cost"><i class="fa fa-check"></i><b>4.5</b> “Signal” Variance (Benefit-to-Cost)</a></li>
+<li class="chapter" data-level="4.6" data-path="ModelComparison.html"><a href="ModelComparison.html#ratio-of-variances-signal-to-noise"><i class="fa fa-check"></i><b>4.6</b> Ratio of Variances (Signal-to-Noise)</a></li>
+<li class="chapter" data-level="4.7" data-path="ModelComparison.html"><a href="ModelComparison.html#anova-table"><i class="fa fa-check"></i><b>4.7</b> ANOVA Table</a></li>
+<li class="chapter" data-level="4.8" data-path="ModelComparison.html"><a href="ModelComparison.html#two-sample-t-test-revisited-using-linear-models"><i class="fa fa-check"></i><b>4.8</b> Two-Sample t-Test Revisited: Using Linear Models</a></li>
+<li class="chapter" data-level="4.9" data-path="ModelComparison.html"><a href="ModelComparison.html#one-more-look-at-ms-and-f-test"><i class="fa fa-check"></i><b>4.9</b> One More Look at MS and F-test</a></li>
+</ul></li>
+<li class="part"><span><b>ONE-WAY ANOVA</b></span></li>
+<li class="chapter" data-level="5" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html"><i class="fa fa-check"></i><b>5</b> One-Way Foundations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#analytical-foundation"><i class="fa fa-check"></i><b>5.1</b> Analytical Foundation</a></li>
+<li class="chapter" data-level="5.2" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#one-way-anova-in-r"><i class="fa fa-check"></i><b>5.2</b> One-Way ANOVA in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html"><i class="fa fa-check"></i><b>6</b> One-Way Multiple Comparisons</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#multiple-comparison-problem"><i class="fa fa-check"></i><b>6.1</b> Multiple Comparison Problem</a></li>
+<li class="chapter" data-level="6.2" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#correction-methods"><i class="fa fa-check"></i><b>6.2</b> Correction Methods</a></li>
+<li class="chapter" data-level="6.3" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r"><i class="fa fa-check"></i><b>6.3</b> Multiple Comparisons in R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html"><i class="fa fa-check"></i><b>7</b> One-Way Assumptions</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#independence"><i class="fa fa-check"></i><b>7.1</b> Independence</a></li>
+<li class="chapter" data-level="7.2" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#equal-variances"><i class="fa fa-check"></i><b>7.2</b> Equal Variances</a></li>
+<li class="chapter" data-level="7.3" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#normality"><i class="fa fa-check"></i><b>7.3</b> Normality</a></li>
+<li class="chapter" data-level="7.4" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#no-outliers"><i class="fa fa-check"></i><b>7.4</b> No Outliers</a></li>
+<li class="chapter" data-level="7.5" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#testing-assumptions-in-r"><i class="fa fa-check"></i><b>7.5</b> Testing Assumptions in R</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html"><i class="fa fa-check"></i><b>8</b> One-Way Transformations</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#power-transformations"><i class="fa fa-check"></i><b>8.1</b> Power Transformations</a></li>
+<li class="chapter" data-level="8.2" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#transformations-from-theory"><i class="fa fa-check"></i><b>8.2</b> Transformations from Theory</a></li>
+<li class="chapter" data-level="8.3" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#interpretations-after-transformations"><i class="fa fa-check"></i><b>8.3</b> Interpretations After Transformations</a></li>
+<li class="chapter" data-level="8.4" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#back-transformations-in-r"><i class="fa fa-check"></i><b>8.4</b> Back-Transformations in R</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html"><i class="fa fa-check"></i><b>9</b> One-Way Summary</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#suggested-workflow"><i class="fa fa-check"></i><b>9.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="9.2" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#nematodes-no-transformation"><i class="fa fa-check"></i><b>9.2</b> Nematodes (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="9.3" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#ant-foraging-transformation"><i class="fa fa-check"></i><b>9.3</b> Ant Foraging (<em>Transformation</em>)</a></li>
+<li class="chapter" data-level="9.4" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#peak-discharge-transformation"><i class="fa fa-check"></i><b>9.4</b> Peak Discharge (<em>Transformation</em>)</a></li>
+</ul></li>
+<li class="part"><span><b>TWO-WAY ANOVA</b></span></li>
+<li class="chapter" data-level="10" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html"><i class="fa fa-check"></i><b>10</b> Two-Way Conceptual Foundation"</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#two-factors"><i class="fa fa-check"></i><b>10.1</b> Two Factors</a></li>
+<li class="chapter" data-level="10.2" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#interaction-effects"><i class="fa fa-check"></i><b>10.2</b> Interaction Effects</a></li>
+<li class="chapter" data-level="10.3" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#main-effects"><i class="fa fa-check"></i><b>10.3</b> Main Effects</a></li>
+<li class="chapter" data-level="10.4" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#advantages-of-ccfd"><i class="fa fa-check"></i><b>10.4</b> Advantages of CCFD</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html"><i class="fa fa-check"></i><b>11</b> Two-Way Analytical Foundation</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#terminology"><i class="fa fa-check"></i><b>11.1</b> Terminology</a></li>
+<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#total-and-within-ss-df-and-ms"><i class="fa fa-check"></i><b>11.2</b> Total and Within SS, df, and MS</a></li>
+<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#among-ss-df-and-ms"><i class="fa fa-check"></i><b>11.3</b> Among SS, df, and MS</a></li>
+<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.4</b> ANOVA Table</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html"><i class="fa fa-check"></i><b>12</b> Two-Way Analysis</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#model-fitting-in-r"><i class="fa fa-check"></i><b>12.1</b> Model Fitting in R</a></li>
+<li class="chapter" data-level="12.2" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#assumptions"><i class="fa fa-check"></i><b>12.2</b> Assumptions</a></li>
+<li class="chapter" data-level="12.3" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#main-and-interaction-effects-anova-table"><i class="fa fa-check"></i><b>12.3</b> Main and Interaction Effects (ANOVA Table)</a></li>
+<li class="chapter" data-level="12.4" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#multiple-comparisons"><i class="fa fa-check"></i><b>12.4</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="12.5" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#graphing-results"><i class="fa fa-check"></i><b>12.5</b> Graphing Results</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html"><i class="fa fa-check"></i><b>13</b> Two-Way Summary</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#suggested-workflow-1"><i class="fa fa-check"></i><b>13.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="13.2" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#bacteria-no-transformation"><i class="fa fa-check"></i><b>13.2</b> Bacteria (No Transformation)</a></li>
+<li class="chapter" data-level="13.3" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#blood-pressure-no-transformation"><i class="fa fa-check"></i><b>13.3</b> Blood Pressure (No Transformation)</a></li>
+<li class="chapter" data-level="13.4" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#crayfish-foraging-transformation"><i class="fa fa-check"></i><b>13.4</b> Crayfish Foraging (Transformation)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
+<li><a href="https://bookdown.org" target="_blank">Built with Bookdown + RStudio</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Readings for MTH207</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ANOVA2Foundations2" class="section level1" number="11">
+<h1><span class="header-section-number">Module 11</span> Two-Way Analytical Foundation</h1>
+<p>In this module we will examine the analytical foundation of a Two-Way ANOVA. In many ways, this foundation is very similar to that for the <a href="ANOVA1Foundations.html#ANOVA1Foundations">One-Way ANOVA</a>. However, there are some striking differences. The similarities and differences are discussed here.</p>
+<div id="terminology" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> Terminology</h2>
+<div id="definitions" class="section level3" number="11.1.1">
+<h3><span class="header-section-number">11.1.1</span> Definitions</h3>
+<p>Some terminology must be developed before discussing the objective criteria for determining the significance of main and interaction effects in a Two-Way ANOVA. The tadpole body mass study discussed in Module <a href="ANOVA2Foundations1.html#ANOVA2Foundations1">10</a> was an experiment with two <em>factors</em>: UV-B light intensity with two <em>levels</em> (High and Low) and the density of tadpoles with three <em>levels</em> (1, 2, and 4 tadpoles). The combination of these two factors created six <em>treatments</em> with 15 individuals or <em>replicates</em> per treatment.<a href="#fn43" class="footnote-ref" id="fnref43"><sup>43</sup></a></p>
+</div>
+<div id="graphing" class="section level3" number="11.1.2">
+<h3><span class="header-section-number">11.1.2</span> Graphing</h3>
+<p>Two-factor studies can be visualized with the response variable on the y-axis, levels of one factor on the x-axis, and levels of the other factor shown with different colors or symbols. It does not make a difference which factor is on the x-axis, though putting the factor with more levels on the x-axis makes for a less cluttered graph.</p>
+<p>In this module, two graphs will often be shown side-by-side. These are the same data but the role of the factor variables in the plot are reversed. For example, Figure <a href="ANOVA2Foundations2.html#fig:TadpoleObs">11.1</a>-Left has tadpole density on the x-axis with different colors for the UV-B light levels and Figure <a href="ANOVA2Foundations2.html#fig:TadpoleObs">11.1</a>-Right has UV-B light intensity on the x-axis with different colors for the tadpole densities.</p>
+<div class="figure" style="text-align: center"><span id="fig:TadpoleObs"></span>
+<img src="Book207_files/figure-html/TadpoleObs-1.png" alt="Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis." width="672" />
+<p class="caption">
+Figure 11.1: Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis.
+</p>
+</div>
+</div>
+<div id="symbols" class="section level3" number="11.1.3">
+<h3><span class="header-section-number">11.1.3</span> Symbols</h3>
+<p>In a two-factor study, one of the factors is generically labeled as Factor A and the other factor is generically labeled as Factor B. Ultimately it does not make a difference which factor is considered first. In this example, tadpole density will be the first (A) factor and UV-B light intensity will be the second (B) factor.</p>
+<p>Factor A has <span class="math inline">\(a\)</span> levels and Factor B has <span class="math inline">\(b\)</span> levels. In the tadpole example, <span class="math inline">\(a\)</span>=3 (1, 2, and 4 tadpoles per tank) and <span class="math inline">\(b\)</span>=2 (High and Low UV-B light intensity). We use <span class="math inline">\(i\)</span> to index the first (A) factor and <span class="math inline">\(j\)</span> to index the second (B) factor. Thus, <span class="math inline">\(i\)</span> varies from 1 (first level) to <span class="math inline">\(a\)</span> (last level) and <span class="math inline">\(j\)</span> varies from 1 to <span class="math inline">\(b\)</span>.</p>
+<p>For the sake of simplicity the same number of replicates are used in each treatment.<a href="#fn44" class="footnote-ref" id="fnref44"><sup>44</sup></a> With this <span class="math inline">\(m\)</span> is the number of replicates <em>per treatment</em>. In the tadpole example <span class="math inline">\(m\)</span>=15. We use <span class="math inline">\(k\)</span> as an index for individuals <strong>within</strong> a treatment. Thus, <span class="math inline">\(k\)</span> varies from 1 to <span class="math inline">\(m\)</span> for each treatment.</p>
+<p>With these definitions, the response variable recorded on the <span class="math inline">\(k\)</span>th individual in the treatment defined by the <span class="math inline">\(i\)</span>th level of Factor A and the <span class="math inline">\(j\)</span>th level of the Factor B is denoted by <span class="math inline">\(Y_{ijk}\)</span>. For example, the body mass of tadpoles in the seventh tank (<span class="math inline">\(k\)</span>=7) that received 1 tadpole (<span class="math inline">\(i\)</span>=1) and low UV-B light (<span class="math inline">\(j\)</span>=2) would be <span class="math inline">\(Y_{127}\)</span> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleObs2">11.2</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:TadpoleObs2"></span>
+<img src="Book207_files/figure-html/TadpoleObs2-1.png" alt="Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis." width="672" />
+<p class="caption">
+Figure 11.2: Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis.
+</p>
+</div>
+<p>The mean response for the <span class="math inline">\(i\)</span>th level of Factor A and the <span class="math inline">\(j\)</span>th level of Factor B is denoted by <span class="math inline">\(\overline{Y}_{ij\cdot}\)</span>. The <span class="math inline">\(\overline{Y}_{ij\cdot}\)</span> are called <strong>treatment means</strong> in an experiment or <strong>group means</strong> in an observational study. The “dot” in <span class="math inline">\(\overline{Y}_{ij\cdot}\)</span> replaces the subscript in <span class="math inline">\(Y_{ijk}\)</span> that was summed across when computing the mean. Treatment means are calculated by summing across individuals in a treatment (the <span class="math inline">\(k\)</span> subscript), thus the <span class="math inline">\(k\)</span> subscript is replaced with a dot. As an example, the treatment mean body mass for tadpoles in the 1 tadpole density (<span class="math inline">\(i\)</span>=1) and low UV-B light intensity (<span class="math inline">\(k\)</span>=2) would be <span class="math inline">\(\overline{Y}_{12\cdot}\)</span> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleTMNS">11.3</a>).<a href="#fn45" class="footnote-ref" id="fnref45"><sup>45</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:TadpoleTMNS"></span>
+<img src="Book207_files/figure-html/TadpoleTMNS-1.png" alt="Same as Figure \@ref(fig:TadpoleObs2) except that six treatments means are shown with horizontal blue segments." width="672" />
+<p class="caption">
+Figure 11.3: Same as Figure <a href="ANOVA2Foundations2.html#fig:TadpoleObs2">11.2</a> except that six treatments means are shown with horizontal blue segments.
+</p>
+</div>
+<p>The mean response for the <span class="math inline">\(i\)</span>th level of Factor A is given by <span class="math inline">\(\overline{Y}_{i\cdot\cdot}\)</span>. These <strong>level means</strong> are calculated by first summing individuals in each treatment (the <span class="math inline">\(k\)</span> subscript) and then summing across UV-B light levels (the <span class="math inline">\(j\)</span> subscript); thus, both the <span class="math inline">\(k\)</span> and <span class="math inline">\(j\)</span> subscripts are replaced with a “dot.” For example, the mean body mass for tadpoles in the 1 tadpole density (<span class="math inline">\(i\)</span>=1) is <span class="math inline">\(\overline{Y}_{1\cdot\cdot}\)</span> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleLMNS">11.4</a>-Left).</p>
+<div class="figure" style="text-align: center"><span id="fig:TadpoleLMNS"></span>
+<img src="Book207_files/figure-html/TadpoleLMNS-1.png" alt="Same as Figure \@ref(fig:TadpoleObs2) except that three density level means are shown on the left and two UV-B light level means are shown on the right with horizontal orange segments." width="672" />
+<p class="caption">
+Figure 11.4: Same as Figure <a href="ANOVA2Foundations2.html#fig:TadpoleObs2">11.2</a> except that three density level means are shown on the left and two UV-B light level means are shown on the right with horizontal orange segments.
+</p>
+</div>
+<p>Similarly, the mean response for the <span class="math inline">\(j\)</span>th level of Factor B is given by <span class="math inline">\(\overline{Y}_{\cdot j\cdot}\)</span>. These <strong>level means</strong> are calculated by first summing individuals in each treatment (the <span class="math inline">\(k\)</span> subscript) and then summing across tadpole density levels (the <span class="math inline">\(i\)</span> subscript); thus, both the <span class="math inline">\(k\)</span> and <span class="math inline">\(i\)</span> subscripts are replaced with a “dot.” For example, the mean body mass for tadpoles in the low UV-B light intensity (<span class="math inline">\(j\)</span>=2) is <span class="math inline">\(\overline{Y}_{\cdot2\cdot}\)</span> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleLMNS">11.4</a>-Right).</p>
+<p>Finally, the mean response regardless of level of any factor is given by <span class="math inline">\(\overline{Y}_{\cdot\cdot\cdot}\)</span> and is called the <strong>grand mean</strong> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleGMN">11.5</a>). The grand mean is calculated by summing individuals in each treatment, then summing across UV-B light intensities, and then summing across tadpole densities; thus, all three subscripts are replaced with a “dot.”</p>
+<div class="figure" style="text-align: center"><span id="fig:TadpoleGMN"></span>
+<img src="Book207_files/figure-html/TadpoleGMN-1.png" alt="Same as Figure \@ref(fig:TadpoleObs2) except that the grand means is shown with a horizontal red segment in each panel." width="672" />
+<p class="caption">
+Figure 11.5: Same as Figure <a href="ANOVA2Foundations2.html#fig:TadpoleObs2">11.2</a> except that the grand means is shown with a horizontal red segment in each panel.
+</p>
+</div>
+<div class="tip">
+<p>In symbols for means, dots replace lettered subscripts for subscripts summed across when calculating the mean.</p>
+</div>
+<p> </p>
+</div>
+</div>
+<div id="total-and-within-ss-df-and-ms" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> Total and Within SS, df, and MS</h2>
+<div id="models" class="section level3" number="11.2.1">
+<h3><span class="header-section-number">11.2.1</span> Models</h3>
+<p>The total and within SS and df<a href="#fn46" class="footnote-ref" id="fnref46"><sup>46</sup></a> are effectively the same with a Two-Way ANOVA as with <a href="ANOVA1Foundations.html#ANOVA1Foundations">a One-Way ANOVA</a>, though their calculation may look more complicated. In a Two-Way ANOVA, the <em>full model</em> uses a separate mean for each treatment group and the <em>simple model</em> uses a single grand mean for all treatment groups. In essence, the simple model says that each treatment mean should be modeled by a common mean (Figure <a href="ANOVA2Foundations2.html#fig:2WayModels">11.6</a>-Left), whereas the full model says that each treatment mean should be modeled by a separate mean (Figure <a href="ANOVA2Foundations2.html#fig:2WayModels">11.6</a>-Right). It should be evident that this is the same simple and full models used in a One-Way ANOVA.</p>
+<div class="figure" style="text-align: center"><span id="fig:2WayModels"></span>
+<img src="Book207_files/figure-html/2WayModels-1.png" alt="Tadpole body mass by density and UV-B light levels (different colored points) with the grand mean of the simple model (Left) and the treatments means of the full model (Right) shown." width="672" />
+<p class="caption">
+Figure 11.6: Tadpole body mass by density and UV-B light levels (different colored points) with the grand mean of the simple model (Left) and the treatments means of the full model (Right) shown.
+</p>
+</div>
+</div>
+<div id="sstotal-dftotal-and-mstotal" class="section level3" number="11.2.2">
+<h3><span class="header-section-number">11.2.2</span> SS<sub>Total</sub>, df<sub>Total</sub>, and MS<sub>Total</sub></h3>
+<p>As discussed with a One-Way ANOVA, SS<sub>Total</sub> measures the lack-of-fit of the observations around the simple model of a grand mean. Visually, this computation sums the square of the vertical distance of each point from the red line at the grand mean in Figure <a href="ANOVA2Foundations2.html#fig:2WayModels">11.6</a>-Left; i.e.,</p>
+<p><span class="math display">\[ \text{SS}_{\text{Total}} = \sum_{i=1}^{a}\sum_{j=1}^{b}\sum_{k=1}^{m}\left(Y_{ijk}-\overline{Y}_{\cdot\cdot\cdot}\right)^{2} \]</span></p>
+<p>This formula may appear intimidating but focus on the part being summed – <span class="math inline">\(\left(Y_{ijk}-\overline{Y}_{\cdot\cdot\cdot}\right)^{2}\)</span>. This is simply the square of each observation (<span class="math inline">\(Y_{ijk}\)</span>) from the simple model of a grand mean (<span class="math inline">\(\overline{Y}_{\cdot\cdot\cdot}\)</span>). The three summations simply mean<a href="#fn47" class="footnote-ref" id="fnref47"><sup>47</sup></a> to sum across individuals, then across levels of Factor B, and then across levels of Factor A. In other words, sum the squared residuals across <em>all</em> individuals, exactly what you did for a One-Way ANOVA.</p>
+<p>The total degrees-of-freedom is still the total number of individuals (<span class="math inline">\(n\)</span>) minus 1 because only one parameter (the grand mean) is being used in the simple model. Note, however, that <span class="math inline">\(n=abm\)</span>, or the number of treatments (<span class="math inline">\(ab\)</span>) times the number of replicates (or individuals) per treatment. Thus df<sub>Total</sub>=<span class="math inline">\(abm-1\)</span>.</p>
+<p>The MS<sub>Total</sub> is (as always) SS<sub>Total</sub> divided by df<sub>Total</sub> and represents the variance of <strong>individuals</strong> around the grand mean (or simple model).</p>
+</div>
+<div id="sswithin-dfwithin-and-mswithin" class="section level3" number="11.2.3">
+<h3><span class="header-section-number">11.2.3</span> SS<sub>Within</sub>, df<sub>Within</sub>, and MS<sub>Within</sub></h3>
+<p>Not surprisingly, SS<sub>Within</sub> measures the lack-of-fit of the observations around the full model of separate means for each treatment. Visually, this computation sums the square of the vertical distance of each point from the blue line at the corresponding treatment mean in Figure <a href="ANOVA2Foundations2.html#fig:2WayModels">11.6</a>-Right; i.e.,</p>
+<p><span class="math display">\[ \text{SS}_{\text{Within}} = \sum_{i=1}^{a}\sum_{j=1}^{b}\sum_{k=1}^{m}\left(Y_{ijk}-\overline{Y}_{ij\cdot}\right)^{2} \]</span></p>
+<p>Again focus on the part of the formula being summed – <span class="math inline">\(\left(Y_{ijk}-\overline{Y}_{ij\cdot}\right)^{2}\)</span>. This is the square of each observation (<span class="math inline">\(Y_{ijk}\)</span>) from each treatment mean (<span class="math inline">\(\overline{Y}_{ij\cdot}\)</span>). The three summations are the same as for SS<sub>Total</sub>; i.e., sum the squared residuals across **all* individuals.</p>
+<p>The within degrees-of-freedom is still the total number of individuals (<span class="math inline">\(n\)</span>) minus the number of groups, because a separate mean is used for each treatment/group in the full model. Thus df<sub>Within</sub>=<span class="math inline">\(abm-ab\)</span> or df<sub>Within</sub>=<span class="math inline">\(ab(m-1)\)</span>.</p>
+<p>The MS<sub>Within</sub> is (as always) SS<sub>Within</sub> divided by df<sub>Within</sub> and represents the variance of <strong>individuals</strong> around the treatment/group means (or full model).</p>
+<p> </p>
+</div>
+</div>
+<div id="among-ss-df-and-ms" class="section level2" number="11.3">
+<h2><span class="header-section-number">11.3</span> Among SS, df, and MS</h2>
+<p>The SS<sub>Among</sub> is usually found by subtraction (i.e., SS<sub>Total</sub>-SS<sub>Within</sub>), which again indicates that SS<sub>Among</sub> is the improvement in fit<a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a> between the full and simple models. It can also be shown that</p>
+<p><span class="math display">\[ \text{SS}_{\text{Among}} = m\sum_{i=1}^{a}\sum_{j=1}^{b}\left(\overline{Y}_{ij\cdot}-\overline{Y}_{\cdot\cdot\cdot}\right)^{2} \]</span></p>
+<p>Again focus on the part being summed, which is the square of the difference between each treatment mean (<span class="math inline">\(\overline{Y}_{ij\cdot}\)</span>) and the grand mean (<span class="math inline">\(\overline{Y}_{\cdot\cdot\cdot}\)</span>; Figure <a href="ANOVA2Foundations2.html#fig:2WayAmong">11.7</a>). Thus, as before, SS<sub>Among</sub> measures how different the treatment means are. The rest of the formula simply sums the differences in means across all treatments<a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a> and then multiplies by <span class="math inline">\(m\)</span> to account for the <span class="math inline">\(m\)</span> individuals that went into calculating each treatment mean.<a href="#fn50" class="footnote-ref" id="fnref50"><sup>50</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:2WayAmong"></span>
+<img src="Book207_files/figure-html/2WayAmong-1.png" alt="Mean tadpole body mass by density and UV-B light levels (not differentiated) with the grand mean of the simple model (red horizontal line) and the treatments means of the full model (blue horizontal lines) shown. Vertical dashed lines are &quot;residuals&quot; between the two types of means. Note that the y-axis scale is different than all previous plots." width="336" />
+<p class="caption">
+Figure 11.7: Mean tadpole body mass by density and UV-B light levels (not differentiated) with the grand mean of the simple model (red horizontal line) and the treatments means of the full model (blue horizontal lines) shown. Vertical dashed lines are “residuals” between the two types of means. Note that the y-axis scale is different than all previous plots.
+</p>
+</div>
+<p>The among df may be obtained by subtraction (i.e., df<sub>Among</sub>=df<sub>Total</sub>-df<sub>Within</sub>), which indicates that df<sub>Among</sub> measures the difference in complexity<a href="#fn51" class="footnote-ref" id="fnref51"><sup>51</sup></a> between the simple and full models. It can also easily be shown that df<sub>Among</sub>=<span class="math inline">\(ab-1\)</span>, or the number of treatments/groups minus 1, which is exactly as it was with the One-Way ANOVA.</p>
+<p>Finally, MS<sub>Among</sub> is equal to SS<sub>Among</sub> divided by df<sub>Among</sub> and represents the variance of <strong>treatment/group means</strong>. Thus, the larger MS<sub>Among</sub> is the more different the treatment/group means are. Of course, an F-ratio test statistic and corresponding p-value should be calculated to determine if MS<sub>Among</sub> is “large” relative to MS<sub>Within</sub> and whether we should conclude that there is a significant difference in treatment/group means.</p>
+<div id="partitioning-ssamong" class="section level3" number="11.3.1">
+<h3><span class="header-section-number">11.3.1</span> Partitioning SS<sub>Among</sub></h3>
+<p>To this point, everything in a Two-Way ANOVA has been the same as it was for a One-Way ANOVA, just with a few more symbols. However, an issue occurs if H<sub>0</sub> is rejected in favor of H<sub>A</sub>. If this occurs, then we would conclude that there is a significant difference in treatment/group means. However, as discussed in Module <a href="ANOVA2Foundations1.html#ANOVA2Foundations1">10</a>, a difference in treatment means could be related to differences in Factor A level means, differences in Factor B level means, or differences in means due to the interaction of Factor A and Factor B. Which factor, factors, or their interaction is responsible for the difference in treatments means must be teased out in an objective way.</p>
+<p>Just as SS<sub>Total</sub> partitioned into parts (i.e., SS<sub>Among</sub> and SS<sub>Within</sub>), SS<sub>Among</sub> partitions into parts due to differences in the levels of Factor A, differences in the levels of Factor B, and differences in the interaction among the two factors. In other words,</p>
+<p><span class="math display">\[ SS_{Among} = SS_{A} + SS_{B} + SS_{A:B} \]</span></p>
+<p>where A:B represents the interaction between Factor A and Factor B.</p>
+<p>It can be shown that</p>
+<p><span class="math display">\[ \text{SS}_{\text{A}} = mb\sum_{i=1}^{a}\left(\overline{Y}_{i\cdot\cdot}-\overline{Y}_{\cdot\cdot\cdot}\right)^{2} \]</span></p>
+<p>Again, focus on the part that is summed, which is the square of the differences in the Factor A level means and the grand mean (Figure <a href="ANOVA2Foundations2.html#fig:2WayAB">11.8</a>-Left). Thus, SS<sub>A</sub> measures how different the Factor A levels means are, just as you would expect. Note that the rest of the formula says that you must sum across the Factor A levels and then multiply by the number of individuals that went into calculating the Factor A levels means (i.e., <span class="math inline">\(m\)</span> individuals across <span class="math inline">\(b\)</span> levels of Factor B).</p>
+<div class="figure" style="text-align: center"><span id="fig:2WayAB"></span>
+<img src="Book207_files/figure-html/2WayAB-1.png" alt="Mean tadpole body mass by density and UV-B light levels (not differentiated) with the grand mean of the simple model (red horizontal line) and the level means shown for the tadpole densities (Left) or UV-B light intensities (Right). Vertical dashed lines are &quot;residuals&quot; between respective level means and the grand means." width="672" />
+<p class="caption">
+Figure 11.8: Mean tadpole body mass by density and UV-B light levels (not differentiated) with the grand mean of the simple model (red horizontal line) and the level means shown for the tadpole densities (Left) or UV-B light intensities (Right). Vertical dashed lines are “residuals” between respective level means and the grand means.
+</p>
+</div>
+<p>Similarly (Figure <a href="ANOVA2Foundations2.html#fig:2WayAB">11.8</a>-Left),</p>
+<p><span class="math display">\[ \text{SS}_{\text{B}} = ma\sum_{j=1}^{b}\left(\overline{Y}_{\cdot j\cdot}-\overline{Y}_{\cdot\cdot\cdot}\right)^{2} \]</span></p>
+<p>The interaction SS is difficult to describe or to visualize, but it is easily calculated by subtraction:</p>
+<p><span class="math display">\[ SS_{A:B} = SS_{Among} - SS_{A} - SS_{B} \]</span></p>
+<p>The df<sub>Among</sub> partitions in the same way that SS<sub>Among</sub> partitions; i.e., df<sub>Among</sub>=df<sub>A</sub>+df<sub>B</sub>+df<sub>A:B</sub>. Further, df<sub>A</sub>=<span class="math inline">\(a-1\)</span> and df<sub>B</sub>=<span class="math inline">\(b-1\)</span>; their respective number of level means minus 1, as you would expect. The df<sub>A:B</sub> is most easily found by subtraction (df<sub>A:B</sub>=df<sub>Among</sub>-df<sub>A</sub>-df<sub>B</sub>), but is also df<sub>A:B</sub>=<span class="math inline">\((a-1)(b-1)\)</span>.)</p>
+<p>Of course, MS<sub>A</sub>, MS<sub>B</sub>, and MS<sub>A:B</sub> are all computed by dividing the corresponding SS by the df. Thus, MS<sub>A</sub> is the variance explained by Factor A, or the difference in the Factor A level means. If MS<sub>A</sub> is “large” relative to MS<sub>Within</sub> then there is likely a difference in the Factor A level means and there is a so-called Factor A main effect. The same argument can be made for Factor B.</p>
+<p>The MS<sub>A:B</sub> is more difficult to describe, but can be thought of as the variance explained by the interaction between Factor A and Factor B. If MS<sub>A:B</sub> is “large” relative to MS<sub>Within</sub> then there is likely a difference in means due to an interaction between factors A an B and there is a so-called interaction effect.</p>
+<p> </p>
+</div>
+</div>
+<div id="anova-table-1" class="section level2" number="11.4">
+<h2><span class="header-section-number">11.4</span> ANOVA Table</h2>
+<p>The F-ratio test statistics and corresponding p-values for the Factor A and Factor B main effects and the interaction between the two are summarized in an ANOVA table.</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:ANOVA2">Table 11.1: </span>An ANOVA table for testing if mean body mass of tadpoles differs by density, UV-B light intensity, or the interaction between density and UV-B light. Note that the “Total” row is not shown.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+density
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2.434
+</td>
+<td style="text-align:right;">
+1.217
+</td>
+<td style="text-align:right;">
+10.381
+</td>
+<td style="text-align:right;">
+0.0001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+uvb
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.300
+</td>
+<td style="text-align:right;">
+0.300
+</td>
+<td style="text-align:right;">
+2.563
+</td>
+<td style="text-align:right;">
+0.1131
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+density:uvb
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.299
+</td>
+<td style="text-align:right;">
+0.149
+</td>
+<td style="text-align:right;">
+1.275
+</td>
+<td style="text-align:right;">
+0.2847
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+84
+</td>
+<td style="text-align:right;">
+9.846
+</td>
+<td style="text-align:right;">
+0.117
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+<p>The following observations or conclusions can be drawn from Table <a href="ANOVA2Foundations2.html#tab:ANOVA2">11.1</a>.</p>
+<ul>
+<li>There are three levels of density (i.e., one more that df<sub>density</sub>).</li>
+<li>There are two levels of UV-B light intensity (i.e., one more that df<sub>uvb</sub>).</li>
+<li>There are 90 individuals (or replicates) (i.e., one more than df<sub>Total</sub>=2+1+2+84=89.)</li>
+<li>The variance of individuals around the grand mean is MS<sub>Total</sub>=0.145 (=<span class="math inline">\(\frac{2.434+0.300+0.299+9.846}{2+1+2+84}\)</span> = <span class="math inline">\(\frac{12.879}{89}\)</span>).</li>
+<li>The variance of individuals around the treatment means is MS<sub>Within</sub>=0.117.</li>
+<li>The variance of treatment means around the grand mean is MS<sub>Among</sub>=0.607 (=<span class="math inline">\(\frac{2.434+0.300+0.299}{2+1+2}\)</span> = <span class="math inline">\(\frac{3.033}{5}\)</span>).</li>
+<li>The variance of density level means around the grand mean is MS<sub>density</sub>=1.217.</li>
+<li>The variance of UV-B level means around the grand mean is MS<sub>uvb</sub>=0.300.</li>
+<li>There is not a significant interaction effect (p=0.2847).</li>
+<li>There is not a significant UV-B light intensity main effect (p=0.1131).</li>
+<li>There is a significant tadpole density effect (p=0.0001), which means that the mean body mass differs for at least one pair of tadpole densities.<a href="#fn52" class="footnote-ref" id="fnref52"><sup>52</sup></a></li>
+</ul>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="43">
+<li id="fn43"><p>These terms are not defined specifically here as it is assumed that you were introduced to basic experimental design terms in your introductory statistics course.<a href="ANOVA2Foundations2.html#fnref43" class="footnote-back">↩︎</a></p></li>
+<li id="fn44"><p>An experiment where each treatment has the same number of replicates is called a balanced design.<a href="ANOVA2Foundations2.html#fnref44" class="footnote-back">↩︎</a></p></li>
+<li id="fn45"><p>This figure is similar to the interaction plots from Module <a href="#ANOVA1Foundations1"><strong>??</strong></a>.<a href="ANOVA2Foundations2.html#fnref45" class="footnote-back">↩︎</a></p></li>
+<li id="fn46"><p>Thus, also the MS.<a href="ANOVA2Foundations2.html#fnref46" class="footnote-back">↩︎</a></p></li>
+<li id="fn47"><p>Read summations from right-to-left … in this case the summation across <span class="math inline">\(k\)</span> and then across <span class="math inline">\(j\)</span> and then across <span class="math inline">\(i\)</span><a href="ANOVA2Foundations2.html#fnref47" class="footnote-back">↩︎</a></p></li>
+<li id="fn48"><p>Really, the reduction in lack-of-fit<a href="ANOVA2Foundations2.html#fnref48" class="footnote-back">↩︎</a></p></li>
+<li id="fn49"><p>First across levels of Factor B and then across levels of Factor A.<a href="ANOVA2Foundations2.html#fnref49" class="footnote-back">↩︎</a></p></li>
+<li id="fn50"><p>Multiplying by m scales the summation to the same number of individuals as summed in SS<sub>Total</sub> and SS<sub>Within</sub>; i.e., allowing a comparison of apples to apples.<a href="ANOVA2Foundations2.html#fnref50" class="footnote-back">↩︎</a></p></li>
+<li id="fn51"><p>Difference in number of estimated parameters in the models.<a href="ANOVA2Foundations2.html#fnref51" class="footnote-back">↩︎</a></p></li>
+<li id="fn52"><p>We will discuss methods to identify which pairs differ in Module <a href="ANOVA2Analysis.html#ANOVA2Analysis">12</a>.<a href="ANOVA2Foundations2.html#fnref52" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ANOVA2Foundations1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ANOVA2Analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Book207.pdf", "Book207.epub"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

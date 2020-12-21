@@ -1,4 +1,4 @@
-# Multiple Comparisons {#ANOVA1MultipleComparisons}
+# One-Way Multiple Comparisons {#ANOVA1MultipleComparisons}
 
 ```{r ANOVA1-MultipleComparisons-setup, include=FALSE}
 ## Opossums data

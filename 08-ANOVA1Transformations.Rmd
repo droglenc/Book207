@@ -1,4 +1,4 @@
-# One-Way ANOVA Transformations {#ANOVA1Transformations}
+# One-Way Transformations {#ANOVA1Transformations}
 
 As discussed in Module \@ref(ANOVA1Assumptions) a One-Way ANOVA depends on four assumptions being met. If those assumptions are not met, then the results of the one-way ANOVA are invalid. Fortunately, violations of the equality of variances and normality assumptions can often be addressed by transforming the quantitative response variable to a scale where the assumptions are met. For example it is common use the natural log of the response variable rather than the response variable on its original scale.
 

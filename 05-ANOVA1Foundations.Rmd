@@ -1,6 +1,6 @@
 # (PART\*) ONE-WAY ANOVA {-}
 
-# One-Way ANOVA Foundations {#ANOVA1Foundations}
+# One-Way Foundations {#ANOVA1Foundations}
 
 ```{r ANOVA1Foundations-setup, include=FALSE}
 ## Set random seed to control the jittering

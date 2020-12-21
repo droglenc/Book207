@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Module 1 Model Types &amp; Methods | Readings for MTH207</title>
+  <title>Module 10 Two-Way Conceptual Foundation" | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Module 1 Model Types &amp; Methods | Readings for MTH207" />
+  <meta property="og:title" content="Module 10 Two-Way Conceptual Foundation" | Readings for MTH207" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://derekogle.com/Book207/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="droglenc/Book207" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Module 1 Model Types &amp; Methods | Readings for MTH207" />
+  <meta name="twitter:title" content="Module 10 Two-Way Conceptual Foundation" | Readings for MTH207" />
   
   <meta name="twitter:description" content="This book contains the readings for MTH207 at Northland College." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="T2Review.html"/>
+<link rel="prev" href="ANOVA1Summary.html"/>
+<link rel="next" href="ANOVA2Foundations2.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -254,157 +254,257 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ModelTypes" class="section level1" number="1">
-<h1><span class="header-section-number">Module 1</span> Model Types &amp; Methods</h1>
-<p>During this course we will examine a variety of models called either <em>general linear</em> or <em>generalIZED linear</em> models. General linear models have a quantitative response variable and generally assume that the “errors” around the model follow a normal distribution. General linear models that we will discuss are a <strong>One-Way ANOVA</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, <strong>Two-WAY ANOVA</strong>, <strong>Simple Linear Regression</strong>, and <strong>Indicator Variable Regression</strong>. GeneralIZED linear models do not require a quantitative response variable nor “errors” that are normally distributed. Thus, generalIZED linear models are more flexible than general linear models. The only generalIZED linear model that we will encounter in this course is <strong>Logistic Regression</strong>, but the chi-square test from your introductory statistics course can also be cast as a generalIZED linear model.</p>
-<div class="defn">
-<p><strong>Response Variable</strong>: The variable thought to depend upon, be explained by, or be predicted by other variables.</p>
-</div>
-<div class="tip">
-<p>All models covered in this course will have <strong>only one</strong> response variable</p>
-</div>
-<p>Both general and generalIZED linear models can have a single explanatory variable that can be either quantitative or categorical, or multiple explanatory variables that can be all quantitative, all categorical, or a mixture of both quantitative and categorical. Ultimately, there can be several explanatory variables in a model, but we will only consider one or two explanatory variables in this course.</p>
-<div class="defn">
-<p><strong>Explanatory Variable</strong>: A variable thought to explained or be able to predict the response variable.</p>
-</div>
+<div id="ANOVA2Foundations1" class="section level1" number="10">
+<h1><span class="header-section-number">Module 10</span> Two-Way Conceptual Foundation"</h1>
+<p>In contrast to a <a href="ANOVA1Foundations.html#ANOVA1Foundations">one-way ANOVA</a>, a two-way ANOVA allows for simultaneously determining whether the mean of a quantitative response variable differs according to the levels of two grouping variables or an interaction between the two. For example, consider the following situations:</p>
+<ul>
+<li>Determining the effect of UV-B light intensity and tadpole density on mean growth of plains leopard frog (<em>Rana blairi</em>) tadpoles (<a href="https://conbio.onlinelibrary.wiley.com/doi/abs/10.1111/j.1523-1739.2000.99364.x">Smith <em>et al.</em> 2000</a>).</li>
+<li>Whether mean monoterpene levels in Douglas firs (<em>Pseudotsuga menziesii</em>) differ depending on exposure to ambient or elevated levels of CO<sub>2</sub> and ambient or elevated levels of temperature (<a href="https://onlinelibrary-wiley-com.ezproxy.uwsp.edu/doi/full/10.1034/j.1399-3054.2003.00035.x">Snow <em>et al.</em> 2003</a>).</li>
+<li>Whether mean microcystin-LR concentration (a common cyanotoxin) differed by time (days) and exposure type (control (no exposure), direct exposure, or indirect exposure) to duckweed (<em>Lemna gibba</em>) (<a href="https://onlinelibrary-wiley-com.ezproxy.uwsp.edu/doi/abs/10.1002/tox.20079">LeBlanc <em>et al.</em> 2005</a>).</li>
+<li>Determining if the mean Na-K-ATPase activity level differs among locations of the kidney and between normal and hypertensive rats (<a href="https://journals-physiology-org.ezproxy.uwsp.edu/doi/abs/10.1152/ajprenal.1985.249.6.f863">Garg <em>et al.</em> 1985</a>).</li>
+</ul>
+<p>The theory and application of two-way ANOVAs are discussed in this module. The presentation here depends heavily on the foundational material discussed for <a href="ANOVA1Foundations.html#ANOVA1Foundations">One-Way ANOVAs</a>.</p>
 <p> </p>
-<div id="distinguishing-methods" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Distinguishing Methods</h2>
-<p>The five methods that will be covered in this course can be distinguished by considering only the type of response variable and the types and number of explanatory variables (Table <a href="ModelTypes.html#tab:ModelCharacteristics">1.1</a>). Thus, you will want to review <a href="http://derekogle.com/NCMTH107/modules/FoundationalDefns.html">variable types</a> and <a href="http://derekogle.com/NCMTH107/modules/DataProduction.html">definitions and distinctions of response and explanatory variables</a> from your introductory statistics course.</p>
+<div id="two-factors" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Two Factors</h2>
+<p>It is both possible and advantageous to manipulate more than one factor at a time to determine the effect of those factors on the response variable. For example, an experimenter may manipulate both the density of tadpoles and the level of exposure to UV-B light to determine the effect of both of these explanatory variables on body mass of tadpoles. The design of such an experiment and why it is beneficial to simultaneously manipulate two factors, as compared to varying each of those factors alone in two separate experiments, is examined in this section.</p>
+<div id="design" class="section level3" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Design</h3>
+<p>Suppose that we are interested in the impact of two different UV-B light intensity levels (simply called “High” and “Low”) and the density of tadpoles (1, 2, and 4 individuals per tank) on the body mass (g) of tadpoles. Further suppose that we have access to 90 tanks in which to conduct this work, where each tank will be stocked with a certain number of tadpoles and exposed to a certain UV-B light intensity. After a period of time the body mass of the tadpoles will be recorded (as a surrogate for growth).</p>
+<p>Note here that in experiments like this the explanatory variables are often called <strong>factors</strong>. Thus, we are considering two factors in this study. Observational studies usually will use explanatory variable rather than factor.</p>
+<p>One way to design this study would be to separate the 90 tanks available for the experiment into two sets. One set of tanks would be used to determine the effect of UV-B light intensity on tadpole body mass and the other set of tanks would be used to determine the effect of density on tadpole body mass. The tanks within each group would be randomly allocated to the different levels of each of the factors. This is called a “one factor at a time” (OFAT) design and might look like that shown in Table <a href="ANOVA2Foundations1.html#tab:TadpoleOFAT">10.1</a>.</p>
 <table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:ModelCharacteristics">Table 1.1: </span>Response and explanatory variables types for the linear models considered in this course.
+<span id="tab:TadpoleOFAT">Table 10.1: </span>Schematic of two OFAT experiments with UV-B light intensity and density of tadpoles. Tank numbers correspond to the random allocation of individual tanks to each treatment.
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;">
-Response
+<th style="text-align:left;font-weight: bold;">
+UVB
 </th>
-<th style="text-align:left;">
-Explanatory
-</th>
-<th style="text-align:left;">
-Linear Model
+<th style="text-align:left;font-weight: bold;">
+Tanks
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-Quantitative
+High
 </td>
 <td style="text-align:left;">
-Categorical (only one)
-</td>
-<td style="text-align:left;">
-One-Way ANOVA
+37, 73, 63, 80, 76, 36, 67, 53, 83, 31, 29, 88, 62, 35, 21, 68, 17, 46, 89, 81, 26, 48
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Quantitative
+Low
 </td>
 <td style="text-align:left;">
-Categorical (two)
+85, 40, 30, 71, 60, 11, 47, 51, 24, 32, 54, 52, 23, 1, 38, 44, 78, 50, 3, 16, 9, 20
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;">
+Density
+</th>
+<th style="text-align:left;font-weight: bold;">
+Tanks
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1 Tadpole
 </td>
 <td style="text-align:left;">
-Two-Way ANOVA
+74, 57, 58, 7, 8, 86, 56, 43, 82, 90, 39, 27, 49, 77, 12
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Quantitative
+2 Tadpoles
 </td>
 <td style="text-align:left;">
-Quantitative (only one)
-</td>
-<td style="text-align:left;">
-Simple Linear Regression
+61, 64, 15, 65, 6, 70, 10, 22, 14, 55, 72, 33, 25, 45, 42
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Quantitative
+4 Tadpoles
 </td>
 <td style="text-align:left;">
-Quantitative (one) &amp; Categorical (one)
-</td>
-<td style="text-align:left;">
-Indicator Variable Regression
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Binomial
-</td>
-<td style="text-align:left;">
-Quantitative (or Both)
-</td>
-<td style="text-align:left;">
-(Binary) Logistic Regression
+66, 59, 19, 28, 34, 18, 69, 4, 2, 79, 75, 5, 84, 87, 13
 </td>
 </tr>
 </tbody>
 </table>
 <p> </p>
+<p>In contrast, an alternative way to design this study would be to create “treatments”<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a> where each level of one factor is combined with each level of the other factor. In this example, there would be six treatments as two levels of UV-B light intensity would be “crossed” with three levels of tadpole density. Tanks would be randomly allocated to treatments. This type of design is called a “completely crossed factorial design” (CCFD) and might look like that shown in Table <a href="ANOVA2Foundations1.html#tab:TadpoleCrossed">10.2</a>.</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:TadpoleCrossed">Table 10.2: </span>Schematic depicting the crossing of three levels of UV-B light intensity with two levels of tadpole density to produce six treatments. Numbers in each cell represent individual tanks exposed to that treatment.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;">
+UVB
+</th>
+<th style="text-align:left;font-weight: bold;">
+Density
+</th>
+<th style="text-align:left;font-weight: bold;">
+Tanks
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+High
+</td>
+<td style="text-align:left;">
+1 Tadpole
+</td>
+<td style="text-align:left;">
+37, 73, 63, 80, 76, 36, 67, 53, 83, 31, 29, 88, 62, 35, 21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+High
+</td>
+<td style="text-align:left;">
+2 Tadpoles
+</td>
+<td style="text-align:left;">
+68, 17, 46, 89, 81, 26, 48, 85, 40, 30, 71, 60, 11, 47, 51
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+High
+</td>
+<td style="text-align:left;">
+4 Tadpoles
+</td>
+<td style="text-align:left;">
+24, 32, 54, 52, 23, 1, 38, 44, 78, 50, 3, 16, 9, 20, 41
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Low
+</td>
+<td style="text-align:left;">
+1 Tadpole
+</td>
+<td style="text-align:left;">
+74, 57, 58, 7, 8, 86, 56, 43, 82, 90, 39, 27, 49, 77, 12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Low
+</td>
+<td style="text-align:left;">
+2 Tadpoles
+</td>
+<td style="text-align:left;">
+61, 64, 15, 65, 6, 70, 10, 22, 14, 55, 72, 33, 25, 45, 42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Low
+</td>
+<td style="text-align:left;">
+4 Tadpoles
+</td>
+<td style="text-align:left;">
+66, 59, 19, 28, 34, 18, 69, 4, 2, 79, 75, 5, 84, 87, 13
+</td>
+</tr>
+</tbody>
+</table>
+<div class="defn">
+<p><strong>Completely crossed factorial design (CCFD)</strong>: A study design where each level of one explanatory variable (or factor) is combined with each level of the other explanatory variable (or factor) to form groups (or treatments).</p>
 </div>
-<div id="method-purposes" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Method Purposes</h2>
-<p>As seen above, each method uses different types of data. Not surprisingly then, each method is used to test different hypotheses or has a different analytical purpose. These purposes will be discussed in detail in subsequent modules. However, the major objective of each method is explained briefly below (in the order that we will cover them).</p>
-<p>Each example uses a data set that contains data about <a href="https://en.wikipedia.org/wiki/Mirex">mirex</a> concentrations (<code>mirex</code>) for two species of salmon (<code>species</code>) captured in six years between 1977 and 1999 (<code>year</code>) in Lake Ontario. The weight of each fish (<code>weight</code>) and whether or not the mirex concentration exceeded the EPA limit of 0.1 mg/kg (<code>exceeds_limit</code>) were also recorded.</p>
 <p> </p>
-<p>A <strong>one-way ANOVA</strong> is used to determine if the means of the quantitative response variable (<code>mirex</code>) differ among two or more groups defined by a single categorical variable (e.g., <code>year</code>).</p>
-<div class="figure" style="text-align: center"><span id="fig:OneWay"></span>
-<img src="Book207_files/figure-html/OneWay-1.png" alt="Mean mirex concentration by sample year. This is an example of a One-Way ANOVA." width="336" />
+</div>
+</div>
+<div id="interaction-effects" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Interaction Effects</h2>
+<p>An interaction among factors is said to exist if the effect of one explanatory variable on the mean response depends on the level of the other explanatory variable. For example, if the mean body mass of the tadpoles <em>increased</em> across densities in the low light intensity treatments but <em>decreased</em> across densities in the high light intensity treatments (Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction">10.1</a>-Left), then an interaction between the density of tadpoles and UV-B light intensities is said to exist. However, if the pattern among tadpole densities is the same in both the low and high density light intensities (Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction">10.1</a>-Right), then no interaction exists between the factors.</p>
+<div class="figure" style="text-align: center"><span id="fig:TadpoleInteraction"></span>
+<img src="Book207_files/figure-html/TadpoleInteraction-1.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating a hypothetical interaction effect (Left) and a lack of an interaction effect (Right)." width="672" />
 <p class="caption">
-Figure 1.1: Mean mirex concentration by sample year. This is an example of a One-Way ANOVA.
+Figure 10.1: Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating a hypothetical interaction effect (Left) and a lack of an interaction effect (Right).
 </p>
 </div>
-<p> </p>
-<p>A <strong>two-way ANOVA</strong> is used to determine if the means of the quantitative response variable (<code>mirex</code>) differ among groups of one categorical variable (e.g., <code>year</code>), among groups of another categorical variable (e.g., <code>species</code>), or by the interaction between the two categorical variables.</p>
-<div class="figure" style="text-align: center"><span id="fig:TwoWay"></span>
-<img src="Book207_files/figure-html/TwoWay-1.png" alt="Mean mirex concentration by sample year and salmon species. This is an example of a Two-Way ANOVA." width="336" />
+<div class="defn">
+<p>**Interaction effect:: When the effect of one explanatory variable (or factor) on the mean response is significantly different among the levels of the other explanatory variable (or factor).</p>
+</div>
+<p>The tell-tale sign of an interaction effect is if you describe the effect of a factor on the mean response differently depending on the level of the other explanatory variable. For example, in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a>-Left the effect of tadpole density on mean body mass is increasing in the high UV-B light intensity treatments, but is neither increasing or decreasing in the low UV-B light intensity treatments. The fact that density had a different effect on mean body mass in the different UV-B light treatments tells of an interaction effect. In Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a>-Right mean body mass increases with increasing density but at a very different rate (at least for densities of 1 to 2 tadpoles per tank). Again, this is a different conclusion about the effect of density on mean body mass depending on level of UV-B light; thus this represents an interaction effect.</p>
+<div class="figure" style="text-align: center"><span id="fig:TadpoleInteraction2"></span>
+<img src="Book207_files/figure-html/TadpoleInteraction2-1.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical interaction effects." width="672" />
 <p class="caption">
-Figure 1.2: Mean mirex concentration by sample year and salmon species. This is an example of a Two-Way ANOVA.
+Figure 10.2: Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical interaction effects.
 </p>
 </div>
-<p> </p>
-<p>A <strong>simple linear regression</strong> is used to determine if there is a relationship between the quantitative response variable (e.g., <code>mirex</code>) and a single quantitative explanatory variable (e.g., <code>weight</code>).</p>
-<div class="figure" style="text-align: center"><span id="fig:SLR"></span>
-<img src="Book207_files/figure-html/SLR-1.png" alt="Mirex concentration by fish weight. This is an example of a Simple Linear Regression." width="336" />
-<p class="caption">
-Figure 1.3: Mirex concentration by fish weight. This is an example of a Simple Linear Regression.
-</p>
-</div>
-<p> </p>
-<p>An <strong>indicator variable regression</strong> is used to determine if the relationship between a quantitative response (e.g., <code>mirex</code>) and a quantitative explanatory variable (e.g., <code>weight</code>) differs between two or more groups defined by a categorical explanatory variable (e.g., <code>species</code>). This will look like two (or more) simple linear regressions are being compared.</p>
-<div class="figure" style="text-align: center"><span id="fig:IVR"></span>
-<img src="Book207_files/figure-html/IVR-1.png" alt="Mirex concentration by fish weight seprated by salmon species. This is an example of an Indicator Variable Regression." width="336" />
-<p class="caption">
-Figure 1.4: Mirex concentration by fish weight seprated by salmon species. This is an example of an Indicator Variable Regression.
-</p>
-</div>
-<p> </p>
-<p>A <strong>logistic regression</strong> is used to determine if there is a relationship between the probability of “success” for a binary<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> categorical response variable (e.g., <code>exceeds_limit</code>) and the quantitative explanatory variable (e.g., <code>weight</code>).</p>
-<div class="figure" style="text-align: center"><span id="fig:LogReg"></span>
-<img src="Book207_files/figure-html/LogReg-1.png" alt="The probability that the mirex concentration exceed the 0.1 mg/kg threshold by fish weight. This is an example of a Logistic Regression." width="336" />
-<p class="caption">
-Figure 1.5: The probability that the mirex concentration exceed the 0.1 mg/kg threshold by fish weight. This is an example of a Logistic Regression.
-</p>
-</div>
-<p> </p>
-<p>From these examples it should be apparent that “ANOVAs” are about <strong>comparing means</strong> among groups and will look like means (usually with confidence intervals) plotted as points for each group. In contrast “regressions” are about exploring <strong>relationships</strong> and will look like a line or a curve when plotted.</p>
+<p>In Module <a href="ANOVA2Foundations2.html#ANOVA2Foundations2">11</a> we will develop objective mathematical measures of whether an interaction effect exists.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a> However, in addition to the concept above, an interaction effect will look like means that are connected for levels of one explanatory variable that “do not track together” for levels of the other explanatory variable. For example, in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a>-Left the “blue line” (connecting high UV-B light treatments) is steadily increasing whereas the “red line” (connecting low UV-B light treatments) is steadily flat – i.e., they don’t “track” together, which indicates an interaction effect. The two lines also do not track together in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a> - Right.</p>
 <div class="tip">
-<p>ANOVAs compare means; regressions examine relationships.</p>
+<p>An interaction effect is evident if the “lines” in an interaction plot do not largely “track together.”</p>
 </div>
+<p> </p>
+</div>
+<div id="main-effects" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Main Effects</h2>
+<p>A main effect occurs when there is a difference in the mean response among levels of an explanatory variable <em>that is consistent across the levels of the other explanatory variable</em>. Thus, by definition, a main effect cannot exist if an interaction effect exists. Thus, do not try to identify main effects when an interaction is present.</p>
+<div class="tip">
+<p>Do <strong>not</strong> identify main effects when an interact effect exists.</p>
+</div>
+<p>For example, Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction">10.1</a>-Right showed no significant interaction; thus, main effects can be assessed. In that case, the main effect of density is that mean body mass decreased when density increased from 1 to 2 tadpoles per tank and continued to decrease at a slower rate when the density increased from 2 to 4 tadpoles per tank. From the same figure, the effect of UV-B light density is that mean body mass was greater at a low than at a high UV-B intensity.<a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a></p>
+<p>Main effects can also be determined for both interaction plots in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleNoInteraction2">10.3</a>. The main effect for density in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleNoInteraction2">10.3</a>-Left is the same as that described for Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction">10.1</a>-Right. However, in this case there is no UV-B main effect because there is no separation in means by UV-B light level at each level of density. In other words the red line for low UV-B light and the blue line for high UV-B light are (nearly) directly on top of each other, so there is no difference in means due to UV-B light and thus no main effect of UV-B light.</p>
+<div class="figure" style="text-align: center"><span id="fig:TadpoleNoInteraction2"></span>
+<img src="Book207_files/figure-html/TadpoleNoInteraction2-1.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical lack2 of interaction effects." width="672" />
+<p class="caption">
+Figure 10.3: Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical lack2 of interaction effects.
+</p>
+</div>
+<p>In Figure <a href="ANOVA2Foundations1.html#fig:TadpoleNoInteraction2">10.3</a>-Right, there is no main effect of tadpole density as the mean body mass at each density within each UV-B light level is the same; i.e., mean body mass does not differ by density. However, there is a UV-B light main effect as mean body mass at the high UV-B light intensity is always<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a> greater than mean body mass at the low UV-B light intensity.</p>
+<p>As a reminder, only assess main effects if there is no interaction effect. Visually a main effect of the factor shown on the x-axis will be evident if the lines connecting the means are <em>not</em> horizontal (i.e., the means differ). In contrast, a main effect of the factor not shown on the x-axis (but shown as a legend) will be evident if the lines connecting the means are <em>not</em> right on top of each other.</p>
+<p> </p>
+</div>
+<div id="advantages-of-ccfd" class="section level2" number="10.4">
+<h2><span class="header-section-number">10.4</span> Advantages of CCFD</h2>
+<p>A two-factor CCFD has two major advantages over two separate OFAT experiments.</p>
+<p>First, the CCFD allocates individuals more efficiently than the two OFAT experiments. For example, in the CCFD of the tadpole experiment, all 90 individuals were used to identify differences among the light intensities <strong>AND</strong> all 90 individuals were used to identify differences among the densities of tadpoles. However, in the OFAT experiments, only 44 individuals<a href="#fn41" class="footnote-ref" id="fnref41"><sup>41</sup></a> were used to identify differences among the light intensities and only 45 individuals were used to identify differences among the tadpole densities.</p>
+<div class="tip">
+<p>CCFD studies effectively increase the sample size for identifying effects on the response variable.</p>
+</div>
+<p>Efficiency in allocation of individuals effectively leads to an increased sample size for determining the effect of any one factor. An increased sample size means more precise estimates of means<a href="#fn42" class="footnote-ref" id="fnref42"><sup>42</sup></a> and more statistical power. Statistical power is the probability of correctly rejecting a false null hypothesis. In lay terms, statistical power is the ability to correctly identify a difference in means when a difference in means really exists. Relatedly, the increased sample size means that smaller effect sizes can be identified. In practice this means that smaller differences in means will be found to be statistically different. In yet other words, a smaller “signal” can be detected. Finally, the increased efficiency means that the same power and detectable effect size can be obtained with a smaller overall sample size and, thus, lower costs.</p>
+<div class="tip">
+<p>More efficient use of individuals in CCFD studies results in increased power and increased ability to detect small effect sizes, or lower costs to obtain the same power and effect size detectability.</p>
+</div>
+<p>A second advantage of CCFD studies is that they allow researchers to identify if an interaction effect exists between the two explanatory variables. An interaction effect cannot be detected in OFAT studies because the two explanatory variables are not considered simultaneously.</p>
 
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>ANOVA is short for ANalysis Of VAriance<a href="ModelTypes.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Binary means there are only two categories – generically “success” and “failure.”<a href="ModelTypes.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<ol start="37">
+<li id="fn37"><p>The combination of levels is often called a “treatment” in an experiment. In an observational study it would just be called a “group.”<a href="ANOVA2Foundations1.html#fnref37" class="footnote-back">↩︎</a></p></li>
+<li id="fn38"><p>That is, we will use a p-value.<a href="ANOVA2Foundations1.html#fnref38" class="footnote-back">↩︎</a></p></li>
+<li id="fn39"><p>The blue line was always below the red line by roughly the same amount.<a href="ANOVA2Foundations1.html#fnref39" class="footnote-back">↩︎</a></p></li>
+<li id="fn40"><p>For each density.<a href="ANOVA2Foundations1.html#fnref40" class="footnote-back">↩︎</a></p></li>
+<li id="fn41"><p>One individual was not used in order to have equal numbers of individuals in each treatment.<a href="ANOVA2Foundations1.html#fnref41" class="footnote-back">↩︎</a></p></li>
+<li id="fn42"><p>That is, a reduced SE<a href="ANOVA2Foundations1.html#fnref42" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -412,8 +512,8 @@ Figure 1.5: The probability that the mirex concentration exceed the 0.1 mg/kg th
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="T2Review.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ANOVA1Summary.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ANOVA2Foundations2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

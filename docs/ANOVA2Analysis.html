@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 12 Two-Way Analysis | Readings for MTH207</title>
+  <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 12 Two-Way Analysis | Readings for MTH207" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://derekogle.com/Book207/" />
+  
+  <meta property="og:description" content="This book contains the readings for MTH207 at Northland College." />
+  <meta name="github-repo" content="droglenc/Book207" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 12 Two-Way Analysis | Readings for MTH207" />
+  
+  <meta name="twitter:description" content="This book contains the readings for MTH207 at Northland College." />
+  
+
+<meta name="author" content="Derek H. Ogle" />
+
+
+<meta name="date" content="2020-12-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ANOVA2Foundations2.html"/>
+<link rel="next" href="ANOVA2Summary.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Readings for MTH207</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>FOUNDATIONS</b></span></li>
+<li class="chapter" data-level="1" data-path="ModelTypes.html"><a href="ModelTypes.html"><i class="fa fa-check"></i><b>1</b> Model Types &amp; Methods</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="ModelTypes.html"><a href="ModelTypes.html#distinguishing-methods"><i class="fa fa-check"></i><b>1.1</b> Distinguishing Methods</a></li>
+<li class="chapter" data-level="1.2" data-path="ModelTypes.html"><a href="ModelTypes.html#method-purposes"><i class="fa fa-check"></i><b>1.2</b> Method Purposes</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="T2Review.html"><a href="T2Review.html"><i class="fa fa-check"></i><b>2</b> 2-Sample t Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="T2Review.html"><a href="T2Review.html#review"><i class="fa fa-check"></i><b>2.1</b> Review</a></li>
+<li class="chapter" data-level="2.2" data-path="T2Review.html"><a href="T2Review.html#T2analysis"><i class="fa fa-check"></i><b>2.2</b> Analysis in R</a></li>
+<li class="chapter" data-level="2.3" data-path="T2Review.html"><a href="T2Review.html#signal-to-noise"><i class="fa fa-check"></i><b>2.3</b> Signal-to-Noise</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ModelConcepts.html"><a href="ModelConcepts.html"><i class="fa fa-check"></i><b>3</b> Model Concepts</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ModelConcepts.html"><a href="ModelConcepts.html#what-is-a-model"><i class="fa fa-check"></i><b>3.1</b> What is a Model</a></li>
+<li class="chapter" data-level="3.2" data-path="ModelConcepts.html"><a href="ModelConcepts.html#assessing-fit-ss"><i class="fa fa-check"></i><b>3.2</b> Assessing Fit (SS)</a></li>
+<li class="chapter" data-level="3.3" data-path="ModelConcepts.html"><a href="ModelConcepts.html#residual-degrees-of-freedom"><i class="fa fa-check"></i><b>3.3</b> Residual Degrees-of-Freedom</a></li>
+<li class="chapter" data-level="3.4" data-path="ModelConcepts.html"><a href="ModelConcepts.html#mean-squares"><i class="fa fa-check"></i><b>3.4</b> Mean-Squares</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ModelComparison.html"><a href="ModelComparison.html"><i class="fa fa-check"></i><b>4</b> Model Comparison</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ModelComparison.html"><a href="ModelComparison.html#competing-models"><i class="fa fa-check"></i><b>4.1</b> Competing Models</a></li>
+<li class="chapter" data-level="4.2" data-path="ModelComparison.html"><a href="ModelComparison.html#measuring-increase-in-fit"><i class="fa fa-check"></i><b>4.2</b> Measuring Increase in Fit</a></li>
+<li class="chapter" data-level="4.3" data-path="ModelComparison.html"><a href="ModelComparison.html#measuring-increase-in-complexity"><i class="fa fa-check"></i><b>4.3</b> Measuring Increase in Complexity</a></li>
+<li class="chapter" data-level="4.4" data-path="ModelComparison.html"><a href="ModelComparison.html#noise-variances"><i class="fa fa-check"></i><b>4.4</b> “Noise” Variances</a></li>
+<li class="chapter" data-level="4.5" data-path="ModelComparison.html"><a href="ModelComparison.html#signal-variance-benefit-to-cost"><i class="fa fa-check"></i><b>4.5</b> “Signal” Variance (Benefit-to-Cost)</a></li>
+<li class="chapter" data-level="4.6" data-path="ModelComparison.html"><a href="ModelComparison.html#ratio-of-variances-signal-to-noise"><i class="fa fa-check"></i><b>4.6</b> Ratio of Variances (Signal-to-Noise)</a></li>
+<li class="chapter" data-level="4.7" data-path="ModelComparison.html"><a href="ModelComparison.html#anova-table"><i class="fa fa-check"></i><b>4.7</b> ANOVA Table</a></li>
+<li class="chapter" data-level="4.8" data-path="ModelComparison.html"><a href="ModelComparison.html#two-sample-t-test-revisited-using-linear-models"><i class="fa fa-check"></i><b>4.8</b> Two-Sample t-Test Revisited: Using Linear Models</a></li>
+<li class="chapter" data-level="4.9" data-path="ModelComparison.html"><a href="ModelComparison.html#one-more-look-at-ms-and-f-test"><i class="fa fa-check"></i><b>4.9</b> One More Look at MS and F-test</a></li>
+</ul></li>
+<li class="part"><span><b>ONE-WAY ANOVA</b></span></li>
+<li class="chapter" data-level="5" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html"><i class="fa fa-check"></i><b>5</b> One-Way Foundations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#analytical-foundation"><i class="fa fa-check"></i><b>5.1</b> Analytical Foundation</a></li>
+<li class="chapter" data-level="5.2" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#one-way-anova-in-r"><i class="fa fa-check"></i><b>5.2</b> One-Way ANOVA in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html"><i class="fa fa-check"></i><b>6</b> One-Way Multiple Comparisons</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#multiple-comparison-problem"><i class="fa fa-check"></i><b>6.1</b> Multiple Comparison Problem</a></li>
+<li class="chapter" data-level="6.2" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#correction-methods"><i class="fa fa-check"></i><b>6.2</b> Correction Methods</a></li>
+<li class="chapter" data-level="6.3" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r"><i class="fa fa-check"></i><b>6.3</b> Multiple Comparisons in R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html"><i class="fa fa-check"></i><b>7</b> One-Way Assumptions</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#independence"><i class="fa fa-check"></i><b>7.1</b> Independence</a></li>
+<li class="chapter" data-level="7.2" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#equal-variances"><i class="fa fa-check"></i><b>7.2</b> Equal Variances</a></li>
+<li class="chapter" data-level="7.3" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#normality"><i class="fa fa-check"></i><b>7.3</b> Normality</a></li>
+<li class="chapter" data-level="7.4" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#no-outliers"><i class="fa fa-check"></i><b>7.4</b> No Outliers</a></li>
+<li class="chapter" data-level="7.5" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#testing-assumptions-in-r"><i class="fa fa-check"></i><b>7.5</b> Testing Assumptions in R</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html"><i class="fa fa-check"></i><b>8</b> One-Way Transformations</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#power-transformations"><i class="fa fa-check"></i><b>8.1</b> Power Transformations</a></li>
+<li class="chapter" data-level="8.2" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#transformations-from-theory"><i class="fa fa-check"></i><b>8.2</b> Transformations from Theory</a></li>
+<li class="chapter" data-level="8.3" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#interpretations-after-transformations"><i class="fa fa-check"></i><b>8.3</b> Interpretations After Transformations</a></li>
+<li class="chapter" data-level="8.4" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#back-transformations-in-r"><i class="fa fa-check"></i><b>8.4</b> Back-Transformations in R</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html"><i class="fa fa-check"></i><b>9</b> One-Way Summary</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#suggested-workflow"><i class="fa fa-check"></i><b>9.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="9.2" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#nematodes-no-transformation"><i class="fa fa-check"></i><b>9.2</b> Nematodes (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="9.3" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#ant-foraging-transformation"><i class="fa fa-check"></i><b>9.3</b> Ant Foraging (<em>Transformation</em>)</a></li>
+<li class="chapter" data-level="9.4" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#peak-discharge-transformation"><i class="fa fa-check"></i><b>9.4</b> Peak Discharge (<em>Transformation</em>)</a></li>
+</ul></li>
+<li class="part"><span><b>TWO-WAY ANOVA</b></span></li>
+<li class="chapter" data-level="10" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html"><i class="fa fa-check"></i><b>10</b> Two-Way Conceptual Foundation"</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#two-factors"><i class="fa fa-check"></i><b>10.1</b> Two Factors</a></li>
+<li class="chapter" data-level="10.2" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#interaction-effects"><i class="fa fa-check"></i><b>10.2</b> Interaction Effects</a></li>
+<li class="chapter" data-level="10.3" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#main-effects"><i class="fa fa-check"></i><b>10.3</b> Main Effects</a></li>
+<li class="chapter" data-level="10.4" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#advantages-of-ccfd"><i class="fa fa-check"></i><b>10.4</b> Advantages of CCFD</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html"><i class="fa fa-check"></i><b>11</b> Two-Way Analytical Foundation</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#terminology"><i class="fa fa-check"></i><b>11.1</b> Terminology</a></li>
+<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#total-and-within-ss-df-and-ms"><i class="fa fa-check"></i><b>11.2</b> Total and Within SS, df, and MS</a></li>
+<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#among-ss-df-and-ms"><i class="fa fa-check"></i><b>11.3</b> Among SS, df, and MS</a></li>
+<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.4</b> ANOVA Table</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html"><i class="fa fa-check"></i><b>12</b> Two-Way Analysis</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#model-fitting-in-r"><i class="fa fa-check"></i><b>12.1</b> Model Fitting in R</a></li>
+<li class="chapter" data-level="12.2" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#assumptions"><i class="fa fa-check"></i><b>12.2</b> Assumptions</a></li>
+<li class="chapter" data-level="12.3" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#main-and-interaction-effects-anova-table"><i class="fa fa-check"></i><b>12.3</b> Main and Interaction Effects (ANOVA Table)</a></li>
+<li class="chapter" data-level="12.4" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#multiple-comparisons"><i class="fa fa-check"></i><b>12.4</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="12.5" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#graphing-results"><i class="fa fa-check"></i><b>12.5</b> Graphing Results</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html"><i class="fa fa-check"></i><b>13</b> Two-Way Summary</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#suggested-workflow-1"><i class="fa fa-check"></i><b>13.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="13.2" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#bacteria-no-transformation"><i class="fa fa-check"></i><b>13.2</b> Bacteria (No Transformation)</a></li>
+<li class="chapter" data-level="13.3" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#blood-pressure-no-transformation"><i class="fa fa-check"></i><b>13.3</b> Blood Pressure (No Transformation)</a></li>
+<li class="chapter" data-level="13.4" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#crayfish-foraging-transformation"><i class="fa fa-check"></i><b>13.4</b> Crayfish Foraging (Transformation)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
+<li><a href="https://bookdown.org" target="_blank">Built with Bookdown + RStudio</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Readings for MTH207</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ANOVA2Analysis" class="section level1" number="12">
+<h1><span class="header-section-number">Module 12</span> Two-Way Analysis</h1>
+<p>In this module, a thorough Two-Way ANOVA will be performed using the experiment introduced in Module <a href="ANOVA2Foundations2.html#ANOVA2Foundations2">11</a>, where the effect of tadpole density and UV-B light intensity on tadpole body mass was examined.</p>
+<div id="model-fitting-in-r" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> Model Fitting in R</h2>
+<p>The data are loaded into R below. Because <code>density</code> was recorded as a number (i.e., 1, 2, and 4) rather than as an obvious grouping (i.e., “one,” “two,” and “four”), it must be explicitly converted to a factor before using.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="ANOVA2Analysis.html#cb50-1" aria-hidden="true" tabindex="-1"></a>tad <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/Tadpoles.csv&quot;</span>)</span>
+<span id="cb50-2"><a href="ANOVA2Analysis.html#cb50-2" aria-hidden="true" tabindex="-1"></a>tad<span class="sc">$</span>density <span class="ot">&lt;-</span> <span class="fu">factor</span>(tad<span class="sc">$</span>density)</span>
+<span id="cb50-3"><a href="ANOVA2Analysis.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(tad)</span></code></pre></div>
+<pre><code>#R&gt;   &#39;data.frame&#39;: 90 obs. of  3 variables:
+#R&gt;    $ uvb    : chr  &quot;High&quot; &quot;High&quot; &quot;High&quot; &quot;High&quot; ...
+#R&gt;    $ density: Factor w/ 3 levels &quot;1&quot;,&quot;2&quot;,&quot;4&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+#R&gt;    $ mass   : num  0.91 0.65 1.58 0.98 1.07 0.84 0.88 1.47 0.94 0.72 ...</code></pre>
+<p>When fitting a linear model in R the first argument to <code>lm()</code> must be a formula of the form <code>response~factorA+factorB+factorA:factorB</code><a href="#fn53" class="footnote-ref" id="fnref53"><sup>53</sup></a> where <code>response</code> is the response variables, <code>factorA</code> and <code>factorB</code> are the two factor variables, and <code>factorA:factorB</code> tells <code>lm()</code> to include the interaction between the two factor variables. Thus, the Two-Way ANOVA model for the tadpole experiment is fit as follows.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="ANOVA2Analysis.html#cb52-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mass<span class="sc">~</span>density<span class="sc">+</span>uvb<span class="sc">+</span>density<span class="sc">:</span>uvb,<span class="at">data=</span>tad)</span></code></pre></div>
+<p>As usual, the results are saved to an object for checking assumptions, creating an ANOVA table, and making multiple comparisons.</p>
+<p> </p>
+</div>
+<div id="assumptions" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> Assumptions</h2>
+<p>The assumptions for a Two-Way ANOVA are exactly the same as for a One-Way ANOVA as shown in Module <a href="ANOVA1Assumptions.html#ANOVA1Assumptions">7</a>. Thus, assumptions are checked in R in the exact same manner as described in that module (i.e., using <code>assumptionCheck()</code>).</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="ANOVA2Analysis.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1)</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>From these results it is seen that the variances across all treatments are equal (Levenes p=0.0776), the residuals are normally distributed (p=0.3332), and there are no significant outliers (p&gt;1). There was not much information given previously about this experiment, but as along as the tanks of tadpoles were kept separate such that no tank could impact any other tank then independence is likely adequately met.</p>
+<p> </p>
+</div>
+<div id="main-and-interaction-effects-anova-table" class="section level2" number="12.3">
+<h2><span class="header-section-number">12.3</span> Main and Interaction Effects (ANOVA Table)</h2>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="ANOVA2Analysis.html#cb54-1" aria-hidden="true" tabindex="-1"></a>aov1 <span class="ot">&lt;-</span> <span class="fu">anova</span>(lm1)</span></code></pre></div>
+<p>The ANOVA table is extracted from the <code>lm()</code> object with <code>anova()</code>.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="ANOVA2Analysis.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1)</span></code></pre></div>
+<pre><code>#R&gt;   Analysis of Variance Table
+#R&gt;   
+#R&gt;   Response: mass
+#R&gt;               Df Sum Sq Mean Sq F value    Pr(&gt;F)
+#R&gt;   density      2 2.4337 1.21686 10.3814 9.355e-05
+#R&gt;   uvb          1 0.3004 0.30044  2.5632    0.1131
+#R&gt;   density:uvb  2 0.2989 0.14947  1.2752    0.2847
+#R&gt;   Residuals   84 9.8461 0.11722</code></pre>
+<p>These results indicate that the interaction effect is insignificant (p=0.2847). Because the interaction term is insignificant, the main effects can be interpreted. The density main effect is strongly significant (p=0.0001), but the UV-B main effect is not significant (p=0.1131). Thus, it appears that the mean body mass of tadpoles differs among some of the density treatments but not between the two UV-B light intensities.</p>
+<p> </p>
+</div>
+<div id="multiple-comparisons" class="section level2" number="12.4">
+<h2><span class="header-section-number">12.4</span> Multiple Comparisons</h2>
+<div id="main-effects-1" class="section level3" number="12.4.1">
+<h3><span class="header-section-number">12.4.1</span> Main Effects</h3>
+<p>When an interaction is not present, as is the case here, then multiple comparisons can be conducted on the main effect factors (separately if they both exist). However, multiple comparisons on the main effects are compromised by the interaction term in the model. This is seen by the warning from <code>emmeans()</code> below, where I tried to perform multiple comparisons for just the density main effect.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="ANOVA2Analysis.html#cb57-1" aria-hidden="true" tabindex="-1"></a>mc1 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1,<span class="at">specs=</span>pairwise<span class="sc">~</span>density)</span></code></pre></div>
+<p>Thus, if the interaction term is not significant then you should fit a new model without the interaction term and then use that model when performing multiple comparisons. A model without an interaction term simply uses a formula of the form <code>response~factorA+factorB</code> in <code>lm()</code>. The ANOVA table is shown below to confirm that the interaction term is not in this new model.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="ANOVA2Analysis.html#cb58-1" aria-hidden="true" tabindex="-1"></a>lm1_noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(mass<span class="sc">~</span>density<span class="sc">+</span>uvb,<span class="at">data=</span>tad)</span>
+<span id="cb58-2"><a href="ANOVA2Analysis.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1_noint)</span></code></pre></div>
+<pre><code>#R&gt;   Analysis of Variance Table
+#R&gt;   
+#R&gt;   Response: mass
+#R&gt;             Df  Sum Sq Mean Sq F value    Pr(&gt;F)
+#R&gt;   density    2  2.4337 1.21686 10.3154 9.649e-05
+#R&gt;   uvb        1  0.3004 0.30044  2.5469    0.1142
+#R&gt;   Residuals 86 10.1450 0.11797</code></pre>
+<p>With this the multiple comparisons for a main effect factor variable is performed as described for a One-Way ANOVA in Module <a href="ANOVA1MultipleComparisons.html#ANOVA1MultipleComparisons">6</a>.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="ANOVA2Analysis.html#cb60-1" aria-hidden="true" tabindex="-1"></a>mc1_noint <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1_noint,<span class="at">specs=</span>pairwise<span class="sc">~</span>density)</span>
+<span id="cb60-2"><a href="ANOVA2Analysis.html#cb60-2" aria-hidden="true" tabindex="-1"></a>( mc1sum_noint <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc1_noint,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<pre><code>#R&gt;   $emmeans
+#R&gt;    density emmean     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;    1        1.157 0.0627 86    1.033    1.282 18.456  &lt;.0001 
+#R&gt;    2        0.829 0.0627 86    0.704    0.953 13.215  &lt;.0001 
+#R&gt;    4        0.791 0.0627 86    0.667    0.916 12.620  &lt;.0001 
+#R&gt;   
+#R&gt;   Results are averaged over the levels of: uvb 
+#R&gt;   Confidence level used: 0.95 
+#R&gt;   
+#R&gt;   $contrasts
+#R&gt;    contrast estimate     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;    1 - 2      0.3287 0.0887 86    0.117    0.540 3.706   0.0011 
+#R&gt;    1 - 4      0.3660 0.0887 86    0.154    0.578 4.127   0.0002 
+#R&gt;    2 - 4      0.0373 0.0887 86   -0.174    0.249 0.421   0.9070 
+#R&gt;   
+#R&gt;   Results are averaged over the levels of: uvb 
+#R&gt;   Confidence level used: 0.95 
+#R&gt;   Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+#R&gt;   P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<p>Again, results for the individual means are in the <code>$emmeans</code> portion of the output and the results for differences in paired means are in the <code>$contrasts</code> portion. From these results, it is seen that the mean body mass of tadpoles in the 1 tadpole treatment is between 0.117 and 0.540 g greater than the mean for the 2 tadpole treatment (p=0.0011) and between 0.154 and 0.578 g greater than the mean for the 2 tadpole treatment (p=0.0002). The mean body mass of tadpoles did not significantly differ between the 2 and 4 tadpole treatments (p=0.9070).</p>
+</div>
+<div id="interaction-effects-1" class="section level3" number="12.4.2">
+<h3><span class="header-section-number">12.4.2</span> Interaction Effects</h3>
+<p>If an interaction effect had been present in the original Two-Way ANOVA model, multiple comparisons must be carried out to determine which pairs of <strong>treatment</strong> means differ. This is easily accomplished with <code>emmeans()</code> by using the interaction variable in the <code>pairwise~</code> formula. For example, if <code>lm1</code> had had a significant interaction term, the multiple comparisons for all pairs of treatments would be computed as follows.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="ANOVA2Analysis.html#cb62-1" aria-hidden="true" tabindex="-1"></a>mc1 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1,<span class="at">specs=</span>pairwise<span class="sc">~</span>density<span class="sc">:</span>uvb)</span>
+<span id="cb62-2"><a href="ANOVA2Analysis.html#cb62-2" aria-hidden="true" tabindex="-1"></a>( mc1sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc1,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<pre><code>#R&gt;   $emmeans
+#R&gt;    density uvb  emmean     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;    1       High  1.023 0.0884 84    0.848    1.199 11.576  &lt;.0001 
+#R&gt;    2       High  0.784 0.0884 84    0.608    0.960  8.869  &lt;.0001 
+#R&gt;    4       High  0.797 0.0884 84    0.621    0.972  9.012  &lt;.0001 
+#R&gt;    1       Low   1.291 0.0884 84    1.116    1.467 14.608  &lt;.0001 
+#R&gt;    2       Low   0.873 0.0884 84    0.698    1.049  9.879  &lt;.0001 
+#R&gt;    4       Low   0.786 0.0884 84    0.610    0.962  8.892  &lt;.0001 
+#R&gt;   
+#R&gt;   Confidence level used: 0.95 
+#R&gt;   
+#R&gt;   $contrasts
+#R&gt;    contrast        estimate    SE df lower.CL upper.CL t.ratio p.value
+#R&gt;    1 High - 2 High   0.2393 0.125 84  -0.1253   0.6039  1.914  0.4007 
+#R&gt;    1 High - 4 High   0.2267 0.125 84  -0.1379   0.5913  1.813  0.4631 
+#R&gt;    1 High - 1 Low   -0.2680 0.125 84  -0.6326   0.0966 -2.144  0.2754 
+#R&gt;    1 High - 2 Low    0.1500 0.125 84  -0.2146   0.5146  1.200  0.8357 
+#R&gt;    1 High - 4 Low    0.2373 0.125 84  -0.1273   0.6019  1.898  0.4103 
+#R&gt;    2 High - 4 High  -0.0127 0.125 84  -0.3773   0.3519 -0.101  1.0000 
+#R&gt;    2 High - 1 Low   -0.5073 0.125 84  -0.8719  -0.1427 -4.058  0.0015 
+#R&gt;    2 High - 2 Low   -0.0893 0.125 84  -0.4539   0.2753 -0.715  0.9797 
+#R&gt;    2 High - 4 Low   -0.0020 0.125 84  -0.3666   0.3626 -0.016  1.0000 
+#R&gt;    4 High - 1 Low   -0.4947 0.125 84  -0.8593  -0.1301 -3.957  0.0021 
+#R&gt;    4 High - 2 Low   -0.0767 0.125 84  -0.4413   0.2879 -0.613  0.9898 
+#R&gt;    4 High - 4 Low    0.0107 0.125 84  -0.3539   0.3753  0.085  1.0000 
+#R&gt;    1 Low - 2 Low     0.4180 0.125 84   0.0534   0.7826  3.344  0.0152 
+#R&gt;    1 Low - 4 Low     0.5053 0.125 84   0.1407   0.8699  4.042  0.0016 
+#R&gt;    2 Low - 4 Low     0.0873 0.125 84  -0.2773   0.4519  0.699  0.9816 
+#R&gt;   
+#R&gt;   Confidence level used: 0.95 
+#R&gt;   Conf-level adjustment: tukey method for comparing a family of 6 estimates 
+#R&gt;   P value adjustment: tukey method for comparing a family of 6 estimates</code></pre>
+<p>As before, results for the individual means are in the <code>$emmeans</code> portion of the output and the results for differences in paired means are in the <code>$contrasts</code> portion.</p>
+<p> </p>
+</div>
+</div>
+<div id="graphing-results" class="section level2" number="12.5">
+<h2><span class="header-section-number">12.5</span> Graphing Results</h2>
+<div id="interaction-plot" class="section level3" number="12.5.1">
+<h3><span class="header-section-number">12.5.1</span> Interaction Plot</h3>
+<p>The results of a Two-Way ANOVA are summarizaed in an <strong>interaction plot</strong> whether a significant interaction was present in the results or not. An interaction plot, which was introduced in Module <a href="ANOVA2Foundations1.html#ANOVA2Foundations1">10</a>, show each treatment mean with the levels of one factor on the x-axis and the levels of other other factor shown with different colors or symbols and sometimes connected with a line. The interaction plot made here will also include a confidence intervals for each treatment mean.</p>
+<p>The method shown below requires having saved the summary of the multiple comparisons procedure applied to the <strong>model that included the interaction term.</strong> This was created above and saved as <code>mc1sum</code>. The data we want to plot is in the <code>$emmeans</code> portion of this object.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="ANOVA2Analysis.html#cb64-1" aria-hidden="true" tabindex="-1"></a>mc1sum<span class="sc">$</span>emmeans</span></code></pre></div>
+<pre><code>#R&gt;    density uvb  emmean     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;    1       High  1.023 0.0884 84    0.848    1.199 11.576  &lt;.0001 
+#R&gt;    2       High  0.784 0.0884 84    0.608    0.960  8.869  &lt;.0001 
+#R&gt;    4       High  0.797 0.0884 84    0.621    0.972  9.012  &lt;.0001 
+#R&gt;    1       Low   1.291 0.0884 84    1.116    1.467 14.608  &lt;.0001 
+#R&gt;    2       Low   0.873 0.0884 84    0.698    1.049  9.879  &lt;.0001 
+#R&gt;    4       Low   0.786 0.0884 84    0.610    0.962  8.892  &lt;.0001 
+#R&gt;   
+#R&gt;   Confidence level used: 0.95</code></pre>
+<p>Specifically, we want to plot the results in the <code>emmean</code> column with the confidence intervals in <code>lower.CL</code> and <code>upper.CL</code> against one of the factor variables. One issue is that the confidence intervals for the multiple treatments defined by one level of the variable on the x-axis will overlap. Thus, before plotting we define a “dodge” amount with <code>position_dodge()</code> that will shift the levels of the other factor slightly left and right to eliminate the overlap. The <code>width=</code> argument defines the amount of shift. You may need to “play” with this value to get the exact look that you want.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="ANOVA2Analysis.html#cb66-1" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.1</span>)</span></code></pre></div>
+<p>The summary graphic is constucted with the code below. This code is similar to what was used for the summary graphic of a One-Way ANOVA. However, in this code, note</p>
+<ul>
+<li>the use of <code>mc1sum$emmeans</code> as the data,</li>
+<li>the use of <code>density</code> (i.e., one of the factor variables) as <code>x=</code>,</li>
+<li>the use of <code>uvb</code> (i.e., the other factor variale) in <code>group=</code> (so it will be “dodged”) and <code>color=</code> (so it will be denoted with different colors),</li>
+<li>that <code>geom_line()</code> is placed first so that the points and confidence intervals will be on top of the connecting lines,</li>
+<li>that <code>alpha=</code> is used in <code>geom_line()</code> so that the lines are subtle, and</li>
+<li>the use of <code>pd</code> from <code>position_dodge()</code> above in <code>geom_pointrange()</code>.</li>
+</ul>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="ANOVA2Analysis.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mc1sum<span class="sc">$</span>emmeans,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>density,<span class="at">group=</span>uvb,<span class="at">color=</span>uvb,</span>
+<span id="cb67-2"><a href="ANOVA2Analysis.html#cb67-2" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">y=</span>emmean,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL)) <span class="sc">+</span></span>
+<span id="cb67-3"><a href="ANOVA2Analysis.html#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="fl">1.1</span>,<span class="at">alpha=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb67-4"><a href="ANOVA2Analysis.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">1</span>,<span class="at">fatten=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb67-5"><a href="ANOVA2Analysis.html#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Body Mass (g)&quot;</span>,<span class="at">x=</span><span class="st">&quot;Density (Tadpoles per Tank)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb67-6"><a href="ANOVA2Analysis.html#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-53-1.png" width="432" style="display: block; margin: auto;" /></p>
+</div>
+<div id="main-effects-plot" class="section level3" number="12.5.2">
+<h3><span class="header-section-number">12.5.2</span> Main Effects Plot</h3>
+<p>Some researchers prefer to plot just the main effects when there is no significant interaction effect in the data. Such a plot is called a <strong>main effects</strong> plot and can be constructed similarly from the multiple comparison results using the model without an interaction term. Note that <code>group=1</code> must be used as shown below so that <code>geom_line()</code> will work properly.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="ANOVA2Analysis.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mc1sum_noint<span class="sc">$</span>emmeans,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>density,<span class="at">group=</span><span class="dv">1</span>,</span>
+<span id="cb68-2"><a href="ANOVA2Analysis.html#cb68-2" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">y=</span>emmean,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL)) <span class="sc">+</span></span>
+<span id="cb68-3"><a href="ANOVA2Analysis.html#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="fl">1.1</span>,<span class="at">alpha=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb68-4"><a href="ANOVA2Analysis.html#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">size=</span><span class="dv">1</span>,<span class="at">fatten=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb68-5"><a href="ANOVA2Analysis.html#cb68-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Body Mass (g)&quot;</span>,<span class="at">x=</span><span class="st">&quot;Density (Tadpoles per Tank)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb68-6"><a href="ANOVA2Analysis.html#cb68-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-54-1.png" width="336" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="53">
+<li id="fn53"><p>This exact model may also be entered with the shorthand <code>response~factorA*factorB</code>.<a href="ANOVA2Analysis.html#fnref53" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ANOVA2Foundations2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ANOVA2Summary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Book207.pdf", "Book207.epub"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

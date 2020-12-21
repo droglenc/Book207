@@ -1,4 +1,4 @@
-# One-Way ANOVA Summary {#ANOVA1Summary}
+# One-Way Summary {#ANOVA1Summary}
 
 Specific parts of a full One-Way ANOVA analysis have been described in Modules \@ref(ANOVA1Foundations)-\@ref(ANOVA1Transformations). In this module, a workflow for a full analysis is offered and that workflow is demonstrated with several examples.
 
