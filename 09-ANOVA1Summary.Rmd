@@ -6,6 +6,7 @@ Specific parts of a full One-Way ANOVA analysis have been described in Modules \
 The process of fitting and interpreting linear models is as much an art as it is a science. The "feel" for fitting these models comes with experience. The following is a process to consider for fitting a one-way ANOVA model. Consider this process as you learn to fit one-way ANOVA models, but don't consider this to be a concrete process for all models.
 
 1. Perform a thorough EDA of the quantitative response variable. Pay special attention to the distributional shape, center, dispersion, and outliers within each level of the grouping variable.
+1. Show the sample size per group and comment on whether the study was balanced (i.e., same sample size per group) or not.
 1. Address the independence assumption.
     * If this assumption is not met then other analysis methods must be used.
 1. Fit the untransformed full model (i.e., separate group means) with `lm()`.
@@ -30,6 +31,7 @@ The process of fitting and interpreting linear models is as much an art as it is
 TN <- read.csv("http://derekogle.com/Book207/data/TomatoNematode.csv")
 TN$density <- factor(TN$density)
 lm.tn <- lm(growth~density,data=TN)
+xtabs(~density,data=TN)
 assumptionCheck(lm.tn)
 anova(lm.tn)
 mc.tn <- emmeans(lm.tn,specs=pairwise~density)
@@ -58,6 +60,14 @@ $$
 where $\mu$ is the mean growth of the tomato seedlings and the subscripts identify densities of nematodes (see below).
 
 The student had 16 pots of a homogeneous soil type in which he "stocked" a known density of nematodes. The densities of nematodes used were 0, 1000, 5000, or 10000 nematodes per pot. The density of nematodes to be stocked in each pot was randomly assigned. After stocking the pots with nematodes, tomato seedlings, which had been selected to be as nearly identical in size and health as possible, were transplanted into each pot. The exact pot that a seedling was transplanted into was again randomly selected. Each pot was placed under a growing light in the same laboratory and allowed to grow for six weeks. Watering regimes and any other handling necessary during the six weeks was kept the same as much as possible among the pots. After six weeks, the plants were removed from the growing conditions and the growth of the seedling (in cm) from the beginning of the experiment was recorded.
+
+This study was "balanced" as the number of pots at each nematode density is the same (Table \@ref(tab:TNSampleSize)). The sample size, though, is quite small.
+
+```{r TNSampleSize, echo=FALSE}
+xtabs(~density,data=TN) %>%
+  knitr::kable(booktabs=TRUE,caption="Number of pots at each nematode density treatment.") %>%
+  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+```
 
 Independence appears to be largely met in this experiment. Each tomato plant was planted in a randomly selected individual pot that had been randomly assigned a number of nematodes. Thus, the growth of an individual plant should not effect the growth of another individual plant. I would be concerned if the pots were not randomly placed around the laboratory. For example, if all pots of a certain treatment were placed in one corner of the laboratory then conditions in that one corner may affect growth for those pots. There is no indication that this happened, so I will assume that it did not.
 
@@ -115,7 +125,7 @@ ggplot() +
 From this analysis, it appears that there is a "critical" density of nematodes for tomato growth somewhere between 1000 and 5000 nematodes per pot. The experimenter may want to redo this experiment for densities between 1000 and 5000 nematodes per pot in an attempt to more specifically identify a "critical" nematode density below which there is very little affect on growth and above which there is a significant negative affect on growth.
 
 #### R Code and Results {-}
-```{r fig.show='hide', results='hide', prompt=TRUE}
+```{r fig.show='hide', results='hide'}
 <<TNAnalysis>>
 <<TNMeansPlot>>
 ```
@@ -126,6 +136,7 @@ From this analysis, it appears that there is a "critical" density of nematodes f
 ```{r AFAnalysis, echo=FALSE, results='hide', fig.show='hide'}
 AF <- read.csv("http://derekogle.com/Book207/data/Ants.csv")
 lm.af <- lm(Food~Tree,data=AF)
+xtabs(~Tree,data=AF)
 assumptionCheck(lm.af)
 assumptionCheck(lm.af,lambday=0)
 AF$logFood <- log(AF$Food)
@@ -161,6 +172,14 @@ $$
 $$
 
 where $\mu$ is the mean foraging rate of the ants and the subscripts identify the type of tree examined.
+
+This study was slightly "unbalanced" as the number of ants recorded on each tree is similar, but not the same (Table \@ref(tab:AFSampleSize)).
+
+```{r AFSampleSize, echo=FALSE}
+xtabs(~Tree,data=AF) %>%
+  knitr::kable(booktabs=TRUE,caption="Number of ants recorded on each type of tree.") %>%
+  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+```
 
 The data appear to be independent as long as the separate trees were not in close proximity to each other. It is possible that the researchers examined one species of tree entirely within one "forest" of those trees. This would mean that the individuals within a species were somehow related, which would violate the independence assumption. In addition, the researchers could have looked at one specimen of each species all in a certain location, such that one tree could influence another tree. This again would violate the independence assumption. There is no indication that either of the scenarios occurred so I will assume that the individuals are independent both within- and among-groups.
 
@@ -228,7 +247,7 @@ ggplot() +
 ```
 
 #### R Code and Results {-}
-```{r fig.show='hide', results='hide', prompt=TRUE}
+```{r fig.show='hide', results='hide'}
 <<AFAnalysis>>
 <<AFMeansPlot>>
 ```
@@ -240,6 +259,7 @@ ggplot() +
 PD <- read.csv("http://derekogle.com/Book207/data/PeakDischarge.csv")
 PD$method <- factor(PD$method)
 lm.pd <- lm(discharge~method,data=PD)
+xtabs(~method,data=PD)
 assumptionCheck(lm.pd)
 assumptionCheck(lm.pd,lambday=0.5)
 PD$sqrtdischarge <- sqrt(PD$discharge)
@@ -272,7 +292,13 @@ $$
 
 where $\mu$ is the mean peak discharge estimate and the subscripts generically identify the four different methods for estimating peak discharge.
 
-Each estimation method was used six times on the watershed and the resulting discharge estimates (in cubic feet per second) were recorded.
+Each estimation method was used six times on the watershed and the resulting discharge estimates (in cubic feet per second) were recorded (Table \@ref(tab:PDSampleSize)).
+
+```{r PDSampleSize, echo=FALSE}
+xtabs(~method,data=PD) %>%
+  knitr::kable(booktabs=TRUE,caption="Number of estimates for each method.") %>%
+  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+```
 
 At first glance, the data do not appear to be independent either within- or among-groups as the same methods were applied to the same watershed. However, the single watershed is the engineer's "population" of interest; thus, this form of data collection is not problematic unless the engineer (or you) attempt to make strict inferences to other watersheds. In addition, measurements from the same method may seem dependent, but this is the factor that is being examined, thus this is not a within-group dependency issue.
 
@@ -330,7 +356,7 @@ ggplot() +
 ```
 
 #### R Code and Results {-}
-```{r fig.show='hide', results='hide', prompt=TRUE}
+```{r fig.show='hide', results='hide'}
 <<PDAnalysis>>
 <<PDMeansPlot>>
 ```

@@ -128,7 +128,7 @@ Specifically, we want to plot the results in the `emmean` column with the confid
 pd <- position_dodge(width=0.1)
 ```
 
-The summary graphic is constructed with the code below. This code is similar to what was used for the summary graphic of a One-Way ANOVA in Section \@ref(multiple-comparisons-r). However, this code is somewhat simpler because the individual observations are not plotted to eliminate clutter. Further, note 
+The summary graphic is constructed with the code below. This code is similar to what was used for the summary graphic of a One-Way ANOVA in Section \@ref(multiple-comparisons-in-r). However, this code is somewhat simpler because the individual observations are not plotted to eliminate clutter. Further, note 
 
 - the use of `mc1sum$emmeans` as the data,
 - the use of `density` (i.e., one of the factor variables) as `x=`,

@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2020-12-21" />
+<meta name="date" content="2020-12-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -228,9 +228,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html"><i class="fa fa-check"></i><b>13</b> Two-Way Summary</a>
 <ul>
 <li class="chapter" data-level="13.1" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#suggested-workflow-1"><i class="fa fa-check"></i><b>13.1</b> Suggested Workflow</a></li>
-<li class="chapter" data-level="13.2" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#bacteria-no-transformation"><i class="fa fa-check"></i><b>13.2</b> Bacteria (No Transformation)</a></li>
-<li class="chapter" data-level="13.3" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#blood-pressure-no-transformation"><i class="fa fa-check"></i><b>13.3</b> Blood Pressure (No Transformation)</a></li>
-<li class="chapter" data-level="13.4" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#crayfish-foraging-transformation"><i class="fa fa-check"></i><b>13.4</b> Crayfish Foraging (Transformation)</a></li>
+<li class="chapter" data-level="13.2" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#expected-prices-no-transformation"><i class="fa fa-check"></i><b>13.2</b> Expected Prices (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="13.3" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#blood-pressure-no-transformation"><i class="fa fa-check"></i><b>13.3</b> Blood Pressure (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="13.4" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#crayfish-foraging-transformation"><i class="fa fa-check"></i><b>13.4</b> Crayfish Foraging (<em>Transformation</em>)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -409,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   Confidence level used: 0.95</code></pre>
 <p>Specifically, we want to plot the results in the <code>emmean</code> column with the confidence intervals in <code>lower.CL</code> and <code>upper.CL</code> against one of the factor variables. One issue that arises is that the confidence intervals for the multiple treatments defined by one level of the variable on the x-axis overlap. Thus, before plotting, a “dodge” amount is defined with <code>position_dodge()</code> that will shift the levels slightly left and right to eliminate the overlap. The <code>width=</code> argument defines the amount of shift. You may need to “play” with this value to get the exact look that you want.</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb65-1"><a href="ANOVA2Analysis.html#cb65-1" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.1</span>)</span></code></pre></div>
-<p>The summary graphic is constructed with the code below. This code is similar to what was used for the summary graphic of a One-Way ANOVA in Section <a href="#multiple-comparisons-r"><strong>??</strong></a>. However, this code is somewhat simpler because the individual observations are not plotted to eliminate clutter. Further, note</p>
+<p>The summary graphic is constructed with the code below. This code is similar to what was used for the summary graphic of a One-Way ANOVA in Section <a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r">6.3</a>. However, this code is somewhat simpler because the individual observations are not plotted to eliminate clutter. Further, note</p>
 <ul>
 <li>the use of <code>mc1sum$emmeans</code> as the data,</li>
 <li>the use of <code>density</code> (i.e., one of the factor variables) as <code>x=</code>,</li>

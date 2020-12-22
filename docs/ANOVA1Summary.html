@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2020-12-21" />
+<meta name="date" content="2020-12-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -228,9 +228,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html"><i class="fa fa-check"></i><b>13</b> Two-Way Summary</a>
 <ul>
 <li class="chapter" data-level="13.1" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#suggested-workflow-1"><i class="fa fa-check"></i><b>13.1</b> Suggested Workflow</a></li>
-<li class="chapter" data-level="13.2" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#bacteria-no-transformation"><i class="fa fa-check"></i><b>13.2</b> Bacteria (No Transformation)</a></li>
-<li class="chapter" data-level="13.3" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#blood-pressure-no-transformation"><i class="fa fa-check"></i><b>13.3</b> Blood Pressure (No Transformation)</a></li>
-<li class="chapter" data-level="13.4" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#crayfish-foraging-transformation"><i class="fa fa-check"></i><b>13.4</b> Crayfish Foraging (Transformation)</a></li>
+<li class="chapter" data-level="13.2" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#expected-prices-no-transformation"><i class="fa fa-check"></i><b>13.2</b> Expected Prices (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="13.3" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#blood-pressure-no-transformation"><i class="fa fa-check"></i><b>13.3</b> Blood Pressure (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="13.4" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#crayfish-foraging-transformation"><i class="fa fa-check"></i><b>13.4</b> Crayfish Foraging (<em>Transformation</em>)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -262,6 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The process of fitting and interpreting linear models is as much an art as it is a science. The “feel” for fitting these models comes with experience. The following is a process to consider for fitting a one-way ANOVA model. Consider this process as you learn to fit one-way ANOVA models, but don’t consider this to be a concrete process for all models.</p>
 <ol style="list-style-type: decimal">
 <li>Perform a thorough EDA of the quantitative response variable. Pay special attention to the distributional shape, center, dispersion, and outliers within each level of the grouping variable.</li>
+<li>Show the sample size per group and comment on whether the study was balanced (i.e., same sample size per group) or not.</li>
 <li>Address the independence assumption.
 <ul>
 <li>If this assumption is not met then other analysis methods must be used.</li>
@@ -301,6 +302,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \]</span></p>
 <p>where <span class="math inline">\(\mu\)</span> is the mean growth of the tomato seedlings and the subscripts identify densities of nematodes (see below).</p>
 <p>The student had 16 pots of a homogeneous soil type in which he “stocked” a known density of nematodes. The densities of nematodes used were 0, 1000, 5000, or 10000 nematodes per pot. The density of nematodes to be stocked in each pot was randomly assigned. After stocking the pots with nematodes, tomato seedlings, which had been selected to be as nearly identical in size and health as possible, were transplanted into each pot. The exact pot that a seedling was transplanted into was again randomly selected. Each pot was placed under a growing light in the same laboratory and allowed to grow for six weeks. Watering regimes and any other handling necessary during the six weeks was kept the same as much as possible among the pots. After six weeks, the plants were removed from the growing conditions and the growth of the seedling (in cm) from the beginning of the experiment was recorded.</p>
+<p>This study was “balanced” as the number of pots at each nematode density is the same (Table <a href="ANOVA1Summary.html#tab:TNSampleSize">9.1</a>). The sample size, though, is quite small.</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:TNSampleSize">Table 9.1: </span>Number of pots at each nematode density treatment.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+density
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1000
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5000
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10000
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+</tbody>
+</table>
 <p>Independence appears to be largely met in this experiment. Each tomato plant was planted in a randomly selected individual pot that had been randomly assigned a number of nematodes. Thus, the growth of an individual plant should not effect the growth of another individual plant. I would be concerned if the pots were not randomly placed around the laboratory. For example, if all pots of a certain treatment were placed in one corner of the laboratory then conditions in that one corner may affect growth for those pots. There is no indication that this happened, so I will assume that it did not.</p>
 <div class="tip">
 <p>Note the detailed discussion of independence.</p>
@@ -315,13 +366,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Figure 9.1: Histogram (Left) and boxplot (Right) of residuals from the utransformed One-Way ANOVA model for the tomato seedling growth at each nematode density.
 </p>
 </div>
-<p>There appears to be a significant difference in mean tomato seedling growth among at least some of the four treatments (p=0.0006; Table <a href="ANOVA1Summary.html#tab:TNANOVA">9.1</a>).</p>
+<p>There appears to be a significant difference in mean tomato seedling growth among at least some of the four treatments (p=0.0006; Table <a href="ANOVA1Summary.html#tab:TNANOVA">9.2</a>).</p>
 <div class="tip">
 <p>Note the use of ANOVA table to first identify any differences.</p>
 </div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:TNANOVA">Table 9.1: </span>ANOVA results for tomato seedling growth at four nematode densities.
+<span id="tab:TNANOVA">Table 9.2: </span>ANOVA results for tomato seedling growth at four nematode densities.
 </caption>
 <thead>
 <tr>
@@ -385,10 +436,10 @@ Residuals
 </tr>
 </tbody>
 </table>
-<p>It appears that mean growth of tomatoes does not differ at densities 0 and 1000 (p=0.9974) and 5000 and 10000 (p=0.9992), but does differ for all other pairs of nematode densities (p≤0.0070) (Table <a href="ANOVA1Summary.html#tab:TNTukey">9.2</a>).</p>
+<p>It appears that mean growth of tomatoes does not differ at densities 0 and 1000 (p=0.9974) and 5000 and 10000 (p=0.9992), but does differ for all other pairs of nematode densities (p≤0.0070) (Table <a href="ANOVA1Summary.html#tab:TNTukey">9.3</a>).</p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:TNTukey">Table 9.2: </span>Tukey’s multiple comparisons for differences in mean tomato seedling growth for all pairs of four nematode densities.
+<span id="tab:TNTukey">Table 9.3: </span>Tukey’s multiple comparisons for differences in mean tomato seedling growth for all pairs of four nematode densities.
 </caption>
 <thead>
 <tr>
@@ -514,7 +565,7 @@ p.value
 </tr>
 </tbody>
 </table>
-<p>The student’s hypothesis was generally supported (Figure <a href="ANOVA1Summary.html#fig:TNMeansPlot">9.2</a>). However, it does not appear that tomato seedling growth is negatively affected for all increases in nematode density. For example, seedling growth declined for an increase from 1000 to 5000 nematodes per pot but not for increases from 0 to 1000 nematodes per pot or from 5000 to 10000 nematodes per pot. Specifically, it appears that the mean growth of the tomato seedlings is between 1.3 and 8.3 cm lower at a density of 5000 nematodes than at a density of 1000 nematodes (Table <a href="ANOVA1Summary.html#tab:TNANOVA">9.1</a>).</p>
+<p>The student’s hypothesis was generally supported (Figure <a href="ANOVA1Summary.html#fig:TNMeansPlot">9.2</a>). However, it does not appear that tomato seedling growth is negatively affected for all increases in nematode density. For example, seedling growth declined for an increase from 1000 to 5000 nematodes per pot but not for increases from 0 to 1000 nematodes per pot or from 5000 to 10000 nematodes per pot. Specifically, it appears that the mean growth of the tomato seedlings is between 1.3 and 8.3 cm lower at a density of 5000 nematodes than at a density of 1000 nematodes (Table <a href="ANOVA1Summary.html#tab:TNANOVA">9.2</a>).</p>
 <div class="tip">
 <p>Note use of a confidence interval and specific direction (i.e., “lower”) when describing the “difference.”</p>
 </div>
@@ -527,21 +578,22 @@ Figure 9.2: Mean (with 95% confidence interval) of tomato growth at each nematod
 <p>From this analysis, it appears that there is a “critical” density of nematodes for tomato growth somewhere between 1000 and 5000 nematodes per pot. The experimenter may want to redo this experiment for densities between 1000 and 5000 nematodes per pot in an attempt to more specifically identify a “critical” nematode density below which there is very little affect on growth and above which there is a significant negative affect on growth.</p>
 <div id="r-code-and-results" class="section level4 unnumbered">
 <h4>R Code and Results</h4>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb42-1"><a href="ANOVA1Summary.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> TN <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/TomatoNematode.csv&quot;</span>)</span>
-<span id="cb42-2"><a href="ANOVA1Summary.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> TN<span class="sc">$</span>density <span class="ot">&lt;-</span> <span class="fu">factor</span>(TN<span class="sc">$</span>density)</span>
-<span id="cb42-3"><a href="ANOVA1Summary.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> lm.tn <span class="ot">&lt;-</span> <span class="fu">lm</span>(growth<span class="sc">~</span>density,<span class="at">data=</span>TN)</span>
-<span id="cb42-4"><a href="ANOVA1Summary.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">assumptionCheck</span>(lm.tn)</span></code></pre></div>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb43-1"><a href="ANOVA1Summary.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">anova</span>(lm.tn)</span>
-<span id="cb43-2"><a href="ANOVA1Summary.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> mc.tn <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm.tn,<span class="at">specs=</span>pairwise<span class="sc">~</span>density)</span>
-<span id="cb43-3"><a href="ANOVA1Summary.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> ( mcsum.tn <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc.tn,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
-<span id="cb43-4"><a href="ANOVA1Summary.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb43-5"><a href="ANOVA1Summary.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>   <span class="fu">geom_jitter</span>(<span class="at">data=</span>TN,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>density,<span class="at">y=</span>growth),</span>
-<span id="cb43-6"><a href="ANOVA1Summary.html#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>               <span class="at">alpha=</span><span class="fl">0.25</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb43-7"><a href="ANOVA1Summary.html#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>   <span class="fu">geom_pointrange</span>(<span class="at">data=</span>mcsum.tn<span class="sc">$</span>emmeans,</span>
-<span id="cb43-8"><a href="ANOVA1Summary.html#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>                   <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>density,<span class="at">y=</span>emmean,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL),</span>
-<span id="cb43-9"><a href="ANOVA1Summary.html#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>                <span class="at">size=</span><span class="fl">1.1</span>,<span class="at">fatten=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb43-10"><a href="ANOVA1Summary.html#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>   <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Nematode Stocking Density&quot;</span>,<span class="at">y=</span><span class="st">&quot;Tomato Plant Growth (cm)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb43-11"><a href="ANOVA1Summary.html#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>   <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb42-1"><a href="ANOVA1Summary.html#cb42-1" aria-hidden="true" tabindex="-1"></a>TN <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/TomatoNematode.csv&quot;</span>)</span>
+<span id="cb42-2"><a href="ANOVA1Summary.html#cb42-2" aria-hidden="true" tabindex="-1"></a>TN<span class="sc">$</span>density <span class="ot">&lt;-</span> <span class="fu">factor</span>(TN<span class="sc">$</span>density)</span>
+<span id="cb42-3"><a href="ANOVA1Summary.html#cb42-3" aria-hidden="true" tabindex="-1"></a>lm.tn <span class="ot">&lt;-</span> <span class="fu">lm</span>(growth<span class="sc">~</span>density,<span class="at">data=</span>TN)</span>
+<span id="cb42-4"><a href="ANOVA1Summary.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>density,<span class="at">data=</span>TN)</span>
+<span id="cb42-5"><a href="ANOVA1Summary.html#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.tn)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb43-1"><a href="ANOVA1Summary.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.tn)</span>
+<span id="cb43-2"><a href="ANOVA1Summary.html#cb43-2" aria-hidden="true" tabindex="-1"></a>mc.tn <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm.tn,<span class="at">specs=</span>pairwise<span class="sc">~</span>density)</span>
+<span id="cb43-3"><a href="ANOVA1Summary.html#cb43-3" aria-hidden="true" tabindex="-1"></a>( mcsum.tn <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc.tn,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb43-4"><a href="ANOVA1Summary.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb43-5"><a href="ANOVA1Summary.html#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">data=</span>TN,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>density,<span class="at">y=</span>growth),</span>
+<span id="cb43-6"><a href="ANOVA1Summary.html#cb43-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha=</span><span class="fl">0.25</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb43-7"><a href="ANOVA1Summary.html#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">data=</span>mcsum.tn<span class="sc">$</span>emmeans,</span>
+<span id="cb43-8"><a href="ANOVA1Summary.html#cb43-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>density,<span class="at">y=</span>emmean,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL),</span>
+<span id="cb43-9"><a href="ANOVA1Summary.html#cb43-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">size=</span><span class="fl">1.1</span>,<span class="at">fatten=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb43-10"><a href="ANOVA1Summary.html#cb43-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Nematode Stocking Density&quot;</span>,<span class="at">y=</span><span class="st">&quot;Tomato Plant Growth (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb43-11"><a href="ANOVA1Summary.html#cb43-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
 <p> </p>
 </div>
 </div>
@@ -556,6 +608,48 @@ Figure 9.2: Mean (with 95% confidence interval) of tomato growth at each nematod
 \end{split}
 \]</span></p>
 <p>where <span class="math inline">\(\mu\)</span> is the mean foraging rate of the ants and the subscripts identify the type of tree examined.</p>
+<p>This study was slightly “unbalanced” as the number of ants recorded on each tree is similar, but not the same (Table <a href="ANOVA1Summary.html#tab:AFSampleSize">9.4</a>).</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:AFSampleSize">Table 9.4: </span>Number of ants recorded on each type of tree.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Tree
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Oak
+</td>
+<td style="text-align:right;">
+27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Rowan
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sycamore
+</td>
+<td style="text-align:right;">
+26
+</td>
+</tr>
+</tbody>
+</table>
 <p>The data appear to be independent as long as the separate trees were not in close proximity to each other. It is possible that the researchers examined one species of tree entirely within one “forest” of those trees. This would mean that the individuals within a species were somehow related, which would violate the independence assumption. In addition, the researchers could have looked at one specimen of each species all in a certain location, such that one tree could influence another tree. This again would violate the independence assumption. There is no indication that either of the scenarios occurred so I will assume that the individuals are independent both within- and among-groups.</p>
 <div class="tip">
 <p>Note careful discussion of independence here.</p>
@@ -574,13 +668,13 @@ Figure 9.3: Histogram of residuals (Left) and boxplot of residual (Right) from t
 Figure 9.4: Histogram of residuals (Left) and boxplot of residual (Right) from the one-way ANOVA on log transformed foraging rate of ants.
 </p>
 </div>
-<p>There appears to be a significant difference in mean log foraging rate of the ants among some of the tree species (p=0.0013; Table <a href="ANOVA1Summary.html#tab:AFANOVA">9.3</a>).</p>
+<p>There appears to be a significant difference in mean log foraging rate of the ants among some of the tree species (p=0.0013; Table <a href="ANOVA1Summary.html#tab:AFANOVA">9.5</a>).</p>
 <div class="tip">
 <p>Note the careful use of the transformation name here.</p>
 </div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:AFANOVA">Table 9.3: </span>ANOVA results for the log transformed foraging rate of ants among tree species.
+<span id="tab:AFANOVA">Table 9.5: </span>ANOVA results for the log transformed foraging rate of ants among tree species.
 </caption>
 <thead>
 <tr>
@@ -644,13 +738,13 @@ Residuals
 </tr>
 </tbody>
 </table>
-<p>Tukey multiple comparisons indicate that the mean log foraging rate was greater for ants on Oak trees than ants on Rowan trees (p=0.0008; Table <a href="ANOVA1Summary.html#tab:AFTukey1">9.4</a>). Specifically, the mean foraging rate for ants on an Oak tree was between 1.318 and 3.318 <strong>times</strong> higher than the mean foraging rate for ants on a Rowan tree (Table <a href="ANOVA1Summary.html#tab:AFTukey2">9.5</a>). However, there was no significant difference in mean log foraging rate between ants on Sycamore trees and ants on Oak (p=0.1559) or Rowan (p=0.1457; Table <a href="ANOVA1Summary.html#tab:AFTukey1">9.4</a>) trees.</p>
+<p>Tukey multiple comparisons indicate that the mean log foraging rate was greater for ants on Oak trees than ants on Rowan trees (p=0.0008; Table <a href="ANOVA1Summary.html#tab:AFTukey1">9.6</a>). Specifically, the mean foraging rate for ants on an Oak tree was between 1.318 and 3.318 <strong>times</strong> higher than the mean foraging rate for ants on a Rowan tree (Table <a href="ANOVA1Summary.html#tab:AFTukey2">9.7</a>). However, there was no significant difference in mean log foraging rate between ants on Sycamore trees and ants on Oak (p=0.1559) or Rowan (p=0.1457; Table <a href="ANOVA1Summary.html#tab:AFTukey1">9.6</a>) trees.</p>
 <div class="tip">
 <p>Note how the back-transformed difference in means forms a ratio that is interpreted as a multiplicative change.</p>
 </div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:AFTukey1">Table 9.4: </span>Tukey’s multiple comparisons for differences in mean log foraging rate of ants among tree species.
+<span id="tab:AFTukey1">Table 9.6: </span>Tukey’s multiple comparisons for differences in mean log foraging rate of ants among tree species.
 </caption>
 <thead>
 <tr>
@@ -727,7 +821,7 @@ Rowan - Sycamore
 </table>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:AFTukey2">Table 9.5: </span>Tukey’s multiple comparisons for <strong>ratios</strong> of mean foraging rate of ants among tree species.
+<span id="tab:AFTukey2">Table 9.7: </span>Tukey’s multiple comparisons for <strong>ratios</strong> of mean foraging rate of ants among tree species.
 </caption>
 <thead>
 <tr>
@@ -814,24 +908,25 @@ Figure 9.5: <strong>Back-transformed</strong> mean (with 95% confidence interval
 </div>
 <div id="r-code-and-results-1" class="section level4 unnumbered">
 <h4>R Code and Results</h4>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb44-1"><a href="ANOVA1Summary.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> AF <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/Ants.csv&quot;</span>)</span>
-<span id="cb44-2"><a href="ANOVA1Summary.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> lm.af <span class="ot">&lt;-</span> <span class="fu">lm</span>(Food<span class="sc">~</span>Tree,<span class="at">data=</span>AF)</span>
-<span id="cb44-3"><a href="ANOVA1Summary.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">assumptionCheck</span>(lm.af)</span></code></pre></div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb45-1"><a href="ANOVA1Summary.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">assumptionCheck</span>(lm.af,<span class="at">lambday=</span><span class="dv">0</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb46-1"><a href="ANOVA1Summary.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> AF<span class="sc">$</span>logFood <span class="ot">&lt;-</span> <span class="fu">log</span>(AF<span class="sc">$</span>Food)</span>
-<span id="cb46-2"><a href="ANOVA1Summary.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> lm.aft <span class="ot">&lt;-</span> <span class="fu">lm</span>(logFood<span class="sc">~</span>Tree,<span class="at">data=</span>AF)</span>
-<span id="cb46-3"><a href="ANOVA1Summary.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">anova</span>(lm.aft)</span>
-<span id="cb46-4"><a href="ANOVA1Summary.html#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> mc.aft <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm.aft,<span class="at">specs=</span>pairwise<span class="sc">~</span>Tree,<span class="at">tran=</span><span class="st">&quot;log&quot;</span>)</span>
-<span id="cb46-5"><a href="ANOVA1Summary.html#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> ( mcsum.aft <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc.aft,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
-<span id="cb46-6"><a href="ANOVA1Summary.html#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> ( mcsum.afbt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc.aft,<span class="at">infer=</span><span class="cn">TRUE</span>,<span class="at">type=</span><span class="st">&quot;response&quot;</span>) )</span>
-<span id="cb46-7"><a href="ANOVA1Summary.html#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb46-8"><a href="ANOVA1Summary.html#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>   <span class="fu">geom_jitter</span>(<span class="at">data=</span>AF,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Tree,<span class="at">y=</span>Food),</span>
-<span id="cb46-9"><a href="ANOVA1Summary.html#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>               <span class="at">alpha=</span><span class="fl">0.25</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb46-10"><a href="ANOVA1Summary.html#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>   <span class="fu">geom_pointrange</span>(<span class="at">data=</span>mcsum.afbt<span class="sc">$</span>emmeans,</span>
-<span id="cb46-11"><a href="ANOVA1Summary.html#cb46-11" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>                   <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Tree,<span class="at">y=</span>response,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL),</span>
-<span id="cb46-12"><a href="ANOVA1Summary.html#cb46-12" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>                <span class="at">size=</span><span class="fl">1.1</span>,<span class="at">fatten=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb46-13"><a href="ANOVA1Summary.html#cb46-13" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>   <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Tree Species&quot;</span>,<span class="at">y=</span><span class="st">&quot;Foraging Rate (mg per ant per 30 mins)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb46-14"><a href="ANOVA1Summary.html#cb46-14" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>   <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb44-1"><a href="ANOVA1Summary.html#cb44-1" aria-hidden="true" tabindex="-1"></a>AF <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/Ants.csv&quot;</span>)</span>
+<span id="cb44-2"><a href="ANOVA1Summary.html#cb44-2" aria-hidden="true" tabindex="-1"></a>lm.af <span class="ot">&lt;-</span> <span class="fu">lm</span>(Food<span class="sc">~</span>Tree,<span class="at">data=</span>AF)</span>
+<span id="cb44-3"><a href="ANOVA1Summary.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>Tree,<span class="at">data=</span>AF)</span>
+<span id="cb44-4"><a href="ANOVA1Summary.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.af)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb45-1"><a href="ANOVA1Summary.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.af,<span class="at">lambday=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb46-1"><a href="ANOVA1Summary.html#cb46-1" aria-hidden="true" tabindex="-1"></a>AF<span class="sc">$</span>logFood <span class="ot">&lt;-</span> <span class="fu">log</span>(AF<span class="sc">$</span>Food)</span>
+<span id="cb46-2"><a href="ANOVA1Summary.html#cb46-2" aria-hidden="true" tabindex="-1"></a>lm.aft <span class="ot">&lt;-</span> <span class="fu">lm</span>(logFood<span class="sc">~</span>Tree,<span class="at">data=</span>AF)</span>
+<span id="cb46-3"><a href="ANOVA1Summary.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.aft)</span>
+<span id="cb46-4"><a href="ANOVA1Summary.html#cb46-4" aria-hidden="true" tabindex="-1"></a>mc.aft <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm.aft,<span class="at">specs=</span>pairwise<span class="sc">~</span>Tree,<span class="at">tran=</span><span class="st">&quot;log&quot;</span>)</span>
+<span id="cb46-5"><a href="ANOVA1Summary.html#cb46-5" aria-hidden="true" tabindex="-1"></a>( mcsum.aft <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc.aft,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb46-6"><a href="ANOVA1Summary.html#cb46-6" aria-hidden="true" tabindex="-1"></a>( mcsum.afbt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc.aft,<span class="at">infer=</span><span class="cn">TRUE</span>,<span class="at">type=</span><span class="st">&quot;response&quot;</span>) )</span>
+<span id="cb46-7"><a href="ANOVA1Summary.html#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb46-8"><a href="ANOVA1Summary.html#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">data=</span>AF,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Tree,<span class="at">y=</span>Food),</span>
+<span id="cb46-9"><a href="ANOVA1Summary.html#cb46-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha=</span><span class="fl">0.25</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb46-10"><a href="ANOVA1Summary.html#cb46-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">data=</span>mcsum.afbt<span class="sc">$</span>emmeans,</span>
+<span id="cb46-11"><a href="ANOVA1Summary.html#cb46-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Tree,<span class="at">y=</span>response,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL),</span>
+<span id="cb46-12"><a href="ANOVA1Summary.html#cb46-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">size=</span><span class="fl">1.1</span>,<span class="at">fatten=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb46-13"><a href="ANOVA1Summary.html#cb46-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Tree Species&quot;</span>,<span class="at">y=</span><span class="st">&quot;Foraging Rate (mg per ant per 30 mins)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb46-14"><a href="ANOVA1Summary.html#cb46-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
 <p> </p>
 </div>
 </div>
@@ -844,7 +939,56 @@ Figure 9.5: <strong>Back-transformed</strong> mean (with 95% confidence interval
 \end{split}
 \]</span></p>
 <p>where <span class="math inline">\(\mu\)</span> is the mean peak discharge estimate and the subscripts generically identify the four different methods for estimating peak discharge.</p>
-<p>Each estimation method was used six times on the watershed and the resulting discharge estimates (in cubic feet per second) were recorded.</p>
+<p>Each estimation method was used six times on the watershed and the resulting discharge estimates (in cubic feet per second) were recorded (Table <a href="ANOVA1Summary.html#tab:PDSampleSize">9.8</a>).</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:PDSampleSize">Table 9.8: </span>Number of estimates for each method.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+method
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+</tbody>
+</table>
 <p>At first glance, the data do not appear to be independent either within- or among-groups as the same methods were applied to the same watershed. However, the single watershed is the engineer’s “population” of interest; thus, this form of data collection is not problematic unless the engineer (or you) attempt to make strict inferences to other watersheds. In addition, measurements from the same method may seem dependent, but this is the factor that is being examined, thus this is not a within-group dependency issue.</p>
 <div class="tip">
 <p>Note careful discussion of independence here.</p>
@@ -863,13 +1007,13 @@ Figure 9.6: Histogram of residuals (Left) and boxplot of residual (Right) from t
 Figure 9.7: Histogram of residuals (Left) and boxplot of residual (Right) from the one-way ANOVA on square root transformed peak discharge data.
 </p>
 </div>
-<p>There appears to be a significant difference in mean square root peak discharge among the four methods (p&lt;0.00005; Table <a href="ANOVA1Summary.html#tab:PDANOVA">9.6</a>).</p>
+<p>There appears to be a significant difference in mean square root peak discharge among the four methods (p&lt;0.00005; Table <a href="ANOVA1Summary.html#tab:PDANOVA">9.9</a>).</p>
 <div class="tip">
 <p>Note the careful use of the transformation name here.</p>
 </div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:PDANOVA">Table 9.6: </span>ANOVA results for the square root peak discharge analysis by estimationg method.
+<span id="tab:PDANOVA">Table 9.9: </span>ANOVA results for the square root peak discharge analysis by estimationg method.
 </caption>
 <thead>
 <tr>
@@ -933,10 +1077,10 @@ Residuals
 </tr>
 </tbody>
 </table>
-<p>Tukey multiple comparisons indicate that no two mean square root peak discharges were equal (p≤0.0046; Table <a href="ANOVA1Summary.html#tab:PDTukey1">9.7</a>). It appears that the mean square root of estimated peak discharge increases from Method 1 to Method 2 to Method 3 to Method 4. For example, the mean square root of estimated peak discharge was between 2.471 and 3.656 units greater for Method 4 than for Method 1 (Table <a href="ANOVA1Summary.html#tab:PDTukey1">9.7</a>).</p>
+<p>Tukey multiple comparisons indicate that no two mean square root peak discharges were equal (p≤0.0046; Table <a href="ANOVA1Summary.html#tab:PDTukey1">9.10</a>). It appears that the mean square root of estimated peak discharge increases from Method 1 to Method 2 to Method 3 to Method 4. For example, the mean square root of estimated peak discharge was between 2.471 and 3.656 units greater for Method 4 than for Method 1 (Table <a href="ANOVA1Summary.html#tab:PDTukey1">9.10</a>).</p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:PDTukey1">Table 9.7: </span>Tukey’s multiple comparisons for differences in square root peak discharge for different estimation methods.
+<span id="tab:PDTukey1">Table 9.10: </span>Tukey’s multiple comparisons for differences in square root peak discharge for different estimation methods.
 </caption>
 <thead>
 <tr>
@@ -1074,25 +1218,26 @@ Figure 9.8: <strong>Back-transformed</strong> mean (with 95% confidence interval
 </div>
 <div id="r-code-and-results-2" class="section level4 unnumbered">
 <h4>R Code and Results</h4>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb47-1"><a href="ANOVA1Summary.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> PD <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/PeakDischarge.csv&quot;</span>)</span>
-<span id="cb47-2"><a href="ANOVA1Summary.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> PD<span class="sc">$</span>method <span class="ot">&lt;-</span> <span class="fu">factor</span>(PD<span class="sc">$</span>method)</span>
-<span id="cb47-3"><a href="ANOVA1Summary.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> lm.pd <span class="ot">&lt;-</span> <span class="fu">lm</span>(discharge<span class="sc">~</span>method,<span class="at">data=</span>PD)</span>
-<span id="cb47-4"><a href="ANOVA1Summary.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">assumptionCheck</span>(lm.pd)</span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb48-1"><a href="ANOVA1Summary.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">assumptionCheck</span>(lm.pd,<span class="at">lambday=</span><span class="fl">0.5</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb49-1"><a href="ANOVA1Summary.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> PD<span class="sc">$</span>sqrtdischarge <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(PD<span class="sc">$</span>discharge)</span>
-<span id="cb49-2"><a href="ANOVA1Summary.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> lm.pdt <span class="ot">&lt;-</span> <span class="fu">lm</span>(sqrtdischarge<span class="sc">~</span>method,<span class="at">data=</span>PD)</span>
-<span id="cb49-3"><a href="ANOVA1Summary.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">anova</span>(lm.pdt)</span>
-<span id="cb49-4"><a href="ANOVA1Summary.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> mc.pdt <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm.pdt,<span class="at">specs=</span>pairwise<span class="sc">~</span>method,<span class="at">tran=</span><span class="st">&quot;sqrt&quot;</span>)</span>
-<span id="cb49-5"><a href="ANOVA1Summary.html#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> ( mcsum.pdt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc.pdt,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
-<span id="cb49-6"><a href="ANOVA1Summary.html#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> ( mcsum.pdbt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc.pdt,<span class="at">infer=</span><span class="cn">TRUE</span>,<span class="at">type=</span><span class="st">&quot;response&quot;</span>) )</span>
-<span id="cb49-7"><a href="ANOVA1Summary.html#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb49-8"><a href="ANOVA1Summary.html#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>   <span class="fu">geom_jitter</span>(<span class="at">data=</span>PD,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>method,<span class="at">y=</span>discharge),</span>
-<span id="cb49-9"><a href="ANOVA1Summary.html#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>               <span class="at">alpha=</span><span class="fl">0.25</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb49-10"><a href="ANOVA1Summary.html#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>   <span class="fu">geom_pointrange</span>(<span class="at">data=</span>mcsum.pdbt<span class="sc">$</span>emmeans,</span>
-<span id="cb49-11"><a href="ANOVA1Summary.html#cb49-11" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>                   <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>method,<span class="at">y=</span>response,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL),</span>
-<span id="cb49-12"><a href="ANOVA1Summary.html#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>                <span class="at">size=</span><span class="fl">1.1</span>,<span class="at">fatten=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb49-13"><a href="ANOVA1Summary.html#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>   <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Estimation Method&quot;</span>,<span class="at">y=</span><span class="st">&quot;Peak Discharge (cfs)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb49-14"><a href="ANOVA1Summary.html#cb49-14" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>   <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb47-1"><a href="ANOVA1Summary.html#cb47-1" aria-hidden="true" tabindex="-1"></a>PD <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/PeakDischarge.csv&quot;</span>)</span>
+<span id="cb47-2"><a href="ANOVA1Summary.html#cb47-2" aria-hidden="true" tabindex="-1"></a>PD<span class="sc">$</span>method <span class="ot">&lt;-</span> <span class="fu">factor</span>(PD<span class="sc">$</span>method)</span>
+<span id="cb47-3"><a href="ANOVA1Summary.html#cb47-3" aria-hidden="true" tabindex="-1"></a>lm.pd <span class="ot">&lt;-</span> <span class="fu">lm</span>(discharge<span class="sc">~</span>method,<span class="at">data=</span>PD)</span>
+<span id="cb47-4"><a href="ANOVA1Summary.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>method,<span class="at">data=</span>PD)</span>
+<span id="cb47-5"><a href="ANOVA1Summary.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.pd)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb48-1"><a href="ANOVA1Summary.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.pd,<span class="at">lambday=</span><span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb49-1"><a href="ANOVA1Summary.html#cb49-1" aria-hidden="true" tabindex="-1"></a>PD<span class="sc">$</span>sqrtdischarge <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(PD<span class="sc">$</span>discharge)</span>
+<span id="cb49-2"><a href="ANOVA1Summary.html#cb49-2" aria-hidden="true" tabindex="-1"></a>lm.pdt <span class="ot">&lt;-</span> <span class="fu">lm</span>(sqrtdischarge<span class="sc">~</span>method,<span class="at">data=</span>PD)</span>
+<span id="cb49-3"><a href="ANOVA1Summary.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.pdt)</span>
+<span id="cb49-4"><a href="ANOVA1Summary.html#cb49-4" aria-hidden="true" tabindex="-1"></a>mc.pdt <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm.pdt,<span class="at">specs=</span>pairwise<span class="sc">~</span>method,<span class="at">tran=</span><span class="st">&quot;sqrt&quot;</span>)</span>
+<span id="cb49-5"><a href="ANOVA1Summary.html#cb49-5" aria-hidden="true" tabindex="-1"></a>( mcsum.pdt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc.pdt,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb49-6"><a href="ANOVA1Summary.html#cb49-6" aria-hidden="true" tabindex="-1"></a>( mcsum.pdbt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc.pdt,<span class="at">infer=</span><span class="cn">TRUE</span>,<span class="at">type=</span><span class="st">&quot;response&quot;</span>) )</span>
+<span id="cb49-7"><a href="ANOVA1Summary.html#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb49-8"><a href="ANOVA1Summary.html#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">data=</span>PD,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>method,<span class="at">y=</span>discharge),</span>
+<span id="cb49-9"><a href="ANOVA1Summary.html#cb49-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha=</span><span class="fl">0.25</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb49-10"><a href="ANOVA1Summary.html#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">data=</span>mcsum.pdbt<span class="sc">$</span>emmeans,</span>
+<span id="cb49-11"><a href="ANOVA1Summary.html#cb49-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>method,<span class="at">y=</span>response,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL),</span>
+<span id="cb49-12"><a href="ANOVA1Summary.html#cb49-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">size=</span><span class="fl">1.1</span>,<span class="at">fatten=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-13"><a href="ANOVA1Summary.html#cb49-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Estimation Method&quot;</span>,<span class="at">y=</span><span class="st">&quot;Peak Discharge (cfs)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-14"><a href="ANOVA1Summary.html#cb49-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
 
 </div>
 </div>
