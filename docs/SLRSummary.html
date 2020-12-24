@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Module 2 2-Sample t Review | Readings for MTH207</title>
+  <title>Module 19 SLR Summary | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Module 2 2-Sample t Review | Readings for MTH207" />
+  <meta property="og:title" content="Module 19 SLR Summary | Readings for MTH207" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://derekogle.com/Book207/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="droglenc/Book207" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Module 2 2-Sample t Review | Readings for MTH207" />
+  <meta name="twitter:title" content="Module 19 SLR Summary | Readings for MTH207" />
   
   <meta name="twitter:description" content="This book contains the readings for MTH207 at Northland College." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ModelTypes.html"/>
-<link rel="next" href="ModelConcepts.html"/>
+<link rel="prev" href="SLRTransformations.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -270,143 +270,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="T2Review" class="section level1" number="2">
-<h1><span class="header-section-number">Module 2</span> 2-Sample t Review</h1>
-<p>A two-sample t-test is a statistical method for comparing the means of a quantitative variable between two populations represented by two independent samples. The <a href="http://derekogle.com/NCMTH107/modules/2Samplet.html">specific details of a two-sample t-test were covered in your introductory statistics course</a> and will only be cursorily reviewed here.</p>
-<div id="review" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Review</h2>
-<p>The null hypothesis for a 2-sample t-test is H<sub>0</sub>: <span class="math inline">\(\mu_{1}=\mu_{2}\)</span>, where <span class="math inline">\(\mu\)</span> is the population mean and the subscripts represent the two populations. The alternative hypothesis of a 2-sample t-test may be “less than,” “greater than,” or “not equals.” We will use H<sub>A</sub>: <span class="math inline">\(\mu_{1}\ne\mu_{2}\)</span> for most examples in this course.</p>
-<p>The 2-sample t-test assumes that (i) individuals in the populations are independent; (ii) the sample size (n) is great than 40, greater than 15 and the histograms are not strongly skewed, or the histograms are normally distributed; and (iii) the population variances are equal. The assumption of equal variances for the 2-sample t-test is tested with Levene’s test, which uses H<sub>0</sub>: <span class="math inline">\(\sigma_{1}^{2}=\sigma_{2}^{2}\)</span> and H<sub>A</sub>: <span class="math inline">\(\sigma_{1}^{2}\ne\sigma_{2}^{2}\)</span>, where <span class="math inline">\(\sigma^{2}\)</span> is the population variance. If H<sub>0</sub> is rejected for Levene’s test then the variances for both populations are assumed to be equal, such that only one combined sample variance needs to be estimated. That combined sample variance is called the <em>the pooled sample variance</em> and is computed as a weighted mean of the two sample variances,</p>
-<p><span class="math display">\[ s_{p}^{2}=\frac{(n_{1}-1)s_{1}^{2}+(n_{2}-1)s_{2}^{2}}{n_{1}+n_{2}-2} \]</span></p>
-<p>If the three assumptions are met then the statistic for the 2-sample t-test is <span class="math inline">\(\bar{x}_{1}-\bar{x}_{2}\)</span> which is immediately standardized to a t test statistic with</p>
-<p><span class="math display">\[ t=\frac{\bar{x}_{1}-\bar{x}_{2}}{\sqrt{s_{p}^{2}\left(\frac{1}{n_{1}}+\frac{1}{n_{2}} \right)}} \]</span></p>
-<p>The t test statistic is converted to a p-value using a t-distribution with <span class="math inline">\(n_{1}+n_{2}-2\)</span> df. Of course, a p-value &lt; α means that H<sub>0</sub> is rejected and the two population means appear to be different. A confidence interval would then be used to fully describe which population mean was greater (or smaller) and by how much.</p>
+<div id="SLRSummary" class="section level1" number="19">
+<h1><span class="header-section-number">Module 19</span> SLR Summary</h1>
+<p>The following is a process for fitting a simple linear regression model. Consider this process as you learn to fit simple linear regression models, but don’t consider this to be a concrete process for all models.</p>
+<ol style="list-style-type: decimal">
+<li>Perform a thorough EDA. Pay close attention to the form, strength, and outliers on the scatterplot of the response and explanatory variables.</li>
+<li>Show the overall sample size.</li>
+<li>Address the independence assumption.</li>
+<li>Fit the untransformed full model with <code>lm()</code>.</li>
+<li>Check the other four assumptions for the untransformed model with <code>assumptionCheck()</code>.
+<ul>
+<li>Check the linearity of the relationship a residual plot.</li>
+<li>Check homoscedasticity with the residual plot.</li>
+<li>Check normality of residuals with an Anderson-Darling test and histogram of residuals.</li>
+<li>Check outliers and influential points with the outlier test and residual plot.</li>
+</ul></li>
+<li>If an assumption or assumptions are violated, then attempt to find a transformation where the assumptions are met.
+<ul>
+<li>Use trial-and-error with <code>assumptionCheck()</code>, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.</li>
+<li>If only an outlier or influential observation exists (i.e., linear, homoscedastic, and normal residuals) and no transformation corrects the “problem,” then consider removing that observation from the data set.</li>
+<li>Fit the full model with the transformed variable(s) or reduced data set.</li>
+</ul></li>
+<li>Construct an ANOVA table for the full model <code>anova()</code> and interpret the overall F-test.</li>
+<li>Summarize findings with coefficient results and confidence intervals with <code>cbind(coef(),confint())</code>.</li>
+<li>Create a summary graphic of the fitted line with 95% confidence band using <code>ggplot()</code>.</li>
+<li>Make predictions if desired with <code>predict()</code>.</li>
+</ol>
 <p> </p>
-</div>
-<div id="T2analysis" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Analysis in R</h2>
-<div id="data-format" class="section level3" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Data Format</h3>
-<p>Data for a 2-sample t-test must be in stacked format, where measurements are in one column and a label for the populations is in another column. Each row corresponds to the measurement and population of a single individual.</p>
-<p>The data (<a href="https://raw.githubusercontent.com/droglenc/NCData/master/BOD.csv">data</a>, <a href="https://github.com/droglenc/NCData/blob/master/BOD_meta.txt">meta</a>) for the example below are the <a href="https://www.usgs.gov/special-topic/water-science-school/science/biological-oxygen-demand-bod-and-water?qt-science_center_objects=0#qt-science_center_objects">biological oxygen demands (BOD)</a> at the inlet and outlet to an aquaculture facility. These data illustrate stacked data because each row is one water sample with two variables recorded – BOD and where the sample came from.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb1-1"><a href="T2Review.html#cb1-1" aria-hidden="true" tabindex="-1"></a>aqua <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;BOD.csv&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb2-1"><a href="T2Review.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">headtail</span>(aqua)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;        BOD    src
-#R&gt;   1  6.782  inlet
-#R&gt;   2  5.809  inlet
-#R&gt;   3  6.849  inlet
-#R&gt;   18 8.545 outlet
-#R&gt;   19 8.063 outlet
-#R&gt;   20 8.001 outlet</code></pre>
-<div class="defn">
-<p><strong>Stacked Data</strong>: Data where the quantitative measurements of two or more groups are “stacked” on top of each other and a second variable is used to record to which group (or population) the measurement belongs.</p>
-</div>
-<div class="tip">
-<p>Stacked data is required for the methods used in this course.</p>
-</div>
-<p>Specific <a href="http://derekogle.com/NCMTH107/modules/2Samplet.html">details for performing a 2-sample t-test in R</a> were provided in your introductory statistics course, but will be cursorily reviewed below.</p>
-</div>
-<div id="assumption-checking" class="section level3" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Assumption Checking</h3>
-<p>The metadata suggests that measurements at the intake and outtake were taken at different times. Thus, there is no reasonable reason to think that individuals are dependent across the two populations. Thus, the independence assumption is met.</p>
-<p>The sample size is less than 40 but greater than 15. The histograms shown below are not particularly informative because of the small sample size. The histogram for the inlet samples appears to be not strongly skewed, but that for the outlet appears to be strongly right-skewed. I am going to continue with this analysis, but I will be cautious with my final interpretations.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb4-1"><a href="T2Review.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>BOD)) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="T2Review.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.5</span>,<span class="at">boundary=</span><span class="dv">0</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="T2Review.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Frequency of Water Samples&quot;</span>,<span class="at">x=</span><span class="st">&quot;Biological Oxygen Demand&quot;</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="T2Review.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand=</span><span class="fu">expansion</span>(<span class="at">mult=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.05</span>))) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="T2Review.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span></span>
-<span id="cb4-6"><a href="T2Review.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(src))</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="tip">
-<p>The <code>ggplot2</code> package is required to make plots with <code>ggplot()</code>.</p>
-</div>
-<p>Levene’s test is computed with <code>levenesTest()</code> using a formula of <code>response~groups</code> as the first argument, where <code>response</code> represents the name of the quantitative response variable and <code>groups</code> represents the name of the categorical variable that identifies the two populations. The data.frame with the variables must be in <code>data=</code>. From the results below, it is concluded that the population variances appear to be equal because the Levene’s test p-value (0.5913) is greater than α=0.05.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb5-1"><a href="T2Review.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levenesTest</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   Levene&#39;s Test for Homogeneity of Variance (center = median)
-#R&gt;         Df F value Pr(&gt;F)
-#R&gt;   group  1  0.2989 0.5913
-#R&gt;         18</code></pre>
-<div class="tip">
-<p>Levene’s test requires the <code>NCStats</code> package to be loaded.</p>
-</div>
-</div>
-<div id="analysis" class="section level3" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> Analysis</h3>
-<p>A 2-sample t-test is constructed in R with <code>t.test()</code> using the exact same <code>response~groups</code> formula and <code>data=</code> used in <code>levenesTest()</code>. Additionally, <code>var.equal=TRUE</code> is used when the two population variances should be considered equal. By default <code>t.test()</code> uses a “not equals” H<sub>A</sub> and a 95% confidence interval. In the results below the two sample means are 6.6538 for the inlet group and 8.6873 for the outlet group such that the statistic is 6.6538-8.6873=-2.0335; the t test statistic is -8.994 with 18 df; and the p-value is &lt;0.00005 (or, more specifically, 4.449e-08).<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> Because the p-value&lt;α the H<sub>0</sub> is rejected and we conclude that the mean BOD at the inlet is lower than the mean BOD at the outlet. More specifically, the mean BOD at the inlet is between 1.558 and 2.509 units lower than the mean BOD at the outlet. Thus, it appears that the mean BOD in the water is increased from when it enters to when it leaves the aquaculture facility.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb7-1"><a href="T2Review.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua,<span class="at">var.equal=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;    Two Sample t-test with BOD by src 
-#R&gt;   t = -8.994, df = 18, p-value = 4.449e-08
-#R&gt;   alternative hypothesis: true difference in means is not equal to 0 
-#R&gt;   95 percent confidence interval:
-#R&gt;    -2.508511 -1.558489 
-#R&gt;   sample estimates:
-#R&gt;    mean in group inlet mean in group outlet 
-#R&gt;                 6.6538               8.6873</code></pre>
-<p>A graphic that illustrates the mean BOD with 95% confidence intervals for each sampling location is constructed below. Note that in the code below that the only items you need to change for your own data is in the first line, where <code>data=</code> should be set to the name of your data and <code>x=</code> and <code>y=</code> should be set to the names of the explanatory and response variables, respectively.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb9-1"><a href="T2Review.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>src,<span class="at">y=</span>BOD)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="T2Review.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha=</span><span class="fl">0.5</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="T2Review.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data=</span>mean_cl_normal,<span class="at">geom=</span><span class="st">&quot;errorbar&quot;</span>,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="T2Review.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean,<span class="at">geom=</span><span class="st">&quot;point&quot;</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb9-5"><a href="T2Review.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Water Sample Location&quot;</span>,<span class="at">y=</span><span class="st">&quot;Biological Oxygen Demand&quot;</span>) <span class="sc">+</span></span>
-<span id="cb9-6"><a href="T2Review.html#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-7-1.png" width="336" style="display: block; margin: auto;" /></p>
+<div id="climate-change-data" class="section level2" number="19.1">
+<h2><span class="header-section-number">19.1</span> Climate Change Data</h2>
+<p>Climate researchers examined the relationship between global temperature anomaly and the concentration of CO<sub>2</sub> in the atmosphere. Temperature anomaly data was recorded as the Global Land-Ocean Temperature Index from the Goddard Institute of Space Studies (GISTEMP). It is reported in units of 1/100<sup>C</sup> increase above the 1950-1980 mean. The CO<sub>2</sub> data are from The Earth System Research Laboratory of the National Oceanic and Atmospheric Administration (NOAA). Specifically, these data are a record of annual mean atmospheric CO2 concentration at Mauna Loa Observatory, Hawaii, and constitute the longest continuous record of atmospheric CO<sub>2</sub> concentration. This remote location at high altitude in Hawaii was chosen because it is relatively unaffected by any local emissions and so is representative of the global concentration of a well-mixed gas like CO<sub>2</sub>. These observations were started by C. David Keeling of the Scripps Institution of Oceanography in March of 1958 and are often referred to as the Keeling Curve. Data are reported as a dry mole fraction defined as the number of molecules of carbon dioxide divided by the number of molecules of dry air multiplied by one million (ppm). Our goal here is to determine if the variability in the temperature anomaly records can be reasonably explained by the CO<sub>2</sub> values in the same year.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb83-1"><a href="SLRSummary.html#cb83-1" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/NCMTH107/modules/CE/GSI_data.csv&quot;</span>)</span></code></pre></div>
+<div id="r-code-and-results-6" class="section level4 unnumbered">
+<h4>R Code and Results</h4>
 <p> </p>
 </div>
 </div>
-<div id="signal-to-noise" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Signal-to-Noise</h2>
-<p>The ratio of signal to noise can be a useful metaphor for understanding hypothesis testing, as we have done here, and model comparisons, as we will do in future modules. In this metaphor, think of “signal” as how different two things are and “noise” as anything that gets in the way of you receiving the signal. For example, the difference in heights of two students standing on the other side of the room is a “signal,” but smoke in the room that makes it difficult to see those students is “noise.” As another example, it may be easy to see an orange kayak (the “signal”) on Lake Superior on a calm day but harder to see it on a wavy day (i.e., more “noise”).</p>
-<p>In a 2-sample t-test, the “signal” is the difference in the two group means (Figure <a href="T2Review.html#fig:SignalNoise1">2.1</a>), which is measured by <span class="math inline">\(\bar{x}_{1}-\bar{x}_{2}\)</span>, the numerator of the t-test statistic. The bigger the difference in sample means the stronger the “signal” that the population means are different.</p>
-<div class="tip">
-<p>The “signal” is the difference in sample means</p>
-</div>
-<div class="figure" style="text-align: center"><span id="fig:SignalNoise1"></span>
-<img src="Book207_files/figure-html/SignalNoise1-1.png" alt="Response variable by group for each indiviual (points) with group means shown as horizontal segments. The difference in sample means is highlighted as the &quot;signal&quot; in these data." width="336" />
-<p class="caption">
-Figure 2.1: Response variable by group for each indiviual (points) with group means shown as horizontal segments. The difference in sample means is highlighted as the “signal” in these data.
-</p>
-</div>
-<p>“Noise” is sampling variability, the fact that statistics (e.g., <span class="math inline">\(\bar{x}_{1}\)</span> and <span class="math inline">\(\bar{x}_{2}\)</span>) vary from sample to sample. Sampling variability in a 2-sample t-test is measured by <span class="math inline">\(SE_{\bar{x}_{1}-\bar{x}_{2}}\)</span>, which is the denominator of the t test statistic, or <span class="math inline">\(\sqrt{s_{p}^{2}\left(\frac{1}{n_{1}}+\frac{1}{n_{2}}\right)}\)</span>. This SE increases with increasing <span class="math inline">\(s_{p}^{2}\)</span> and decreases with increasing n<sub>1</sub> and n<sub>2</sub>. So the “noise” increases as the natural variability of individuals around their group means (i.e., <span class="math inline">\(s_{p}^{2}\)</span>) increases (Figure <a href="T2Review.html#fig:SignalNoise2">2.2</a>), but decreases as the sample size increases.</p>
-<div class="tip">
-<p>The “noise” is sampling variability</p>
-</div>
-<div class="figure" style="text-align: center"><span id="fig:SignalNoise2"></span>
-<img src="Book207_files/figure-html/SignalNoise2-1.png" alt="Response variable by group for each indiviual (points) with group means shown as horizontal segments. The variability of individuals around the group means is highlighted as a part of the &quot;noise&quot; in these data." width="336" />
-<p class="caption">
-Figure 2.2: Response variable by group for each indiviual (points) with group means shown as horizontal segments. The variability of individuals around the group means is highlighted as a part of the “noise” in these data.
-</p>
-</div>
-<p>The ratio of signal to noise is related to whether we will be able to detect the difference between two things or not. If the signal is large relative to the noise then the signal will be detected. In other words, will be able to tell the difference in heights of students if the room is not full of smoke.</p>
-<p>For example, each panel in Figure <a href="T2Review.html#fig:SignalNoise3">2.3</a> has the same signal (difference in means) but the noise (i.e., SE) increases from left to right. In the left-most panel it is very clear that the sample means are different (high signal-to-noise ratio), but in the right-most panel it is less clear that the sample means are different (low signal-to-noise ratio).</p>
-<div class="figure" style="text-align: center"><span id="fig:SignalNoise3"></span>
-<img src="Book207_files/figure-html/SignalNoise3-1.png" alt="Response variable by group for each indiviual (points) with group means shown as horizontal segments for three different standard errors (SE; i.e., &quot;noise&quot;). Note that the group means are the same in all three panels." width="720" />
-<p class="caption">
-Figure 2.3: Response variable by group for each indiviual (points) with group means shown as horizontal segments for three different standard errors (SE; i.e., “noise”). Note that the group means are the same in all three panels.
-</p>
-</div>
-<p>The t test statistic is a measure of signal (i.e., difference in sample means) to noise (i.e., sampling variability as measured by the SE)</p>
-<p><span class="math display">\[ t=\frac{\bar{x}_{1}-\bar{x}_{2}}{\sqrt{s_{p}^{2}\left(\frac{1}{n_{1}}+\frac{1}{n_{2}} \right)}} = \frac{\text{Signal}}{\text{Noise}} \]</span></p>
-<p>Thus, larger values of the t test statistic indicate a larger signal-to-noise ratio. Larger t test statistics are further into the tail of the t distribution and result in smaller p-values. Therefore, small p-values represent larger signal-to-noise ratios and are more likely to lead to concluding that the population means differ. In other words, you were able to detect the “signal” through the “noise.”</p>
-<div class="tip">
-<p>More signal-to-noise means smaller p-values</p>
-</div>
-<p>We will return to the signal-to-noise metaphor throughout this course.</p>
+<div id="forest-allometrics" class="section level2" number="19.2">
+<h2><span class="header-section-number">19.2</span> Forest Allometrics</h2>
+<div id="r-code-and-results-7" class="section level4 unnumbered">
+<h4>R Code and Results</h4>
 
 </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="3">
-<li id="fn3"><p>I usually round my p-values to four decimal places. In this case that would mean 0.0000 which is awkward. Thus, I will say p&lt;0.00005 as the fifth position must have been less than 5 to round to 0.0000.<a href="T2Review.html#fnref3" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="ModelTypes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ModelConcepts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="SLRTransformations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

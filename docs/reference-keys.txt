@@ -75,6 +75,9 @@ fig:CrayfishResidPlot2
 tab:CrayfishAnova
 tab:CrayfishTukey
 fig:CrayfishFitPlot
+tab:EverestData
+fig:SLRPredictDemo
+fig:SLRResidDemo
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -162,3 +165,14 @@ suggested-workflow-1
 expected-prices-no-transformation
 blood-pressure-no-transformation
 crayfish-foraging-transformation
+SLRFoundations
+equation-of-a-line
+best-fit-line
+best-fit-line-in-r
+SLRInference
+SLRModels
+SLRAssumptions
+SLRTransformations
+SLRSummary
+climate-change-data
+forest-allometrics

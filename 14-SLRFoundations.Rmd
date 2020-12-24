@@ -1,0 +1,193 @@
+# (PART\*) SIMPLE LINEAR REGRESSION {-}
+
+# SLR Foundational Principles {#SLRFoundations}
+Simple linear regression (SLR) is used when a single quantitative response and a single quantitative explanatory variable are considered. The goals of SLR are to use the explanatory variable to (1) predict future values of the response variable and (2) explain the variability of the response variable. A simple linear regression would be used in the following situations.
+
+* Evaluate the variability of porcupine body mass based on days since the beginning of winter.
+* Predict daily energy consumption from the body weight of penguins.
+* Explain the variability in product sales from the price of the product.
+* Explain variability in a measure of "interpersonal avoidance" and a reported self-esteem metric.
+* Explain variability in number of deaths related to lung cancer and per capita cigarette sales.
+* Predict change in duck abundance from the loss of wetlands.
+* Explain variability in a pitcher's earned run "average" (ERA) and the average pitch speed at the point of release.
+* Evaluate the variability in clutch size relative to length of female spiders.
+
+&nbsp;
+
+#### The Data {-}
+
+Throughout the SLR modules, an example data set will be used that is the actual mean air temperatures and altitude lapse rates taken during the winter at eleven locations at various altitudes on Mount Everest. The "altitude lapse rate" is an index that was designed to be related to air temperature but adjusted for altitude. In this case, the researchers are testing to see if this index can be used to adequately predict the actual air temperature. Thus, actual air temperature is the response variable and altitude lapse rate is the explanatory variable.
+
+```{r EverestData, echo=FALSE}
+ev <- read.csv("https://raw.githubusercontent.com/droglenc/NCData/master/EverestTemps.csv")
+ev <- filter(ev,Season=="Winter")
+knitr::kable(ev,booktabs=TRUE,caption="Actual air temperature (`MeanAirTemp`) and altitude lapse rate (`Altitude`) data for Mount Everest in the winter.") %>%
+  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+```
+
+&nbsp;
+
+## Equation of a Line
+Both goals of SLR are accomplished by finding the model^["Model" is used here instead of "line" because in this course, models other than lines will be fit to some data. However, all models will be fit on a "scale" where the form of the relationship between the response and explanatory variable is linear.] that best fits the relationship between the response and explanatory variables.^[It is assumed that you covered the basics of simple linear regression in your introductory statistics course. Thus, parts of this section will be review, although the nomenclature used may differ somewhat.] When examining statistical regression models, the most common expression for the equation of the best-fit line is
+
+$$
+\mu_{Y|X} = \alpha + \beta X
+$$
+
+where $Y$ is the response variable, $X$ is the explanatory variable, $\alpha$ is the y-intercept, and $\beta$ is the slope. The left-hand-side of this equation is read as "the mean of Y at a given value of X." This terminology is used because the best-fit line models the mean values of $Y$ at each value of $X$ rather than the *individuals* themselves. This model is for the population and thus, $\alpha$ and $\beta$ are the population y-intercept and slope, respectively.
+
+The equation of the best-fit line determined from the sample is
+
+$$
+\hat{\mu}_{Y|X} = \hat{\alpha} + \hat{\beta}X
+$$
+
+where a "hat" on a parameter means that the value is an estimate and thus a statistic. Therefore, $\hat{\alpha}$ and $\hat{\beta}$ are the sample y-intercept and slope.
+
+::: {.tip data-latex=""}
+Remember that statistics like $\hat{\alpha}$ and $\hat{\beta}$ are subject to sampling variability (i.e., vary from sample to sample) and have corresponding standard errors (to be shown in Module \@ref(SLRInference)).
+:::
+
+&nbsp;
+
+## Best-Fit Line
+A line is simply a model for data and from that model we can make predictions for the response variable by plugging a value of $x$ into the line equation. For example, a prediction using the $i$th individual's value of $x$ is given by $\hat{\mu}_{Y|X=x_{i}}=\hat{\alpha}+\hat{\beta}x_{i}$, where $\hat{\mu}_{Y|X=x_{i}}$ is read as "the predicted mean of $Y$ when $X$ is equal to $x_{i}$." Visually this prediction is found by locating the value of $x_{i}$ on the x-axis, rising vertically until the line is met, and then moving horizontally to the y-axis. This is demonstrated in Figure \@ref(fig:SLRPredictDemo) for individual #2.
+
+```{r SLRPredictDemo, echo=FALSE, fig.cap="Scatterplot of actual mean air temperature versus altitude lapse rate with the best-fit line shown and the prediction demonstrated for individual 2."}
+lm1.ev <- lm(MeanAirTemp~Altitude,data=ev)
+ev2 <- ev %>%
+  mutate(pMeanAirTemp=predict(lm1.ev),
+         resid=MeanAirTemp-pMeanAirTemp)
+
+slr <- ggplot(data=ev2,mapping=aes(x=Altitude,y=MeanAirTemp)) +
+  geom_point(alpha=0.25,size=2) +
+  geom_smooth(method="lm",se=FALSE,color="blue",size=1.25) +
+  labs(x="Altitude Lapse Rate (C/km)",y="Mean Air Temperature (C)") +
+  theme_NCStats()
+slrp <- slr +
+  geom_point(data=ev2[2,],mapping=aes(x=Altitude,y=MeanAirTemp),color="red",size=2) +
+  # vertical and horizontal segments to demonstrate prediction
+  geom_segment(data=ev2[2,],mapping=aes(x=Altitude,xend=Altitude,
+                                        y=-Inf,yend=pMeanAirTemp),
+               color="gray50",linetype="dashed") +
+  geom_segment(data=ev2[2,],mapping=aes(x=-Inf,xend=Altitude,
+                                        y=pMeanAirTemp,yend=pMeanAirTemp),
+               color="gray50",linetype="dashed") +
+  # point to x2
+  annotate(geom="text",x=3000,y=-5,label=expression(x[2]),parse=TRUE,
+           size=lbl_text_size,vjust=0.25,hjust=-0.25) +
+  annotate(geom="segment",x=3000,y=-5,xend=ev2$Altitude[2],yend=-Inf,
+           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+  # point to y-hat
+  annotate(geom="text",x=2700,y=1,label=expression(mu[Y*"|"*X==x[2]]),parse=TRUE,
+           size=lbl_text_size,vjust=1,hjust=-0.1) +
+  annotate(geom="segment",x=2700,y=1,xend=-Inf,yend=ev2$pMeanAirTemp[2],
+           arrow=arrow(length=unit(1.5,"mm"),type="closed"))
+slrp
+```
+
+As noted in previous modules, the residual is the vertical difference between an individual's observed value of the response variable (i.e., $y_{i}$) and a predicted value of the response variable based on the equation of a line and the individual's value of the explanatory variable (i.e., $\hat{\mu}_{Y|X=x_{i}}$). Thus, a residual is $y_{i}-\hat{\mu}_{Y|X=x_{i}}$ and measures how close the line is to that point. A residual for the second individual is demonstrated in Figure \@ref(fig:SLRResidDemo).
+
+```{r SLRResidDemo, echo=FALSE, fig.cap="Same as previous figure except that the residual for individual #2 is highlighted with the red vertical line."}
+midResid <- mean(c(ev2$MeanAirTemp[2],ev2$pMeanAirTemp[2]))
+slrp +
+  ## Highlight the point
+  geom_point(data=ev2[2,],mapping=aes(x=Altitude,y=MeanAirTemp),color="red") +
+  ## Draw and label the residual
+  geom_segment(data=ev2[2,],mapping=aes(x=Altitude,xend=Altitude,
+                                       y=MeanAirTemp,yend=pMeanAirTemp),
+               color="red",linetype="dashed") + 
+  annotate(geom="text",x=3000,y=midResid,label="Residual",
+           size=lbl_text_size,vjust=0.25,hjust=-0.25) +
+  annotate(geom="segment",x=3000,y=midResid,xend=ev2$Altitude[2],yend=midResid,
+           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+  # point to y2
+  annotate(geom="text",x=2600,y=10.7,label=expression(y[2]),parse=TRUE,
+           size=lbl_text_size,vjust=0.25,hjust=-0.25) +
+  annotate(geom="segment",x=2600,y=10.7,xend=-Inf,yend=ev2$MeanAirTemp[2],
+           arrow=arrow(length=unit(1.5,"mm"),type="closed"))
+```
+
+Based on previous modules, an overall measure of the lack-of-fit of the line to the data is the sum of all squared residuals or the residual sum-of-squares (RSS); i.e., 
+
+$$
+RSS = \sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X=x_{i}}\right)^{2}
+$$
+
+**The** best-fit line is defined by the $\hat{\alpha}$ and $\hat{\beta}$ out of all possible choices^[Actually out of all choices that go through the point ($\overline{X}$,$\overline{Y}$).] for $\hat{\alpha}$ and $\hat{\beta}$ that minimize the RSS.^[This process of finding the best-fit line is called "least-squares" or "ordinary least-squares."] Mathematical statisticians have proven that the $\hat{\alpha}$ and $\hat{\beta}$ that minimize the RSS are given by
+
+$$
+\hat{\beta}=r\frac{s_{Y}}{s_{X}}
+$$
+
+and 
+
+$$
+\hat{\alpha} = \overline{Y}-\hat{\beta}\overline{X}
+$$
+
+where $r$ is the sample correlation coefficient, $s_{Y}$ and $s_{X}$ are the sample standard deviations of the respective variables, and $\overline{Y}$ and $\overline{X}$ are the sample means of the respective variables.
+
+::: {.defn data-latex=""}
+**RSS**: Residual Sum-of-Squares
+:::
+
+::: {.tip data-latex=""}
+The best-fit line is the line of all possible lines that minimizes the RSS.
+:::
+
+## Best-Fit Line in R
+The data for Mount Everest temperature data is loaded below and restricted to just the data from Winter.
+
+```{r}
+ev <- read.csv("https://raw.githubusercontent.com/droglenc/NCData/master/EverestTemps.csv")
+ev <- filter(ev,Season=="Winter")
+```
+
+A best-fit regression line is obtained using the familiar `lm()` with a formula of the form `response~explanatory` and the data frame in `data=`. As usual, the results of this function should be assigned to an object that can be given to other functions to extract specific results.
+
+```{r}
+lm1.ev <- lm(MeanAirTemp~Altitude,data=ev)
+```
+
+The estimated intercept and slope (i.e., the $\hat{\alpha}$ and $\hat{\beta}$) and corresponding 95% confidence intervals are extracted from the `lm()` object with `coef()` and `confint()`, respectively. I like to "column bind" these two results together to make a synthetic summary table.
+
+```{r}
+cbind(Est=coef(lm1.ev),confint(lm1.ev))
+```
+```{r echo=FALSE}
+cf.ev <- coef(lm1.ev)
+ci.ev <- confint(lm1.ev)
+```
+
+These results show that the slope of the best-fit line is `r formatC(cf.ev[2],format="f",digits=4)` (95% CI: `r formatC(ci.ev[2,1],format="f",digits=4)` - `r formatC(ci.ev[2,2],format="f",digits=4)`) and the intercept is `r formatC(cf.ev[1],format="f",digits=2)` (95% CI: `r formatC(ci.ev[1,1],format="f",digits=2)` - `r formatC(ci.ev[1,2],format="f",digits=2)`). Thus, the equation of the best-fit line is Mean Air Temperature = `r formatC(cf.ev[1],format="f",digits=2)` - `r formatC(-1*cf.ev[2],format="f",digits=4)`Altitude Lapse Rate. From this slope, it appears that the actual air temperature will decrease by `r formatC(-1*cf.ev[2],format="f",digits=4)`, on average, for each 1 C/km increase in the altitude lapse rate.
+
+```{r echo=FALSE}
+x <- ev$Altitude[2]
+predy <- round(cf.ev[1],4)+round(cf.ev[2],4)*x
+```
+
+Of course, the mean actual air temperature can be predicted by plugging a value of the altitude lapse rate into the equation of the line. For example, the predicted mean actual air temperature if the altitude lapse rate is `r x` is `r formatC(cf.ev[1],format="f",digits=2)` - `r formatC(-1*cf.ev[2],format="f",digits=4)`&times;`r x` = `r formatC(predy,format="f",digits=2)`<sup>o</sup>C. This can also be found with `predict()` using the saved `lm()` object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the `lm()` object.^[The difference between the two results is because the "hand-calculation" used rounded values of the intercept and slope.]
+
+```{r}
+predict(lm1.ev,data.frame(Altitude=2552))
+```
+
+
+The coefficient of determination ($r^{2}$) explains the proportion of the total variability in $Y$ that is explained by knowing the value of $X$. Thus, $r^{2}$ ranges between 0 and 1, with $r^{2}$=1 meaning that 100% of the variation in $Y$ is explained by knowing $X$. Visually, higher $r^{2}$ values occur when the data are more tightly clustered around the best-fit line.^[It is assumed that you discussed $r^{2}$ in your introductory statistics course and, thus, it is only cursorily covered here.] The $r^{2}$ can be extracted from the `lm()` object with `rSquared()`.
+
+```{r}
+rSquared(lm1.ev)
+```
+
+Thus, in this case, `r formatC(100*rSquared(lm1.ev),format="f",digits=1)`% of the variability in actual mean air temperature is explained by knowing the altitude lapse rate. This indicates a tight fit between the two variables and suggests that the actual mean air temperate will be well predicted by the altitude lapse rate.
+
+The best-fit line can be visualized by creating a scatterplot with `ggplot()` and then using `geom_smooth(method="lm",se=FALSE)` to superimpose the best-fit line.
+
+```{r}
+ggplot(data=ev,mapping=aes(x=Altitude,y=MeanAirTemp)) +  
+  geom_point(pch=21,color="black",fill="lightgray") +  
+  labs(x="Altitude Lapse Rate (C/km)",y="Mean Air Temperature (C)") +  
+  theme_NCStats() +  
+  geom_smooth(method="lm",se=FALSE)
+```
