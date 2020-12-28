@@ -114,7 +114,56 @@ $$
 RSS = \sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X=x_{i}}\right)^{2}
 $$
 
-**The** best-fit line is defined by the $\hat{\alpha}$ and $\hat{\beta}$ out of all possible choices^[Actually out of all choices that go through the point ($\overline{X}$,$\overline{Y}$).] for $\hat{\alpha}$ and $\hat{\beta}$ that minimize the RSS.^[This process of finding the best-fit line is called "least-squares" or "ordinary least-squares."] Mathematical statisticians have proven that the $\hat{\alpha}$ and $\hat{\beta}$ that minimize the RSS are given by
+&nbsp;
+
+**The** best-fit line is defined by the $\hat{\alpha}$ and $\hat{\beta}$ out of all possible choices^[Actually out of all choices that go through the point ($\overline{X}$,$\overline{Y}$).] for $\hat{\alpha}$ and $\hat{\beta}$ that minimize the RSS (Figure \@ref(fig:DemoBFLandRSS)).^[This process of finding the best-fit line is called "least-squares" or "ordinary least-squares."]
+
+```{r DemoBFLandRSS, echo=FALSE, fig.width=7, animation.hook="gifski", interval=0.5, fig.cap="Scatterplot with candidate best-fit lines (blue line) and residuals (vertical red dashed lines) in left pane and the residual sum-of-squares for all candidate lines (gray) with the current line highlighted with a red dot. Note how the candidate line is on the best-fit line when the RSS is smallest."}
+set.seed(1070)
+tmp1 <- tibble(X=scale(runif(n=10)),Y=X+scale(rnorm(n=10,sd=0.5),scale=FALSE))
+slopes <- seq(0,2,0.1)
+slopes <- c(slopes,rev(slopes))
+
+res <- NULL
+for (i in seq_along(slopes)) {
+  pred <- slopes[i]*tmp1$X
+  resids <- tmp1$X-pred
+  res <- rbind(res,cbind(sample=i,slope=slopes[i],tmp1,pred,resids))
+}
+
+rss <- res %>%
+  group_by(sample,slope) %>%
+  summarize(RSS=sum(resids^2)) %>%
+  ungroup()
+
+RSSer <- function(res,rss,i) {
+  res <- filter(res,sample==i)
+  pres <- ggplot(res,aes(x=X,y=Y)) +
+    geom_segment(aes(xend=X,yend=pred),linetype="dashed",color="red") +
+    geom_point(size=2,pch=21,color="black",fill="lightgray") +
+    geom_smooth(method="lm",se=FALSE,color="gray70") +
+    geom_path(aes(y=pred),color="blue",size=1.25) +
+    theme_NCStats() +
+    labs(x="Explanatory Variable",y="Response Variable") +
+    theme(axis.text=element_blank()) +
+    coord_cartesian(xlim=c(-1.5,1.5),ylim=c(-3,3))
+  rss2 <- filter(rss,sample==i)
+  prss <- ggplot(rss,aes(x=slope,y=RSS)) +
+    geom_path(size=1.25,color="gray30") +
+    geom_point(data=rss2,size=2,color="red") +
+    theme_NCStats() +
+    labs(x="Slope, Intercept",y="RSS") +
+    theme(axis.text=element_blank())
+  comb <- pres + prss
+  print(comb)
+}
+
+for (i in seq_along(slopes)) RSSer(res,rss,i)
+```
+
+&nbsp;
+
+Mathematical statisticians have proven that the $\hat{\alpha}$ and $\hat{\beta}$ that minimize the RSS are given by
 
 $$
 \hat{\beta}=r\frac{s_{Y}}{s_{X}}
@@ -170,9 +219,8 @@ predy <- round(cf.ev[1],4)+round(cf.ev[2],4)*x
 Of course, the mean actual air temperature can be predicted by plugging a value of the altitude lapse rate into the equation of the line. For example, the predicted mean actual air temperature if the altitude lapse rate is `r x` is `r formatC(cf.ev[1],format="f",digits=2)` - `r formatC(-1*cf.ev[2],format="f",digits=4)`&times;`r x` = `r formatC(predy,format="f",digits=2)`<sup>o</sup>C. This can also be found with `predict()` using the saved `lm()` object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the `lm()` object.^[The difference between the two results is because the "hand-calculation" used rounded values of the intercept and slope.]
 
 ```{r}
-predict(lm1.ev,data.frame(Altitude=2552))
+predict(lm1.ev,newdata=data.frame(Altitude=2552))
 ```
-
 
 The coefficient of determination ($r^{2}$) explains the proportion of the total variability in $Y$ that is explained by knowing the value of $X$. Thus, $r^{2}$ ranges between 0 and 1, with $r^{2}$=1 meaning that 100% of the variation in $Y$ is explained by knowing $X$. Visually, higher $r^{2}$ values occur when the data are more tightly clustered around the best-fit line.^[It is assumed that you discussed $r^{2}$ in your introductory statistics course and, thus, it is only cursorily covered here.] The $r^{2}$ can be extracted from the `lm()` object with `rSquared()`.
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2020-12-24" />
+<meta name="date" content="2020-12-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -239,7 +239,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.2" data-path="SLRFoundations.html"><a href="SLRFoundations.html#best-fit-line"><i class="fa fa-check"></i><b>14.2</b> Best-Fit Line</a></li>
 <li class="chapter" data-level="14.3" data-path="SLRFoundations.html"><a href="SLRFoundations.html#best-fit-line-in-r"><i class="fa fa-check"></i><b>14.3</b> Best-Fit Line in R</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="SLRInference.html"><a href="SLRInference.html"><i class="fa fa-check"></i><b>15</b> SLR Inference</a></li>
+<li class="chapter" data-level="15" data-path="SLRInference.html"><a href="SLRInference.html"><i class="fa fa-check"></i><b>15</b> SLR Inference</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="SLRInference.html"><a href="SLRInference.html#variability-around-the-line"><i class="fa fa-check"></i><b>15.1</b> Variability Around the Line</a></li>
+<li class="chapter" data-level="15.2" data-path="SLRInference.html"><a href="SLRInference.html#slope"><i class="fa fa-check"></i><b>15.2</b> Slope</a></li>
+<li class="chapter" data-level="15.3" data-path="SLRInference.html"><a href="SLRInference.html#intercept"><i class="fa fa-check"></i><b>15.3</b> Intercept</a></li>
+<li class="chapter" data-level="15.4" data-path="SLRInference.html"><a href="SLRInference.html#slope-and-intercept-in-r"><i class="fa fa-check"></i><b>15.4</b> Slope and Intercept in R</a></li>
+<li class="chapter" data-level="15.5" data-path="SLRInference.html"><a href="SLRInference.html#predicting-means"><i class="fa fa-check"></i><b>15.5</b> Predicting Means</a></li>
+<li class="chapter" data-level="15.6" data-path="SLRInference.html"><a href="SLRInference.html#predicting-individuals"><i class="fa fa-check"></i><b>15.6</b> Predicting Individuals</a></li>
+<li class="chapter" data-level="15.7" data-path="SLRInference.html"><a href="SLRInference.html#predictions-in-r"><i class="fa fa-check"></i><b>15.7</b> Predictions in R</a></li>
+</ul></li>
 <li class="chapter" data-level="16" data-path="SLRModels.html"><a href="SLRModels.html"><i class="fa fa-check"></i><b>16</b> SLR Models</a></li>
 <li class="chapter" data-level="17" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html"><i class="fa fa-check"></i><b>17</b> SLR Assumptions</a></li>
 <li class="chapter" data-level="18" data-path="SLRTransformations.html"><a href="SLRTransformations.html"><i class="fa fa-check"></i><b>18</b> SLR Transformations</a></li>
@@ -300,7 +309,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="climate-change-data" class="section level2" number="19.1">
 <h2><span class="header-section-number">19.1</span> Climate Change Data</h2>
 <p>Climate researchers examined the relationship between global temperature anomaly and the concentration of CO<sub>2</sub> in the atmosphere. Temperature anomaly data was recorded as the Global Land-Ocean Temperature Index from the Goddard Institute of Space Studies (GISTEMP). It is reported in units of 1/100<sup>C</sup> increase above the 1950-1980 mean. The CO<sub>2</sub> data are from The Earth System Research Laboratory of the National Oceanic and Atmospheric Administration (NOAA). Specifically, these data are a record of annual mean atmospheric CO2 concentration at Mauna Loa Observatory, Hawaii, and constitute the longest continuous record of atmospheric CO<sub>2</sub> concentration. This remote location at high altitude in Hawaii was chosen because it is relatively unaffected by any local emissions and so is representative of the global concentration of a well-mixed gas like CO<sub>2</sub>. These observations were started by C. David Keeling of the Scripps Institution of Oceanography in March of 1958 and are often referred to as the Keeling Curve. Data are reported as a dry mole fraction defined as the number of molecules of carbon dioxide divided by the number of molecules of dry air multiplied by one million (ppm). Our goal here is to determine if the variability in the temperature anomaly records can be reasonably explained by the CO<sub>2</sub> values in the same year.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb83-1"><a href="SLRSummary.html#cb83-1" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/NCMTH107/modules/CE/GSI_data.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb97-1"><a href="SLRSummary.html#cb97-1" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/NCMTH107/modules/CE/GSI_data.csv&quot;</span>)</span></code></pre></div>
 <div id="r-code-and-results-6" class="section level4 unnumbered">
 <h4>R Code and Results</h4>
 <p> </p>
@@ -362,7 +371,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Book207.pdf", "Book207.epub"],
+"download": null,
 "toc": {
 "collapse": "section",
 "scroll_highlight": true

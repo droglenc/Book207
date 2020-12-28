@@ -1,2 +1,508 @@
 # SLR Inference {#SLRInference}
+The best-fit line is computed from a sample, thus it is a statistic that is subject to sampling variability. In other words, the best-fit line will vary from sample to sample taken from the same population (Figure \@ref(fig:BFLSamplingVariability)).
 
+```{r BFLSamplingVariability, echo=FALSE, animation.hook="gifski", interval=0.5, fig.cap="Scatterplot for a population of 500 points with the population line shown in gray. Each of 100 samples of 50 points and their respective best-fit line is shown in red in each frame of the animation. Note how each sample produces a similar but ultimately different best-fit line."}
+set.seed(1057)
+popn1 <- data.frame(mvtnorm::rmvnorm(n=500,mean=c(0,0),
+                                    sigma=matrix(c(1,0.8,0.8,1),ncol=2))) %>%
+  rename(X=X1,Y=X2)
+samples <- data.frame(X=NULL,Y=NULL,sample=NULL)
+for (i in seq_len(100)) 
+  samples <- rbind(samples,data.frame(popn1[sample(nrow(popn1),50),],sample=i))
+
+SAMPLER <- function(popn,sample,i) {
+  sample <- filter(sample,sample==i)
+  p <- ggplot(data=sample,mapping=aes(x=X,y=Y)) +
+    geom_point(data=popn,mapping=aes(x=X,y=Y),color="gray80") +
+    geom_smooth(data=popn,mapping=aes(x=X,y=Y),method="lm",color="gray60",se=FALSE) +
+    geom_point(pch=21,color="gray60",bg="blue") +
+    geom_smooth(method="lm",se=FALSE,color="blue") +
+    theme_NCStats() +
+    labs(x="Explanatory Variable",y="Response Variable") +
+    theme(axis.text=element_blank()) +
+    stat_SLR_equation() +
+    coord_cartesian(xlim=c(-3,3),ylim=c(-3,3))
+  print(p)
+}
+
+for (i in seq_len(100)) SAMPLER(popn1,samples,i)
+```
+
+&nbsp;
+
+Given the above, then any statistic derived from the best-fit line -- such as $\hat{\alpha}$, $\hat{\beta}$, and $\hat{\mu}_{Y|X=x_{i}}$ introduced in Module \@ref(SLRFoundations) -- will also be subject to sampling variability. Thus, to construct confidence intervals and perform hypothesis tests with these statistics we need to measure their *standard errors* (SE).
+
+::: {.tip data-latex=""}
+$\hat{\alpha}$, $\hat{\beta}$, and $\hat{\mu}_{Y|X=x_{i}}$ are all subject to sampling variability.
+:::
+
+In this module, a measurement for variability around the line is introduced and then used to derive SE for $\hat{\alpha}$, $\hat{\beta}$, and $\hat{\mu}_{Y|X=x_{i}}$. These are then used to make inferences (confidence intervals and hypothesis tests) for $\alpha$, $\beta$, and $\mu_{Y|X=x_{i}}$.
+
+&nbsp;
+
+## Variability Around the Line
+The SEs for statistics related to the best-fit line (i.e., $\hat{\alpha}$, $\hat{\beta}$, and $\hat{\mu}_{Y|X=x_{i}}$) depend on the variability of observations around the best-fit line. The variability of observations around the line can be visualized as an "envelope" that contains most of the observations (Figure \@ref(fig:BFLNaturalVariability)). The "bigger" the envelope then the more variability among observations there is.
+
+```{r BFLNaturalVariability, echo=FALSE, animation.hook="gifski", interval=1, fig.cap="Scatterplot for different samples of 50 observations showing an ellipse that captures most of the points and the measure of natural variability around the line. Note how the measure increases with increasing spread of the observations (i.e., larger ellipse)."}
+set.seed(1058)
+sigmas <- c(0.999,0.975,seq(0.95,0.75,-0.05))
+n <- 50
+
+tmp <- NULL
+for (i in seq_along(sigmas)) {
+  dat <- data.frame(mvtnorm::rmvnorm(n=n,mean=c(0,0),
+                                     sigma=matrix(c(1,sigmas[i],
+                                                    sigmas[i],1),ncol=2))) %>%
+    rename(X=X1,Y=X2)
+  syx2 <- sd(lm(Y~X,data=dat)$residuals)^2
+  tmp <- rbind(tmp,cbind(sample=i,syx2=syx2,dat))
+}
+
+SYX2er <- function(dat,i) {
+  dat <- filter(dat,sample==i)
+  p <- ggplot(data=dat,aes(x=X,y=Y)) +
+    stat_ellipse(level=0.99,type="norm",geom="polygon",fill="gray95") +
+    geom_point(pch=21,size=1.5,color="black",bg="lightgray") +
+    annotate(geom="text",x=-Inf,y=Inf,hjust=-0.1,vjust=1.5,size=lbl_text_size,
+             label=bquote(s[Y*"|"*X]^2==.(formatC(dat$syx2[1],format="f",digits=3)))) +
+    theme_NCStats() +
+    labs(x="Explanatory Variable",y="Response Variable") +
+    theme(axis.text=element_blank()) +
+    coord_cartesian(xlim=c(-3,3),ylim=c(-3,3))
+  print(p)  
+}
+
+for (i in seq_along(sigmas)) SYX2er(tmp,i)
+```
+
+&nbsp;
+
+However, more objective measure of variability around the line is needed. Recall from Section \@ref(best-fit-line) that a residual measures the distance that an observation is from the line and the RSS is a synthetic measure of how far (in squared units) all individuals are from the line. Dividing the RSS by the corresponding df=$n-2$ makes a mean-square, which is a true variance.^[Recall from Section \@ref(mean-squares).] Thus, the variance of individuals around the line is
+
+$$
+s^{2}_{Y|X} = \frac{RSS}{n-2} = \frac{\sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X=x_{i}}\right)^{2}}{n-2}
+$$
+
+where $s^{2}_{Y|X}$ is read as "the variance of $Y$ at a given $X$." Because of the homoscedasticity assumption, which you are familiar with from your introductory statistics course but will be discussed in more detail in Module \@ref(SLRAssumptions), this variance is the same for all values of $X$ and, thus, $s^{2}_{Y|X}$ can be interpreted as the "the variance of $Y$ around the best-fit line." It is seen in Figure \@ref(fig:BFLNaturalVariability) that $s^{2}_{Y|X}$ increases as the variability of observations around the line increases.
+
+::: {.tip data-latex=""}
+The natural variability of individuals around the best-fit line is measured by $s^{2}_{Y|X}$.
+:::
+
+Intuitively, if there is more natural variability around the line, then the best-fit line from different samples will vary more, statistics from the different lines will vary more, and their SEs will be larger. This is the same principle you learned in your introductory statistics course -- more natural variability (observations around the line) leads to more sampling variability (statistics related to the line).
+ 
+::: {.tip data-latex=""}
+The SEs of $\hat{\alpha}$, $\hat{\beta}$, and $\hat{\mu}_{Y|X=x_{i}}$ are all positively related to $s^{2}_{Y|X}$.
+:::
+
+&nbsp;
+
+## Slope
+The sampling distribution of $\hat{\beta}$ follows a normal distribution,^[If the assumptions of an SLR are met; see Module \@ref(SLRAssumptions)] is unbiased (so centered on $\beta$), and has a standard error of
+
+$$
+SE_{\hat{\beta}} = \sqrt{\frac{s^{2}_{Y|X}}{(n-1)s_{X}^{2}}}
+$$
+
+Don't memorize this formula; rather note how $SE_{\hat{\beta}}$ increases with increasing $s^{2}_{Y|X}$) but decreases with increasing $n$ or $s_{X}^{2}$.
+
+::: {.tip data-latex=""}
+Variability in the slope increases with increasing variability of observations around the line, decreases with increasing sample size, and decreases with increasing variability in the explanatory variable.
+:::
+
+Hypotheses of the form 
+
+$$
+\begin{split}
+H_{0}&: \beta = \beta_{0} \\
+H_{A}&: \beta \neq \beta_{0}
+\end{split}
+$$
+
+where $\beta_{0}$ represents a specific value for $\beta$ can be tested with a t test statistic of 
+
+$$
+t=\frac{\hat{\beta}-\beta_{0}}{SE_{\hat{\beta}}}
+$$
+
+which has $n-2$ df. Familiarly, a confidence interval for $\beta$ is constructed with $\hat{\beta} \pm t^{*}SE_{\hat{\beta}}$.
+
+The most common hypothesis to test in SLR is whether the slope is equal to zero or not. A slope of zero represents a "flat" best-fit line (Figure \@ref(fig:SlopeHypotheses)) which indicates that the mean of $Y$ does not increase or decrease with increasing $X$. If this is the case then $Y$ and $X$ are not related. Thus, testing $H_{0}: \beta = 0$ versus $H_{A}: \beta \ne 0$ is testing whether $Y$ and $X$ are statistically related or not -- a key question in SLR!
+
+```{r SlopeHypotheses, echo=FALSE, fig.cap="Demonstration of what the best-fit lines would like for the null hypothesis that the slope is zero or there is no relationship between Y and X (red) or the alternative hypothesis that the slope is not zero and there is a relationship between Y and X (blue). Note that two possibilities are shown for the alternative hypothesis because the slope could be positive (solid) or negative (dashed)"}
+sz <- 1
+H0_lbl <- bquote(H[0]*":"*beta==0)
+HA_lbl <- bquote(H[A]*":"*beta!=0)
+ggplot() +
+  geom_hline(yintercept=0,col="red",size=sz) +
+  geom_abline(intercept=-1,slope=1,color="blue",size=sz) +
+  geom_abline(intercept=1,slope=-1,color="blue",linetype="dashed",size=sz) +
+  # add Ho label
+  annotate(geom="text",x=2.5,y=0.5,label=H0_lbl,size=lbl_text_size,hjust=-0.1) +
+  annotate(geom="segment",x=2.5,y=0.5,xend=2,yend=0,
+           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+  # add Ha label
+  annotate(geom="text",x=1,y=1,label=HA_lbl,size=lbl_text_size,vjust=-0.1) +
+  annotate(geom="segment",x=1,y=1,xend=0.75,yend=1-1*0.75,
+           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+  annotate(geom="segment",x=1,y=1,xend=1.25,yend=-1+1*1.25,
+           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+  xlim(c(0.5,3)) + ylim(c(-2,2)) +
+  labs(y="Response Variable",x="Explanatory Variable") +
+  theme_NCStats() +
+  theme(axis.text=element_blank())
+```
+
+::: {.tip data-latex=""}
+Testing that the slope of the best-fit line is 0 (or not) is the most important hypothesis test in SLR as it is the same as testing if the response and explanatory variables are related or not.
+:::
+
+&nbsp;
+
+## Intercept
+The sampling distribution of $\hat{\alpha}$ is normally distributed,^[If the assumptions of an SLR are met; see Module \@ref(SLRAssumptions)] unbiased (so centered on $\alpha$), and has a standard error of
+
+$$
+SE_{\hat{\alpha}} = \sqrt{s^{2}_{Y|X}\left(\frac{1}{n}+\frac{\overline{X}^{2}}{(n-1)s_{X}^{2}}\right)}
+$$
+
+Again, don't memorize this formula; rather note that $SE_{\hat{\alpha}}$, as did $SE_{\hat{\beta}}$, increases with $s^{2}_{Y|X}$) but decreases with increasing $n$ and $s_{X}^{2}$. However, also note that $SE_{\hat{\alpha}}$ increases with increasing $\overline{X}$. This positive relationship between $SE_{\hat{\alpha}}$ and $\overline{X}$ indicates that $\hat{\alpha}$ is more variable the further $\overline{X}$ is from $x=0$. In other words, $\hat{\alpha}$ is more variable when the intercept is more of an extrapolation.
+
+::: {.tip data-latex=""}
+Variability in the intercept increases with increasing variability of observations around the line and increasing mean of the explanatory variable, but decreases with increasing sample size and increasing variability in the explanatory variable.
+:::
+
+Hypotheses of the form 
+
+$$
+\begin{split}
+H_{0}&: \alpha = \alpha_{0} \\
+H_{A}&: \alpha \neq \alpha_{0}
+\end{split}
+$$
+
+where $\alpha_{0}$ represents a specific value for $\alpha$ can be tested with a t test statistic of 
+
+$$
+t=\frac{\hat{\alpha}-\alpha_{0}}{SE_{\hat{\alpha}}}
+$$
+
+which has $n-2$ df. Familiarly, a confidence interval for $\alpha$ is constructed with $\hat{\alpha} \pm t^{*}SE_{\hat{\alpha}}$.
+
+A common automatically computed hypothesis test in SLR is whether the intercept is equal to zero or not. This effectively tests whether the best-fit line "goes" through the origin or not.^[Here this means the mathematical origin where ($X$,$Y$)=(0,0).] This hypothesis is rarely of interest because the intercept is often either an extreme extrapolation (i.e., $X=0$ is far from the observed values of $X$) or $Y=0$ does not make sense for $Y$. For example, both of these issues are illustrated by asking whether it makes sense to test if the mean gas mileage ($Y$) is 0 for a car that weighs ($X$) 0 lbs? 
+
+::: {.tip data-latex=""}
+Testing if the y-intercept of the best-fit line (fit to raw data) is rarely of much interest as the intercept is often an extrapolation or a response value of 0 is non-sensical.
+:::
+
+The y-intercept, and tests about the y-intercept, can be made more useful by centering the explanatory variable. A variable is centered by subtracting the mean from every observation of that variable. For example, a new variable $X^{*}$ is constructed by centering $X$; i.e., $X^{*}=X-\overline{X}$. Centering $X$ simply horizontally shifts the plot to being centered on $X^{*}=0$ rather than on $X=\overline{X}$ (Figure \@ref(fig:Centering)).
+
+```{r Centering, echo=FALSE, fig.width=5, out.width="70%",fig.cap="Example of centering the explanatory variable. The original data is centered on 5, whereas the centered data is centered on 0. The vertical dashed line highlights the mean value of 'X' for the original and centered data. Note how the intercept but not the slope of the equation changes after centering."}
+set.seed(34343423)
+dat <- data.frame(mvtnorm::rmvnorm(n=20,mean=c(5,10),
+                                   sigma=matrix(c(1,0.95,0.95,1),ncol=2))) %>%
+  rename(X=X1,Y=X2) %>%
+  mutate(set="Original",X=scale(X,scale=FALSE)+5)
+dat2 <- dat %>%
+  mutate(set=mapvalues(set,from="Original",to="Centered"),
+         X=scale(X,scale=FALSE))
+dat <- rbind(dat,dat2)
+
+cf1 <- coef(lm(Y~X,data=filter(dat,set=="Original")))
+cf2 <- coef(lm(Y~X,data=filter(dat,set=="Centered")))
+
+res <- tibble(set=c("Original","Centered"),
+              mns=c(mean(filter(dat,set=="Original")$X),
+                    mean(filter(dat,set=="Centered")$X)),
+              lbls=c(paste0(set[1],"\nY=",formatC(cf1[2],format="f",digits=2),
+                            "X+",formatC(cf1[1],format="f",digits=2)),
+                     paste0(set[2],"\nY=",formatC(cf2[2],format="f",digits=2),
+                            "X+",formatC(cf2[1],format="f",digits=2))),
+              xlbls=c(-0.5,6),ylbls=c(12.2,12.2)) %>%
+  as.data.frame()
+names(res) <- c("set","mns","lbls","xlbls","ylbls")
+
+ggplot(data=dat,aes(x=X,y=Y)) +
+  geom_vline(data=res,aes(xintercept=mns),
+             color="gray50",linetype="dashed",size=1.1) +
+  geom_point(pch=21,color="black",bg="lightgray") +
+  geom_smooth(method="lm",se=FALSE,color="blue") +
+  geom_text(data=res,aes(x=xlbls,y=ylbls,label=lbls),size=lbl_text_size) +
+  scale_x_continuous(name="Response Variable",
+                     limits=c(-2,7),expand=expansion(mult=c(0,0.03)),
+                     breaks=seq(-4,8,2)) +
+  scale_y_continuous(name="Explanatory Variable",limits=c(8.5,12.5)) +
+  labs(y="Response Variable",x="Explanatory Variable") +
+  theme_NCStats() +
+  gganimate::transition_states(rev(set))
+```
+
+&nbsp;
+
+When examining Figure \@ref(fig:Centering) note that the slope did not change because the general shape of the scatterplot is unchanged. However, the intercept changed dramatically because the intercept before centering was the mean value of $Y$ when $X$=0 but after centering the intercept is the mean value of $Y$ when $X^{*}$=0, which is the same as $X=\overline{X}$. Thus, the intercept from the centered model is the mean value of $Y$ at the mean value of $X$. For example, the centered intercept would be the mean miles per gallon at the mean weight of cars. The intercept after centering is imminently interpretable!!
+
+Despite this, it is not necessary in this course to center the explanatory variable unless you plan to interpret or perform a test with the intercept. Centering does have some added value in multiple linear regression and will be revisited when we learn Indicator Variable Regressions.
+
+::: {.tip data-latex=""}
+The intercept after centering the explanatory variable represents the mean value of the response variable when the original explanatory variable is equal to its mean. Thus, the interpretation of the centered intercept is always interpretable. The interpretation of the slope is unaffected by centering.
+:::
+
+&nbsp;
+
+## Slope and Intercept in R
+As shown in Section \@ref(best-fit-line-in-r) the best-fit line is obtained using `lm()` with a model of the form `response~explanatory`. Thus, the linear model for the Mount Everest temperature data is fit with
+
+```{r}
+lm1.ev <- lm(MeanAirTemp~Altitude,data=ev)
+```
+
+As shown in that section, a concise table of the estimated intercept and slope with 95% confidence intervals is constructed with `cbind()`, `coef()`, and `confint()`.
+
+```{r}
+cbind(Est=coef(lm1.ev),confint(lm1.ev))
+```
+
+While not discussed there, these confidence intervals were computed using $SE_{\hat{\alpha}}$ and $SE_{\hat{\beta}}$ and the confidence interval formulae discussed above.
+
+More summary information may be extracted by submitting the saved `lm()` object to `summary()`.
+
+```{r}
+summary(lm1.ev)
+```
+```{r echo=FALSE}
+coef1.ev <- summary(lm1.ev)$coefficients
+sigma.ev <- summary(lm1.ev)$sigma
+```
+
+There are two portions of output from `summary()`. The top portion under "Coefficients:" contains information about the intercept in the row labeled "(Intercept)" and information about the slope in the row labeled with the name of the explanatory variable. Thus $\hat{\alpha}$ (=`r formatC(coef1.ev["(Intercept)","Estimate"],format="f",digits=2)`) and $\hat{\beta}$ (=`r formatC(coef1.ev["Altitude","Estimate"],format="f",digits=4)`) are under "Estimate" and the $SE_{\hat{\alpha}}$ (=`r formatC(coef1.ev["(Intercept)","Std. Error"],format="f",digits=2)`) and $SE_{\hat{\beta}}$ (=`r formatC(coef1.ev["Altitude","Std. Error"],format="f",digits=5)`) are under "Std. Error".
+
+The values under "t value" and "Pr(>|t|)" are the t test statistic and corresponding p-value for testing that the corresponding parameter is equal to zero or not. Because the specific value in the tests is zero, the t test statistic shown here is simply the "Estimate" divided by the "Std. Error." For example, the test statistic for testing $H_{0}: \beta = 0$ versus $H_{A}: \beta \ne 0$ is $t=\frac{`r formatC(coef1.ev["Altitude","Estimate"],format="f",digits=4)`}{`r formatC(coef1.ev["Altitude","Std. Error"],format="f",digits=4)`}$ = `r formatC(coef1.ev["Altitude","t value"],format="f",digits=2)`. The corresponding p-value (`r kPvalue(coef1.ev["Altitude","Pr(>|t|)"],digits=6,latex=FALSE,include.p=FALSE)`) suggests that $H_{0}$ should be rejected and one would conclude that there is a significant relationship between the actual mean air temperature and the altitude lapse rate.
+
+::: {.tip data-latex=""}
+The default p-values printed by most softwares are ONLY for the specific $H_{0}$ that the
+corresponding parameter is equal to zero (vs. that it is not).
+:::
+
+The remaining output from `summary()` is largely redundant with what will be discussed more thoroughly in Module \@ref(SLRModels). However, it should be noted that $s_{Y|X}$ is given after "Residual standard error:". Thus, in this case, the **standard deviation** of observations around the best-fit line is `r formatC(sigma.ev,format="f",digits=3)`. The **variance** of the observations around the best fit line ($s_{Y|X}^{2}$) discussed in Section \@ref(variability-around-the-line) is this value squared or `r formatC(sigma.ev,format="f",digits=3)`<sup>2</sup>=`r formatC(sigma.ev^2,format="f",digits=3)`.
+
+&nbsp;
+
+## Predicting Means
+One of the major goals of linear regression is to use the best-fit line and a known value of the explanatory variable (generically labeled as $x_{0}$) to predict a future value of the response variable. This prediction is easily made by plugging $x_{0}$ into the equation of the best-fit line for $X$. Generically, this is
+
+$$
+\hat{\mu}_{Y|X=x_{0}} = \hat{\alpha} + \hat{\beta}x_{0}
+$$
+
+Example predictions were made "by hand" and using `predict()` in R in Section \@ref(best-fit-line-in-r).
+
+These predictions are the best estimate of the **mean** response for **all** individuals with an explanatory variable of $x_{0}$ -- i.e., $\hat{\mu}_{Y|X=x_{0}}$ and is called a *fitted value* because the best-fit line actually "fits" the mean values of $Y$ at a given value of $X$.
+
+::: {.defn data-latex=""}
+**Fitted value**: Predicted *mean* value of the response variable for *all* individuals with a given value of the explanatory variable -- i.e., $\hat{\mu}_{Y|X=x_{0}}$
+:::
+
+The fitted value is a statistic that is subject to sampling variability. It is known that the fitted values have a sampling distributions that is normally distributed^[If the SLR assumptions are met; see Module \@ref(SLRAssumptions).] with a mean equal to $\hat{\mu}_{Y|X=x_{0}}$ and a standard error of
+
+$$
+\text{SE}_{\text{fits}} = \sqrt{s_{Y|X}^{2}\left(\frac{1}{n}+\frac{\left(x_{0}-\bar{X}\right)^{2}}{(n-1)s_{x}^{2}}\right)}
+$$
+
+Once again, don't memorize this formula but again note that $\text{SE}_{\text{fits}}$ increases with increasing $s_{Y|X}^{2}$ and decreases with increasing $n$ and $s_{x}^{2}$. However, also note that the $\text{SE}_{\text{fits}}$ increases as $x_{0}$ is further from $\overline{X}$. In other words, there is more variability in predicting the mean of $Y$ for values of $X$ further from the mean of $X$. Thus, the most precise prediction of the mean of $Y$ is made when $X=\overline{X}$.
+
+A confidence interval for $\mu_{Y|X=x_{0}}$ is computed with $\hat{\mu}_{Y|X=x_{0}}\pm t^{*}\text{SE}_{\text{fits}}$. Computing this confidence interval for all values of $x_{0}$ and plotting it produces what is called a **confidence band** (Figure \@ref(fig:SLRConfidenceBand1)). Confidence bands will always have a "saddle shape" because, as stated above, the prediction of $\mu_{Y|X=x_{0}}$ is always most precise (narrowest) when $X=\overline{X}$.
+
+```{r SLRConfidenceBand1, echo=FALSE, fig.cap="Confidence bands around a best-fit line."}
+lm.popn <- lm(Y~X,data=popn1)
+cfs.popn <- coef(lm.popn)
+syx2.popn <- var(lm.popn$residuals)
+xbar <- mean(popn1$X)
+sx2.popn <- var(popn1$X)
+n <- 50
+x0 <- seq(-3,3,0.01)
+preds <- cfs.popn[1]+cfs.popn[2]*x0
+varfits <- syx2.popn*(1/n+((x0-xbar)^2)/((n-1)*sx2.popn))
+varpred <- varfits+syx2.popn
+tstar <- qt(0.975,n-1)
+lci <- preds-tstar*sqrt(varfits)
+uci <- preds+tstar*sqrt(varfits)
+lpi <- preds-tstar*sqrt(varpred)
+upi <- preds+tstar*sqrt(varpred)
+cipis <- data.frame(x0,preds,lci,uci,lpi,upi)
+
+base <- ggplot() +
+  theme_NCStats() +
+  labs(x="Explanatory Variable",y="Response Variable") +
+  theme(axis.text=element_blank()) +
+  coord_cartesian(xlim=c(-3,3),ylim=c(-3,3))
+
+base + 
+  geom_path(data=cipis,aes(x=x0,y=lci),color="blue",linetype="dashed",size=1) +
+  geom_path(data=cipis,aes(x=x0,y=uci),color="blue",linetype="dashed",size=1) +
+  geom_path(data=cipis,aes(x=x0,y=preds),color="blue",size=1)
+```
+
+&nbsp;
+
+The confidence band shown in Figure \@ref(fig:SLRConfidenceBand1) is a 95% "confidence interval" related to the *placement of the line*. To demonstrate this, lines from 100 random samples from the same population are plotted in Figure \@ref(fig:SLRConfidenceBand2) along with the confidence band from Figure \@ref(fig:SLRConfidenceBand1). At the end of this animation, it is evident that most (95%-ish) of the random regression lines were contained within the 95% confidence band. 
+
+```{r SLRConfidenceBand2, echo=FALSE, animation.hook="gifski", interval=0.25, fig.cap="Animation of 100 samples with corresponding regression lines and how most of the regression lines fit within the confidence bands shown in the previous figure."}
+res <- data.frame(coef(nlme::lmList(Y~X|sample,data=samples)))
+names(res) <- c("Intercept","Slope")
+
+SAMPLERCI <- function(p,samples,res,cis,i) {
+  sample <- filter(samples,sample==i)
+  res1 <- res[1:i,,drop=FALSE]
+  res2 <- res[i,,drop=FALSE]
+  
+  p <- p +
+    geom_abline(data=res1,aes(intercept=Intercept,slope=Slope),
+                color="gray50",alpha=0.25,size=1) +
+    geom_abline(data=res2,aes(intercept=Intercept,slope=Slope),color="gray30",size=1) + 
+    geom_point(data=sample,aes(x=X,y=Y),color="gray30") +
+    geom_path(data=cis,aes(x=x0,y=lci),color="blue",linetype="dashed",size=1) +
+    geom_path(data=cis,aes(x=x0,y=uci),color="blue",linetype="dashed",size=1)
+  print(p)
+}
+
+for (i in seq_len(100)) SAMPLERCI(base,samples,res,cipis,i)
+
+p <- base +
+  geom_abline(data=res,aes(intercept=Intercept,slope=Slope),
+              color="gray50",alpha=0.25,size=1) + 
+  geom_path(data=cipis,aes(x=x0,y=lci),color="blue",linetype="dashed",size=1) +
+  geom_path(data=cipis,aes(x=x0,y=uci),color="blue",linetype="dashed",size=1)
+for (i in seq_len(20)) print(p)
+```
+
+&nbsp;
+
+::: {.tip data-latex=""}
+Confidence bands are built from $\text{SE}_{\text{fits}}$ and are confidence intervals for $\mu_{Y|X=x_{0}}$ and "the placement of the best-fit line."
+:::
+
+&nbsp;
+
+## Predicting Individuals
+In addition to predicting the mean value of the response for all individuals with a given value of the explanatory variable, it is common to predict **the value** of the response for **an** individual. Given that our best guess for **an** individual is that they "are average", this prediction is the same as that use for the mean, but will be labeled as $\hat{Y}|X=x_{0}$ to help keep it separate. This second objective (predict the individual) is called finding a *predicted value*.
+
+::: {.defn data-latex=""}
+**Predicted value**: Predicted value of the response variable for *an* individual with a given value of the explanatory variable. -- i.e., $\hat{Y}|X=x_{0}$
+:::
+
+Once again, the predicted value is a statistic that is subject to sampling variability. It is known that the predicted values have a sampling distribution that is normally distributed^[If the SLR assumptions are met; see Module \@ref(SLRAssumptions).] with a mean equal to $\hat{Y}|X=x_{0}$ and a standard error of
+
+$$
+\text{SE}_{\text{prediction}} = \sqrt{s_{Y|X}^{2}\left(\frac{1}{n}+\frac{\left(x_{0}-\bar{X}\right)^{2}}{(n-1)s_{x}^{2}}\right)+s_{Y|X}^{2}}
+$$
+
+This formula has two parts separate at the second plus sign. The first part in front of the plus sign is **exactly** the same as $\text{SE}_{\text{fits}}$ and represents variability in placement of the line. The second part is $s_{Y|X}^{2}$ and represents variability of individuals around the line. Thus, variability in predicting an individual consists of variability in placing the line and then variability of individuals around that line.
+
+A confidence interval for $Y|X=x_{0}$ is computed with $\hat{Y}|X=x_{0}\pm t^{*}\text{SE}_{\text{prediction}}$, but is called a **prediction interval** to keep it distinct from the prediction of the mean response. Computing this prediction interval for all values of $x_{0}$ and plotting it produces what is called a **prediction band** (Figure \@ref(fig:SLRPredictionBand1)). Prediction bands will always have a "saddle shape" from "predicting the line placement" an will be wider than the confidence bands because of the added variability of predicting an individual.
+
+```{r SLRPredictionBand1, echo=FALSE, fig.cap="Prediction (red) and confidence bands (blue) around a best-fit line."}
+base + 
+  geom_path(data=cipis,aes(x=x0,y=lpi),color="red",linetype="dashed",size=1) +
+  geom_path(data=cipis,aes(x=x0,y=upi),color="red",linetype="dashed",size=1) +
+  geom_path(data=cipis,aes(x=x0,y=lci),color="blue",linetype="dashed",size=1) +
+  geom_path(data=cipis,aes(x=x0,y=uci),color="blue",linetype="dashed",size=1) +
+  geom_path(data=cipis,aes(x=x0,y=preds),color="blue",size=1)
+```
+
+&nbsp;
+
+The prediction band shown in Figure \@ref(fig:SLRPredictionBand1) is a 95% "confidence interval" related to the *placement of points*. To demonstrate this, points and lines from 100 random samples from the same population are plotted in Figure \@ref(fig:SLRPredictionBand2)^[These are the same random samples as in Figure \@ref(fig:SLRConfidenceBand2).] along with the prediction band from Figure \@ref(fig:SLRPredictionBand1). At the end of this animation, it is evident that most (95%-ish) of the random points were contained within the 95% prediction band. 
+
+```{r SLRPredictionBand2, echo=FALSE, animation.hook="gifski", interval=0.25, fig.cap="Animation of 100 samples with corresponding regression lines and points and how most of the points fit within the prediction bands shown in the previous figure."}
+SAMPLERPI <- function(p,samples,res,pis,i) {
+  sample1 <- filter(samples,sample<=i)
+  sample2 <- filter(samples,sample==i)
+  res1 <- res[1:i,,drop=FALSE]
+  res2 <- res[i,,drop=FALSE]
+  
+  p <- p +
+    # past samples
+    geom_abline(data=res1,aes(intercept=Intercept,slope=Slope),
+                color="gray50",alpha=0.25,size=1) +
+    geom_point(data=sample1,aes(x=X,y=Y),color="gray50",alpha=0.25) +
+    # current sample
+    geom_abline(data=res2,aes(intercept=Intercept,slope=Slope),color="gray30",size=1) + 
+    geom_point(data=sample2,aes(x=X,y=Y),color="gray30") +
+    # bands
+    geom_path(data=pis,aes(x=x0,y=lci),color="blue",linetype="dashed",size=1) +
+    geom_path(data=pis,aes(x=x0,y=uci),color="blue",linetype="dashed",size=1) +
+    geom_path(data=pis,aes(x=x0,y=lpi),color="red",linetype="dashed",size=1) +
+    geom_path(data=pis,aes(x=x0,y=upi),color="red",linetype="dashed",size=1)
+  print(p)
+}
+
+for (i in seq_len(100)) SAMPLERPI(base,samples,res,cipis,i)
+
+p <- base +
+  geom_abline(data=res,aes(intercept=Intercept,slope=Slope),
+              color="gray50",alpha=0.1,size=1) +
+  geom_point(data=samples,aes(x=X,y=Y),color="gray50",alpha=0.25) +
+  geom_path(data=cipis,aes(x=x0,y=lci),color="blue",linetype="dashed",size=1) +
+  geom_path(data=cipis,aes(x=x0,y=uci),color="blue",linetype="dashed",size=1) +
+  geom_path(data=cipis,aes(x=x0,y=lpi),color="red",linetype="dashed",size=1) +
+  geom_path(data=cipis,aes(x=x0,y=upi),color="red",linetype="dashed",size=1)
+
+for (i in seq_len(20)) print(p)
+```
+
+&nbsp;
+
+::: {.tip data-latex=""}
+Prediction bands are built from $\text{SE}_{\text{prediction}}$ and are confidence intervals for $Y|X=x_{0}$ and "the placement of individuals around the best-fit line."
+:::
+
+::: {.tip data-latex=""}
+$\text{SE}_{\text{fits}}$ measures only sampling variability related to predicting the mean
+value of the response variable at a given value of the explanatory variable. $\text{SE}_{\text{prediction}}$ measures both sampling variability related to predicting the mean value of the response variable and natural variability related to predicting an individual's difference from that mean.
+:::
+
+&nbsp;
+
+Finally, note that making a prediction (i.e., plugging a value of $X$ into the equation of a best-fit line) is simultaneously a prediction of (1) **the mean value** of the response variable for **all individuals** with a given value of the explanatory variable and (2) **the value** of the response variable for **an individual** with a given value of the explanatory variable. The difference is that the confidence interval for the mean value is narrower than the prediction interval for the individual.
+
+&nbsp;
+
+## Predictions in R
+As shown in Section \@ref(best-fit-line-in-r) a prediction can be made in R with `predict()` using the saved `lm()` object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the `lm()` object. A confidence or prediction interval can be constructed by including `interval="confidence"` or `interval="prediction"`, respectively.
+
+```{r}
+nd <- data.frame(Altitude=2552)  # create data.frame first to save typing
+predict(lm1.ev,newdata=nd,interval="confidence")
+predict(lm1.ev,newdata=nd,interval="prediction")
+```
+```{r echo=FALSE}
+ci1 <- predict(lm1.ev,newdata=nd,interval="confidence")
+pi1 <- predict(lm1.ev,newdata=nd,interval="prediction")
+```
+
+Thus, one is 95% confident that the **mean** actual mean air temperature is between `r formatC(ci1[2],format="f",digits=2)` and `r formatC(ci1[3],format="f",digits=2)`<sup>o</sup>C for **all** stations when the altitude lapse rate is 2552 C/km. In contrast one is 95% confident that the actual mean air temperature is between `r formatC(pi1[2],format="f",digits=2)` and `r formatC(pi1[3],format="f",digits=2)`<sup>o</sup>C for **a** station when the altitude lapse rate is 2552 C/km.
+
+Note that multiple predictions can be made at once by including more values in the data frame given to `predict()`.
+
+```{r}
+nd <- data.frame(Altitude=c(2552,3000))
+predict(lm1.ev,newdata=nd,interval="confidence")
+predict(lm1.ev,newdata=nd,interval="prediction")
+```
+
+The confidence band can be added to the scatterplot with the best-fit line (as shown in Section \@ref(best-fit-line-in-r)) by leaving off `se=FALSE` in `geom_smooth()`. Use `color=` to change the color of the best-fit line and `fill=` to change the color of the confidence band (of so desired).
+
+```{r}
+ggplot(data=ev,mapping=aes(x=Altitude,y=MeanAirTemp)) + 
+  geom_point(pch=21,color="black",fill="lightgray") + 
+  labs(x="Altitude Lapse Rate (C/km)",y="Mean Air Temperature (C)") + 
+  theme_NCStats() + 
+  geom_smooth(method="lm",color="black",fill="lightgray")
+```
+
+
+::: {.tip data-latex=""}
+Scatterplots depicting the best-fit line should usually be augmented with the confidence band.
+:::
+
+Adding the prediction bands is more work because it is not automatically computed within any `geom`.

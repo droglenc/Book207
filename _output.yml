@@ -1,7 +1,5 @@
 bookdown::gitbook:
   css: style.css
-  fontsettings:
-    theme: night
   toc_depth: 2
   number_sections: true
   split_by: chapter
@@ -15,19 +13,10 @@ bookdown::gitbook:
       after: |
         <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
         <li><a href="https://bookdown.org" target="_blank">Built with Bookdown + RStudio</a></li>
-    download: ["pdf", "epub"]
     search: yes
     sharing:
       twitter: no
       facebook: no
       github: yes
       all: no
-bookdown::pdf_book:
-  includes:
-    in_header: preamble.tex
-  latex_engine: xelatex
-  citation_package: natbib
-  keep_tex: no
-  toc_depth: 2
-  number_sections: true
-bookdown::epub_book: default
+
