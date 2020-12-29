@@ -87,6 +87,9 @@ fig:SLRConfidenceBand1
 fig:SLRConfidenceBand2
 fig:SLRPredictionBand1
 fig:SLRPredictionBand2
+fig:SLRModelsVisual
+fig:SLRModelsResids
+tab:EverestSLRANOVA
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -187,6 +190,9 @@ predicting-means
 predicting-individuals
 predictions-in-r
 SLRModels
+models-1
+anova-table-2
+coefficient-of-determination
 SLRAssumptions
 SLRTransformations
 SLRSummary

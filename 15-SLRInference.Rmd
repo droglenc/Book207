@@ -1,7 +1,7 @@
 # SLR Inference {#SLRInference}
 The best-fit line is computed from a sample, thus it is a statistic that is subject to sampling variability. In other words, the best-fit line will vary from sample to sample taken from the same population (Figure \@ref(fig:BFLSamplingVariability)).
 
-```{r BFLSamplingVariability, echo=FALSE, animation.hook="gifski", interval=0.5, fig.cap="Scatterplot for a population of 500 points with the population line shown in gray. Each of 100 samples of 50 points and their respective best-fit line is shown in red in each frame of the animation. Note how each sample produces a similar but ultimately different best-fit line."}
+```{r BFLSamplingVariability, echo=FALSE, cache=TRUE, animation.hook="gifski", interval=0.5, fig.cap="Scatterplot for a population of 500 points with the population line shown in gray. Each of 100 samples of 50 points and their respective best-fit line is shown in red in each frame of the animation. Note how each sample produces a similar but ultimately different best-fit line."}
 set.seed(1057)
 popn1 <- data.frame(mvtnorm::rmvnorm(n=500,mean=c(0,0),
                                     sigma=matrix(c(1,0.8,0.8,1),ncol=2))) %>%
@@ -43,7 +43,7 @@ In this module, a measurement for variability around the line is introduced and 
 ## Variability Around the Line
 The SEs for statistics related to the best-fit line (i.e., $\hat{\alpha}$, $\hat{\beta}$, and $\hat{\mu}_{Y|X=x_{i}}$) depend on the variability of observations around the best-fit line. The variability of observations around the line can be visualized as an "envelope" that contains most of the observations (Figure \@ref(fig:BFLNaturalVariability)). The "bigger" the envelope then the more variability among observations there is.
 
-```{r BFLNaturalVariability, echo=FALSE, animation.hook="gifski", interval=1, fig.cap="Scatterplot for different samples of 50 observations showing an ellipse that captures most of the points and the measure of natural variability around the line. Note how the measure increases with increasing spread of the observations (i.e., larger ellipse)."}
+```{r BFLNaturalVariability, echo=FALSE, cache=TRUE, animation.hook="gifski", interval=1, fig.cap="Scatterplot for different samples of 50 observations showing an ellipse that captures most of the points and the measure of natural variability around the line. Note how the measure increases with increasing spread of the observations (i.e., larger ellipse)."}
 set.seed(1058)
 sigmas <- c(0.999,0.975,seq(0.95,0.75,-0.05))
 n <- 50
@@ -197,7 +197,7 @@ Testing if the y-intercept of the best-fit line (fit to raw data) is rarely of m
 
 The y-intercept, and tests about the y-intercept, can be made more useful by centering the explanatory variable. A variable is centered by subtracting the mean from every observation of that variable. For example, a new variable $X^{*}$ is constructed by centering $X$; i.e., $X^{*}=X-\overline{X}$. Centering $X$ simply horizontally shifts the plot to being centered on $X^{*}=0$ rather than on $X=\overline{X}$ (Figure \@ref(fig:Centering)).
 
-```{r Centering, echo=FALSE, fig.width=5, out.width="70%",fig.cap="Example of centering the explanatory variable. The original data is centered on 5, whereas the centered data is centered on 0. The vertical dashed line highlights the mean value of 'X' for the original and centered data. Note how the intercept but not the slope of the equation changes after centering."}
+```{r Centering, echo=FALSE, cache=TRUE, fig.width=5, out.width="70%",fig.cap="Example of centering the explanatory variable. The original data is centered on 5, whereas the centered data is centered on 0. The vertical dashed line highlights the mean value of 'X' for the original and centered data. Note how the intercept but not the slope of the equation changes after centering."}
 set.seed(34343423)
 dat <- data.frame(mvtnorm::rmvnorm(n=20,mean=c(5,10),
                                    sigma=matrix(c(1,0.95,0.95,1),ncol=2))) %>%
@@ -346,7 +346,7 @@ base +
 
 The confidence band shown in Figure \@ref(fig:SLRConfidenceBand1) is a 95% "confidence interval" related to the *placement of the line*. To demonstrate this, lines from 100 random samples from the same population are plotted in Figure \@ref(fig:SLRConfidenceBand2) along with the confidence band from Figure \@ref(fig:SLRConfidenceBand1). At the end of this animation, it is evident that most (95%-ish) of the random regression lines were contained within the 95% confidence band. 
 
-```{r SLRConfidenceBand2, echo=FALSE, animation.hook="gifski", interval=0.25, fig.cap="Animation of 100 samples with corresponding regression lines and how most of the regression lines fit within the confidence bands shown in the previous figure."}
+```{r SLRConfidenceBand2, echo=FALSE, cache=TRUE, animation.hook="gifski", interval=0.25, fig.cap="Animation of 100 samples with corresponding regression lines and how most of the regression lines fit within the confidence bands shown in the previous figure."}
 res <- data.frame(coef(nlme::lmList(Y~X|sample,data=samples)))
 names(res) <- c("Intercept","Slope")
 
@@ -413,7 +413,7 @@ base +
 
 The prediction band shown in Figure \@ref(fig:SLRPredictionBand1) is a 95% "confidence interval" related to the *placement of points*. To demonstrate this, points and lines from 100 random samples from the same population are plotted in Figure \@ref(fig:SLRPredictionBand2)^[These are the same random samples as in Figure \@ref(fig:SLRConfidenceBand2).] along with the prediction band from Figure \@ref(fig:SLRPredictionBand1). At the end of this animation, it is evident that most (95%-ish) of the random points were contained within the 95% prediction band. 
 
-```{r SLRPredictionBand2, echo=FALSE, animation.hook="gifski", interval=0.25, fig.cap="Animation of 100 samples with corresponding regression lines and points and how most of the points fit within the prediction bands shown in the previous figure."}
+```{r SLRPredictionBand2, echo=FALSE, cache=TRUE, animation.hook="gifski", interval=0.25, fig.cap="Animation of 100 samples with corresponding regression lines and points and how most of the points fit within the prediction bands shown in the previous figure."}
 SAMPLERPI <- function(p,samples,res,pis,i) {
   sample1 <- filter(samples,sample<=i)
   sample2 <- filter(samples,sample==i)

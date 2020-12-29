@@ -118,7 +118,7 @@ $$
 
 **The** best-fit line is defined by the $\hat{\alpha}$ and $\hat{\beta}$ out of all possible choices^[Actually out of all choices that go through the point ($\overline{X}$,$\overline{Y}$).] for $\hat{\alpha}$ and $\hat{\beta}$ that minimize the RSS (Figure \@ref(fig:DemoBFLandRSS)).^[This process of finding the best-fit line is called "least-squares" or "ordinary least-squares."]
 
-```{r DemoBFLandRSS, echo=FALSE, fig.width=7, animation.hook="gifski", interval=0.5, fig.cap="Scatterplot with candidate best-fit lines (blue line) and residuals (vertical red dashed lines) in left pane and the residual sum-of-squares for all candidate lines (gray) with the current line highlighted with a red dot. Note how the candidate line is on the best-fit line when the RSS is smallest."}
+```{r DemoBFLandRSS, echo=FALSE, cache=TRUE, fig.width=7, animation.hook="gifski", interval=0.5, fig.cap="Scatterplot with candidate best-fit lines (blue line) and residuals (vertical red dashed lines) in left pane and the residual sum-of-squares for all candidate lines (gray) with the current line highlighted with a red dot. Note how the candidate line is on the best-fit line when the RSS is smallest."}
 set.seed(1070)
 tmp1 <- tibble(X=scale(runif(n=10)),Y=X+scale(rnorm(n=10,sd=0.5),scale=FALSE))
 slopes <- seq(0,2,0.1)

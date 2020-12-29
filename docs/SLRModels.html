@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2020-12-27" />
+<meta name="date" content="2020-12-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -249,7 +249,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.6" data-path="SLRInference.html"><a href="SLRInference.html#predicting-individuals"><i class="fa fa-check"></i><b>15.6</b> Predicting Individuals</a></li>
 <li class="chapter" data-level="15.7" data-path="SLRInference.html"><a href="SLRInference.html#predictions-in-r"><i class="fa fa-check"></i><b>15.7</b> Predictions in R</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="SLRModels.html"><a href="SLRModels.html"><i class="fa fa-check"></i><b>16</b> SLR Models</a></li>
+<li class="chapter" data-level="16" data-path="SLRModels.html"><a href="SLRModels.html"><i class="fa fa-check"></i><b>16</b> SLR Models</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="SLRModels.html"><a href="SLRModels.html#models-1"><i class="fa fa-check"></i><b>16.1</b> Models</a></li>
+<li class="chapter" data-level="16.2" data-path="SLRModels.html"><a href="SLRModels.html#anova-table-2"><i class="fa fa-check"></i><b>16.2</b> ANOVA Table</a></li>
+<li class="chapter" data-level="16.3" data-path="SLRModels.html"><a href="SLRModels.html#coefficient-of-determination"><i class="fa fa-check"></i><b>16.3</b> Coefficient Of Determination</a></li>
+</ul></li>
 <li class="chapter" data-level="17" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html"><i class="fa fa-check"></i><b>17</b> SLR Assumptions</a></li>
 <li class="chapter" data-level="18" data-path="SLRTransformations.html"><a href="SLRTransformations.html"><i class="fa fa-check"></i><b>18</b> SLR Transformations</a></li>
 <li class="chapter" data-level="19" data-path="SLRSummary.html"><a href="SLRSummary.html"><i class="fa fa-check"></i><b>19</b> SLR Summary</a>
@@ -281,7 +286,150 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="SLRModels" class="section level1" number="16">
 <h1><span class="header-section-number">Module 16</span> SLR Models</h1>
+<p>As with all linear models, the important hypothesis tests of SLR can be reduced to comparing two models’ lack-of-fit to data. The description below relies heavily on your previous understanding of full and simple models (see Modules <a href="ModelConcepts.html#ModelConcepts">3</a> and <a href="ModelComparison.html#ModelComparison">4</a>).</p>
+<div id="models-1" class="section level2" number="16.1">
+<h2><span class="header-section-number">16.1</span> Models</h2>
+<p>The full model in SLR is the equation of the best-fit line modified with an error term to represent individuals; i.e.,</p>
+<p><span class="math display">\[
+Y_{i} = \alpha + \beta X_{i} + \epsilon_{i}
+\]</span></p>
+<p>where <span class="math inline">\(i\)</span> is an index for individuals. The simple model corresponds with <span class="math inline">\(H_{0}:\beta=0\)</span> and is thus</p>
+<p><span class="math display">\[
+Y_{i} = \alpha + \epsilon_{i}
+\]</span></p>
+<p>Furthermore, it can be shown algebraically that the <span class="math inline">\(\alpha\)</span> in the simple model is <span class="math inline">\(\mu_{Y}\)</span>.<a href="#fn69" class="footnote-ref" id="fnref69"><sup>69</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:SLRModelsVisual"></span>
+<img src="Book207_files/figure-html/SLRModelsVisual-1.png" alt="Scatterplot illustrating two competing models for describing the relationship between actual mean temperature and altitude lapse rate for Mount Everest in the winter. The horizontal red line is placed at the mean actual mean air temperatures and represents the simple model, whereas the blue line is the best-fit line and represents the full model." width="336" />
+<p class="caption">
+Figure 16.1: Scatterplot illustrating two competing models for describing the relationship between actual mean temperature and altitude lapse rate for Mount Everest in the winter. The horizontal red line is placed at the mean actual mean air temperatures and represents the simple model, whereas the blue line is the best-fit line and represents the full model.
+</p>
+</div>
+<div class="tip">
+<p>The simple model in SLR represents a flat line at the mean of the response variable. The full model in SLR represents a line with a significant slope.</p>
+</div>
+<p>Comparing Figure <a href="SLRModels.html#fig:SLRModelsVisual">16.1</a> to Figure <a href="SLRInference.html#fig:SlopeHypotheses">15.3</a> reveals that testing the simple versus the full model is the same as testing that the slope is equal to zero or not. In other words, testing for a relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> is the same as testing that the mean value of <span class="math inline">\(Y\)</span> is the same for all <span class="math inline">\(X\)</span>s (i.e., simple model with no slope) or whether the mean value of <span class="math inline">\(Y\)</span> depends on the value of <span class="math inline">\(X\)</span> (i.e., full model with a slope).</p>
+<div class="tip">
+<p>Determining whether the simple or full model should be used in SLR is a test of whether the two variables are statistically related.</p>
+</div>
+</div>
+<div id="anova-table-2" class="section level2" number="16.2">
+<h2><span class="header-section-number">16.2</span> ANOVA Table</h2>
+<p>Of course, the lack-of-fit of the a model is measured by summing the squared residuals using predictions from the model. The lack-of-fit of the simple model is calculated with residuals from the mean value of the response variable (Figure <a href="SLRModels.html#fig:SLRModelsResids">16.2</a>-Left) or</p>
+<p><span class="math display">\[ \text{SS}_{\text{Total}} = \sum_{i=1}^{n}\left(y_{i}-\overline{Y}_{\cdot}\right)^{2} \]</span></p>
+<p>This calculation is exactly the same as that discussed for the one- and two-way ANOVAs. The lack-of-fit of the full model is calculated with residuals from the best-fit regression line (Figure <a href="SLRModels.html#fig:SLRModelsResids">16.2</a>-Center) or</p>
+<p><span class="math display">\[ \text{SS}_{\text{Residual}} = \sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X}\right)^{2} = \sum_{i=1}^{n}\left(y_{i}-\left(\hat{\alpha}+\hat{\beta}x_{i}\right)\right)^{2} \]</span></p>
+<p>This is termed SS<sub>Residual</sub> in SLR, but it is exactly analogous to SS<sub>Within</sub> from Modules <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a> and (ANOVA2Foundations2).</p>
+<div class="figure" style="text-align: center"><span id="fig:SLRModelsResids"></span>
+<img src="Book207_files/figure-html/SLRModelsResids-1.png" alt="Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs." width="816" />
+<p class="caption">
+Figure 16.2: Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs.
+</p>
+</div>
+<div class="tip">
+<p>SS<sub>Total</sub> measures the lack-of=fit of the simplest model, which is just the mean of the response variable. Thus, SS<sub>Total</sub> measures the maximum lack-of-fit of any model to the response variable.</p>
+</div>
+<p>As always, SS<sub>Total</sub> partitions into two parts, labeled here as SS<sub>Residual</sub> and SS<sub>Regression</sub>. As stated above SS<sub>Residual</sub> is exactly analogous to SS<sub>Within</sub>. Similarly SS<sub>Regression</sub> is exactly analogous to SS<sub>Among</sub>. Thus, SS<sub>Regression</sub> measures the reduction in lack-of-fit from using the full model over the simple model (i.e., how much better the full model fits) and is a measure of the “signal” in the data. Specifically, SS<sub>Regression</sub> is calculate from the difference in predictions between the full and simple models (Figure <a href="SLRModels.html#fig:SLRModelsResids">16.2</a>-Right); i.e.,</p>
+<p><span class="math display">\[\sum_{i=1}^{n}\left((\hat{\alpha}+\hat{\beta}x_{i})-\overline{Y}\right)^{2}\]</span></p>
+<p>The df are similar to those discussed for a One-Way and Two-Way ANOVA. The df<sub>Total</sub> are <span class="math inline">\(n-1\)</span> as before and because there is only one parameter in the simple model. The df<sub>Residual</sub> is <span class="math inline">\(n-2\)</span> because the full model has two parameters (i.e., <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>). The df<sub>Total</sub> partitions as before which leaves df<sub>Regression</sub>=1, which is the difference in parameters between the full and simple models. As you can see, df<sub>Regression</sub> is exactly analogous to df<sub>Among</sub>.</p>
+<div class="tip">
+<p>df<sub>Regression</sub> is always 1 in SLR.</p>
+</div>
+<p>Per usual, MS are calculated by dividing SS by their respective df. As with the other models MS<sub>Total</sub>=<span class="math inline">\(s_{Y}^{2}\)</span> an is the total natural variability of observations (around the simple model of a single mean). The MS<sub>Residual</sub> is the natural variability of observations around the best-fit line (i.e., the full model) and is, thus, <span class="math inline">\(s_{Y|X}^{2}\)</span>, which was discussed in Section <a href="SLRInference.html#variability-around-the-line">15.1</a>. Finally, MS<sub>Regression</sub> is a measure of the variability of the best-fit line around the simple mean.</p>
+<p>The F test statistic is computed as a ratio of the variance explained by the full model (i.e., the “signal”) the variance unexplained by the full model (i.e., the “noise”) as described in Section <a href="ModelComparison.html#ratio-of-variances-signal-to-noise">4.6</a>, In SLR, this translates to</p>
+<p><span class="math display">\[ F = \frac{MS_{Regression}}{MS_{Residual}} \]</span></p>
+<p>which will have df<sub>Regression</sub> numerator and df<sub>Residual</sub> denominator df. Once again, this is exactly analogous to what we did with the One- and Two-Way ANOVAs.</p>
+<p>The SS, MS, df, F, and p-value just discussed are summarized in an ANOVA table. Even though this is called an ANOVA table, the method is still a <em>Simple Linear Regression</em>. The ANOVA table is simply a common way to summarize the calculations needed to compare two models, whether those models are part of the One-Way ANOVA, Two-Way ANOVA, or Simple Linear Regression <em>methods.</em></p>
+<p>The ANOVA table for the Mount Everest air temperature and altitude lapse rate analysis is in Table <a href="SLRModels.html#tab:EverestSLRANOVA">16.1</a>. These results indicate that there is a significant relationship between the actual mean air temperature and the altitude lapse rate at stations on Mount Everest in the Winter (p=0.0001). This same result indicates that a full model with a slope term is significantly “better” at fitting the observed data then a simple model that does not contain a slope term.</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:EverestSLRANOVA">Table 16.1: </span>An ANOVA table for the simple linear regression of actual mean air temperature on altitude lapse rate for locations on Mount Everest in the Winter. Note that the “Total” row is not shown.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Altitude
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+245.934
+</td>
+<td style="text-align:right;">
+245.934
+</td>
+<td style="text-align:right;">
+115.096
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+19.231
+</td>
+<td style="text-align:right;">
+2.137
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+<p>In addition to the primary objective of comparing the full and simple models, several items of interest can be identified from the ANOVA table in Table <a href="SLRModels.html#tab:EverestSLRANOVA">16.1</a>.</p>
+<ul>
+<li>The variance of individuals around the regression line (<span class="math inline">\(s_{Y|X}^{2}\)</span>) is given by MS<sub>Residual</sub> as 2.137).</li>
+<li>The variance of individuals around the overall mean (<span class="math inline">\(s_{Y}^{2}\)</span>) is given by MS<sub>Total</sub> as 26.516 (=<span class="math inline">\(\frac{245.934+19.231}{1+9}\)</span> = <span class="math inline">\(\frac{265.165}{10}\)</span>).</li>
+<li>The F test statistic is equal to the square of the t test statistic from testing <span class="math inline">\(H_{0}:\beta =0\)</span> (see results from <code>summary()</code> in Section <a href="SLRInference.html#slope-and-intercept-in-r">15.4</a>).<a href="#fn70" class="footnote-ref" id="fnref70"><sup>70</sup></a></li>
+</ul>
+<p>The ANOVA table for a SLR is obtained by submitting the saved <code>lm()</code> object to <code>anova()</code>. For example, Table <a href="SLRModels.html#tab:EverestSLRANOVA">16.1</a> was obtained with <code>anova(lt.ev)</code>.</p>
+<p> </p>
+</div>
+<div id="coefficient-of-determination" class="section level2" number="16.3">
+<h2><span class="header-section-number">16.3</span> Coefficient Of Determination</h2>
+<p>The coefficient of determination (<span class="math inline">\(r^{2}\)</span>) was introduced in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a> as a measure of the proportion of the total variability in the response variable that is explained by knowing the value of the explanatory variable. This value is actually calculated with</p>
+<p><span class="math display">\[
+r^{2} = \frac{SS_{Regression}}{SS_{Total}}
+\]</span></p>
 
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="69">
+<li id="fn69"><p>By substituting the formula for the intercept (<span class="math inline">\(\alpha=\mu_{Y} - \hat{\beta}\mu_{X}\)</span>) into <span class="math inline">\(\mu_{Y|X} = \alpha + \beta X\)</span>, an alternative form of the equation of the line is <span class="math inline">\(\mu_{Y|X} =\mu_{Y}+\beta\left(X-\mu_{X}\right)\)</span>. Thus, if <span class="math inline">\(\beta=0\)</span> as in <span class="math inline">\(H_{0}\)</span> then the simple model in <span class="math inline">\(H_{0}\)</span> reduces to <span class="math inline">\(\mu_{Y|X}=\mu_{Y}\)</span>.<a href="SLRModels.html#fnref69" class="footnote-back">↩︎</a></p></li>
+<li id="fn70"><p>This is a general rule between the t and F distributions. An F with <span class="math inline">\(1\)</span> numerator df and <span class="math inline">\(\nu\)</span> denominator df is equal to the square of a t with <span class="math inline">\(\nu\)</span> df.<a href="SLRModels.html#fnref70" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 

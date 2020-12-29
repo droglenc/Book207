@@ -90,7 +90,7 @@ SST <- ggplot(data=opp1) +
   annotate(geom="segment",x=1.5,y=0.4,xend=opp1$seasjit[11],yend=opp1$imm[11],
            arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
   annotate(geom="text",x=1.3,y=0.8,
-           label=expression(bar(Y)~plain(..)),parse=TRUE,
+           label=expression(bar(Y)*plain(..)),parse=TRUE,
            size=lbl_text_size,vjust=-0.5) +
   annotate(geom="segment",x=1.3,y=0.8,xend=1.5,yend=opp1$gmn[1],
            arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
@@ -110,7 +110,7 @@ SSW <- ggplot(data=opp1) +
   annotate(geom="segment",x=2.3,y=0.75,xend=opp1$seasjit[19],yend=opp1$imm[19],
            arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
   annotate(geom="text",x=1.8,y=0.4,
-           label=expression(bar(Y)[i]~plain(.)),parse=TRUE,
+           label=expression(bar(Y)[i]*plain(.)),parse=TRUE,
            size=lbl_text_size,vjust=1.2) +
   annotate(geom="segment",x=1.8,y=0.4,xend=1.1,yend=opp1$mn[1],
            arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
@@ -129,7 +129,7 @@ SSA <- ggplot(data=opp1) +
   labs(y="",x="Season/Month",
        title=bquote('"Residuals" for'~SS[Among])) +
   annotate(geom="text",x=2.5,y=0.82,
-           label=expression(bar(Y)[i]~plain(.)),parse=TRUE,
+           label=expression(bar(Y)[i]*plain(.)),parse=TRUE,
            size=lbl_text_size,vjust=-0.2) +
   annotate(geom="segment",x=2.5,y=0.82,xend=1.1,yend=opp1$mn[1],
            arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
@@ -138,7 +138,7 @@ SSA <- ggplot(data=opp1) +
   annotate(geom="segment",x=2.5,y=0.82,xend=2.9,yend=opp1$mn[nrow(opp1)],
            arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
   annotate(geom="text",x=1.3,y=0.45,
-           label=expression(bar(Y)~plain(..)),parse=TRUE,
+           label=expression(bar(Y)*plain(..)),parse=TRUE,
            size=lbl_text_size,vjust=1.3) +
   annotate(geom="segment",x=1.3,y=0.45,xend=1.5,yend=opp1$gmn[1],
            arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
@@ -150,12 +150,12 @@ SST + SSW + SSA + plot_layout(nrow=1)
 
 &nbsp;
 
-An ANOVA table (Table \@ref(tab:oppANOVA)) is use to display the results from a one-way ANOVA, because the one-way ANOVA is simply a comparison of two models.
+An ANOVA table (Table \@ref(tab:oppANOVA)) is used to display the results from a one-way ANOVA, because the one-way ANOVA is simply a comparison of two models.
 
 ```{r oppANOVA, echo=FALSE}
 knitr::kable(aov1,booktabs=TRUE,digits=4,
              caption='An ANOVA table for immunoglobuling concentration by season (or month) for New Zealand opossums. Note that the "Total" row is not shown.') %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font="Cambria")
+  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
 ```
 
 In addition to the usual meanings attached to MS<sub>Among</sub>, MS<sub>Among</sub>, and MS<sub>Total</sub>,^[Note that MS<sub>Total</sub> **must** be computed from SS<sub>Total</sub> and df<sub>Total</sub> and not by summing MS<sub>Among</sub> an MS<sub>Within</sub>.] the following can be discerned from this ANOVA table.
