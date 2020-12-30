@@ -90,6 +90,12 @@ fig:SLRPredictionBand2
 fig:SLRModelsVisual
 fig:SLRModelsResids
 tab:EverestSLRANOVA
+fig:FLPResid1
+fig:FLPResid2
+fig:SLRAssumptionsMet
+fig:SLRAssumptionsHetero
+fig:SLRInfluentialPoint
+fig:SLRAssumptionsNonlinear
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -194,6 +200,13 @@ models-1
 anova-table-2
 coefficient-of-determination
 SLRAssumptions
+residual-plot
+independence-1
+homoscedasticity
+SLRNormality
+SLRNoOutliers
+linearity
+testing-assumptions-in-r-1
 SLRTransformations
 SLRSummary
 climate-change-data

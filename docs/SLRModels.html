@@ -255,7 +255,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.2" data-path="SLRModels.html"><a href="SLRModels.html#anova-table-2"><i class="fa fa-check"></i><b>16.2</b> ANOVA Table</a></li>
 <li class="chapter" data-level="16.3" data-path="SLRModels.html"><a href="SLRModels.html#coefficient-of-determination"><i class="fa fa-check"></i><b>16.3</b> Coefficient Of Determination</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html"><i class="fa fa-check"></i><b>17</b> SLR Assumptions</a></li>
+<li class="chapter" data-level="17" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html"><i class="fa fa-check"></i><b>17</b> SLR Assumptions</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#residual-plot"><i class="fa fa-check"></i><b>17.1</b> Residual Plot</a></li>
+<li class="chapter" data-level="17.2" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#independence-1"><i class="fa fa-check"></i><b>17.2</b> Independence</a></li>
+<li class="chapter" data-level="17.3" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#homoscedasticity"><i class="fa fa-check"></i><b>17.3</b> Homoscedasticity</a></li>
+<li class="chapter" data-level="17.4" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#SLRNormality"><i class="fa fa-check"></i><b>17.4</b> Normality</a></li>
+<li class="chapter" data-level="17.5" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#SLRNoOutliers"><i class="fa fa-check"></i><b>17.5</b> No Outliers or Influential Points</a></li>
+<li class="chapter" data-level="17.6" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#linearity"><i class="fa fa-check"></i><b>17.6</b> Linearity</a></li>
+<li class="chapter" data-level="17.7" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#testing-assumptions-in-r-1"><i class="fa fa-check"></i><b>17.7</b> Testing Assumptions in R</a></li>
+</ul></li>
 <li class="chapter" data-level="18" data-path="SLRTransformations.html"><a href="SLRTransformations.html"><i class="fa fa-check"></i><b>18</b> SLR Transformations</a></li>
 <li class="chapter" data-level="19" data-path="SLRSummary.html"><a href="SLRSummary.html"><i class="fa fa-check"></i><b>19</b> SLR Summary</a>
 <ul>
@@ -329,7 +338,7 @@ Figure 16.2: Scatterplots illustrating two competing models for describing the r
 <p>SS<sub>Total</sub> measures the lack-of=fit of the simplest model, which is just the mean of the response variable. Thus, SS<sub>Total</sub> measures the maximum lack-of-fit of any model to the response variable.</p>
 </div>
 <p>As always, SS<sub>Total</sub> partitions into two parts, labeled here as SS<sub>Residual</sub> and SS<sub>Regression</sub>. As stated above SS<sub>Residual</sub> is exactly analogous to SS<sub>Within</sub>. Similarly SS<sub>Regression</sub> is exactly analogous to SS<sub>Among</sub>. Thus, SS<sub>Regression</sub> measures the reduction in lack-of-fit from using the full model over the simple model (i.e., how much better the full model fits) and is a measure of the “signal” in the data. Specifically, SS<sub>Regression</sub> is calculate from the difference in predictions between the full and simple models (Figure <a href="SLRModels.html#fig:SLRModelsResids">16.2</a>-Right); i.e.,</p>
-<p><span class="math display">\[\sum_{i=1}^{n}\left((\hat{\alpha}+\hat{\beta}x_{i})-\overline{Y}\right)^{2}\]</span></p>
+<p><span class="math display">\[\text{SS}_{\text{Regression}} = \sum_{i=1}^{n}\left((\hat{\alpha}+\hat{\beta}x_{i})-\overline{Y}\right)^{2}\]</span></p>
 <p>The df are similar to those discussed for a One-Way and Two-Way ANOVA. The df<sub>Total</sub> are <span class="math inline">\(n-1\)</span> as before and because there is only one parameter in the simple model. The df<sub>Residual</sub> is <span class="math inline">\(n-2\)</span> because the full model has two parameters (i.e., <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>). The df<sub>Total</sub> partitions as before which leaves df<sub>Regression</sub>=1, which is the difference in parameters between the full and simple models. As you can see, df<sub>Regression</sub> is exactly analogous to df<sub>Among</sub>.</p>
 <div class="tip">
 <p>df<sub>Regression</sub> is always 1 in SLR.</p>
@@ -412,7 +421,17 @@ Residuals
 <li>The variance of individuals around the overall mean (<span class="math inline">\(s_{Y}^{2}\)</span>) is given by MS<sub>Total</sub> as 26.516 (=<span class="math inline">\(\frac{245.934+19.231}{1+9}\)</span> = <span class="math inline">\(\frac{265.165}{10}\)</span>).</li>
 <li>The F test statistic is equal to the square of the t test statistic from testing <span class="math inline">\(H_{0}:\beta =0\)</span> (see results from <code>summary()</code> in Section <a href="SLRInference.html#slope-and-intercept-in-r">15.4</a>).<a href="#fn70" class="footnote-ref" id="fnref70"><sup>70</sup></a></li>
 </ul>
-<p>The ANOVA table for a SLR is obtained by submitting the saved <code>lm()</code> object to <code>anova()</code>. For example, Table <a href="SLRModels.html#tab:EverestSLRANOVA">16.1</a> was obtained with <code>anova(lt.ev)</code>.</p>
+<p>The ANOVA table for a SLR is obtained by submitting the saved <code>lm()</code> object to <code>anova()</code>. For example, Table <a href="SLRModels.html#tab:EverestSLRANOVA">16.1</a> was obtained with <code>anova(lm1.ev)</code>.</p>
+<p>Note also that the F-ratio test statistic, df<sub>Regression</sub>, df<sub>Residual</sub>, and the p-value from the ANOVA table are shown on the last line of the output from <code>summary()</code>, which was introduced in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a>. Also, as noted before, MS<sub>Residual</sub> is the square of the value following “Residual standard error:” in the <code>summary()</code> output. Thus, many of the key components of the ANOVA table are also in the <code>summary()</code> results.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb97-1"><a href="SLRModels.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1.ev)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   Coefficients:
+#R&gt;                 Estimate Std. Error t value Pr(&gt;|t|)
+#R&gt;   (Intercept) 21.3888561  1.7447131   12.26 6.42e-07
+#R&gt;   Altitude    -0.0056341  0.0005252  -10.73 1.99e-06
+#R&gt;   
+#R&gt;   Residual standard error: 1.462 on 9 degrees of freedom
+#R&gt;   Multiple R-squared: 0.9275,   Adjusted R-squared: 0.9194 
+#R&gt;   F-statistic: 115.1 on 1 and 9 DF,  p-value: 1.987e-06</code></pre>
 <p> </p>
 </div>
 <div id="coefficient-of-determination" class="section level2" number="16.3">
@@ -421,6 +440,7 @@ Residuals
 <p><span class="math display">\[
 r^{2} = \frac{SS_{Regression}}{SS_{Total}}
 \]</span></p>
+<p>Note also that the coeffcient of determination is found in the <code>summary()</code> results shown above behind the “Multiple R-squared:” label.</p>
 
 </div>
 </div>

@@ -141,7 +141,7 @@ SS<sub>Total</sub> measures the lack-of=fit of the simplest model, which is just
 
 As always, SS<sub>Total</sub> partitions into two parts, labeled here as SS<sub>Residual</sub> and SS<sub>Regression</sub>. As stated above SS<sub>Residual</sub> is exactly analogous to SS<sub>Within</sub>. Similarly SS<sub>Regression</sub> is exactly analogous to SS<sub>Among</sub>. Thus, SS<sub>Regression</sub> measures the reduction in lack-of-fit from using the full model over the simple model (i.e., how much better the full model fits) and is a measure of the "signal" in the data. Specifically, SS<sub>Regression</sub> is calculate from the difference in predictions between the full and simple models (Figure \@ref(fig:SLRModelsResids)-Right); i.e.,
 
-$$\sum_{i=1}^{n}\left((\hat{\alpha}+\hat{\beta}x_{i})-\overline{Y}\right)^{2}$$
+$$\text{SS}_{\text{Regression}} = \sum_{i=1}^{n}\left((\hat{\alpha}+\hat{\beta}x_{i})-\overline{Y}\right)^{2}$$
 
 The df are similar to those discussed for a One-Way and Two-Way ANOVA. The df<sub>Total</sub> are $n-1$ as before and because there is only one parameter in the simple model. The df<sub>Residual</sub> is $n-2$ because the full model has two parameters (i.e., $\alpha$ and $\beta$). The df<sub>Total</sub> partitions as before which leaves df<sub>Regression</sub>=1, which is the difference in parameters between the full and simple models. As you can see, df<sub>Regression</sub> is exactly analogous to df<sub>Among</sub>.
 
@@ -174,7 +174,13 @@ In addition to the primary objective of comparing the full and simple models, se
 * The variance of individuals around the overall mean ($s_{Y}^{2}$) is given by MS<sub>Total</sub> as `r formatC(sum(aov1[,"Sum Sq"])/sum(aov1[,"Df"]),format="f",digits=3)` (=$\frac{`r formatC(aov1[1,"Sum Sq"],format="f",digits=3)`+`r formatC(aov1[2,"Sum Sq"],format="f",digits=3)`}{`r aov1[1,"Df"]`+`r aov1[2,"Df"]`}$ = $\frac{`r formatC(sum(aov1[,"Sum Sq"]),format="f",digits=3)`}{`r sum(aov1[,"Df"])`}$).
 * The F test statistic is equal to the square of the t test statistic from testing $H_{0}:\beta =0$ (see results from `summary()` in Section \@ref(slope-and-intercept-in-r)).^[This is a general rule between the t and F distributions. An F with $1$ numerator df and $\nu$ denominator df is equal to the square of a t with $\nu$ df.]
 
-The ANOVA table for a SLR is obtained by submitting the saved `lm()` object to `anova()`. For example, Table \@ref(tab:EverestSLRANOVA) was obtained with `anova(lt.ev)`.
+The ANOVA table for a SLR is obtained by submitting the saved `lm()` object to `anova()`. For example, Table \@ref(tab:EverestSLRANOVA) was obtained with `anova(lm1.ev)`.
+
+Note also that the F-ratio test statistic, df<sub>Regression</sub>, df<sub>Residual</sub>, and the p-value from the ANOVA table are shown on the last line of the output from `summary()`, which was introduced in Section \@ref(best-fit-line-in-r). Also, as noted before, MS<sub>Residual</sub> is the square of the value following "Residual standard error:" in the `summary()` output. Thus, many of the key components of the ANOVA table are also in the `summary()` results.
+
+```{r}
+summary(lm1.ev)
+```
 
 &nbsp;
 
@@ -185,3 +191,4 @@ $$
 r^{2} = \frac{SS_{Regression}}{SS_{Total}}
 $$
 
+Note also that the coeffcient of determination is found in the `summary()` results shown above behind the "Multiple R-squared:" label.
