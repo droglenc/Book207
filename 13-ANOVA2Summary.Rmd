@@ -1,5 +1,4 @@
 # Two-Way Summary {#ANOVA2Summary}
-
 Specific parts of a full Two-Way ANOVA analysis were described in Module \@ref(ANOVA2Analysis). In this module, a workflow for a full analysis is offered and that workflow is demonstrated with several examples.
 
 ## Suggested Workflow

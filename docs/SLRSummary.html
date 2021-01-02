@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2020-12-31" />
+<meta name="date" content="2021-01-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -274,8 +274,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="19" data-path="SLRSummary.html"><a href="SLRSummary.html"><i class="fa fa-check"></i><b>19</b> SLR Summary</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="SLRSummary.html"><a href="SLRSummary.html#climate-change-data"><i class="fa fa-check"></i><b>19.1</b> Climate Change Data</a></li>
-<li class="chapter" data-level="19.2" data-path="SLRSummary.html"><a href="SLRSummary.html#forest-allometrics"><i class="fa fa-check"></i><b>19.2</b> Forest Allometrics</a></li>
+<li class="chapter" data-level="19.1" data-path="SLRSummary.html"><a href="SLRSummary.html#suggested-workflow-2"><i class="fa fa-check"></i><b>19.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="19.2" data-path="SLRSummary.html"><a href="SLRSummary.html#climate-change-data-no-transformation"><i class="fa fa-check"></i><b>19.2</b> Climate Change Data (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="19.3" data-path="SLRSummary.html"><a href="SLRSummary.html#forest-allometrics-transformation"><i class="fa fa-check"></i><b>19.3</b> Forest Allometrics (Transformation)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -301,22 +302,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="SLRSummary" class="section level1" number="19">
 <h1><span class="header-section-number">Module 19</span> SLR Summary</h1>
-<p>The following is a process for fitting a simple linear regression model. Consider this process as you learn to fit simple linear regression models, but don’t consider this to be a concrete process for all models.</p>
+<p>Specific parts of a full Simple Linear Regression (SLR) analysis were described in Modules <a href="SLRFoundations.html#SLRFoundations">14</a>-<a href="SLRTransformations.html#SLRTransformations">18</a>. In this module, a workflow for a full analysis is offered and that workflow is demonstrated with several examples.</p>
+<div id="suggested-workflow-2" class="section level2" number="19.1">
+<h2><span class="header-section-number">19.1</span> Suggested Workflow</h2>
+<p>The following is a process for fitting a SLR. Consider this process as you learn to fit SLR models, but don’t consider this to be a concrete process for all models.</p>
 <ol style="list-style-type: decimal">
 <li>Perform a thorough EDA. Pay close attention to the form, strength, and outliers on the scatterplot of the response and explanatory variables.</li>
 <li>Show the overall sample size.</li>
-<li>Address the independence assumption.</li>
+<li>Address the independence assumption.
+<ul>
+<li>If this assumption is not met then other analysis methods must be used.</li>
+</ul></li>
 <li>Fit the untransformed full model with <code>lm()</code>.</li>
 <li>Check the other four assumptions for the untransformed model with <code>assumptionCheck()</code>.
 <ul>
-<li>Check the linearity of the relationship a residual plot.</li>
+<li>Check the linearity of the relationship with the residual plot.</li>
 <li>Check homoscedasticity with the residual plot.</li>
 <li>Check normality of residuals with an Anderson-Darling test and histogram of residuals.</li>
 <li>Check outliers and influential points with the outlier test and residual plot.</li>
 </ul></li>
 <li>If an assumption or assumptions are violated, then attempt to find a transformation where the assumptions are met.
 <ul>
-<li>Use trial-and-error with <code>assumptionCheck()</code>, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.</li>
+<li>Use trial-and-error with <code>assumptionCheck()</code>, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
+<ul>
+<li>Attempt transformations with the response variable first.</li>
+<li>Generally only ever transformation the explanatory variable with logarithms.</li>
+</ul></li>
 <li>If only an outlier or influential observation exists (i.e., linear, homoscedastic, and normal residuals) and no transformation corrects the “problem,” then consider removing that observation from the data set.</li>
 <li>Fit the full model with the transformed variable(s) or reduced data set.</li>
 </ul></li>
@@ -326,19 +337,354 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Make predictions if desired with <code>predict()</code>.</li>
 </ol>
 <p> </p>
-<div id="climate-change-data" class="section level2" number="19.1">
-<h2><span class="header-section-number">19.1</span> Climate Change Data</h2>
-<p>Climate researchers examined the relationship between global temperature anomaly and the concentration of CO<sub>2</sub> in the atmosphere. Temperature anomaly data was recorded as the Global Land-Ocean Temperature Index from the Goddard Institute of Space Studies (GISTEMP). It is reported in units of 1/100<sup>C</sup> increase above the 1950-1980 mean. The CO<sub>2</sub> data are from The Earth System Research Laboratory of the National Oceanic and Atmospheric Administration (NOAA). Specifically, these data are a record of annual mean atmospheric CO2 concentration at Mauna Loa Observatory, Hawaii, and constitute the longest continuous record of atmospheric CO<sub>2</sub> concentration. This remote location at high altitude in Hawaii was chosen because it is relatively unaffected by any local emissions and so is representative of the global concentration of a well-mixed gas like CO<sub>2</sub>. These observations were started by C. David Keeling of the Scripps Institution of Oceanography in March of 1958 and are often referred to as the Keeling Curve. Data are reported as a dry mole fraction defined as the number of molecules of carbon dioxide divided by the number of molecules of dry air multiplied by one million (ppm). Our goal here is to determine if the variability in the temperature anomaly records can be reasonably explained by the CO<sub>2</sub> values in the same year.</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb137-1"><a href="SLRSummary.html#cb137-1" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/NCMTH107/modules/CE/GSI_data.csv&quot;</span>)</span></code></pre></div>
+</div>
+<div id="climate-change-data-no-transformation" class="section level2" number="19.2">
+<h2><span class="header-section-number">19.2</span> Climate Change Data (<em>No Transformation</em>)</h2>
+<p>Climate researchers examined the relationship between global temperature anomaly and the concentration of CO<sub>2</sub> in the atmosphere. Temperature anomaly data was recorded as the Global Land-Ocean Temperature Index from the Goddard Institute of Space Studies (GISTEMP). It is reported in units of 1/100<sup>o</sup>C increase above the 1950-1980 mean. The CO<sub>2</sub> data are from The Earth System Research Laboratory of the National Oceanic and Atmospheric Administration (NOAA). Specifically, these data are a record of annual mean atmospheric CO<sub>2</sub> concentration at Mauna Loa Observatory, Hawaii, and constitute the longest continuous record of atmospheric CO<sub>2</sub> concentration. This remote location at high altitude in Hawaii was chosen because it is relatively unaffected by any local emissions and so is representative of the global concentration of a well-mixed gas like CO<sub>2</sub>. These observations were started by C. David Keeling of the Scripps Institution of Oceanography in March of 1958 and are often referred to as the Keeling Curve. Data are reported as a dry mole fraction defined as the number of molecules of carbon dioxide divided by the number of molecules of dry air multiplied by one million (ppm). Our goal here is to determine if the variability in the temperature anomaly records can be reasonably explained by the CO<sub>2</sub> values in the same year.</p>
+<p>The statistical hypotheses to be examined are</p>
+<p><span class="math display">\[
+\begin{split}
+\text{H}_{\text{0}}&amp;: \text{no relationship between temperature anomaly and CO2 values} \\
+\text{H}_{\text{A}}&amp;: \text{is a relationship between temperature anomaly and CO2 values} \\
+\end{split}
+\]</span></p>
+<p>Data was recorded for 32 years. The data between years is likely not independent as knowing the temperature anomaly and CO<sub>2</sub> values in any given year likely are a good indicator of the values in the next year. This temporal dependence should probably be included in the analysis. However, these data are recorded on an annual basis and it does not make much sense to include only a random sample of years. Thus, to better understand the relationship between these two variables, I will continue with this analysis assuming independence.</p>
+<p>The assumptions are met as the residual plots show no obvious curvature or funneling (Figure <a href="SLRSummary.html#fig:CCAssumptions1">19.1</a>-Right), the histogram of residuals is not strongly skewed (Figure <a href="SLRSummary.html#fig:CCAssumptions1">19.1</a>-Left) and the Anderson-Darling tests suggests that it is approximately normal (p=0.4313), and the there are not obvious outliers (p&gt;1). Thus, the analysis can continue without any transformations.</p>
+<div class="figure" style="text-align: center"><span id="fig:CCAssumptions1"></span>
+<img src="Book207_files/figure-html/CCAssumptions1-1.png" alt="Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of temperature anomaly on CO2 data." width="672" />
+<p class="caption">
+Figure 19.1: Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of temperature anomaly on CO2 data.
+</p>
+</div>
+<p> </p>
+<p>The temperature anomaly and CO<sub>2</sub> data appear to be significantly related (p&lt;0.00005; Table <a href="SLRSummary.html#tab:ccANOVA">19.1</a>). In fact, 74.1% of the variability in the temperature anomaly is explained by knowing the value of the CO<sub>2</sub> concentration.</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:ccANOVA">Table 19.1: </span>ANOVA table for simple linear regression of temperature anomaly on CO2 data.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+CO2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+7717.1
+</td>
+<td style="text-align:right;">
+7717.1
+</td>
+<td style="text-align:right;">
+85.918
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+2694.6
+</td>
+<td style="text-align:right;">
+89.8
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>In fact, it appears that as as the CO<sub>2</sub> levels increase by 1 ppm then the temperature anomaly increases by between 0.80 and 1.26 1/100<sup>o</sup>C (Table <a href="SLRSummary.html#tab:ccCoefs">19.2</a>; Figure <a href="SLRSummary.html#fig:ccFitPlot">19.2</a>).</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:ccCoefs">Table 19.2: </span>Intercept and slope, along with 95% confidence intervals, for simple linear regression of temperature anomaly on CO2 data.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Est
+</th>
+<th style="text-align:right;">
+2.5 %
+</th>
+<th style="text-align:right;">
+97.5 %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+-338.25
+</td>
+<td style="text-align:right;">
+-420.24
+</td>
+<td style="text-align:right;">
+-256.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CO2
+</td>
+<td style="text-align:right;">
+1.03
+</td>
+<td style="text-align:right;">
+0.80
+</td>
+<td style="text-align:right;">
+1.26
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<div class="figure" style="text-align: center"><span id="fig:ccFitPlot"></span>
+<img src="Book207_files/figure-html/ccFitPlot-1.png" alt="Scatterplot of temperature anomaly versuse CO2 concentration with the best-fit line and 95% confidence band superimposed." width="336" />
+<p class="caption">
+Figure 19.2: Scatterplot of temperature anomaly versuse CO2 concentration with the best-fit line and 95% confidence band superimposed.
+</p>
+</div>
+<p> </p>
+<p>Finally, the predicted mean temperature anomaly for all times when the CO<sub>2</sub> concentration was 360 ppm is between 29.2 and 36.0.</p>
 <div id="r-code-and-results-6" class="section level4 unnumbered">
 <h4>R Code and Results</h4>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb137-1"><a href="SLRSummary.html#cb137-1" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/NCMTH107/modules/CE/GSI_data.csv&quot;</span>)</span>
+<span id="cb137-2"><a href="SLRSummary.html#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cc)</span>
+<span id="cb137-3"><a href="SLRSummary.html#cb137-3" aria-hidden="true" tabindex="-1"></a>lm.cc <span class="ot">&lt;-</span> <span class="fu">lm</span>(Temp<span class="sc">~</span>CO2,<span class="at">data=</span>cc)</span>
+<span id="cb137-4"><a href="SLRSummary.html#cb137-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.cc)</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb138-1"><a href="SLRSummary.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.cc)</span>
+<span id="cb138-2"><a href="SLRSummary.html#cb138-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.cc)</span>
+<span id="cb138-3"><a href="SLRSummary.html#cb138-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.cc),<span class="fu">confint</span>(lm.cc))</span>
+<span id="cb138-4"><a href="SLRSummary.html#cb138-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cc,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>CO2,<span class="at">y=</span>Temp)) <span class="sc">+</span> </span>
+<span id="cb138-5"><a href="SLRSummary.html#cb138-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb138-6"><a href="SLRSummary.html#cb138-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;CO2 Concentration (ppm)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Temperature Anomaly (1/100C)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb138-7"><a href="SLRSummary.html#cb138-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
+<span id="cb138-8"><a href="SLRSummary.html#cb138-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb139-1"><a href="SLRSummary.html#cb139-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">CO2=</span><span class="dv">360</span>)</span>
+<span id="cb139-2"><a href="SLRSummary.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm.cc,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <p> </p>
 </div>
 </div>
-<div id="forest-allometrics" class="section level2" number="19.2">
-<h2><span class="header-section-number">19.2</span> Forest Allometrics</h2>
+<div id="forest-allometrics-transformation" class="section level2" number="19.3">
+<h2><span class="header-section-number">19.3</span> Forest Allometrics (Transformation)</h2>
+<p>Understanding the carbon dynamics in forests is important to understanding ecological processes and managing forests. The amount of carbon stored in a tree is related to tree biomass. Measuring the biomass of a tree is a tedious process that also results in the harvest (i.e., death) of the tree. However, biomass is often related to other simple metrics (e.g., diameter-at-breast-height (DBH) or tree height) that can be made without harming the tree. Thus, forest scientists have developed a series of equations (called allometric equations) that can be used to predict tree biomass from simple metrics for a variety of trees in a variety of locations.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Central_Zambezian_miombo_woodlands">Miombo Woodlands</a> is the largest continuous dry deciduous forest in the world. It extends across much of Central, Eastern, and Southern Africa including parts of Angola, the Democratic Republic of Congo, Malawi, Mozambique, Tanzania, Zambia, and Zimbabwe. The woodlands are rich in plant diversity and have the potential to contain a substantial amount of carbon. There is, however, significant uncertainty in the amount of biomass carbon in the Miombo Woodlands. The objective of this study (<a href="https://www.mdpi.com/1999-4907/7/2/13">Kuyah <em>et al.</em> 2016</a>) is to develop allometric equations that can be used to reliably estimate biomass of trees in the Miombo Woodlands so that biomass carbon can be more reliably estimated.</p>
+<p>Trees for building allometric models were sampled from three 10 km by 10 km sites located in the districts of Kasungu, Salima, and Neno. A total of 88 trees (33 species) were harvested from six plots in Kasungu, seventeen plots in Salima, and five plots in Neno. The DBH (cm) of each tree was measured using diameter tape. Each tree was felled by cutting at the lowest possible point using a chainsaw. The length (m) of the felled tree was measured along the longest axis with a measuring tape. This measurement was used as the total tree height in the analysis. Felled trees were separated into stem, branches, and twigs (leaves and small branches). Total biomass (kg) of the tree (above-ground biomass; AGB) and the separate biomasses (kg) of the stems, branches, and twigs was recorded. The data are stored in TreesMiombo.csv (<a href="https://raw.githubusercontent.com/droglenc/NCData/master/TreesMiombo.csv">data</a>, <a href="https://github.com/droglenc/NCData/blob/master/TreesMiombo_meta.txt">meta</a>). This analysis will attempt to predict AGB from DBH.</p>
+<p>The statistical hypotheses to be examined are</p>
+<p><span class="math display">\[
+\begin{split}
+\text{H}_{\text{0}}&amp;: \text{no relationship between above ground biomass and diameter at breast height} \\
+\text{H}_{\text{A}}&amp;: \text{is a relationship between above ground biomass and diameter at breast height} \\
+\end{split}
+\]</span></p>
+<p>There is some concern over independence because some of the trees presumably came from the same plot and it is possible that one tree might have an impact on another tree. That impact may have been on the overall growth of the tree through density-dependent factors and it is hard to imagine how one tree could effect another tree with respect to the <em>relationship</em> between above ground biomass and diameter at breast height. Thus, I will continue with analysis assuming independence.</p>
+<p>The residual plot (Figure <a href="SLRSummary.html#fig:tmAssumptions1">19.3</a>-Right) indicates a lack of linearity and homoscedasticity as there is both a clear curve and funnel present. There also appears to be a lack of normality in the residuals (Anderson-Darling p=0.0041) and the presence of outliers (outlier test p&lt;0.00005). These results all indicate that a transformation should be explored.</p>
+<div class="figure" style="text-align: center"><span id="fig:tmAssumptions1"></span>
+<img src="Book207_files/figure-html/tmAssumptions1-1.png" alt="Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of above ground biomass on diameter at breast height for trees from the Miombo Woodlands." width="672" />
+<p class="caption">
+Figure 19.3: Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of above ground biomass on diameter at breast height for trees from the Miombo Woodlands.
+</p>
+</div>
+<p> </p>
+<p>Allometric relationships between weights (i.e., biomass) and lengths (i.e., height) tend to follow power functions, which can be linearized with the log of both variables. When both variables were transformed the relationship was largely linear and homoscedastic (Figure <a href="SLRSummary.html#fig:tmAssumptions2">19.4</a>-Right), the residuals appear to be normal (Anderson-Darling p=0.4463; Figure <a href="SLRSummary.html#fig:tmAssumptions2">19.4</a>-Left), and no outliers are present (outlier test p&gt;1). Thus, the linear regression model was fit to the log-log transformed data as all assumptions were met.</p>
+<div class="figure" style="text-align: center"><span id="fig:tmAssumptions2"></span>
+<img src="Book207_files/figure-html/tmAssumptions2-1.png" alt="Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands." width="672" />
+<p class="caption">
+Figure 19.4: Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands.
+</p>
+</div>
+<p> </p>
+<p>The log above ground biomass and log diameter at breast height appear to be significantly related (p&lt;0.00005; Table <a href="SLRSummary.html#tab:tmANOVA">19.3</a>). In fact, 96.3% of the variability in the above ground biomass is explained by knowing the value of the diameter at breast height.</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tmANOVA">Table 19.3: </span>ANOVA table for simple linear regression of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+logDBH
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+244.86
+</td>
+<td style="text-align:right;">
+244.86
+</td>
+<td style="text-align:right;">
+2238.21
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+86
+</td>
+<td style="text-align:right;">
+9.41
+</td>
+<td style="text-align:right;">
+0.11
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>In fact, it appears that as as the log diameter at breast height increases by 1 unit then the log above ground biomass increases by between 2.17 and 2.37 units (Table <a href="SLRSummary.html#tab:tmCoefs">19.4</a>; Figure <a href="SLRSummary.html#fig:tmFitPlot">19.5</a>). More importantly, as the diameter at breast height increases by a multiple of 2.718 the above ground biomass increases by a multiple of between 8.80 and 10.65.</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tmCoefs">Table 19.4: </span>Intercept and slope, along with 95% confidence intervals, for simple linear regression of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Est
+</th>
+<th style="text-align:right;">
+2.5 %
+</th>
+<th style="text-align:right;">
+97.5 %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+-1.94
+</td>
+<td style="text-align:right;">
+-2.26
+</td>
+<td style="text-align:right;">
+-1.63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+logDBH
+</td>
+<td style="text-align:right;">
+2.27
+</td>
+<td style="text-align:right;">
+2.17
+</td>
+<td style="text-align:right;">
+2.37
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<div class="figure" style="text-align: center"><span id="fig:tmFitPlot"></span>
+<img src="Book207_files/figure-html/tmFitPlot-1.png" alt="Scatterplot of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands. with the best-fit line and 95% confidence band superimposed." width="336" />
+<p class="caption">
+Figure 19.5: Scatterplot of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands. with the best-fit line and 95% confidence band superimposed.
+</p>
+</div>
+<p> </p>
+<p>Finally, the predicted above ground biomass for a tree with a diameter at breast height of 50 cm is between 529.9 and 2002.1 kg.</p>
+<p>In conclusion, a significant and very strong relationship was found between the natural log above-ground biomass and the natural log diameter-at-breast-height for trees in the Miombo Woodlands. A model was developed from this relationship that can be used to predict above-ground biomass of a tree from the measured DBH of the tree.</p>
 <div id="r-code-and-results-7" class="section level4 unnumbered">
 <h4>R Code and Results</h4>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb140-1"><a href="SLRSummary.html#cb140-1" aria-hidden="true" tabindex="-1"></a>tm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/droglenc/NCData/master/TreesMiombo.csv&quot;</span>)</span>
+<span id="cb140-2"><a href="SLRSummary.html#cb140-2" aria-hidden="true" tabindex="-1"></a>tm <span class="ot">&lt;-</span> <span class="fu">filterD</span>(tm,<span class="sc">!</span>outlier)   <span class="do">## data entry error removed</span></span>
+<span id="cb140-3"><a href="SLRSummary.html#cb140-3" aria-hidden="true" tabindex="-1"></a>lm.tm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(AGB<span class="sc">~</span>DBH,<span class="at">data=</span>tm)</span>
+<span id="cb140-4"><a href="SLRSummary.html#cb140-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.tm1)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb141-1"><a href="SLRSummary.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.tm1,<span class="at">lambday=</span><span class="dv">0</span>,<span class="at">lambdax=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb142-1"><a href="SLRSummary.html#cb142-1" aria-hidden="true" tabindex="-1"></a>tm<span class="sc">$</span>logDBH <span class="ot">&lt;-</span> <span class="fu">log</span>(tm<span class="sc">$</span>DBH)</span>
+<span id="cb142-2"><a href="SLRSummary.html#cb142-2" aria-hidden="true" tabindex="-1"></a>tm<span class="sc">$</span>logAGB <span class="ot">&lt;-</span> <span class="fu">log</span>(tm<span class="sc">$</span>AGB)</span>
+<span id="cb142-3"><a href="SLRSummary.html#cb142-3" aria-hidden="true" tabindex="-1"></a>lm.tm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(logAGB<span class="sc">~</span>logDBH,<span class="at">data=</span>tm)</span>
+<span id="cb142-4"><a href="SLRSummary.html#cb142-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.tm2)</span>
+<span id="cb142-5"><a href="SLRSummary.html#cb142-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.tm2)</span>
+<span id="cb142-6"><a href="SLRSummary.html#cb142-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>tm,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>logDBH,<span class="at">y=</span>logAGB)) <span class="sc">+</span> </span>
+<span id="cb142-7"><a href="SLRSummary.html#cb142-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb142-8"><a href="SLRSummary.html#cb142-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;log Diameter at Breast Height&quot;</span>,<span class="at">y=</span><span class="st">&quot;log Above Ground Biomass&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb142-9"><a href="SLRSummary.html#cb142-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
+<span id="cb142-10"><a href="SLRSummary.html#cb142-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb143-1"><a href="SLRSummary.html#cb143-1" aria-hidden="true" tabindex="-1"></a>aov.p.tm2 <span class="ot">&lt;-</span> <span class="fu">anova</span>(lm.tm2)<span class="sc">$</span><span class="st">&quot;Pr(&gt;F)&quot;</span>[<span class="dv">1</span>]</span>
+<span id="cb143-2"><a href="SLRSummary.html#cb143-2" aria-hidden="true" tabindex="-1"></a>( cfs.tm2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.tm2),<span class="fu">confint</span>(lm.tm2)) )</span>
+<span id="cb143-3"><a href="SLRSummary.html#cb143-3" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(cfs.tm2)</span>
+<span id="cb143-4"><a href="SLRSummary.html#cb143-4" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">logDBH=</span><span class="fu">log</span>(<span class="dv">50</span>))</span>
+<span id="cb143-5"><a href="SLRSummary.html#cb143-5" aria-hidden="true" tabindex="-1"></a>( pl50 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm.tm2,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>) )</span>
+<span id="cb143-6"><a href="SLRSummary.html#cb143-6" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(pl50)</span></code></pre></div>
 
 </div>
 </div>

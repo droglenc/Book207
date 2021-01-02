@@ -103,6 +103,15 @@ fig:ExpoFunEx2
 fig:BtransSlope1
 fig:BtransSlope2
 fig:BtransSlope3
+fig:CCAssumptions1
+tab:ccANOVA
+tab:ccCoefs
+fig:ccFitPlot
+fig:tmAssumptions1
+fig:tmAssumptions2
+tab:tmANOVA
+tab:tmCoefs
+fig:tmFitPlot
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -224,5 +233,6 @@ examples
 petrels
 bac-and-crashing
 SLRSummary
-climate-change-data
-forest-allometrics
+suggested-workflow-2
+climate-change-data-no-transformation
+forest-allometrics-transformation
