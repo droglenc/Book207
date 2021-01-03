@@ -112,6 +112,7 @@ fig:tmAssumptions2
 tab:tmANOVA
 tab:tmCoefs
 fig:tmFitPlot
+tab:MirexData
 fig:IVRInteraction
 ModelTypes
 distinguishing-methods
