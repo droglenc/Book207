@@ -1,0 +1,134 @@
+# (PART\*) INDICATOR VARIABLE REGRESSION {-}
+
+# IVR Variables {#IVRVariables}
+Simple linear regression is a powerful tool used to evaluate the relationship between two quantitative variables (Modules \@ref(SLRFoundations)-\@ref(SLRSummary)). It is common for a researcher to compare simple linear regression models fit to separate groups of individuals. **Indicator variable regression** (IVR),^[This is not a standard name. Some authors call it dummy variable regression (e.g., Fox 1997), whereas others call it Analysis of Covariance (ANCOVA). I will not use either of these terms as I prefer the word "indicator" to "dummy" and I will reserve the ANCOVA method for the situation where the separate SLR models are known or assumed to have equal slopes. Thus, ANCOVA models are a subset of the IVR models discussed here. It should also be noted that some authors (e.g., Weisberg 2005) do not use a separate name for IVR but simply include it as a multiple linear regression model.] is a method to make these comparisons. For example, IVR methods could be used in each of the following situations.
+
+* Determine if the relationship between foot length and tail length of possums differs between possums collected in Victoria and possums collected elsewhere (Woods and Hellgren 2003).
+* Determine if the relationship between propodus height and claw closing force differs among three types of crabs (Yamada and Boulding 1998).
+* Determine if the proportional area covered by an invasive plant differs between sites after adjusting for different resident times for the plant (i.e., how long it has been present at a site) (Mullerova 2005).
+* Determine if the snout-to-vent length (SVL) to body mass relationship differs between sexes of iguanid lizards (Vitt and Goldberg 1983).
+* Determine if the liver weight of yellow perch, adjusted for somatic weight, differed between four locations -- two reference sites and two sites potentially impacted by pulp and paper mills (Karels and Oikari 2000).
+* Determine if the relationship between total body electrical conductivity and lean body mass (a method used to measure body fat) differs between live and dead birds of various species (Castro *et al.* 1990).
+* Determine if the relationship between the body mass of porcupines (*Erithizon dorsatum*) and days since October 15th differs among life stages AND sexes (Sweitzer and Berger 1993).
+* Determine if the relationship between clutch size and female length for spiders differs depending on whether the spider species is from web-building or cursorial genera (Simpson 1995).
+
+In each of these cases, a single quantitative explanatory variable is considered along with one factor explanatory variable. Because there is only one factor variable, these specific situations require a **one-way IVR** model. Furthermore, it is common practice to call the quantitative explanatory variable in these models a **covariate**. This terminology will be used throughout the rest of this module.
+
+::: {.defn data-latex=""}
+**One-way IVR**: A regression model with a single quantitative explanatory variable and a single factor variable.
+:::
+
+::: {.defn data-latex=""}
+**Covariate**: The quantitative explanatory variable in an IVR model.
+:::
+
+&nbsp;
+
+## Indicator Variables
+A *factor* variable is a categorical variable with two or more levels.^[Factor variables were considered extensively in the ANOVA modules (see Modules \@ref(ANOVA1Foundations)-\@ref(ANOVA2Summary).] A factor variable must be converted to  numeric codes in order to be included in a linear regression model.
+
+An indicator variable contains the numeric "codes" created from the factor variable. Specifically, an **indicator variable** consists of zeroes and ones, where a one indicates that the individual has a certain characteristic and a zero indicates that it does not have the characteristic.^[Other coding schemes exist. For example, "contrast coding" uses -1 and 1. However, the 0 and 1 coding scheme leads to simpler interpretations and calculations and, thus, is used throughout this course.]
+
+
+::: {.defn data-latex=""}
+**Indicator Variable**: A variable that is a numerical representation of a dichotomous (or binary or binomial) categorical variable.
+:::
+
+::: {.tip data-latex=""}
+Indicator variables will be coded as 0 for individuals that do NOT have the characteristic of interest and 1 for individuals that do have the characteristic of interest.
+:::
+
+An indicator variable should be named after the characteristic denoted by a one so that it will be easy to remember what the indicator variable represents and how the coding was made.^[Indicator variables will be named automatically by R. Fortunately, it follows this naming rule.] For example, if an indicator variable is called *CONTROL*, then a 0 means the individual was not in the control group and a 1 means that it was in the control group. If an indicator variable is called *FEMALES*, then a 0 means that the individual is not a female (i.e., a male) and a 1 means that the individual is a female.
+
+In R, the levels of factor variables are considered alphabetically. In this scheme, the indicator variable will be named after the alphabetically second group. To maintain consistency with R we will follow this convention.
+
+::: {.tip data-latex=""}
+Indicator variables should be named after the "1" group so that it is easy to remember the coding scheme being used.
+:::
+
+As an example, [Makarewicz *et al.* (2003)](https://pubmed.ncbi.nlm.nih.gov/12731833/) studied the relationship between the concentration of mirex in the tissue of salmon and the weight of the salmon.^[Mirex is a chlorinated hydrocarbon that was commercialized as an insecticide. Use of mirex was banned in 1976 because of its impact on the environment.] They collected these data on Coho Salmon (*Oncorhynchus kisutch*) and Chinook Salmon (*Oncorhynchus tshawytscha*) and were interested in determining if the relationship between mirex and weight differed between these two species.
+
+For this analysis, an indicator variable must be defined that represents the species factor variable. Here, because "Coho" is alphabetically after "Chinook", Coho will be the "1" group. Therefore, the indicator variable will be name after Coho as such,^[This indicator variable could have been named "coho" for succinctness. However, the name chosen here will be consistent with names for indicator variables automatically created by R.]
+
+$$
+  speciesCoho = \left\{\begin{array}{l}
+  1 \text{ if a Coho salmon }\\
+  0 \text{ if NOT a Coho salmon}
+  \end{array}  \right.
+$$
+
+Combinations of indicator variables can be used to code factor variables that consist of more than two levels. For example, Makarewicz *et al.* (2003) were also interested in determining if the relationship between mirex concentrations and weight of the salmon differed among six collection years. For simplicity and space considerations, let's consider that they were interested in only three years -- 1977, 1982, and 1986. In this simpler situation, two indicator variables would be created to represnet the year factor variable.
+
+$$
+  year1982 = \left\{\begin{array}{l}
+  1 \text{ if collected in 1982 }\\
+  0 \text{ if NOT collected in 1982 }
+  \end{array}  \right.
+$$
+
+and
+
+$$
+  year1986 = \left\{\begin{array}{l}
+  1 \text{ if collected in 1986 }\\
+  0 \text{ if NOT collected in 1986}
+  \end{array}  \right.
+$$
+
+Note that it is possible to create a third dummy variable to represent salmon collected in 1977. However, this indicator variable would be redundant with the *year1982* and *year1986* indicator variables. In other words, if it is known that *year1982*=0 and that *year1986*=0, then the salmon must have been collected in 1977. This illustrates the rule that the number of indicator variables required is one less than the number of levels to be coded.^[This is only true if an intercept term exists in the regression model, which will be the case for all models in this course.]
+
+::: {.tip data-latex=""}
+One less indicator variable is needed then the number of categories in the factor variable.
+:::
+
+The level denoted by the group with "0"s for all related indicator variables is called the **reference group**. In the last example above, the salmon collected in 1977 would be considered the reference group. It will be shown in Module \@ref(IVRModels) that all comparisons of intercepts and slopes in the analysis will "refer" to this group of individuals.
+
+\defn{Reference group}{The category or group that is represented by zeroes for all indicator variables.}
+
+Suppose, for illustration purposes, that fish collected in 1982 were to be considered the reference group rather than fish collected in 1977. In this situation, the \var{year1982} indicator variable would be replaced with the \var{year1977} indicator variable in the model.
+
+::: {.defn data-latex=""}
+**Reference group**: The category or group that is represented by zeroes for all indicator variables.
+:::
+
+::: {.tip data-latex=""}
+Changing the reference group in an analysis requires changing the indicator variables used in the analysis.
+:::
+
+&nbsp;
+
+## Interaction Variables
+An **interaction variable** is an explanatory variable that is the product of two or more other explanatory variables (see Module \@ref(ANOVA2Foundations)). In IVR models, interactions between the covariate and the indicator variables are used to determine if the effect of the covariate on the response variable depends on the levels represented by the indicator variables. In other words, these interaction variables allow one to model the influence of a factor variable on the covariate's effect on the response variable.^[This is the same general interpretation of interaction variables as discussed for a two-way ANOVA.]
+
+::: {.defn data-latex=""}
+**Interaction Variable**: An explanatory variable that is the product of two or more explanatory variables.
+:::
+
+::: {.tip data-latex=""}
+Interaction variables in IVR are used to determine if the effect of the covariate on the response variable differs among groups defined by the indicator variable(s).
+:::
+
+The interaction between two variables in an IVR model may best be illustrated by looking at the examples in Figure \@ref(fig:IVRInteraction). In the panel on the left, the effect of salmon weight (the covariate) on mirex concentration in the tissue (the response) is the same for Coho and Chinook Salmon. This is illustrated by each group having the same slope.^[In regression the "effect" of the explanatory variable on the response variable is measured by the slope.] However, in the panel on the right, different slopes indicate that the effect of salmon weight on mirex concentration in the tissue differs between the two species. In this particular example, the relationship is "flatter" for the Coho Salmon than for the Chinook Salmon. Thus, an interaction exists for the situation depicted in Figure \@ref(fig:IVRInteraction)-Right, because the effect of the covariate on the response depends on which group is being considered. Graphically, an interaction is illustrated by non-parallel lines.
+
+```{r IVRInteraction, echo=FALSE, fig.width=7, fig.cap="Idealized fitted-line plots representing SLR fit to two groups. The graph on the left indicates the absence of an interaction. The graph on the right indicates the presence of an interaction."}
+d <- tibble(x=rep(c(0,1),4),
+            y=c(0,0.8,0.2,1,0.2,0.8,0,1),
+            species=c("Coho","Coho","Chinook","Chinook",
+                      "Coho","Coho","Chinook","Chinook"),
+            type=c("No Interaction","No Interaction","No Interaction","No Interaction",
+                   "Interaction","Interaction","Interaction","Interaction")) %>%
+  mutate(type=factor(type,levels=c("No Interaction","Interaction")))
+ggplot(data=d,mapping=aes(x=x,y=y,group=species,color=species)) +
+  geom_line(size=1) +
+  facet_wrap(vars(type)) +
+  labs(x="Salmon Weight",y="Mirex Concentration") +
+  scale_color_manual(name="",values=clrs2) +
+  theme_NCStats() +
+  theme(axis.text=element_blank(),
+        legend.position=c(0.02,1),
+        legend.justification=c(0,1.02))
+```
+
+::: {.tip data-latex=""}
+Parallel lines indicate non-interaction. Intersecting lines (actual or eventual) indicate an interaction.
+:::

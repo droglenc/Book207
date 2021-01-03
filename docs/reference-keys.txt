@@ -112,6 +112,7 @@ fig:tmAssumptions2
 tab:tmANOVA
 tab:tmCoefs
 fig:tmFitPlot
+fig:IVRInteraction
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -236,3 +237,10 @@ SLRSummary
 suggested-workflow-2
 climate-change-data-no-transformation
 forest-allometrics-transformation
+IVRVariables
+indicator-variables
+interaction-variables
+IVRModels
+IVRTesting
+IVRAnalysis
+IVRSummary

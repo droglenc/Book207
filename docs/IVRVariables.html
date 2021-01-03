@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Module 6 One-Way Multiple Comparisons | Readings for MTH207</title>
+  <title>Module 20 IVR Variables | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Module 6 One-Way Multiple Comparisons | Readings for MTH207" />
+  <meta property="og:title" content="Module 20 IVR Variables | Readings for MTH207" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://derekogle.com/Book207/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="droglenc/Book207" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Module 6 One-Way Multiple Comparisons | Readings for MTH207" />
+  <meta name="twitter:title" content="Module 20 IVR Variables | Readings for MTH207" />
   
   <meta name="twitter:description" content="This book contains the readings for MTH207 at Northland College." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ANOVA1Foundations.html"/>
-<link rel="next" href="ANOVA1Assumptions.html"/>
+<link rel="prev" href="SLRSummary.html"/>
+<link rel="next" href="IVRModels.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -310,115 +310,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ANOVA1MultipleComparisons" class="section level1" number="6">
-<h1><span class="header-section-number">Module 6</span> One-Way Multiple Comparisons</h1>
-<p>A significant result (i.e., reject H<sub>0</sub>) in a one-way ANOVA indicates that the means of at least one pair of groups differ. It is not yet known whether all means differ, all but two means differ, only one pair of means differ, or any other possible combination of differences. Thus, specific follow-up analyses to a significant one-way ANOVA are needed to identify which pairs of means are significantly different.</p>
-<div class="tip">
-<p>A significant one-way ANOVA only indicates that at least one pair of means differ. Follow-up analyses are required to determine which pairs differ.</p>
+<div id="IVRVariables" class="section level1" number="20">
+<h1><span class="header-section-number">Module 20</span> IVR Variables</h1>
+<p>Simple linear regression is a powerful tool used to evaluate the relationship between two quantitative variables (Modules <a href="SLRFoundations.html#SLRFoundations">14</a>-<a href="SLRSummary.html#SLRSummary">19</a>). It is common for a researcher to compare simple linear regression models fit to separate groups of individuals. **Indicator variable regression* (IVR),<a href="#fn76" class="footnote-ref" id="fnref76"><sup>76</sup></a> is a method to make these comparisons. For example, IVR methods could be used in each of the following situations.</p>
+<ul>
+<li>Determine if the relationship between foot length and tail length of possums differs between possums collected in Victoria and possums collected elsewhere (Woods and Hellgren 2003).</li>
+<li>Determine if the relationship between propodus height and claw closing force differs among three types of crabs (Yamada and Boulding 1998).</li>
+<li>Determine if the proportional area covered by an invasive plant differs between sites after adjusting for different resident times for the plant (i.e., how long it has been present at a site) (Mullerova 2005).</li>
+<li>Determine if the snout-to-vent length (SVL) to body mass relationship differs between sexes of iguanid lizards (Vitt and Goldberg 1983).</li>
+<li>Determine if the liver weight of yellow perch, adjusted for somatic weight, differed between four locations – two reference sites and two sites potentially impacted by pulp and paper mills (Karels and Oikari 2000).</li>
+<li>Determine if the relationship between total body electrical conductivity and lean body mass (a method used to measure body fat) differs between live and dead birds of various species (Castro <em>et al.</em> 1990).</li>
+<li>Determine if the relationship between the body mass of porcupines (<em>Erithizon dorsatum</em>) and days since October 15th differs among life stages AND sexes (Sweitzer and Berger 1993).</li>
+<li>Determine if the relationship between clutch size and female length for spiders differs depending on whether the spider species is from web-building or cursorial genera (Simpson 1995).</li>
+</ul>
+<p>In each of these cases, a single quantitative explanatory variable is considered along with one factor explanatory variable. Because there is only one factor variable, these specific situations require a <strong>one-way IVR</strong> model. Furthermore, it is common practice to call the quantitative explanatory variable in these models a <strong>covariate</strong>. This terminology will be used throughout the rest of this module.</p>
+<div class="defn">
+<p><strong>One-way IVR</strong>: A regression model with a single quantitative explanatory variable and a single factor variable.</p>
+</div>
+<div class="defn">
+<p><strong>Covariate</strong>: The quantitative explanatory variable in an IVR model.</p>
 </div>
 <p> </p>
-<div id="multiple-comparison-problem" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> Multiple Comparison Problem</h2>
-<p>The most obvious solution to identify which pairs of means differ is to perform a 2-sample t-test for each pair of groups. Unfortunately, this seemingly simple answer has at least two major problems. First, the number of 2-sample t-tests needed increases dramatically with increasing numbers of groups. Second, the probability of incorrectly concluding that at least one pair of means differs when no pairs actually differ increases dramatically with increasing numbers of groups. Of these two issues, the second is much more problematic and needs to be better understood.</p>
-<p>In any one comparison of two means the probability of incorrectly concluding that the means are different when they are actually not different is α. This incorrect conclusion is called a <strong>pairwise Type I error</strong> because it relates to only one comparison of a pair of means.</p>
-<p>In a situation with three (<span class="math inline">\(I\)</span>=3) groups (say A, B, C) then there are three pairwise comparisons (<span class="math inline">\(k\)</span>=3) to be made (A to B, A to C, and B to C). A pairwise error could be made on any of these three tests. Making a Type I error on <em>at least one</em> of these multiple pairwise tests is called an <strong>experiment-wise Type I error</strong> because it involves all pairwise comparisons in the experiment at hand.</p>
-<p>It is important that you notice <em>at least</em> in the definition of the experiment-wise error rate. For example, in three comparisons, the incorrect conclusion could be for the first pair, the second pair, the third pair, the first and second pair, the first and third pair, the second and third pair, or all three pairs!!</p>
-<div class="tip">
-<p>A Type I error is rejecting H<sub>0</sub> when H<sub>0</sub> is actually true. In a two-sample t-test, a Type I error is concluding that two means are significantly different when they are not different.</p>
+<div id="indicator-variables" class="section level2" number="20.1">
+<h2><span class="header-section-number">20.1</span> Indicator Variables</h2>
+<p>A <em>factor</em> variable is a categorical variable with two or more levels.<a href="#fn77" class="footnote-ref" id="fnref77"><sup>77</sup></a> A factor variable must be converted to numeric codes in order to be included in a linear regression model.</p>
+<p>An indicator variable contains the numeric “codes” created from the factor variable. Specifically, an <strong>indicator variable</strong> consists of zeroes and ones, where a one indicates that the individual has a certain characteristic and a zero indicates that it does not have the characteristic.<a href="#fn78" class="footnote-ref" id="fnref78"><sup>78</sup></a></p>
+<div class="defn">
+<p><strong>Indicator Variable</strong>: A variable that is a numerical representation of a dichotomous (or binary or binomial) categorical variable.</p>
 </div>
 <div class="tip">
-<p><strong>Pairwise error rate:</strong> The probability of a Type I error in a single comparison of two means. Sometimes called an comparison-, individual-, or test-wise error.</p>
+<p>Indicator variables will be coded as 0 for individuals that do NOT have the characteristic of interest and 1 for individuals that do have the characteristic of interest.</p>
+</div>
+<p>An indicator variable should be named after the characteristic denoted by a one so that it will be easy to remember what the indicator variable represents and how the coding was made.<a href="#fn79" class="footnote-ref" id="fnref79"><sup>79</sup></a> For example, if an indicator variable is called <em>CONTROL</em>, then a 0 means the individual was not in the control group and a 1 means that it was in the control group. If an indicator variable is called <em>FEMALES</em>, then a 0 means that the individual is not a female (i.e., a male) and a 1 means that the individual is a female.</p>
+<p>In R, the levels of factor variables are considered alphabetically. In this scheme, the indicator variable will be named after the alphabetically second group. To maintain consistency with R we will follow this convention.</p>
+<div class="tip">
+<p>Indicator variables should be named after the “1” group so that it is easy to remember the coding scheme being used.</p>
+</div>
+<p>As an example, <a href="https://pubmed.ncbi.nlm.nih.gov/12731833/">Makarewicz <em>et al.</em> (2003)</a> studied the relationship between the concentration of mirex in the tissue of salmon and the weight of the salmon.<a href="#fn80" class="footnote-ref" id="fnref80"><sup>80</sup></a> They collected these data on Coho Salmon (<em>Oncorhynchus kisutch</em>) and Chinook Salmon (<em>Oncorhynchus tshawytscha</em>) and were interested in determining if the relationship between mirex and weight differed between these two species.</p>
+<p>For this analysis, an indicator variable must be defined that represents the species factor variable. Here, because “Coho” is alphabetically after “Chinook,” Coho will be the “1” group. Therefore, the indicator variable will be name after Coho as such,<a href="#fn81" class="footnote-ref" id="fnref81"><sup>81</sup></a></p>
+<p><span class="math display">\[
+  \text{speciesCoho} = \left\{\begin{array}{l}
+  1 \text{ if a Coho salmon }\\
+  0 \text{ if NOT a Coho salmon}
+  \end{array}  \right.
+\]</span></p>
+<p>Combinations of indicator variables can be used to code factor variables that consist of more than two levels. For example, Makarewicz <em>et al.</em> (2003) were also interested in determining if the relationship between mirex concentrations and weight of the salmon differed among six collection years. For simplicity and space considerations, let’s consider that they were interested in only three years – 1977, 1982, and 1986. In this simpler situation, two indicator variables would be created to represnet the year factor variable.</p>
+<p><span class="math display">\[
+  \text{year1982} = \left\{\begin{array}{l}
+  1 \text{ if collected in 1982 }\\
+  0 \text{ if NOT collected in 1982 }
+  \end{array}  \right.
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+  \text{year1986} = \left\{\begin{array}{l}
+  1 \text{ if collected in 1986 }\\
+  0 \text{ if NOT collected in 1986}
+  \end{array}  \right.
+\]</span></p>
+<p>Note that it is possible to create a third dummy variable to represent salmon collected in 1977. However, this indicator variable would be redundant with the <em>year1982</em> and <em>year1986</em> indicator variables. In other words, if it is known that <em>year1982</em>=0 and that <em>year1986</em>=0, then the salmon must have been collected in 1977. This illustrates the rule that the number of indicator variables required is one less than the number of levels to be coded.<a href="#fn82" class="footnote-ref" id="fnref82"><sup>82</sup></a></p>
+<div class="tip">
+<p>One less indicator variable is needed then the number of categories in the factor variable.</p>
+</div>
+<p>The level denoted by the group with “0”s for all related indicator variables is called the <strong>reference group</strong>. In the last example above, the salmon collected in 1977 would be considered the reference group. It will be shown in Module <a href="IVRModels.html#IVRModels">21</a> that all comparisons of intercepts and slopes in the analysis will “refer” to this group of individuals.</p>
+<p>Suppose, for illustration purposes, that fish collected in 1982 were to be considered the reference group rather than fish collected in 1977. In this situation, the  indicator variable would be replaced with the  indicator variable in the model.</p>
+<div class="defn">
+<p><strong>Reference group</strong>: The category or group that is represented by zeroes for all indicator variables.</p>
 </div>
 <div class="tip">
-<p><strong>Experiment-wise error rate:</strong> The probability of <em>at least one</em> Type I error in a set of comparisons of two means. Sometimes called the family-wise error.</p>
+<p>Changing the reference group in an analysis requires changing the indicator variables used in the analysis.</p>
 </div>
-<p>Figure <a href="ANOVA1MultipleComparisons.html#fig:MCProblem">6.1</a> demonstrates the two issues related to multiple comparisons. First, the x-axis labels show how the number of pairwise comparisons (<span class="math inline">\(k\)</span>) increases quickly with increasing number of groups (<span class="math inline">\(I\)</span>) in the study. For example, six groups (<span class="math inline">\(I\)</span>=6) is not a complicated study, but it results in fifteen pairwise comparisons (<span class="math inline">\(k\)</span>=15). More importantly the line and point labels in the figure show how the experiment-wise error rate increases quickly and dramatically with increasing number of groups. For example, the experiment-wise error rate for six (<span class="math inline">\(I\)</span>=6) groups is over 0.50.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a> Thus, it is nearly a coin flip that at least one error will be made in all paired comparisons among six groups. Making an error more than 50% of the time in such a simple study is not acceptable and must be corrected.</p>
-<div class="figure" style="text-align: center"><span id="fig:MCProblem"></span>
-<img src="Book207_files/figure-html/MCProblem-1.png" alt="Relationship between the number of groups (I) in an analysis, the number of pairs of means that would need to be tested (k), and the probability of making one or more Type I errors in all comparisons. Note that alpha=0.05." width="336" />
+<p> </p>
+</div>
+<div id="interaction-variables" class="section level2" number="20.2">
+<h2><span class="header-section-number">20.2</span> Interaction Variables</h2>
+<p>An <strong>interaction variable</strong> is an explanatory variable that is the product of two or more other explanatory variables (see Module @(ANOVA2Foundations)). In IVR models, interactions between the covariate and the indicator variables are used to determine if the effect of the covariate on the response variable depends on the levels represented by the indicator variables. In other words, these interaction variables allow one to model the influence of a factor variable on the covariate’s effect on the response variable.<a href="#fn83" class="footnote-ref" id="fnref83"><sup>83</sup></a></p>
+<div class="defn">
+<p><strong>Interaction Variable</strong>: An explanatory variable that is the product of two or more explanatory variables.</p>
+</div>
+<div class="tip">
+<p>Interaction variables in IVR are used to determine if the effect of the covariate on the response variable differs among groups defined by the indicator variable(s).</p>
+</div>
+<p>The interaction between two variables in an IVR model may best be illustrated by looking at the examples in Figure <a href="IVRVariables.html#fig:IVRInteraction">20.1</a>. In the panel on the left, the effect of salmon weight (the covariate) on mirex concentration in the tissue (the response) is the same for Coho and Chinook Salmon. This is illustrated by each group having the same slope.<a href="#fn84" class="footnote-ref" id="fnref84"><sup>84</sup></a> However, in the panel on the right, different slopes indicate that the effect of salmon weight on mirex concentration in the tissue differs between the two species. In this particular example, the relationship is “flatter” for the Coho Salmon than for the Chinook Salmon. Thus, an interaction exists for the situation depicted in Figure <a href="IVRVariables.html#fig:IVRInteraction">20.1</a>-Right, because the effect of the covariate on the response depends on which group is being considered. Graphically, an interaction is illustrated by non-parallel lines.</p>
+<div class="figure" style="text-align: center"><span id="fig:IVRInteraction"></span>
+<img src="Book207_files/figure-html/IVRInteraction-1.png" alt="Idealized fitted-line plots representing SLR fit to two groups. The graph on the left indicates the absence of an interaction. The graph on the right indicates the presence of an interaction." width="672" />
 <p class="caption">
-Figure 6.1: Relationship between the number of groups (I) in an analysis, the number of pairs of means that would need to be tested (k), and the probability of making one or more Type I errors in all comparisons. Note that alpha=0.05.
+Figure 20.1: Idealized fitted-line plots representing SLR fit to two groups. The graph on the left indicates the absence of an interaction. The graph on the right indicates the presence of an interaction.
 </p>
 </div>
 <div class="tip">
-<p>The experiment-wise error rate increases dramatically with increasing numbers of treatment groups.</p>
+<p>Parallel lines indicate non-interaction. Intersecting lines (actual or eventual) indicate an interaction.</p>
 </div>
-<p> </p>
-</div>
-<div id="correction-methods" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> Correction Methods</h2>
-<p>There are many procedures designed to attempt to control experiment-wise error rate at a desired level (usually α). You will here a variety of names like Tukey’s HSD, Bonferroni’s adjustment, Sidak’s method, and Scheffe’s method.<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> For simplicity, only the Tukey-Kramer honestly significantly different (i.e., Tukey’s HSD or Tukey’s) method will be used here.</p>
-<p>As simplistically as possible, Tukey’s test computes the t test statistic for each pair of means as if conducting a 2-sample t-test. However, this test statistic is compared to a “Studentized range” rather than a t distribution to compute the p-value. These “adjusted” p-values are then simply compared to α to make a decision about the means of each pair. The net result of this modification however is that the experiment-wise error rate across all comparisions is controlled at the desired level when the group sample sizes are equal and is slightly conservative when the group sample sizes are different.</p>
-<p> </p>
-</div>
-<div id="multiple-comparisons-in-r" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> Multiple Comparisons in R</h2>
-<p>Tukey’s procedure should only be implemented if multiple comparisons are needed!! In other words, only use this method following a significant One-Way ANOVA result; i.e., H<sub>0</sub> was rejected such that it appears that there is some difference among group means. Therefore, a One-Way ANOVA must be performed first as described in Section <a href="ANOVA1Foundations.html#one-way-anova-in-r">5.2</a>.</p>
-<p>The ANOVA table from the analysis of immunoglobulin levels in opossums across seasons that was begun in the Module <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a> is shown below.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb20-1"><a href="ANOVA1MultipleComparisons.html#cb20-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
-<span id="cb20-2"><a href="ANOVA1MultipleComparisons.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
-#R&gt;   
-#R&gt;   Response: imm
-#R&gt;             Df  Sum Sq  Mean Sq F value    Pr(&gt;F)
-#R&gt;   season     2 0.23401 0.117005  14.449 7.609e-05
-#R&gt;   Residuals 24 0.19435 0.008098</code></pre>
-<p>Once again, there appears to be some significant difference in the mean immunoglobulin values among the three months (0.0001&lt;α). Thus, a multiple comparisons procedure is warranted here to identify exaclty which pairs of means differ.</p>
-<p>There are a number of functions and packages in R for computing Tukey’s multiple comparisons. I prefer to use functions in the <code>emmeans</code> package because those functions will generalize to other methods, some of which we will use in other modules and some of which you may use in more advanced statistics courses. The <code>emmeans</code> package must be attached with <code>library()</code> before its functions can be used.</p>
-<div class="tip">
-<p>The <code>emmeans</code> package must be attached with <code>library</code> to perform Tukey’s procedure.</p>
-</div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb22-1"><a href="ANOVA1MultipleComparisons.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span></code></pre></div>
-<p>Tukey’s procedure is computed with a two-step process. First, use <code>emmeans()</code> with the <code>lm()</code> object as the first argument and a <code>specs=</code> argument with <code>pairwise~</code> followed by the name of the variable that identifies the groups. The results from this function should be saved to an object.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb23-1"><a href="ANOVA1MultipleComparisons.html#cb23-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1,<span class="at">specs=</span>pairwise<span class="sc">~</span>season)</span></code></pre></div>
-<p>That saved object is then the first argument to <code>summary()</code>, which also uses <code>infer=TRUE</code>. This again should be saved to an object.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb24-1"><a href="ANOVA1MultipleComparisons.html#cb24-1" aria-hidden="true" tabindex="-1"></a>( mcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   $emmeans
-#R&gt;    season emmean     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    feb     0.668 0.0260 24    0.614    0.721 25.702  &lt;.0001 
-#R&gt;    may     0.724 0.0340 24    0.654    0.795 21.299  &lt;.0001 
-#R&gt;    nov     0.491 0.0318 24    0.425    0.557 15.433  &lt;.0001 
-#R&gt;   
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   
-#R&gt;   $contrasts
-#R&gt;    contrast  estimate     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    feb - may  -0.0568 0.0428 24  -0.1636   0.0501 -1.326  0.3948 
-#R&gt;    feb - nov   0.1767 0.0411 24   0.0741   0.2792  4.301  0.0007 
-#R&gt;    may - nov   0.2334 0.0466 24   0.1171   0.3497  5.012  0.0001 
-#R&gt;   
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   Conf-level adjustment: tukey method for comparing a family of 3 estimates 
-#R&gt;   P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
-<p>The results are in two “sections” labeled as <code>$emmeans</code> and <code>$contrasts</code>.</p>
-<p>The <code>$contrasts</code> section contains the actual Tukey’s test for each pair of means. In these results the difference in group sample means is under <code>estimate</code>, a 95% confidence interval for the <strong>difference</strong> in means is under <code>lower.CL</code> and <code>upper.CL</code>, and a p-value for testing that the difference in group population means is 0 is under <code>p.value</code>. For example, the difference in group <strong>sample</strong> mean immunoglobulin between February and May is -0.0568, but the p-value suggests that the <strong>population</strong> mean immunoglobulin does not differ between February and May (p=0.3948). In contrast, it appears that the population mean immunoglobulin for opossums in November differed from both those in Feb (p=0.0007) and those in May (p=0.0001).</p>
-<div class="tip">
-<p>The <strong>difference</strong> of group means with 95% confidence intervals and p-values are shown in the <code>$contrasts</code> section of the results.</p>
-</div>
-<p>The <code>$emmeans</code> section contains the group sample means under <code>emmean</code> with 95% confidence intervals under <code>lower.CL</code> and <code>upper.CL</code>. For example, the sample mean immunoglobulin level for opossums in February was 0.668, with a 95% confidence interval from 0.614 to 0.721. The <code>t.ratio</code> and <code>p.value</code> in this section tests if the group population mean is different than 0. These tests are not often of interest and can largely be ignored.</p>
-<div class="tip">
-<p>The group means with 95% confidence intervals are shown in the <code>$emmeans</code> section of the results.</p>
-</div>
-<p>A plot of group means with 95% confidence intervals using the results in <code>$emmeans</code> is slightly different than shown in Sections <a href="ModelComparison.html#two-sample-t-test-revisited-using-linear-models">4.8</a> and <a href="ANOVA1Foundations.html#one-way-anova-in-r">5.2</a> because the raw data and the means with their confidence intervals are in separate data frames. While this method is slightly more complicated, it will generalize to a wider variety of situationst throughout the course.</p>
-<p>The <code>data=</code> and <code>mapping=aes()</code> arguments are not included in the initial <code>ggplot()</code> because we will be drawing variables from two data frames. Thus, <code>geom_jitter()</code> below adds the raw data to the plot, jittered to decrease overlap; <code>geom_errorbar()</code> creates the error bars from the <code>$emmeans</code> object, and <code>geom_point()</code> simply overlays the mean from the <code>$emmeans</code> object. Note that in the code below you would only need to modify the two <code>data=</code> arguments, the three <code>x=</code> arguments (to the grouping variables), and the one <code>y=</code> argument in <code>geom_jitter()</code> (to the response variable).</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb26-1"><a href="ANOVA1MultipleComparisons.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb26-2"><a href="ANOVA1MultipleComparisons.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">data=</span>opp,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>imm),</span>
-<span id="cb26-3"><a href="ANOVA1MultipleComparisons.html#cb26-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha=</span><span class="fl">0.25</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb26-4"><a href="ANOVA1MultipleComparisons.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data=</span>mcsum<span class="sc">$</span>emmeans,</span>
-<span id="cb26-5"><a href="ANOVA1MultipleComparisons.html#cb26-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL),</span>
-<span id="cb26-6"><a href="ANOVA1MultipleComparisons.html#cb26-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb26-7"><a href="ANOVA1MultipleComparisons.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>mcsum<span class="sc">$</span>emmeans,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>emmean),</span>
-<span id="cb26-8"><a href="ANOVA1MultipleComparisons.html#cb26-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb26-9"><a href="ANOVA1MultipleComparisons.html#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Immunoglobulin Concentration&quot;</span>,<span class="at">x=</span><span class="st">&quot;Season/Month&quot;</span>) <span class="sc">+</span></span>
-<span id="cb26-10"><a href="ANOVA1MultipleComparisons.html#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-20-1.png" width="336" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="22">
-<li id="fn22"><p>Using α=0.05<a href="ANOVA1MultipleComparisons.html#fnref22" class="footnote-back">↩︎</a></p></li>
-<li id="fn23"><p>See <a href="https://en.wikipedia.org/wiki/Family-wise_error_rate#Controlling_procedures">here</a> for a short list of methods.<a href="ANOVA1MultipleComparisons.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<ol start="76">
+<li id="fn76"><p>This is not a standard name. Some authors call it dummy variable regression (e.g., Fox 1997), whereas others call it Analysis of Covariance (ANCOVA). I will not use either of these terms as I prefer the word “indicator” to “dummy” and I will reserve the ANCOVA method for the situation where the separate SLR models are known or assumed to have equal slopes. Thus, ANCOVA models are a subset of the IVR models discussed here. It should also be noted that some authors (e.g., Weisberg 2005) do not use a separate name for IVR but simply include it as a multiple linear regression model.<a href="IVRVariables.html#fnref76" class="footnote-back">↩︎</a></p></li>
+<li id="fn77"><p>Factor variables were considered extensively in the ANOVA modules (see Modules <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a>-<a href="ANOVA2Summary.html#ANOVA2Summary">13</a>.<a href="IVRVariables.html#fnref77" class="footnote-back">↩︎</a></p></li>
+<li id="fn78"><p>Other coding schemes exist. For example, “contrast coding” uses -1 and 1. However, the 0 and 1 coding scheme leads to simpler interpretations and calculations and, thus, is used throughout this course.<a href="IVRVariables.html#fnref78" class="footnote-back">↩︎</a></p></li>
+<li id="fn79"><p>Indicator variables will be named automatically by R. Fortunately, it follows this naming rule.<a href="IVRVariables.html#fnref79" class="footnote-back">↩︎</a></p></li>
+<li id="fn80"><p>Mirex is a chlorinated hydrocarbon that was commercialized as an insecticide. Use of mirex was banned in 1976 because of its impact on the environment.<a href="IVRVariables.html#fnref80" class="footnote-back">↩︎</a></p></li>
+<li id="fn81"><p>This indicator variable could have been named “coho” for succinctness. However, the name chosen here will be consistent with names for indicator variables automatically created by R.<a href="IVRVariables.html#fnref81" class="footnote-back">↩︎</a></p></li>
+<li id="fn82"><p>This is only true if an intercept term exists in the regression model, which will be the case for all models in this course.<a href="IVRVariables.html#fnref82" class="footnote-back">↩︎</a></p></li>
+<li id="fn83"><p>This is the same general interpretation of interaction variables as discussed for a two-way ANOVA.<a href="IVRVariables.html#fnref83" class="footnote-back">↩︎</a></p></li>
+<li id="fn84"><p>In regression the “effect” of the explanatory variable on the response variable is measured by the slope.<a href="IVRVariables.html#fnref84" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -426,8 +423,8 @@ Figure 6.1: Relationship between the number of groups (I) in an analysis, the nu
           </div>
         </div>
       </div>
-<a href="ANOVA1Foundations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ANOVA1Assumptions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="SLRSummary.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="IVRModels.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
