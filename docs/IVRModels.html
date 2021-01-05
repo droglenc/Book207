@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-03" />
+<meta name="date" content="2021-01-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -284,7 +284,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.1" data-path="IVRVariables.html"><a href="IVRVariables.html#indicator-variables"><i class="fa fa-check"></i><b>20.1</b> Indicator Variables</a></li>
 <li class="chapter" data-level="20.2" data-path="IVRVariables.html"><a href="IVRVariables.html#interaction-variables"><i class="fa fa-check"></i><b>20.2</b> Interaction Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="IVRModels.html"><a href="IVRModels.html"><i class="fa fa-check"></i><b>21</b> IVR Models &amp; Sub-Models</a></li>
+<li class="chapter" data-level="21" data-path="IVRModels.html"><a href="IVRModels.html"><i class="fa fa-check"></i><b>21</b> IVR Models &amp; Sub-Models</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="IVRModels.html"><a href="IVRModels.html#ultimate-full-model"><i class="fa fa-check"></i><b>21.1</b> Ultimate Full Model</a></li>
+<li class="chapter" data-level="21.2" data-path="IVRModels.html"><a href="IVRModels.html#sub-models"><i class="fa fa-check"></i><b>21.2</b> Sub-Models</a></li>
+<li class="chapter" data-level="21.3" data-path="IVRModels.html"><a href="IVRModels.html#interpreting-parameter-estimates"><i class="fa fa-check"></i><b>21.3</b> Interpreting Parameter Estimates</a></li>
+<li class="chapter" data-level="21.4" data-path="IVRModels.html"><a href="IVRModels.html#ultimate-full-model-in-r"><i class="fa fa-check"></i><b>21.4</b> Ultimate Full Model in R</a></li>
+</ul></li>
 <li class="chapter" data-level="22" data-path="IVRTesting.html"><a href="IVRTesting.html"><i class="fa fa-check"></i><b>22</b> IVR Testing</a></li>
 <li class="chapter" data-level="23" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html"><i class="fa fa-check"></i><b>23</b> IVR Analysis</a></li>
 <li class="chapter" data-level="24" data-path="IVRSummary.html"><a href="IVRSummary.html"><i class="fa fa-check"></i><b>24</b> IVR Summary</a></li>
@@ -312,7 +318,289 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="IVRModels" class="section level1" number="21">
 <h1><span class="header-section-number">Module 21</span> IVR Models &amp; Sub-Models</h1>
+<p>Covariate, indicator, and interaction variables (see Module <a href="IVRVariables.html#IVRVariables">20</a>) can be entered into a single model that will allow one to determine if simple linear regression lines differ among groups. As such, possible differences among slopes, intercepts, or both can be determined. In this module, the model for this Indicator Variable Regression (IVR) analysis is introduced. Hypothesis testing for slopes and intercepts is introduced in Module <a href="IVRTesting.html#IVRTesting">22</a>.</p>
+<div id="ultimate-full-model" class="section level2" number="21.1">
+<h2><span class="header-section-number">21.1</span> Ultimate Full Model</h2>
+<p>Consider the situation introduced in Module <a href="IVRVariables.html#IVRVariables">20</a> where researchers examined the effect of salmon weight on mirex concentration in the tissue for two species of salmon (Coho and Chinook). In this case, there is one quantitative response variable (<span class="math inline">\(MIREX\)</span>), one covariate (<span class="math inline">\(WEIGHT\)</span>), and one indicator variable (<span class="math inline">\(COHO\)</span>) generated from a factor variable with only two categories (i.e., species). In addition, there is an interaction variable between <span class="math inline">\(WEIGHT\)</span> and <span class="math inline">\(COHO\)</span>.</p>
+<p>The <em>ultimate full model</em> for this situation is</p>
+<p><span class="math display">\[
+\mu_{MIREX|WEIGHT,COHO} = \alpha+\beta WEIGHT+\delta_{1}COHO+\gamma_{1}WEIGHT:COHO
+\]</span></p>
+<p>This is called the <strong>ultimate full model</strong> because the model cannot get more complicated that this for this situation as all variables of interest are included in the model. In subsequent modules, simpler models with fewer variables (and parameters) than this one will also be considered.</p>
+<div class="tip">
+<p>The covariate, indicator, and interaction variables are entered in that order into the ultimate full model of an IVR to allow for consistent and simple interpretations.</p>
+</div>
+<p>Specific parameters are used in the ultimate full model of an IVR as shown above. Specifically, they are as follows:</p>
+<ul>
+<li><span class="math inline">\(\alpha\)</span>: an overall intercept term.</li>
+<li><span class="math inline">\(\beta\)</span>: coefficient on the covariate.</li>
+<li><span class="math inline">\(\delta_{i}\)</span>: coefficient on the ith indicator variable.</li>
+<li><span class="math inline">\(\gamma_{i}\)</span>: coefficient on the interaction between the covariate and the ith indicator variable.</li>
+</ul>
+<p>Each of these parameters has a specific meaning or interpretation that will be better understood by reducing the ultimate full model to its constituent sub-models.</p>
+</div>
+<div id="sub-models" class="section level2" number="21.2">
+<h2><span class="header-section-number">21.2</span> Sub-Models</h2>
+<p>The ultimate full model in IVR contains sub-models that are SLR models for each group represented by the indicator variables. The sub-models can be revealed by substituting appropriate values for the indicator variables in the ultimate full model. For example <span class="math inline">\(COHO=0\)</span> for the “non-Coho” group (i.e., Chinook). Thus, to find the sub-model for Chinook Salmon, plug 0 for <span class="math inline">\(COHO\)</span> in the ultimate full model and simplify.</p>
+<p><span class="math display">\[
+\begin{split}
+  \mu_{MIREX|WEIGHT,COHO} &amp;= \alpha+\beta WEIGHT+\delta_{1}COHO+\gamma_{1}WEIGHT:COHO \\
+  &amp;=\alpha+\beta WEIGHT+\delta_{1}0+\gamma_{1}WEIGHT:0\\
+  &amp;=\alpha+\beta WEIGHT+0+0\\
+  &amp;=\alpha+\beta WEIGHT\\
+\end{split}
+\]</span></p>
+<p>Similarly, the sub-model for Coho is found by plugging 1 for <span class="math inline">\(COHO\)</span> in the ultimate full model and simplifying.</p>
+<p><span class="math display">\[
+\begin{split}
+  \mu_{MIREX|WEIGHT,COHO} &amp;= \alpha+\beta WEIGHT+\delta_{1}COHO+\gamma_{1}WEIGHT:COHO \\
+  &amp;=\alpha+\beta WEIGHT+\delta_{1}1+\gamma_{1}1WEIGHT \\
+  &amp;=\alpha+\beta WEIGHT+\delta_{1}+\gamma_{1}WEIGHT \\
+  &amp;=\alpha+\delta_{1}+\beta WEIGHT+\gamma_{1}WEIGHT \\
+  &amp;=(\alpha+\delta_{1})+(\beta+\gamma_{1})WEIGHT \\
+\end{split}
+\]</span></p>
+<div class="tip">
+<p>Sub-models are found by appropriately substituting “0”s and “1”s for the indicator variable(s) in the IVR ultimate full model and simplifying.</p>
+</div>
+<p>These sub-models can be appended to the tables from Module <a href="IVRVariables.html#IVRVariables">20</a> to provide a succinct summary.</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Species
+</th>
+<th style="text-align:right;">
+COHO
+</th>
+<th style="text-align:left;">
+Sub-Model (<span class="math inline">\(\mu_{MIREX|WEIGHT}=\)</span>)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Chinook (Reference)
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\alpha+\beta WEIGHT\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Coho
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+<span class="math inline">\((\alpha+\delta_{1})+(\beta+\gamma_{1})WEIGHT\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>Examination of the sub-models for each group shows that each sub-model is itself an SLR model. The sub-model for Chinook Salmon is an SLR with a slope of <span class="math inline">\(\beta\)</span> and an intercept of <span class="math inline">\(\alpha\)</span>. In contrast, the sub-model for Coho Salmon is an SLR with a slope of <span class="math inline">\(\beta+\gamma_{1}\)</span> and an intercept of <span class="math inline">\(\alpha+\delta_{1}\)</span>.</p>
+<div class="tip">
+<p>Each sub-model is an SLR for one of the groups represented in the IVR ultimate full model.</p>
+</div>
+<p>The process is similar when there are more than two groups, except that 0s and 1s must be substituted for multiple indicator variables. For example, the ultimate full model for the situation when three years (1977, 1982, and 1986) were considered is</p>
+<p><span class="math display">\[
+\begin{split}
+\mu_{MIREX|WEIGHT,\cdots} = &amp; \alpha+\beta WEIGHT + \delta_{1}YEAR1982 + \delta_{2}YEAR1986 + \\
+ &amp; \gamma_{1}WEIGHT:YEAR1982 + \gamma_{2}WEIGHT:YEAR1986 \\
+\end{split}
+\]</span></p>
+<p>To find the sub-model for 1982, for example, requires plugging 1 in for <span class="math inline">\(YEAR1982\)</span> and 0 for <span class="math inline">\(YEAR1986\)</span> and simplifying</p>
+<p><span class="math display">\[
+\begin{split}
+\mu_{MIREX|WEIGHT,\cdots} &amp;= \alpha+\beta WEIGHT + \delta_{1}1 + \delta_{2}0 +  \gamma_{1}WEIGHT:1 + \gamma_{2}WEIGHT:0 \\
+&amp;= \alpha+\beta WEIGHT + \delta_{1} + 0 + \gamma_{1}WEIGHT + 0 \\
+&amp;= (\alpha+\delta_{1}) + (\beta+\gamma_{1})WEIGHT
+\end{split}
+\]</span></p>
+<p>A similar process can be used to find the sub-models for 1977 and 1986.<a href="#fn82" class="footnote-ref" id="fnref82"><sup>82</sup></a> The sub-models are then summarized in the following table.</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Year
+</th>
+<th style="text-align:right;">
+YEAR1982
+</th>
+<th style="text-align:right;">
+YEAR1986
+</th>
+<th style="text-align:left;">
+Sub-Model (<span class="math inline">\(\mu_{MIREX|WEIGHT}=\)</span>)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1977 (Reference)
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\alpha+\beta WEIGHT\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1982
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+<span class="math inline">\((\alpha+\delta_{1})+(\beta+\gamma_{1})WEIGHT\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1986
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+<span class="math inline">\((\alpha+\delta_{2})+(\beta+\gamma_{2})WEIGHT\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>Once again, each sub-model is itself an SLR model. For example, the slopes are <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\beta+\gamma_{1}\)</span>, and <span class="math inline">\(\beta+\gamma_{2}\)</span> for the years 1977, 1982, and 1986, respectively.</p>
+<div class="tip">
+<p>The sub-model for the reference group is always <span class="math inline">\(\mu_{Y|X}=\alpha+\beta X\)</span>. The slopes for the other groups always have a <span class="math inline">\(\gamma_{i}\)</span> added to <span class="math inline">\(\beta\)</span> and the intercepts always have a <span class="math inline">\(\delta_{i}\)</span> added to <span class="math inline">\(\alpha\)</span>.</p>
+</div>
+</div>
+<div id="interpreting-parameter-estimates" class="section level2" number="21.3">
+<h2><span class="header-section-number">21.3</span> Interpreting Parameter Estimates</h2>
+<p>Careful examination of the sub-models in the tables above help illustrate what the model parameters (i.e., <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\delta_{i}\)</span>, and <span class="math inline">\(\gamma_{i}\)</span>) mean. The sub-model for the reference groups is always <span class="math inline">\(\mu_{Y|X}=\alpha+\beta X\)</span>; thus, <span class="math inline">\(\alpha\)</span> is the intercept and <span class="math inline">\(\beta\)</span> is the slope <em>for the reference group</em>. From above, it is also evident that the intercept for the <span class="math inline">\(i\)</span>th group is <span class="math inline">\(\alpha+\delta_{i}\)</span> and the slope for the <span class="math inline">\(i\)</span>th group is <span class="math inline">\(\beta+\gamma_{i}\)</span>.</p>
+<p>However, what are <span class="math inline">\(\delta_{i}\)</span> and <span class="math inline">\(\gamma_{i}\)</span>? To answer this, consider the following algebra for the difference in intercepts between the <span class="math inline">\(i\)</span>th group and the reference group.</p>
+<p><span class="math display">\[
+\begin{split}
+i\text{th Group&#39;s Intercept} - \text{Reference Group&#39;s Intercept} &amp;= (\alpha+\delta_{i}) - \alpha \\
+&amp;= \delta_{i}
+\end{split}
+\]</span></p>
+<p>Thus, <span class="math inline">\(\delta_{i}\)</span> is the additive difference between intercepts for the <span class="math inline">\(i\)</span>th and reference groups. Similar algebra shows that <span class="math inline">\(\gamma_{i}\)</span> is the additive difference in slopes between the <span class="math inline">\(i\)</span>th group and the reference group.</p>
+<p><span class="math display">\[
+\begin{split}
+i\text{th Group&#39;s Slope} - \text{Reference Group&#39;s Slope} &amp;= (\beta+\gamma_{i}) - \beta \\
+&amp;= \gamma_{i}
+\end{split}
+\]</span></p>
+<p>In summary, the parameters in the ultimate full model have the following interpretations (see Figure <a href="IVRModels.html#fig:IVRCoefficients">21.1</a>).</p>
+<ul>
+<li><span class="math inline">\(\alpha\)</span>: y-intercept term for the reference group.</li>
+<li><span class="math inline">\(\beta\)</span>: slope for the reference group.</li>
+<li><span class="math inline">\(\delta_{i}\)</span>: difference in y-intercepts between the <span class="math inline">\(i\)</span>th group and the reference group.</li>
+<li><span class="math inline">\(\gamma_{i}\)</span>: difference in slopes between the <span class="math inline">\(i\)</span>th group and the reference group.</li>
+</ul>
+<div class="figure" style="text-align: center"><span id="fig:IVRCoefficients"></span>
+<img src="Book207_files/figure-html/IVRCoefficients-1.png" alt="Representation of two sub-models fit with the ultimate full model in an IVR with the geometric meaning of each parameter. The red line is the sub-model for the reference group. Note that $\alpha$=2, $\beta$=0.4, $\delta_{1}$=-1.6, and $\gamma_{1}$=0.45 in this example." width="336" />
+<p class="caption">
+Figure 21.1: Representation of two sub-models fit with the ultimate full model in an IVR with the geometric meaning of each parameter. The red line is the sub-model for the reference group. Note that <span class="math inline">\(\alpha\)</span>=2, <span class="math inline">\(\beta\)</span>=0.4, <span class="math inline">\(\delta_{1}\)</span>=-1.6, and <span class="math inline">\(\gamma_{1}\)</span>=0.45 in this example.
+</p>
+</div>
+<p> </p>
+<p>These interpretations show why the first group is called the reference group. The parameters in the reference sub-model represent the intercept and slope for that group. These parameters also appear in the other sub-models, but each has another parameter added to it to account for differences between the non-reference group and the reference group. In other words, every difference in slopes or intercepts is computed relative to the slope or intercept for the reference group. Thus, <span class="math inline">\(\delta_{i}\)</span> and <span class="math inline">\(\gamma){i}\)</span> are only meaningful relative to the reference group.</p>
+<div class="tip">
+<p>Coefficients on <strong>indicator</strong> variables (i.e., the <span class="math inline">\(\delta_{i}\)</span>) always measure differences in <em>intercepts</em> between a non-reference group and the reference group.</p>
+</div>
+<div class="tip">
+<p>Coefficients on <strong>interaction</strong> variables (i.e., the <span class="math inline">\(\gamma_{i}\)</span>) always measure differences in <em>slopes</em> between a non-reference group and the reference group.</p>
+</div>
+<p>The ultimate full model of an IVR can represent four situations between two groups depending on values of the <span class="math inline">\(\delta_{1}\)</span> and <span class="math inline">\(\gamma_{1}\)</span> parameters (Figure <a href="IVRModels.html#fig:IVRSituations">21.2</a>).</p>
+<ul>
+<li><em>Coincident Lines</em>: A single regression line represents the relationship between the response variable and the covariate for both groups (i.e., <span class="math inline">\(\delta_{1}=0\)</span> and <span class="math inline">\(\gamma_{1}=0\)</span>).</li>
+<li><em>Parallel Lines</em>: Separate parallel lines with different y-intercepts are needed for both groups (i.e., <span class="math inline">\(\delta_{1}\neq0\)</span> and <span class="math inline">\(\gamma_{1}=0\)</span>).</li>
+<li><em>Same Intercept</em>: Separate non-parallel lines with the same y-intercept are needed for both groups (i.e., <span class="math inline">\(\delta_{1}=0\)</span> and <span class="math inline">\(\gamma_{1}\neq0\)</span>)</li>
+<li>Completely Separate Lines*: Two completely separate lines are needed for both groups (i.e., <span class="math inline">\(\delta_{1}\neq0\)</span> and <span class="math inline">\(\gamma_{1}\neq0\)</span>).</li>
+</ul>
+<div class="figure" style="text-align: center"><span id="fig:IVRSituations"></span>
+<img src="Book207_files/figure-html/IVRSituations-1.png" alt="Hypothetical depictions of four situations that can occur for the relationship between a response variable and a covariate for two groups." width="480" />
+<p class="caption">
+Figure 21.2: Hypothetical depictions of four situations that can occur for the relationship between a response variable and a covariate for two groups.
+</p>
+</div>
+</div>
+<div id="ultimate-full-model-in-r" class="section level2" number="21.4">
+<h2><span class="header-section-number">21.4</span> Ultimate Full Model in R</h2>
+<p>Fitting ultimate full model in R is straightforward because it is essentially the same as fitting a Two-Way ANOVA with <code>lm()</code> (see @ref(#model-fitting-in-r)) and R automatically creates the indicator variables behind the scenes. The ultimate full model for an IVR is fit in <code>lm()</code> with a formula of the form <code>response~covariate+factor+covariated:factor</code> (<em>in that order to match what we did above</em>).<a href="#fn83" class="footnote-ref" id="fnref83"><sup>83</sup></a></p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb144-1"><a href="IVRModels.html#cb144-1" aria-hidden="true" tabindex="-1"></a>ivr1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species<span class="sc">+</span>weight<span class="sc">:</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
+<div id="extracting-parameter-estimates" class="section level4 unnumbered">
+<h4>Extracting Parameter Estimates</h4>
+<p>The parameter estimates and their confidence intervals are extractd with <code>coef()</code> and <code>confint()</code>, which can be bound together with <code>cbind()</code> to create a succinct summary.</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb145-1"><a href="IVRModels.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Ests=</span><span class="fu">coef</span>(ivr1),<span class="fu">confint</span>(ivr1))</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;                              Ests        2.5 %     97.5 %
+#R&gt;   (Intercept)         0.135451558  0.093132341 0.17777078
+#R&gt;   weight              0.009607284  0.003886599 0.01532797
+#R&gt;   speciescoho        -0.050914887 -0.113215438 0.01138566
+#R&gt;   weight:speciescoho  0.012110273 -0.001079885 0.02530043</code></pre>
+<p>The parameter estimates are under the “Ests” column and are in rows that are generally labeled as the variables in the ultimate full model. Do note that R prepends the indicator variable with the name of the original factor variable. Thus, what we called “COHO,” R calls “speciescoho.” From this then, <span class="math inline">\(\hat{\alpha}\)</span>=0.135, <span class="math inline">\(\hat{\beta}\)</span>=0.010, <span class="math inline">\(\hat{\delta}_{1}\)</span>=-0.051, and <span class="math inline">\(\hat{\gamma}_{1}\)</span>=0.012. Thus, for example, the sample slope for Chinook Salmon (the reference groups) is 0.010 and the sample slope for Coho Salmon is 0.012 greater than the sample slope for Chinook Salmon. Furthermore, for example, one is 95% confident that <span class="math inline">\(\beta\)</span> is between 0.004 and 0.015 and <span class="math inline">\(\gamma_{1}\)</span> is between -0.001 and 0.025.</p>
+<p>Of course, inferential methods are needed to determine if these results suggest a real difference in parameters between populations. For example, a statistical test of whether <span class="math inline">\(\gamma_{1}=0\)</span> would be used to determine if the population slopes differed between Coho and Chinook salmon. These types of tests are introduced in Module <a href="IVRTesting.html#IVRTesting">22</a>.</p>
+</div>
+<div id="fitted-line-plots" class="section level4 unnumbered">
+<h4>Fitted Line Plots</h4>
+<p>A visual of the fitted IVR model is constructed the same as the visual for an SLR model except that the color of the points and the regression line for each group is mapped to the factor variable. The plotting character and colors should then be removed from <code>geom_point()</code>. For example, note the <code>color=species</code> in <code>mapping=aes()</code> and the simplicity of <code>geom_point()</code> in the code below.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb147-1"><a href="IVRModels.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Mirex,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>weight,<span class="at">y=</span>mirex,<span class="at">color=</span>species)) <span class="sc">+</span>  </span>
+<span id="cb147-2"><a href="IVRModels.html#cb147-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  </span>
+<span id="cb147-3"><a href="IVRModels.html#cb147-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Weight (kg)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mirex Concentration (mg/kg)&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb147-4"><a href="IVRModels.html#cb147-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
+<span id="cb147-5"><a href="IVRModels.html#cb147-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-112-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>From this plot, note that the intercept for Coho is less than the intercept for Chinook (as you would expect because <span class="math inline">\(\hat{\delta}_{1}\)</span>=-0.051) and the slope for Coho is greater than (i.e., steeper) than that for Chinook (as you would expect because <span class="math inline">\(\hat{\gamma}_{1}\)</span>=0.012)</p>
+</div>
+<div id="predictions" class="section level4 unnumbered">
+<h4>Predictions</h4>
+<p>Predicted values for IVR models are constructed by submitting the <code>lm()</code> object and a data frame of observed values of the explanatory variables to <code>predict()</code>, as was described for SLR models (see Section <a href="SLRInference.html#predictions-in-r">15.7</a>). One must make sure, though, that the data frame contains an observed value for each explanatory variable found in the <code>lm()</code> object.</p>
+<p>For example, the predicted value, with a 95% prediction interval, for a 3 kg Coho Salmon is found with</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb148-1"><a href="IVRModels.html#cb148-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="dv">3</span>,<span class="at">species=</span><span class="st">&quot;coho&quot;</span>)</span>
+<span id="cb148-2"><a href="IVRModels.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;           fit         lwr      upr
+#R&gt;   1 0.1496893 -0.03240232 0.331781</code></pre>
+<p>Similarly, the predicted values, with 95% prediction intervals, for 5 kg Chinook AND a 3 kg Coho Salmon are found with</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb150-1"><a href="IVRModels.html#cb150-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">3</span>),<span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;chinook&quot;</span>,<span class="st">&quot;coho&quot;</span>))</span>
+<span id="cb150-2"><a href="IVRModels.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;           fit          lwr       upr
+#R&gt;   1 0.1834880  0.001557795 0.3654182
+#R&gt;   2 0.1496893 -0.032402319 0.3317810</code></pre>
+<p>The results may be easier to read if you bind together the new data.frame and the prediction results.</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb152-1"><a href="IVRModels.html#cb152-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">3</span>),<span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;chinook&quot;</span>,<span class="st">&quot;coho&quot;</span>))</span>
+<span id="cb152-2"><a href="IVRModels.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(nd,<span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>))</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     weight species       fit          lwr       upr
+#R&gt;   1      5 chinook 0.1834880  0.001557795 0.3654182
+#R&gt;   2      3    coho 0.1496893 -0.032402319 0.3317810</code></pre>
 
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="82">
+<li id="fn82"><p>You should do this to make sure that you understand how to properly substitute in the 0s and 1s.<a href="IVRModels.html#fnref82" class="footnote-back">↩︎</a></p></li>
+<li id="fn83"><p>Shorthand for fitting this model is <code>response~covariate*factor</code>.<a href="IVRModels.html#fnref83" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 

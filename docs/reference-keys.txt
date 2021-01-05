@@ -114,6 +114,8 @@ tab:tmCoefs
 fig:tmFitPlot
 tab:MirexData
 fig:IVRInteraction
+fig:IVRCoefficients
+fig:IVRSituations
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -242,6 +244,10 @@ IVRVariables
 indicator-variables
 interaction-variables
 IVRModels
+ultimate-full-model
+sub-models
+interpreting-parameter-estimates
+ultimate-full-model-in-r
 IVRTesting
 IVRAnalysis
 IVRSummary

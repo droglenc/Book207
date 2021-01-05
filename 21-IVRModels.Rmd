@@ -1,1 +1,298 @@
 # IVR Models & Sub-Models {#IVRModels}
+Covariate, indicator, and interaction variables (see Module \@ref(IVRVariables)) can be entered into a single model that will allow one to determine if simple linear regression lines differ among groups. As such, possible differences among slopes, intercepts, or both can be determined. In this module, the model for this Indicator Variable Regression (IVR) analysis is introduced. Hypothesis testing for slopes and intercepts is introduced in Module \@ref(IVRTesting).
+
+## Ultimate Full Model
+Consider the situation introduced in Module \@ref(IVRVariables) where researchers examined the effect of salmon weight on mirex concentration in the tissue for two species of salmon (Coho and Chinook). In this case, there is one quantitative response variable ($MIREX$), one covariate ($WEIGHT$), and one indicator variable ($COHO$) generated from a factor variable with only two categories (i.e., species). In addition, there is an interaction variable between $WEIGHT$ and $COHO$.
+
+The *ultimate full model* for this situation is
+
+$$
+\mu_{MIREX|WEIGHT,COHO} = \alpha+\beta WEIGHT+\delta_{1}COHO+\gamma_{1}WEIGHT:COHO
+$$
+
+This is called the **ultimate full model** because the model cannot get more complicated that this for this situation as all variables of interest are included in the model. In subsequent modules, simpler models with fewer variables (and parameters) than this one will also be considered.
+
+::: {.tip data-latex=""}
+The covariate, indicator, and interaction variables are entered in that order into the ultimate full model of an IVR to allow for consistent and simple interpretations.
+:::
+
+Specific parameters are used in the ultimate full model of an IVR as shown above. Specifically, they are as follows:
+
+* $\alpha$: an overall intercept term.
+* $\beta$: coefficient on the covariate.
+* $\delta_{i}$: coefficient on the ith indicator variable.
+* $\gamma_{i}$: coefficient on the interaction between the covariate and the ith indicator variable.
+
+Each of these parameters has a specific meaning or interpretation that will be better understood by reducing the ultimate full model to its constituent sub-models.
+
+## Sub-Models
+The ultimate full model in IVR contains sub-models that are SLR models for each group represented by the indicator variables. The sub-models can be revealed by substituting appropriate values for the indicator variables in the ultimate full model. For example $COHO=0$ for the "non-Coho" group (i.e., Chinook). Thus, to find the sub-model for Chinook Salmon, plug 0 for $COHO$ in the ultimate full model and simplify.
+
+$$
+\begin{split}
+  \mu_{MIREX|WEIGHT,COHO} &= \alpha+\beta WEIGHT+\delta_{1}COHO+\gamma_{1}WEIGHT:COHO \\
+  &=\alpha+\beta WEIGHT+\delta_{1}0+\gamma_{1}WEIGHT:0\\
+  &=\alpha+\beta WEIGHT+0+0\\
+  &=\alpha+\beta WEIGHT\\
+\end{split}
+$$
+
+Similarly, the sub-model for Coho is found by plugging 1 for $COHO$ in the ultimate full model and simplifying.
+
+$$
+\begin{split}
+  \mu_{MIREX|WEIGHT,COHO} &= \alpha+\beta WEIGHT+\delta_{1}COHO+\gamma_{1}WEIGHT:COHO \\
+  &=\alpha+\beta WEIGHT+\delta_{1}1+\gamma_{1}1WEIGHT \\
+  &=\alpha+\beta WEIGHT+\delta_{1}+\gamma_{1}WEIGHT \\
+  &=\alpha+\delta_{1}+\beta WEIGHT+\gamma_{1}WEIGHT \\
+  &=(\alpha+\delta_{1})+(\beta+\gamma_{1})WEIGHT \\
+\end{split}
+$$
+
+::: {.tip data-latex=""}
+Sub-models are found by appropriately substituting "0"s and "1"s for the indicator variable(s) in the IVR ultimate full model and simplifying.
+:::
+
+These sub-models can be appended to the tables from Module \@ref(IVRVariables) to provide a succinct summary.
+
+```{r echo=FALSE}
+data.frame(Species=c("Chinook (Reference)","Coho"),COHO=c(0,1),
+           "Sub-Model ($\\mu_{MIREX|WEIGHT}=$)"=c("$\\alpha+\\beta WEIGHT$",
+                      "$(\\alpha+\\delta_{1})+(\\beta+\\gamma_{1})WEIGHT$"),
+           check.names=FALSE) %>%
+  knitr::kable(booktabs=TRUE,row.names=FALSE) %>%
+  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+```
+
+&nbsp;
+
+Examination of the sub-models for each group shows that each sub-model is itself an SLR model. The sub-model for Chinook Salmon is an SLR with a slope of $\beta$ and an intercept of $\alpha$. In contrast, the sub-model for Coho Salmon is an SLR with a slope of $\beta+\gamma_{1}$ and an intercept of $\alpha+\delta_{1}$.
+
+::: {.tip data-latex=""}
+Each sub-model is an SLR for one of the groups represented in the IVR ultimate full model.
+:::
+
+The process is similar when there are more than two groups, except that 0s and 1s must be substituted for multiple indicator variables. For example, the ultimate full model for the situation when three years (1977, 1982, and 1986) were considered is
+
+$$
+\begin{split}
+\mu_{MIREX|WEIGHT,\cdots} = & \alpha+\beta WEIGHT + \delta_{1}YEAR1982 + \delta_{2}YEAR1986 + \\
+ & \gamma_{1}WEIGHT:YEAR1982 + \gamma_{2}WEIGHT:YEAR1986 \\
+\end{split}
+$$
+
+To find the sub-model for 1982, for example, requires plugging 1 in for $YEAR1982$ and 0 for $YEAR1986$ and simplifying
+
+$$
+\begin{split}
+\mu_{MIREX|WEIGHT,\cdots} &= \alpha+\beta WEIGHT + \delta_{1}1 + \delta_{2}0 +  \gamma_{1}WEIGHT:1 + \gamma_{2}WEIGHT:0 \\
+&= \alpha+\beta WEIGHT + \delta_{1} + 0 + \gamma_{1}WEIGHT + 0 \\
+&= (\alpha+\delta_{1}) + (\beta+\gamma_{1})WEIGHT
+\end{split}
+$$
+
+A similar process can be used to find the sub-models for 1977 and 1986.^[You should do this to make sure that you understand how to properly substitute in the 0s and 1s.] The sub-models are then summarized in the following table.
+
+```{r echo=FALSE}
+data.frame(Year=c("1977 (Reference)","1982","1986"),YEAR1982=c(0,1,0),YEAR1986=c(0,0,1),
+           "Sub-Model ($\\mu_{MIREX|WEIGHT}=$)"=c("$\\alpha+\\beta WEIGHT$",
+                      "$(\\alpha+\\delta_{1})+(\\beta+\\gamma_{1})WEIGHT$",
+                      "$(\\alpha+\\delta_{2})+(\\beta+\\gamma_{2})WEIGHT$"),
+           check.names=FALSE) %>%
+  knitr::kable(booktabs=TRUE,row.names=FALSE) %>%
+  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+```
+
+&nbsp;
+
+Once again, each sub-model is itself an SLR model. For example, the slopes are $\beta$, $\beta+\gamma_{1}$, and $\beta+\gamma_{2}$ for the years 1977, 1982, and 1986, respectively.
+
+::: {.tip data-latex=""}
+The sub-model for the reference group is always $\mu_{Y|X}=\alpha+\beta X$. The slopes for the other groups always have a $\gamma_{i}$ added to $\beta$ and the intercepts always have a $\delta_{i}$ added to $\alpha$.
+:::
+
+## Interpreting Parameter Estimates
+Careful examination of the sub-models in the tables above help illustrate what the model parameters (i.e., $\alpha$, $\beta$, $\delta_{i}$, and $\gamma_{i}$) mean. The sub-model for the reference groups is always $\mu_{Y|X}=\alpha+\beta X$; thus, $\alpha$ is the intercept and $\beta$ is the slope *for the reference group*. From above, it is also evident that the intercept for the $i$th group is $\alpha+\delta_{i}$ and the slope for the $i$th group is $\beta+\gamma_{i}$.
+
+However, what are $\delta_{i}$ and $\gamma_{i}$? To answer this, consider the following algebra for the difference in intercepts between the $i$th group and the reference group.
+
+$$
+\begin{split}
+i\text{th Group's Intercept} - \text{Reference Group's Intercept} &= (\alpha+\delta_{i}) - \alpha \\
+&= \delta_{i}
+\end{split}
+$$
+
+Thus, $\delta_{i}$ is the additive difference between intercepts for the $i$th and reference groups. Similar algebra shows that $\gamma_{i}$ is the additive difference in slopes between the $i$th group and the reference group.
+
+$$
+\begin{split}
+i\text{th Group's Slope} - \text{Reference Group's Slope} &= (\beta+\gamma_{i}) - \beta \\
+&= \gamma_{i}
+\end{split}
+$$
+
+In summary, the parameters in the ultimate full model have the following interpretations (see Figure \@ref(fig:IVRCoefficients)).
+
+* $\alpha$: y-intercept term for the reference group.
+* $\beta$: slope for the reference group.
+* $\delta_{i}$: difference in y-intercepts between the $i$th group and the reference group.
+* $\gamma_{i}$: difference in slopes between the $i$th group and the reference group.
+
+```{r IVRCoefficients, echo=FALSE, warning=FALSE, fig.cap="Representation of two sub-models fit with the ultimate full model in an IVR with the geometric meaning of each parameter. The red line is the sub-model for the reference group. Note that $\\alpha$=2, $\\beta$=0.4, $\\delta_{1}$=-1.6, and $\\gamma_{1}$=0.45 in this example."}
+a <- 2
+b <- 0.4
+d1 <- -1.6
+g1 <- 0.45
+xlmts <- c(0,4)
+
+xs1 <- c(0.25,1.25)
+ys1 <- a+b*xs1
+xs2 <- (b*xs1[1]-d1)/(b+g1)
+xs2 <- c(xs2,xs2+1)
+ys2 <- (a+d1)+(b+g1)*xs2
+
+ggplot(data=data.frame(x=1,y=1),mapping=aes(x=x,y=y)) +
+  ## Gridlines for gamma1 ... wanted them behind the other lines
+  annotate(geom="segment",x=0,xend=xs2[2],y=ys1[2],yend=ys1[2],
+           color="gray80",linetype="dotted") +
+  annotate(geom="segment",x=0,xend=xs2[2],y=ys2[2],yend=ys2[2],
+           color="gray80",linetype="dotted") +
+  ## 2 sub-models
+  geom_abline(aes(slope=b,intercept=a),size=1,color=clrs2[1]) +
+  geom_abline(aes(slope=b+g1,intercept=a+d1),color=clrs2[2],size=1) +
+  ## Add reference slope
+  annotate(geom="segment",x=xs1[1],y=ys1[1],xend=xs1[2],yend=ys1[1],
+           size=1,linetype="dashed",color=clrs2[1]) +
+  annotate(geom="text",x=mean(xs1),y=ys1[1],label="1",vjust=1.25,
+           size=lbl_text_size,color=clrs2[1]) +
+  annotate(geom="segment",x=xs1[2],y=ys1[1],xend=xs1[2],yend=ys1[2],
+           size=1,linetype="dashed",color=clrs2[1]) +
+  annotate(geom="text",x=xs1[2],y=mean(ys1),label="beta",parse=TRUE,hjust=-0.5,
+           size=lbl_text_size,color=clrs2[1]) +
+  ## Add non-reference slope
+  annotate(geom="segment",x=xs2[1],y=ys2[1],xend=xs2[2],yend=ys2[1],
+           color=clrs2[2],linetype="dashed",size=1) +
+  annotate(geom="text",x=mean(xs2),y=ys2[1],label="1",vjust=1.25,
+           size=lbl_text_size,color=clrs2[2]) +
+  annotate(geom="segment",x=xs2[2],y=ys2[1],xend=xs2[2],yend=ys2[2],
+           color=clrs2[2],linetype="dashed",size=1) +
+  annotate(geom="text",x=xs2[2],y=mean(ys2),label="beta+gamma[1]",parse=TRUE,
+           hjust=-0.25,size=lbl_text_size,color=clrs2[2]) +
+  ## Label delta1
+  annotate(geom="segment",x=0,xend=0,y=a,yend=a+d1,color="orange",size=2) +
+  annotate(geom="text",x=0,y=a+d1/2,label="delta[1]",parse=TRUE,
+           color=clrs2[2],size=lbl_text_size,hjust=-0.5) +
+  ## Label gamma1
+  annotate(geom="segment",x=0,xend=0,y=ys1[2],yend=ys2[2],color="orange",size=2) +
+  annotate(geom="text",x=0,y=mean(c(ys1[2],ys2[2])),label="gamma[1]",parse=TRUE,
+           color=clrs2[2],size=lbl_text_size,hjust=-0.5) +
+  scale_x_continuous(name="Covariate",limits=xlmts,expand=expansion(mult=0),
+                     breaks=0) +
+  scale_y_continuous(name="Response Variable",limits=xlmts,expand=expansion(mult=0),
+                     breaks=c(a,a+d1),label=parse(text=c("alpha","alpha+delta[1]"))) +
+  theme_NCStats() +
+  theme(axis.text.y=element_text(color=clrs2,size=11))
+```
+
+&nbsp;
+
+These interpretations show why the first group is called the reference group. The parameters in the reference sub-model represent the intercept and slope for that group. These parameters also appear in the other sub-models, but each has another parameter added to it to account for differences between the non-reference group and the reference group. In other words, every difference in slopes or intercepts is computed relative to the slope or intercept for the reference group. Thus, $\delta_{i}$ and $\gamma){i}$ are only meaningful relative to the reference group.
+
+::: {.tip data-latex=""}
+Coefficients on **indicator** variables (i.e., the $\delta_{i}$) always measure differences in *intercepts* between a non-reference group and the reference group.
+:::
+
+::: {.tip data-latex=""}
+Coefficients on **interaction** variables (i.e., the $\gamma_{i}$) always measure differences in *slopes* between a non-reference group and the reference group.
+:::
+
+The ultimate full model of an IVR can represent four situations between two groups depending on values of the $\delta_{1}$ and $\gamma_{1}$ parameters (Figure \@ref(fig:IVRSituations)).
+
+* *Coincident Lines*: A single regression line represents the relationship between the response variable and the covariate for both groups (i.e., $\delta_{1}=0$ and $\gamma_{1}=0$).
+* *Parallel Lines*: Separate parallel lines with different y-intercepts are needed for both groups (i.e., $\delta_{1}\neq0$ and $\gamma_{1}=0$).
+* *Same Intercept*: Separate non-parallel lines with the same y-intercept are needed for both groups (i.e., $\delta_{1}=0$ and $\gamma_{1}\neq0$)
+* Completely Separate Lines*: Two completely separate lines are needed for both groups (i.e., $\delta_{1}\neq0$ and $\gamma_{1}\neq0$).
+
+```{r IVRSituations, echo=FALSE, fig.width=5, fig.height=5, fig.cap="Hypothetical depictions of four situations that can occur for the relationship between a response variable and a covariate for two groups."}
+a <- 1
+b <- 0.5
+x <- c(0,4)
+Y1A <- a+b*x
+Y1B <- Y1A+0.04
+Y2B <- (a+1)+b*x
+Y2C <- a+(b+0.25)*x
+Y2D <- (a-0.5)+(b+0.25)*x
+d <- tibble(sit=rep(c("Coincident Lines","Parallel Lines","Same Intercept","Completely Separate Lines"),each=4),
+            group=c(rep(c("A","B","A","B"),each=2),rep(c("A","B","A","B"),each=2)),
+            x=rep(x,8),
+            y=c(Y1A,Y1B,Y1A,Y2B,Y1A,Y2C,Y1A,Y2D)
+            ) %>%
+  mutate(sit=factor(sit,levels=c("Coincident Lines","Parallel Lines","Same Intercept","Completely Separate Lines")))
+ggplot(data=d,mapping=aes(x=x,y=y,color=group)) +
+  geom_line(size=1) +
+  facet_wrap(vars(sit)) +
+  labs(x="Covariate",y="Response Variable") +
+  scale_color_manual(values=clrs2) +
+  theme_NCStats() +
+  theme(axis.text=element_blank(),
+        legend.position="none")
+```
+
+## Ultimate Full Model in R
+Fitting ultimate full model in R is straightforward because it is essentially the same as fitting a Two-Way ANOVA with `lm()` (see \@ref(model-fitting-in-r)) and R automatically creates the indicator variables behind the scenes. The ultimate full model for an IVR is fit in `lm()` with a formula of the form `response~covariate+factor+covariated:factor` (*in that order to match what we did above*).^[Shorthand for fitting this model is `response~covariate*factor`.]
+
+```{r}
+ivr1 <- lm(mirex~weight+species+weight:species,data=Mirex)
+```
+
+#### Extracting Parameter Estimates {-}
+The parameter estimates and their confidence intervals are extractd with `coef()` and `confint()`, which can be bound together with `cbind()` to create a succinct summary.
+
+```{r}
+cbind(Ests=coef(ivr1),confint(ivr1))
+```
+```{r echo=FALSE}
+cf.m1 <- cbind(Ests=coef(ivr1),confint(ivr1))
+```
+
+The parameter estimates are under the "Ests" column and are in rows that are generally labeled as the variables in the ultimate full model. Do note that R prepends the indicator variable with the name of the original factor variable. Thus, what we called "COHO", R calls "speciescoho". From this then, $\hat{\alpha}$=`r formatC(cf.m1[1,"Ests"],format="f",digits=3)`, $\hat{\beta}$=`r formatC(cf.m1[2,"Ests"],format="f",digits=3)`, $\hat{\delta}_{1}$=`r formatC(cf.m1[3,"Ests"],format="f",digits=3)`, and $\hat{\gamma}_{1}$=`r formatC(cf.m1[4,"Ests"],format="f",digits=3)`. Thus, for example, the sample slope for Chinook Salmon (the reference groups) is `r formatC(cf.m1[2,"Ests"],format="f",digits=3)` and the sample slope for Coho Salmon is `r formatC(cf.m1[4,"Ests"],format="f",digits=3)` greater than the sample slope for Chinook Salmon. Furthermore, for example, one is 95% confident that $\beta$ is between `r formatC(cf.m1[2,"2.5 %"],format="f",digits=3)` and `r formatC(cf.m1[2,"97.5 %"],format="f",digits=3)` and $\gamma_{1}$ is between `r formatC(cf.m1[4,"2.5 %"],format="f",digits=3)` and `r formatC(cf.m1[4,"97.5 %"],format="f",digits=3)`.
+
+Of course, inferential methods are needed to determine if these results suggest a real difference in parameters between populations. For example, a statistical test of whether $\gamma_{1}=0$ would be used to determine if the population slopes differed between Coho and Chinook salmon. These types of tests are introduced in Module \@ref(IVRTesting).
+
+#### Fitted Line Plots {-}
+A visual of the fitted IVR model is constructed the same as the visual for an SLR model except that the color of the points and the regression line for each group is mapped to the factor variable. The plotting character and colors should then be removed from `geom_point()`. For example, note the `color=species` in `mapping=aes()` and the simplicity of `geom_point()` in the code below.
+
+```{r fig.width=5}
+ggplot(data=Mirex,mapping=aes(x=weight,y=mirex,color=species)) +  
+  geom_point() +  
+  labs(x="Weight (kg)",y="Mirex Concentration (mg/kg)") +  
+  theme_NCStats() +  
+  geom_smooth(method="lm",se=FALSE)
+```
+
+From this plot, note that the intercept for Coho is less than the intercept for Chinook (as you would expect because $\hat{\delta}_{1}$=`r formatC(cf.m1[3,"Ests"],format="f",digits=3)`) and the slope for Coho is greater than (i.e., steeper) than that for Chinook (as you would expect because $\hat{\gamma}_{1}$=`r formatC(cf.m1[4,"Ests"],format="f",digits=3)`)
+
+#### Predictions {-}
+Predicted values for IVR models are constructed by submitting the `lm()` object and a data frame of observed values of the explanatory variables to `predict()`, as was described for SLR models (see Section \@ref(predictions-in-r)). One must make sure, though, that the data frame contains an observed value for each explanatory variable found in the `lm()` object.
+
+For example, the predicted value, with a 95% prediction interval, for a 3 kg Coho Salmon is found with
+
+```{r}
+nd <- data.frame(weight=3,species="coho")
+predict(ivr1,newdata=nd,interval="prediction")
+```
+
+Similarly, the predicted values, with 95% prediction intervals, for 5 kg Chinook AND a 3 kg Coho Salmon are found with
+
+```{r}
+nd <- data.frame(weight=c(5,3),species=c("chinook","coho"))
+predict(ivr1,newdata=nd,interval="prediction")
+```
+
+The results may be easier to read if you bind together the new data.frame and the prediction results.
+
+```{r}
+nd <- data.frame(weight=c(5,3),species=c("chinook","coho"))
+cbind(nd,predict(ivr1,newdata=nd,interval="prediction"))
+```
