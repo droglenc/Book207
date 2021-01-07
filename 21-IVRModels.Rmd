@@ -223,13 +223,13 @@ Y1B <- Y1A+0.04
 Y2B <- (a+1)+b*x
 Y2C <- a+(b+0.25)*x
 Y2D <- (a-0.5)+(b+0.25)*x
-d <- tibble(sit=rep(c("Coincident Lines","Parallel Lines","Same Intercept","Completely Separate Lines"),each=4),
+IVR4Sits <- tibble(sit=rep(c("Coincident Lines","Parallel Lines","Same Intercept","Completely Separate Lines"),each=4),
             group=c(rep(c("A","B","A","B"),each=2),rep(c("A","B","A","B"),each=2)),
             x=rep(x,8),
             y=c(Y1A,Y1B,Y1A,Y2B,Y1A,Y2C,Y1A,Y2D)
             ) %>%
   mutate(sit=factor(sit,levels=c("Coincident Lines","Parallel Lines","Same Intercept","Completely Separate Lines")))
-ggplot(data=d,mapping=aes(x=x,y=y,color=group)) +
+ggplot(data=IVR4Sits,mapping=aes(x=x,y=y,color=group)) +
   geom_line(size=1) +
   facet_wrap(vars(sit)) +
   labs(x="Covariate",y="Response Variable") +

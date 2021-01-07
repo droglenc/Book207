@@ -116,6 +116,13 @@ tab:MirexData
 fig:IVRInteraction
 fig:IVRCoefficients
 fig:IVRSituations
+fig:ParallelLinesTestModels
+fig:CoincidentLinesTestModels
+fig:IVRInterceptIssue
+fig:DiffIntercepts
+fig:RelationshipTestModels
+fig:IVRMirexYear6
+fig:IVRMirexYear4
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -249,5 +256,12 @@ sub-models
 interpreting-parameter-estimates
 ultimate-full-model-in-r
 IVRTesting
+f-ratio-test-statistic
+parallel-lines-test
+coincident-lines-test
+relationship-test
+all-tests-in-r
+more-groups-different-slopes
+more-groups-same-slopes
 IVRAnalysis
 IVRSummary

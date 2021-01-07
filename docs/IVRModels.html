@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-05" />
+<meta name="date" content="2021-01-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -291,7 +291,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="21.3" data-path="IVRModels.html"><a href="IVRModels.html#interpreting-parameter-estimates"><i class="fa fa-check"></i><b>21.3</b> Interpreting Parameter Estimates</a></li>
 <li class="chapter" data-level="21.4" data-path="IVRModels.html"><a href="IVRModels.html#ultimate-full-model-in-r"><i class="fa fa-check"></i><b>21.4</b> Ultimate Full Model in R</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="IVRTesting.html"><a href="IVRTesting.html"><i class="fa fa-check"></i><b>22</b> IVR Testing</a></li>
+<li class="chapter" data-level="22" data-path="IVRTesting.html"><a href="IVRTesting.html"><i class="fa fa-check"></i><b>22</b> IVR Testing</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="IVRTesting.html"><a href="IVRTesting.html#f-ratio-test-statistic"><i class="fa fa-check"></i><b>22.1</b> F-ratio Test Statistic</a></li>
+<li class="chapter" data-level="22.2" data-path="IVRTesting.html"><a href="IVRTesting.html#parallel-lines-test"><i class="fa fa-check"></i><b>22.2</b> Parallel Lines Test</a></li>
+<li class="chapter" data-level="22.3" data-path="IVRTesting.html"><a href="IVRTesting.html#coincident-lines-test"><i class="fa fa-check"></i><b>22.3</b> Coincident Lines Test</a></li>
+<li class="chapter" data-level="22.4" data-path="IVRTesting.html"><a href="IVRTesting.html#relationship-test"><i class="fa fa-check"></i><b>22.4</b> Relationship Test</a></li>
+<li class="chapter" data-level="22.5" data-path="IVRTesting.html"><a href="IVRTesting.html#all-tests-in-r"><i class="fa fa-check"></i><b>22.5</b> All Tests in R</a></li>
+<li class="chapter" data-level="22.6" data-path="IVRTesting.html"><a href="IVRTesting.html#more-groups-different-slopes"><i class="fa fa-check"></i><b>22.6</b> More Groups (Different Slopes)</a></li>
+<li class="chapter" data-level="22.7" data-path="IVRTesting.html"><a href="IVRTesting.html#more-groups-same-slopes"><i class="fa fa-check"></i><b>22.7</b> More Groups (Same Slopes)</a></li>
+</ul></li>
 <li class="chapter" data-level="23" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html"><i class="fa fa-check"></i><b>23</b> IVR Analysis</a></li>
 <li class="chapter" data-level="24" data-path="IVRSummary.html"><a href="IVRSummary.html"><i class="fa fa-check"></i><b>24</b> IVR Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -546,7 +555,7 @@ Figure 21.2: Hypothetical depictions of four situations that can occur for the r
 </div>
 <div id="ultimate-full-model-in-r" class="section level2" number="21.4">
 <h2><span class="header-section-number">21.4</span> Ultimate Full Model in R</h2>
-<p>Fitting ultimate full model in R is straightforward because it is essentially the same as fitting a Two-Way ANOVA with <code>lm()</code> (see @ref(#model-fitting-in-r)) and R automatically creates the indicator variables behind the scenes. The ultimate full model for an IVR is fit in <code>lm()</code> with a formula of the form <code>response~covariate+factor+covariated:factor</code> (<em>in that order to match what we did above</em>).<a href="#fn83" class="footnote-ref" id="fnref83"><sup>83</sup></a></p>
+<p>Fitting ultimate full model in R is straightforward because it is essentially the same as fitting a Two-Way ANOVA with <code>lm()</code> (see <a href="ANOVA2Analysis.html#model-fitting-in-r">12.1</a>) and R automatically creates the indicator variables behind the scenes. The ultimate full model for an IVR is fit in <code>lm()</code> with a formula of the form <code>response~covariate+factor+covariated:factor</code> (<em>in that order to match what we did above</em>).<a href="#fn83" class="footnote-ref" id="fnref83"><sup>83</sup></a></p>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb144-1"><a href="IVRModels.html#cb144-1" aria-hidden="true" tabindex="-1"></a>ivr1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species<span class="sc">+</span>weight<span class="sc">:</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
 <div id="extracting-parameter-estimates" class="section level4 unnumbered">
 <h4>Extracting Parameter Estimates</h4>
