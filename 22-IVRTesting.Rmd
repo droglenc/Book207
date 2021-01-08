@@ -392,7 +392,7 @@ The parallel lines, coincident lines, and relationship test results are in the r
 &nbsp;
 
 ## More Groups (Different Slopes)
-The previous example with two groups (Coho and Chinook Salmon) can be extended to more than two groups. In this example, we will continue to examine the relationship between mirex concentration in the tissue and weight of the salmon, but among six years (with both species combined).
+The previous example with two groups (Coho and Chinook Salmon) can be extended to more than two groups. In this example, we will continue to examine the relationship between mirex concentration in the tissue and weight of the salmon, but among three years (with both species combined).
 
 Before continuing, take note that the `year` variable in the `Mirex` data frame is considered to be numeric.
 
@@ -407,19 +407,25 @@ Mirex$year <- factor(Mirex$year)
 str(Mirex)
 ```
 
+Also, for the sake of having a simple example, only the last three years in the data will be used.
+
+```{r}
+MirexLast3 <- filter(Mirex,year %in% c(1992,1996,1999))
+```
+
 The ultimate full model is then fit and the ANOVA table is extracted with^[Assumptions should be checked and will be introduced in the next module.]
 
 ```{r}
-ivrY1 <- lm(mirex~weight+year+weight:year,data=Mirex)
+ivrY1 <- lm(mirex~weight+year+weight:year,data=MirexLast3)
 anova(ivrY1)
 ```
 
-In this case, the p-value for the interaction (`r kPvalue(anova(ivrY1)$"Pr(>F)"[3],latex=FALSE)`) is less than 0.05, which suggests that the interaction term is important to the model (it explains a significant portion of variability) and that **at least** one of the groups has a different slope than the other groups (Figure \@ref(fig:IVRMirexYear6)). Note the "at least" in the previous sentence. This is the same issue you ran into with One- and Two-Way ANOVAs -- rejecting H<sub>0</sub> simply means that there is some difference among the groups, not that they are all different. Multiple comparisons for slopes will be introduced in the next module.
+In this case, the p-value for the interaction (`r kPvalue(anova(ivrY1)$"Pr(>F)"[3],latex=FALSE)`) is less than 0.05, which suggests that the interaction term is important to the model (it explains a significant portion of variability) and that **at least** one of the groups has a different slope than the other groups (Figure \@ref(fig:IVRMirexYearL3)). Note the "at least" in the previous sentence. This is the same issue you ran into with One- and Two-Way ANOVAs -- rejecting H<sub>0</sub> simply means that there is some difference among the groups, not that they are all different. Multiple comparisons for slopes will be introduced in the next module.
 
-```{r IVRMirexYear6, echo=FALSE, fig.width=4.5, fig.cap="Fitted regression lines for mirex in tissue by salmon weight for all six years. Note that the IVR indicated that these lines are not  parallel."}
-ggplot(data=Mirex,mapping=aes(x=weight,y=mirex,color=year)) +
+```{r IVRMirexYearL3, echo=FALSE, fig.width=4.5, fig.cap="Fitted regression lines for mirex in tissue by salmon weight for 1992, 1996, and 1999. Note that the IVR indicated that these lines are not  parallel."}
+ggplot(data=MirexLast3,mapping=aes(x=weight,y=mirex,color=year)) +
   geom_smooth(method="lm",se=FALSE) +
-  scale_color_manual(values=clrs) +
+  scale_color_manual(values=clrs3) +
   labs(x="Weight (kg)",y="Mirex Concentration (mg/kg)") +
   theme_NCStats()
 ```
@@ -431,11 +437,11 @@ If there are more than two groups, then a significant parallel lines test means 
 &nbsp;
 
 ## More Groups (Same Slopes)
-For the purposes of having a simple example, supposed that only the first four years from the previous example were considered.
+For the purposes of having another simple example, suppose that only the first three years from the previous example were considered.
 
 ```{r}
-Mirex2 <- filter(Mirex,year %in% c(1977,1982,1986,1992))
-ivrY2 <- lm(mirex~weight+year+weight:year,data=Mirex2)
+MirexFirst3 <- filter(Mirex,year %in% c(1977,1982,1986))
+ivrY2 <- lm(mirex~weight+year+weight:year,data=MirexFirst3)
 anova(ivrY2)
 ```
 ```{r echo=FALSE}
@@ -445,12 +451,12 @@ aovY2.clt <- kPvalue(aovY2$"Pr(>F)"[2],latex=FALSE)
 aovY2.rt <- kPvalue(aovY2$"Pr(>F)"[1],latex=FALSE)
 ```
 
-With these results it is seen that the lines for the four years are parallel (`r aovY2.plt`); thus, the relationship between mirex concentration in the tissue and weight of the salmon does not differ across the four years (Figure \@ref(fig:IVRMirexYear4)). There does appear to be a significant relationsip between mirex concentration in the tissue and weight of the salmon (`r aovY2.rt`). Finally, it appears the mirex concentration in the salmon at the same weight of salmon differ between **at least** one pair of years (`r aovY2.clt`). Again, in the next module, multiple comparison methods for distinguishing which pairs of means have different intercepts will be introduced.
+With these results it is seen that the lines for the three years are parallel (`r aovY2.plt`); thus, the relationship between mirex concentration in the tissue and weight of the salmon does not differ across the three years (Figure \@ref(fig:IVRMirexYearF3)). There does appear to be a significant relationship between mirex concentration in the tissue and weight of the salmon (`r aovY2.rt`). Finally, it appears the mirex concentration in the salmon at the same weight of salmon differ between **at least** one pair of years (`r aovY2.clt`). Again, in the next module, multiple comparison methods for distinguishing which pairs of means have different intercepts will be introduced.
 
-```{r IVRMirexYear4, echo=FALSE, fig.width=4.5, fig.cap="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, 1986, and 1992. Note that the IVR indicated that these lines are parallel, there is a signficant relationship, and at least one of the lines has a different intercept."}
-ggplot(data=Mirex2,mapping=aes(x=weight,y=mirex,color=year)) +
+```{r IVRMirexYearF3, echo=FALSE, fig.width=4.5, fig.cap="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. Note that the IVR indicated that these lines are parallel, there is a signficant relationship, and at least one of the lines has a different intercept."}
+ggplot(data=MirexFirst3,mapping=aes(x=weight,y=mirex,color=year)) +
   geom_smooth(method="lm",se=FALSE) +
-  scale_color_manual(values=clrs) +
+  scale_color_manual(values=clrs3) +
   labs(x="Weight (kg)",y="Mirex Concentration (mg/kg)") +
   theme_NCStats()
 ```

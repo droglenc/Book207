@@ -121,8 +121,12 @@ fig:CoincidentLinesTestModels
 fig:IVRInterceptIssue
 fig:DiffIntercepts
 fig:RelationshipTestModels
-fig:IVRMirexYear6
-fig:IVRMirexYear4
+fig:IVRMirexYearL3
+fig:IVRMirexYearF3
+fig:IVRMirexYearL3a
+fig:IVRMirexYearF3a
+fig:IVRExampleIntercepts
+fig:IVRExampleIntercepts2
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -264,4 +268,7 @@ all-tests-in-r
 more-groups-different-slopes
 more-groups-same-slopes
 IVRAnalysis
+assumptions-transformations
+multiple-comparisons-for-slopes
+multiple-comparisons-for-intercepts
 IVRSummary

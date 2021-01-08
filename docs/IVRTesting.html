@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-07" />
+<meta name="date" content="2021-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -301,7 +301,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="22.6" data-path="IVRTesting.html"><a href="IVRTesting.html#more-groups-different-slopes"><i class="fa fa-check"></i><b>22.6</b> More Groups (Different Slopes)</a></li>
 <li class="chapter" data-level="22.7" data-path="IVRTesting.html"><a href="IVRTesting.html#more-groups-same-slopes"><i class="fa fa-check"></i><b>22.7</b> More Groups (Same Slopes)</a></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html"><i class="fa fa-check"></i><b>23</b> IVR Analysis</a></li>
+<li class="chapter" data-level="23" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html"><i class="fa fa-check"></i><b>23</b> IVR Analysis</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html#assumptions-transformations"><i class="fa fa-check"></i><b>23.1</b> Assumptions &amp; Transformations</a></li>
+<li class="chapter" data-level="23.2" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html#multiple-comparisons-for-slopes"><i class="fa fa-check"></i><b>23.2</b> Multiple Comparisons for Slopes</a></li>
+<li class="chapter" data-level="23.3" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html#multiple-comparisons-for-intercepts"><i class="fa fa-check"></i><b>23.3</b> Multiple Comparisons for Intercepts</a></li>
+</ul></li>
 <li class="chapter" data-level="24" data-path="IVRSummary.html"><a href="IVRSummary.html"><i class="fa fa-check"></i><b>24</b> IVR Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -574,7 +579,7 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 </div>
 <div id="more-groups-different-slopes" class="section level2" number="22.6">
 <h2><span class="header-section-number">22.6</span> More Groups (Different Slopes)</h2>
-<p>The previous example with two groups (Coho and Chinook Salmon) can be extended to more than two groups. In this example, we will continue to examine the relationship between mirex concentration in the tissue and weight of the salmon, but among six years (with both species combined).</p>
+<p>The previous example with two groups (Coho and Chinook Salmon) can be extended to more than two groups. In this example, we will continue to examine the relationship between mirex concentration in the tissue and weight of the salmon, but among three years (with both species combined).</p>
 <p>Before continuing, take note that the <code>year</code> variable in the <code>Mirex</code> data frame is considered to be numeric.</p>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb166-1"><a href="IVRTesting.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Mirex)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   &#39;data.frame&#39;: 122 obs. of  4 variables:
@@ -590,22 +595,24 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 #R&gt;    $ weight : num  0.41 0.45 1.04 1.09 1.24 1.25 1.3 1.34 1.37 1.49 ...
 #R&gt;    $ mirex  : num  0.16 0.19 0.19 0.1 0.13 0.19 0.28 0.16 0.17 0.2 ...
 #R&gt;    $ species: Factor w/ 2 levels &quot;chinook&quot;,&quot;coho&quot;: 1 1 1 2 1 1 1 2 2 2 ...</code></pre>
+<p>Also, for the sake of having a simple example, only the last three years in the data will be used.</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb170-1"><a href="IVRTesting.html#cb170-1" aria-hidden="true" tabindex="-1"></a>MirexLast3 <span class="ot">&lt;-</span> <span class="fu">filter</span>(Mirex,year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1992</span>,<span class="dv">1996</span>,<span class="dv">1999</span>))</span></code></pre></div>
 <p>The ultimate full model is then fit and the ANOVA table is extracted with<a href="#fn86" class="footnote-ref" id="fnref86"><sup>86</sup></a></p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb170-1"><a href="IVRTesting.html#cb170-1" aria-hidden="true" tabindex="-1"></a>ivrY1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year<span class="sc">+</span>weight<span class="sc">:</span>year,<span class="at">data=</span>Mirex)</span>
-<span id="cb170-2"><a href="IVRTesting.html#cb170-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivrY1)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb171-1"><a href="IVRTesting.html#cb171-1" aria-hidden="true" tabindex="-1"></a>ivrY1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year<span class="sc">+</span>weight<span class="sc">:</span>year,<span class="at">data=</span>MirexLast3)</span>
+<span id="cb171-2"><a href="IVRTesting.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivrY1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Response: mirex
-#R&gt;                Df  Sum Sq  Mean Sq F value    Pr(&gt;F)
-#R&gt;   weight        1 0.22298 0.222980 60.2061   4.7e-12
-#R&gt;   year          5 0.50667 0.101333 27.3607 &lt; 2.2e-16
-#R&gt;   weight:year   5 0.09351 0.018703  5.0499 0.0003326
-#R&gt;   Residuals   110 0.40740 0.003704</code></pre>
-<p>In this case, the p-value for the interaction (p=0.0003) is less than 0.05, which suggests that the interaction term is important to the model (it explains a significant portion of variability) and that <strong>at least</strong> one of the groups has a different slope than the other groups (Figure <a href="IVRTesting.html#fig:IVRMirexYear6">22.6</a>). Note the “at least” in the previous sentence. This is the same issue you ran into with One- and Two-Way ANOVAs – rejecting H<sub>0</sub> simply means that there is some difference among the groups, not that they are all different. Multiple comparisons for slopes will be introduced in the next module.</p>
-<div class="figure" style="text-align: center"><span id="fig:IVRMirexYear6"></span>
-<img src="Book207_files/figure-html/IVRMirexYear6-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for all six years. Note that the IVR indicated that these lines are not  parallel." width="432" />
+#R&gt;               Df   Sum Sq  Mean Sq F value    Pr(&gt;F)
+#R&gt;   weight       1 0.115886 0.115886 30.6459 1.615e-06
+#R&gt;   year         2 0.205825 0.102912 27.2149 2.028e-08
+#R&gt;   weight:year  2 0.042176 0.021088  5.5767   0.00694
+#R&gt;   Residuals   44 0.166385 0.003781</code></pre>
+<p>In this case, the p-value for the interaction (p=0.0069) is less than 0.05, which suggests that the interaction term is important to the model (it explains a significant portion of variability) and that <strong>at least</strong> one of the groups has a different slope than the other groups (Figure <a href="IVRTesting.html#fig:IVRMirexYearL3">22.6</a>). Note the “at least” in the previous sentence. This is the same issue you ran into with One- and Two-Way ANOVAs – rejecting H<sub>0</sub> simply means that there is some difference among the groups, not that they are all different. Multiple comparisons for slopes will be introduced in the next module.</p>
+<div class="figure" style="text-align: center"><span id="fig:IVRMirexYearL3"></span>
+<img src="Book207_files/figure-html/IVRMirexYearL3-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for 1992, 1996, and 1999. Note that the IVR indicated that these lines are not  parallel." width="432" />
 <p class="caption">
-Figure 22.6: Fitted regression lines for mirex in tissue by salmon weight for all six years. Note that the IVR indicated that these lines are not parallel.
+Figure 22.6: Fitted regression lines for mirex in tissue by salmon weight for 1992, 1996, and 1999. Note that the IVR indicated that these lines are not parallel.
 </p>
 </div>
 <div class="tip">
@@ -615,23 +622,23 @@ Figure 22.6: Fitted regression lines for mirex in tissue by salmon weight for al
 </div>
 <div id="more-groups-same-slopes" class="section level2" number="22.7">
 <h2><span class="header-section-number">22.7</span> More Groups (Same Slopes)</h2>
-<p>For the purposes of having a simple example, supposed that only the first four years from the previous example were considered.</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb172-1"><a href="IVRTesting.html#cb172-1" aria-hidden="true" tabindex="-1"></a>Mirex2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(Mirex,year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1977</span>,<span class="dv">1982</span>,<span class="dv">1986</span>,<span class="dv">1992</span>))</span>
-<span id="cb172-2"><a href="IVRTesting.html#cb172-2" aria-hidden="true" tabindex="-1"></a>ivrY2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year<span class="sc">+</span>weight<span class="sc">:</span>year,<span class="at">data=</span>Mirex2)</span>
-<span id="cb172-3"><a href="IVRTesting.html#cb172-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivrY2)</span></code></pre></div>
+<p>For the purposes of having another simple example, suppose that only the first three years from the previous example were considered.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb173-1"><a href="IVRTesting.html#cb173-1" aria-hidden="true" tabindex="-1"></a>MirexFirst3 <span class="ot">&lt;-</span> <span class="fu">filter</span>(Mirex,year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1977</span>,<span class="dv">1982</span>,<span class="dv">1986</span>))</span>
+<span id="cb173-2"><a href="IVRTesting.html#cb173-2" aria-hidden="true" tabindex="-1"></a>ivrY2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year<span class="sc">+</span>weight<span class="sc">:</span>year,<span class="at">data=</span>MirexFirst3)</span>
+<span id="cb173-3"><a href="IVRTesting.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivrY2)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Response: mirex
-#R&gt;               Df  Sum Sq Mean Sq  F value    Pr(&gt;F)
-#R&gt;   weight       1 0.43886 0.43886 103.7272 7.431e-16
-#R&gt;   year         3 0.07602 0.02534   5.9895  0.001016
-#R&gt;   weight:year  3 0.00089 0.00030   0.0704  0.975568
-#R&gt;   Residuals   76 0.32155 0.00423</code></pre>
-<p>With these results it is seen that the lines for the four years are parallel (p=0.9756); thus, the relationship between mirex concentration in the tissue and weight of the salmon does not differ across the four years (Figure <a href="IVRTesting.html#fig:IVRMirexYear4">22.7</a>). There does appear to be a significant relationsip between mirex concentration in the tissue and weight of the salmon (p&lt;0.00005). Finally, it appears the mirex concentration in the salmon at the same weight of salmon differ between <strong>at least</strong> one pair of years (p=0.0010). Again, in the next module, multiple comparison methods for distinguishing which pairs of means have different intercepts will be introduced.</p>
-<div class="figure" style="text-align: center"><span id="fig:IVRMirexYear4"></span>
-<img src="Book207_files/figure-html/IVRMirexYear4-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, 1986, and 1992. Note that the IVR indicated that these lines are parallel, there is a signficant relationship, and at least one of the lines has a different intercept." width="432" />
+#R&gt;               Df  Sum Sq Mean Sq F value    Pr(&gt;F)
+#R&gt;   weight       1 0.32844 0.32844 89.9408 6.064e-14
+#R&gt;   year         2 0.05719 0.02859  7.8306 0.0008881
+#R&gt;   weight:year  2 0.00089 0.00044  0.1218 0.8855178
+#R&gt;   Residuals   66 0.24101 0.00365</code></pre>
+<p>With these results it is seen that the lines for the three years are parallel (p=0.8855); thus, the relationship between mirex concentration in the tissue and weight of the salmon does not differ across the three years (Figure <a href="IVRTesting.html#fig:IVRMirexYearF3">22.7</a>). There does appear to be a significant relationship between mirex concentration in the tissue and weight of the salmon (p&lt;0.00005). Finally, it appears the mirex concentration in the salmon at the same weight of salmon differ between <strong>at least</strong> one pair of years (p=0.0009). Again, in the next module, multiple comparison methods for distinguishing which pairs of means have different intercepts will be introduced.</p>
+<div class="figure" style="text-align: center"><span id="fig:IVRMirexYearF3"></span>
+<img src="Book207_files/figure-html/IVRMirexYearF3-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. Note that the IVR indicated that these lines are parallel, there is a signficant relationship, and at least one of the lines has a different intercept." width="432" />
 <p class="caption">
-Figure 22.7: Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, 1986, and 1992. Note that the IVR indicated that these lines are parallel, there is a signficant relationship, and at least one of the lines has a different intercept.
+Figure 22.7: Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. Note that the IVR indicated that these lines are parallel, there is a signficant relationship, and at least one of the lines has a different intercept.
 </p>
 </div>
 <div class="tip">
