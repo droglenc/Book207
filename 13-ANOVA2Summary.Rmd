@@ -25,7 +25,7 @@ The following is a process for fitting a Two-Way ANOVA model. Consider this proc
     * If a significant interaction exists then perform multiple comparisons on the interaction term using the model that contained an interaction term.
     * If a significant interaction does not exist then perform multiple comparisons for each factor for which a main effect exists using the model without an interaction term.
 1. Create a summary graphic of treatment means (i.e., an interaction plot) **on the original scale** with 95% confidence intervals using `ggplot()` and results from `emmeans()` using the model with an interaction term.
-1. Write an overall conclusion of your findings.
+1. Write a succinct conclusion of your findings.
 
 &nbsp;
 

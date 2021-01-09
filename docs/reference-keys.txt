@@ -127,6 +127,20 @@ fig:IVRMirexYearL3a
 fig:IVRMirexYearF3a
 fig:IVRExampleIntercepts
 fig:IVRExampleIntercepts2
+tab:NRGSampleSize
+fig:NRGAssumptions1
+tab:NRGANOVA1
+tab:NRGSlopes1
+tab:NRGANOVA2
+tab:NRGIntercepts2
+fig:NRGFitPlot
+tab:ShrubSampleSize
+fig:ShrubAssumptions1
+fig:ShrubAssumptions2
+tab:ShrubANOVA1
+tab:ShrubIntercepts2
+fig:ShrubFitPlot
+fig:ShrubMeansPlot
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -272,3 +286,6 @@ assumptions-transformations
 multiple-comparisons-for-slopes
 multiple-comparisons-for-intercepts
 IVRSummary
+IVRWorkflow
+fish-energy-density-no-transformation
+shrub-allometry-no-transformation

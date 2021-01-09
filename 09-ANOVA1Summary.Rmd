@@ -22,7 +22,7 @@ The process of fitting and interpreting linear models is as much an art as it is
 1. If differences among group means exist, then use a multiple comparison technique with `emmeans()` and `summary()` to identify specific differences. Discuss specific differences **using confidence intervals**.
     * If the data were log-transformed then discuss specific ratios of means using back-transformed differences (use `tran=` in `emmeans()` and `type="response"` in `summary()` to computed the back-transformations).
 1. Create a summary graphic of observations with group means **on the original scale** and 95% confidence intervals using `ggplot()` and results from `emmeans()`.
-1. Write an overall conclusion of your findings.
+1. Write a succinct conclusion of your findings.
 
 &nbsp;
 

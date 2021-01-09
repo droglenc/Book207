@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-08" />
+<meta name="date" content="2021-01-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -307,7 +307,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="23.2" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html#multiple-comparisons-for-slopes"><i class="fa fa-check"></i><b>23.2</b> Multiple Comparisons for Slopes</a></li>
 <li class="chapter" data-level="23.3" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html#multiple-comparisons-for-intercepts"><i class="fa fa-check"></i><b>23.3</b> Multiple Comparisons for Intercepts</a></li>
 </ul></li>
-<li class="chapter" data-level="24" data-path="IVRSummary.html"><a href="IVRSummary.html"><i class="fa fa-check"></i><b>24</b> IVR Summary</a></li>
+<li class="chapter" data-level="24" data-path="IVRSummary.html"><a href="IVRSummary.html"><i class="fa fa-check"></i><b>24</b> IVR Summary</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="IVRSummary.html"><a href="IVRSummary.html#IVRWorkflow"><i class="fa fa-check"></i><b>24.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="24.2" data-path="IVRSummary.html"><a href="IVRSummary.html#fish-energy-density-no-transformation"><i class="fa fa-check"></i><b>24.2</b> Fish Energy Density (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="24.3" data-path="IVRSummary.html"><a href="IVRSummary.html#shrub-allometry-no-transformation"><i class="fa fa-check"></i><b>24.3</b> Shrub Allometry (<em>No Transformation</em>)</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
@@ -332,7 +337,893 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="IVRSummary" class="section level1" number="24">
 <h1><span class="header-section-number">Module 24</span> IVR Summary</h1>
+<p>Specific parts of a full Indicator Variable Regression (IVR) analysis were described in Modules <a href="IVRVariables.html#IVRVariables">20</a>-<a href="IVRAnalysis.html#IVRAnalysis">23</a>. In this module, a workflow for a full analysis is offered and that workflow is demonstrated with several examples.</p>
+<div id="IVRWorkflow" class="section level2" number="24.1">
+<h2><span class="header-section-number">24.1</span> Suggested Workflow</h2>
+<p>The following is a process for fitting an IVR. Consider this process as you learn to fit IVR models, but don’t consider this to be a concrete process for all models.</p>
+<ol style="list-style-type: decimal">
+<li>Perform a thorough EDA. Pay close attention to the form, strength, and outliers on the scatterplot of the response and explanatory variables separated by each level of the factor (You can add <code>facet_wrap(vars(FACTOR)))</code> (where <code>FACTOR</code> is replaced with the factor variable in the IVR) to <code>ggplot()</code> code that constructs a scatterplot to separate by groups.)</li>
+<li>Show the sample size by group using <code>xtabs()</code>.</li>
+<li>Assess the independence assumption.
+<ul>
+<li>If this assumption is not met then other analysis methods must be used.</li>
+</ul></li>
+<li>Fit the untransformed ultimate full model with <code>lm()</code>.</li>
+<li>Check the other four assumptions for the untransformed model with assumptionCheck().
+<ul>
+<li>Check the linearity of the relationship with the residual plot.</li>
+<li>Check homoscedasticity with the residual plot.</li>
+<li>Check normality of residuals with an Anderson-Darling test and histogram of residuals.</li>
+<li>Check outliers and influential points with the outlier test and residual plot.</li>
+</ul></li>
+<li>If an assumption or assumptions are violated, then attempt to find a transformation where the assumptions are met.
+<ul>
+<li>Use trial-and-error with assumptionCheck(), theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
+<ul>
+<li>Attempt transformations with the response variable first.</li>
+<li>Generally only ever transform the explanatory variable with logarithms.</li>
+</ul></li>
+<li>If only an outlier or influential observation exists (i.e., linear, homoscedastic, and normal residuals) and no transformation corrects the “problem,” then consider removing that observation from the data set.</li>
+<li>Fit the ultimate full model with the transformed variable(s) or reduced data set.</li>
+</ul></li>
+<li>Construct an ANOVA table for the ultimate full model with <code>anova()</code>.
+<ul>
+<li>If a significant interaction exists then do NOT interpret the main effects!!</li>
+<li>If a significant interaction does NOT exist then interpret the main effects (i.e., interpret the coincident lines and relationship test p-values).</li>
+</ul></li>
+<li>As appropriate, perform multiple comparisons to identify specific differences.
+<ul>
+<li>If a significant interact exists (i.e., non-parallel lines) then use <code>emtrend()</code> and <code>summary()</code> to identify specific slopes that differ.</li>
+<li>If a significant interaction does not exist (i.e., parallel lines) but the lines are not coincident (i.e., different slopes) …
+<ul>
+<li>Fit a new model without the insignificant interaction term.</li>
+<li>Use <code>emmeans()</code> and <code>summary()</code> to identify specific mean values of the response at the mean value of the covariate that differ.</li>
+</ul></li>
+</ul></li>
+<li>Create a summary graphic of the fitted lines using the <code>ggplot()</code>.
+<ul>
+<li>Include the 95% confidence band and the observed data as long as the plot is not overly cluttered. If it is, just show the fitted lines.</li>
+</ul></li>
+<li>Make predictions with <code>predict()</code>, if desired.</li>
+<li>Write a succinct conclusion of your findings. Make sure you address …
+<ul>
+<li>whether the relationship between the response variable and the covariate differs among groups.</li>
+<li>whether the mean value of the response variable at the mean value of the covariate differs among groups (if appropriate to address this).</li>
+<li>whether there is a significant relationship between the response variable and the covariate (may need to do separately for each group).</li>
+</ul></li>
+</ol>
+<p> </p>
+</div>
+<div id="fish-energy-density-no-transformation" class="section level2" number="24.2">
+<h2><span class="header-section-number">24.2</span> Fish Energy Density (<em>No Transformation</em>)</h2>
+<p>Some ecologists study the transfer of energy through the ecosystem. Energy is passed up trophic levels through predation. How much energy is transferred depends on a number of things, including the energy density of the prey. <a href="https://www.researchgate.net/profile/Kyle_Hartman/publication/250019672_Estimating_Energy_Density_of_Fish/links/0a85e52e51c7c8df25000000.pdf">Hartman and Brandt (1995)</a> provided a meta-analysis of energy densities for a wide variety of prey fishes. In one part of that study they more closely examined the energy densities of <a href="https://en.wikipedia.org/wiki/Anchoa_mitchilli">Bay Anchovy</a> (<em>Anchoa mitchilli</em>), <a href="https://en.wikipedia.org/wiki/Bluefish">Bluefish</a> (<em>Pomatomus saltatrix</em>), <a href="https://en.wikipedia.org/wiki/Striped_bass">Striped Bass</a> (<em>Morone saxatilis</em>), and <a href="https://en.wikipedia.org/wiki/Weakfish">Weakfish</a> (<em>Cynoscion regalis</em>) collected from <a href="https://en.wikipedia.org/wiki/Chesapeake_Bay">Chesapeake Bay</a> , Maryland.</p>
+<p>Hartman and Brandt (1995) were primarily interested in describing differences in energy density between the four species. However, it is commonly known that the amount of energy in a fish is partly dependent on the percent dry weight of the fish.<a href="#fn93" class="footnote-ref" id="fnref93"><sup>93</sup></a> Thus, their objectives were to (i) describe the relationship between energy density and dry weight and determine if that relationship differed among the four species and (ii) determine if the mean energy density at a constant dry weight differed among the four species.</p>
+<p>The first hypothesis to be tested (i.e, parallel lines test) is</p>
+<p><span class="math display">\[
+\begin{split}
+\text{H}_{\text{0}}&amp;: ``\text{the relationship between energy density and dry weight does not differ by species&#39;&#39;} \\
+\text{H}_{\text{A}}&amp;: ``\text{the relationship between energy density and dry weight does differ by species&#39;&#39;} \\
+\end{split}
+\]</span></p>
+<p>If this H<sub>0</sub> is not rejected (i.e., the lines are parallel) then the following two sets of hypotheses will be tested (i.e., coincident lines and relationship tests),</p>
+<p><span class="math display">\[
+\begin{split}
+\text{H}_{\text{0}}&amp;: ``\text{the mean energy density at the mean dry weight does not differ among species&#39;&#39;} \\
+\text{H}_{\text{A}}&amp;: ``\text{the mean energy density at the mean dry weight does differ among species&#39;&#39;} \\
+\end{split}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\begin{split}
+\text{H}_{\text{0}}&amp;: ``\text{there is not a relationship between energy density and dry weight&#39;&#39;} \\
+\text{H}_{\text{A}}&amp;: ``\text{there is a relationship between energy density and dry weight&#39;&#39;} \\
+\end{split}
+\]</span></p>
+<p>The sample size is quite unbalanced, with essentially twice as many Bay Anchovy as any other species (Table <a href="IVRSummary.html#tab:NRGSampleSize">24.1</a>). The sample size for Bluefish, Striped Bass, and Weakfish is quite small.</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:NRGSampleSize">Table 24.1: </span>Sample size for each species.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+species
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+bayanchovy
+</td>
+<td style="text-align:right;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bluefish
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stripedbass
+</td>
+<td style="text-align:right;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+weakfish
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+</tbody>
+</table>
+<p>There is very little information to fully assess independence. However, as long as any individual fish does not affect the dry weight or the energy density of any other fish, than the independence assumption is likely met. It is hard to imagine how any one fish could affect any other single fish for these two metrics, so I suspect that independence is adequately met.</p>
+<p>The residual plot (Figure <a href="IVRSummary.html#fig:NRGAssumptions1">24.1</a>-Right) does not exhibit any curvature or funneling pattern; thus the linearity and homoscedasticity assumptions are met. The residuals appear approximately normal (Anderson-Darling p=0.4549; Figure <a href="IVRSummary.html#fig:NRGAssumptions1">24.1</a>-Left) and no outliers are present (outlier test p&gt;1). No transformation is needed as all assumptions appear to be met.</p>
+<div class="figure" style="text-align: center"><span id="fig:NRGAssumptions1"></span>
+<img src="Book207_files/figure-html/NRGAssumptions1-1.png" alt="Histogram of residuals (left) and residual plot (right) for the IVR analysis of energy density by percent dry weight and species." width="672" />
+<p class="caption">
+Figure 24.1: Histogram of residuals (left) and residual plot (right) for the IVR analysis of energy density by percent dry weight and species.
+</p>
+</div>
+<p>The relationship between energy density and percent dry weight differed among some of the species (p&lt;0.00005; Table <a href="IVRSummary.html#tab:NRGANOVA1">24.2</a>). It appears that the slope for Bay Anchovy is less than the slope for all other species (p≤0.0002; Table <a href="IVRSummary.html#tab:NRGSlopes1">24.3</a>). The slopes do not differ among the other three species (p≥0.1444; Table <a href="IVRSummary.html#tab:NRGSlopes1">24.3</a>).</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:NRGANOVA1">Table 24.2: </span>ANOVA table for the IVR analysis of energy density by percent dry weight and species.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+dw
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+170693154
+</td>
+<td style="text-align:right;">
+170693154
+</td>
+<td style="text-align:right;">
+1859.0
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+species
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+10592036
+</td>
+<td style="text-align:right;">
+3530679
+</td>
+<td style="text-align:right;">
+38.5
+</td>
+<td style="text-align:right;">
+0e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dw:species
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4105617
+</td>
+<td style="text-align:right;">
+1368539
+</td>
+<td style="text-align:right;">
+14.9
+</td>
+<td style="text-align:right;">
+3e-07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+5142008
+</td>
+<td style="text-align:right;">
+91822
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:NRGSlopes1">Table 24.3: </span>Tukey’s multiple comparisons for all pairs of slopes for the IVR analysis of energy density by percent dry weight and species.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+contrast
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+lower.CL
+</th>
+<th style="text-align:right;">
+upper.CL
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+bayanchovy - bluefish
+</td>
+<td style="text-align:right;">
+-208.3
+</td>
+<td style="text-align:right;">
+-291.2
+</td>
+<td style="text-align:right;">
+-125.5
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bayanchovy - stripedbass
+</td>
+<td style="text-align:right;">
+-157.6
+</td>
+<td style="text-align:right;">
+-241.3
+</td>
+<td style="text-align:right;">
+-73.9
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bayanchovy - weakfish
+</td>
+<td style="text-align:right;">
+-149.6
+</td>
+<td style="text-align:right;">
+-237.4
+</td>
+<td style="text-align:right;">
+-61.8
+</td>
+<td style="text-align:right;">
+0.0002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bluefish - stripedbass
+</td>
+<td style="text-align:right;">
+50.7
+</td>
+<td style="text-align:right;">
+-15.9
+</td>
+<td style="text-align:right;">
+117.3
+</td>
+<td style="text-align:right;">
+0.1948
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bluefish - weakfish
+</td>
+<td style="text-align:right;">
+58.7
+</td>
+<td style="text-align:right;">
+-12.9
+</td>
+<td style="text-align:right;">
+130.4
+</td>
+<td style="text-align:right;">
+0.1444
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stripedbass - weakfish
+</td>
+<td style="text-align:right;">
+8.0
+</td>
+<td style="text-align:right;">
+-64.6
+</td>
+<td style="text-align:right;">
+80.6
+</td>
+<td style="text-align:right;">
+0.9912
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>As only Bay Anchovy had a different slope, I removed this species so that I could determine how the mean energy density at the mean percent dry weight differed among the the other three species. Assuming parallel lines for these three species (from the analysis above), it appears that the intercepts differed among some of the species (p=0.0005; Table <a href="IVRSummary.html#tab:NRGANOVA2">24.4</a>). Tukey’s multiple comparisons indicate that the intercept for Bluefish is less than the intercept for both Striped Bass and Weakfish (p≤0.0178; Table <a href="IVRSummary.html#tab:NRGIntercepts2">24.5</a>). The intercepts for Striped Bass and Weakfish did not differ (p=0.7088; Table <a href="IVRSummary.html#tab:NRGIntercepts2">24.5</a>).</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:NRGANOVA2">Table 24.4: </span>ANOVA table for the IVR analysis of energy density by percent dry weight and species with Bay Anchovy excluded and assuming parallel lines (from the previous analysis).
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+dw
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+104962559
+</td>
+<td style="text-align:right;">
+104962559
+</td>
+<td style="text-align:right;">
+782.4
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+species
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2583571
+</td>
+<td style="text-align:right;">
+1291785
+</td>
+<td style="text-align:right;">
+9.6
+</td>
+<td style="text-align:right;">
+0.00049
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+4561501
+</td>
+<td style="text-align:right;">
+134162
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:NRGIntercepts2">Table 24.5: </span>Tukey’s multiple comparisons for all pairs of mean energy density at the mean percent dry weight by species.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+contrast
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+lower.CL
+</th>
+<th style="text-align:right;">
+upper.CL
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+bluefish - stripedbass
+</td>
+<td style="text-align:right;">
+-631.4
+</td>
+<td style="text-align:right;">
+-988.4
+</td>
+<td style="text-align:right;">
+-274.4
+</td>
+<td style="text-align:right;">
+0.0004
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bluefish - weakfish
+</td>
+<td style="text-align:right;">
+-506.5
+</td>
+<td style="text-align:right;">
+-935.9
+</td>
+<td style="text-align:right;">
+-77.1
+</td>
+<td style="text-align:right;">
+0.0178
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stripedbass - weakfish
+</td>
+<td style="text-align:right;">
+124.9
+</td>
+<td style="text-align:right;">
+-260.3
+</td>
+<td style="text-align:right;">
+510.2
+</td>
+<td style="text-align:right;">
+0.7088
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>Through this analysis it appears that Bay Anchovy has a less steep relationship between energy density and percent dry weight than the other species (Figure <a href="IVRSummary.html#fig:NRGFitPlot">24.2</a>). So, energy density does not increase as quickly with increasing dry weight for Bay Anchovy as it does for the other species. Among the other species, it appears that Bluefish has a lower mean energy density at all percent dry weights than Striped Bass and Weakfish. Striped Bass and Weakfish appear to have the same mean energy density at all percent dry weights. Thus, for fish of the same percent dry weight, Striped Bass and Weakfish have a higher mean energy density than Bluefish.</p>
+<div class="figure" style="text-align: center"><span id="fig:NRGFitPlot"></span>
+<img src="Book207_files/figure-html/NRGFitPlot-1.png" alt="Fitted lines for the regression of energy density on percent dry weight separated by species of fish." width="480" />
+<p class="caption">
+Figure 24.2: Fitted lines for the regression of energy density on percent dry weight separated by species of fish.
+</p>
+</div>
+<div id="r-code-and-results-8" class="section level4 unnumbered">
+<h4>R Code and Results</h4>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb183-1"><a href="IVRSummary.html#cb183-1" aria-hidden="true" tabindex="-1"></a>nrg <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/FishEnergyDensity.csv&quot;</span>)</span>
+<span id="cb183-2"><a href="IVRSummary.html#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>species,<span class="at">data=</span>nrg)</span>
+<span id="cb183-3"><a href="IVRSummary.html#cb183-3" aria-hidden="true" tabindex="-1"></a>ivr1.nrg <span class="ot">&lt;-</span> <span class="fu">lm</span>(ed<span class="sc">~</span>dw<span class="sc">+</span>species<span class="sc">+</span>dw<span class="sc">:</span>species,<span class="at">data=</span>nrg)</span>
+<span id="cb183-4"><a href="IVRSummary.html#cb183-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(ivr1.nrg)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb184-1"><a href="IVRSummary.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr1.nrg)</span>
+<span id="cb184-2"><a href="IVRSummary.html#cb184-2" aria-hidden="true" tabindex="-1"></a>mc1.nrg <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(ivr1.nrg,<span class="at">specs=</span>pairwise<span class="sc">~</span>species,<span class="at">var=</span><span class="st">&quot;dw&quot;</span>)</span>
+<span id="cb184-3"><a href="IVRSummary.html#cb184-3" aria-hidden="true" tabindex="-1"></a>( mc1sum.nrg <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc1.nrg,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb184-4"><a href="IVRSummary.html#cb184-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr2.nrg)</span>
+<span id="cb184-5"><a href="IVRSummary.html#cb184-5" aria-hidden="true" tabindex="-1"></a>mc2.nrg <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivr2.nrg,<span class="at">specs=</span>pairwise<span class="sc">~</span>species)</span>
+<span id="cb184-6"><a href="IVRSummary.html#cb184-6" aria-hidden="true" tabindex="-1"></a>( mc2sum.nrg <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc2.nrg,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb184-7"><a href="IVRSummary.html#cb184-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>nrg,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>dw,<span class="at">y=</span>ed,<span class="at">color=</span>species)) <span class="sc">+</span> </span>
+<span id="cb184-8"><a href="IVRSummary.html#cb184-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb184-9"><a href="IVRSummary.html#cb184-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Percent Dry Weight&quot;</span>,<span class="at">y=</span><span class="st">&quot;Energy Density (J/g)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb184-10"><a href="IVRSummary.html#cb184-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
+<span id="cb184-11"><a href="IVRSummary.html#cb184-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p> </p>
+</div>
+</div>
+<div id="shrub-allometry-no-transformation" class="section level2" number="24.3">
+<h2><span class="header-section-number">24.3</span> Shrub Allometry (<em>No Transformation</em>)</h2>
+<p>Allometric models are useful for assessing above-ground biomass (AGB) and net primary productivity (ANPP) of forests and shrubs. These models are widely used for forest inventory and management because they offer a non-destructive, relatively accurate, and labor-efficient method for estimating these difficult to measure metrics. The AGB and ANPP of plants are important components of the global carbon cycle. Above-ground biomass can be used to quantify carbon stores in plants and ANPP can help to understand potential future carbon storage. Thus, the prediction of AGB and ANPP of plants will help to evaluate terrestrial carbon sequestration, which is important for mitigation of global climate change.</p>
+<p>Allometric models to be used for these purposes are developed for individual tree and shrub species, oftentimes for different habitats. <a href="https://www.researchgate.net/publication/287346484_Habitat_Effect_on_Allometry_of_a_Xeric_Shrub_Artemisia_ordosica_Krasch_in_the_Mu_Us_Desert_of_Northern_China">She <em>et al.</em> (2015)</a> examined allometric relationships for the <a href="https://www.sunset.com/garden/xeric-water-wise-drought-tolerant-what-does-it-all-mean">xeric</a> shrub <a href="https://en.wikipedia.org/wiki/Artemisia_(genus)"><em>Artemisia</em></a> <em>ordosica</em>, a species endemic to the <a href="https://en.wikipedia.org/wiki/Mu_Us_Desert">Mu Us Desert</a> in China. In one part of their analysis they used crown area (CA; m<sup>2</sup>) and habitat type to explain variability in AGB (kg) of individual <em>Artemisia</em> shrubs. Three habitats were considered – semi-fixed dunes (SF), fixed dunes (FD), and fixed dunes with soil crusts (FC). All individual <em>Artemisia</em> plants were sampled from three plots that were 2-4 km separated. In their model fitting they assumed that the relationship between AGB and CA followed a power function, as is typical for many allometric relationships.</p>
+<p>The first hypothesis to be tested (i.e, parallel lines test) is</p>
+<p><span class="math display">\[
+\begin{split}
+\text{H}_{\text{0}}&amp;: ``\text{the relationship between AGB an CA does not differ by habitat&#39;&#39;} \\
+\text{H}_{\text{A}}&amp;: ``\text{the relationship between AGB an CA does differ by habitat&#39;&#39;} \\
+\end{split}
+\]</span></p>
+<p>If this H<sub>0</sub> is not rejected (i.e., the lines are parallel) then the following two sets of hypotheses will be tested (i.e., coincident lines and relationship tests),</p>
+<p><span class="math display">\[
+\begin{split}
+\text{H}_{\text{0}}&amp;: ``\text{the mean AGB at the mean CA does not differ among habitats&#39;&#39;} \\
+\text{H}_{\text{A}}&amp;: ``\text{the mean AGB at the mean CA does differ among habitats&#39;&#39;} \\
+\end{split}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\begin{split}
+\text{H}_{\text{0}}&amp;: ``\text{there is not a relationship between ABG and CA&#39;&#39;} \\
+\text{H}_{\text{A}}&amp;: ``\text{there is a relationship between AGB and CA&#39;&#39;} \\
+\end{split}
+\]</span></p>
+<p>The sample size is unbalanced, with essentially 50% more <em>Artemisia</em> sampled in semi-fixed (SF) dunes than the other two habitats (Table <a href="IVRSummary.html#tab:ShrubSampleSize">24.6</a>). The sample sizes are not large but are likely adequate in all habitats.</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:ShrubSampleSize">Table 24.6: </span>Sample size of individual plants by habitat.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Habitat
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+FC
+</td>
+<td style="text-align:right;">
+22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FD
+</td>
+<td style="text-align:right;">
+23
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SF
+</td>
+<td style="text-align:right;">
+31
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>Independence of individual plants is questionable both within- and among- groups. Though the three plots were spatially separated, it appears that multiple plants were sampled in each plot. Thus, there could be an effect of one plant on another plant in the same plot. That being said, it is hard to imagine that one plant could affect the <em>relationship</em> between crown area and above-ground biomass of another plant in the same plot. Thus, I will tentatively continue assuming independence.</p>
+<p>Allometric relationships often follow a power function, thus the assumptions are likely not met on the original untransformed scale. Indeed, the residual plot (Figure <a href="IVRSummary.html#fig:ShrubAssumptions1">24.3</a>-Right) shows a clear curvature and heteroscedasticity. A power function relationship suggests that both the response and covariate should be log-transformed. With both variables log-transformed the residual plot (Figure <a href="IVRSummary.html#fig:ShrubAssumptions2">24.4</a>-Right) exhibits no curvature or funnel-shape, which indicates that the linearity and homoscedasticity assumptions are met on this scale. The residuals are approximately normal (Anderson-Darling p=0.6638; Figure <a href="IVRSummary.html#fig:ShrubAssumptions2">24.4</a>-Left) and no outliers are present (outlier test p=0.2764). The analysis will continue on the log-log scale as all assumptions appear to be met on this scale.</p>
+<div class="figure" style="text-align: center"><span id="fig:ShrubAssumptions1"></span>
+<img src="Book207_files/figure-html/ShrubAssumptions1-1.png" alt="Histogram of residuals (Left) and residual plot (Right) for the IVR of above-ground biomass on crown area for three dune habitats." width="672" />
+<p class="caption">
+Figure 24.3: Histogram of residuals (Left) and residual plot (Right) for the IVR of above-ground biomass on crown area for three dune habitats.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:ShrubAssumptions2"></span>
+<img src="Book207_files/figure-html/ShrubAssumptions2-1.png" alt="Histogram of residuals (Left) and residual plot (Right) for the IVR of log-transformed above-ground biomass on log-transformed crown area for three dune habitats." width="672" />
+<p class="caption">
+Figure 24.4: Histogram of residuals (Left) and residual plot (Right) for the IVR of log-transformed above-ground biomass on log-transformed crown area for three dune habitats.
+</p>
+</div>
+<p> </p>
+<p>The relationship between log above-ground biomass and log crown area does not differ among <em>Artemisia</em> sampled from the different habitats (p=0.1115; Table <a href="IVRSummary.html#tab:ShrubANOVA1">24.7</a>). There does appear to be a significant relationship between log above-ground biomass and log crown area for <em>Artemisia</em> (p&lt;0.00005; Table <a href="IVRSummary.html#tab:ShrubANOVA1">24.7</a>). Finally, it appears that the mean log above-ground biomass at all log crown areas differs between some of the habitats (p&lt;0.00005; Table <a href="IVRSummary.html#tab:ShrubANOVA1">24.7</a>).</p>
+<p> </p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:ShrubANOVA1">Table 24.7: </span>ANOVA table for the IVR of log-transformed above-ground biomass on log-transformed crown area for three dune habitats.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+logCA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+120.72
+</td>
+<td style="text-align:right;">
+120.72
+</td>
+<td style="text-align:right;">
+826.34
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Habitat
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+13.65
+</td>
+<td style="text-align:right;">
+6.83
+</td>
+<td style="text-align:right;">
+46.73
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+logCA:Habitat
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.66
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+2.26
+</td>
+<td style="text-align:right;">
+0.1115
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+10.23
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>The back-transformed mean above-ground biomass at the back-transformed mean crown area differs among all habitats (p≤0.0001; Table <a href="IVRSummary.html#tab:ShrubIntercepts2">24.8</a>). The back-transformed mean above-ground biomass at the back-transformed mean crown area is between 5.5 and 16.4% greater in the soil crust (FC) than fixed dune (FD) habitats, between 15.8 and 27.7% greater in the soil crust (FC) than semi-fixed dune (FD) habitats, and between 4.3 and 15.4% greater in the fixed dune (FD) than semi-fixed dune habitats (Table <a href="IVRSummary.html#tab:ShrubIntercepts2">24.8</a>).</p>
+<p> </p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:ShrubIntercepts2">Table 24.8: </span>Tukey’s multiple comparisons for the RATIO mean above-ground biomass at the mean log crown areas for each pair of habitats
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+contrast
+</th>
+<th style="text-align:right;">
+ratio
+</th>
+<th style="text-align:right;">
+lower.CL
+</th>
+<th style="text-align:right;">
+upper.CL
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+FC / FD
+</td>
+<td style="text-align:right;">
+1.108
+</td>
+<td style="text-align:right;">
+1.055
+</td>
+<td style="text-align:right;">
+1.164
+</td>
+<td style="text-align:right;">
+0.000013
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FC / SF
+</td>
+<td style="text-align:right;">
+1.216
+</td>
+<td style="text-align:right;">
+1.158
+</td>
+<td style="text-align:right;">
+1.277
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FD / SF
+</td>
+<td style="text-align:right;">
+1.097
+</td>
+<td style="text-align:right;">
+1.043
+</td>
+<td style="text-align:right;">
+1.154
+</td>
+<td style="text-align:right;">
+0.000103
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>A positive relationship was found between log above-ground biomass and log crown area that did not differ between habitat types (Figure <a href="IVRSummary.html#fig:ShrubFitPlot">24.5</a>). The mean above-ground biomass for plants with the same crown area was greater for <em>Artemisia</em> in the surface crust habitats than in the fixed dunes habitats which were greater than in the semi-fixed dunes habitats (Figure <a href="IVRSummary.html#fig:ShrubMeansPlot">24.6</a>). In other words, it appears that the above-ground biomass is greater in the surface crust habitats than fixed-dunes than semi-fixed dunes for plants with the same crown area.</p>
+<div class="figure" style="text-align: center"><span id="fig:ShrubFitPlot"></span>
+<img src="Book207_files/figure-html/ShrubFitPlot-1.png" alt="Fitted lines for the regression of log above-ground biomass on log crown area separated by habitats. Note that these lines are statistically parallel, have statistically different intercepts, and exhibit a statistically positive relationship." width="432" />
+<p class="caption">
+Figure 24.5: Fitted lines for the regression of log above-ground biomass on log crown area separated by habitats. Note that these lines are statistically parallel, have statistically different intercepts, and exhibit a statistically positive relationship.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:ShrubMeansPlot"></span>
+<img src="Book207_files/figure-html/ShrubMeansPlot-1.png" alt="Back-transformed mean above-ground biomass of *Artemisia* (and 95% confidence interval) at the back-transformed mean crown area for each habitat (FC=surface crust, FC=fixed-dune, and SF=semi-fixed dune)." width="336" />
+<p class="caption">
+Figure 24.6: Back-transformed mean above-ground biomass of <em>Artemisia</em> (and 95% confidence interval) at the back-transformed mean crown area for each habitat (FC=surface crust, FC=fixed-dune, and SF=semi-fixed dune).
+</p>
+</div>
+<div id="r-code-and-results-9" class="section level4 unnumbered">
+<h4>R Code and Results</h4>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb185-1"><a href="IVRSummary.html#cb185-1" aria-hidden="true" tabindex="-1"></a>shrub <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/Artemisia.csv&quot;</span>)</span>
+<span id="cb185-2"><a href="IVRSummary.html#cb185-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>Habitat,<span class="at">data=</span>shrub)</span>
+<span id="cb185-3"><a href="IVRSummary.html#cb185-3" aria-hidden="true" tabindex="-1"></a>ivr1.shrub <span class="ot">&lt;-</span> <span class="fu">lm</span>(AGB<span class="sc">~</span>CA<span class="sc">+</span>Habitat<span class="sc">+</span>CA<span class="sc">:</span>Habitat,<span class="at">data=</span>shrub)</span>
+<span id="cb185-4"><a href="IVRSummary.html#cb185-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(ivr1.shrub)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb186-1"><a href="IVRSummary.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(ivr1.shrub,<span class="at">lambday=</span><span class="dv">0</span>,<span class="at">lambdax=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb187-1"><a href="IVRSummary.html#cb187-1" aria-hidden="true" tabindex="-1"></a>shrub<span class="sc">$</span>logAGB <span class="ot">&lt;-</span> <span class="fu">log</span>(shrub<span class="sc">$</span>AGB)</span>
+<span id="cb187-2"><a href="IVRSummary.html#cb187-2" aria-hidden="true" tabindex="-1"></a>shrub<span class="sc">$</span>logCA <span class="ot">&lt;-</span> <span class="fu">log</span>(shrub<span class="sc">$</span>CA)</span>
+<span id="cb187-3"><a href="IVRSummary.html#cb187-3" aria-hidden="true" tabindex="-1"></a>ivr1t.shrub <span class="ot">&lt;-</span> <span class="fu">lm</span>(logAGB<span class="sc">~</span>logCA<span class="sc">+</span>Habitat<span class="sc">+</span>logCA<span class="sc">:</span>Habitat,<span class="at">data=</span>shrub)</span>
+<span id="cb187-4"><a href="IVRSummary.html#cb187-4" aria-hidden="true" tabindex="-1"></a>ivr2t.shrub <span class="ot">&lt;-</span> <span class="fu">lm</span>(logAGB<span class="sc">~</span>logCA<span class="sc">+</span>Habitat,<span class="at">data=</span>shrub)</span>
+<span id="cb187-5"><a href="IVRSummary.html#cb187-5" aria-hidden="true" tabindex="-1"></a>mc2t.shrub <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivr2t.shrub,<span class="at">specs=</span>pairwise<span class="sc">~</span>Habitat,<span class="at">trans=</span><span class="st">&quot;log&quot;</span>)</span>
+<span id="cb187-6"><a href="IVRSummary.html#cb187-6" aria-hidden="true" tabindex="-1"></a>( mc2tsum.shrub <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc2t.shrub,<span class="at">infer=</span><span class="cn">TRUE</span>,<span class="at">type=</span><span class="st">&quot;response&quot;</span>) )</span>
+<span id="cb187-7"><a href="IVRSummary.html#cb187-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>shrub,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>logCA,<span class="at">y=</span>logAGB,<span class="at">color=</span>Habitat)) <span class="sc">+</span> </span>
+<span id="cb187-8"><a href="IVRSummary.html#cb187-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb187-9"><a href="IVRSummary.html#cb187-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;log Crown Area&quot;</span>,<span class="at">y=</span><span class="st">&quot;log Above-Ground Biomass&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb187-10"><a href="IVRSummary.html#cb187-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
+<span id="cb187-11"><a href="IVRSummary.html#cb187-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb188-1"><a href="IVRSummary.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mc2tsum.shrub<span class="sc">$</span>emmeans,</span>
+<span id="cb188-2"><a href="IVRSummary.html#cb188-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Habitat,<span class="at">y=</span>response,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL)) <span class="sc">+</span></span>
+<span id="cb188-3"><a href="IVRSummary.html#cb188-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">size=</span><span class="fl">1.1</span>,<span class="at">fatten=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb188-4"><a href="IVRSummary.html#cb188-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Mean Above-Ground Biomass (kg)&quot;</span>,<span class="at">x=</span><span class="st">&quot;Habitat&quot;</span>) <span class="sc">+</span></span>
+<span id="cb188-5"><a href="IVRSummary.html#cb188-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
 
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="93">
+<li id="fn93"><p>Percent dry weight is the dry weight divided by the wet weight of the fish times 100.<a href="IVRSummary.html#fnref93" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 

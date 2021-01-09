@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-08" />
+<meta name="date" content="2021-01-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -307,7 +307,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="23.2" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html#multiple-comparisons-for-slopes"><i class="fa fa-check"></i><b>23.2</b> Multiple Comparisons for Slopes</a></li>
 <li class="chapter" data-level="23.3" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html#multiple-comparisons-for-intercepts"><i class="fa fa-check"></i><b>23.3</b> Multiple Comparisons for Intercepts</a></li>
 </ul></li>
-<li class="chapter" data-level="24" data-path="IVRSummary.html"><a href="IVRSummary.html"><i class="fa fa-check"></i><b>24</b> IVR Summary</a></li>
+<li class="chapter" data-level="24" data-path="IVRSummary.html"><a href="IVRSummary.html"><i class="fa fa-check"></i><b>24</b> IVR Summary</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="IVRSummary.html"><a href="IVRSummary.html#IVRWorkflow"><i class="fa fa-check"></i><b>24.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="24.2" data-path="IVRSummary.html"><a href="IVRSummary.html#fish-energy-density-no-transformation"><i class="fa fa-check"></i><b>24.2</b> Fish Energy Density (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="24.3" data-path="IVRSummary.html"><a href="IVRSummary.html#shrub-allometry-no-transformation"><i class="fa fa-check"></i><b>24.3</b> Shrub Allometry (<em>No Transformation</em>)</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
@@ -356,15 +361,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Use trial-and-error with <code>assumptionCheck()</code>, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
 <ul>
 <li>Attempt transformations with the response variable first.</li>
-<li>Generally only ever transformation the explanatory variable with logarithms.</li>
+<li>Generally only ever transform the explanatory variable with logarithms.</li>
 </ul></li>
 <li>If only an outlier or influential observation exists (i.e., linear, homoscedastic, and normal residuals) and no transformation corrects the “problem,” then consider removing that observation from the data set.</li>
 <li>Fit the full model with the transformed variable(s) or reduced data set.</li>
 </ul></li>
-<li>Construct an ANOVA table for the full model <code>anova()</code> and interpret the overall F-test.</li>
+<li>Construct an ANOVA table for the full model with <code>anova()</code> and interpret the overall F-test.</li>
 <li>Summarize findings with coefficient results and confidence intervals with <code>cbind(coef(),confint())</code>.</li>
 <li>Create a summary graphic of the fitted line with 95% confidence band using <code>ggplot()</code>.</li>
-<li>Make predictions if desired with <code>predict()</code>.</li>
+<li>Make predictions with <code>predict()</code>, if desired.</li>
+<li>Write a succinct conclusion of your findings.</li>
 </ol>
 <p> </p>
 </div>
@@ -374,8 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The statistical hypotheses to be examined are</p>
 <p><span class="math display">\[
 \begin{split}
-\text{H}_{\text{0}}&amp;: \text{no relationship between temperature anomaly and CO2 values} \\
-\text{H}_{\text{A}}&amp;: \text{is a relationship between temperature anomaly and CO2 values} \\
+\text{H}_{\text{0}}&amp;: ``\text{no relationship between temperature anomaly and CO2 values}&#39;&#39; \\
+\text{H}_{\text{A}}&amp;: ``\text{is a relationship between temperature anomaly and CO2 values}&#39;&#39; \\
 \end{split}
 \]</span></p>
 <p>Data was recorded for 32 years. The data between years is likely not independent as knowing the temperature anomaly and CO<sub>2</sub> values in any given year likely are a good indicator of the values in the next year. This temporal dependence should probably be included in the analysis. However, these data are recorded on an annual basis and it does not make much sense to include only a random sample of years. Thus, to better understand the relationship between these two variables, I will continue with this analysis assuming independence.</p>
@@ -542,8 +548,8 @@ Figure 19.2: Scatterplot of temperature anomaly versuse CO2 concentration with t
 <p>The statistical hypotheses to be examined are</p>
 <p><span class="math display">\[
 \begin{split}
-\text{H}_{\text{0}}&amp;: \text{no relationship between above ground biomass and diameter at breast height} \\
-\text{H}_{\text{A}}&amp;: \text{is a relationship between above ground biomass and diameter at breast height} \\
+\text{H}_{\text{0}}&amp;: ``\text{no relationship between above ground biomass and diameter at breast height}&#39;&#39; \\
+\text{H}_{\text{A}}&amp;: ``\text{is a relationship between above ground biomass and diameter at breast height}&#39;&#39; \\
 \end{split}
 \]</span></p>
 <p>There is some concern over independence because some of the trees presumably came from the same plot and it is possible that one tree might have an impact on another tree. That impact may have been on the overall growth of the tree through density-dependent factors and it is hard to imagine how one tree could effect another tree with respect to the <em>relationship</em> between above ground biomass and diameter at breast height. Thus, I will continue with analysis assuming independence.</p>

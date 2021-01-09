@@ -17,13 +17,14 @@ The following is a process for fitting a SLR. Consider this process as you learn
 1. If an assumption or assumptions are violated, then attempt to find a transformation where the assumptions are met.
     * Use trial-and-error with `assumptionCheck()`, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
         * Attempt transformations with the response variable first.
-        * Generally only ever transformation the explanatory variable with logarithms.
+        * Generally only ever transform the explanatory variable with logarithms.
     * If only an outlier or influential observation exists (i.e., linear, homoscedastic, and normal residuals) and no transformation corrects the "problem", then consider removing that observation from the data set.
     * Fit the full model with the transformed variable(s) or reduced data set.
-1. Construct an ANOVA table for the full model `anova()` and interpret the overall F-test.
+1. Construct an ANOVA table for the full model with `anova()` and interpret the overall F-test.
 1. Summarize findings with coefficient results and confidence intervals with `cbind(coef(),confint())`.
 1. Create a summary graphic of the fitted line with 95% confidence band using `ggplot()`.
-1. Make predictions if desired with `predict()`.
+1. Make predictions with `predict()`, if desired.
+1. Write a succinct conclusion of your findings.
 
 &nbsp;
 
@@ -34,8 +35,8 @@ The statistical hypotheses to be examined are
 
 $$
 \begin{split}
-\text{H}_{\text{0}}&: \text{no relationship between temperature anomaly and CO2 values} \\
-\text{H}_{\text{A}}&: \text{is a relationship between temperature anomaly and CO2 values} \\
+\text{H}_{\text{0}}&: ``\text{no relationship between temperature anomaly and CO2 values}'' \\
+\text{H}_{\text{A}}&: ``\text{is a relationship between temperature anomaly and CO2 values}'' \\
 \end{split}
 $$
 ```{r echo=FALSE}
@@ -119,8 +120,8 @@ The statistical hypotheses to be examined are
 
 $$
 \begin{split}
-\text{H}_{\text{0}}&: \text{no relationship between above ground biomass and diameter at breast height} \\
-\text{H}_{\text{A}}&: \text{is a relationship between above ground biomass and diameter at breast height} \\
+\text{H}_{\text{0}}&: ``\text{no relationship between above ground biomass and diameter at breast height}'' \\
+\text{H}_{\text{A}}&: ``\text{is a relationship between above ground biomass and diameter at breast height}'' \\
 \end{split}
 $$
 
