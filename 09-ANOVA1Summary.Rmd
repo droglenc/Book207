@@ -113,11 +113,12 @@ Note use of a confidence interval and specific direction (i.e., "lower") when de
 
 ```{r TNMeansPlot, echo=FALSE, fig.cap="Mean (with 95% confidence interval) of tomato growth at each nematode density."}
 ggplot() +
-  geom_jitter(data=TN,mapping=aes(x=density,y=growth),
-              alpha=0.25,width=0.05) +
-  geom_pointrange(data=mcsum.tn$emmeans,
-                  mapping=aes(x=density,y=emmean,ymin=lower.CL,ymax=upper.CL),
-               size=1.1,fatten=2,pch=21,fill="white") +
+  geom_jitter(data=TN,mapping=aes(x=density,y=growth),alpha=0.25,width=0.1) +
+  geom_errorbar(data=mcsum.tn$emmeans,
+                mapping=aes(x=density,y=emmean,ymin=lower.CL,ymax=upper.CL),
+                size=2,width=0) +
+  geom_point(data=mcsum.tn$emmeans,mapping=aes(x=density,y=emmean),
+             size=2,pch=21,fill="white") +
   labs(x="Nematode Stocking Density",y="Tomato Plant Growth (cm)") +
   theme_NCStats()
 ```
@@ -237,11 +238,12 @@ It is possible with a log to back-transform both means and differences in means.
 
 ```{r AFMeansPlot, echo=FALSE, fig.cap="**Back-transformed** mean (with 95% confidence interval) foraging rate of ants on each tree species. The mean foraging rate differed only between Oak and Rown trees."}
 ggplot() +
-  geom_jitter(data=AF,mapping=aes(x=Tree,y=Food),
-              alpha=0.25,width=0.05) +
-  geom_pointrange(data=mcsum.afbt$emmeans,
-                  mapping=aes(x=Tree,y=response,ymin=lower.CL,ymax=upper.CL),
-               size=1.1,fatten=2,pch=21,fill="white") +
+  geom_jitter(data=AF,mapping=aes(x=Tree,y=Food),alpha=0.25,width=0.05) +
+  geom_errorbar(data=mcsum.afbt$emmeans,
+                mapping=aes(x=Tree,y=response,ymin=lower.CL,ymax=upper.CL),
+                size=2,width=0) +
+  geom_point(data=mcsum.afbt$emmeans,mapping=aes(x=Tree,y=response),
+             size=2,pch=21,fill="white") +
   labs(x="Tree Species",y="Foraging Rate (mg per ant per 30 mins)") +
   theme_NCStats()
 ```
@@ -348,9 +350,11 @@ It is possible with a square root to back-transform means, but not differences i
 ggplot() +
   geom_jitter(data=PD,mapping=aes(x=method,y=discharge),
               alpha=0.25,width=0.05) +
-  geom_pointrange(data=mcsum.pdbt$emmeans,
-                  mapping=aes(x=method,y=response,ymin=lower.CL,ymax=upper.CL),
-               size=1.1,fatten=2,pch=21,fill="white") +
+  geom_errorbar(data=mcsum.pdbt$emmeans,
+                mapping=aes(x=method,y=response,ymin=lower.CL,ymax=upper.CL),
+                size=2,width=0) +
+  geom_point(data=mcsum.pdbt$emmeans,mapping=aes(x=method,y=response),
+             size=2,pch=21,fill="white") +
   labs(x="Estimation Method",y="Peak Discharge (cfs)") +
   theme_NCStats()
 ```

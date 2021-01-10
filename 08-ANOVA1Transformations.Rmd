@@ -250,15 +250,16 @@ More importantly if you declare your transformation with `tran=` then you can us
 
 &nbsp;
 
-The back-transformed means in `$emmeans` can be used to construct a plot of means as before, but you must realize that the means are now labeled as "response" (look at the last output above) rather than "emmean" (thus you must change `y=` in `geom_pointrange()`).
+The back-transformed means in `$emmeans` can be used to construct a plot of means as before, but you must realize that the means are now labeled as "response" (look at the last output above) rather than "emmean" (thus you must change `y=` in `geom_errobar()` and `geom_point()`).
 
 ```{r}
 ggplot() +
-  geom_jitter(data=opp,mapping=aes(x=season,y=imm),
-              alpha=0.25,width=0.05) +
-  geom_pointrange(data=mcsumbt$emmeans,
-                  mapping=aes(x=season,y=response,ymin=lower.CL,ymax=upper.CL),
-               size=1.1,fatten=2,pch=21,fill="white") +
+  geom_jitter(data=opp,mapping=aes(x=season,y=imm),alpha=0.25,width=0.05) +
+  geom_errorbar(data=mcsumbt$emmeans,
+                mapping=aes(x=season,y=response,ymin=lower.CL,ymax=upper.CL),
+                size=2,width=0) +
+  geom_point(data=mcsumbt$emmeans,mapping=aes(x=season,y=response),
+               size=2,pch=21,fill="white") +
   labs(y="Immunoglobulin Concentration",x="Season/Month") +
   theme_NCStats()
 ```

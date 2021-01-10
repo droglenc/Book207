@@ -311,7 +311,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="24.1" data-path="IVRSummary.html"><a href="IVRSummary.html#IVRWorkflow"><i class="fa fa-check"></i><b>24.1</b> Suggested Workflow</a></li>
 <li class="chapter" data-level="24.2" data-path="IVRSummary.html"><a href="IVRSummary.html#fish-energy-density-no-transformation"><i class="fa fa-check"></i><b>24.2</b> Fish Energy Density (<em>No Transformation</em>)</a></li>
-<li class="chapter" data-level="24.3" data-path="IVRSummary.html"><a href="IVRSummary.html#shrub-allometry-no-transformation"><i class="fa fa-check"></i><b>24.3</b> Shrub Allometry (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="24.3" data-path="IVRSummary.html"><a href="IVRSummary.html#shrub-allometry-transformation"><i class="fa fa-check"></i><b>24.3</b> Shrub Allometry (<em>Transformation</em>)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -497,7 +497,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>the use of <code>uvb</code> (i.e., the other factor variale) in <code>group=</code> (so it will be “dodged”) and <code>color=</code> (so it will be denoted with different colors),</li>
 <li>that <code>geom_line()</code> is placed first so that the points and confidence intervals will be on top of the connecting lines,</li>
 <li>that <code>alpha=</code> is used in <code>geom_line()</code> so that the lines are subtle, and</li>
-<li>the use of <code>pd</code> from <code>position_dodge()</code> above in <code>geom_pointrange()</code>.</li>
+<li>the use of <code>pd</code> from <code>position_dodge()</code> above in <code>geom_errobar()</code> and <code>geom_point()</code>.</li>
 </ul>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb66-1"><a href="ANOVA2Analysis.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mc1sum<span class="sc">$</span>emmeans,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>density,<span class="at">group=</span>uvb,<span class="at">color=</span>uvb,</span>
 <span id="cb66-2"><a href="ANOVA2Analysis.html#cb66-2" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">y=</span>emmean,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL)) <span class="sc">+</span></span>

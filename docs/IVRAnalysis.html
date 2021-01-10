@@ -311,7 +311,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="24.1" data-path="IVRSummary.html"><a href="IVRSummary.html#IVRWorkflow"><i class="fa fa-check"></i><b>24.1</b> Suggested Workflow</a></li>
 <li class="chapter" data-level="24.2" data-path="IVRSummary.html"><a href="IVRSummary.html#fish-energy-density-no-transformation"><i class="fa fa-check"></i><b>24.2</b> Fish Energy Density (<em>No Transformation</em>)</a></li>
-<li class="chapter" data-level="24.3" data-path="IVRSummary.html"><a href="IVRSummary.html#shrub-allometry-no-transformation"><i class="fa fa-check"></i><b>24.3</b> Shrub Allometry (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="24.3" data-path="IVRSummary.html"><a href="IVRSummary.html#shrub-allometry-transformation"><i class="fa fa-check"></i><b>24.3</b> Shrub Allometry (<em>Transformation</em>)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -388,7 +388,7 @@ Figure 23.1: Fitted regression lines for mirex in tissue by salmon weight for 19
 <p>For example, the sample slope for 1992 is 0.01428 greater than the sample slope for 1996, one is 95% confident that the population slope for 1992 is between 0.000403 and 0.0282 greater than the population slope for 1996, and that the population slopes differ between these two years (p=0.0425). In contrast, the sample slope for 1996 is 0.00839 greater than the sample slope for 1999, one is 95% confident that the population slope for 1996 is between 0.005813 less than and 0.0226 greater than the population slope for 1999, and the population slopes do NOT differ between these two years (p=0.3331).</p>
 <p>An examination of all of the <code>$contrast</code> results suggests that the slope from 1992 differed significantly from the slopes of 1996 (p=0.0425) and 1999 (p=0.0059), but the slopes for 1996 and 1999 did not differ (p=0.3331).</p>
 <div class="tip">
-<p>The <strong>difference</strong> in group slopes with 95% confidence intervals and p-values are shown in the <code>$conrasts</code> section of the results.</p>
+<p>The <strong>difference</strong> in group slopes with 95% confidence intervals and p-values are shown in the <code>$contrasts</code> section of the results.</p>
 </div>
 <p>The <code>$emtrends</code> section of the output contains information about the individual slopes, specifically.</p>
 <ul>
@@ -440,6 +440,9 @@ Figure 23.2: Fitted regression lines for mirex in tissue by salmon weight for on
 <li><code>p.value</code>: p-value for whether the differences in intercepts is 0.</li>
 </ul>
 <p>For example, the sample intercept for 1977 is 0.0542 mg/kg greater than the intercept for 1982, the population intercept for 1977 is between 0.0128 and 0.0956 greater than the population intercept for 1982, and the intercepts for these two years are significantly different (p=0.0070). Because these two years are parallel, the sample mean mirex concentration for 1977 is 0.0542 mg/kg greater than the sample mean mirex concentration for 1982 for all salmon weights.</p>
+<div class="tip">
+<p>The <strong>difference</strong> in group intercepts with 95% confidence intervals and p-values are shown in the <code>$contrasts</code> section of the results.</p>
+</div>
 <p>The results in <code>$emmeans</code> portion contains information about the mean of the response variable at the mean of the covariate. In other words, this information is about the intercepts for the <em>centered</em> covariate (see Section <a href="SLRInference.html#intercept">15.3</a>). Specifically,</p>
 <ul>
 <li><code>emmean</code>: sample mean of the response variable at the sample mean of the covariate,</li>
@@ -453,7 +456,10 @@ Figure 23.2: Fitted regression lines for mirex in tissue by salmon weight for on
 Figure 23.3: Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. The mean mirex concentration at the mean salmon weight is shown for each year to demonstrate the results of the <code>emmeans()</code> function.
 </p>
 </div>
-<p>The <code>emmeans()</code> function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extreme extrapolation as discussed in Section <a href="SLRInference.html#intercept">15.3</a>. It is possible to compute the mean values of the response at other values of the covariate by using <code>cov.reduce=</code> in <code>emmeans()</code>. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure <a href="IVRAnalysis.html#fig:IVRExampleIntercepts2">23.4</a>).<a href="#fn92" class="footnote-ref" id="fnref92"><sup>92</sup></a> Because the lines are parallel this does not change anything in the <code>$conrasts</code> portion of the output. However, the <code>$emmeans</code> portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.</p>
+<div class="tip">
+<p>The mean value of the response at the mean value of the covariate, along with 95% confidence intervals and p-values, are shown in the <code>$emmeans</code> section of the results.</p>
+</div>
+<p>The <code>emmeans()</code> function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extreme extrapolation as discussed in Section <a href="SLRInference.html#intercept">15.3</a>. It is possible to compute the mean values of the response at other values of the covariate by using <code>cov.reduce=</code> in <code>emmeans()</code>. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure <a href="IVRAnalysis.html#fig:IVRExampleIntercepts2">23.4</a>).<a href="#fn92" class="footnote-ref" id="fnref92"><sup>92</sup></a> Because the lines are parallel this does not change anything in the <code>$contrasts</code> portion of the output. However, the <code>$emmeans</code> portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.</p>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb181-1"><a href="IVRAnalysis.html#cb181-1" aria-hidden="true" tabindex="-1"></a>imc2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2a,pairwise<span class="sc">~</span>year,<span class="at">cov.reduce=</span>min)</span>
 <span id="cb181-2"><a href="IVRAnalysis.html#cb181-2" aria-hidden="true" tabindex="-1"></a>( imc2sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc2,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   $emmeans

@@ -44,7 +44,7 @@ For example, the sample slope for 1992 is `r formatC(smcsum$contrasts$estimate[1
 An examination of all of the `$contrast` results suggests that the slope from 1992 differed significantly from the slopes of 1996 (`r kPvalue(smcsum$contrasts$p.value[1],latex=FALSE)`) and 1999 (`r kPvalue(smcsum$contrasts$p.value[2],latex=FALSE)`), but the slopes for 1996 and 1999 did not differ (`r kPvalue(smcsum$contrasts$p.value[3],latex=FALSE)`).
 
 ::: {.tip data-latex=""}
-The **difference** in group slopes with 95% confidence intervals and p-values are shown in the `$conrasts` section of the results.
+The **difference** in group slopes with 95% confidence intervals and p-values are shown in the `$contrasts` section of the results.
 :::
 
 The `$emtrends` section of the output contains information about the individual slopes, specifically.
@@ -89,6 +89,10 @@ The important parts of the `$contrasts` portion are
 
 For example, the sample intercept for 1977 is `r formatC(imcsum$contrasts$estimate[1],format="f",digits=4)` mg/kg greater than the intercept for 1982, the population intercept for 1977 is between `r formatC(imcsum$contrasts$lower.CL[1],format="f",digits=4)` and `r formatC(imcsum$contrasts$upper.CL[1],format="f",digits=4)` greater than the population intercept for 1982, and the intercepts for these two years are significantly different (`r kPvalue(imcsum$contrasts$p.value[1],latex=FALSE)`). Because these two years are parallel, the sample mean mirex concentration for 1977 is `r formatC(imcsum$contrasts$estimate[1],format="f",digits=4)` mg/kg greater than the sample mean mirex concentration for 1982 for all salmon weights.
 
+::: {.tip data-latex=""}
+The **difference** in group intercepts with 95% confidence intervals and p-values are shown in the `$contrasts` section of the results.
+:::
+
 The results in `$emmeans` portion contains information about the mean of the response variable at the mean of the covariate. In other words, this information is about the intercepts for the *centered* covariate (see Section \@ref(intercept)). Specifically,
 
 * `emmean`: sample mean of the response variable at the sample mean of the covariate,
@@ -119,7 +123,11 @@ ggplot(data=MirexFirst3,mapping=aes(x=weight,y=mirex,color=year)) +
            arrow=arrow(length=unit(0.2,"cm"),type="closed"))
 ```
 
-The `emmeans()` function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extreme extrapolation as discussed in Section \@ref(intercept). It is possible to compute the mean values of the response at other values of the covariate by using `cov.reduce=` in `emmeans()`. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure \@ref(fig:IVRExampleIntercepts2)).^[You can get the mean values of the response at a covariate of 0 (i.e., the actual y-intercepts) by using `cov.reduce=function(x) 0`.] Because the lines are parallel this does not change anything in the `$conrasts` portion of the output. However, the `$emmeans` portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.
+::: {.tip data-latex=""}
+The mean value of the response at the mean value of the covariate, along with 95% confidence intervals and p-values, are shown in the `$emmeans` section of the results.
+:::
+
+The `emmeans()` function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extreme extrapolation as discussed in Section \@ref(intercept). It is possible to compute the mean values of the response at other values of the covariate by using `cov.reduce=` in `emmeans()`. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure \@ref(fig:IVRExampleIntercepts2)).^[You can get the mean values of the response at a covariate of 0 (i.e., the actual y-intercepts) by using `cov.reduce=function(x) 0`.] Because the lines are parallel this does not change anything in the `$contrasts` portion of the output. However, the `$emmeans` portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.
 
 ```{r}
 imc2 <- emmeans(ivrY2a,pairwise~year,cov.reduce=min)

@@ -288,4 +288,4 @@ multiple-comparisons-for-intercepts
 IVRSummary
 IVRWorkflow
 fish-energy-density-no-transformation
-shrub-allometry-no-transformation
+shrub-allometry-transformation
