@@ -141,6 +141,10 @@ tab:ShrubANOVA1
 tab:ShrubIntercepts2
 fig:ShrubFitPlot
 fig:ShrubMeansPlot
+fig:LogRegRaw
+fig:LogRegProb
+fig:LogRegOdds
+fig:LogRegLogit
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -289,3 +293,11 @@ IVRSummary
 IVRWorkflow
 fish-energy-density-no-transformation
 shrub-allometry-transformation
+LogRegFoundations
+need-for-a-transformation
+odds
+log-odds-and-the-logit-transformation
+back-transformation-introduction
+LogRegModels
+LogRegAnalysis
+LogRegSummary
