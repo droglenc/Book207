@@ -188,7 +188,7 @@ trans1 <- ggplot(data=tmp,mapping=aes(x=x,y=logy)) +
             label=expression(beta==0.25),parse=TRUE,hjust=1.1,size=lbl_text_size) +
   annotate(geom="segment",x=7,xend=9,
            y=mean(pts$logy[3:4]),yend=mean(pts$logy[3:4]),
-           arrow=arrow(length=unit(1.5,"mm"),type="closed"))
+           arrow=ARROW)
 
 btrans1 <- ggplot(data=tmp,mapping=aes(x=x,y=y)) +
   geom_path(size=1) +
@@ -215,7 +215,7 @@ btrans1 <- ggplot(data=tmp,mapping=aes(x=x,y=y)) +
             label=expression(e^{beta}==1.284),parse=TRUE,hjust=1.1,size=lbl_text_size) +
   annotate(geom="segment",x=7,xend=9,
            y=mean(pts$y[3:4]),yend=mean(pts$y[3:4]),
-           arrow=arrow(length=unit(1.5,"mm"),type="closed"))
+           arrow=ARROW)
 trans1 + btrans1
 ```
 
@@ -267,7 +267,7 @@ trans2 <- ggplot(data=tmp,mapping=aes(x=x,y=logy)) +
             label=expression(beta==-0.25),parse=TRUE,hjust=1.1,size=lbl_text_size) +
   annotate(geom="segment",x=5,xend=7,
            y=mean(pts$logy[3:4]),yend=mean(pts$logy[3:4]),
-           arrow=arrow(length=unit(1.5,"mm"),type="closed"))
+           arrow=ARROW)
 
 btrans2 <- ggplot(data=tmp,mapping=aes(x=x,y=y)) +
   geom_path(size=1) +
@@ -295,7 +295,7 @@ btrans2 <- ggplot(data=tmp,mapping=aes(x=x,y=y)) +
             hjust=1.1,vjust=0.25,size=lbl_text_size) +
   annotate(geom="segment",x=5,xend=7,
            y=mean(pts$y[3:4]),yend=mean(pts$y[3:4]),
-           arrow=arrow(length=unit(1.5,"mm"),type="closed"))
+           arrow=ARROW)
 trans2 + btrans2
 ```
 
@@ -345,7 +345,7 @@ trans3 <- ggplot(data=tmp,mapping=aes(x=logx,y=logy)) +
             label=expression(beta==0.25),parse=TRUE,hjust=1,size=lbl_text_size) +
   annotate(geom="segment",x=3,xend=5,
            y=mean(pts$logy[3:4]),yend=mean(pts$logy[3:4]),
-           arrow=arrow(length=unit(1.5,"mm"),type="closed"))
+           arrow=ARROW)
 
 btrans3 <- ggplot(data=tmp,mapping=aes(x=x,y=y)) +
   geom_path(size=1) +
@@ -363,7 +363,7 @@ btrans3 <- ggplot(data=tmp,mapping=aes(x=x,y=y)) +
             label=expression(e^{1}==2.718),parse=TRUE) +
   annotate(geom="segment",x=90,xend=mean(pts$x[1:2]),
            y=1.1,yend=mean(pts$y[1]),
-           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+           arrow=ARROW) +
   geom_text(x=pts$x[2],y=mean(pts$y[1:2],size=lbl_text_size),
             label=expression(e^{beta}==1.284),parse=TRUE,hjust=-0.1) +
   ## Second example
@@ -375,10 +375,10 @@ btrans3 <- ggplot(data=tmp,mapping=aes(x=x,y=y)) +
             label=expression(e^{beta}==1.284),parse=TRUE,hjust=1.1) +
   annotate(geom="segment",x=90,xend=pts$x[4],
            y=pts$y[4],yend=mean(pts$y[3:4]),
-           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+           arrow=ARROW) +
   annotate(geom="segment",x=120,xend=mean(pts$x[3:4]),
            y=1.2,yend=pts$y[3],
-           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+           arrow=ARROW) +
   theme(axis.text.x=element_text(angle=90,vjust=0.5))
 trans3 + btrans3
 ```

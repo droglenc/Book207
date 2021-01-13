@@ -33,6 +33,7 @@ clrs2 <- clrs[c(1,4)]
 clrs3 <- clrs[c(5,2,6)]
 lbl_text_size <- 4
 khfont <- "Cambria"
+ARROW <- arrow(length=unit(1.5,"mm"),type="closed")
 ```
 
 

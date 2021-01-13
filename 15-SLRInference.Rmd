@@ -140,13 +140,13 @@ ggplot() +
   # add Ho label
   annotate(geom="text",x=2.5,y=0.5,label=H0_lbl,size=lbl_text_size,hjust=-0.1) +
   annotate(geom="segment",x=2.5,y=0.5,xend=2,yend=0,
-           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+           arrow=ARROW) +
   # add Ha label
   annotate(geom="text",x=1,y=1,label=HA_lbl,size=lbl_text_size,vjust=-0.1) +
   annotate(geom="segment",x=1,y=1,xend=0.75,yend=1-1*0.75,
-           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+           arrow=ARROW) +
   annotate(geom="segment",x=1,y=1,xend=1.25,yend=-1+1*1.25,
-           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+           arrow=ARROW) +
   xlim(c(0.5,3)) + ylim(c(-2,2)) +
   labs(y="Response Variable",x="Explanatory Variable") +
   theme_NCStats() +

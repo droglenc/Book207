@@ -77,12 +77,12 @@ slrp <- slr +
   annotate(geom="text",x=3000,y=-5,label=expression(x[2]),parse=TRUE,
            size=lbl_text_size,vjust=0.25,hjust=-0.25) +
   annotate(geom="segment",x=3000,y=-5,xend=ev2$Altitude[2],yend=-Inf,
-           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+           arrow=ARROW) +
   # point to y-hat
   annotate(geom="text",x=2700,y=1,label=expression(mu[Y*"|"*X==x[2]]),parse=TRUE,
            size=lbl_text_size,vjust=1,hjust=-0.1) +
   annotate(geom="segment",x=2700,y=1,xend=-Inf,yend=ev2$pMeanAirTemp[2],
-           arrow=arrow(length=unit(1.5,"mm"),type="closed"))
+           arrow=ARROW)
 slrp
 ```
 
@@ -100,12 +100,12 @@ slrp +
   annotate(geom="text",x=3000,y=midResid,label="Residual",
            size=lbl_text_size,vjust=0.25,hjust=-0.25) +
   annotate(geom="segment",x=3000,y=midResid,xend=ev2$Altitude[2],yend=midResid,
-           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+           arrow=ARROW) +
   # point to y2
   annotate(geom="text",x=2600,y=10.7,label=expression(y[2]),parse=TRUE,
            size=lbl_text_size,vjust=0.25,hjust=-0.25) +
   annotate(geom="segment",x=2600,y=10.7,xend=-Inf,yend=ev2$MeanAirTemp[2],
-           arrow=arrow(length=unit(1.5,"mm"),type="closed"))
+           arrow=ARROW)
 ```
 
 Based on previous modules, an overall measure of the lack-of-fit of the line to the data is the sum of all squared residuals or the residual sum-of-squares (RSS); i.e., 

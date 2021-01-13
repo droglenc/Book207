@@ -120,7 +120,7 @@ ggplot(data=MirexFirst3,mapping=aes(x=weight,y=mirex,color=year)) +
            label=paste0("Mean Weight = ",formatC(tmp$weight[1],format="f",digits=3)),
            size=lbl_text_size,hjust=-0.02) +
   annotate(geom="segment",x=5,y=0.12,xend=tmp$weight[1],yend=-Inf,
-           arrow=arrow(length=unit(0.2,"cm"),type="closed"))
+           arrow=ARROW)
 ```
 
 ::: {.tip data-latex=""}
@@ -154,6 +154,6 @@ ggplot(data=MirexFirst3,mapping=aes(x=weight,y=mirex,color=year)) +
            label=paste0("Minimum Weight = ",formatC(tmp$weight[1],format="f",digits=3)),
            size=lbl_text_size,hjust=-0.02) +
   annotate(geom="segment",x=3,y=0.12,xend=tmp$weight[1],yend=-Inf,
-           arrow=arrow(length=unit(0.2,"cm"),type="closed"))
+           arrow=ARROW)
 ```
 

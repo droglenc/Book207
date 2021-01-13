@@ -35,19 +35,19 @@ slr +
   annotate(geom="text",x=4300,y=9,label="Simple Model",
            size=lbl_text_size,vjust=-0.5) +
   annotate(geom="segment",x=4300,y=9,xend=4300,yend=ev2$mMeanAirTemp[1],
-           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+           arrow=ARROW) +
   # point to full model
   geom_smooth(method="lm",se=FALSE,color="blue",size=1.25) +
   annotate(geom="text",x=3200,y=-4,label="Full Model",
            size=lbl_text_size,vjust=1.5) +
   annotate(geom="segment",x=3200,y=-4,
            xend=3700,yend=predict(lm1.ev,data.frame(Altitude=3700)),
-           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+           arrow=ARROW) +
   # point to y-bar
   annotate(geom="text",x=2200,y=1,label=expression(mu[Y]),parse=TRUE,
            size=lbl_text_size,vjust=0.75,hjust=-0.1) +
   annotate(geom="segment",x=2200,y=1,xend=-Inf,yend=ev2$mMeanAirTemp[1],
-           arrow=arrow(length=unit(1.5,"mm"),type="closed"))
+           arrow=ARROW)
 ```
 
 ::: {.tip data-latex=""}
@@ -103,7 +103,7 @@ SSres <- slr +
            size=lbl_text_size,hjust=1,vjust=1) +
   annotate(geom="segment",x=3200,y=-4,
            xend=3700,yend=predict(lm1.ev,data.frame(Altitude=3700)),
-           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+           arrow=ARROW) +
   # Show the residuals
   geom_segment(aes(xend=Altitude,yend=pMeanAirTemp),linetype="dashed",color="blue") +
   labs(title=bquote("Residuals for"~SS[Residual]),y="") +
@@ -123,7 +123,7 @@ SSreg <-  ggplot(data=ev2,mapping=aes(x=Altitude,y=MeanAirTemp)) +
            size=lbl_text_size,hjust=1,vjust=1) +
   annotate(geom="segment",x=3200,y=-4,
            xend=3700,yend=predict(lm1.ev,data.frame(Altitude=3700)),
-           arrow=arrow(length=unit(1.5,"mm"),type="closed")) +
+           arrow=ARROW) +
   # Show the residuals
   geom_segment(aes(xend=Altitude,y=mMeanAirTemp,yend=pMeanAirTemp),
                linetype="dashed",color="black") +

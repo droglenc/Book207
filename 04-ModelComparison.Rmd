@@ -94,12 +94,12 @@ ggplot(data=aqua) +
            label=expression(plain("One of")~Y[ij]),parse=TRUE,
            size=4.5,hjust=-0.1) +
   annotate(geom="segment",x=1.7,y=6.5,xend=aqua$srcjit[7],yend=aqua$BOD[7],
-           arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+           arrow=ARROW) +
   annotate(geom="text",x=1,y=9,
            label=expression(bar(Y)~plain(..)),parse=TRUE,
            size=4.5,hjust=1.1,vjust=-0.1) +
   annotate(geom="segment",x=1,y=9,xend=1.5,yend=aqua$gmn[1],
-           arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+           arrow=ARROW) +
   theme_NCStats() +
   theme(aspect.ratio=1)
 ```
@@ -128,14 +128,14 @@ ggplot(data=aqua) +
            label=expression(plain("One of")~Y[ij]),parse=TRUE,
            size=4.5,hjust=-0.1) +
   annotate(geom="segment",x=1.7,y=6.5,xend=aqua$srcjit[7],yend=aqua$BOD[7],
-           arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+           arrow=ARROW) +
   annotate(geom="text",x=1.2,y=8,
            label=expression(bar(Y)[i]~plain(.)),parse=TRUE,
            size=4.5,hjust=1.1,vjust=-0.1) +
   annotate(geom="segment",x=1.2,y=8,xend=1.1,yend=aqua$mn[1],
-           arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+           arrow=ARROW) +
   annotate(geom="segment",x=1.2,y=8,xend=1.9,yend=aqua$mn[nrow(aqua)],
-           arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+           arrow=ARROW) +
   theme_NCStats() +
   theme(aspect.ratio=1)
 ```
@@ -183,14 +183,14 @@ ggplot(data=aqua) +
            label=expression(bar(Y)[i]~plain(.)),parse=TRUE,
            size=4.5,hjust=1.1,vjust=-0.1) +
   annotate(geom="segment",x=0.65,y=8,xend=0.9,yend=aqua$mn[1],
-           arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+           arrow=ARROW) +
   annotate(geom="segment",x=0.65,y=8,xend=1.9,yend=aqua$mn[nrow(aqua)],
-           arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+           arrow=ARROW) +
   annotate(geom="text",x=2,y=6.6,
            label=expression(bar(Y)~plain(..)),parse=TRUE,
            size=4.5,hjust=-0.1,vjust=1.1) +
   annotate(geom="segment",x=2,y=6.5,xend=1.5,yend=aqua$gmn[1],
-           arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+           arrow=ARROW) +
   theme_NCStats() +
   theme(aspect.ratio=1)
 ```
@@ -306,7 +306,7 @@ b + labs(x="F-Ratio") +
            label="p-value",size=5.5,hjust=-0.1) +
   annotate(geom="segment",x=2.2,y=df(2.2,df1=dfA,df2=dfW),
            xend=2.8,yend=df(2.2,df1=dfA,df2=dfW),
-           arrow=arrow(length=unit(0.2,"cm"),type="closed"))
+           arrow=ARROW)
 ```
 
 &nbsp;

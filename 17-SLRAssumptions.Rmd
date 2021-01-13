@@ -98,7 +98,7 @@ flp1 <- ggplot(data=tmp,mapping=aes(x=x,y=y,label=lbl)) +
   geom_point(pch=21,color="black",bg="lightgray") +
   geom_point(data=filter(tmp,lbl!=""),mapping=aes(x=x,y=y),color="red") +
   ggrepel::geom_text_repel(min.segment.length=0.5,box.padding=1,max.overlaps=Inf,force=5,
-                           arrow=arrow(length=unit(1.5,"mm"),type="closed"),
+                           arrow=ARROW,
                            size=lbl_text_size,color="red",segment.color="black") +
   geom_smooth(method="lm",se=FALSE) +
   labs(x="Explanatory Variable",y="Response Variable") +
@@ -108,7 +108,7 @@ residp1 <- ggplot(data=tmp,mapping=aes(x=p,y=r,label=lbl)) +
   geom_point(pch=21,color="black",bg="lightgray") +
   geom_point(data=filter(tmp,lbl!=""),mapping=aes(x=p,y=r),color="red") +
   ggrepel::geom_text_repel(min.segment.length=0.5,box.padding=1,max.overlaps=Inf,
-                           arrow=arrow(length=unit(1.5,"mm"),type="closed"),
+                           arrow=ARROW,
                            size=lbl_text_size,color="red",segment.color="black") +
   geom_hline(yintercept=0,color="blue",size=1) +
   scale_y_continuous(breaks=0) +
@@ -135,7 +135,7 @@ flp2 <- ggplot(data=tmp2,mapping=aes(x=x,y=y,label=lbl)) +
   geom_point(pch=21,color="black",bg="lightgray") +
   geom_point(data=filter(tmp2,lbl!=""),mapping=aes(x=x,y=y),color="red") +
   ggrepel::geom_text_repel(min.segment.length=0.5,box.padding=1,max.overlaps=Inf,force=5,
-                           arrow=arrow(length=unit(1.5,"mm"),type="closed"),
+                           arrow=ARROW,
                            size=lbl_text_size,color="red",segment.color="black") +
   geom_smooth(method="lm",se=FALSE) +
   labs(x="Explanatory Variable",y="Response Variable") +
@@ -145,7 +145,7 @@ residp2 <- ggplot(data=tmp2,mapping=aes(x=p,y=r,label=lbl)) +
   geom_point(pch=21,color="black",bg="lightgray") +
   geom_point(data=filter(tmp2,lbl!=""),mapping=aes(x=p,y=r),color="red") +
   ggrepel::geom_text_repel(min.segment.length=0.5,box.padding=1,max.overlaps=Inf,
-                           arrow=arrow(length=unit(1.5,"mm"),type="closed"),
+                           arrow=ARROW,
                            size=lbl_text_size,color="red",segment.color="black") +
   geom_hline(yintercept=0,color="blue",size=1) +
   scale_y_continuous(breaks=0) +

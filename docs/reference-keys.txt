@@ -151,6 +151,13 @@ tab:PuttExpCoefs
 fig:PuttsOdds
 fig:PuttsProb
 fig:PuttsPredX
+fig:PuttsBootSlopeCI
+fig:PuttsBootPred50CI
+tab:ShrubCoefs
+fig:shrubLogOdds
+fig:shrubOdds
+fig:shrubProb
+fig:shrubPredX
 ModelTypes
 distinguishing-methods
 method-purposes
