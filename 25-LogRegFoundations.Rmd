@@ -153,10 +153,22 @@ $$ log\left(\frac{p_{i}}{1-p_{i}}\right) = \alpha + \beta x_{i} $$
 where $\alpha$ is the "intercept" parameter and $\beta$ is the "slope" parameter. This model is discussed in more detail in the next module.
 
 ## Back-Transformation Introduction
-While it will be discussed more in the next modules, it is evident from the logistic regression model above that that model is used to predict log odds. However, log odds are largely uninterpretable and should be back-transformed to the odds by exponentiating (i.e., $\text{odds}=e^{\text{log(odds)}}$. It also can be shown that the odds can be back-transformed to a probability with
+While it will be discussed more in the next modules, it is evident from the logistic regression model above that that model is used to predict log odds. However, log odds are largely uninterpretable and should be back-transformed to the odds by exponentiating (i.e., $\text{odds}=e^{\text{log(odds)}}$.
+
+An equation for predicting odds can also be obtained with algebra, starting with the logistic regression equation.
 
 $$
-p = \frac{\text{odds}}{\text{1+odds}}
+\begin{split}
+log\left(\frac{p}{1-p}\right) &= \alpha+\beta X \\
+\frac{p}{1-p} &= e^{\alpha+\beta X} \\
+p &= (1-p)e^{\alpha+\beta X} \\
+p &= e^{\alpha+\beta X}-pe^{\alpha+\beta X} \\
+p + pe^{\alpha+\beta X} &= e^{\alpha+\beta X} \\
+p\left(1+e^{\alpha+\beta X}\right) &= e^{\alpha+\beta X} \\
+p &= \frac{e^{\alpha+\beta X}}{1+e^{\alpha+\beta X}} = \frac{e^{log(odds)}}{1+e^{log(odds)}} = \frac{\text{odds}}{1+\text{odds}}
+\end{split}
 $$
 
-The relationships will be expanded upon in the next module.
+Thus, a probability can be calculated from the odds with $p=\frac{\text{odds}}{1+\text{odds}}$.
+
+These relationships will be expanded upon in the next module.

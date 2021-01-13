@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-11" />
+<meta name="date" content="2021-01-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -321,7 +321,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.3" data-path="LogRegFoundations.html"><a href="LogRegFoundations.html#log-odds-and-the-logit-transformation"><i class="fa fa-check"></i><b>25.3</b> Log Odds and the Logit Transformation</a></li>
 <li class="chapter" data-level="25.4" data-path="LogRegFoundations.html"><a href="LogRegFoundations.html#back-transformation-introduction"><i class="fa fa-check"></i><b>25.4</b> Back-Transformation Introduction</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="LogRegModels.html"><a href="LogRegModels.html"><i class="fa fa-check"></i><b>26</b> Models and Predictions</a></li>
+<li class="chapter" data-level="26" data-path="LogRegModels.html"><a href="LogRegModels.html"><i class="fa fa-check"></i><b>26</b> Models and Predictions</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="LogRegModels.html"><a href="LogRegModels.html#LogRegSlope"><i class="fa fa-check"></i><b>26.1</b> Slope &amp; Back-Transformed Slope</a></li>
+<li class="chapter" data-level="26.2" data-path="LogRegModels.html"><a href="LogRegModels.html#back-transformed-slope"><i class="fa fa-check"></i><b>26.2</b> Back-Transformed Slope</a></li>
+<li class="chapter" data-level="26.3" data-path="LogRegModels.html"><a href="LogRegModels.html#predictions-1"><i class="fa fa-check"></i><b>26.3</b> Predictions</a></li>
+<li class="chapter" data-level="26.4" data-path="LogRegModels.html"><a href="LogRegModels.html#reverse-predictions"><i class="fa fa-check"></i><b>26.4</b> “Reverse” Predictions</a></li>
+<li class="chapter" data-level="26.5" data-path="LogRegModels.html"><a href="LogRegModels.html#variability-estimates"><i class="fa fa-check"></i><b>26.5</b> Variability Estimates</a></li>
+<li class="chapter" data-level="26.6" data-path="LogRegModels.html"><a href="LogRegModels.html#another-example"><i class="fa fa-check"></i><b>26.6</b> Another Example</a></li>
+</ul></li>
 <li class="chapter" data-level="27" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html"><i class="fa fa-check"></i><b>27</b> Analysis</a></li>
 <li class="chapter" data-level="28" data-path="LogRegSummary.html"><a href="LogRegSummary.html"><i class="fa fa-check"></i><b>28</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -348,7 +356,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="LogRegAnalysis" class="section level1" number="27">
 <h1><span class="header-section-number">Module 27</span> Analysis</h1>
+<div id="example-data-2" class="section level4 unnumbered">
+<h4>Example Data</h4>
+<p>Two data frames will be used throughout this and the next module. The first data frame was collected by a student who putted a golf ball 10 times from ever 1 foot between 1 and 25 feet from the hole. For each putt she recorded whether she made the putt or not. She wanted to model the probability of making the putt as a function of distance to the hole. Her data are in <a href="GolfPutts.csv">https://derekogle.com/Book207/data/GolfPutts.csv</a>, which are loaded below.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb190-1"><a href="LogRegAnalysis.html#cb190-1" aria-hidden="true" tabindex="-1"></a>putts <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://derekogle.com/Book207/data/GolfPutts.csv&quot;</span>)</span></code></pre></div>
+<p>The second data frame represents the presence or absence of a common shrub (<em>Berberis repens</em>) in the <a href="https://www.nps.gov/brca/index.htm">Bryce Canyon National Park</a> Utah. The researchers recorded whether the shrub was present or not in many 10m×10m plots throughout the park. They also recorded the elevation (among other things) of the plot. They wanted to model the effect of elevation on the presence of the shrub. Their data is in <a href="https://derekogle.com/Book207/data/BryceShrub.csv">BryceShrub.csv</a>, which are loaded below.</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb191-1"><a href="LogRegAnalysis.html#cb191-1" aria-hidden="true" tabindex="-1"></a>shrub <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://derekogle.com/Book207/data/BryceShrub.csv&quot;</span>)</span></code></pre></div>
+<p>For both data sets an indicator variable for the response variable is needed to make plotting the logistic regression results easier. This variable is created with <code>ifelse()</code> which has a “condition” as its first argument, what should be returned if the condition is “yes” as the second argument, and what should be returned if the condition is “no” as the third argument. To be consistent with R the condition should always be asking for the “second” level of the variable, which will be the alphabetically second level if the levels have not be altered by you.</p>
+<p>Thus, for the <code>putts</code> data there are two levels of the <code>made</code> variable so that a new variable called <code>made01</code> is “1” if <code>made</code> is “Yes” and “0” if it is a “No.”</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb192-1"><a href="LogRegAnalysis.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(putts<span class="sc">$</span>made)  <span class="co"># Available levels</span></span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Yes&quot; &quot;No&quot;</code></pre>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb194-1"><a href="LogRegAnalysis.html#cb194-1" aria-hidden="true" tabindex="-1"></a>putts<span class="sc">$</span>made01 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(putts<span class="sc">$</span>made<span class="sc">==</span><span class="st">&quot;Yes&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb194-2"><a href="LogRegAnalysis.html#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="fu">headtail</span>(putts)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;       distance made made01
+#R&gt;   1          1  Yes      1
+#R&gt;   2          1  Yes      1
+#R&gt;   3          1  Yes      1
+#R&gt;   248       25   No      0
+#R&gt;   249       25   No      0
+#R&gt;   250       25   No      0</code></pre>
+<p>A similar process if followed to create a <code>presence01</code> variable in the <code>shrub</code> data frame.</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb196-1"><a href="LogRegAnalysis.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(shrub<span class="sc">$</span>presence)  <span class="co"># Available levels</span></span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Absent&quot;  &quot;Present&quot;</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb198-1"><a href="LogRegAnalysis.html#cb198-1" aria-hidden="true" tabindex="-1"></a>shrub<span class="sc">$</span>presence01 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(shrub<span class="sc">$</span>presence<span class="sc">==</span><span class="st">&quot;Present&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb198-2"><a href="LogRegAnalysis.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="fu">headtail</span>(shrub)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;       elev presence presence01
+#R&gt;   1   2159   Absent          0
+#R&gt;   2   2284   Absent          0
+#R&gt;   3   2601  Present          1
+#R&gt;   98  2488  Present          1
+#R&gt;   99  2707  Present          1
+#R&gt;   100 2042   Absent          0</code></pre>
 
+</div>
 </div>
             </section>
 

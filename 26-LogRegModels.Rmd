@@ -1,1 +1,284 @@
 # Models and Predictions {#LogRegModels}
+The logistic regression model, using the logit transformation, was briefly introduced at the end of Module \@ref(LogRegFoundations) as 
+
+$$ log\left(\frac{p_{i}}{1-p_{i}}\right) = \alpha + \beta x_{i} $$
+
+where $\alpha$ is the "intercept" parameter and $\beta$ is the "slope" parameter. As noted there, this represents a linear model of log odds plotted against values of the explanatory variable. In this module, interpretations of the slope, back-transformed slope, predictions, and "reverse" predictions are described.
+
+#### Example Data {-}
+Throughout this and the next module data that was collected by a student a few years ago will be used. In this project the student putted a golf ball 10 times from ever 1 foot between 1 and 25 feet from the hole. For each putt she recorded whether she made the putt or not. She wanted to model the probability of making the putt as a function of distance to the hole.
+
+```{r echo=FALSE}
+putts <- read.csv("https://derekogle.com/Book207/data/GolfPutts.csv")
+putts$made01 <- ifelse(putts$made=="Yes",1,0)
+glm.putts <- glm(made01~distance,data=putts,family="binomial")
+cfs.putts <- cbind(Ests=coef(glm.putts),confint(glm.putts))
+ecfs.putts <- exp(cfs.putts)
+
+sum.putts <- putts %>%
+  group_by(distance) %>%
+  summarize(n=n(),
+            made=sum(made01),
+            p=made/n,
+            odds=p/(1-p),
+            lodds=log(odds)) %>%
+  as.data.frame()
+
+bfl.putts <- tibble(distance=1:25,
+                    lodds=as.numeric(predict(glm.putts,data.frame(distance=distance))),
+                    odds=exp(lodds),
+                    p=odds/(1+odds))
+
+pts.putts <- bfl.putts %>%
+  filter(distance %in% c(6,7,10,11)) %>%
+  mutate(lodds=round(lodds,3),
+         odds=round(odds,3))
+```
+
+&nbsp;
+
+## Slope & Back-Transformed Slope {#LogRegSlope}
+The slope for any linear regression represents the average additive change in the response variable for a unit change in the explanatory variable. In logistic regression, this corresponds to the average additive change in the log odds of a "success" for a unit change in the explanatory variable.
+
+The estimated slope for the golf putt data is `r formatC(cfs.putts[2,1],format="f",digits=3)` with a 95% confidence interval from `r formatC(cfs.putts[2,2],format="f",digits=3)` to `r formatC(cfs.putts[2,3],format="f",digits=3)` (Table \@ref(tab:PuttCoefs)). Thus, as the length of the putt increases by one foot, the **log odds** that the student made the putt **de**creases by between `r formatC(-1*cfs.putts[2,2],format="f",digits=3)` to `r formatC(-1*cfs.putts[2,3],format="f",digits=3)` (Figure \@ref(fig:PuttsLogOdds)).
+
+```{r PuttCoefs, echo=FALSE}
+cfs.putts %>%
+  knitr::kable(booktabs=TRUE,digits=c(3,3,3),
+               caption="Parameter estimates from the logistic regression with the golf putting data.") %>%
+  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+```
+
+&nbsp;
+
+```{r PuttsLogOdds, echo=FALSE, fig.width=7, fig.cap="Log odds of making a putt versus the distance of the putt with best-fit line superimposed. The right panel is 'zoomed in' on distances of 5 to 15 so that the slope could be better seen."}
+flp.lodds.putts <- ggplot(mapping=aes(x=distance,y=lodds)) +
+  geom_point(data=sum.putts,pch=21,color="black",fill="red",size=1.75) +
+  geom_line(data=bfl.putts,color="blue",size=1) +
+  labs(x="Distance of Putt (ft)",y="log Odds of Making Putt") +
+  theme_NCStats()
+
+flp.lodds.putts2 <- flp.lodds.putts +
+  coord_cartesian(xlim=c(5,15),ylim=c(-2.5,1)) +
+  scale_y_continuous(breaks=pts.putts$lodds) +
+  scale_x_continuous(breaks=pts.putts$distance) +
+  theme(panel.grid.major=element_line(color="gray90",linetype="dashed")) +
+  geom_point(data=pts.putts,mapping=aes(x=distance,y=lodds),
+             pch=21,color="black",bg="lightgray") +
+  ## First example
+  geom_segment(aes(x=pts.putts$distance[1],xend=pts.putts$distance[2],
+               y=pts.putts$lodds[1],yend=pts.putts$lodds[1]),
+               color="red") +
+  geom_segment(aes(x=pts.putts$distance[2],xend=pts.putts$distance[2],
+               y=pts.putts$lodds[1],yend=pts.putts$lodds[2]),
+               color="red") +
+  geom_text(aes(x=mean(pts.putts$distance[1:2]),y=pts.putts$lodds[1],label="1"),
+            vjust=-0.25,size=lbl_text_size) +
+  geom_text(aes(x=pts.putts$distance[2],y=mean(pts.putts$lodds[1:2])),
+            label=expression(beta==-0.354),parse=TRUE,hjust=-0.1,size=lbl_text_size) +
+  ## Second example
+  geom_segment(aes(x=pts.putts$distance[3],xend=pts.putts$distance[4],
+               y=pts.putts$lodds[3],yend=pts.putts$lodds[3]),
+               color="red") +
+  geom_segment(aes(x=pts.putts$distance[4],xend=pts.putts$distance[4],
+               y=pts.putts$lodds[3],yend=pts.putts$lodds[4]),
+               color="red") +
+  geom_text(aes(x=mean(pts.putts$distance[3:4]),y=pts.putts$lodds[3],label="1"),
+            vjust=-0.25,size=lbl_text_size) +
+  geom_text(aes(x=pts.putts$distance[4],y=mean(pts.putts$lodds[3:4])),
+            label=expression(beta==-0.354),parse=TRUE,hjust=-0.1,size=lbl_text_size)
+
+flp.lodds.putts + flp.lodds.putts2
+```
+
+&nbsp;
+
+Look closely at Figure \@ref(fig:PuttsLogOdds)-Right to understand the meaning of the slope. When the distance of the putt increased from 6 to 7 feet the predicted **log odds** decreased from `r formatC(bfl.putts$lodds[6],format="f",digits=3)` to `r formatC(bfl.putts$lodds[7],format="f",digits=3)`, a difference of `r formatC(bfl.putts$lodds[7],format="f",digits=3)`-`r formatC(bfl.putts$lodds[6],format="f",digits=3)`= `r formatC(diff(bfl.putts$lodds[6:7]),format="f",digits=3)` which is the same as the estimated slope (Table \@ref(tab:PuttCoefs)). The same difference in **log odds** is observed when the distance of the putt increased from 10 to 11 feet (i.e., `r formatC(bfl.putts$lodds[11],format="f",digits=3)`-`r formatC(bfl.putts$lodds[10],format="f",digits=3)`= `r formatC(diff(bfl.putts$lodds[10:11]),format="f",digits=3)`) and will be the same for every other increase of 1 foot for the distance of the putt.
+
+::: {.tip data-latex=""}
+The slope for a logistic regression is the **additive** change in the **log odds** for a unit change in the explanatory variable.
+:::
+
+
+## Back-Transformed Slope
+Log odds are nearly impossible to interpret. The change in log odds are even hard to interpret. Fortunately, a useful interpretation emerges when the slope is back-transformed by exponentiation.
+
+Mathematically, the slope of the logistic regression looks like this:
+
+$$ \beta = log(ODDS(Y|X+1)) - log(ODDS(Y|X)) $$
+
+where $ODDS(Y|X)$ generically represents the odds of $Y$ being a "success" at a given value of $X$. However, back-transforming the slope (i.e., exponentiating the slope) looks like
+
+$$
+\begin{split}
+e^{\beta} &= log(ODDS(Y|X+1)) - log(ODDS(Y|X)) \\
+&= log\left(\frac{ODDS(Y|X+1)}{ODDS(Y|X)}\right) \\
+&= \frac{ODDS(Y|X+1)}{ODDS(Y|X)} \\
+\end{split}
+$$
+
+Thus, the exponentiated slope is the **multiplicative** change in the odds of a "success" for a unit change in $X$. The exponentiated slope is called an **odds ratio** because it is a ratio of odds at two values of $X$ (that differ by one unit).
+
+For example, $\hat{\beta}$=0.2 would mean that the log odds of a "success" increases by 0.2, on average, for a one unit increase in $X$. The corresponding exponentiated slope, $e^{0.2}$=`r formatC(exp(0.2),format="f",digits=2)`, indicates that the **odds** of a "success" are `r formatC(exp(0.2),format="f",digits=2)` **times** greater for a one unit increase in $X$. The exponentiated slope does not indicate what the odds are, only that the odds are `r formatC(exp(0.2),format="f",digits=2)` **times** greater with an increase of one unit in the explanatory variable.
+
+The exponentiated estimated slope for the golf putt data is `r formatC(ecfs.putts[2,1],format="f",digits=3)` with a 95% confidence interval from `r formatC(ecfs.putts[2,2],format="f",digits=3)` to `r formatC(ecfs.putts[2,3],format="f",digits=3)` (Table \@ref(tab:PuttExpCoefs)). Thus, as the length of the putt increases by one foot, the **odds** that the student made the putt are between `r formatC(ecfs.putts[2,2],format="f",digits=3)` and `r formatC(ecfs.putts[2,3],format="f",digits=3)` times lower (Figure \@ref(fig:PuttsOdds)). In other words, as the length of the putt increases by one foot, the **odds** that the student made the putt decreases by between `r formatC((1-ecfs.putts[2,3])*100,format="f",digits=1)` and `r formatC((1-ecfs.putts[2,2])*100,format="f",digits=1)`%.
+
+```{r PuttExpCoefs, echo=FALSE}
+ecfs.putts %>%
+  knitr::kable(booktabs=TRUE,digits=c(3,3,3),
+               caption="Exponentiated parameter estimates from the logistic regression with the golf putting data. Note that the intercepts values are not useful.") %>%
+  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+```
+
+&nbsp;
+
+```{r PuttsOdds, echo=FALSE, fig.width=7, fig.cap="Odds of making a putt versus the distance of the putt with best-fit line superimposed. The right panel is 'zoomed in' on distances of 5 to 15 so that the exponentiated slope could be better seen."}
+flp.odds.putts <- ggplot(mapping=aes(x=distance,y=odds)) +
+  geom_point(data=sum.putts,pch=21,color="black",fill="red",size=1.75) +
+  geom_line(data=bfl.putts,color="blue",size=1) +
+  labs(x="Distance of Putt (ft)",y="Odds of Making Putt") +
+  theme_NCStats()
+
+flp.odds.putts2 <- flp.odds.putts +
+  coord_cartesian(xlim=c(5,15),ylim=c(0,3)) +
+  scale_y_continuous(breaks=pts.putts$odds) +
+  scale_x_continuous(breaks=pts.putts$distance) +
+  theme(panel.grid.major=element_line(color="gray90",linetype="dashed")) +
+  geom_point(data=pts.putts,mapping=aes(x=distance,y=odds),
+             pch=21,color="black",bg="lightgray") +
+  ## First example
+  geom_segment(aes(x=pts.putts$distance[1],xend=pts.putts$distance[2],
+               y=pts.putts$odds[1],yend=pts.putts$odds[1]),
+               color="red") +
+  geom_segment(aes(x=pts.putts$distance[2],xend=pts.putts$distance[2],
+               y=pts.putts$odds[1],yend=pts.putts$odds[2]),
+               color="red") +
+  geom_text(aes(x=mean(pts.putts$distance[1:2]),y=pts.putts$odds[1],label="1"),
+            vjust=-0.25,size=lbl_text_size) +
+  geom_text(aes(x=pts.putts$distance[2],y=mean(pts.putts$odds[1:2])),
+            label=expression(e^{beta}==0.702),parse=TRUE,hjust=-0.1,size=lbl_text_size) +
+  ## Second example
+  geom_segment(aes(x=pts.putts$distance[3],xend=pts.putts$distance[4],
+               y=pts.putts$odds[3],yend=pts.putts$odds[3]),
+               color="red") +
+  geom_segment(aes(x=pts.putts$distance[4],xend=pts.putts$distance[4],
+               y=pts.putts$odds[3],yend=pts.putts$odds[4]),
+               color="red") +
+  geom_text(aes(x=mean(pts.putts$distance[3:4]),y=pts.putts$odds[3],label="1"),
+            vjust=-0.25,size=lbl_text_size) +
+  geom_text(aes(x=pts.putts$distance[4],y=mean(pts.putts$odds[3:4])),
+            label=expression(e^{beta}==0.702),parse=TRUE,hjust=-0.1,size=lbl_text_size)
+
+flp.odds.putts + flp.odds.putts2
+```
+
+&nbsp;
+
+Again, look closely at Figure \@ref(fig:PuttsOdds)-Right to understand the meaning of the exponentiated slope. When the distance of the putt increased from 6 to 7 feet the predicted **odds** declined from `r formatC(bfl.putts$odds[6],format="f",digits=3)` to `r formatC(bfl.putts$odds[7],format="f",digits=3)`, a difference of `r formatC(bfl.putts$odds[7],format="f",digits=3)`-`r formatC(bfl.putts$odds[6],format="f",digits=3)`= `r formatC(diff(bfl.putts$odds[6:7]),format="f",digits=3)` but a **ratio** of $\frac{`r formatC(bfl.putts$odds[7],format="f",digits=3)`}{`r formatC(bfl.putts$odds[6],format="f",digits=3)`}$=`r formatC(exp(diff(bfl.putts$lodds[6:7])),format="f",digits=3)`. When the distance of the putt was increased from 10 to 11 feet the difference in odds was `r formatC(bfl.putts$odds[11],format="f",digits=3)`-`r formatC(bfl.putts$odds[10],format="f",digits=3)`= `r formatC(diff(bfl.putts$odds[10:11]),format="f",digits=3)` but the **ratio** was $\frac{`r formatC(bfl.putts$odds[11],format="f",digits=3)`}{`r formatC(bfl.putts$odds[10],format="f",digits=3)`}$ which was again `r formatC(exp(diff(bfl.putts$lodds[10:11])),format="f",digits=3)`. Thus, the *difference* in odds changes depending on the values of the explanatory variable but the **ratio** of odds stays constant at the value of the exponentiated slope (Table \@ref(tab:PuttExpCoefs)).
+
+::: {.tip data-latex=""}
+The exponentiated slope for a logistic regression is the **multiplicative** change in the **odds** for a unit change in the explanatory variable.
+:::
+
+&nbsp;
+
+## Predictions
+The fitted logistic regression model can be used to make predictions. However, you must be very careful what is being predicted (i.e., the log odds) and how to back-transform (exponentiation gives the odds, not the probability). Plugging a value of $X$ into the fitted logistic regression equation will predict a value for the log odds. For example, the predicted **log odds** for making a 6 foot putt is `r formatC(cfs.putts[1,1],format="f",digits=3)`-`r formatC(-1*cfs.putts[2,1],format="f",digits=3)`&times;6 = `r formatC(bfl.putts$lodds[6],format="f",digits=3)` (values of &alpha; and &beta; from Table \@ref(tab:PuttCoefs) and log odds prediction shown in Figure \@ref(fig:PuttsLogOdds)).
+
+Of course, predicting the log odds is not that useful. However, exponentiating this value results in the odds. Thus, the **odds** of making a 6 foot putt is e<sup>`r formatC(bfl.putts$lodds[6],format="f",digits=3)`</sup>=`r formatC(bfl.putts$odds[6],format="f",digits=3)` (Figure \@ref(fig:PuttsOdds)). Thus, the probability of making the 6 foot putt is nearly twice as likely as not making the 6 foot putt.
+
+Finally, one most often wants to predict the **probability** of "success." As shown in Module \@ref(LogRegFoundations), a probability can be computed from the odds with $p = \frac{\text{odds}}{\text{1+odds}}$. Thus, for example, the probability of making the 6 foot putt is $\frac{`r formatC(bfl.putts$odds[6],format="f",digits=3)`}{1+`r formatC(bfl.putts$odds[6],format="f",digits=3)`}$=`r formatC(bfl.putts$p[6],format="f",digits=3)` (Figure \@ref(fig:PuttsProb)). Therefore, the students makes a 6 foot put about 66% of the time on average (so, about 2 out of every 3).
+
+```{r PuttsProb, echo=FALSE, fig.cap="Probability of making a putt versus the distance of the putt with best-fit line superimposed and the prediction of the probability of making a 6 foot is shown."}
+puttsProb <- ggplot(mapping=aes(x=distance,y=p)) +
+  geom_point(data=sum.putts,pch=21,color="black",fill="red",size=1.75) +
+  geom_line(data=bfl.putts,color="blue",size=1) +
+  labs(x="Distance of Putt (ft)",y="Probability of Making Putt") +
+  theme_NCStats()
+puttsProb +
+  scale_y_continuous(expand=expansion(mult=0.03),breaks=c(0,0.25,0.5,0.663,0.75,1)) +
+  scale_x_continuous(expand=expansion(mult=0.02),breaks=c(5,6,10,15,20,25)) +
+  geom_segment(aes(x=6,xend=6,y=-Inf,yend=bfl.putts$p[6]),
+               linetype="dashed",arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+  geom_segment(aes(x=6,xend=-Inf,y=bfl.putts$p[6],yend=bfl.putts$p[6]),
+               linetype="dashed",arrow=arrow(length=unit(0.2,"cm"),type="closed"))
+```
+
+&nbsp;
+
+## "Reverse" Predictions
+In logistic regression it is fairly common to ask a specific version of the generic question "What is the value of $X$ for a given probability?". For example, one may be interested in determine the length of the putt where there is a 50% probability of making the putt. In other words, what is the distance when the probability making the putt is no longer greater than the probability of not making the putt. Of course, one can consider other probabilities as well.
+
+Solving the logistic regression equation for $X$ provides an equation to answer these types of questions. The albegray to solve for $X$ is shown below, beginning with the logistic regression equation.
+
+$$
+\begin{split}
+log\left(\frac{p}{1-p}\right) &= \alpha+\beta X \\
+log\left(\frac{p}{1-p}\right)-\alpha &= \beta X \\
+\beta X &= log\left(\frac{p}{1-p}\right)-\alpha \\
+X &= \frac{log\left(\frac{p}{1-p}\right)-\alpha}{\beta} \\
+\end{split}
+$$
+
+For example, the distance for which the probability of making the putt is 0.1 is
+
+$$
+\frac{log\left(\frac{0.1}{1-0.1}\right)-`r formatC(cfs.putts[1,1],format="f",digits=3)`}{`r formatC(cfs.putts[1,1],format="f",digits=3)`} = `r formatC((log(0.1/0.9)-cfs.putts[1,1])/cfs.putts[2,1],format="f",digits=2)`.
+$$
+
+as shown in Figure \@ref(fig:PuttsPredX).
+
+```{r PuttsPredX, echo=FALSE, fig.cap="Probability of making a putt versus the distance of the putt with best-fit line superimposed and the prediction of the distances where the probabililty of making the putt is 0.10 and 0.50."}
+predX <- round((log(c(0.1,0.5)/(1-c(0.1,0.5)))-cfs.putts[1,1])/cfs.putts[2,1],2)
+predXlbls <- formatC(predX,format="f",digits=2)
+
+puttsProb +
+  scale_y_continuous(expand=expansion(mult=0.03),breaks=c(0.25,0.5)) +
+  scale_x_continuous(expand=expansion(mult=0.02),breaks=predX) +
+  geom_segment(aes(x=-Inf,xend=predX[1],y=0.1,yend=0.1),
+               linetype="dashed",arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+  geom_segment(aes(x=predX[1],xend=predX[1],y=0.1,yend=-Inf),
+               linetype="dashed",arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+  geom_segment(aes(x=-Inf,xend=predX[2],y=0.5,yend=0.5),
+               linetype="dashed",arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+  geom_segment(aes(x=predX[2],xend=predX[2],y=0.5,yend=-Inf),
+               linetype="dashed",arrow=arrow(length=unit(0.2,"cm"),type="closed"))
+```
+
+&nbsp;
+
+Because $log(\left(\frac{0.5}{1-0.5}\right)$=$log(1)$=0, this equation reduces to $X=\frac{-\alpha}{\beta}$ for a probability of 0.5. Thus, the distance for which the probability of making the putt is 0.5 is `r formatC(-1*cfs.putts[1,1]/cfs.putts[2,1],format="f",digits=2)` ft (Figure \@ref(fig:PuttsPredX)).
+
+&nbsp;
+
+## Variability Estimates
+Standard errors or confidence intervals for the parameters of the logistic regression model can be computed with normal distribution theory. However, this theory does not hold for all logistic regression models. In addition, methods for computing confidence intervals for predicted probabilities or for predicted values of $X$ for a particular probability are not well formed. Bootstrapping provides one method for producing confidence intervals for these parameters.
+
+In bootstrapping, $B$ (re)samples of the same size as the original sample are produced with replacement from the original sample. The logistic regression model is fit to each of these new (re)samples and the estimates of interest (i.e., slope, intercept, predicted probability, etc.) are computed each time. The estimates from each (re)sample are then aggregated and an approximate 95% confidence interval is computed as the values of the estimate that have 2.5% of all bootstrapped values smaller and greater (i.e., find the bounds that contain the most common 95% of bootstrapped values). Bootstrap confidence intervals are computer intensive, but provide an interval that does not depend on the shape of the underlying sampling distribution.
+
+
+## Another Example
+As another example data about the presence or absence of a common shrub (*Berberis repens*) in the [Bryce Canyon National Park](https://www.nps.gov/brca/index.htm) Utah will be used. Here the researchers recorded whether the shrub was present or not in many 10m&times;10m plots throughout the park. They also recorded the elevation (among other things) of the plot. They wanted to model the effect of elevation on the presence of the shrub.
+
+```{r echo=FALSE}
+
+
+shrub <- read.csv("https://derekogle.com/Book207/data/BryceShrub.csv")
+shrub$presence01 <- ifelse(shrub$presence=="Present",1,0)
+glm.shrub <- glm(presence01~elev,data=shrub,family="binomial")
+cfs.shrub <- cbind(Ests=coef(glm.shrub),confint(glm.shrub))
+
+sum.shrub <- shrub %>%
+  group_by(elev) %>%
+  summarize(n=n(),
+            presence=sum(presence01),
+            p=presence/n,
+            odds=p/(1-p),
+            lodds=log(odds)) %>%
+  as.data.frame()
+bfl.shrub <- tibble(elev=seq(2000,2800,200),
+                    lodds=predict(glm.shrub,data.frame(elev=elev)),
+                    odds=exp(lodds),
+                    p=odds/(1+odds))
+```
+

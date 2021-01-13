@@ -145,6 +145,12 @@ fig:LogRegRaw
 fig:LogRegProb
 fig:LogRegOdds
 fig:LogRegLogit
+tab:PuttCoefs
+fig:PuttsLogOdds
+tab:PuttExpCoefs
+fig:PuttsOdds
+fig:PuttsProb
+fig:PuttsPredX
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -299,5 +305,11 @@ odds
 log-odds-and-the-logit-transformation
 back-transformation-introduction
 LogRegModels
+LogRegSlope
+back-transformed-slope
+predictions-1
+reverse-predictions
+variability-estimates
+another-example
 LogRegAnalysis
 LogRegSummary

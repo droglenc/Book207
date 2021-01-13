@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-11" />
+<meta name="date" content="2021-01-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -321,7 +321,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25.3" data-path="LogRegFoundations.html"><a href="LogRegFoundations.html#log-odds-and-the-logit-transformation"><i class="fa fa-check"></i><b>25.3</b> Log Odds and the Logit Transformation</a></li>
 <li class="chapter" data-level="25.4" data-path="LogRegFoundations.html"><a href="LogRegFoundations.html#back-transformation-introduction"><i class="fa fa-check"></i><b>25.4</b> Back-Transformation Introduction</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="LogRegModels.html"><a href="LogRegModels.html"><i class="fa fa-check"></i><b>26</b> Models and Predictions</a></li>
+<li class="chapter" data-level="26" data-path="LogRegModels.html"><a href="LogRegModels.html"><i class="fa fa-check"></i><b>26</b> Models and Predictions</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="LogRegModels.html"><a href="LogRegModels.html#LogRegSlope"><i class="fa fa-check"></i><b>26.1</b> Slope &amp; Back-Transformed Slope</a></li>
+<li class="chapter" data-level="26.2" data-path="LogRegModels.html"><a href="LogRegModels.html#back-transformed-slope"><i class="fa fa-check"></i><b>26.2</b> Back-Transformed Slope</a></li>
+<li class="chapter" data-level="26.3" data-path="LogRegModels.html"><a href="LogRegModels.html#predictions-1"><i class="fa fa-check"></i><b>26.3</b> Predictions</a></li>
+<li class="chapter" data-level="26.4" data-path="LogRegModels.html"><a href="LogRegModels.html#reverse-predictions"><i class="fa fa-check"></i><b>26.4</b> “Reverse” Predictions</a></li>
+<li class="chapter" data-level="26.5" data-path="LogRegModels.html"><a href="LogRegModels.html#variability-estimates"><i class="fa fa-check"></i><b>26.5</b> Variability Estimates</a></li>
+<li class="chapter" data-level="26.6" data-path="LogRegModels.html"><a href="LogRegModels.html#another-example"><i class="fa fa-check"></i><b>26.6</b> Another Example</a></li>
+</ul></li>
 <li class="chapter" data-level="27" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html"><i class="fa fa-check"></i><b>27</b> Analysis</a></li>
 <li class="chapter" data-level="28" data-path="LogRegSummary.html"><a href="LogRegSummary.html"><i class="fa fa-check"></i><b>28</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -348,7 +356,211 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="LogRegModels" class="section level1" number="26">
 <h1><span class="header-section-number">Module 26</span> Models and Predictions</h1>
+<p>The logistic regression model, using the logit transformation, was briefly introduced at the end of Module <a href="LogRegFoundations.html#LogRegFoundations">25</a> as</p>
+<p><span class="math display">\[ log\left(\frac{p_{i}}{1-p_{i}}\right) = \alpha + \beta x_{i} \]</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> is the “intercept” parameter and <span class="math inline">\(\beta\)</span> is the “slope” parameter. As noted there, this represents a linear model of log odds plotted against values of the explanatory variable. In this module, interpretations of the slope, back-transformed slope, predictions, and “reverse” predictions are described.</p>
+<div id="example-data-1" class="section level4 unnumbered">
+<h4>Example Data</h4>
+<p>Throughout this and the next module data that was collected by a student a few years ago will be used. In this project the student putted a golf ball 10 times from ever 1 foot between 1 and 25 feet from the hole. For each putt she recorded whether she made the putt or not. She wanted to model the probability of making the putt as a function of distance to the hole.</p>
+<p> </p>
+</div>
+<div id="LogRegSlope" class="section level2" number="26.1">
+<h2><span class="header-section-number">26.1</span> Slope &amp; Back-Transformed Slope</h2>
+<p>The slope for any linear regression represents the average additive change in the response variable for a unit change in the explanatory variable. In logistic regression, this corresponds to the average additive change in the log odds of a “success” for a unit change in the explanatory variable.</p>
+<p>The estimated slope for the golf putt data is -0.354 with a 95% confidence interval from -0.451 to -0.272 (Table <a href="LogRegModels.html#tab:PuttCoefs">26.1</a>). Thus, as the length of the putt increases by one foot, the <strong>log odds</strong> that the student made the putt <strong>de</strong>creases by between 0.451 to 0.272 (Figure <a href="LogRegModels.html#fig:PuttsLogOdds">26.1</a>).</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:PuttCoefs">Table 26.1: </span>Parameter estimates from the logistic regression with the golf putting data.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Ests
+</th>
+<th style="text-align:right;">
+2.5 %
+</th>
+<th style="text-align:right;">
+97.5 %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+2.797
+</td>
+<td style="text-align:right;">
+1.992
+</td>
+<td style="text-align:right;">
+3.715
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+distance
+</td>
+<td style="text-align:right;">
+-0.354
+</td>
+<td style="text-align:right;">
+-0.451
+</td>
+<td style="text-align:right;">
+-0.272
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<div class="figure" style="text-align: center"><span id="fig:PuttsLogOdds"></span>
+<img src="Book207_files/figure-html/PuttsLogOdds-1.png" alt="Log odds of making a putt versus the distance of the putt with best-fit line superimposed. The right panel is 'zoomed in' on distances of 5 to 15 so that the slope could be better seen." width="672" />
+<p class="caption">
+Figure 26.1: Log odds of making a putt versus the distance of the putt with best-fit line superimposed. The right panel is ‘zoomed in’ on distances of 5 to 15 so that the slope could be better seen.
+</p>
+</div>
+<p> </p>
+<p>Look closely at Figure <a href="LogRegModels.html#fig:PuttsLogOdds">26.1</a>-Right to understand the meaning of the slope. When the distance of the putt increased from 6 to 7 feet the predicted <strong>log odds</strong> decreased from 0.675 to 0.321, a difference of 0.321-0.675= -0.354 which is the same as the estimated slope (Table <a href="LogRegModels.html#tab:PuttCoefs">26.1</a>). The same difference in <strong>log odds</strong> is observed when the distance of the putt increased from 10 to 11 feet (i.e., -1.094–0.740= -0.354) and will be the same for every other increase of 1 foot for the distance of the putt.</p>
+<div class="tip">
+<p>The slope for a logistic regression is the <strong>additive</strong> change in the <strong>log odds</strong> for a unit change in the explanatory variable.</p>
+</div>
+</div>
+<div id="back-transformed-slope" class="section level2" number="26.2">
+<h2><span class="header-section-number">26.2</span> Back-Transformed Slope</h2>
+<p>Log odds are nearly impossible to interpret. The change in log odds are even hard to interpret. Fortunately, a useful interpretation emerges when the slope is back-transformed by exponentiation.</p>
+<p>Mathematically, the slope of the logistic regression looks like this:</p>
+<p><span class="math display">\[ \beta = log(ODDS(Y|X+1)) - log(ODDS(Y|X)) \]</span></p>
+<p>where <span class="math inline">\(ODDS(Y|X)\)</span> generically represents the odds of <span class="math inline">\(Y\)</span> being a “success” at a given value of <span class="math inline">\(X\)</span>. However, back-transforming the slope (i.e., exponentiating the slope) looks like</p>
+<p><span class="math display">\[
+\begin{split}
+e^{\beta} &amp;= log(ODDS(Y|X+1)) - log(ODDS(Y|X)) \\
+&amp;= log\left(\frac{ODDS(Y|X+1)}{ODDS(Y|X)}\right) \\
+&amp;= \frac{ODDS(Y|X+1)}{ODDS(Y|X)} \\
+\end{split}
+\]</span></p>
+<p>Thus, the exponentiated slope is the <strong>multiplicative</strong> change in the odds of a “success” for a unit change in <span class="math inline">\(X\)</span>. The exponentiated slope is called an <strong>odds ratio</strong> because it is a ratio of odds at two values of <span class="math inline">\(X\)</span> (that differ by one unit).</p>
+<p>For example, <span class="math inline">\(\hat{\beta}\)</span>=0.2 would mean that the log odds of a “success” increases by 0.2, on average, for a one unit increase in <span class="math inline">\(X\)</span>. The corresponding exponentiated slope, <span class="math inline">\(e^{0.2}\)</span>=1.22, indicates that the <strong>odds</strong> of a “success” are 1.22 <strong>times</strong> greater for a one unit increase in <span class="math inline">\(X\)</span>. The exponentiated slope does not indicate what the odds are, only that the odds are 1.22 <strong>times</strong> greater with an increase of one unit in the explanatory variable.</p>
+<p>The exponentiated estimated slope for the golf putt data is 0.702 with a 95% confidence interval from 0.637 to 0.762 (Table <a href="LogRegModels.html#tab:PuttExpCoefs">26.2</a>). Thus, as the length of the putt increases by one foot, the <strong>odds</strong> that the student made the putt are between 0.637 and 0.762 times lower (Figure <a href="LogRegModels.html#fig:PuttsOdds">26.2</a>). In other words, as the length of the putt increases by one foot, the <strong>odds</strong> that the student made the putt decreases by between 23.8 and 36.3%.</p>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:PuttExpCoefs">Table 26.2: </span>Exponentiated parameter estimates from the logistic regression with the golf putting data. Note that the intercepts values are not useful.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Ests
+</th>
+<th style="text-align:right;">
+2.5 %
+</th>
+<th style="text-align:right;">
+97.5 %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+16.392
+</td>
+<td style="text-align:right;">
+7.333
+</td>
+<td style="text-align:right;">
+41.054
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+distance
+</td>
+<td style="text-align:right;">
+0.702
+</td>
+<td style="text-align:right;">
+0.637
+</td>
+<td style="text-align:right;">
+0.762
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<div class="figure" style="text-align: center"><span id="fig:PuttsOdds"></span>
+<img src="Book207_files/figure-html/PuttsOdds-1.png" alt="Odds of making a putt versus the distance of the putt with best-fit line superimposed. The right panel is 'zoomed in' on distances of 5 to 15 so that the exponentiated slope could be better seen." width="672" />
+<p class="caption">
+Figure 26.2: Odds of making a putt versus the distance of the putt with best-fit line superimposed. The right panel is ‘zoomed in’ on distances of 5 to 15 so that the exponentiated slope could be better seen.
+</p>
+</div>
+<p> </p>
+<p>Again, look closely at Figure <a href="LogRegModels.html#fig:PuttsOdds">26.2</a>-Right to understand the meaning of the exponentiated slope. When the distance of the putt increased from 6 to 7 feet the predicted <strong>odds</strong> declined from 1.964 to 1.379, a difference of 1.379-1.964= -0.585 but a <strong>ratio</strong> of <span class="math inline">\(\frac{1.379}{1.964}\)</span>=0.702. When the distance of the putt was increased from 10 to 11 feet the difference in odds was 0.335-0.477= -0.142 but the <strong>ratio</strong> was <span class="math inline">\(\frac{0.335}{0.477}\)</span> which was again 0.702. Thus, the <em>difference</em> in odds changes depending on the values of the explanatory variable but the <strong>ratio</strong> of odds stays constant at the value of the exponentiated slope (Table <a href="LogRegModels.html#tab:PuttExpCoefs">26.2</a>).</p>
+<div class="tip">
+<p>The exponentiated slope for a logistic regression is the <strong>multiplicative</strong> change in the <strong>odds</strong> for a unit change in the explanatory variable.</p>
+</div>
+<p> </p>
+</div>
+<div id="predictions-1" class="section level2" number="26.3">
+<h2><span class="header-section-number">26.3</span> Predictions</h2>
+<p>The fitted logistic regression model can be used to make predictions. However, you must be very careful what is being predicted (i.e., the log odds) and how to back-transform (exponentiation gives the odds, not the probability). Plugging a value of <span class="math inline">\(X\)</span> into the fitted logistic regression equation will predict a value for the log odds. For example, the predicted <strong>log odds</strong> for making a 6 foot putt is 2.797-0.354×6 = 0.675 (values of α and β from Table <a href="LogRegModels.html#tab:PuttCoefs">26.1</a> and log odds prediction shown in Figure <a href="LogRegModels.html#fig:PuttsLogOdds">26.1</a>).</p>
+<p>Of course, predicting the log odds is not that useful. However, exponentiating this value results in the odds. Thus, the <strong>odds</strong> of making a 6 foot putt is e<sup>0.675</sup>=1.964 (Figure <a href="LogRegModels.html#fig:PuttsOdds">26.2</a>). Thus, the probability of making the 6 foot putt is nearly twice as likely as not making the 6 foot putt.</p>
+<p>Finally, one most often wants to predict the <strong>probability</strong> of “success.” As shown in Module <a href="LogRegFoundations.html#LogRegFoundations">25</a>, a probability can be computed from the odds with <span class="math inline">\(p = \frac{\text{odds}}{\text{1+odds}}\)</span>. Thus, for example, the probability of making the 6 foot putt is <span class="math inline">\(\frac{1.964}{1+1.964}\)</span>=0.663 (Figure <a href="LogRegModels.html#fig:PuttsProb">26.3</a>). Therefore, the students makes a 6 foot put about 66% of the time on average (so, about 2 out of every 3).</p>
+<div class="figure" style="text-align: center"><span id="fig:PuttsProb"></span>
+<img src="Book207_files/figure-html/PuttsProb-1.png" alt="Probability of making a putt versus the distance of the putt with best-fit line superimposed and the prediction of the probability of making a 6 foot is shown." width="336" />
+<p class="caption">
+Figure 26.3: Probability of making a putt versus the distance of the putt with best-fit line superimposed and the prediction of the probability of making a 6 foot is shown.
+</p>
+</div>
+<p> </p>
+</div>
+<div id="reverse-predictions" class="section level2" number="26.4">
+<h2><span class="header-section-number">26.4</span> “Reverse” Predictions</h2>
+<p>In logistic regression it is fairly common to ask a specific version of the generic question “What is the value of <span class="math inline">\(X\)</span> for a given probability?” For example, one may be interested in determine the length of the putt where there is a 50% probability of making the putt. In other words, what is the distance when the probability making the putt is no longer greater than the probability of not making the putt. Of course, one can consider other probabilities as well.</p>
+<p>Solving the logistic regression equation for <span class="math inline">\(X\)</span> provides an equation to answer these types of questions. The albegray to solve for <span class="math inline">\(X\)</span> is shown below, beginning with the logistic regression equation.</p>
+<p><span class="math display">\[
+\begin{split}
+log\left(\frac{p}{1-p}\right) &amp;= \alpha+\beta X \\
+log\left(\frac{p}{1-p}\right)-\alpha &amp;= \beta X \\
+\beta X &amp;= log\left(\frac{p}{1-p}\right)-\alpha \\
+X &amp;= \frac{log\left(\frac{p}{1-p}\right)-\alpha}{\beta} \\
+\end{split}
+\]</span></p>
+<p>For example, the distance for which the probability of making the putt is 0.1 is</p>
+<p><span class="math display">\[
+\frac{log\left(\frac{0.1}{1-0.1}\right)-2.797}{2.797} = 14.12.
+\]</span></p>
+<p>as shown in Figure <a href="LogRegModels.html#fig:PuttsPredX">26.4</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:PuttsPredX"></span>
+<img src="Book207_files/figure-html/PuttsPredX-1.png" alt="Probability of making a putt versus the distance of the putt with best-fit line superimposed and the prediction of the distances where the probabililty of making the putt is 0.10 and 0.50." width="336" />
+<p class="caption">
+Figure 26.4: Probability of making a putt versus the distance of the putt with best-fit line superimposed and the prediction of the distances where the probabililty of making the putt is 0.10 and 0.50.
+</p>
+</div>
+<p> </p>
+<p>Because <span class="math inline">\(log(\left(\frac{0.5}{1-0.5}\right)\)</span>=<span class="math inline">\(log(1)\)</span>=0, this equation reduces to <span class="math inline">\(X=\frac{-\alpha}{\beta}\)</span> for a probability of 0.5. Thus, the distance for which the probability of making the putt is 0.5 is 7.91 ft (Figure <a href="LogRegModels.html#fig:PuttsPredX">26.4</a>).</p>
+<p> </p>
+</div>
+<div id="variability-estimates" class="section level2" number="26.5">
+<h2><span class="header-section-number">26.5</span> Variability Estimates</h2>
+<p>Standard errors or confidence intervals for the parameters of the logistic regression model can be computed with normal distribution theory. However, this theory does not hold for all logistic regression models. In addition, methods for computing confidence intervals for predicted probabilities or for predicted values of <span class="math inline">\(X\)</span> for a particular probability are not well formed. Bootstrapping provides one method for producing confidence intervals for these parameters.</p>
+<p>In bootstrapping, <span class="math inline">\(B\)</span> (re)samples of the same size as the original sample are produced with replacement from the original sample. The logistic regression model is fit to each of these new (re)samples and the estimates of interest (i.e., slope, intercept, predicted probability, etc.) are computed each time. The estimates from each (re)sample are then aggregated and an approximate 95% confidence interval is computed as the values of the estimate that have 2.5% of all bootstrapped values smaller and greater (i.e., find the bounds that contain the most common 95% of bootstrapped values). Bootstrap confidence intervals are computer intensive, but provide an interval that does not depend on the shape of the underlying sampling distribution.</p>
+</div>
+<div id="another-example" class="section level2" number="26.6">
+<h2><span class="header-section-number">26.6</span> Another Example</h2>
+<p>As another example data about the presence or absence of a common shrub (<em>Berberis repens</em>) in the <a href="https://www.nps.gov/brca/index.htm">Bryce Canyon National Park</a> Utah will be used. Here the researchers recorded whether the shrub was present or not in many 10m×10m plots throughout the park. They also recorded the elevation (among other things) of the plot. They wanted to model the effect of elevation on the presence of the shrub.</p>
 
+</div>
 </div>
             </section>
 
