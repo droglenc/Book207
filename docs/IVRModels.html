@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-13" />
+<meta name="date" content="2021-01-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -334,11 +334,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="27.1" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#data-preparation"><i class="fa fa-check"></i><b>27.1</b> Data Preparation</a></li>
 <li class="chapter" data-level="27.2" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#fitting-the-model"><i class="fa fa-check"></i><b>27.2</b> Fitting the Model</a></li>
-<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.3</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.4</b> Predictions</a></li>
-<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.5</b> Plotting Best-Fit Line</a></li>
+<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#relationship-test-1"><i class="fa fa-check"></i><b>27.3</b> Relationship Test</a></li>
+<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.4</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.5</b> Predictions</a></li>
+<li class="chapter" data-level="27.6" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.6</b> Plotting Best-Fit Line</a></li>
 </ul></li>
-<li class="chapter" data-level="28" data-path="LogRegSummary.html"><a href="LogRegSummary.html"><i class="fa fa-check"></i><b>28</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
@@ -592,11 +592,11 @@ Figure 21.2: Hypothetical depictions of four situations that can occur for the r
 <div id="ultimate-full-model-in-r" class="section level2" number="21.4">
 <h2><span class="header-section-number">21.4</span> Ultimate Full Model in R</h2>
 <p>Fitting ultimate full model in R is straightforward because it is essentially the same as fitting a Two-Way ANOVA with <code>lm()</code> (see <a href="ANOVA2Analysis.html#model-fitting-in-r">12.1</a>) and R automatically creates the indicator variables behind the scenes. The ultimate full model for an IVR is fit in <code>lm()</code> with a formula of the form <code>response~covariate+factor+covariated:factor</code> (<em>in that order to match what we did above</em>).<a href="#fn83" class="footnote-ref" id="fnref83"><sup>83</sup></a></p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb144-1"><a href="IVRModels.html#cb144-1" aria-hidden="true" tabindex="-1"></a>ivr1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species<span class="sc">+</span>weight<span class="sc">:</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb146-1"><a href="IVRModels.html#cb146-1" aria-hidden="true" tabindex="-1"></a>ivr1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species<span class="sc">+</span>weight<span class="sc">:</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
 <div id="extracting-parameter-estimates" class="section level4 unnumbered">
 <h4>Extracting Parameter Estimates</h4>
 <p>The parameter estimates and their confidence intervals are extractd with <code>coef()</code> and <code>confint()</code>, which can be bound together with <code>cbind()</code> to create a succinct summary.</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb145-1"><a href="IVRModels.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Ests=</span><span class="fu">coef</span>(ivr1),<span class="fu">confint</span>(ivr1))</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb147-1"><a href="IVRModels.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Ests=</span><span class="fu">coef</span>(ivr1),<span class="fu">confint</span>(ivr1))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;                              Ests        2.5 %     97.5 %
 #R&gt;   (Intercept)         0.135451558  0.093132341 0.17777078
 #R&gt;   weight              0.009607284  0.003886599 0.01532797
@@ -608,31 +608,31 @@ Figure 21.2: Hypothetical depictions of four situations that can occur for the r
 <div id="fitted-line-plots" class="section level4 unnumbered">
 <h4>Fitted Line Plots</h4>
 <p>A visual of the fitted IVR model is constructed the same as the visual for an SLR model except that the color of the points and the regression line for each group is mapped to the factor variable. The plotting character and colors should then be removed from <code>geom_point()</code>. For example, note the <code>color=species</code> in <code>mapping=aes()</code> and the simplicity of <code>geom_point()</code> in the code below.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb147-1"><a href="IVRModels.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Mirex,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>weight,<span class="at">y=</span>mirex,<span class="at">color=</span>species)) <span class="sc">+</span>  </span>
-<span id="cb147-2"><a href="IVRModels.html#cb147-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  </span>
-<span id="cb147-3"><a href="IVRModels.html#cb147-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Weight (kg)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mirex Concentration (mg/kg)&quot;</span>) <span class="sc">+</span>  </span>
-<span id="cb147-4"><a href="IVRModels.html#cb147-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
-<span id="cb147-5"><a href="IVRModels.html#cb147-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-112-1.png" width="480" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb149-1"><a href="IVRModels.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Mirex,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>weight,<span class="at">y=</span>mirex,<span class="at">color=</span>species)) <span class="sc">+</span>  </span>
+<span id="cb149-2"><a href="IVRModels.html#cb149-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  </span>
+<span id="cb149-3"><a href="IVRModels.html#cb149-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Weight (kg)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mirex Concentration (mg/kg)&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb149-4"><a href="IVRModels.html#cb149-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
+<span id="cb149-5"><a href="IVRModels.html#cb149-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-113-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>From this plot, note that the intercept for Coho is less than the intercept for Chinook (as you would expect because <span class="math inline">\(\hat{\delta}_{1}\)</span>=-0.051) and the slope for Coho is greater than (i.e., steeper) than that for Chinook (as you would expect because <span class="math inline">\(\hat{\gamma}_{1}\)</span>=0.012)</p>
 </div>
 <div id="predictions" class="section level4 unnumbered">
 <h4>Predictions</h4>
 <p>Predicted values for IVR models are constructed by submitting the <code>lm()</code> object and a data frame of observed values of the explanatory variables to <code>predict()</code>, as was described for SLR models (see Section <a href="SLRInference.html#predictions-in-r">15.7</a>). One must make sure, though, that the data frame contains an observed value for each explanatory variable found in the <code>lm()</code> object.</p>
 <p>For example, the predicted value, with a 95% prediction interval, for a 3 kg Coho Salmon is found with</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb148-1"><a href="IVRModels.html#cb148-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="dv">3</span>,<span class="at">species=</span><span class="st">&quot;coho&quot;</span>)</span>
-<span id="cb148-2"><a href="IVRModels.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb150-1"><a href="IVRModels.html#cb150-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="dv">3</span>,<span class="at">species=</span><span class="st">&quot;coho&quot;</span>)</span>
+<span id="cb150-2"><a href="IVRModels.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;           fit         lwr      upr
 #R&gt;   1 0.1496893 -0.03240232 0.331781</code></pre>
 <p>Similarly, the predicted values, with 95% prediction intervals, for 5 kg Chinook AND a 3 kg Coho Salmon are found with</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb150-1"><a href="IVRModels.html#cb150-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">3</span>),<span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;chinook&quot;</span>,<span class="st">&quot;coho&quot;</span>))</span>
-<span id="cb150-2"><a href="IVRModels.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb152-1"><a href="IVRModels.html#cb152-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">3</span>),<span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;chinook&quot;</span>,<span class="st">&quot;coho&quot;</span>))</span>
+<span id="cb152-2"><a href="IVRModels.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;           fit          lwr       upr
 #R&gt;   1 0.1834880  0.001557795 0.3654182
 #R&gt;   2 0.1496893 -0.032402319 0.3317810</code></pre>
 <p>The results may be easier to read if you bind together the new data.frame and the prediction results.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb152-1"><a href="IVRModels.html#cb152-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">3</span>),<span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;chinook&quot;</span>,<span class="st">&quot;coho&quot;</span>))</span>
-<span id="cb152-2"><a href="IVRModels.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(nd,<span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb154-1"><a href="IVRModels.html#cb154-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">3</span>),<span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;chinook&quot;</span>,<span class="st">&quot;coho&quot;</span>))</span>
+<span id="cb154-2"><a href="IVRModels.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(nd,<span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;     weight species       fit          lwr       upr
 #R&gt;   1      5 chinook 0.1834880  0.001557795 0.3654182
 #R&gt;   2      3    coho 0.1496893 -0.032402319 0.3317810</code></pre>

@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-13" />
+<meta name="date" content="2021-01-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -334,11 +334,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="27.1" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#data-preparation"><i class="fa fa-check"></i><b>27.1</b> Data Preparation</a></li>
 <li class="chapter" data-level="27.2" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#fitting-the-model"><i class="fa fa-check"></i><b>27.2</b> Fitting the Model</a></li>
-<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.3</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.4</b> Predictions</a></li>
-<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.5</b> Plotting Best-Fit Line</a></li>
+<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#relationship-test-1"><i class="fa fa-check"></i><b>27.3</b> Relationship Test</a></li>
+<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.4</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.5</b> Predictions</a></li>
+<li class="chapter" data-level="27.6" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.6</b> Plotting Best-Fit Line</a></li>
 </ul></li>
-<li class="chapter" data-level="28" data-path="LogRegSummary.html"><a href="LogRegSummary.html"><i class="fa fa-check"></i><b>28</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
@@ -453,8 +453,8 @@ Figure 17.6: Residual plot where linearity assumption has NOT been adequately me
 <div id="testing-assumptions-in-r-1" class="section level2" number="17.7">
 <h2><span class="header-section-number">17.7</span> Testing Assumptions in R</h2>
 <p>The residual plot, histogram of residuals, Anderson-Darling test p-value, and outlier test p-value can all be constructed by submitting the saved <code>lm()</code> object to <code>assumptionCheck()</code>.<a href="#fn73" class="footnote-ref" id="fnref73"><sup>73</sup></a> For example, the results below indicated that all assumptions are adequately met for the Mount Everest air temperature and altitude lapse rate regression – i.e., there is no discernible or obvious curve or funnel-shape to the residual plot, the Anderson-Darling p-value indicates that the residuals are normally distributed, and the outlier test p-value does not indicate the presence of any outliers. It should be noted, however, that the sample size is very small in this case.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb99-1"><a href="SLRAssumptions.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.ev)</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-86-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb101-1"><a href="SLRAssumptions.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.ev)</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-87-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>If the linearity, homoscedasticity, normality, or no outliers assumptions are not met then transformations for the response variable, explanatory variable, or both should be considered (see Module <a href="SLRTransformations.html#SLRTransformations">18</a>).</p>
 
 </div>

@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-13" />
+<meta name="date" content="2021-01-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -334,11 +334,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="27.1" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#data-preparation"><i class="fa fa-check"></i><b>27.1</b> Data Preparation</a></li>
 <li class="chapter" data-level="27.2" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#fitting-the-model"><i class="fa fa-check"></i><b>27.2</b> Fitting the Model</a></li>
-<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.3</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.4</b> Predictions</a></li>
-<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.5</b> Plotting Best-Fit Line</a></li>
+<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#relationship-test-1"><i class="fa fa-check"></i><b>27.3</b> Relationship Test</a></li>
+<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.4</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.5</b> Predictions</a></li>
+<li class="chapter" data-level="27.6" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.6</b> Plotting Best-Fit Line</a></li>
 </ul></li>
-<li class="chapter" data-level="28" data-path="LogRegSummary.html"><a href="LogRegSummary.html"><i class="fa fa-check"></i><b>28</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
@@ -380,8 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.2.1</span> Data Format</h3>
 <p>Data for a 2-sample t-test must be in stacked format, where measurements are in one column and a label for the populations is in another column. Each row corresponds to the measurement and population of a single individual.</p>
 <p>The data (<a href="https://raw.githubusercontent.com/droglenc/NCData/master/BOD.csv">data</a>, <a href="https://github.com/droglenc/NCData/blob/master/BOD_meta.txt">meta</a>) for the example below are the <a href="https://www.usgs.gov/special-topic/water-science-school/science/biological-oxygen-demand-bod-and-water?qt-science_center_objects=0#qt-science_center_objects">biological oxygen demands (BOD)</a> at the inlet and outlet to an aquaculture facility. These data illustrate stacked data because each row is one water sample with two variables recorded – BOD and where the sample came from.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb1-1"><a href="T2Review.html#cb1-1" aria-hidden="true" tabindex="-1"></a>aqua <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;BOD.csv&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb2-1"><a href="T2Review.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">headtail</span>(aqua)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb3-1"><a href="T2Review.html#cb3-1" aria-hidden="true" tabindex="-1"></a>aqua <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;BOD.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb4-1"><a href="T2Review.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">headtail</span>(aqua)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;        BOD    src
 #R&gt;   1  6.782  inlet
 #R&gt;   2  5.809  inlet
@@ -401,18 +401,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.2.2</span> Assumption Checking</h3>
 <p>The metadata suggests that measurements at the intake and outtake were taken at different times. Thus, there is no reasonable reason to think that individuals are dependent across the two populations. Thus, the independence assumption is met.</p>
 <p>The sample size is less than 40 but greater than 15. The histograms shown below are not particularly informative because of the small sample size. The histogram for the inlet samples appears to be not strongly skewed, but that for the outlet appears to be strongly right-skewed. I am going to continue with this analysis, but I will be cautious with my final interpretations.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb4-1"><a href="T2Review.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>BOD)) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="T2Review.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.5</span>,<span class="at">boundary=</span><span class="dv">0</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="T2Review.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Frequency of Water Samples&quot;</span>,<span class="at">x=</span><span class="st">&quot;Biological Oxygen Demand&quot;</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="T2Review.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand=</span><span class="fu">expansion</span>(<span class="at">mult=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.05</span>))) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="T2Review.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span></span>
-<span id="cb4-6"><a href="T2Review.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(src))</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb6-1"><a href="T2Review.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>BOD)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="T2Review.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.5</span>,<span class="at">boundary=</span><span class="dv">0</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="T2Review.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Frequency of Water Samples&quot;</span>,<span class="at">x=</span><span class="st">&quot;Biological Oxygen Demand&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="T2Review.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand=</span><span class="fu">expansion</span>(<span class="at">mult=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.05</span>))) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="T2Review.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span></span>
+<span id="cb6-6"><a href="T2Review.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(src))</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="tip">
 <p>The <code>ggplot2</code> package is required to make plots with <code>ggplot()</code>.</p>
 </div>
 <p>Levene’s test is computed with <code>levenesTest()</code> using a formula of <code>response~groups</code> as the first argument, where <code>response</code> represents the name of the quantitative response variable and <code>groups</code> represents the name of the categorical variable that identifies the two populations. The data.frame with the variables must be in <code>data=</code>. From the results below, it is concluded that the population variances appear to be equal because the Levene’s test p-value (0.5913) is greater than α=0.05.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb5-1"><a href="T2Review.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levenesTest</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb7-1"><a href="T2Review.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levenesTest</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Levene&#39;s Test for Homogeneity of Variance (center = median)
 #R&gt;         Df F value Pr(&gt;F)
 #R&gt;   group  1  0.2989 0.5913
@@ -424,7 +424,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="analysis" class="section level3" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Analysis</h3>
 <p>A 2-sample t-test is constructed in R with <code>t.test()</code> using the exact same <code>response~groups</code> formula and <code>data=</code> used in <code>levenesTest()</code>. Additionally, <code>var.equal=TRUE</code> is used when the two population variances should be considered equal. By default <code>t.test()</code> uses a “not equals” H<sub>A</sub> and a 95% confidence interval. In the results below the two sample means are 6.6538 for the inlet group and 8.6873 for the outlet group such that the statistic is 6.6538-8.6873=-2.0335; the t test statistic is -8.994 with 18 df; and the p-value is &lt;0.00005 (or, more specifically, 4.449e-08).<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> Because the p-value&lt;α the H<sub>0</sub> is rejected and we conclude that the mean BOD at the inlet is lower than the mean BOD at the outlet. More specifically, the mean BOD at the inlet is between 1.558 and 2.509 units lower than the mean BOD at the outlet. Thus, it appears that the mean BOD in the water is increased from when it enters to when it leaves the aquaculture facility.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb7-1"><a href="T2Review.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua,<span class="at">var.equal=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb9-1"><a href="T2Review.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua,<span class="at">var.equal=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;    Two Sample t-test with BOD by src 
 #R&gt;   t = -8.994, df = 18, p-value = 4.449e-08
 #R&gt;   alternative hypothesis: true difference in means is not equal to 0 
@@ -434,13 +434,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;    mean in group inlet mean in group outlet 
 #R&gt;                 6.6538               8.6873</code></pre>
 <p>A graphic that illustrates the mean BOD with 95% confidence intervals for each sampling location is constructed below. Note that in the code below that the only items you need to change for your own data is in the first line, where <code>data=</code> should be set to the name of your data and <code>x=</code> and <code>y=</code> should be set to the names of the explanatory and response variables, respectively.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb9-1"><a href="T2Review.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>src,<span class="at">y=</span>BOD)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="T2Review.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha=</span><span class="fl">0.5</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="T2Review.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data=</span>mean_cl_normal,<span class="at">geom=</span><span class="st">&quot;errorbar&quot;</span>,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="T2Review.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean,<span class="at">geom=</span><span class="st">&quot;point&quot;</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb9-5"><a href="T2Review.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Water Sample Location&quot;</span>,<span class="at">y=</span><span class="st">&quot;Biological Oxygen Demand&quot;</span>) <span class="sc">+</span></span>
-<span id="cb9-6"><a href="T2Review.html#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-7-1.png" width="336" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb11-1"><a href="T2Review.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>src,<span class="at">y=</span>BOD)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="T2Review.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha=</span><span class="fl">0.5</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="T2Review.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data=</span>mean_cl_normal,<span class="at">geom=</span><span class="st">&quot;errorbar&quot;</span>,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="T2Review.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean,<span class="at">geom=</span><span class="st">&quot;point&quot;</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="T2Review.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Water Sample Location&quot;</span>,<span class="at">y=</span><span class="st">&quot;Biological Oxygen Demand&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="T2Review.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-8-1.png" width="336" style="display: block; margin: auto;" /></p>
 <p> </p>
 </div>
 </div>

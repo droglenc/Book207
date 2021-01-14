@@ -334,9 +334,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="27.1" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#data-preparation"><i class="fa fa-check"></i><b>27.1</b> Data Preparation</a></li>
 <li class="chapter" data-level="27.2" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#fitting-the-model"><i class="fa fa-check"></i><b>27.2</b> Fitting the Model</a></li>
-<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.3</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.4</b> Predictions</a></li>
-<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.5</b> Plotting Best-Fit Line</a></li>
+<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#relationship-test-1"><i class="fa fa-check"></i><b>27.3</b> Relationship Test</a></li>
+<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.4</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.5</b> Predictions</a></li>
+<li class="chapter" data-level="27.6" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.6</b> Plotting Best-Fit Line</a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="LogRegSummary.html"><a href="LogRegSummary.html"><i class="fa fa-check"></i><b>28</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -363,33 +364,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="LogRegSummary" class="section level1" number="28">
 <h1><span class="header-section-number">Module 28</span> Summary</h1>
-<p>The second data frame represents the presence or absence of a common shrub (<em>Berberis repens</em>) in the <a href="https://www.nps.gov/brca/index.htm">Bryce Canyon National Park</a> Utah. The researchers recorded whether the shrub was present or not in many 10m×10m plots throughout the park. They also recorded the elevation (among other things) of the plot. They wanted to model the effect of elevation on the presence of the shrub. Their data is in <a href="https://derekogle.com/Book207/data/BryceShrub.csv">BryceShrub.csv</a>, which are loaded below.</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb215-1"><a href="LogRegSummary.html#cb215-1" aria-hidden="true" tabindex="-1"></a>shrub <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://derekogle.com/Book207/data/BryceShrub.csv&quot;</span>)</span></code></pre></div>
-<p>For both data sets an indicator variable for the response variable is needed to make plotting the logistic regression results easier. This variable is created with <code>ifelse()</code> which has a “condition” as its first argument, what should be returned if the condition is “yes” as the second argument, and what should be returned if the condition is “no” as the third argument. To be consistent with R the condition should always be asking for the “second” level of the variable, which will be the alphabetically second level if the levels have not be altered by you.</p>
-<p>Thus, for the <code>putts</code> data there are two levels of the <code>made</code> variable so that a new variable called <code>made01</code> is “1” if <code>made</code> is “Yes” and “0” if it is a “No.”</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb216-1"><a href="LogRegSummary.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(putts<span class="sc">$</span>made)  <span class="co"># Available levels</span></span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Yes&quot; &quot;No&quot;</code></pre>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb218-1"><a href="LogRegSummary.html#cb218-1" aria-hidden="true" tabindex="-1"></a>putts<span class="sc">$</span>made01 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(putts<span class="sc">$</span>made<span class="sc">==</span><span class="st">&quot;Yes&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
-<span id="cb218-2"><a href="LogRegSummary.html#cb218-2" aria-hidden="true" tabindex="-1"></a><span class="fu">headtail</span>(putts)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;       distance made made01
-#R&gt;   1          1  Yes      1
-#R&gt;   2          1  Yes      1
-#R&gt;   3          1  Yes      1
-#R&gt;   248       25   No      0
-#R&gt;   249       25   No      0
-#R&gt;   250       25   No      0</code></pre>
-<p>A similar process if followed to create a <code>presence01</code> variable in the <code>shrub</code> data frame.</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb220-1"><a href="LogRegSummary.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(shrub<span class="sc">$</span>presence)  <span class="co"># Available levels</span></span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] &quot;Absent&quot;  &quot;Present&quot;</code></pre>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb222-1"><a href="LogRegSummary.html#cb222-1" aria-hidden="true" tabindex="-1"></a>shrub<span class="sc">$</span>presence01 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(shrub<span class="sc">$</span>presence<span class="sc">==</span><span class="st">&quot;Present&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
-<span id="cb222-2"><a href="LogRegSummary.html#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="fu">headtail</span>(shrub)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;       elev presence presence01
-#R&gt;   1   2159   Absent          0
-#R&gt;   2   2284   Absent          0
-#R&gt;   3   2601  Present          1
-#R&gt;   98  2488  Present          1
-#R&gt;   99  2707  Present          1
-#R&gt;   100 2042   Absent          0</code></pre>
 
 </div>
             </section>

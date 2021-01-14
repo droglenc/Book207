@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-13" />
+<meta name="date" content="2021-01-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -334,11 +334,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="27.1" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#data-preparation"><i class="fa fa-check"></i><b>27.1</b> Data Preparation</a></li>
 <li class="chapter" data-level="27.2" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#fitting-the-model"><i class="fa fa-check"></i><b>27.2</b> Fitting the Model</a></li>
-<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.3</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.4</b> Predictions</a></li>
-<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.5</b> Plotting Best-Fit Line</a></li>
+<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#relationship-test-1"><i class="fa fa-check"></i><b>27.3</b> Relationship Test</a></li>
+<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.4</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.5</b> Predictions</a></li>
+<li class="chapter" data-level="27.6" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.6</b> Plotting Best-Fit Line</a></li>
 </ul></li>
-<li class="chapter" data-level="28" data-path="LogRegSummary.html"><a href="LogRegSummary.html"><i class="fa fa-check"></i><b>28</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
@@ -479,15 +479,15 @@ Figure 15.4: Example of centering the explanatory variable. The original data is
 <div id="slope-and-intercept-in-r" class="section level2" number="15.4">
 <h2><span class="header-section-number">15.4</span> Slope and Intercept in R</h2>
 <p>As shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a> the best-fit line is obtained using <code>lm()</code> with a model of the form <code>response~explanatory</code>. Thus, the linear model for the Mount Everest temperature data is fit with</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb83-1"><a href="SLRInference.html#cb83-1" aria-hidden="true" tabindex="-1"></a>lm1.ev <span class="ot">&lt;-</span> <span class="fu">lm</span>(MeanAirTemp<span class="sc">~</span>Altitude,<span class="at">data=</span>ev)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb85-1"><a href="SLRInference.html#cb85-1" aria-hidden="true" tabindex="-1"></a>lm1.ev <span class="ot">&lt;-</span> <span class="fu">lm</span>(MeanAirTemp<span class="sc">~</span>Altitude,<span class="at">data=</span>ev)</span></code></pre></div>
 <p>As shown in that section, a concise table of the estimated intercept and slope with 95% confidence intervals is constructed with <code>cbind()</code>, <code>coef()</code>, and <code>confint()</code>.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb84-1"><a href="SLRInference.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm1.ev),<span class="fu">confint</span>(lm1.ev))</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb86-1"><a href="SLRInference.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm1.ev),<span class="fu">confint</span>(lm1.ev))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;                        Est        2.5 %       97.5 %
 #R&gt;   (Intercept) 21.388856057 17.442040728 25.335671386
 #R&gt;   Altitude    -0.005634136 -0.006822147 -0.004446125</code></pre>
 <p>While not discussed there, these confidence intervals were computed using <span class="math inline">\(SE_{\hat{\alpha}}\)</span> and <span class="math inline">\(SE_{\hat{\beta}}\)</span> and the confidence interval formulae discussed above.</p>
 <p>More summary information may be extracted by submitting the saved <code>lm()</code> object to <code>summary()</code>.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb86-1"><a href="SLRInference.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1.ev)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb88-1"><a href="SLRInference.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1.ev)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Coefficients:
 #R&gt;                 Estimate Std. Error t value Pr(&gt;|t|)
 #R&gt;   (Intercept) 21.3888561  1.7447131   12.26 6.42e-07
@@ -583,31 +583,31 @@ value of the response variable at a given value of the explanatory variable. <sp
 <div id="predictions-in-r" class="section level2" number="15.7">
 <h2><span class="header-section-number">15.7</span> Predictions in R</h2>
 <p>As shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a> a prediction can be made in R with <code>predict()</code> using the saved <code>lm()</code> object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the <code>lm()</code> object. A confidence or prediction interval can be constructed by including <code>interval="confidence"</code> or <code>interval="prediction"</code>, respectively.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb88-1"><a href="SLRInference.html#cb88-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="dv">2552</span>)  <span class="co"># create data.frame first to save typing</span></span>
-<span id="cb88-2"><a href="SLRInference.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb90-1"><a href="SLRInference.html#cb90-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="dv">2552</span>)  <span class="co"># create data.frame first to save typing</span></span>
+<span id="cb90-2"><a href="SLRInference.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr     upr
 #R&gt;   1 7.010541 5.740331 8.28075</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb90-1"><a href="SLRInference.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb92-1"><a href="SLRInference.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr      upr
 #R&gt;   1 7.010541 3.468216 10.55287</code></pre>
 <p>Thus, one is 95% confident that the <strong>mean</strong> actual mean air temperature is between 5.74 and 8.28<sup>o</sup>C for <strong>all</strong> stations when the altitude lapse rate is 2552 C/km. In contrast one is 95% confident that the actual mean air temperature is between 3.47 and 10.55<sup>o</sup>C for <strong>a</strong> station when the altitude lapse rate is 2552 C/km.</p>
 <p>Note that multiple predictions can be made at once by including more values in the data frame given to <code>predict()</code>.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb92-1"><a href="SLRInference.html#cb92-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="fu">c</span>(<span class="dv">2552</span>,<span class="dv">3000</span>))</span>
-<span id="cb92-2"><a href="SLRInference.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb94-1"><a href="SLRInference.html#cb94-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="fu">c</span>(<span class="dv">2552</span>,<span class="dv">3000</span>))</span>
+<span id="cb94-2"><a href="SLRInference.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr      upr
 #R&gt;   1 7.010541 5.740331 8.280750
 #R&gt;   2 4.486448 3.457386 5.515509</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb94-1"><a href="SLRInference.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb96-1"><a href="SLRInference.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr       upr
 #R&gt;   1 7.010541 3.468216 10.552866
 #R&gt;   2 4.486448 1.023270  7.949626</code></pre>
 <p>The confidence band can be added to the scatterplot with the best-fit line (as shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a>) by leaving off <code>se=FALSE</code> in <code>geom_smooth()</code>. Use <code>color=</code> to change the color of the best-fit line and <code>fill=</code> to change the color of the confidence band (of so desired).</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb96-1"><a href="SLRInference.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>ev,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Altitude,<span class="at">y=</span>MeanAirTemp)) <span class="sc">+</span> </span>
-<span id="cb96-2"><a href="SLRInference.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb96-3"><a href="SLRInference.html#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Altitude Lapse Rate (C/km)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mean Air Temperature (C)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb96-4"><a href="SLRInference.html#cb96-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
-<span id="cb96-5"><a href="SLRInference.html#cb96-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>)</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-83-1.png" width="336" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb98-1"><a href="SLRInference.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>ev,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Altitude,<span class="at">y=</span>MeanAirTemp)) <span class="sc">+</span> </span>
+<span id="cb98-2"><a href="SLRInference.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb98-3"><a href="SLRInference.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Altitude Lapse Rate (C/km)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mean Air Temperature (C)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb98-4"><a href="SLRInference.html#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
+<span id="cb98-5"><a href="SLRInference.html#cb98-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>)</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-84-1.png" width="336" style="display: block; margin: auto;" /></p>
 <div class="tip">
 <p>Scatterplots depicting the best-fit line should usually be augmented with the confidence band.</p>
 </div>

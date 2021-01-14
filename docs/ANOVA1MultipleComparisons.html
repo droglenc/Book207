@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-13" />
+<meta name="date" content="2021-01-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -334,11 +334,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="27.1" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#data-preparation"><i class="fa fa-check"></i><b>27.1</b> Data Preparation</a></li>
 <li class="chapter" data-level="27.2" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#fitting-the-model"><i class="fa fa-check"></i><b>27.2</b> Fitting the Model</a></li>
-<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.3</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.4</b> Predictions</a></li>
-<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.5</b> Plotting Best-Fit Line</a></li>
+<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#relationship-test-1"><i class="fa fa-check"></i><b>27.3</b> Relationship Test</a></li>
+<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.4</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.5</b> Predictions</a></li>
+<li class="chapter" data-level="27.6" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.6</b> Plotting Best-Fit Line</a></li>
 </ul></li>
-<li class="chapter" data-level="28" data-path="LogRegSummary.html"><a href="LogRegSummary.html"><i class="fa fa-check"></i><b>28</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
@@ -405,8 +405,8 @@ Figure 6.1: Relationship between the number of groups (I) in an analysis, the nu
 <h2><span class="header-section-number">6.3</span> Multiple Comparisons in R</h2>
 <p>Tukey’s procedure should only be implemented if multiple comparisons are needed!! In other words, only use this method following a significant One-Way ANOVA result; i.e., H<sub>0</sub> was rejected such that it appears that there is some difference among group means. Therefore, a One-Way ANOVA must be performed first as described in Section <a href="ANOVA1Foundations.html#one-way-anova-in-r">5.2</a>.</p>
 <p>The ANOVA table from the analysis of immunoglobulin levels in opossums across seasons that was begun in the Module <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a> is shown below.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb20-1"><a href="ANOVA1MultipleComparisons.html#cb20-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
-<span id="cb20-2"><a href="ANOVA1MultipleComparisons.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb22-1"><a href="ANOVA1MultipleComparisons.html#cb22-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
+<span id="cb22-2"><a href="ANOVA1MultipleComparisons.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Response: imm
@@ -418,11 +418,11 @@ Figure 6.1: Relationship between the number of groups (I) in an analysis, the nu
 <div class="tip">
 <p>The <code>emmeans</code> package must be attached with <code>library</code> to perform Tukey’s procedure.</p>
 </div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb22-1"><a href="ANOVA1MultipleComparisons.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb24-1"><a href="ANOVA1MultipleComparisons.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span></code></pre></div>
 <p>Tukey’s procedure is computed with a two-step process. First, use <code>emmeans()</code> with the <code>lm()</code> object as the first argument and a <code>specs=</code> argument with <code>pairwise~</code> followed by the name of the variable that identifies the groups. The results from this function should be saved to an object.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb23-1"><a href="ANOVA1MultipleComparisons.html#cb23-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1,<span class="at">specs=</span>pairwise<span class="sc">~</span>season)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb25-1"><a href="ANOVA1MultipleComparisons.html#cb25-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1,<span class="at">specs=</span>pairwise<span class="sc">~</span>season)</span></code></pre></div>
 <p>That saved object is then the first argument to <code>summary()</code>, which also uses <code>infer=TRUE</code>. This again should be saved to an object.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb24-1"><a href="ANOVA1MultipleComparisons.html#cb24-1" aria-hidden="true" tabindex="-1"></a>( mcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb26-1"><a href="ANOVA1MultipleComparisons.html#cb26-1" aria-hidden="true" tabindex="-1"></a>( mcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   $emmeans
 #R&gt;    season emmean     SE df lower.CL upper.CL t.ratio p.value
 #R&gt;    feb     0.668 0.0260 24    0.614    0.721 25.702  &lt;.0001 
@@ -451,17 +451,17 @@ Figure 6.1: Relationship between the number of groups (I) in an analysis, the nu
 </div>
 <p>A plot of group means with 95% confidence intervals using the results in <code>$emmeans</code> is slightly different than shown in Sections <a href="ModelComparison.html#two-sample-t-test-revisited-using-linear-models">4.8</a> and <a href="ANOVA1Foundations.html#one-way-anova-in-r">5.2</a> because the raw data and the means with their confidence intervals are in separate data frames. While this method is slightly more complicated, it will generalize to a wider variety of situationst throughout the course.</p>
 <p>The <code>data=</code> and <code>mapping=aes()</code> arguments are not included in the initial <code>ggplot()</code> because we will be drawing variables from two data frames. Thus, <code>geom_jitter()</code> below adds the raw data to the plot, jittered to decrease overlap; <code>geom_errorbar()</code> creates the error bars from the <code>$emmeans</code> object, and <code>geom_point()</code> simply overlays the mean from the <code>$emmeans</code> object. Note that in the code below you would only need to modify the two <code>data=</code> arguments, the three <code>x=</code> arguments (to the grouping variables), and the one <code>y=</code> argument in <code>geom_jitter()</code> (to the response variable).</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb26-1"><a href="ANOVA1MultipleComparisons.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb26-2"><a href="ANOVA1MultipleComparisons.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">data=</span>opp,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>imm),</span>
-<span id="cb26-3"><a href="ANOVA1MultipleComparisons.html#cb26-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha=</span><span class="fl">0.25</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb26-4"><a href="ANOVA1MultipleComparisons.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data=</span>mcsum<span class="sc">$</span>emmeans,</span>
-<span id="cb26-5"><a href="ANOVA1MultipleComparisons.html#cb26-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL),</span>
-<span id="cb26-6"><a href="ANOVA1MultipleComparisons.html#cb26-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb26-7"><a href="ANOVA1MultipleComparisons.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>mcsum<span class="sc">$</span>emmeans,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>emmean),</span>
-<span id="cb26-8"><a href="ANOVA1MultipleComparisons.html#cb26-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb26-9"><a href="ANOVA1MultipleComparisons.html#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Immunoglobulin Concentration&quot;</span>,<span class="at">x=</span><span class="st">&quot;Season/Month&quot;</span>) <span class="sc">+</span></span>
-<span id="cb26-10"><a href="ANOVA1MultipleComparisons.html#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-20-1.png" width="336" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb28-1"><a href="ANOVA1MultipleComparisons.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb28-2"><a href="ANOVA1MultipleComparisons.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">data=</span>opp,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>imm),</span>
+<span id="cb28-3"><a href="ANOVA1MultipleComparisons.html#cb28-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha=</span><span class="fl">0.25</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="ANOVA1MultipleComparisons.html#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data=</span>mcsum<span class="sc">$</span>emmeans,</span>
+<span id="cb28-5"><a href="ANOVA1MultipleComparisons.html#cb28-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL),</span>
+<span id="cb28-6"><a href="ANOVA1MultipleComparisons.html#cb28-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb28-7"><a href="ANOVA1MultipleComparisons.html#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>mcsum<span class="sc">$</span>emmeans,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>emmean),</span>
+<span id="cb28-8"><a href="ANOVA1MultipleComparisons.html#cb28-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb28-9"><a href="ANOVA1MultipleComparisons.html#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Immunoglobulin Concentration&quot;</span>,<span class="at">x=</span><span class="st">&quot;Season/Month&quot;</span>) <span class="sc">+</span></span>
+<span id="cb28-10"><a href="ANOVA1MultipleComparisons.html#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-21-1.png" width="336" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

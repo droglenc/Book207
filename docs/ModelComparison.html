@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-13" />
+<meta name="date" content="2021-01-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -334,11 +334,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="27.1" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#data-preparation"><i class="fa fa-check"></i><b>27.1</b> Data Preparation</a></li>
 <li class="chapter" data-level="27.2" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#fitting-the-model"><i class="fa fa-check"></i><b>27.2</b> Fitting the Model</a></li>
-<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.3</b> Parameter Estimates</a></li>
-<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.4</b> Predictions</a></li>
-<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.5</b> Plotting Best-Fit Line</a></li>
+<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#relationship-test-1"><i class="fa fa-check"></i><b>27.3</b> Relationship Test</a></li>
+<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.4</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.5</b> Predictions</a></li>
+<li class="chapter" data-level="27.6" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.6</b> Plotting Best-Fit Line</a></li>
 </ul></li>
-<li class="chapter" data-level="28" data-path="LogRegSummary.html"><a href="LogRegSummary.html"><i class="fa fa-check"></i><b>28</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
@@ -669,15 +669,15 @@ Residuals
 <div id="two-sample-t-test-revisited-using-linear-models" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Two-Sample t-Test Revisited: Using Linear Models</h2>
 <p>The models for a two-sample t-test can be fit and assessed with <code>lm()</code>. This function requires the same type of formula for its first argument – <code>response~factor</code> – and a data.frame in the <code>data=</code> argument as described for <code>t.test()</code> in Section <a href="T2Review.html#T2analysis">2.2</a>. The results of <code>lm()</code> should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted from the <code>lm()</code> object with <code>anova()</code>. In addition, coefficient results<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> can be extracted with <code>coef()</code>, <code>confint()</code>, and <code>summary()</code>. Note that I like to “column-bind” the coefficients and confidence intervals together for a more succinct representation.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb10-1"><a href="ModelComparison.html#cb10-1" aria-hidden="true" tabindex="-1"></a>aqua.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span>
-<span id="cb10-2"><a href="ModelComparison.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(aqua.lm)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb12-1"><a href="ModelComparison.html#cb12-1" aria-hidden="true" tabindex="-1"></a>aqua.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span>
+<span id="cb12-2"><a href="ModelComparison.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(aqua.lm)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Response: BOD
 #R&gt;             Df  Sum Sq Mean Sq F value    Pr(&gt;F)
 #R&gt;   src        1 20.6756 20.6756  80.891 4.449e-08
 #R&gt;   Residuals 18  4.6008  0.2556</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb12-1"><a href="ModelComparison.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">ests=</span><span class="fu">coef</span>(aqua.lm),<span class="fu">confint</span>(aqua.lm))</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb14-1"><a href="ModelComparison.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">ests=</span><span class="fu">coef</span>(aqua.lm),<span class="fu">confint</span>(aqua.lm))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;                 ests    2.5 %   97.5 %
 #R&gt;   (Intercept) 6.6538 6.317917 6.989683
 #R&gt;   srcoutlet   2.0335 1.558489 2.508511</code></pre>

@@ -38,6 +38,17 @@ glm.bliss <- glm(outcome01~conc,data=bliss,family=binomial)
 Logistic regressions are fit in R with `glm()` rather than `lm()` because logistic regression is a *generalized* rather than a *general* linear model.
 :::
 
+## Relationship Test
+Generalized linear models, like logistic regression, are fit with a method called *maximum likelihood (ML)* rather than least-squares (i.e,. minimizing the residual sums-of-squares) estimation. In a *very* loose sense, the "best" model with ML estimation is the model that is "most likely" (i.e., maximum) to fit the data, in contrast to the model that minimizes the lack-of-fit (i.e., sum-of-squares). Because ML estimation is different than least-squares, the usual model comparison procedure is different for the logistic regression model.
+
+A *likelihood ratio test* (LRT) is used to determine if the increased likelihood of a full model is "worth" the increased complexity of the full model. A LRT can be performed in R with `anova()`, the `glm()` object with the logistic regression fit, and `test="LRT"`. For example,
+
+```{r}
+anova(glm.bliss,test="LRT")
+```
+
+The p-value (under `Pr(>Chi)`) is very small in this case which indicates that the full model that has a slope parameter is a much better fit to the data than the simple model with no slope parameter. In other words, there is a significant relationship between the log odds of mortality and concentration of the calcium disulphide. By extension this means that there is a significant relationship between the probability of mortality and the concentration of calcium disulphide.
+
 ## Parameter Estimates {#LogRegParametersR}
 The estimated intercept and slope are extracted from the `glm()` object with `coef()`.
 

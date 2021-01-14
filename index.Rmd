@@ -2,7 +2,7 @@
 lang: "en"
 title: "Readings for MTH207"
 author: "Derek H. Ogle"
-date: "`r Sys.Date()`"
+date: "`r format (Sys.Date(), '%d %b %Y')`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -12,10 +12,6 @@ url: 'http\://derekogle.com/Book207/'
 github-repo: droglenc/Book207
 description: "This book contains the readings for MTH207 at Northland College."
 ---
-
-# Preface {-}
-
-**This BOOK-IN-PROGRESS was last updated on: `r format (Sys.Date(), '%d %b %Y')`**.
 
 ```{r setup, include=FALSE}
 library(NCStats)
@@ -36,6 +32,27 @@ khfont <- "Cambria"
 ARROW <- arrow(length=unit(1.5,"mm"),type="closed")
 ```
 
+# Preface {-}
+This book contains a translation and re-development of past lectures from MTH207. Thus, it contains all, but only, information that I expect you to know from this course. I have made every attempt to make it easy to read, provide visuals and explanations for all concepts, and grammatically correct. However, there are likely still errors or descriptions that don't make sense. Please feel free to ask questions or post errors on the appropriate channel of the course MS Team.
+
+The book highlights definitions and tips in special boxes.
+
+::: {.defn data-latex=""}
+**Definition**: This is a definition.
+:::
+
+::: {.tip data-latex=""}
+This is a tip.
+:::
+
+R Code and results are also shown in special boxes. Code in the R box can be copied verbatim from the box with the icon that appears when you hover over the upper right corner of the code box.
+
+```{r}
+dat <- c(3,4,5,2,8)
+mean(dat)
+```
+
+The material presented in this book can be challenging to master. Please don't hesitate to ask me questions as you have them!
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

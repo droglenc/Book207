@@ -321,9 +321,9 @@ another-example
 LogRegAnalysis
 data-preparation
 fitting-the-model
+relationship-test-1
 LogRegParametersR
 LogRegPredictionsR
 functions-for-bootstrapping
 predictions-2
 plotting-best-fit-line
-LogRegSummary
