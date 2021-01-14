@@ -319,4 +319,11 @@ reverse-predictions
 variability-estimates
 another-example
 LogRegAnalysis
+data-preparation
+fitting-the-model
+LogRegParametersR
+LogRegPredictionsR
+functions-for-bootstrapping
+predictions-2
+plotting-best-fit-line
 LogRegSummary

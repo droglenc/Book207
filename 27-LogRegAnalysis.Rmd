@@ -1,33 +1,142 @@
 # Analysis {#LogRegAnalysis}
+Modules \@ref(LogRegFoundations) and \@ref(LogRegModels) described the basics of fitting a logistic regression and understanding the meanings of the parameter estimates, predicted probabilities, and predicted values of the explanatory variable for a given probability. This module will demonstrate how to perform those analyses using R.
 
-
-#### Example Data {-}
-Two data frames will be used throughout this and the next module. The first data frame was collected by a student who putted a golf ball 10 times from ever 1 foot between 1 and 25 feet from the hole. For each putt she recorded whether she made the putt or not. She wanted to model the probability of making the putt as a function of distance to the hole. Her data are in [https://derekogle.com/Book207/data/GolfPutts.csv](GolfPutts.csv), which are loaded below.
+## Data Preparation
+Bliss (1935), in a classic study, examined the mortality response of beetles to various concentrations of gaseous carbon disulphide (mg/liter). The concentration and whether or not the beetle survived the exposure to that concentration was recorded for each beetle in Bliss.csv ([data](https://raw.githubusercontent.com/droglenc/NCData/master/Bliss.csv), [meta](https://github.com/droglenc/NCData/blob/master/Bliss_meta.txt)). These data are loaded and briefly examined below.
 
 ```{r}
-putts <- read.csv("https://derekogle.com/Book207/data/GolfPutts.csv")
+bliss <- read.csv("https://raw.githubusercontent.com/droglenc/NCData/master/Bliss.csv")
+str(bliss)
 ```
 
-The second data frame represents the presence or absence of a common shrub (*Berberis repens*) in the [Bryce Canyon National Park](https://www.nps.gov/brca/index.htm) Utah. The researchers recorded whether the shrub was present or not in many 10m&times;10m plots throughout the park. They also recorded the elevation (among other things) of the plot. They wanted to model the effect of elevation on the presence of the shrub. Their data is in [BryceShrub.csv](https://derekogle.com/Book207/data/BryceShrub.csv), which are loaded below.
+In this case, we want to model the probability of mortality (i.e., the beetle died) as a function of the concentration of gaseous carbon disulphide. With this objective, a "success" is a "dead" beetle. Thus, "dead" should be coded as "1" and "not dead" (i.e., "alive") as a "0". You will recognize this as an indicator variable from Module \@ref(IVRVariables). In contrast to when we used indicator variables for factors, we need to explicitly create the indicator variable here when it is used as a response variable.
+
+An indicator variable can be created with `ifelse()`, which takes a "condition" as its first argument, what should be returned if the condition is "yes" as the second argument, and what should be returned if the condition is "no" as the third argument. The code below creates a new `outcome01` variable in the `bliss` data frame that will be `1` if `outcome` is `dead` and `0` if `outcome` is not `dead`.^[Note that R uses `==` when asking if two things are equal. So the condition in this `ifelse()` is asking where the `oucome` variable in `bliss` is equal to `dead`.]
 
 ```{r}
-shrub <- read.csv("https://derekogle.com/Book207/data/BryceShrub.csv")
+bliss$outcome01 <- ifelse(bliss$outcome=="dead",1,0)
 ```
 
-For both data sets an indicator variable for the response variable is needed to make plotting the logistic regression results easier. This variable is created with `ifelse()` which has a "condition" as its first argument, what should be returned if the condition is "yes" as the second argument, and what should be returned if the condition is "no" as the third argument. To be consistent with R the condition should always be asking for the "second" level of the variable, which will be the alphabetically second level if the levels have not be altered by you.
-
-Thus, for the `putts` data there are two levels of the `made` variable so that a new variable called `made01` is "1" if `made` is "Yes" and "0" if it is a "No."
+You should examine the new variable to make sure that it represents what you intended.
 
 ```{r}
-unique(putts$made)  # Available levels
-putts$made01 <- ifelse(putts$made=="Yes",1,0)
-headtail(putts)
+head(bliss,n=8)
 ```
 
-A similar process if followed to create a `presence01` variable in the `shrub` data frame.
+::: {.tip data-latex=""}
+The binary response variable must be explicitly converted to an indicator variable with `ifelse()` for constructing a logistic regression and plotting the results in R.
+:::
+
+## Fitting the Model
+The logistic regression model is fit with `glm()`, which is the **generalized linear model** function in R. The first argument to `glm()` is a formula of the form `var01~qvar` where `var01` is the indicator response variable created above and `qvar` is the quantitative explanatory variable, the data frame that contains these variables is in `data=`, and `family=binomial`. The `family=binomial` argument is critical because that is what tells `glm()` that the response variable should be treated as an indicator rather than quantitative variable. This signals `glm()` to fit a logistic regression model. The results of `glm()` should be saved to an object.
 
 ```{r}
-unique(shrub$presence)  # Available levels
-shrub$presence01 <- ifelse(shrub$presence=="Present",1,0)
-headtail(shrub)
+glm.bliss <- glm(outcome01~conc,data=bliss,family=binomial)
+```
+
+::: {.tip data-latex=""}
+Logistic regressions are fit in R with `glm()` rather than `lm()` because logistic regression is a *generalized* rather than a *general* linear model.
+:::
+
+## Parameter Estimates {#LogRegParametersR}
+The estimated intercept and slope are extracted from the `glm()` object with `coef()`.
+
+Confidence intervals constructed from bootstrap samples require bootstrap samples to be constructed first. There are many ways to construct bootstrap samples in R. We will use `Boot()` from the `car` package. This function will be called with `car::Boot()` so as to not have to load the whole `car` package. `Boot()` requires only the saved `glm()` object as its argument.^[The number of bootstrap samples defaults to 999, which is adequate for our purposes. This number of bootstrap samples can be modified with `R=`.] The results of `car::Boot()` should be saved to an object.^[`Boot()` may take many seconds to run, depending on the size of the original data frame and the number of bootstrapped samples taken.]
+
+```{r}
+boot.bliss <- car::Boot(glm.bliss)
+```
+
+The bootstrap confidence intervals for the intercept and slope are extracted from the `Boot()` object with `confint()`. Include `type="perc"` to perform the last step of the bootstrap steps shown in Section \@ref(variability-estimates).
+
+As before, I like to combine the parameter estimates and confidence intervals into one presentation.
+
+```{r}
+cbind(Ests=coef(glm.bliss),confint(boot.bliss,type="perc"))
+```
+
+## Predictions {#LogRegPredictionsR}
+### Functions for Bootstrapping
+The bootstrap method was introduced in Section \@ref(variability-estimates) as a way to estimate reliable confidence intervals for predicted probabilities and values of the explanatory variable for a given probability. Applying the bootstrap method for derived metrics like these requires specific functions to calculate the predicted probability for a given value of $X$ and the value of $X$ for a given probability. The `predProb()` below is the R version of
+
+$$ p = \frac{e^{\alpha+\beta X}}{1+e^{\alpha+\beta X}} $$
+
+from Module \@ref(LogRegFoundations) and `predX()` below is the R version of
+
+$$ X = \frac{log\left(\frac{p}{1-p}\right)-\alpha}{\beta} $$
+
+from Module \@ref(LogRegModels).
+
+```{r}
+predProb <- function(x,alpha,beta) exp(alpha+beta*x)/(1+exp(alpha+beta*x))
+predX <- function(p,alpha,beta) (log(p/(1-p))-alpha)/beta
+```
+
+::: {.tip data-latex=""}
+Copy the code for `predProb()` and `predX()` as shown above directly into the beginning of your logistic regression script.
+:::
+
+### Predictions
+The predicted log odds of mortality given a value of the concentration of calcium disulphide is found with `predict()`, similar to what was shown in previous modules. For example, the code below finds the log odds of mortality for a concentration of 70 mg/liter.
+
+```{r}
+nd <- data.frame(conc=70)
+predict(glm.bliss,newdata=nd)
+```
+
+The probability, rather than log odds, can be found by including `type=response` in `predict()`.
+
+```{r}
+predict(glm.bliss,newdata=nd,type="response")
+```
+
+Unfortunately, confidence intervals for this prediction can not be constructed with `predict()`. Bootstrap confidence intervals, however, can be constructed using `predProb()` and the data frame of bootstrapped intercepts and slopes saved earlier. This is a bit of work so, lets work through this step-by-step.
+
+First, the boostrapped data is in the `t` object of the `Boot` object saved above.
+
+```{r}
+head(boot.bliss$t)
+```
+
+The intercepts are in the first column and the slopes are in the second. For example, you could see just the vector of slopes with `boot.bliss$t[,2]` (rounded below to save space)
+
+```{r}
+round(boot.bliss$t[,2],2)
+```
+
+Second, note that `predProb()` takes a value of $X$ at which to make the prediction as its first argument, an intercept as the second argument, and the slope as the third argument. If this function is given **all** of the bootstrapped intercepts and slopes then it will make a prediction at the supplied value of `x` for each bootstrapped sample. For example, the code below computes the predicted probability of mortality at a concentration of 70 mg/L for each bootstrapped sample and then examines the first six of those values.
+
+```{r}
+p70 <- predProb(70,boot.bliss$t[,1],boot.bliss$t[,2])
+head(p70)
+```
+
+The 95% bootstrapped confidence interval is between the two values in `p70` that have 2.5% and 97.5% of the values lower. These values are found with `quantile()` given the vector of values as the first argument, the percentages to "cut off" at as proportions in `probs=`, and `type=1` so that the quantiles computed here are the same as those in `confint()` above. For example, the 95% confidence interval for the predicted probability for a concentration of 70 mg/L is computed with
+
+```{r}
+( ci70 <- quantile(p70,c(0.025,0.975)) )
+```
+
+Thus, one is 95% confident that the predicted probability of mortality for beetles exposed to 70 mg/l calcium disulphide is between `r formatC(ci70[1],format="f",digits=3)` and `r formatC(ci70[2],format="f",digits=3)`.
+
+A similar process is used to predict the concentration where 50%, for example, of the beetles will have died, except that `predX()` from above is used and it requires the probability of interest as a proportion as the first argument.
+
+```{r}
+x50 <- predX(0.5,boot.bliss$t[,1],boot.bliss$t[,2])
+( ci50 <- quantile(x50,c(0.025,0.975)) )
+```
+
+Thus, one is 95% confident that the predicted concentration where 50% of the beetles would be dead is between `r formatC(ci50[1],format="f",digits=1)` and  `r formatC(ci50[2],format="f",digits=1)`.
+
+&nbsp;
+
+## Plotting Best-Fit Line
+The code below is used to construct a fitted-line plot for the logistic regression. The `alpha=` argument in `geom_point()` is used to make the points semi-transparent. This is important here because many points will be plotted on top of each other. With semi-transparency the visible "point" will become darker as more points are plotted on top of each other. You may need to try different values for `alpha=` (smaller values are more transparent). Also note that `geom_smooth` uses `method="glm"` instead of `lm`. The `method.args=` can be copied directly, but note that this just supplies the `family=` argument to `glm()` within `geom_smooth()`.
+
+```{r}
+ggplot(data=bliss,mapping=aes(x=conc,y=outcome01)) +
+  geom_point(alpha=0.01) +
+  geom_smooth(method="glm",method.args=list(family=binomial)) +
+  labs(x="Concentration of Disulphide",y="Probability of Mortality") +
+  theme_NCStats()
 ```
