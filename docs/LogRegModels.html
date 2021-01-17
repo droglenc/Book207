@@ -36,7 +36,6 @@
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -375,7 +374,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">26.1</span> Slope &amp; Back-Transformed Slope</h2>
 <p>The slope for any linear regression represents the average additive change in the response variable for a unit change in the explanatory variable. In logistic regression, this corresponds to the average additive change in the log odds of a “success” for a unit change in the explanatory variable.</p>
 <p>The estimated slope for the golf putt data is -0.354 with a 95% confidence interval from -0.491 to -0.272 (Table <a href="LogRegModels.html#tab:PuttCoefs">26.1</a>). Thus, as the length of the putt increases by one foot, the <strong>log odds</strong> that the student made the putt <strong>de</strong>creases by -0.354 (95% CI: 0.272, 0.491; Figure <a href="LogRegModels.html#fig:PuttsLogOdds">26.1</a>).</p>
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:PuttCoefs">Table 26.1: </span>Parameter estimates from the logistic regression with the golf putting data.
 </caption>
@@ -454,7 +453,7 @@ e^{\beta} &amp;= \text{log}(\text{ODDS}(Y|X+1)) - \text{log}(\text{ODDS}(Y|X)) \
 <p>Thus, the exponentiated slope is the <strong>multiplicative</strong> change in the odds of a “success” for a unit change in <span class="math inline">\(X\)</span>. The exponentiated slope is called an <strong>odds ratio</strong> because it is a ratio of odds at two values of <span class="math inline">\(X\)</span> (that differ by one unit).</p>
 <p>For example, <span class="math inline">\(\hat{\beta}\)</span>=0.2 means that the log odds of a “success” increases by 0.2, on average, for a one unit increase in <span class="math inline">\(X\)</span>. The corresponding exponentiated slope, <span class="math inline">\(e^{0.2}\)</span>=1.22, indicates that the <strong>odds</strong> of a “success” are 1.22 <strong>times</strong> greater for a one unit increase in <span class="math inline">\(X\)</span>. The exponentiated slope does not indicate what the odds are, only that the odds are 1.22 <strong>times</strong> greater with an increase of one unit in the explanatory variable.</p>
 <p>The exponentiated estimated slope for the golf putt data is 0.702 with a 95% confidence interval from 0.612 to 0.761 (Table <a href="LogRegModels.html#tab:PuttExpCoefs">26.2</a>). Thus, as the length of the putt increases by one foot, the <strong>odds</strong> that the student made the putt is 0.702 (95% CI: 0.612, 0.761) times lower (Figure <a href="LogRegModels.html#fig:PuttsOdds">26.2</a>). In other words, as the length of the putt increases by one foot, the <strong>odds</strong> that the student made the putt decreases by 29.8% (95% CI: 23.9, 38.8).</p>
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:PuttExpCoefs">Table 26.2: </span>Exponentiated parameter estimates from the logistic regression with the golf putting data. Note that the intercepts values are not useful.
 </caption>
@@ -596,7 +595,7 @@ Figure 26.6: Histogram of the predicted distance where the probability making th
 <h2><span class="header-section-number">26.6</span> Another Example</h2>
 <p>As another example data about the presence or absence of a common shrub (<em>Berberis repens</em>) in the <a href="https://www.nps.gov/brca/index.htm">Bryce Canyon National Park</a> Utah will be used. Here the researchers recorded whether the shrub was present or not in many 10m×10m plots throughout the park. They also recorded the elevation (among other things) of the plot. They wanted to model the effect of elevation on the presence of the shrub.</p>
 <p>The estimated slope for the shrub data indicates that as the elevation increases by one meter, the <strong>log odds</strong> that the shrub is present <strong>in</strong>creases by 0.0090 (95% CI: 0.0063, 0.0146; Table <a href="LogRegModels.html#tab:ShrubCoefs">26.3</a>). The interpretation of the slope is made difficult by the fact that a 1 m change is a very small movement along the x-axis in this case where the elevations range from near 2000 to near 2800. However, if a 1 unit change in <span class="math inline">\(X\)</span> results in an additive change in <span class="math inline">\(Y\)</span> of the slope, then, for example, a 100 unit change in <span class="math inline">\(X\)</span> results in an additive change in <span class="math inline">\(Y\)</span> of 100 slopes. Thus, for example, if the elevation increases by 100 m then the log odds of the presence of the shrub will increase by 100×0.0090=0.898 (Figure <a href="LogRegModels.html#fig:shrubLogOdds">26.7</a>).</p>
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:ShrubCoefs">Table 26.3: </span>Parameter estimates from the logistic regression with the shrub presence data.
 </caption>

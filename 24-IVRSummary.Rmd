@@ -81,7 +81,7 @@ The sample size is quite unbalanced, with essentially twice as many Bay Anchovy 
 ```{r NRGSampleSize, echo=FALSE}
 xtabs(~species,data=nrg) %>%
   knitr::kable(booktabs=TRUE,caption="Sample size for each species.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 There is very little information to fully assess independence. However, as long as any individual fish does not affect the dry weight or the energy density of any other fish, than the independence assumption is likely met. It is hard to imagine how any one fish could affect any other single fish for these two metrics, so I suspect that independence is adequately met.
@@ -109,7 +109,7 @@ The relationship between energy density and percent dry weight differed among so
 aov1.nrg %>%
   knitr::kable(booktabs=TRUE,digits=c(0,0,0,1,7),
                caption="ANOVA table for the IVR analysis of energy density by percent dry weight and species.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;
@@ -118,7 +118,7 @@ aov1.nrg %>%
 mc1sum.nrg$contrasts[,c(1,2,5,6,8)] %>%
   knitr::kable(booktabs=TRUE,digits=c(0,1,1,1,4),
                caption="Tukey's multiple comparisons for all pairs of slopes for the IVR analysis of energy density by percent dry weight and species.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 ```{r NRDData2, echo=FALSE}
@@ -139,7 +139,7 @@ As only Bay Anchovy had a different slope, I removed this species so that I coul
 aov2.nrg %>%
   knitr::kable(booktabs=TRUE,digits=c(0,0,0,1,5),
                caption="ANOVA table for the IVR analysis of energy density by percent dry weight and species with Bay Anchovy excluded and assuming parallel lines (from the previous analysis).") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;
@@ -148,7 +148,7 @@ aov2.nrg %>%
 mc2sum.nrg$contrasts[,c(1,2,5,6,8)] %>%
   knitr::kable(booktabs=TRUE,digits=c(0,1,1,1,4),
                caption="Tukey's multiple comparisons for all pairs of mean energy density at the mean percent dry weight by species.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;
@@ -222,7 +222,7 @@ The sample size is unbalanced, with essentially 50% more *Artemisia* sampled in 
 ```{r ShrubSampleSize, echo=FALSE}
 xtabs(~Habitat,data=shrub) %>%
   knitr::kable(booktabs=TRUE,caption="Sample size of individual plants by habitat.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;
@@ -268,7 +268,7 @@ The relationship between log above-ground biomass and log crown area does not di
 aov1.shrub %>%
   knitr::kable(booktabs=TRUE,digits=c(0,2,2,2,4),
                caption="ANOVA table for the IVR of log-transformed above-ground biomass on log-transformed crown area for three dune habitats.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 ```{r ShrubModel2, echo=FALSE, results="hide"}
@@ -291,7 +291,7 @@ The back-transformed mean above-ground biomass at the back-transformed mean crow
 mc2tsum.shrub$contrasts[,c(1,2,5,6,8)] %>%
   knitr::kable(booktabs=TRUE,digits=c(0,3,3,3,6),
                caption="Tukey's multiple comparisons for the RATIO mean above-ground biomass at the mean log crown areas for each pair of habitats") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;

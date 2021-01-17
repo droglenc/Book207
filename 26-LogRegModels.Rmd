@@ -49,7 +49,7 @@ The estimated slope for the golf putt data is `r formatC(cfs.putts[2,1],format="
 cfs.putts %>%
   knitr::kable(booktabs=TRUE,digits=c(3,3,3),
                caption="Parameter estimates from the logistic regression with the golf putting data.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;
@@ -131,7 +131,7 @@ The exponentiated estimated slope for the golf putt data is `r formatC(ecfs.putt
 ecfs.putts %>%
   knitr::kable(booktabs=TRUE,digits=c(3,3,3),
                caption="Exponentiated parameter estimates from the logistic regression with the golf putting data. Note that the intercepts values are not useful.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;
@@ -367,7 +367,7 @@ The estimated slope for the shrub data indicates that as the elevation increases
 cfs.shrub %>%
   knitr::kable(booktabs=TRUE,digits=c(4,4,4),
                caption="Parameter estimates from the logistic regression with the shrub presence data.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;

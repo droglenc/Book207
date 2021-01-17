@@ -36,7 +36,6 @@
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -380,7 +379,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Suppose that we are interested in the impact of two different UV-B light intensity levels (simply called “High” and “Low”) and the density of tadpoles (1, 2, and 4 individuals per tank) on the body mass (g) of tadpoles. Further suppose that we have access to 90 tanks in which to conduct this work, where each tank will be stocked with a certain number of tadpoles and exposed to a certain UV-B light intensity. After a period of time the body mass of the tadpoles will be recorded (as a surrogate for growth).</p>
 <p>Note here that in experiments like this the explanatory variables are often called <strong>factors</strong>. Thus, we are considering two factors in this study. Observational studies usually will use explanatory variable rather than factor.</p>
 <p>One way to design this study would be to separate the 90 tanks available for the experiment into two sets. One set of tanks would be used to determine the effect of UV-B light intensity on tadpole body mass and the other set of tanks would be used to determine the effect of density on tadpole body mass. The tanks within each group would be randomly allocated to the different levels of each of the factors. This is called a “one factor at a time” (OFAT) design and might look like that shown in Table <a href="ANOVA2Foundations1.html#tab:TadpoleOFAT">10.1</a>.</p>
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:TadpoleOFAT">Table 10.1: </span>Schematic of two OFAT experiments with UV-B light intensity and density of tadpoles. Tank numbers correspond to the random allocation of individual tanks to each treatment.
 </caption>
@@ -413,7 +412,7 @@ Low
 </tr>
 </tbody>
 </table>
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;font-weight: bold;">
@@ -453,7 +452,7 @@ Tanks
 </table>
 <p> </p>
 <p>In contrast, an alternative way to design this study would be to create “treatments”<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a> where each level of one factor is combined with each level of the other factor. In this example, there would be six treatments as two levels of UV-B light intensity would be “crossed” with three levels of tadpole density. Tanks would be randomly allocated to treatments. This type of design is called a “completely crossed factorial design” (CCFD) and might look like that shown in Table <a href="ANOVA2Foundations1.html#tab:TadpoleCrossed">10.2</a>.</p>
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:TadpoleCrossed">Table 10.2: </span>Schematic depicting the crossing of three levels of UV-B light intensity with two levels of tadpole density to produce six treatments. Numbers in each cell represent individual tanks exposed to that treatment.
 </caption>

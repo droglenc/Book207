@@ -66,7 +66,7 @@ This study was "balanced" as the number of pots at each nematode density is the 
 ```{r TNSampleSize, echo=FALSE}
 xtabs(~density,data=TN) %>%
   knitr::kable(booktabs=TRUE,caption="Number of pots at each nematode density treatment.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 Independence appears to be largely met in this experiment. Each tomato plant was planted in a randomly selected individual pot that had been randomly assigned a number of nematodes. Thus, the growth of an individual plant should not effect the growth of another individual plant. I would be concerned if the pots were not randomly placed around the laboratory. For example, if all pots of a certain treatment were placed in one corner of the laboratory then conditions in that one corner may affect growth for those pots. There is no indication that this happened, so I will assume that it did not.
@@ -94,7 +94,7 @@ Note the use of ANOVA table to first identify any differences.
 ```{r TNANOVA, echo=FALSE}
 knitr::kable(anova(lm.tn),digits=c(0,2,2,2,5),
              caption="ANOVA results for tomato seedling growth at four nematode densities.") %>%
-  kableExtra::kable_styling(full_width=FALSE)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 It appears that mean growth of tomatoes does not differ at densities 0 and 1000 (`r kPvalue(dmns.tn$p.value[1],latex=FALSE)`) and 5000 and 10000 (`r kPvalue(dmns.tn$p.value[6],latex=FALSE)`), but does differ for all other pairs of nematode densities (p&leq;`r kPvalue(max(dmns.tn$p.value[2:5]),latex=FALSE,include.p=FALSE)`) (Table \@ref(tab:TNTukey)).
@@ -102,7 +102,7 @@ It appears that mean growth of tomatoes does not differ at densities 0 and 1000 
 ```{r TNTukey, echo=FALSE}
 knitr::kable(dmns.tn[,-c(3,4,7)],digits=c(NA,3,3,3,4),
              caption="Tukey's multiple comparisons for differences in mean tomato seedling growth for all pairs of four nematode densities.") %>%
-  kableExtra::kable_styling(full_width=FALSE)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 The student's hypothesis was generally supported (Figure \@ref(fig:TNMeansPlot)). However, it does not appear that tomato seedling growth is negatively affected for all increases in nematode density. For example, seedling growth declined for an increase from 1000 to 5000 nematodes per pot but not for increases from 0 to 1000 nematodes per pot or from 5000 to 10000 nematodes per pot. Specifically, it appears that the mean growth of the tomato seedlings is between `r formatC(dmns.tn$lower.CL[4],format="f",digits=1)` and `r formatC(dmns.tn$upper.CL[4],format="f",digits=1)` cm lower at a density of 5000 nematodes than at a density of 1000 nematodes (Table \@ref(tab:TNANOVA)).
@@ -179,7 +179,7 @@ This study was slightly "unbalanced" as the number of ants recorded on each tree
 ```{r AFSampleSize, echo=FALSE}
 xtabs(~Tree,data=AF) %>%
   knitr::kable(booktabs=TRUE,caption="Number of ants recorded on each type of tree.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 The data appear to be independent as long as the separate trees were not in close proximity to each other. It is possible that the researchers examined one species of tree entirely within one "forest" of those trees. This would mean that the individuals within a species were somehow related, which would violate the independence assumption. In addition, the researchers could have looked at one specimen of each species all in a certain location, such that one tree could influence another tree. This again would violate the independence assumption. There is no indication that either of the scenarios occurred so I will assume that the individuals are independent both within- and among-groups.
@@ -209,7 +209,7 @@ Note the careful use of the transformation name here.
 ```{r AFANOVA, echo=FALSE}
 knitr::kable(anova(lm.aft),digits=c(0,3,3,3,5),
              caption="ANOVA results for the log transformed foraging rate of ants among tree species.") %>%
-  kableExtra::kable_styling(full_width=FALSE)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 Tukey multiple comparisons indicate that the mean log foraging rate was greater for ants on Oak trees than ants on Rowan trees (`r kPvalue(dmns.aft$p.value[1],latex=FALSE)`; Table \@ref(tab:AFTukey1)). Specifically, the mean foraging rate for ants on an Oak tree was between `r formatC(dmns.afbt$lower.CL[1],format="f",digits=3)` and `r formatC(dmns.afbt$upper.CL[1],format="f",digits=3)` **times** higher than the mean foraging rate for ants on a Rowan tree (Table \@ref(tab:AFTukey2)). However, there was no significant difference in mean log foraging rate between ants on Sycamore trees and ants on Oak (`r kPvalue(dmns.aft$p.value[2],latex=FALSE)`) or Rowan (`r kPvalue(dmns.aft$p.value[3],latex=FALSE)`; Table \@ref(tab:AFTukey1)) trees. 
@@ -221,13 +221,13 @@ Note how the back-transformed difference in means forms a ratio that is interpre
 ```{r AFTukey1, echo=FALSE}
 knitr::kable(dmns.aft[,-c(3,4,7)],digits=c(NA,3,3,3,4),
              caption="Tukey's multiple comparisons for differences in mean log foraging rate of ants among tree species.") %>%
-  kableExtra::kable_styling(full_width=FALSE)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 ```{r AFTukey2, echo=FALSE}
 knitr::kable(dmns.afbt[,-c(3,4,7)],digits=c(NA,3,3,3,4),
              caption="Tukey's multiple comparisons for **ratios** of mean foraging rate of ants among tree species.") %>%
-  kableExtra::kable_styling(full_width=FALSE)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 These results indicate that there is a difference in the mean foraging rate of ants, but only between those on Oak and Rowan trees, where ants on Oak trees had approximately double the mean foraging rate as ants on Rowan trees (Figure \@ref(fig:AFMeansPlot)). There was no difference in mean foraging rates for ants on Sycamore trees and either Oak or Rowan trees.
@@ -299,7 +299,7 @@ Each estimation method was used six times on the watershed and the resulting dis
 ```{r PDSampleSize, echo=FALSE}
 xtabs(~method,data=PD) %>%
   knitr::kable(booktabs=TRUE,caption="Number of estimates for each method.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 At first glance, the data do not appear to be independent either within- or among-groups as the same methods were applied to the same watershed. However, the single watershed is the engineer's "population" of interest; thus, this form of data collection is not problematic unless the engineer (or you) attempt to make strict inferences to other watersheds. In addition, measurements from the same method may seem dependent, but this is the factor that is being examined, thus this is not a within-group dependency issue.
@@ -329,7 +329,7 @@ Note the careful use of the transformation name here.
 ```{r PDANOVA, echo=FALSE}
 knitr::kable(anova(lm.pdt),digits=c(0,3,3,3,5),
              caption="ANOVA results for the square root peak discharge analysis by estimationg method.") %>%
-  kableExtra::kable_styling(full_width=FALSE)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 Tukey multiple comparisons indicate that no two mean square root peak discharges were equal (p&leq;`r kPvalue(max(dmns.pdt$p.value),latex=FALSE,include.p=FALSE)`; Table \@ref(tab:PDTukey1)). It appears that the mean square root of estimated peak discharge increases from Method 1 to Method 2 to Method 3 to Method 4. For example, the mean square root of estimated peak discharge was between `r formatC(-1*dmns.pdt$upper.CL[3],format="f",digits=3)` and `r formatC(-1*dmns.pdt$lower.CL[3],format="f",digits=3)` units greater for Method 4 than for Method 1 (Table \@ref(tab:PDTukey1)).
@@ -337,7 +337,7 @@ Tukey multiple comparisons indicate that no two mean square root peak discharges
 ```{r PDTukey1, echo=FALSE}
 knitr::kable(dmns.pdt[,-c(3,4,7)],digits=c(NA,3,3,3,4),
              caption="Tukey's multiple comparisons for differences in square root peak discharge for different estimation methods.") %>%
-  kableExtra::kable_styling(full_width=FALSE)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 These results indicate that the mean peak discharge estimate differed significantly, with a higher peak discharge estimated for each method from Method 1 to Method 4 (Figure \@ref(fig:PDMeansPlot)).

@@ -36,7 +36,6 @@
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -369,7 +368,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.1.1</span> General</h3>
 <p>Many hypothesis tests can be cast in a framework of competing models. In this module we will cast the familiar 2-sample t-test in this framework which will then serve as a conceptual foundation for all other linear models in this course.</p>
 <p>The two competing models are generically called the <em>simple</em> and <em>full</em> models (Table <a href="ModelComparison.html#tab:ModelDifferences">4.1</a>). The simple model is simpler than the full model in the sense that it has fewer parameters. However, the simple model fits the data “worse” than a full model. Thus, determining which model to use becomes a question of balancing “fit” (full model fits better than the simple model) with complexity (simple model is less complex than the full model). Because the simple model corresponds to H<sub>0</sub> and the full model corresponds to H<sub>A</sub>, deciding which model to use is the same as deciding which hypothesis is supported by the data.</p>
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:ModelDifferences">Table 4.1: </span>Differences between the two generic model types.
 </caption>
@@ -592,7 +591,7 @@ Figure 4.4: Mean biological oxygen demand versus sample location with the grand 
 <p>SS and df partition, but MS do not! Do not add MS<sub>Among</sub> and MS<sub>Within</sub> to get MS<sub>Total</sub>, instead divide SS<sub>Total</sub> by df<sub>Total</sub>.</p>
 </div>
 <p>An ANOVA table for the BOD measurements at the inlet and outlet sources to the aquaculture facility is in Table <a href="ModelComparison.html#tab:ANOVA1">4.2</a>. Note that R does not show the total row that most softwares do.</p>
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:ANOVA1">Table 4.2: </span>An ANOVA table for biological oxygen demand measurements at two locations of the aquaculture facility. Note that the “Total” row is not shown.
 </caption>

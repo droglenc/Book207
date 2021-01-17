@@ -22,7 +22,7 @@ Throughout the SLR modules, an example data set will be used that is the actual 
 ev <- read.csv("https://raw.githubusercontent.com/droglenc/NCData/master/EverestTemps.csv")
 ev <- filter(ev,Season=="Winter")
 knitr::kable(ev,booktabs=TRUE,caption="Actual air temperature (`MeanAirTemp`) and altitude lapse rate (`Altitude`) data for Mount Everest in the winter.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;

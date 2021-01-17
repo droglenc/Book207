@@ -167,7 +167,7 @@ The ANOVA table for the Mount Everest air temperature and altitude lapse rate an
 aov1 <- anova(lm1.ev)
 knitr::kable(aov1,booktabs=TRUE,digits=c(0,3,3,3),
              caption='An ANOVA table for the simple linear regression of actual mean air temperature on altitude lapse rate for locations on Mount Everest in the Winter. Note that the "Total" row is not shown.') %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 In addition to the primary objective of comparing the full and simple models, several items of interest can be identified from the ANOVA table in Table \@ref(tab:EverestSLRANOVA).

@@ -66,7 +66,7 @@ The temperature anomaly and CO<sub>2</sub> data appear to be significantly relat
 ```{r ccANOVA, echo=FALSE}
 knitr::kable(anova(lm.cc),booktabs=TRUE,digits=c(0,1,1,3,4),
              caption="ANOVA table for simple linear regression of temperature anomaly on CO2 data.") %>%
-    kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;
@@ -76,7 +76,7 @@ In fact, it appears that as as the CO<sub>2</sub> levels increase by 1 ppm then 
 ```{r ccCoefs, echo=FALSE}
 knitr::kable(cfs.cc,booktabs=TRUE,digits=c(2,2,2),
              caption="Intercept and slope, along with 95% confidence intervals, for simple linear regression of temperature anomaly on CO2 data.") %>%
-    kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;
@@ -168,7 +168,7 @@ The log above ground biomass and log diameter at breast height appear to be sign
 ```{r tmANOVA, echo=FALSE}
 knitr::kable(anova(lm.tm2),booktabs=TRUE,digits=c(0,2,2,2,4),
              caption="ANOVA table for simple linear regression of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands.") %>%
-    kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;
@@ -178,7 +178,7 @@ In fact, it appears that as as the log diameter at breast height increases by 1 
 ```{r tmCoefs, echo=FALSE}
 knitr::kable(cfs.tm2,booktabs=TRUE,digits=c(2,2,2),
              caption="Intercept and slope, along with 95% confidence intervals, for simple linear regression of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands.") %>%
-    kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;

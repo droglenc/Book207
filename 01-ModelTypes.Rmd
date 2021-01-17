@@ -41,8 +41,8 @@ data.frame(Response=c("Quantitative","Quantitative","Quantitative",
                             "Simple Linear Regression","Indicator Variable Regression",
                             "(Binary) Logistic Regression"),
            check.names=FALSE) %>%
-  knitr::kable(booktabs=TRUE,caption="Response and explanatory variables types for the linear models considered in this course.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  knitr::kable(booktabs=TRUE,caption="Response and explanatory variable types (and number) for the linear models considered in this course.") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;

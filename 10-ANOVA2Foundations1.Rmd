@@ -29,7 +29,7 @@ ofat1 <- tibble(UVB=c("High","Low"),
                 Tanks=c(paste(tmp[1:22],collapse=", "),
                         paste(tmp[23:44],collapse=", ")))
 knitr::kable(ofat1,booktabs=TRUE,caption="Schematic of two OFAT experiments with UV-B light intensity and density of tadpoles. Tank numbers correspond to the random allocation of individual tanks to each treatment.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font="Cambria") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font="Cambria") %>%
   kableExtra::row_spec(0,bold=TRUE)
 ```
 ```{r echo=FALSE}
@@ -38,7 +38,7 @@ ofat2 <- tibble(Density=c("1 Tadpole","2 Tadpoles","4 Tadpoles"),
                         paste(tmp[61:75],collapse=", "),
                         paste(tmp[76:90],collapse=", ")))
 knitr::kable(ofat2) %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font="Cambria") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font="Cambria") %>%
   kableExtra::row_spec(0,bold=TRUE)
 ```
 
@@ -56,7 +56,7 @@ crossed <- tibble(UVB=rep(c("High","Low"),each=3),
                           paste(tmp[61:75],collapse=", "),
                           paste(tmp[76:90],collapse=", ")))
 knitr::kable(crossed,booktab=TRUE,caption="Schematic depicting the crossing of three levels of UV-B light intensity with two levels of tadpole density to produce six treatments. Numbers in each cell represent individual tanks exposed to that treatment.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font="Cambria") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font="Cambria") %>%
   kableExtra::row_spec(0,bold=TRUE)
 ```
 

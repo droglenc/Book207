@@ -61,7 +61,7 @@ data.frame(Species=c("Chinook (Reference)","Coho"),COHO=c(0,1),
                       "$(\\alpha+\\delta_{1})+(\\beta+\\gamma_{1})WEIGHT$"),
            check.names=FALSE) %>%
   knitr::kable(booktabs=TRUE,row.names=FALSE) %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;
@@ -100,7 +100,7 @@ data.frame(Year=c("1977 (Reference)","1982","1986"),YEAR1982=c(0,1,0),YEAR1986=c
                       "$(\\alpha+\\delta_{2})+(\\beta+\\gamma_{2})WEIGHT$"),
            check.names=FALSE) %>%
   knitr::kable(booktabs=TRUE,row.names=FALSE) %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;

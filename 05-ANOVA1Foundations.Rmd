@@ -75,9 +75,8 @@ A 2-Sample t-Test is simply a special case of a One-Way ANOVA.
 Figure \@ref(fig:SS) is a visual for simple and full models and residuals from each. Note the similarity with figures from the Module \@ref(ModelComparison), except that there are three group means here.
 
 ```{r SS, echo=FALSE, fig.width=8.5/3, fig.height=3, fig.cap="Immunoglobulin concentrations versus season (or month) of capture for New Zealand opposums. The grand mean is shown by a red horizontal segment, group means are shown by blue horizontal segments, residuals from the grand mean are red vertical dashed lines, residuals from the groups means are blue vertical dashed lines, and differnces between the group means and the grand mean are black vertical dashed lines."}
-lbl_text_size <- 4
 SST <- ggplot(data=opp1) +
-  geom_crossbar(mapping=aes(x=season,y=mn,ymin=mn,ymax=mn),color="white",alpha=0.01) +
+  geom_crossbar(mapping=aes(x=season,y=mn,ymin=mn,ymax=mn),color="transparent") +
   geom_crossbar(mapping=aes(x=2,y=gmn,ymin=gmn,ymax=gmn),width=2.25,color="red") +
   geom_point(mapping=aes(x=seasjit,y=imm),alpha=0.25) +
   geom_segment(mapping=aes(x=seasjit,xend=seasjit,y=imm,yend=gmn),
@@ -157,7 +156,7 @@ An ANOVA table (Table \@ref(tab:oppANOVA)) is used to display the results from a
 ```{r oppANOVA, echo=FALSE}
 knitr::kable(aov1,booktabs=TRUE,digits=4,
              caption='An ANOVA table for immunoglobuling concentration by season (or month) for New Zealand opossums. Note that the "Total" row is not shown.') %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 In addition to the usual meanings attached to MS<sub>Among</sub>, MS<sub>Among</sub>, and MS<sub>Total</sub>,^[Note that MS<sub>Total</sub> **must** be computed from SS<sub>Total</sub> and df<sub>Total</sub> and not by summing MS<sub>Among</sub> an MS<sub>Within</sub>.] the following can be discerned from this ANOVA table.

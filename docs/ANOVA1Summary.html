@@ -36,7 +36,6 @@
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -410,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>where <span class="math inline">\(\mu\)</span> is the mean growth of the tomato seedlings and the subscripts identify densities of nematodes (see below).</p>
 <p>The student had 16 pots of a homogeneous soil type in which he “stocked” a known density of nematodes. The densities of nematodes used were 0, 1000, 5000, or 10000 nematodes per pot. The density of nematodes to be stocked in each pot was randomly assigned. After stocking the pots with nematodes, tomato seedlings, which had been selected to be as nearly identical in size and health as possible, were transplanted into each pot. The exact pot that a seedling was transplanted into was again randomly selected. Each pot was placed under a growing light in the same laboratory and allowed to grow for six weeks. Watering regimes and any other handling necessary during the six weeks was kept the same as much as possible among the pots. After six weeks, the plants were removed from the growing conditions and the growth of the seedling (in cm) from the beginning of the experiment was recorded.</p>
 <p>This study was “balanced” as the number of pots at each nematode density is the same (Table <a href="ANOVA1Summary.html#tab:TNSampleSize">9.1</a>). The sample size, though, is quite small.</p>
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:TNSampleSize">Table 9.1: </span>Number of pots at each nematode density treatment.
 </caption>
@@ -477,7 +476,7 @@ Figure 9.1: Histogram (Left) and boxplot (Right) of residuals from the utransfor
 <div class="tip">
 <p>Note the use of ANOVA table to first identify any differences.</p>
 </div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:TNANOVA">Table 9.2: </span>ANOVA results for tomato seedling growth at four nematode densities.
 </caption>
@@ -544,7 +543,7 @@ Residuals
 </tbody>
 </table>
 <p>It appears that mean growth of tomatoes does not differ at densities 0 and 1000 (p=0.9974) and 5000 and 10000 (p=0.9992), but does differ for all other pairs of nematode densities (p≤0.0070) (Table <a href="ANOVA1Summary.html#tab:TNTukey">9.3</a>).</p>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:TNTukey">Table 9.3: </span>Tukey’s multiple comparisons for differences in mean tomato seedling growth for all pairs of four nematode densities.
 </caption>
@@ -717,7 +716,7 @@ Figure 9.2: Mean (with 95% confidence interval) of tomato growth at each nematod
 \]</span></p>
 <p>where <span class="math inline">\(\mu\)</span> is the mean foraging rate of the ants and the subscripts identify the type of tree examined.</p>
 <p>This study was slightly “unbalanced” as the number of ants recorded on each tree is similar, but not the same (Table <a href="ANOVA1Summary.html#tab:AFSampleSize">9.4</a>).</p>
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:AFSampleSize">Table 9.4: </span>Number of ants recorded on each type of tree.
 </caption>
@@ -780,7 +779,7 @@ Figure 9.4: Histogram of residuals (Left) and boxplot of residual (Right) from t
 <div class="tip">
 <p>Note the careful use of the transformation name here.</p>
 </div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:AFANOVA">Table 9.5: </span>ANOVA results for the log transformed foraging rate of ants among tree species.
 </caption>
@@ -850,7 +849,7 @@ Residuals
 <div class="tip">
 <p>Note how the back-transformed difference in means forms a ratio that is interpreted as a multiplicative change.</p>
 </div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:AFTukey1">Table 9.6: </span>Tukey’s multiple comparisons for differences in mean log foraging rate of ants among tree species.
 </caption>
@@ -927,7 +926,7 @@ Rowan - Sycamore
 </tr>
 </tbody>
 </table>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:AFTukey2">Table 9.7: </span>Tukey’s multiple comparisons for <strong>ratios</strong> of mean foraging rate of ants among tree species.
 </caption>
@@ -1049,7 +1048,7 @@ Figure 9.5: <strong>Back-transformed</strong> mean (with 95% confidence interval
 \]</span></p>
 <p>where <span class="math inline">\(\mu\)</span> is the mean peak discharge estimate and the subscripts generically identify the four different methods for estimating peak discharge.</p>
 <p>Each estimation method was used six times on the watershed and the resulting discharge estimates (in cubic feet per second) were recorded (Table <a href="ANOVA1Summary.html#tab:PDSampleSize">9.8</a>).</p>
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:PDSampleSize">Table 9.8: </span>Number of estimates for each method.
 </caption>
@@ -1120,7 +1119,7 @@ Figure 9.7: Histogram of residuals (Left) and boxplot of residual (Right) from t
 <div class="tip">
 <p>Note the careful use of the transformation name here.</p>
 </div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:PDANOVA">Table 9.9: </span>ANOVA results for the square root peak discharge analysis by estimationg method.
 </caption>
@@ -1187,7 +1186,7 @@ Residuals
 </tbody>
 </table>
 <p>Tukey multiple comparisons indicate that no two mean square root peak discharges were equal (p≤0.0046; Table <a href="ANOVA1Summary.html#tab:PDTukey1">9.10</a>). It appears that the mean square root of estimated peak discharge increases from Method 1 to Method 2 to Method 3 to Method 4. For example, the mean square root of estimated peak discharge was between 2.471 and 3.656 units greater for Method 4 than for Method 1 (Table <a href="ANOVA1Summary.html#tab:PDTukey1">9.10</a>).</p>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:PDTukey1">Table 9.10: </span>Tukey’s multiple comparisons for differences in square root peak discharge for different estimation methods.
 </caption>

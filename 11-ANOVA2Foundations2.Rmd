@@ -344,7 +344,7 @@ The F-ratio test statistics and corresponding p-values for the Factor A and Fact
 ```{r ANOVA2, echo=FALSE}
 knitr::kable(aov1,booktabs=TRUE,digits=c(0,3,3,3,4),
              caption='An ANOVA table for testing if mean body mass of tadpoles differs by density, UV-B light intensity, or the interaction between density and UV-B light. Note that the "Total" row is not shown.') %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font="Cambria")
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font="Cambria")
 ```
 
 The following observations or conclusions can be drawn from Table \@ref(tab:ANOVA2).

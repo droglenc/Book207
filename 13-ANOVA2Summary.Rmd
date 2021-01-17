@@ -75,7 +75,7 @@ This study was "balanced" as the number of participants was the same in each com
 ```{r DiscountSampleSize, echo=FALSE}
 xtabs(~Promo+Discount,data=d) %>%
   knitr::kable(booktabs=TRUE,caption="Number of participants in each combination of number of promotions and amount of discount.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont) %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
   kableExtra::add_header_above(c(" "=1,"Discounts"=4),bold=TRUE) %>%
   kableExtra::pack_rows("Promotions",1,4) %>%
   kableExtra::column_spec(1,width="6em")
@@ -111,7 +111,7 @@ There does not appear to be a significant interaction effect (`r kPvalue(p.aov1.
 ```{r DiscountAnova, echo=FALSE}
 knitr::kable(aov1.d,booktabs=TRUE,digits=c(1,3,3,3,4),
              caption="Two-way ANOVA results for expected price among different numbers of promotions and amounts of discount.") %>%
-    kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 Tukey's multiple comparison results suggest that the mean expected price does not differ between when one and three promotions are used (`r kPvalue(mc1sum.d.promo$contrasts$p.value[1],latex=FALSE)`) but does decline from three to five promotions (`r kPvalue(mc1sum.d.promo$contrasts$p.value[4],latex=FALSE)`) and from five to seven promotions (`r kPvalue(mc1sum.d.promo$contrasts$p.value[6],latex=FALSE)`; Table \@ref(tab:DiscountPromoTukey)). For example, the mean expected price drops between `r formatC(mc1sum.d.promo$contrasts$lower.CL[4],format="f",digits=2)` and `r formatC(mc1sum.d.promo$contrasts$upper.CL[4],format="f",digits=2)` dollars from three to five promotions and between `r formatC(mc1sum.d.promo$contrasts$lower.CL[6],format="f",digits=2)` and `r formatC(mc1sum.d.promo$contrasts$upper.CL[6],format="f",digits=2)` dollars from five to seven promotions.
@@ -119,7 +119,7 @@ Tukey's multiple comparison results suggest that the mean expected price does no
 ```{r DiscountPromoTukey, echo=FALSE}
 knitr::kable(mc1sum.d.promo$contrasts[c(1,2,5,6,8)],booktabs=TRUE,digits=c(0,2,2,2,4),
              caption="Tukey's multiple comparisons of differences in mean expected price among all pairs of numbers of promotions.") %>%
-    kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 Tukey's multiple comparison results suggest that the mean expected price differed between all pairs of amounts of discount (p&le;`r kPvalue(max(mc1sum.d.discount$contrasts$p.value),latex=FALSE,include.p=FALSE)`; Table \@ref(tab:DiscountDiscountTukey)). The mean expected price declined between `r formatC(mc1sum.d.discount$contrasts$lower.CL[1],format="f",digits=2)` and `r formatC(mc1sum.d.discount$contrasts$upper.CL[1],format="f",digits=2)` dollars from a discount rate of 10% to 20% (`r kPvalue(mc1sum.d.discount$contrasts$p.value[1],latex=FALSE)`) and between `r formatC(mc1sum.d.discount$contrasts$lower.CL[4],format="f",digits=2)` and `r formatC(mc1sum.d.discount$contrasts$upper.CL[4],format="f",digits=2)` dollars from a discount rate of 20% to 30% (`r kPvalue(mc1sum.d.discount$contrasts$p.value[4],latex=FALSE)`), but increased  between `r formatC(-1*mc1sum.d.discount$contrasts$upper.CL[6],format="f",digits=2)` and `r formatC(-1*mc1sum.d.discount$contrasts$lower.CL[6],format="f",digits=2)` dollars from a discount rate of 30% to 40% (`r kPvalue(mc1sum.d.discount$contrasts$p.value[6],latex=FALSE)`).
@@ -127,7 +127,7 @@ Tukey's multiple comparison results suggest that the mean expected price differe
 ```{r DiscountDiscountTukey, echo=FALSE}
 knitr::kable(mc1sum.d.discount$contrasts[c(1,2,5,6,8)],booktabs=TRUE,digits=c(0,2,2,2,4),
              caption="Tukey's multiple comparisons of differences in mean expected price among all pairs of amounts of discount.") %>%
-    kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 From these results it appears that if there is no difference in mean expected price for three or less promotions, but after that the mean expected price drops with increasing numbers of promotions, regardless of the amount of discount offered. Regardless of the number of promotions, consumers expect to pay less with increasing amount of discount up to 30%, but the mean expected price increased when the discount was increased to 40% (Figure \@ref(fig:DiscountFitPlot)).
@@ -200,7 +200,7 @@ lm1.nak <- lm(activity~strain+site+strain:site,data=nak)
 ```{r NAKSampleSize, echo=FALSE}
 xtabs(~strain+site,data=nak) %>%
   knitr::kable(booktabs=TRUE,caption="Number of rats in each combination of rat strain and kidney site.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont) %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
   kableExtra::add_header_above(c(" "=1,"Kidney Site"=3),bold=TRUE) %>%
   kableExtra::pack_rows("Strain",1,2) %>%
   kableExtra::column_spec(1,width="6em")
@@ -233,7 +233,7 @@ There appears to be a (weakly) significant interaction effect (`r kPvalue(p.aov1
 ```{r NAKAnova, echo=FALSE}
 knitr::kable(aov1.nak,booktabs=TRUE,digits=c(0,1,1,3,4),
              caption="Two-way ANOVA results for Na-K-ATPase activity levels among two strains of rats and three sites in the kidney.") %>%
-    kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 ```{r echo=FALSE}
@@ -247,7 +247,7 @@ Tukey's method was performed on the interaction effect to more specifically desc
 ```{r NAKTukey, echo=FALSE}
 knitr::kable(mc1sum.nak$contrasts[c(1,2,5,6,8)],booktabs=TRUE,digits=c(0,2,2,2,4),
              caption="Tukey's multiple comparisons of differences in means among all pairs of combinations of rat strain and kidney measurement site.") %>%
-    kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 ::: {.tip data-latex=""}
@@ -339,7 +339,7 @@ This study is not balanced (Table \@ref(tab:CrayfishSampleSize)) as the authors 
 ```{r CrayfishSampleSize, echo=FALSE}
 xtabs(~feed+time,data=cray) %>%
   knitr::kable(booktabs=TRUE,caption="Number of groups of crayfish in each combination of feeding regime and time of day when the number of active crayfish were recorded.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont) %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
   kableExtra::add_header_above(c(" "=1,"Kidney Site"=3),bold=TRUE) %>%
   kableExtra::pack_rows("Strain",1,2) %>%
   kableExtra::column_spec(1,width="6em")
@@ -384,7 +384,7 @@ There appears to be a significant interaction effect (`r kPvalue(p.aov1.cct[3],l
 ```{r CrayfishAnova, echo=FALSE}
 knitr::kable(aov1.cct,booktabs=TRUE,digits=c(0,2,2,2,5),
              caption="Two-way ANOVA results for number of active crayfish for two feeding levels and three times of day.") %>%
-    kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 Tukey's multiple comparisons (Table \@ref(tab:CrayfishTukey)) show that mean number of active crayfish did not differ by time of day when the crayfish were fed *ad libitum* (p&ge;`r kPvalue(FEDS,include.p=FALSE,latex=FALSE)`). In contrast, in the unfed treatments, the mean number of active crayfish increased from 1200 to 1700 (`r kPvalue(mc1sum.cct$contrasts$p.value[7],latex=FALSE)`), but not from 1700 to 1900 (`r kPvalue(mc1sum.cct$contrasts$p.value[14],latex=FALSE)`). Additionally, the mean number of active fish was greater in the unfed than in the fed treatments for each time of day (p&le;`r kPvalue(TOD,include.p=FALSE,latex=FALSE)`). For example, the mean number of active crayfish in the unfed treatment was between `r formatC(1/mc1sum.cct$contrasts$upper.CL[15],format="f",digits=2)` and `r formatC(1/mc1sum.cct$contrasts$lower.CL[15],format="f",digits=2)` **times** greater than the mean number of active crayfish in the fed treatment at 1900.
@@ -392,7 +392,7 @@ Tukey's multiple comparisons (Table \@ref(tab:CrayfishTukey)) show that mean num
 ```{r CrayfishTukey, echo=FALSE}
 knitr::kable(mc1sum.cct$contrasts[c(1,2,5,6,8)],booktabs=TRUE,digits=c(0,2,2,2,4),
              caption="Tukey's multiple comparisons for **ratios** of means among all pairs of combinations of feeding levels and times of day. Results were back-transformed from the log scale.") %>%
-    kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 The researcher's primary hypotheses was supported by this study -- crayfish in a high competition situation (i.e., unfed) which more willing to take on predation risk by being active outside their shelters (Figure \@ref(fig:CrayfishFitPlot)). Their thought that crayfish would be more active near dusk or at night was partially supported as this was only evident when crayfish were in the high competition scenario.

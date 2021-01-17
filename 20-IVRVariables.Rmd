@@ -27,7 +27,7 @@ data(Mirex)
 peek(Mirex,n=8) %>%
   knitr::kable(booktabs=TRUE,row.names=FALSE,
                caption="Subset of the Mirex in salmon data.") %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;
@@ -77,7 +77,7 @@ The relationship between the original factor variable and the indicator variable
 ```{r echo=FALSE}
 data.frame(species=unique(Mirex$species),COHO=c(0,1)) %>%
   knitr::kable(booktabs=TRUE,row.names=FALSE) %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 &nbsp;
@@ -106,7 +106,7 @@ Note that it is possible to create a third dummy variable to represent salmon co
 ```{r echo=FALSE}
 data.frame(year=c(1977,1982,1986),YEAR1982=c(0,1,0),YEAR1986=c(0,0,1)) %>%
   knitr::kable(booktabs=TRUE,row.names=FALSE) %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 ::: {.tip data-latex=""}
@@ -122,7 +122,7 @@ Suppose, for illustration purposes, that fish collected in 1982 were to be consi
 ```{r echo=FALSE}
 data.frame(year=c(1977,1982,1986),YEAR1977=c(1,0,0),YEAR1986=c(0,0,1)) %>%
   knitr::kable(booktabs=TRUE,row.names=FALSE) %>%
-  kableExtra::kable_classic(full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
 
 ::: {.defn data-latex=""}
