@@ -74,7 +74,7 @@ A 2-Sample t-Test is simply a special case of a One-Way ANOVA.
 
 Figure \@ref(fig:SS) is a visual for simple and full models and residuals from each. Note the similarity with figures from the Module \@ref(ModelComparison), except that there are three group means here.
 
-```{r SS, echo=FALSE, fig.width=8.5, fig.height=3, fig.cap="Immunoglobulin concentrations versus season (or month) of capture for New Zealand opposums. The grand mean is shown by a red horizontal segment, group means are shown by blue horizontal segments, residuals from the grand mean are red vertical dashed lines, residuals from the groups means are blue vertical dashed lines, and differnces between the group means and the grand mean are black vertical dashed lines."}
+```{r SS, echo=FALSE, fig.width=8.5/3, fig.height=3, fig.cap="Immunoglobulin concentrations versus season (or month) of capture for New Zealand opposums. The grand mean is shown by a red horizontal segment, group means are shown by blue horizontal segments, residuals from the grand mean are red vertical dashed lines, residuals from the groups means are blue vertical dashed lines, and differnces between the group means and the grand mean are black vertical dashed lines."}
 lbl_text_size <- 4
 SST <- ggplot(data=opp1) +
   geom_crossbar(mapping=aes(x=season,y=mn,ymin=mn,ymax=mn),color="white",alpha=0.01) +
@@ -145,7 +145,9 @@ SSA <- ggplot(data=opp1) +
   theme_NCStats() +
   theme(aspect.ratio=1)
 
-SST + SSW + SSA + plot_layout(nrow=1)
+SST
+SSW
+SSA
 ```
 
 &nbsp;

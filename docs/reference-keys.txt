@@ -18,7 +18,9 @@ fig:FullModelResids1
 fig:SimpleModelResids1
 fig:BothModelResids
 tab:ANOVA1
-fig:SS
+fig:SS-1
+fig:SS-2
+fig:SS-3
 tab:oppANOVA
 fig:MCProblem
 tab:CommonTranformations
@@ -88,7 +90,9 @@ fig:SLRConfidenceBand2
 fig:SLRPredictionBand1
 fig:SLRPredictionBand2
 fig:SLRModelsVisual
-fig:SLRModelsResids
+fig:SLRModelsResids-1
+fig:SLRModelsResids-2
+fig:SLRModelsResids-3
 tab:EverestSLRANOVA
 fig:FLPResid1
 fig:FLPResid2

@@ -26,7 +26,7 @@ Mirex <- Mirex %>%
 ## What is a Model
 A model is a representation of something or some phenomena. It is usually a simplification or an abstraction that helps our understanding of the more complex reality. A mathematical or statistical model is an equation or system of equations that is meant to characterize the general characteristics of observations. Statistical models do not represent every observation perfectly, rather they attempt to best represent the "central tendency" of the observations. Weather forecasts are based on mathematical and statistical models. You have observed at least two statistical models in your introductory statistics course -- the mean and the regression line (Figure \@ref(fig:TwoModelsEx)).
 
-```{r TwoModelsEx, echo=FALSE, fig.width=7, fig.cap="Two examples of models seen in your introductory statistics course -- two means (Left) and regression line (Right)."}
+```{r TwoModelsEx, echo=FALSE, fig.show="hold", fig.cap="Two examples of models seen in your introductory statistics course -- two means (Left) and regression line (Right)."}
 t2 <- ggplot(data=aqua) +
   geom_crossbar(mapping=aes(x=src,y=mn,ymin=mn,ymax=mn),width=0.25) +
   geom_point(mapping=aes(x=srcjit,y=BOD),alpha=0.25) +
@@ -39,7 +39,8 @@ slr <- ggplot(data=Mirex,mapping=aes(x=weight,y=mirex)) +
   labs(y="Mirex Concentration (mg/kg)",x="Weight (kg)") +
   theme_NCStats()
 
-t2 + slr
+t2
+slr
 ```
 
 &nbsp;
@@ -94,7 +95,7 @@ Residuals are *vertical* distances between an observation and the model.
 
 Residuals are negative if the point is "below" the model prediction and positive if the point is "above" the model prediction. More importantly, the absolute value of the residual is a measure of how close the model prediction is to the point or how well the model fits the individual point. Large residuals (in an absolute value sense) mean that the point is far from the model prediction and, thus, the model does not represent that point very well. Points with small residuals, in contrast, are near the model prediction and are thus well-represented by the model. Figure \@ref(fig:FullResid3) shows points with relatively large residuals in red and relatively small residuals in blue.
 
-```{r FullResid3, echo=FALSE, fig.width=7, fig.cap='Same plots as previously but with a "large" residual shown in red and a "small" residual shown in blue.'}
+```{r FullResid3, echo=FALSE, fig.show="hold", fig.cap='Same plots as previously but with a "large" residual shown in red and a "small" residual shown in blue.'}
 t2a <- t2 +
   geom_point(data=aqua[20,],mapping=aes(x=srcjit,y=BOD),color="red") +
   geom_segment(data=aqua[20,],mapping=aes(x=srcjit,xend=srcjit,y=BOD,yend=mn),
@@ -109,7 +110,8 @@ slra <- slr +
   geom_point(data=Mirex[78,],mapping=aes(x=weight,y=mirex),color="blue") +
   geom_segment(data=Mirex[78,],mapping=aes(x=weight,xend=weight,y=mirex,yend=pred),
                color="blue",linetype="dashed")
-t2a + slra
+t2a
+slra
 ```
 
 &nbsp;
@@ -127,14 +129,15 @@ The RSS measures how closely the model comes to *all* of the observations.
 
 The RSS is on an unfamiliar scale (squared residuals?) but it maintains the same conceptual idea that summing residuals would have. Mainly, the smaller the RSS the more closely the points are to the model. The full set of residuals required to compute an RSS are shown in Figure \@ref(fig:RSS1).
 
-```{r RSS1, echo=FALSE, fig.width=7, fig.cap='Same plots as previously but with all residuals shown.'}
+```{r RSS1, echo=FALSE, fig.show="hold", fig.cap='Same plots as previously but with all residuals shown.'}
 t2b <- t2 +
   geom_segment(data=aqua,mapping=aes(x=srcjit,xend=srcjit,y=BOD,yend=mn),
                color="red",linetype="dashed")
 slrb <- slr +
   geom_segment(data=Mirex,mapping=aes(x=weight,xend=weight,y=mirex,yend=pred),
                color="red",linetype="dashed")
-t2b + slrb
+t2b
+slrb
 ```
 
 &nbsp;

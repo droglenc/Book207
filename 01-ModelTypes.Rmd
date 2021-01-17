@@ -87,7 +87,7 @@ A **simple linear regression** is used to determine if there is a relationship b
 
 ```{r SLR, echo=FALSE, fig.cap="Mirex concentration by fish weight. This is an example of a Simple Linear Regression."}
 ggplot(data=Mirex,mapping=aes(x=weight,y=mirex)) +
-  geom_point(alpha=0.25) +
+  geom_point(alpha=0.5) +
   geom_smooth(method="lm",se=FALSE) +
   labs(y="Mirex Concentration (mg/kg)",x="Weight (kg)") +
   theme_NCStats()
@@ -99,7 +99,7 @@ An **indicator variable regression** is used to determine if the relationship be
 
 ```{r IVR, echo=FALSE, fig.cap="Mirex concentration by fish weight seprated by salmon species. This is an example of an Indicator Variable Regression."}
 ggplot(data=Mirex,mapping=aes(x=weight,y=mirex,color=species)) +
-  geom_point(alpha=0.25) +
+  geom_point(alpha=0.5) +
   geom_smooth(method="lm",se=FALSE) +
   labs(y="Mirex Concentration (mg/kg)",x="Weight (kg)") +
   theme_NCStats() +

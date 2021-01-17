@@ -54,7 +54,7 @@ cfs.putts %>%
 
 &nbsp;
 
-```{r PuttsLogOdds, echo=FALSE, fig.width=7, fig.cap="Log odds of making a putt versus the distance of the putt with best-fit line superimposed. The right panel is 'zoomed in' on distances of 5 to 15 so that the slope could be better seen."}
+```{r PuttsLogOdds, echo=FALSE, fig.show="hold", fig.cap="Log odds of making a putt versus the distance of the putt with best-fit line superimposed. The right panel is 'zoomed in' on distances of 5 to 15 so that the slope could be better seen."}
 flp.lodds.putts <- ggplot(mapping=aes(x=distance,y=lodds)) +
   geom_point(data=sum.putts,pch=21,color="black",fill="red",size=1.75) +
   geom_line(data=bfl.putts,color="blue",size=1) +
@@ -91,7 +91,8 @@ flp.lodds.putts2 <- flp.lodds.putts +
   geom_text(aes(x=pts.putts$distance[4],y=mean(pts.putts$lodds[3:4])),
             label=expression(beta==-0.354),parse=TRUE,hjust=-0.1,size=lbl_text_size)
 
-flp.lodds.putts + flp.lodds.putts2
+flp.lodds.putts
+flp.lodds.putts2
 ```
 
 &nbsp;
@@ -135,7 +136,7 @@ ecfs.putts %>%
 
 &nbsp;
 
-```{r PuttsOdds, echo=FALSE, fig.width=7, fig.cap="Odds of making a putt versus the distance of the putt with best-fit line superimposed. The right panel is 'zoomed in' on distances of 5 to 15 so that the exponentiated slope could be better seen."}
+```{r PuttsOdds, echo=FALSE, fig.show="hold", fig.cap="Odds of making a putt versus the distance of the putt with best-fit line superimposed. The right panel is 'zoomed in' on distances of 5 to 15 so that the exponentiated slope could be better seen."}
 flp.odds.putts <- ggplot(mapping=aes(x=distance,y=odds)) +
   geom_point(data=sum.putts,pch=21,color="black",fill="red",size=1.75) +
   geom_line(data=bfl.putts,color="blue",size=1) +
@@ -172,7 +173,8 @@ flp.odds.putts2 <- flp.odds.putts +
   geom_text(aes(x=pts.putts$distance[4],y=mean(pts.putts$odds[3:4])),
             label=expression(e^{beta}==0.702),parse=TRUE,hjust=-0.2,size=lbl_text_size)
 
-flp.odds.putts + flp.odds.putts2
+flp.odds.putts
+flp.odds.putts2
 ```
 
 &nbsp;
@@ -370,7 +372,7 @@ cfs.shrub %>%
 
 &nbsp;
 
-```{r shrubLogOdds, echo=FALSE, fig.width=7, fig.cap="Log odds of shrub presence versus elevation with best-fit line superimposed. The right panel is 'zoomed in' on elevations of 2250 to 2600 m so that the slope could be better seen."}
+```{r shrubLogOdds, echo=FALSE, fig.show="hold", fig.cap="Log odds of shrub presence versus elevation with best-fit line superimposed. The right panel is 'zoomed in' on elevations of 2250 to 2600 m so that the slope could be better seen."}
 flp.lodds.shrub <- ggplot(mapping=aes(x=elev,y=lodds)) +
   geom_point(data=sum.shrub,pch=21,color="black",fill="red",size=1.75) +
   geom_line(data=bfl.shrub,color="blue",size=1) +
@@ -410,7 +412,8 @@ flp.lodds.shrub2 <- flp.lodds.shrub +
                    y=mean(pts.shrub$lodds[3:4]),yend=mean(pts.shrub$lodds[3:4])),
                arrow=ARROW)
 
-flp.lodds.shrub + flp.lodds.shrub2
+flp.lodds.shrub
+flp.lodds.shrub2
 ```
 
 &nbsp;
@@ -423,7 +426,7 @@ The exponentiated estimated slope for the shrub data would have the same issue w
 
 &nbsp;
 
-```{r shrubOdds, echo=FALSE, fig.width=7, fig.cap="Odds of shrub presence versus elevation with best-fit line superimposed. The right panel is 'zoomed in' on elevations of 2250 to 2600 m so that the exponentiated slope could be better seen."}
+```{r shrubOdds, echo=FALSE, fig.show="hold", fig.cap="Odds of shrub presence versus elevation with best-fit line superimposed. The right panel is 'zoomed in' on elevations of 2250 to 2600 m so that the exponentiated slope could be better seen."}
 flp.odds.shrub <- ggplot(mapping=aes(x=elev,y=odds)) +
   geom_point(data=sum.shrub,pch=21,color="black",fill="red",size=1.75) +
   geom_line(data=bfl.shrub,color="blue",size=1) +
@@ -463,7 +466,8 @@ flp.odds.shrub2 <- flp.odds.shrub +
                    y=mean(pts.shrub$odds[3:4]),yend=mean(pts.shrub$odds[3:4])),
                arrow=ARROW)
 
-flp.odds.shrub + flp.odds.shrub2
+flp.odds.shrub
+flp.odds.shrub2
 ```
 
 &nbsp;

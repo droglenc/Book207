@@ -154,7 +154,7 @@ $$
 
 Thus, $log(Y)$ changes by **adding** $\beta$ as $X$ increases by 1 unit. In other words, $\beta$ is a difference in two means (the mean of $log(Y)$ at $X$s that are 1 unit apart). For example, in Figure \@ref(fig:BtransSlope1)-Left, the slope on the log-transformed scale indicates that for a one unit increase in $X$ that the predicted value of $log(Y)$ increases by adding 0.25 units.
 
-```{r BtransSlope1, echo=FALSE, fig.width=7, fig.cap="Demonstration of the additive nature of the slope on the log-scale (Left) and multiplicative nature of the back-transformed slope on the original scale (Right)."}
+```{r BtransSlope1, echo=FALSE, fig.show="hold", fig.cap="Demonstration of the additive nature of the slope on the log-scale (Left) and multiplicative nature of the back-transformed slope on the original scale (Right)."}
 a <- 1; b <- 1/4
 tmp <- tibble(x=seq(0.1,10,length.out=100),
               y=expo(x,a=a,b=b),
@@ -216,7 +216,8 @@ btrans1 <- ggplot(data=tmp,mapping=aes(x=x,y=y)) +
   annotate(geom="segment",x=7,xend=9,
            y=mean(pts$y[3:4]),yend=mean(pts$y[3:4]),
            arrow=ARROW)
-trans1 + btrans1
+trans1
+btrans1
 ```
 
 However, when both sides of the above equation are raised to the power of $e$ (i.e., back-transformed)
@@ -233,7 +234,7 @@ it becomes clear that $e^{\beta}$ is no longer a **difference** in means, rather
 
 For negative relationships, the same principle holds except that the back-transformed slope will be less than 1 so that an increase in $X$ results in a **multiplicative** decrease in $Y$ (Figure \@ref(fig:BtransSlope2)).
 
-```{r BtransSlope2, echo=FALSE, fig.width=7, fig.cap="Demonstration of the additive nature of the slope on the log-scale (Left) and multiplicative nature of the back-transformed slope on the original scale (Right)."}
+```{r BtransSlope2, echo=FALSE, fig.show="hold", fig.cap="Demonstration of the additive nature of the slope on the log-scale (Left) and multiplicative nature of the back-transformed slope on the original scale (Right)."}
 a <- 1; b <- -1/4
 tmp <- tibble(x=seq(0.1,10,length.out=100),
               y=expo(x,a=a,b=b),
@@ -296,7 +297,8 @@ btrans2 <- ggplot(data=tmp,mapping=aes(x=x,y=y)) +
   annotate(geom="segment",x=5,xend=7,
            y=mean(pts$y[3:4]),yend=mean(pts$y[3:4]),
            arrow=ARROW)
-trans2 + btrans2
+trans2
+btrans2
 ```
 
 ::: {.tip data-latex=""}
@@ -309,7 +311,7 @@ If the explanatory variable was also log-transformed then the interpretation of 
 
 For exapmle, in Figure \@ref(fig:BtransSlope3) the slope on the log-log-transformed scale is 0.25. Thus, $log(Y)$ increases by adding 0.25 when $log(X)$ increases by 1 unit. However, on the original scale $Y$ increases by a multiple of $e^{0.25}$=1.284 each time that $X$ increases by a multiple of $e^{1}$=2.718. For example, when $X$ increases from 7.39 to 20.98 (7.39&times;2.718) then $Y$ increases from 1.65 to 2.12 (=1.65&times;1.284). As another example, when $X$ increases from 54.60 to 148.41 (54.60&times;2.718) then $Y$ increases from 2.72 to 3.49 (=2.72&times;1.284).
 
-```{r BtransSlope3, echo=FALSE, fig.width=7, fig.cap="Demonstration of the additive nature of the slope on the log-log-scale (Left) and multiplicative nature of the back-transformed slope (and multiplicative change along the x-axis) on the original scale (Right)."}
+```{r BtransSlope3, echo=FALSE, fig.show="hold", fig.cap="Demonstration of the additive nature of the slope on the log-log-scale (Left) and multiplicative nature of the back-transformed slope (and multiplicative change along the x-axis) on the original scale (Right)."}
 a <- 1; b <- 1/4
 tmp <- tibble(logx=seq(-1,5.1,length.out=100),
               logy=log(a)+b*logx,
@@ -380,7 +382,8 @@ btrans3 <- ggplot(data=tmp,mapping=aes(x=x,y=y)) +
            y=1.2,yend=pts$y[3],
            arrow=ARROW) +
   theme(axis.text.x=element_text(angle=90,vjust=0.5))
-trans3 + btrans3
+trans3
+btrans3
 ```
 
 ::: {.tip data-latex=""}

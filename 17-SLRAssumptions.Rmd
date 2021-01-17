@@ -90,7 +90,7 @@ A *residual plot* is a scatterplot of these residuals on the y-axis and the pred
 
 Figure \@ref(fig:FLPResid1) shows a scatterplot with the best-fit line on the left and the corresponding residual plot on the right. Four points are shown to help understand how the two plots are related. This example is fairly straightforward as the residual plot essentially flattens the best-fit line and then zooms in the y-axis scale.
 
-```{r FLPResid1, echo=FALSE, fig.width=7, fig.cap="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)."}
+```{r FLPResid1, echo=FALSE, fig.show="hold", fig.cap="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)."}
 tmp <- filter(d,nm=="Heteroscedastic") %>%
   mutate(row=row_number(),
          lbl=ifelse(row %in% c(12,35,47,50),as.character(row),""))
@@ -115,14 +115,15 @@ residp1 <- ggplot(data=tmp,mapping=aes(x=p,y=r,label=lbl)) +
   labs(x="Predicted Values",y="Residuals") +
   theme_NCStats() +
   theme(axis.text.x=element_blank(),aspect.ratio=1)
-flp1 + residp1
+flp1
+residp1
 ```
 
 &nbsp;
 
 Figure \@ref(fig:FLPResid2) is arranged similarly to Figure \@ref(fig:FLPResid1). However, in this case the scatterplot exhibits a negative relationship which makes the "transformation" to the residual plot not as obvious. With a negative relationship, the "largest" predicted values correspond to points on the left side of the scatterplot, but they end up on the right side of the residual plot. Of course, vice-versa is also true. This is most obvious with the 38th and 39th points in Figure \@ref(fig:FLPResid2).
 
-```{r FLPResid2, echo=FALSE, fig.width=7, fig.cap="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)."}
+```{r FLPResid2, echo=FALSE, fig.show="hold", fig.cap="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)."}
 y2a <- -slp*x2+int+e2
 lm2a <- lm(y2a~x2)
 p2a <- predict(lm2a)
@@ -152,7 +153,8 @@ residp2 <- ggplot(data=tmp2,mapping=aes(x=p,y=r,label=lbl)) +
   labs(x="Predicted Values",y="Residuals") +
   theme_NCStats() +
   theme(axis.text.x=element_blank(),aspect.ratio=1)
-flp2 + residp2
+flp2
+residp2
 ```
 
 ::: {.tip data-latex=""}
@@ -207,7 +209,7 @@ The no outliers assumption for SLR is assessed exactly as it was for a One- and 
 
 In SLR, some individuals may be considered *influential points* that draw the best-fit line towards them. Some very highly influential points may so strongly draw the line to them that the line will come very close to the point and the outlier test will not identify the point as an outlier (Figure \@ref(fig:SLRInfluentialPoint)-Left). Thus, I strongly urge you to look for "abnormal" points in your residual plots (Figure \@ref(fig:SLRInfluentialPoint)-Right) rather than relying solely on the outlier test to identify problem points.
 
-```{r SLRInfluentialPoint, echo=FALSE, fig.width=7, fig.cap="Scatterplot with a best-fit line for all points (dashed red) and all points excluding the red point (solid black) (Left) and the residual plot from the fit to all points (Right)."}
+```{r SLRInfluentialPoint, echo=FALSE, fig.show="hold", fig.cap="Scatterplot with a best-fit line for all points (dashed red) and all points excluding the red point (solid black) (Left) and the residual plot from the fit to all points (Right)."}
 Infl1 <- tibble(x=c(1,2,3,4,5,7),
                 y=c(1+x[-6]+rnorm(length(x)-1,0,0.3),2))
 lm1 <- lm(y~x,data=Infl1)
@@ -232,7 +234,8 @@ residInfl <- ggplot() +
   labs(x="Predicted Values",y="Residuals") +
   theme_NCStats() +
   theme(axis.text=element_blank(),aspect.ratio=1)
-flpInfl + residInfl
+flpInfl
+residInfl
 ```
 
 Influential points are a huge problem in SLR because they make the best-fit line not represent the vast majority of the data. Influential points should be removed from the data if they are clearly an error. However, if they are not an error then the SLR should be fit both with and without the point and then a narrative should be constructed that describes how the points influences the regression results.

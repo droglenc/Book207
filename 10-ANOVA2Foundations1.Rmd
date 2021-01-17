@@ -69,7 +69,7 @@ knitr::kable(crossed,booktab=TRUE,caption="Schematic depicting the crossing of t
 ## Interaction Effects
 An interaction among factors is said to exist if the effect of one explanatory variable on the mean response depends on the level of the other explanatory variable. For example, if the mean body mass of the tadpoles *increased* across densities in the low light intensity treatments but *decreased* across densities in the high light intensity treatments (Figure \@ref(fig:TadpoleInteraction)-Left), then an interaction between the density of tadpoles and UV-B light intensities is said to exist. However, if the pattern among tadpole densities is the same in both the low and high density light intensities (Figure \@ref(fig:TadpoleInteraction)-Right), then no interaction exists between the factors.
 
-```{r TadpoleInteraction, echo=FALSE, fig.width=7, fig.cap="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating a hypothetical interaction effect (Left) and a lack of an interaction effect (Right)."}
+```{r TadpoleInteraction, echo=FALSE, fig.show="hold", fig.cap="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating a hypothetical interaction effect (Left) and a lack of an interaction effect (Right)."}
 tmp <- tibble(UVB=rep(c("High","Low"),each=3),
               Density=factor(rep(c(1,2,4),2)),
               Growth_int=c(1,3,4,3,1.5,1),
@@ -98,16 +98,17 @@ noint <- ggplot(data=tmp,mapping=aes(x=Density,y=Growth_noint,color=UVB,group=UV
   theme_NCStats() +
   theme(legend.position=c(1,1),
         legend.justification=c(1.05,1.05))
-int + noint
+int
+noint
 ```
 
 ::: {.defn data-latex=""}
-**Interaction effect:: When the effect of one explanatory variable (or factor) on the mean response is significantly different among the levels of the other explanatory variable (or factor).
+**Interaction effect**: When the effect of one explanatory variable (or factor) on the mean response is significantly different among the levels of the other explanatory variable (or factor).
 :::
 
 The tell-tale sign of an interaction effect is if you describe the effect of a factor on the mean response differently depending on the level of the other explanatory variable. For example, in Figure \@ref(fig:TadpoleInteraction2)-Left the effect of tadpole density on mean body mass is increasing in the high UV-B light intensity treatments, but is neither increasing or decreasing in the low UV-B light intensity treatments. The fact that density had a different effect on mean body mass in the different UV-B light treatments tells of an interaction effect. In Figure \@ref(fig:TadpoleInteraction2)-Right mean body mass increases with increasing density but at a very different rate (at least for densities of 1 to 2 tadpoles per tank). Again, this is a different conclusion about the effect of density on mean body mass depending on level of UV-B light; thus this represents an interaction effect.
 
-```{r TadpoleInteraction2, echo=FALSE, fig.width=7, fig.cap="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical interaction effects."}
+```{r TadpoleInteraction2, echo=FALSE, fig.show="hold", fig.cap="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical interaction effects."}
 int2 <- ggplot(data=tmp,mapping=aes(x=Density,y=Growth_int2,color=UVB,group=UVB)) +
   geom_path(size=1.1) +
   geom_point(size=2.5,pch=21,fill="white") +
@@ -128,7 +129,8 @@ int3 <- ggplot(data=tmp,mapping=aes(x=Density,y=Growth_int3,color=UVB,group=UVB)
   theme_NCStats() +
   theme(legend.position=c(0.95,0.05),
         legend.justification=c(1,0))
-int2 + int3
+int2
+int3
 ```
 
 In Module \@ref(ANOVA2Foundations2) we will develop objective mathematical measures of whether an interaction effect exists.^[That is, we will use a p-value.] However, in addition to the concept above, an interaction effect will look like means that are connected for levels of one explanatory variable that "do not track together" for levels of the other explanatory variable. For example, in Figure \@ref(fig:TadpoleInteraction2)-Left the "blue line" (connecting high UV-B light treatments) is steadily increasing whereas the "red line" (connecting low UV-B light treatments) is steadily flat -- i.e., they don't "track" together, which indicates an interaction effect. The two lines also do not track together in Figure \@ref(fig:TadpoleInteraction2) - Right.
@@ -150,7 +152,7 @@ For example, Figure \@ref(fig:TadpoleInteraction)-Right showed no significant in
 
 Main effects can also be determined for both interaction plots in Figure \@ref(fig:TadpoleNoInteraction2). The main effect for density in Figure \@ref(fig:TadpoleNoInteraction2)-Left is the same as that described for Figure \@ref(fig:TadpoleInteraction)-Right. However, in this case there is no UV-B main effect because there is no separation in means by UV-B light level at each level of density. In other words the red line for low UV-B light and the blue line for high UV-B light are (nearly) directly on top of each other, so there is no difference in means due to UV-B light and thus no main effect of UV-B light.
 
-```{r TadpoleNoInteraction2, echo=FALSE, fig.width=7, fig.cap="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical lack2 of interaction effects."}
+```{r TadpoleNoInteraction2, echo=FALSE, fig.show="hold", fig.cap="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical lack2 of interaction effects."}
 noint2 <- ggplot(data=tmp,mapping=aes(x=Density,y=Growth_noint2,color=UVB,group=UVB)) +
   geom_path(size=1.1) +
   geom_point(size=2.5,pch=21,fill="white") +
@@ -172,7 +174,8 @@ noint3 <- ggplot(data=tmp,mapping=aes(x=Density,y=Growth_noint3,color=UVB,group=
   theme_NCStats() +
   theme(legend.position=c(1,0.5),
         legend.justification=c(1.05,0.5))
-noint2 + noint3
+noint2
+noint3
 ```
 
 In Figure \@ref(fig:TadpoleNoInteraction2)-Right, there is no main effect of tadpole density as the mean body mass at each density within each UV-B light level is the same; i.e., mean body mass does not differ by density. However, there is a UV-B light main effect as mean body mass at the high UV-B light intensity is always^[For each density.] greater than mean body mass at the low UV-B light intensity.

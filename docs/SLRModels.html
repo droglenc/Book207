@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-14" />
+<meta name="date" content="2021-01-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -391,21 +391,33 @@ Figure 16.1: Scatterplot illustrating two competing models for describing the re
 </div>
 <div id="anova-table-2" class="section level2" number="16.2">
 <h2><span class="header-section-number">16.2</span> ANOVA Table</h2>
-<p>Of course, the lack-of-fit of the a model is measured by summing the squared residuals using predictions from the model. The lack-of-fit of the simple model is calculated with residuals from the mean value of the response variable (Figure <a href="SLRModels.html#fig:SLRModelsResids">16.2</a>-Left) or</p>
+<p>Of course, the lack-of-fit of the a model is measured by summing the squared residuals using predictions from the model. The lack-of-fit of the simple model is calculated with residuals from the mean value of the response variable (Figure <a href="#fig:SLRModelsResids"><strong>??</strong></a>-Left) or</p>
 <p><span class="math display">\[ \text{SS}_{\text{Total}} = \sum_{i=1}^{n}\left(y_{i}-\overline{Y}_{\cdot}\right)^{2} \]</span></p>
-<p>This calculation is exactly the same as that discussed for the one- and two-way ANOVAs. The lack-of-fit of the full model is calculated with residuals from the best-fit regression line (Figure <a href="SLRModels.html#fig:SLRModelsResids">16.2</a>-Center) or</p>
+<p>This calculation is exactly the same as that discussed for the one- and two-way ANOVAs. The lack-of-fit of the full model is calculated with residuals from the best-fit regression line (Figure <a href="#fig:SLRModelsResids"><strong>??</strong></a>-Center) or</p>
 <p><span class="math display">\[ \text{SS}_{\text{Residual}} = \sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X}\right)^{2} = \sum_{i=1}^{n}\left(y_{i}-\left(\hat{\alpha}+\hat{\beta}x_{i}\right)\right)^{2} \]</span></p>
 <p>This is termed SS<sub>Residual</sub> in SLR, but it is exactly analogous to SS<sub>Within</sub> from Modules <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a> and (ANOVA2Foundations2).</p>
-<div class="figure" style="text-align: center"><span id="fig:SLRModelsResids"></span>
-<img src="Book207_files/figure-html/SLRModelsResids-1.png" alt="Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs." width="816" />
+<div class="figure" style="text-align: center"><span id="fig:SLRModelsResids-1"></span>
+<img src="Book207_files/figure-html/SLRModelsResids-1.png" alt="Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs." width="272" />
 <p class="caption">
 Figure 16.2: Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:SLRModelsResids-2"></span>
+<img src="Book207_files/figure-html/SLRModelsResids-2.png" alt="Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs." width="272" />
+<p class="caption">
+Figure 16.3: Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:SLRModelsResids-3"></span>
+<img src="Book207_files/figure-html/SLRModelsResids-3.png" alt="Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs." width="272" />
+<p class="caption">
+Figure 16.4: Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs.
 </p>
 </div>
 <div class="tip">
 <p>SS<sub>Total</sub> measures the lack-of=fit of the simplest model, which is just the mean of the response variable. Thus, SS<sub>Total</sub> measures the maximum lack-of-fit of any model to the response variable.</p>
 </div>
-<p>As always, SS<sub>Total</sub> partitions into two parts, labeled here as SS<sub>Residual</sub> and SS<sub>Regression</sub>. As stated above SS<sub>Residual</sub> is exactly analogous to SS<sub>Within</sub>. Similarly SS<sub>Regression</sub> is exactly analogous to SS<sub>Among</sub>. Thus, SS<sub>Regression</sub> measures the reduction in lack-of-fit from using the full model over the simple model (i.e., how much better the full model fits) and is a measure of the “signal” in the data. Specifically, SS<sub>Regression</sub> is calculate from the difference in predictions between the full and simple models (Figure <a href="SLRModels.html#fig:SLRModelsResids">16.2</a>-Right); i.e.,</p>
+<p>As always, SS<sub>Total</sub> partitions into two parts, labeled here as SS<sub>Residual</sub> and SS<sub>Regression</sub>. As stated above SS<sub>Residual</sub> is exactly analogous to SS<sub>Within</sub>. Similarly SS<sub>Regression</sub> is exactly analogous to SS<sub>Among</sub>. Thus, SS<sub>Regression</sub> measures the reduction in lack-of-fit from using the full model over the simple model (i.e., how much better the full model fits) and is a measure of the “signal” in the data. Specifically, SS<sub>Regression</sub> is calculate from the difference in predictions between the full and simple models (Figure <a href="#fig:SLRModelsResids"><strong>??</strong></a>-Right); i.e.,</p>
 <p><span class="math display">\[\text{SS}_{\text{Regression}} = \sum_{i=1}^{n}\left((\hat{\alpha}+\hat{\beta}x_{i})-\overline{Y}\right)^{2}\]</span></p>
 <p>The df are similar to those discussed for a One-Way and Two-Way ANOVA. The df<sub>Total</sub> are <span class="math inline">\(n-1\)</span> as before and because there is only one parameter in the simple model. The df<sub>Residual</sub> is <span class="math inline">\(n-2\)</span> because the full model has two parameters (i.e., <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>). The df<sub>Total</sub> partitions as before which leaves df<sub>Regression</sub>=1, which is the difference in parameters between the full and simple models. As you can see, df<sub>Regression</sub> is exactly analogous to df<sub>Among</sub>.</p>
 <div class="tip">

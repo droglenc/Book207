@@ -71,7 +71,7 @@ $$ \text{SS}_{\text{Residual}} = \sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X}\right
 
 This is termed SS<sub>Residual</sub> in SLR, but it is exactly analogous to SS<sub>Within</sub> from Modules \@ref(ANOVA1Foundations) and \ref(ANOVA2Foundations2).
 
-```{r SLRModelsResids, echo=FALSE, fig.width=8.5, fig.height=3, fig.cap="Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs."}
+```{r SLRModelsResids, echo=FALSE, fig.width=8.5/3, fig.height=3, fig.cap="Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs."}
 SST <- slr +
   # Label a point
   annotate(geom="text",x=3500,y=9,
@@ -132,7 +132,9 @@ SSreg <-  ggplot(data=ev2,mapping=aes(x=Altitude,y=MeanAirTemp)) +
   theme_NCStats() +
   theme(aspect.ratio=1,plot.title=element_text(size=12))
   
-SST + SSres + SSreg
+SST
+SSres
+SSreg
 ```
 
 ::: {.tip data-latex=""}

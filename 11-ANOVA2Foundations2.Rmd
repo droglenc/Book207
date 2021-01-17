@@ -39,7 +39,7 @@ Two-factor studies can be visualized with the response variable on the y-axis, l
 
 In this module, two graphs will often be shown side-by-side. These are the same data but the role of the factor variables in the plot are reversed. For example, Figure \@ref(fig:TadpoleObs)-Left has tadpole density on the x-axis with different colors for the UV-B light levels and Figure \@ref(fig:TadpoleObs)-Right has UV-B light intensity on the x-axis with different colors for the tadpole densities.
 
-```{r TadpoleObs, echo=FALSE, fig.width=7, fig.height=4, fig.cap="Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis."}
+```{r TadpoleObs, echo=FALSE, fig.show="hold", fig.height=4, fig.cap="Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis."}
 obs1 <- ggplot() +
   geom_point(data=tad,aes(x=density,y=mass),color="white") +
   geom_point(data=tad,aes(x=densityjit,y=mass,color=uvb)) +
@@ -60,7 +60,8 @@ obs2 <- ggplot() +
   theme(legend.position="top",legend.box.spacing=unit(0,units="mm"),
         aspect.ratio=1)
 
-obs1 + obs2
+obs1
+obs2
 ```
 
 ### Symbols
@@ -72,7 +73,7 @@ For the sake of simplicity the same number of replicates are used in each treatm
 
 With these definitions, the response variable recorded on the $k$th individual in the treatment defined by the $i$th level of Factor A and the $j$th level of the Factor B is denoted by $Y_{ijk}$. For example, the body mass of tadpoles in the seventh tank ($k$=7) that received 1 tadpole ($i$=1) and low UV-B light ($j$=2) would be $Y_{127}$ (Figure \@ref(fig:TadpoleObs2)).
 
-```{r TadpoleObs2, echo=FALSE, fig.width=7, fig.height=4, fig.cap="Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis."}
+```{r TadpoleObs2, echo=FALSE, fig.show="hold", fig.height=4, fig.cap="Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis."}
 obs1_26 <- obs1 +
   annotate(geom="text",x=2.1,y=1.9,
            label=expression(Y[127]),parse=TRUE,
@@ -85,12 +86,13 @@ obs2_26 <- obs2 +
            size=lbl_text_size,vjust=-0.5) +
   annotate(geom="segment",x=1.4,y=1.8,xend=tad$uvbjit[26],yend=tad$mass[26],
            arrow=ARROW)
-obs1_26 + obs2_26
+obs1_26
+obs2_26
 ```
 
 The mean response for the $i$th level of Factor A and the $j$th level of Factor B is denoted by $\overline{Y}_{ij\cdot}$. The $\overline{Y}_{ij\cdot}$ are called **treatment means** in an experiment or **group means** in an observational study. The "dot" in $\overline{Y}_{ij\cdot}$ replaces the subscript in $Y_{ijk}$ that was summed across when computing the mean. Treatment means are calculated by summing across individuals in a treatment (the $k$ subscript), thus the $k$ subscript is replaced with a dot. As an example, the treatment mean body mass for tadpoles in the 1 tadpole density ($i$=1) and low UV-B light intensity ($k$=2) would be $\overline{Y}_{12\cdot}$ (Figure \@ref(fig:TadpoleTMNS)).^[This figure is similar to the interaction plots from Module \@ref(ANOVA1Foundations1).] 
 
-```{r TadpoleTMNS, echo=FALSE, fig.width=7, fig.height=4, fig.cap="Same as previous figure except that six treatments means are shown with horizontal blue segments."}
+```{r TadpoleTMNS, echo=FALSE, fig.show="hold", fig.height=4, fig.cap="Same as previous figure except that six treatments means are shown with horizontal blue segments."}
 tmns1 <- obs1 +
   geom_crossbar(data=tadsum,mapping=aes(x=dpd,y=tmn,ymin=tmn,ymax=tmn),
                 width=0.3,color="blue") +
@@ -107,12 +109,13 @@ tmns2 <- obs2 +
            size=lbl_text_size,vjust=-0.5) +
   annotate(geom="segment",x=1.4,y=1.7,xend=tadsum$upd[2],yend=tadsum$tmn[2],
            arrow=ARROW)
-tmns1 + tmns2
+tmns1
+tmns2
 ```
 
 The mean response for the $i$th level of Factor A is given by $\overline{Y}_{i\cdot\cdot}$. These **level means** are calculated by first summing individuals in each treatment (the $k$ subscript) and then summing across UV-B light levels (the $j$ subscript); thus, both the $k$ and $j$ subscripts are replaced with a "dot." For example, the mean body mass for tadpoles in the 1 tadpole density ($i$=1) is $\overline{Y}_{1\cdot\cdot}$ (Figure \@ref(fig:TadpoleLMNS)-Left).
 
-```{r TadpoleLMNS, echo=FALSE, fig.width=7, fig.height=4, fig.cap="Same as previous figure except that three density level means are shown on the left and two UV-B light level means are shown on the right with horizontal orange segments."}
+```{r TadpoleLMNS, echo=FALSE, fig.show="hold", fig.height=4, fig.cap="Same as previous figure except that three density level means are shown on the left and two UV-B light level means are shown on the right with horizontal orange segments."}
 lmns1 <- obs1 +
   geom_crossbar(data=tadsum,mapping=aes(x=density,y=dmn,ymin=dmn,ymax=dmn),
                 width=0.6,color="orange2") +
@@ -131,14 +134,15 @@ lmns2 <- obs2 +
   annotate(geom="segment",x=1.4,y=1.7,xend=tadsum$upd[2],yend=tadsum$umn[2],
            arrow=ARROW)
 
-lmns1 + lmns2
+lmns1
+lmns2
 ```
 
 Similarly, the mean response for the $j$th level of Factor B is given by $\overline{Y}_{\cdot j\cdot}$. These **level means** are calculated by first summing individuals in each treatment (the $k$ subscript) and then summing across tadpole density levels (the $i$ subscript); thus, both the $k$ and $i$ subscripts are replaced with a "dot." For example, the mean body mass for tadpoles in the low UV-B light intensity ($j$=2) is $\overline{Y}_{\cdot2\cdot}$ (Figure \@ref(fig:TadpoleLMNS)-Right).
 
 Finally, the mean response regardless of level of any factor is given by $\overline{Y}_{\cdot\cdot\cdot}$ and is called the **grand mean** (Figure \@ref(fig:TadpoleGMN)). The grand mean is calculated by summing individuals in each treatment, then summing across UV-B light intensities, and then summing across tadpole densities; thus, all three subscripts are replaced with a "dot."
 
-```{r TadpoleGMN, echo=FALSE, fig.width=7, fig.height=4, fig.cap="Same as previous figure except that the grand means is shown with a horizontal red segment in each panel."}
+```{r TadpoleGMN, echo=FALSE, fig.show="hold", fig.height=4, fig.cap="Same as previous figure except that the grand means is shown with a horizontal red segment in each panel."}
 gmn1 <- obs1 +
   geom_crossbar(data=tadsum,mapping=aes(x=2,y=gmn,ymin=gmn,ymax=gmn),
                 width=2.5,color="red") +
@@ -157,7 +161,8 @@ gmn2 <- obs2 +
   annotate(geom="segment",x=1.4,y=1.75,xend=1.5,yend=tadsum$gmn[1],
            arrow=ARROW)
 
-gmn1 + gmn2
+gmn1
+gmn2
 ```
 
 ::: {.tip data-latex=""}
@@ -170,7 +175,7 @@ In symbols for means, dots replace lettered subscripts for subscripts summed acr
 ### Models
 The total and within SS and df^[Thus, also the MS.] are effectively the same with a Two-Way ANOVA as with [a One-Way ANOVA](#ANOVA1Foundations), though their calculation may look more complicated. In a Two-Way ANOVA, the *full model* uses a separate mean for each treatment group and the *simple model* uses a single grand mean for all treatment groups. In essence, the simple model says that each treatment mean should be modeled by a common mean (Figure \@ref(fig:2WayModels)-Left), whereas the full model says that each treatment mean should be modeled by a separate mean (Figure \@ref(fig:2WayModels)-Right). It should be evident that this is the same simple and full models used in a One-Way ANOVA.
 
-```{r 2WayModels, echo=FALSE, fig.width=7, fig.height=4, fig.cap="Tadpole body mass by density and UV-B light levels (different colored points) with the grand mean of the simple model (Left) and the treatments means of the full model (Right) shown."}
+```{r 2WayModels, echo=FALSE, fig.show="hold", fig.height=4, fig.cap="Tadpole body mass by density and UV-B light levels (different colored points) with the grand mean of the simple model (Left) and the treatments means of the full model (Right) shown."}
 fmdl <- obs1 +
   geom_crossbar(data=tadsum,mapping=aes(x=dpd,y=tmn,ymin=tmn,ymax=tmn),
                 width=0.3,color="blue") +
@@ -184,7 +189,8 @@ fmdl <- obs1 +
 smdl <- gmn1 +
   theme(legend.position="none") +
   labs(title="Simple Model")
-smdl+fmdl
+smdl
+fmdl
 ```
 
 ### SS<sub>Total</sub>, df<sub>Total</sub>, and MS<sub>Total</sub>
@@ -262,7 +268,7 @@ $$ \text{SS}_{\text{A}} = mb\sum_{i=1}^{a}\left(\overline{Y}_{i\cdot\cdot}-\over
 
 Again, focus on the part that is summed, which is the square of the differences in the Factor A level means and the grand mean (Figure \@ref(fig:2WayAB)-Left). Thus, SS<sub>A</sub> measures how different the Factor A levels means are, just as you would expect. Note that the rest of the formula says that you must sum across the Factor A levels and then multiply by the number of individuals that went into calculating the Factor A levels means (i.e., $m$ individuals across $b$ levels of Factor B).
 
-```{r 2WayAB, echo=FALSE, fig.width=7, fig.height=4, fig.cap='Mean tadpole body mass by density and UV-B light levels (not differentiated) with the grand mean of the simple model (red horizontal line) and the level means shown for the tadpole densities (Left) or UV-B light intensities (Right). Vertical dashed lines are "residuals" between respective level means and the grand means.'}
+```{r 2WayAB, echo=FALSE, fig.show="hold", fig.height=4, fig.cap='Mean tadpole body mass by density and UV-B light levels (not differentiated) with the grand mean of the simple model (red horizontal line) and the level means shown for the tadpole densities (Left) or UV-B light intensities (Right). Vertical dashed lines are "residuals" between respective level means and the grand means.'}
 SSA <- ggplot() +
   geom_crossbar(data=tadsum,mapping=aes(x=density,y=tmn,ymin=tmn,ymax=tmn),color="white") +
   geom_crossbar(data=tadsum,mapping=aes(x=density,y=dmn,ymin=dmn,ymax=dmn),
@@ -307,7 +313,8 @@ SSB <- ggplot() +
   theme_NCStats() +
   theme(legend.position="top",legend.box.spacing=unit(0,units="mm"),
         aspect.ratio=1)
-SSA+SSB
+SSA
+SSB
 ```
 
 Similarly (Figure \@ref(fig:2WayAB)-Left), 
