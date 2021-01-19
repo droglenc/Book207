@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-18" />
+<meta name="date" content="2021-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -373,7 +373,7 @@ Y_{i} = \alpha + \beta X_{i} + \epsilon_{i}
 <p><span class="math display">\[
 Y_{i} = \alpha + \epsilon_{i}
 \]</span></p>
-<p>Furthermore, it can be shown algebraically that the <span class="math inline">\(\alpha\)</span> in the simple model is <span class="math inline">\(\mu_{Y}\)</span>.<a href="#fn69" class="footnote-ref" id="fnref69"><sup>69</sup></a></p>
+<p>Furthermore, it can be shown algebraically that the <span class="math inline">\(\alpha\)</span> in the simple model is <span class="math inline">\(\mu_{Y}\)</span>.<a href="#fn71" class="footnote-ref" id="fnref71"><sup>71</sup></a></p>
 <div class="figure" style="text-align: center"><span id="fig:SLRModelsVisual"></span>
 <img src="Book207_files/figure-html/SLRModelsVisual-1.png" alt="Scatterplot illustrating two competing models for describing the relationship between actual mean temperature and altitude lapse rate for Mount Everest in the winter. The horizontal red line is placed at the mean actual mean air temperatures and represents the simple model, whereas the blue line is the best-fit line and represents the full model." width="336" />
 <p class="caption">
@@ -498,7 +498,7 @@ Residuals
 <ul>
 <li>The variance of individuals around the regression line (<span class="math inline">\(s_{Y|X}^{2}\)</span>) is given by MS<sub>Residual</sub> as 2.137).</li>
 <li>The variance of individuals around the overall mean (<span class="math inline">\(s_{Y}^{2}\)</span>) is given by MS<sub>Total</sub> as 26.516 (=<span class="math inline">\(\frac{245.934+19.231}{1+9}\)</span> = <span class="math inline">\(\frac{265.165}{10}\)</span>).</li>
-<li>The F test statistic is equal to the square of the t test statistic from testing <span class="math inline">\(H_{0}:\beta =0\)</span> (see results from <code>summary()</code> in Section <a href="SLRInference.html#slope-and-intercept-in-r">15.4</a>).<a href="#fn70" class="footnote-ref" id="fnref70"><sup>70</sup></a></li>
+<li>The F test statistic is equal to the square of the t test statistic from testing <span class="math inline">\(H_{0}:\beta =0\)</span> (see results from <code>summary()</code> in Section <a href="SLRInference.html#slope-and-intercept-in-r">15.4</a>).<a href="#fn72" class="footnote-ref" id="fnref72"><sup>72</sup></a></li>
 </ul>
 <p>The ANOVA table for a SLR is obtained by submitting the saved <code>lm()</code> object to <code>anova()</code>. For example, Table <a href="SLRModels.html#tab:EverestSLRANOVA">16.1</a> was obtained with <code>anova(lm1.ev)</code>.</p>
 <p>Note also that the F-ratio test statistic, df<sub>Regression</sub>, df<sub>Residual</sub>, and the p-value from the ANOVA table are shown on the last line of the output from <code>summary()</code>, which was introduced in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a>. Also, as noted before, MS<sub>Residual</sub> is the square of the value following “Residual standard error:” in the <code>summary()</code> output. Thus, many of the key components of the ANOVA table are also in the <code>summary()</code> results.</p>
@@ -525,9 +525,9 @@ r^{2} = \frac{SS_{Regression}}{SS_{Total}}
 </div>
 <div class="footnotes">
 <hr />
-<ol start="69">
-<li id="fn69"><p>By substituting the formula for the intercept (<span class="math inline">\(\alpha=\mu_{Y} - \hat{\beta}\mu_{X}\)</span>) into <span class="math inline">\(\mu_{Y|X} = \alpha + \beta X\)</span>, an alternative form of the equation of the line is <span class="math inline">\(\mu_{Y|X} =\mu_{Y}+\beta\left(X-\mu_{X}\right)\)</span>. Thus, if <span class="math inline">\(\beta=0\)</span> as in <span class="math inline">\(H_{0}\)</span> then the simple model in <span class="math inline">\(H_{0}\)</span> reduces to <span class="math inline">\(\mu_{Y|X}=\mu_{Y}\)</span>.<a href="SLRModels.html#fnref69" class="footnote-back">↩︎</a></p></li>
-<li id="fn70"><p>This is a general rule between the t and F distributions. An F with <span class="math inline">\(1\)</span> numerator df and <span class="math inline">\(\nu\)</span> denominator df is equal to the square of a t with <span class="math inline">\(\nu\)</span> df.<a href="SLRModels.html#fnref70" class="footnote-back">↩︎</a></p></li>
+<ol start="71">
+<li id="fn71"><p>By substituting the formula for the intercept (<span class="math inline">\(\alpha=\mu_{Y} - \hat{\beta}\mu_{X}\)</span>) into <span class="math inline">\(\mu_{Y|X} = \alpha + \beta X\)</span>, an alternative form of the equation of the line is <span class="math inline">\(\mu_{Y|X} =\mu_{Y}+\beta\left(X-\mu_{X}\right)\)</span>. Thus, if <span class="math inline">\(\beta=0\)</span> as in <span class="math inline">\(H_{0}\)</span> then the simple model in <span class="math inline">\(H_{0}\)</span> reduces to <span class="math inline">\(\mu_{Y|X}=\mu_{Y}\)</span>.<a href="SLRModels.html#fnref71" class="footnote-back">↩︎</a></p></li>
+<li id="fn72"><p>This is a general rule between the t and F distributions. An F with <span class="math inline">\(1\)</span> numerator df and <span class="math inline">\(\nu\)</span> denominator df is equal to the square of a t with <span class="math inline">\(\nu\)</span> df.<a href="SLRModels.html#fnref72" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

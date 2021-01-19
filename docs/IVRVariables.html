@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-18" />
+<meta name="date" content="2021-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -362,7 +362,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="IVRVariables" class="section level1" number="20">
 <h1><span class="header-section-number">Module 20</span> IVR Variables</h1>
-<p>Simple linear regression is a powerful tool used to evaluate the relationship between two quantitative variables (Modules <a href="SLRFoundations.html#SLRFoundations">14</a>-<a href="SLRSummary.html#SLRSummary">19</a>). It is common for a researcher to compare simple linear regression models fit to separate groups of individuals. <strong>Indicator variable regression</strong> (IVR),<a href="#fn76" class="footnote-ref" id="fnref76"><sup>76</sup></a> is a method to make these comparisons. For example, IVR methods could be used in each of the following situations.</p>
+<p>Simple linear regression is a powerful tool used to evaluate the relationship between two quantitative variables (Modules <a href="SLRFoundations.html#SLRFoundations">14</a>-<a href="SLRSummary.html#SLRSummary">19</a>). It is common for a researcher to compare simple linear regression models fit to separate groups of individuals. <strong>Indicator variable regression</strong> (IVR),<a href="#fn78" class="footnote-ref" id="fnref78"><sup>78</sup></a> is a method to make these comparisons. For example, IVR methods could be used in each of the following situations.</p>
 <ul>
 <li>Determine if the relationship between propodus height and claw closing force differs among three types of crabs (<a href="https://www.semanticscholar.org/paper/Claw-morphology%2C-prey-size-selection-and-foraging-Yamada-Boulding/c8c558a33f3a6f9188a5027413abf7030a1bced7">Yamada and Boulding 1998</a>).</li>
 <li>Determine if the proportional area covered by an invasive plant differs between sites after adjusting for different resident times for the plant (i.e., how long it has been present at a site) (<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.559.2115&amp;rep=rep1&amp;type=pdf">Mullerova <em>et al.</em> 2005</a>).</li>
@@ -370,7 +370,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Determine if the relationship between total body electrical conductivity and lean body mass (a method used to measure body fat) differs between live and dead birds of various species (<a href="https://www.semanticscholar.org/paper/Total-Body-Electrical-Conductivity-(TOBEC)-to-Total-Castro-Wunder/3776f637c74c2168479e5a50307d07ba1e8998b4">Castro <em>et al.</em> 1990</a>).</li>
 <li>Determine if the relationship between a pitcher’s earned run “average” (ERA) and the average pitch speed at the point of release differs among pitchers in the National and American Leagues.</li>
 </ul>
-<p>As shown in each of these examples, an IVR consists of a quantitative response variable, a single quantitative explanatory variable, and a second categorical explanatory variable that identifies the groups. As is common with IVRs, the quantitative explanatory variable will be referred to as a <strong>covariate</strong> and the categorical explanatory variable will be referred to as a <strong>factor</strong>.<a href="#fn77" class="footnote-ref" id="fnref77"><sup>77</sup></a></p>
+<p>As shown in each of these examples, an IVR consists of a quantitative response variable, a single quantitative explanatory variable, and a second categorical explanatory variable that identifies the groups. As is common with IVRs, the quantitative explanatory variable will be referred to as a <strong>covariate</strong> and the categorical explanatory variable will be referred to as a <strong>factor</strong>.<a href="#fn79" class="footnote-ref" id="fnref79"><sup>79</sup></a></p>
 <div class="defn">
 <p><strong>Covariate</strong>: The quantitative explanatory variable in an IVR model.</p>
 </div>
@@ -378,7 +378,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p> </p>
 <div id="example-data" class="section level4 unnumbered">
 <h4>Example Data</h4>
-<p>Throughout this and the next few modules, we will refer to a study by <a href="https://pubmed.ncbi.nlm.nih.gov/12731833/">Makarewicz <em>et al.</em> (2003)</a>, who examined the relationship between the concentration of mirex in the tissue and the weight of salmon.<a href="#fn78" class="footnote-ref" id="fnref78"><sup>78</sup></a> They collected these data on Coho Salmon (<em>Oncorhynchus kisutch</em>) and Chinook Salmon (<em>Oncorhynchus tshawytscha</em>) in six different years. They were interested in determining if the relationship between mirex and weight differed between the two species or if it differed among years (Table <a href="IVRVariables.html#tab:MirexData">20.1</a>).</p>
+<p>Throughout this and the next few modules, we will refer to a study by <a href="https://pubmed.ncbi.nlm.nih.gov/12731833/">Makarewicz <em>et al.</em> (2003)</a>, who examined the relationship between the concentration of mirex in the tissue and the weight of salmon.<a href="#fn80" class="footnote-ref" id="fnref80"><sup>80</sup></a> They collected these data on Coho Salmon (<em>Oncorhynchus kisutch</em>) and Chinook Salmon (<em>Oncorhynchus tshawytscha</em>) in six different years. They were interested in determining if the relationship between mirex and weight differed between the two species or if it differed among years (Table <a href="IVRVariables.html#tab:MirexData">20.1</a>).</p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:MirexData">Table 20.1: </span>Subset of the Mirex in salmon data.
@@ -520,7 +520,7 @@ chinook
 <h2><span class="header-section-number">20.1</span> Indicator Variables</h2>
 <div id="only-two-levels" class="section level4 unnumbered">
 <h4>Only Two Levels</h4>
-<p>The factor variable must be converted to numeric codes to be included in a linear model. An <strong>indicator variable</strong> contains the numeric “codes” created from the factor variable. Specifically, an indicator variable consists of 0s and 1s, where a 1 indicates that the individual has a certain characteristic and a 0 indicates that it does not have the characteristic.<a href="#fn79" class="footnote-ref" id="fnref79"><sup>79</sup></a></p>
+<p>The factor variable must be converted to numeric codes to be included in a linear model. An <strong>indicator variable</strong> contains the numeric “codes” created from the factor variable. Specifically, an indicator variable consists of 0s and 1s, where a 1 indicates that the individual has a certain characteristic and a 0 indicates that it does not have the characteristic.<a href="#fn81" class="footnote-ref" id="fnref81"><sup>81</sup></a></p>
 <div class="defn">
 <p><strong>Indicator Variable</strong>: A variable that is a numerical representation of a dichotomous (or binary or binomial) categorical variable.</p>
 </div>
@@ -596,7 +596,7 @@ coho
   0 \text{ if NOT collected in 1986}
   \end{array}  \right.
 \]</span></p>
-<p>Note that it is possible to create a third dummy variable to represent salmon collected in 1977. However, this indicator variable is redundant with the <em>YEAR1982</em> and <em>YEAR1986</em> indicator variables because if <em>YEAR1982</em>=0 and <em>YEAR1986</em>=0 then the salmon must have been collected in 1977. This illustrates the rule that the number of indicator variables required is one less than the number of levels to be coded.<a href="#fn80" class="footnote-ref" id="fnref80"><sup>80</sup></a></p>
+<p>Note that it is possible to create a third dummy variable to represent salmon collected in 1977. However, this indicator variable is redundant with the <em>YEAR1982</em> and <em>YEAR1986</em> indicator variables because if <em>YEAR1982</em>=0 and <em>YEAR1986</em>=0 then the salmon must have been collected in 1977. This illustrates the rule that the number of indicator variables required is one less than the number of levels to be coded.<a href="#fn82" class="footnote-ref" id="fnref82"><sup>82</sup></a></p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -721,7 +721,7 @@ YEAR1986
 <div class="tip">
 <p>Interaction variables in IVR are used to determine if the effect of the covariate on the response variable differs among groups defined by the indicator variable(s).</p>
 </div>
-<p>The interaction between two variables in an IVR model may best be illustrated by looking at the examples in Figure <a href="IVRVariables.html#fig:IVRInteraction">20.1</a>. In the panel on the left, the effect of salmon weight (the covariate) on mirex concentration in the tissue (the response) is the same for Coho and Chinook Salmon. This is illustrated by each group having the same slope.<a href="#fn81" class="footnote-ref" id="fnref81"><sup>81</sup></a> However, in the panel on the right, different slopes indicate that the effect of salmon weight on mirex concentration in the tissue differs between the two species. In this particular example, the relationship is “flatter” for Coho than for Chinook Salmon. Thus, an interaction exists for the situation depicted in Figure <a href="IVRVariables.html#fig:IVRInteraction">20.1</a>-Right, because the effect of the covariate on the response depends on which group is being considered. Graphically, an interaction is illustrated by non-parallel lines.</p>
+<p>The interaction between two variables in an IVR model may best be illustrated by looking at the examples in Figure <a href="IVRVariables.html#fig:IVRInteraction">20.1</a>. In the panel on the left, the effect of salmon weight (the covariate) on mirex concentration in the tissue (the response) is the same for Coho and Chinook Salmon. This is illustrated by each group having the same slope.<a href="#fn83" class="footnote-ref" id="fnref83"><sup>83</sup></a> However, in the panel on the right, different slopes indicate that the effect of salmon weight on mirex concentration in the tissue differs between the two species. In this particular example, the relationship is “flatter” for Coho than for Chinook Salmon. Thus, an interaction exists for the situation depicted in Figure <a href="IVRVariables.html#fig:IVRInteraction">20.1</a>-Right, because the effect of the covariate on the response depends on which group is being considered. Graphically, an interaction is illustrated by non-parallel lines.</p>
 <div class="figure" style="text-align: center"><span id="fig:IVRInteraction"></span>
 <img src="Book207_files/figure-html/IVRInteraction-1.png" alt="Idealized fitted-line plots representing SLR fit to two groups. The graph on the left indicates the absence of an interaction. The graph on the right indicates the presence of an interaction." width="672" />
 <p class="caption">
@@ -736,13 +736,13 @@ Figure 20.1: Idealized fitted-line plots representing SLR fit to two groups. The
 </div>
 <div class="footnotes">
 <hr />
-<ol start="76">
-<li id="fn76"><p>This is not a standard name. Some authors call it dummy variable regression (e.g., Fox 1997), whereas others call it Analysis of Covariance (ANCOVA). I will not use either of these terms as I prefer the word “indicator” to “dummy” and I will reserve the ANCOVA method for the situation where the separate SLR models are known or assumed to have equal slopes. Thus, ANCOVA models are a subset of the IVR models discussed here. It should also be noted that some authors (e.g., Weisberg 2005) do not use a separate name for IVR but simply include it as a multiple linear regression model.<a href="IVRVariables.html#fnref76" class="footnote-back">↩︎</a></p></li>
-<li id="fn77"><p>Similar to what was one with the One- and Two-Way ANOVAS in Modules <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a>-<a href="ANOVA2Summary.html#ANOVA2Summary">13</a>.<a href="IVRVariables.html#fnref77" class="footnote-back">↩︎</a></p></li>
-<li id="fn78"><p>Mirex is a chlorinated hydrocarbon that was commercialized as an insecticide. Use of mirex was banned in 1976 because of its impact on the environment.<a href="IVRVariables.html#fnref78" class="footnote-back">↩︎</a></p></li>
-<li id="fn79"><p>Other coding schemes exist. For example, “contrast coding” uses -1 and 1. However, the 0 and 1 coding scheme leads to simpler interpretations and calculations and, thus, is used throughout this course.<a href="IVRVariables.html#fnref79" class="footnote-back">↩︎</a></p></li>
-<li id="fn80"><p>This is only true if an intercept term exists in the regression model, which will be the case for all models in this course.<a href="IVRVariables.html#fnref80" class="footnote-back">↩︎</a></p></li>
-<li id="fn81"><p>In regression the “effect” of the explanatory variable on the response variable is measured by the slope.<a href="IVRVariables.html#fnref81" class="footnote-back">↩︎</a></p></li>
+<ol start="78">
+<li id="fn78"><p>This is not a standard name. Some authors call it dummy variable regression (e.g., Fox 1997), whereas others call it Analysis of Covariance (ANCOVA). I will not use either of these terms as I prefer the word “indicator” to “dummy” and I will reserve the ANCOVA method for the situation where the separate SLR models are known or assumed to have equal slopes. Thus, ANCOVA models are a subset of the IVR models discussed here. It should also be noted that some authors (e.g., Weisberg 2005) do not use a separate name for IVR but simply include it as a multiple linear regression model.<a href="IVRVariables.html#fnref78" class="footnote-back">↩︎</a></p></li>
+<li id="fn79"><p>Similar to what was one with the One- and Two-Way ANOVAS in Modules <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a>-<a href="ANOVA2Summary.html#ANOVA2Summary">13</a>.<a href="IVRVariables.html#fnref79" class="footnote-back">↩︎</a></p></li>
+<li id="fn80"><p>Mirex is a chlorinated hydrocarbon that was commercialized as an insecticide. Use of mirex was banned in 1976 because of its impact on the environment.<a href="IVRVariables.html#fnref80" class="footnote-back">↩︎</a></p></li>
+<li id="fn81"><p>Other coding schemes exist. For example, “contrast coding” uses -1 and 1. However, the 0 and 1 coding scheme leads to simpler interpretations and calculations and, thus, is used throughout this course.<a href="IVRVariables.html#fnref81" class="footnote-back">↩︎</a></p></li>
+<li id="fn82"><p>This is only true if an intercept term exists in the regression model, which will be the case for all models in this course.<a href="IVRVariables.html#fnref82" class="footnote-back">↩︎</a></p></li>
+<li id="fn83"><p>In regression the “effect” of the explanatory variable on the response variable is measured by the slope.<a href="IVRVariables.html#fnref83" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

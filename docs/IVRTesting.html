@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-18" />
+<meta name="date" content="2021-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -401,7 +401,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   \text{H}_{\text{A}}&amp;: ``\text{The Coho and Chinook lines are NOT parallel&#39;&#39;} \\
 \end{split}
 \]</span></p>
-<p>More usefully these translate into the following models<a href="#fn84" class="footnote-ref" id="fnref84"><sup>84</sup></a></p>
+<p>More usefully these translate into the following models<a href="#fn86" class="footnote-ref" id="fnref86"><sup>86</sup></a></p>
 <p><span class="math display">\[
 \begin{split}
   \text{H}_{\text{0}}&amp;: \mu_{MIREX|\cdots} = \alpha+\beta WEIGHT+\delta_{1}COHO \\
@@ -558,7 +558,7 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 <p> </p>
 <div id="relationship-test-from-two-models-in-r" class="section level4 unnumbered">
 <h4>Relationship Test from Two Models in R</h4>
-<p>The full model for the relationship test was the simple module for the coincident lines test and was fit previously and saved into <code>ivr3</code>. The simple model for the relationship test is the so-called ultimate simple model<a href="#fn85" class="footnote-ref" id="fnref85"><sup>85</sup></a> and is fit with</p>
+<p>The full model for the relationship test was the simple module for the coincident lines test and was fit previously and saved into <code>ivr3</code>. The simple model for the relationship test is the so-called ultimate simple model<a href="#fn87" class="footnote-ref" id="fnref87"><sup>87</sup></a> and is fit with</p>
 <div class="sourceCode" id="cb163"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb163-1"><a href="IVRTesting.html#cb163-1" aria-hidden="true" tabindex="-1"></a>ivr4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span><span class="dv">1</span>,<span class="at">data=</span>Mirex)</span></code></pre></div>
 <p>These models are compared with <code>anova()</code>, again with the ultimate full model included so that the proper residual MS will be used.</p>
 <div class="sourceCode" id="cb164"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb164-1"><a href="IVRTesting.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr4,ivr3,ivr1)</span></code></pre></div>
@@ -627,7 +627,7 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 #R&gt;    $ species: Factor w/ 2 levels &quot;chinook&quot;,&quot;coho&quot;: 1 1 1 2 1 1 1 2 2 2 ...</code></pre>
 <p>Also, for the sake of having a simple example, only the last three years in the data will be used.</p>
 <div class="sourceCode" id="cb172"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb172-1"><a href="IVRTesting.html#cb172-1" aria-hidden="true" tabindex="-1"></a>MirexLast3 <span class="ot">&lt;-</span> <span class="fu">filter</span>(Mirex,year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1992</span>,<span class="dv">1996</span>,<span class="dv">1999</span>))</span></code></pre></div>
-<p>The ultimate full model is then fit and the ANOVA table is extracted with<a href="#fn86" class="footnote-ref" id="fnref86"><sup>86</sup></a></p>
+<p>The ultimate full model is then fit and the ANOVA table is extracted with<a href="#fn88" class="footnote-ref" id="fnref88"><sup>88</sup></a></p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb173-1"><a href="IVRTesting.html#cb173-1" aria-hidden="true" tabindex="-1"></a>ivrY1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year<span class="sc">+</span>weight<span class="sc">:</span>year,<span class="at">data=</span>MirexLast3)</span>
 <span id="cb173-2"><a href="IVRTesting.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivrY1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
@@ -679,10 +679,10 @@ Figure 22.7: Fitted regression lines for mirex in tissue by salmon weight for on
 </div>
 <div class="footnotes">
 <hr />
-<ol start="84">
-<li id="fn84"><p>The variables in this model were defined in Modules <a href="IVRVariables.html#IVRVariables">20</a>-<a href="IVRModels.html#IVRModels">21</a>.<a href="IVRTesting.html#fnref84" class="footnote-back">↩︎</a></p></li>
-<li id="fn85"><p>Because you cannot get any simpler than fitting a model without any variables.<a href="IVRTesting.html#fnref85" class="footnote-back">↩︎</a></p></li>
-<li id="fn86"><p>Assumptions should be checked and will be introduced in the next module.<a href="IVRTesting.html#fnref86" class="footnote-back">↩︎</a></p></li>
+<ol start="86">
+<li id="fn86"><p>The variables in this model were defined in Modules <a href="IVRVariables.html#IVRVariables">20</a>-<a href="IVRModels.html#IVRModels">21</a>.<a href="IVRTesting.html#fnref86" class="footnote-back">↩︎</a></p></li>
+<li id="fn87"><p>Because you cannot get any simpler than fitting a model without any variables.<a href="IVRTesting.html#fnref87" class="footnote-back">↩︎</a></p></li>
+<li id="fn88"><p>Assumptions should be checked and will be introduced in the next module.<a href="IVRTesting.html#fnref88" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

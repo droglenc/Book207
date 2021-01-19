@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-18" />
+<meta name="date" content="2021-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -382,7 +382,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="tip">
 <p><strong>Experiment-wise error rate:</strong> The probability of <em>at least one</em> Type I error in a set of comparisons of two means. Sometimes called the family-wise error.</p>
 </div>
-<p>Figure <a href="ANOVA1MultipleComparisons.html#fig:MCProblem">6.1</a> demonstrates the two issues related to multiple comparisons. First, the x-axis labels show how the number of pairwise comparisons (<span class="math inline">\(k\)</span>) increases quickly with increasing number of groups (<span class="math inline">\(I\)</span>) in the study. For example, six groups (<span class="math inline">\(I\)</span>=6) is not a complicated study, but it results in fifteen pairwise comparisons (<span class="math inline">\(k\)</span>=15). More importantly the line and point labels in the figure show how the experiment-wise error rate increases quickly and dramatically with increasing number of groups. For example, the experiment-wise error rate for six (<span class="math inline">\(I\)</span>=6) groups is over 0.50.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a> Thus, it is nearly a coin flip that at least one error will be made in all paired comparisons among six groups. Making an error more than 50% of the time in such a simple study is not acceptable and must be corrected.</p>
+<p>Figure <a href="ANOVA1MultipleComparisons.html#fig:MCProblem">6.1</a> demonstrates the two issues related to multiple comparisons. First, the x-axis labels show how the number of pairwise comparisons (<span class="math inline">\(k\)</span>) increases quickly with increasing number of groups (<span class="math inline">\(I\)</span>) in the study. For example, six groups (<span class="math inline">\(I\)</span>=6) is not a complicated study, but it results in fifteen pairwise comparisons (<span class="math inline">\(k\)</span>=15). More importantly the line and point labels in the figure show how the experiment-wise error rate increases quickly and dramatically with increasing number of groups. For example, the experiment-wise error rate for six (<span class="math inline">\(I\)</span>=6) groups is over 0.50.<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> Thus, it is nearly a coin flip that at least one error will be made in all paired comparisons among six groups. Making an error more than 50% of the time in such a simple study is not acceptable and must be corrected.</p>
 <div class="figure" style="text-align: center"><span id="fig:MCProblem"></span>
 <img src="Book207_files/figure-html/MCProblem-1.png" alt="Relationship between the number of groups (I) in an analysis, the number of pairs of means that would need to be tested (k), and the probability of making one or more Type I errors in all comparisons. Note that alpha=0.05." width="336" />
 <p class="caption">
@@ -396,7 +396,7 @@ Figure 6.1: Relationship between the number of groups (I) in an analysis, the nu
 </div>
 <div id="correction-methods" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Correction Methods</h2>
-<p>There are many procedures designed to attempt to control experiment-wise error rate at a desired level (usually α). You will here a variety of names like Tukey’s HSD, Bonferroni’s adjustment, Sidak’s method, and Scheffe’s method.<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> For simplicity, only the Tukey-Kramer honestly significantly different (i.e., Tukey’s HSD or Tukey’s) method will be used here.</p>
+<p>There are many procedures designed to attempt to control experiment-wise error rate at a desired level (usually α). You will here a variety of names like Tukey’s HSD, Bonferroni’s adjustment, Sidak’s method, and Scheffe’s method.<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a> For simplicity, only the Tukey-Kramer honestly significantly different (i.e., Tukey’s HSD or Tukey’s) method will be used here.</p>
 <p>As simplistically as possible, Tukey’s test computes the t test statistic for each pair of means as if conducting a 2-sample t-test. However, this test statistic is compared to a “Studentized range” rather than a t distribution to compute the p-value. These “adjusted” p-values are then simply compared to α to make a decision about the means of each pair. The net result of this modification however is that the experiment-wise error rate across all comparisions is controlled at the desired level when the group sample sizes are equal and is slightly conservative when the group sample sizes are different.</p>
 <p> </p>
 </div>
@@ -466,9 +466,9 @@ Figure 6.1: Relationship between the number of groups (I) in an analysis, the nu
 </div>
 <div class="footnotes">
 <hr />
-<ol start="22">
-<li id="fn22"><p>Using α=0.05<a href="ANOVA1MultipleComparisons.html#fnref22" class="footnote-back">↩︎</a></p></li>
-<li id="fn23"><p>See <a href="https://en.wikipedia.org/wiki/Family-wise_error_rate#Controlling_procedures">here</a> for a short list of methods.<a href="ANOVA1MultipleComparisons.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<ol start="24">
+<li id="fn24"><p>Using α=0.05<a href="ANOVA1MultipleComparisons.html#fnref24" class="footnote-back">↩︎</a></p></li>
+<li id="fn25"><p>See <a href="https://en.wikipedia.org/wiki/Family-wise_error_rate#Controlling_procedures">here</a> for a short list of methods.<a href="ANOVA1MultipleComparisons.html#fnref25" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

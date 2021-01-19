@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-18" />
+<meta name="date" content="2021-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -522,7 +522,7 @@ Winter
 </div>
 <div id="equation-of-a-line" class="section level2" number="14.1">
 <h2><span class="header-section-number">14.1</span> Equation of a Line</h2>
-<p>Both goals of SLR are accomplished by finding the model<a href="#fn56" class="footnote-ref" id="fnref56"><sup>56</sup></a> that best fits the relationship between the response and explanatory variables.<a href="#fn57" class="footnote-ref" id="fnref57"><sup>57</sup></a> When examining statistical regression models, the most common expression for the equation of the best-fit line is</p>
+<p>Both goals of SLR are accomplished by finding the model<a href="#fn58" class="footnote-ref" id="fnref58"><sup>58</sup></a> that best fits the relationship between the response and explanatory variables.<a href="#fn59" class="footnote-ref" id="fnref59"><sup>59</sup></a> When examining statistical regression models, the most common expression for the equation of the best-fit line is</p>
 <p><span class="math display">\[
 \mu_{Y|X} = \alpha + \beta X
 \]</span></p>
@@ -558,7 +558,7 @@ Figure 14.2: Same as previous figure except that the residual for individual #2 
 RSS = \sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X=x_{i}}\right)^{2}
 \]</span></p>
 <p> </p>
-<p><strong>The</strong> best-fit line is defined by the <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> out of all possible choices<a href="#fn58" class="footnote-ref" id="fnref58"><sup>58</sup></a> for <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> that minimize the RSS (Figure <a href="SLRFoundations.html#fig:DemoBFLandRSS">14.3</a>).<a href="#fn59" class="footnote-ref" id="fnref59"><sup>59</sup></a></p>
+<p><strong>The</strong> best-fit line is defined by the <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> out of all possible choices<a href="#fn60" class="footnote-ref" id="fnref60"><sup>60</sup></a> for <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> that minimize the RSS (Figure <a href="SLRFoundations.html#fig:DemoBFLandRSS">14.3</a>).<a href="#fn61" class="footnote-ref" id="fnref61"><sup>61</sup></a></p>
 <div class="figure" style="text-align: center"><span id="fig:DemoBFLandRSS"></span>
 <img src="Book207_files/figure-html/DemoBFLandRSS-.gif" alt="Scatterplot with candidate best-fit lines (blue line) and residuals (vertical red dashed lines) in left pane and the residual sum-of-squares for all candidate lines (gray) with the current line highlighted with a red dot. Note how the candidate line is on the best-fit line when the RSS is smallest." width="672" />
 <p class="caption">
@@ -595,11 +595,11 @@ Figure 14.3: Scatterplot with candidate best-fit lines (blue line) and residuals
 #R&gt;   (Intercept) 21.388856057 17.442040728 25.335671386
 #R&gt;   Altitude    -0.005634136 -0.006822147 -0.004446125</code></pre>
 <p>These results show that the slope of the best-fit line is -0.0056 (95% CI: -0.0068 - -0.0044) and the intercept is 21.39 (95% CI: 17.44 - 25.34). Thus, the equation of the best-fit line is Mean Air Temperature = 21.39 - 0.0056Altitude Lapse Rate. From this slope, it appears that the actual air temperature will decrease by 0.0056, on average, for each 1 C/km increase in the altitude lapse rate.</p>
-<p>Of course, the mean actual air temperature can be predicted by plugging a value of the altitude lapse rate into the equation of the line. For example, the predicted mean actual air temperature if the altitude lapse rate is 2552 is 21.39 - 0.0056×2552 = 7.10<sup>o</sup>C. This can also be found with <code>predict()</code> using the saved <code>lm()</code> object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the <code>lm()</code> object.<a href="#fn60" class="footnote-ref" id="fnref60"><sup>60</sup></a></p>
+<p>Of course, the mean actual air temperature can be predicted by plugging a value of the altitude lapse rate into the equation of the line. For example, the predicted mean actual air temperature if the altitude lapse rate is 2552 is 21.39 - 0.0056×2552 = 7.10<sup>o</sup>C. This can also be found with <code>predict()</code> using the saved <code>lm()</code> object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the <code>lm()</code> object.<a href="#fn62" class="footnote-ref" id="fnref62"><sup>62</sup></a></p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb80-1"><a href="SLRFoundations.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="dv">2552</span>))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          1 
 #R&gt;   7.010541</code></pre>
-<p>The coefficient of determination (<span class="math inline">\(r^{2}\)</span>) explains the proportion of the total variability in <span class="math inline">\(Y\)</span> that is explained by knowing the value of <span class="math inline">\(X\)</span>. Thus, <span class="math inline">\(r^{2}\)</span> ranges between 0 and 1, with <span class="math inline">\(r^{2}\)</span>=1 meaning that 100% of the variation in <span class="math inline">\(Y\)</span> is explained by knowing <span class="math inline">\(X\)</span>. Visually, higher <span class="math inline">\(r^{2}\)</span> values occur when the data are more tightly clustered around the best-fit line.<a href="#fn61" class="footnote-ref" id="fnref61"><sup>61</sup></a> The <span class="math inline">\(r^{2}\)</span> can be extracted from the <code>lm()</code> object with <code>rSquared()</code>.</p>
+<p>The coefficient of determination (<span class="math inline">\(r^{2}\)</span>) explains the proportion of the total variability in <span class="math inline">\(Y\)</span> that is explained by knowing the value of <span class="math inline">\(X\)</span>. Thus, <span class="math inline">\(r^{2}\)</span> ranges between 0 and 1, with <span class="math inline">\(r^{2}\)</span>=1 meaning that 100% of the variation in <span class="math inline">\(Y\)</span> is explained by knowing <span class="math inline">\(X\)</span>. Visually, higher <span class="math inline">\(r^{2}\)</span> values occur when the data are more tightly clustered around the best-fit line.<a href="#fn63" class="footnote-ref" id="fnref63"><sup>63</sup></a> The <span class="math inline">\(r^{2}\)</span> can be extracted from the <code>lm()</code> object with <code>rSquared()</code>.</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb82-1"><a href="SLRFoundations.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm1.ev)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] 0.9274753</code></pre>
 <p>Thus, in this case, 92.7% of the variability in actual mean air temperature is explained by knowing the altitude lapse rate. This indicates a tight fit between the two variables and suggests that the actual mean air temperate will be well predicted by the altitude lapse rate.</p>
@@ -615,13 +615,13 @@ Figure 14.3: Scatterplot with candidate best-fit lines (blue line) and residuals
 </div>
 <div class="footnotes">
 <hr />
-<ol start="56">
-<li id="fn56"><p>“Model” is used here instead of “line” because in this course, models other than lines will be fit to some data. However, all models will be fit on a “scale” where the form of the relationship between the response and explanatory variable is linear.<a href="SLRFoundations.html#fnref56" class="footnote-back">↩︎</a></p></li>
-<li id="fn57"><p>It is assumed that you covered the basics of simple linear regression in your introductory statistics course. Thus, parts of this section will be review, although the nomenclature used may differ somewhat.<a href="SLRFoundations.html#fnref57" class="footnote-back">↩︎</a></p></li>
-<li id="fn58"><p>Actually out of all choices that go through the point (<span class="math inline">\(\overline{X}\)</span>,<span class="math inline">\(\overline{Y}\)</span>).<a href="SLRFoundations.html#fnref58" class="footnote-back">↩︎</a></p></li>
-<li id="fn59"><p>This process of finding the best-fit line is called “least-squares” or “ordinary least-squares.”<a href="SLRFoundations.html#fnref59" class="footnote-back">↩︎</a></p></li>
-<li id="fn60"><p>The difference between the two results is because the “hand-calculation” used rounded values of the intercept and slope.<a href="SLRFoundations.html#fnref60" class="footnote-back">↩︎</a></p></li>
-<li id="fn61"><p>It is assumed that you discussed <span class="math inline">\(r^{2}\)</span> in your introductory statistics course and, thus, it is only cursorily covered here.<a href="SLRFoundations.html#fnref61" class="footnote-back">↩︎</a></p></li>
+<ol start="58">
+<li id="fn58"><p>“Model” is used here instead of “line” because in this course, models other than lines will be fit to some data. However, all models will be fit on a “scale” where the form of the relationship between the response and explanatory variable is linear.<a href="SLRFoundations.html#fnref58" class="footnote-back">↩︎</a></p></li>
+<li id="fn59"><p>It is assumed that you covered the basics of simple linear regression in your introductory statistics course. Thus, parts of this section will be review, although the nomenclature used may differ somewhat.<a href="SLRFoundations.html#fnref59" class="footnote-back">↩︎</a></p></li>
+<li id="fn60"><p>Actually out of all choices that go through the point (<span class="math inline">\(\overline{X}\)</span>,<span class="math inline">\(\overline{Y}\)</span>).<a href="SLRFoundations.html#fnref60" class="footnote-back">↩︎</a></p></li>
+<li id="fn61"><p>This process of finding the best-fit line is called “least-squares” or “ordinary least-squares.”<a href="SLRFoundations.html#fnref61" class="footnote-back">↩︎</a></p></li>
+<li id="fn62"><p>The difference between the two results is because the “hand-calculation” used rounded values of the intercept and slope.<a href="SLRFoundations.html#fnref62" class="footnote-back">↩︎</a></p></li>
+<li id="fn63"><p>It is assumed that you discussed <span class="math inline">\(r^{2}\)</span> in your introductory statistics course and, thus, it is only cursorily covered here.<a href="SLRFoundations.html#fnref63" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

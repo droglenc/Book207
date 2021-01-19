@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-18" />
+<meta name="date" content="2021-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -362,7 +362,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="ANOVA1Assumptions" class="section level1" number="7">
 <h1><span class="header-section-number">Module 7</span> One-Way Assumptions</h1>
-<p>As with most statistical methods, the One-Way ANOVA requires that four assumptions be met so that the calculations made in Modules <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a> and <a href="ANOVA1MultipleComparisons.html#ANOVA1MultipleComparisons">6</a> mean what we said they would mean. The four assumptions for a One-Way ANOVA are:<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a></p>
+<p>As with most statistical methods, the One-Way ANOVA requires that four assumptions be met so that the calculations made in Modules <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a> and <a href="ANOVA1MultipleComparisons.html#ANOVA1MultipleComparisons">6</a> mean what we said they would mean. The four assumptions for a One-Way ANOVA are:<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a></p>
 <ol style="list-style-type: decimal">
 <li>independence of individuals within and among groups,</li>
 <li>equal variances among groups,</li>
@@ -383,7 +383,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Zoo keepers were interested in whether the activity rate of lions differed by time of day. For this study, they recorded the activity rate of all five lions at the same random times in the morning, afternoon, evening, and night across several days. This example illustrates a lack of <em>among-group</em> independence because the same lions were recorded in each period. This also illustrates a lack of <em>within-group</em> independence because the activity rates were recorded at the same times for each lion. Thus, the lions may be affecting each others’ activity rates. For example, if one lion gets up to roam around then the other lions may be more likely to get up to roam around as well.</li>
 <li>Researchers with the LoonWatch program wanted to determine if mean density of loons differs among Bayfield, Ashland, and Iron counties. For this they asked local volunteers to record the number of loons they observed on several lakes during the same weekend in June. This example illustrates a lack of <em>within-group</em> independence as different observers were used in each county. It is possible that the observers in one county are more adept at observing loons on their lakes (for whatever reason – they know their lakes better, their lakes are smaller, they are more motivated, they spend more time).</li>
 </ul>
-<p>There are methods to detect violations of the independence assumption if the assumption is related to time (e.g., the first situation above), but for most other situations a violation is only detected by careful consideration of the design of the data collection. Violations that are discovered after the data are collected cannot be corrected and the data have to be analyzed with techniques specific to dependent data.<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a> In other words, designing data collections with independence among individuals is critical and needs to be ascertained before the data are collected.</p>
+<p>There are methods to detect violations of the independence assumption if the assumption is related to time (e.g., the first situation above), but for most other situations a violation is only detected by careful consideration of the design of the data collection. Violations that are discovered after the data are collected cannot be corrected and the data have to be analyzed with techniques specific to dependent data.<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a> In other words, designing data collections with independence among individuals is critical and needs to be ascertained before the data are collected.</p>
 <div class="tip">
 <p>Independence is generally assessed by considering how the individuals were obtained.</p>
 </div>
@@ -396,15 +396,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="tip">
 <p>Equal variances among groups is a critical assumption of a one-way ANOVA. Violations of this assumption should be corrected.</p>
 </div>
-<p>The assumption of equal variances can be tested with Levene’s homogeneity of variances test.<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a> The hypotheses tested by Levene’s test are</p>
+<p>The assumption of equal variances can be tested with Levene’s homogeneity of variances test.<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a> The hypotheses tested by Levene’s test are</p>
 <p><span class="math display">\[
 \begin{split}
    \text{H}_{\text{0}} &amp;: \sigma_{1}^{2}=\sigma_{2}^{2}=\cdots=\sigma_{I}^{2} \\
    \text{H}_{\text{A}} &amp;: \text{At least one pair of variances differ}
 \end{split}
 \]</span></p>
-<p>Thus, a p-value less than α means that the variances are not equal and the assumption of the one-way ANOVA has not been met.<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a></p>
-<p>The equality of variances may be visually examined with a boxplot of full model residuals<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a> by group. If the “boxes” on this boxplot are not roughly the same, then the equal variances assumption may be violated. I will usually examine the boxplots rather than use a Levene’s Test when the sample size is very large because Levene’s test can be hyper-sensitive with large samples sizes (i.e., reject H<sub>0</sub> of equal variances when the variances are not practically different).</p>
+<p>Thus, a p-value less than α means that the variances are not equal and the assumption of the one-way ANOVA has not been met.<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a></p>
+<p>The equality of variances may be visually examined with a boxplot of full model residuals<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a> by group. If the “boxes” on this boxplot are not roughly the same, then the equal variances assumption may be violated. I will usually examine the boxplots rather than use a Levene’s Test when the sample size is very large because Levene’s test can be hyper-sensitive with large samples sizes (i.e., reject H<sub>0</sub> of equal variances when the variances are not practically different).</p>
 <p> </p>
 </div>
 <div id="normality" class="section level2" number="7.3">
@@ -414,7 +414,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A one-way ANOVA is resilient to slight violations of the normality assumption. Severe violations of this assumption should be corrected.</p>
 </div>
 <p>Normality is often tested by simply viewing a histogram of residuals or a so-called Q-Q plot. For an adequate sample size, a histogram that is not strongly skewed is probably adequate for a One-Way ANOVA.</p>
-<p>The normality of residuals may also be tested with the Anderson-Darling Normality Test.<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a> The hypotheses for this test are</p>
+<p>The normality of residuals may also be tested with the Anderson-Darling Normality Test.<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a> The hypotheses for this test are</p>
 <p><span class="math display">\[ 
 \begin{split}
    \text{H}_{\text{0}}&amp;: \text{Residuals are normally distributed} \\
@@ -432,7 +432,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A one-way ANOVA is very sensitive to outliers.</p>
 </div>
 <p>Outliers may be detected by visual examination of a histogram of residuals.</p>
-<p>Potential outliers can be more objectively detected with externally Studentized residuals,<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a> which essentially measure how many standard deviations an individual is from its group mean. Studentized residuals follow a t-distribution with df<sub>Within</sub>-1 degrees-of-freedom.<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a> A p-value for testing whether an individual residual is an outlier or not is calculated by converting the Studentized residual to a two-tailed p-value using a t-distribution. As these p-values are computed for each residual, this process suffers from the “multiple comparison problem” (see Section <a href="#multiple-comparisons-problem"><strong>??</strong></a>). Thus, the p-values use a Bonferroni method<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a> to correct for multiple comparisons so that the likelihood of mistakingly identifying an outlier is controlled at a desirable level. If the Bonferroni adjusted p-value for the most extreme residual is less than α, then that individual is considered to be a significant outlier and should be flagged for further inspection as described above.</p>
+<p>Potential outliers can be more objectively detected with externally Studentized residuals,<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a> which essentially measure how many standard deviations an individual is from its group mean. Studentized residuals follow a t-distribution with df<sub>Within</sub>-1 degrees-of-freedom.<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a> A p-value for testing whether an individual residual is an outlier or not is calculated by converting the Studentized residual to a two-tailed p-value using a t-distribution. As these p-values are computed for each residual, this process suffers from the “multiple comparison problem” (see Section <a href="#multiple-comparisons-problem"><strong>??</strong></a>). Thus, the p-values use a Bonferroni method<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a> to correct for multiple comparisons so that the likelihood of mistakingly identifying an outlier is controlled at a desirable level. If the Bonferroni adjusted p-value for the most extreme residual is less than α, then that individual is considered to be a significant outlier and should be flagged for further inspection as described above.</p>
 <p> </p>
 </div>
 <div id="testing-assumptions-in-r" class="section level2" number="7.5">
@@ -453,16 +453,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="footnotes">
 <hr />
-<ol start="24">
-<li id="fn24"><p>Note that the first three are the same three assumptions you learned for a <a href="T2Review.html#T2Review">2-Sample t-test</a>.<a href="ANOVA1Assumptions.html#fnref24" class="footnote-back">↩︎</a></p></li>
-<li id="fn25"><p>Such methods may include repeated measures ANOVA, mixed-models, and hierarchical models.<a href="ANOVA1Assumptions.html#fnref25" class="footnote-back">↩︎</a></p></li>
-<li id="fn26"><p>There are a wide variety of statistical tests for examining equality of variances. We will use the Levene’s test in this class because it is common in the literature and simple to implement in most statistical software packages.<a href="ANOVA1Assumptions.html#fnref26" class="footnote-back">↩︎</a></p></li>
-<li id="fn27"><p>Methods for “working around” this assumption violation are discussed in Module <a href="ANOVA1Transformations.html#ANOVA1Transformations">8</a>.<a href="ANOVA1Assumptions.html#fnref27" class="footnote-back">↩︎</a></p></li>
-<li id="fn28"><p>Recall that these are the vertical differences between observations and their group mean.<a href="ANOVA1Assumptions.html#fnref28" class="footnote-back">↩︎</a></p></li>
-<li id="fn29"><p>There are also a wide variety of normality tests. Some authors even argue against the use of hypothesis tests for testing normality and suggest the use of graphical methods instead. For simplicity, the Anderson-Darling normality test will be used throughout this course.<a href="ANOVA1Assumptions.html#fnref29" class="footnote-back">↩︎</a></p></li>
-<li id="fn30"><p>A residual divided by the standard deviation of the residual, where the standard deviation is computed with that individual removed.<a href="ANOVA1Assumptions.html#fnref30" class="footnote-back">↩︎</a></p></li>
-<li id="fn31"><p>The extra one is subtracted because the individual residual is not included in the calculation of the standard deviation of residuals.<a href="ANOVA1Assumptions.html#fnref31" class="footnote-back">↩︎</a></p></li>
-<li id="fn32"><p>An adjusted p-value is computed by multiplying the original p-value by the number of comparisons made (in this case n).<a href="ANOVA1Assumptions.html#fnref32" class="footnote-back">↩︎</a></p></li>
+<ol start="26">
+<li id="fn26"><p>Note that the first three are the same three assumptions you learned for a <a href="T2Review.html#T2Review">2-Sample t-test</a>.<a href="ANOVA1Assumptions.html#fnref26" class="footnote-back">↩︎</a></p></li>
+<li id="fn27"><p>Such methods may include repeated measures ANOVA, mixed-models, and hierarchical models.<a href="ANOVA1Assumptions.html#fnref27" class="footnote-back">↩︎</a></p></li>
+<li id="fn28"><p>There are a wide variety of statistical tests for examining equality of variances. We will use the Levene’s test in this class because it is common in the literature and simple to implement in most statistical software packages.<a href="ANOVA1Assumptions.html#fnref28" class="footnote-back">↩︎</a></p></li>
+<li id="fn29"><p>Methods for “working around” this assumption violation are discussed in Module <a href="ANOVA1Transformations.html#ANOVA1Transformations">8</a>.<a href="ANOVA1Assumptions.html#fnref29" class="footnote-back">↩︎</a></p></li>
+<li id="fn30"><p>Recall that these are the vertical differences between observations and their group mean.<a href="ANOVA1Assumptions.html#fnref30" class="footnote-back">↩︎</a></p></li>
+<li id="fn31"><p>There are also a wide variety of normality tests. Some authors even argue against the use of hypothesis tests for testing normality and suggest the use of graphical methods instead. For simplicity, the Anderson-Darling normality test will be used throughout this course.<a href="ANOVA1Assumptions.html#fnref31" class="footnote-back">↩︎</a></p></li>
+<li id="fn32"><p>A residual divided by the standard deviation of the residual, where the standard deviation is computed with that individual removed.<a href="ANOVA1Assumptions.html#fnref32" class="footnote-back">↩︎</a></p></li>
+<li id="fn33"><p>The extra one is subtracted because the individual residual is not included in the calculation of the standard deviation of residuals.<a href="ANOVA1Assumptions.html#fnref33" class="footnote-back">↩︎</a></p></li>
+<li id="fn34"><p>An adjusted p-value is computed by multiplying the original p-value by the number of comparisons made (in this case n).<a href="ANOVA1Assumptions.html#fnref34" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

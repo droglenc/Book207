@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-18" />
+<meta name="date" content="2021-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -364,38 +364,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Module 3</span> Model Concepts</h1>
 <div id="what-is-a-model" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> What is a Model</h2>
-<p>A model is a representation of something or some phenomena. It is usually a simplification or an abstraction that helps our understanding of the more complex reality. A mathematical or statistical model is an equation or system of equations that is meant to characterize the general characteristics of observations. Statistical models do not represent every observation perfectly, rather they attempt to best represent the “central tendency” of the observations. Weather forecasts are based on mathematical and statistical models. You have observed at least two statistical models in your introductory statistics course – the mean and the regression line (Figure <a href="ModelConcepts.html#fig:TwoModelsEx">3.1</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:TwoModelsEx"></span>
-<img src="Book207_files/figure-html/TwoModelsEx-1.png" alt="Two examples of models seen in your introductory statistics course -- two means (Left) and regression line (Right)." width="336" /><img src="Book207_files/figure-html/TwoModelsEx-2.png" alt="Two examples of models seen in your introductory statistics course -- two means (Left) and regression line (Right)." width="336" />
+<p>A model is a representation of something or some phenomena. It is usually a simplification or an abstraction that helps our understanding of the more complex reality. Weather forecasts, for example, are based on mathematical and statistical models (Figure <a href="ModelConcepts.html#fig:WeatherForecast">3.1</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:WeatherForecast"></span>
+<img src="zimgs/Meteorologist.jpg" alt="Weather forecast for Redwoods, CA by meteorologist Dan Romana, an alum of MTH207." width="40%" />
 <p class="caption">
-Figure 3.1: Two examples of models seen in your introductory statistics course – two means (Left) and regression line (Right).
+Figure 3.1: Weather forecast for Redwoods, CA by meteorologist Dan Romana, an alum of MTH207.
 </p>
 </div>
 <p> </p>
-<p>Models can predict an observation but generally not perfectly. For example, weather forecasters predict the temperature for tomorrow but will most likely be off by (hopefully only) a small amount.</p>
-<p>An observed value of the response variable can be thought of as being equal to a value predicted from a model plus some deviation, or error, from that prediction; i.e.,</p>
+<p>A mathematical or statistical model is an equation or system of equations that is meant to characterize the general characteristics of observations. Statistical models do not represent every observation perfectly, rather they attempt to best represent the “central tendency” of the observations. You have observed at least two statistical models in your introductory statistics course – the mean and the regression line (Figure <a href="ModelConcepts.html#fig:TwoModelsEx">3.2</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:TwoModelsEx"></span>
+<img src="Book207_files/figure-html/TwoModelsEx-1.png" alt="Two examples of models seen in your introductory statistics course -- two means (Left) and regression line (Right)." width="336" /><img src="Book207_files/figure-html/TwoModelsEx-2.png" alt="Two examples of models seen in your introductory statistics course -- two means (Left) and regression line (Right)." width="336" />
+<p class="caption">
+Figure 3.2: Two examples of models seen in your introductory statistics course – two means (Left) and regression line (Right).
+</p>
+</div>
+<p> </p>
+<p>Models can predict an observation but generally not perfectly. For example, weather forecasters predict the temperature for tomorrow but will most likely be off by (hopefully only) a small amount. Thus, an observed value of the response variable can be thought of as being equal to a value predicted from a model plus some deviation, or error, from that prediction; i.e.,</p>
 <p><span class="math display">\[ \text{Observed Response} = \text{Model Predicted Response} + \text{error} \]</span></p>
 <p>For example, tomorrow’s temperature may be 74<sup>o</sup>F, which is the predicted 76<sup>o</sup>F from the forecaster’s model plus -2<sup>o</sup>F “error.”</p>
-<p>In statistics, one model for predicting the response variable for an individual in a group is to use the mean for the group. My best guess at the height of an unknown student is to guess that they are average for “their group.” Obviously, most individuals are not truly average, so the specific individual will deviate from the mean. In Figure <a href="ModelConcepts.html#fig:FullResid1">3.2</a> an observation is shown as a red point, the predicted value for that individual is shown as a horizontal line at the mean for the individual’s group, and the “error” from this prediction is shown as the vertical red line.</p>
+<p>In statistics, one model for predicting the response variable for an individual in a group is to use the mean for the group. For example, my best guess at the height of an unknown student is to guess that they are average for “their group.” Obviously, most individuals are not truly average, so the specific individual will deviate from the mean. In Figure <a href="ModelConcepts.html#fig:FullResid1">3.3</a>, one observation is shown as a red point, the predicted value for that individual is shown as a horizontal line at the mean for the individual’s group, and the “error” from this prediction is shown as the vertical red line.</p>
 <div class="figure" style="text-align: center"><span id="fig:FullResid1"></span>
 <img src="Book207_files/figure-html/FullResid1-1.png" alt="Biological oxygen demand versus sample location (points) with group means shown by horizontal segments. The residual from a model that uses a separate mean for both groups is shown." width="336" />
 <p class="caption">
-Figure 3.2: Biological oxygen demand versus sample location (points) with group means shown by horizontal segments. The residual from a model that uses a separate mean for both groups is shown.
+Figure 3.3: Biological oxygen demand versus sample location (points) with group means shown by horizontal segments. The residual from a model that uses a separate mean for both groups is shown.
 </p>
 </div>
 <div class="tip">
 <p>We always predict the <strong>response</strong> variable with a model.</p>
 </div>
-<p>In the context of a simple linear regression, the predicted value is obtained by plugging the observed value of the explanatory variable into the regression equation. Thus, the “error” is the vertical distance between an observed point and the corresponding point on the line (Figure <a href="ModelConcepts.html#fig:FullResid2">3.3</a>).</p>
+<p>In the context of a simple linear regression, the predicted value is obtained by plugging the observed value of the explanatory variable into the regression equation. Thus, the “error” is the vertical distance between an observed point and the corresponding point on the line (Figure <a href="ModelConcepts.html#fig:FullResid2">3.4</a>).</p>
 <div class="figure" style="text-align: center"><span id="fig:FullResid2"></span>
 <img src="Book207_files/figure-html/FullResid2-1.png" alt="Mirex concentration versus fish weight with a simple linear regression line show. The residual from the regression line model is shown." width="336" />
 <p class="caption">
-Figure 3.3: Mirex concentration versus fish weight with a simple linear regression line show. The residual from the regression line model is shown.
+Figure 3.4: Mirex concentration versus fish weight with a simple linear regression line show. The residual from the regression line model is shown.
 </p>
 </div>
 <p> </p>
-<p>Many hypothesis tests, including the two-sample t-test, can be cast in a framework of competing statistical models. Using this framework requires assessing the relative fit (to data) and complexity of a model. The remainder of this module is about measuring fit and complexity of models. We will discuss fit and formally compare two models to see which is “best” in the next module.</p>
-<p> </p>
+<p>Many hypothesis tests, including the 2-sample t-test, can be cast in a framework of competing statistical models. Using this framework requires assessing the relative fit (to data) and complexity of a model. The remainder of this module is about measuring fit and complexity of models. We will discuss fit and formally compare two models to see which is “best” in the next module.</p>
+<div class="tip">
+<p>Hypothesis tests in this course will be cast in a framework of two competing models.</p>
+</div>
 </div>
 <div id="assessing-fit-ss" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Assessing Fit (SS)</h2>
@@ -403,15 +412,15 @@ Figure 3.3: Mirex concentration versus fish weight with a simple linear regressi
 <h3><span class="header-section-number">3.2.1</span> A Residual</h3>
 <p>A residual is an estimate of the “error” discussed in the previous section. If you rearrange the formula shown above and replace “error” with “residual” you see that</p>
 <p><span class="math display">\[ \text{residual} = \text{Observed Response} - \text{Model Predicted Response} \]</span></p>
-<p>Visually a residual is the vertical distance between a point and the “model,” as shown by the vertical dashed lines above (or further below). Residuals are vertical distances because they are the difference between two values of the response variable, which is always plotted on the y-axis.</p>
+<p>Visually a residual is the vertical distance between a point and the “model,” as shown by the vertical dashed lines in Figures <a href="ModelConcepts.html#fig:FullResid1">3.3</a> and <a href="ModelConcepts.html#fig:FullResid2">3.4</a>. Residuals are <strong>vertical</strong> distances because they are the difference between two values of the <strong>response</strong> variable, which is always plotted on the y-axis.</p>
 <div class="tip">
 <p>Residuals are <em>vertical</em> distances between an observation and the model.</p>
 </div>
-<p>Residuals are negative if the point is “below” the model prediction and positive if the point is “above” the model prediction. More importantly, the absolute value of the residual is a measure of how close the model prediction is to the point or how well the model fits the individual point. Large residuals (in an absolute value sense) mean that the point is far from the model prediction and, thus, the model does not represent that point very well. Points with small residuals, in contrast, are near the model prediction and are thus well-represented by the model. Figure <a href="ModelConcepts.html#fig:FullResid3">3.4</a> shows points with relatively large residuals in red and relatively small residuals in blue.</p>
+<p>A residual is negative if the point is “below” the model prediction and positive if the point is “above” the model prediction. More importantly, the absolute value of the residual measures how close the model prediction is to the point or how well the model fits the individual point. A “large” residual (in an absolute value sense) means that the point is far from the model prediction and, thus, the model does not represent that point very well (Figure <a href="ModelConcepts.html#fig:FullResid3">3.5</a>-Blue). A point with a “small” residual, in contrast, is near the model prediction and is thus well-represented by the model (Figure <a href="ModelConcepts.html#fig:FullResid3">3.5</a>-Red).</p>
 <div class="figure" style="text-align: center"><span id="fig:FullResid3"></span>
 <img src="Book207_files/figure-html/FullResid3-1.png" alt="Same plots as previously but with a &quot;large&quot; residual shown in red and a &quot;small&quot; residual shown in blue." width="336" /><img src="Book207_files/figure-html/FullResid3-2.png" alt="Same plots as previously but with a &quot;large&quot; residual shown in red and a &quot;small&quot; residual shown in blue." width="336" />
 <p class="caption">
-Figure 3.4: Same plots as previously but with a “large” residual shown in red and a “small” residual shown in blue.
+Figure 3.5: Same plots as previously but with a “large” residual shown in red and a “small” residual shown in blue.
 </p>
 </div>
 <p> </p>
@@ -420,39 +429,39 @@ Figure 3.4: Same plots as previously but with a “large” residual shown in re
 <h3><span class="header-section-number">3.2.2</span> Residual Sum-of-Squares</h3>
 <p>If a residual measures how closely a model comes to a point then it stands to reason that the sum of all of the residuals measures how closely a model comes to all of the points. Unfortunately, because residuals are negative and positive they always sum to 0.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> Thus, the sum of all residuals is not a useful measure of the overall fit of a model.</p>
 <p>Instead of summing residuals, statisticians sum squared residuals into a quantity called a <strong>residual sum-of-squares (RSS)</strong>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> Using the formula for a residual from above, an RSS for a given set of observed data and a model is computed with</p>
-<p><span class="math display">\[ \text{RSS} = \sum_{data}\left(\text{Observed Response}-\text{Model Predicted Response}\right)^2 \]</span></p>
-<div class="tip">
-<p>The RSS measures how closely the model comes to <em>all</em> of the observations.</p>
-</div>
-<p>The RSS is on an unfamiliar scale (squared residuals?) but it maintains the same conceptual idea that summing residuals would have. Mainly, the smaller the RSS the more closely the points are to the model. The full set of residuals required to compute an RSS are shown in Figure <a href="ModelConcepts.html#fig:RSS1">3.5</a>.</p>
+<p><span class="math display">\[ \text{RSS} = \sum_{data}\left(\text{Observed Response}-\text{Model Predicted Response}\right)^2 \]</span>
+The full set of residuals required to compute an RSS are shown in Figure <a href="ModelConcepts.html#fig:RSS1">3.6</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:RSS1"></span>
 <img src="Book207_files/figure-html/RSS1-1.png" alt="Same plots as previously but with all residuals shown." width="336" /><img src="Book207_files/figure-html/RSS1-2.png" alt="Same plots as previously but with all residuals shown." width="336" />
 <p class="caption">
-Figure 3.5: Same plots as previously but with all residuals shown.
+Figure 3.6: Same plots as previously but with all residuals shown.
 </p>
 </div>
-<p> </p>
+<div class="tip">
+<p>The RSS measures how closely the model comes to <em>all</em> of the observations. Smaller values mean the observations are closer to the model.</p>
+</div>
+<p>The RSS is on an unfamiliar scale (squared residuals?) but it maintains the same conceptual idea that summing residuals would have. Mainly, the smaller the RSS the more closely the points are to the model.</p>
 <p>As a value, the RSS is a measure of how <em>poorly</em> the model fits the data – i.e., small values are a good fit, large values are a poor fit. Thus, the RSS is often called “a measure of lack-of-fit” of the model to the observations.</p>
 <div class="tip">
 <p>An RSS is a measure of the “lack-of-fit” of a model to the data.</p>
 </div>
-<p>Unfortunately, the magnitude of the RSS is only useful in comparison to other RSS computed for different models from the same data. We will discuss this further in the next module.</p>
+<p>Unfortunately, the magnitude of the RSS is only useful in comparison to other RSS computed for different models from the same data. This will be discussed further in the next module.</p>
 <p> </p>
 </div>
 </div>
 <div id="residual-degrees-of-freedom" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Residual Degrees-of-Freedom</h2>
 <p>You used degrees-of-freedom (df) with t-tests and chi-square tests in your introductory statistics course. However, you likely did not discuss what degrees-of-freedom mean and where they come from. I will discuss this briefly here, but we will use df more in the next module.</p>
-<p>Residual degrees-of-freedom (Rdf) are the number of observations that are “free” to vary if the sample size (<span class="math inline">\(n\)</span>) and number of parameters estimated is known. As a simple example, suppose that we know that <span class="math inline">\(\bar{x}\)</span>=13 from <span class="math inline">\(n\)</span>=4 observations. With just this information can I tell you the values for the four observations that went into <span class="math inline">\(\bar{x}\)</span>? Clearly I cannot. If you give me one observation can I tell you the remaining three? No! If you tell me two? No! If you tell me three observations can I tell you the last observation? Yes, because the total of the four numbers must be 52 (=<span class="math inline">\(n\bar{x}\)</span>=4×13); so the last number must be 52 minus the total of the three numbers you told me. In this case, three numbers were “free” to be any value before the last number was set. Thus, this case has three residual degrees-of-freedom.</p>
+<p>Residual degrees-of-freedom (Rdf) are the number of observations that are “free” to vary if the sample size (<span class="math inline">\(n\)</span>) and number of parameters estimated is known. As a simple example, suppose that we know that <span class="math inline">\(\bar{x}\)</span>=13 from <span class="math inline">\(n\)</span>=4 observations. With just this information can I tell you the values for the four observations? Clearly I cannot. If you give me one observation can I tell you the remaining three? No! If you tell me two? No! If you tell me three observations can I tell you the last observation? Yes, because the total of the four numbers must be 52 (=<span class="math inline">\(n\bar{x}\)</span>=4×13); so the last number must be 52 minus the total of the three numbers you told me. In this case, three numbers were “free” to be any value before the last number was set. Thus, this case has three residual degrees-of-freedom.</p>
 <p>Residual degrees-of-freedom are more complicated to explain in other situations, but generally</p>
 <p><span class="math display">\[ \text{Rdf}=\text{Number of Observations}-\text{Number of Model Parameters} \]</span></p>
-<p>In the example above, there were four observations (n) and one model parameter – <span class="math inline">\(\bar{x}\)</span> – so df=4-1=3. In Figure <a href="ModelConcepts.html#fig:TwoModelsEx">3.1</a>-Left there are 20 observations and two parameters (i.e., two group means) so Rdf=20-2=18. In Figure <a href="ModelConcepts.html#fig:TwoModelsEx">3.1</a>-Right there are 122 observations and two parameters (i.e., the slope and intercept of the regression line) so Rdf=122-2=120.</p>
+<p>In the example above, there were four observations (<span class="math inline">\(n\)</span>) and one estimated parameter in the model – <span class="math inline">\(\bar{x}\)</span> – so Rdf=4-1=3. In Figure <a href="ModelConcepts.html#fig:TwoModelsEx">3.2</a>-Left there are 20 observations and two parameters (i.e., two group means) so Rdf=20-2=18. In Figure <a href="ModelConcepts.html#fig:TwoModelsEx">3.2</a>-Right there are 122 observations and two parameters (i.e., the slope and intercept of the regression line) so Rdf=122-2=120.</p>
 <p>As a general rule, parameter estimates are more precisely estimated with more residual degrees-of-freedom. Thus, models that “preserve” residual degrees-of-freedom (i.e., have fewer parameters) are preferred, all else being equal.</p>
 <p> </p>
 </div>
 <div id="mean-squares" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Mean-Squares</h2>
-<p>Sums-of-squares are useful measures of model fit, but they are largely uninterpretible on their own. However, if a sum-of-squares is divided by its corresponding degrees-of-freedom it is called a <strong>Mean-Square (MS)</strong>. Mean-squares are the <strong>variance</strong> (i.e., squared standard deviation) of individuals around a given model. Mean-squares have useful mathematical properties as you will see in future modules. However, visually the square root of a mean square loosely describes how far each point is from the model (i.e., the “errors”), on average. The mean-squares are thus a measure of the “noise” around each model.</p>
+<p>Sums-of-squares are useful measures of model fit, but they are largely uninterpretible on their own. However, if a sum-of-squares is divided by its corresponding degrees-of-freedom it is called a <strong>Mean-Square (MS)</strong>. Mean-squares are the <strong>variance</strong> (i.e., squared standard deviation) of individuals around a given model. Mean-squares have useful mathematical properties as you will see in future modules. However, visually the square root of a mean-square loosely describes how far each point is from the model (i.e., the “errors”), on average. Many mean-squares are thus a measure of the “noise” around each model.</p>
 <div class="tip">
 <p>MS are variances; thus, the square root of MS are standard deviations</p>
 </div>

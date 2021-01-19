@@ -128,11 +128,13 @@ tmp <- ggplot(data=d1,mapping=aes(y=y,x=grp,color=grp)) +
   theme_NCStats() +
   theme(legend.position="none")
 tmp +
-  geom_segment(mapping=aes(x=1.5,xend=1,y=45,yend=45),color="black",linetype="dashed") +
-  geom_segment(mapping=aes(x=1.5,xend=2,y=55,yend=55),color="black",linetype="dashed") +
-  geom_segment(mapping=aes(x=1.5,xend=1.5,y=45,yend=55),color="black",
+  geom_segment(mapping=aes(x=1.5,xend=1,y=45,yend=45),
+               color=lbl_clr,linetype="dashed") +
+  geom_segment(mapping=aes(x=1.5,xend=2,y=55,yend=55),
+               color=lbl_clr,linetype="dashed") +
+  geom_segment(mapping=aes(x=1.5,xend=1.5,y=45,yend=55),color=lbl_clr,
                arrow=arrow(ends="both",length=unit(0.2,"cm"),type="closed")) +
-  geom_text(mapping=aes(x=1.5,y=50,label="Signal"),size=4,color="black",
+  geom_text(mapping=aes(x=1.5,y=50,label="Signal"),size=4,color=lbl_clr,
             angle=90,vjust=-0.5)
 ```
 
@@ -149,19 +151,23 @@ d1 %>%
             maxy=max(y))
 
 tmp + 
-  geom_segment(mapping=aes(x=1,xend=1.2,y=41.3,yend=41.3),color="black",linetype="dashed") +
-  geom_segment(mapping=aes(x=1,xend=1.2,y=49.0,yend=49.0),color="black",linetype="dashed") +
-  geom_segment(mapping=aes(x=1.2,xend=1.2,y=41.3,yend=49.0),color="black",
+  geom_segment(mapping=aes(x=1,xend=1.2,y=41.3,yend=41.3),
+               color=lbl_clr,linetype="dashed") +
+  geom_segment(mapping=aes(x=1,xend=1.2,y=49.0,yend=49.0),
+               color=lbl_clr,linetype="dashed") +
+  geom_segment(mapping=aes(x=1.2,xend=1.2,y=41.3,yend=49.0),color=lbl_clr,
                arrow=arrow(ends="both",length=unit(0.2,"cm"),type="closed")) +
-  geom_segment(mapping=aes(x=2,xend=1.8,y=50.1,yend=50.1),color="black",linetype="dashed") +
-  geom_segment(mapping=aes(x=2,xend=1.8,y=58.5,yend=58.5),color="black",linetype="dashed") +
-  geom_segment(mapping=aes(x=1.8,xend=1.8,y=50.1,yend=58.5),color="black",
+  geom_segment(mapping=aes(x=2,xend=1.8,y=50.1,yend=50.1),
+               color=lbl_clr,linetype="dashed") +
+  geom_segment(mapping=aes(x=2,xend=1.8,y=58.5,yend=58.5),
+               color=lbl_clr,linetype="dashed") +
+  geom_segment(mapping=aes(x=1.8,xend=1.8,y=50.1,yend=58.5),color=lbl_clr,
                arrow=arrow(ends="both",length=unit(0.2,"cm"),type="closed")) +
-  geom_segment(mapping=aes(x=1.2,xend=1.5,y=45,yend=45),color="black") +
-  geom_segment(mapping=aes(x=1.8,xend=1.5,y=55,yend=55),color="black") +
-  geom_segment(mapping=aes(x=1.5,xend=1.5,y=45,yend=55),color="black") +
-  geom_text(mapping=aes(x=1.5,y=50,label="Part of the Noise"),size=4,color="black",
-            angle=90,vjust=-0.5)
+  geom_segment(mapping=aes(x=1.2,xend=1.5,y=45,yend=45),color=lbl_clr) +
+  geom_segment(mapping=aes(x=1.8,xend=1.5,y=55,yend=55),color=lbl_clr) +
+  geom_segment(mapping=aes(x=1.5,xend=1.5,y=45,yend=55),color=lbl_clr) +
+  geom_text(mapping=aes(x=1.5,y=50,label="Part of the Noise"),
+            size=4,color=lbl_clr,angle=90,vjust=-0.5)
 ```
 
 ::: {.tip data-latex=""}
@@ -178,9 +184,10 @@ ggplot(data=d,mapping=aes(y=y,x=grp,color=grp)) +
   stat_summary(geom="point",fun="mean",shape="-",size=15) +
   labs(y="Response Variable",x="Group") +
   scale_color_manual(values=clrs2) +
+  facet_wrap(vars(sim),scales="free_y") +
   theme_NCStats() +
-  theme(legend.position="none") +
-  facet_wrap(vars(sim),scales="free_y")
+  theme(legend.position="none",
+        strip.text=element_text(face="bold"))
 ```
 
 &nbsp;

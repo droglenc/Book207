@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-18" />
+<meta name="date" content="2021-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -452,7 +452,7 @@ Figure 8.3: Demonstration of the result (upper-left) from applying the square ro
 </p>
 </div>
 <p> </p>
-<p>As demonstrated above, the common transformations listed in Table <a href="ANOVA1Transformations.html#tab:CommonTranformations">8.1</a> vary in their ability to “normalize” skewed distributions. Generally the common transformations in Table <a href="ANOVA1Transformations.html#tab:CommonTranformations">8.1</a> are ordered from least to most powerful. In other words, the transformations are ordered from those that “normalize” mildly skewed data to those that “normalize” strongly skewed data.<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a></p>
+<p>As demonstrated above, the common transformations listed in Table <a href="ANOVA1Transformations.html#tab:CommonTranformations">8.1</a> vary in their ability to “normalize” skewed distributions. Generally the common transformations in Table <a href="ANOVA1Transformations.html#tab:CommonTranformations">8.1</a> are ordered from least to most powerful. In other words, the transformations are ordered from those that “normalize” mildly skewed data to those that “normalize” strongly skewed data.<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a></p>
 <p>It is possible to “combine” one of the common powers with the inverse transformation to create a larger array of transformations. For example, <span class="math inline">\(\lambda\)</span>=-0.5 is an inverse square-root transformation. These types of transformations are common but less common than those listed in Table <a href="ANOVA1Transformations.html#tab:CommonTranformations">8.1</a>.</p>
 <table>
 <caption><span id="tab:CommonInvTranformations">Table 8.2: </span> Common inverse power transformations in ANOVAs. These transformations are much less common than those in Table <a href="ANOVA1Transformations.html#tab:CommonTranformations">8.1</a>.</caption>
@@ -492,8 +492,8 @@ Figure 8.3: Demonstration of the result (upper-left) from applying the square ro
 </tbody>
 </table>
 <p> </p>
-<p>Power transformations require non-negative and non-zero data. Violations of this restriction can be rectified by adding an amount to all values of the response variable such that all values become positive. This is called <em>shifting</em> the data and does not effect the shape of the distribution. In addition, power transformations are not effective if the range of values of the response variable is narrow.<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a></p>
-<p>There are several methods to identify the power transformation that is most likely to meet the assumptions of a one-way ANOVA.<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a> One simple method is trial-and-error – i.e., trying various powers until one is found where the assumptions of the model are most closely met.</p>
+<p>Power transformations require non-negative and non-zero data. Violations of this restriction can be rectified by adding an amount to all values of the response variable such that all values become positive. This is called <em>shifting</em> the data and does not effect the shape of the distribution. In addition, power transformations are not effective if the range of values of the response variable is narrow.<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a></p>
+<p>There are several methods to identify the power transformation that is most likely to meet the assumptions of a one-way ANOVA.<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a> One simple method is trial-and-error – i.e., trying various powers until one is found where the assumptions of the model are most closely met.</p>
 <p>The trial-and-error method is made easier with software. For example, the <code>assumptionCheck()</code> function introduced in Section <a href="ANOVA1Assumptions.html#testing-assumptions-in-r">7.5</a> can be used to quickly compute the graphs and hypothesis tests for assumption checking <em>after</em> the data have been transformed by the power given in the <code>lambday=</code> argument. For example, the code and results below show what the assumption checking would look like if the immunoglobulin measurements for the New Zealand opossums had been log transformed.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb32-1"><a href="ANOVA1Transformations.html#cb32-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
 <span id="cb32-2"><a href="ANOVA1Transformations.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1,<span class="at">lambday=</span><span class="dv">0</span>)  <span class="co">#lambda=0 corresponds to log-transformation</span></span></code></pre></div>
@@ -657,10 +657,10 @@ logbtcf(lm1)
 </div>
 <div class="footnotes">
 <hr />
-<ol start="33">
-<li id="fn33"><p>Alternatively, the transformations are listed in order from the transformations that “spread out” the small values the least to those that “spread out” the small values the most.<a href="ANOVA1Transformations.html#fnref33" class="footnote-back">↩︎</a></p></li>
-<li id="fn34"><p>In effect, the power transformation is basically linear over short ranges and, thus, is not effective.<a href="ANOVA1Transformations.html#fnref34" class="footnote-back">↩︎</a></p></li>
-<li id="fn35"><p>Box and Cox (1964) provided a statistical and graphical method for identifying the appropriate power transformation for the response variable. The details of this method are beyond the scope of this class but, in general, the method searches for a <span class="math inline">\(\lambda\)</span> that minimizes SS<sub>within</sub>). A slightly modified Box and Cox approach is implemented in R by sending a <code>lm</code> object to <code>boxcox()</code> from the <code>MASS</code> package.<a href="ANOVA1Transformations.html#fnref35" class="footnote-back">↩︎</a></p></li>
+<ol start="35">
+<li id="fn35"><p>Alternatively, the transformations are listed in order from the transformations that “spread out” the small values the least to those that “spread out” the small values the most.<a href="ANOVA1Transformations.html#fnref35" class="footnote-back">↩︎</a></p></li>
+<li id="fn36"><p>In effect, the power transformation is basically linear over short ranges and, thus, is not effective.<a href="ANOVA1Transformations.html#fnref36" class="footnote-back">↩︎</a></p></li>
+<li id="fn37"><p>Box and Cox (1964) provided a statistical and graphical method for identifying the appropriate power transformation for the response variable. The details of this method are beyond the scope of this class but, in general, the method searches for a <span class="math inline">\(\lambda\)</span> that minimizes SS<sub>within</sub>). A slightly modified Box and Cox approach is implemented in R by sending a <code>lm</code> object to <code>boxcox()</code> from the <code>MASS</code> package.<a href="ANOVA1Transformations.html#fnref37" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

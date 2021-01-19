@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-18" />
+<meta name="date" content="2021-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -366,37 +366,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.1</span> Competing Models</h2>
 <div id="general" class="section level3" number="4.1.1">
 <h3><span class="header-section-number">4.1.1</span> General</h3>
-<p>Many hypothesis tests can be cast in a framework of competing models. In this module we will cast the familiar 2-sample t-test in this framework which will then serve as a conceptual foundation for all other linear models in this course.</p>
+<p>Many hypothesis tests can be cast in a framework of competing models. In this module we will cast the familiar 2-sample t-test in this framework which will then serve as a conceptual foundation for all other models in this course.</p>
 <p>The two competing models are generically called the <em>simple</em> and <em>full</em> models (Table <a href="ModelComparison.html#tab:ModelDifferences">4.1</a>). The simple model is simpler than the full model in the sense that it has fewer parameters. However, the simple model fits the data “worse” than a full model. Thus, determining which model to use becomes a question of balancing “fit” (full model fits better than the simple model) with complexity (simple model is less complex than the full model). Because the simple model corresponds to H<sub>0</sub> and the full model corresponds to H<sub>A</sub>, deciding which model to use is the same as deciding which hypothesis is supported by the data.</p>
+<p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:ModelDifferences">Table 4.1: </span>Differences between the two generic model types.
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;">
+<th style="text-align:left;font-weight: bold;">
 Model
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;font-weight: bold;">
 Parameters
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;font-weight: bold;">
 Residual df
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;font-weight: bold;">
 Relative Fit
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;font-weight: bold;">
 Residual SS
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;font-weight: bold;">
 Hypothesis
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 Simple
 </td>
 <td style="text-align:left;">
@@ -416,7 +417,7 @@ Null
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 Full
 </td>
 <td style="text-align:left;">
@@ -452,7 +453,7 @@ Figure 4.1: Biological oxygen demand versus sample location with group means sho
 </div>
 <p>In contrast, H<sub>A</sub> in the 2-sample t-test is that the two population means differ (i.e., they are not equal). This hypothesis suggests that two separate means are needed to predict observations in the separate groups. The model for this situation is</p>
 <p><span class="math display">\[ Y_{ij} = \mu_{i} + \epsilon_{ij} \]</span></p>
-<p>where <span class="math inline">\(\mu_{i}\)</span> is the population mean for the <span class="math inline">\(i\)</span>th group. This model means that <span class="math inline">\(\mu_{1}\)</span> is the predicted response value for observations in the first group and <span class="math inline">\(\mu_{2}\)</span> is the predicted response value for observations in the second group. This model looks like the two blue lines in the figure above.</p>
+<p>where <span class="math inline">\(\mu_{i}\)</span> is the population mean for the <span class="math inline">\(i\)</span>th group. This model means that <span class="math inline">\(\mu_{1}\)</span> is the predicted response value for observations in the first group and <span class="math inline">\(\mu_{2}\)</span> is the predicted response value for observations in the second group. This model looks like the two blue lines in Figure <a href="ModelComparison.html#fig:Models1">4.1</a>.</p>
 <p>Thus, for a 2-sample t-test, the <strong>simple model</strong> corresponds to H<sub>0</sub>: <span class="math inline">\(\mu_{1}=\mu_{2}\)</span> (=<span class="math inline">\(\mu\)</span>), has fewer parameters (i.e., requires only one mean; the red line in the plots above), and fits “worse.”<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> In contrast, the <strong>full model</strong> corresponds to H<sub>A</sub>: <span class="math inline">\(\mu_{1}\ne\mu_{2}\)</span>, has more parameters (i.e., requires two means; the blue lines in the plots above), and fits “better.”</p>
 <p>In the ensuing sections we will develop a method to determine if the increase in “fit” is worth the increase in “complexity.”</p>
 <p> </p>
@@ -462,10 +463,7 @@ Figure 4.1: Biological oxygen demand versus sample location with group means sho
 <h2><span class="header-section-number">4.2</span> Measuring Increase in Fit</h2>
 <div id="sstotal-and-sswithin" class="section level3" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> SS<sub>Total</sub> and SS<sub>Within</sub></h3>
-<p>In Section <a href="ModelConcepts.html#residual-sum-of-squares">3.2.2</a> the idea of using the residual sum-of-squares (RSS) to measure the lack-of-fit of a model was introduced. Here we apply that concept to measure the lack-of-fit of the simple and full models, which we will then use to see how much “better” the full model fits than the simple model.</p>
-<div class="tip">
-<p>Remember that the full model will always fit better than the simple model, even if by just a small amount.</p>
-</div>
+<p>Using the residual sum-of-squares (RSS) to measure the lack-of-fit of a model was introduced in Section <a href="ModelConcepts.html#residual-sum-of-squares">3.2.2</a>. Here we apply that concept to measure the lack-of-fit of the simple and full models, which we will then use to see how much “better” the full model fits than the simple model.</p>
 <p>The RSS for the simple model using just the grand mean is called SS<sub>Total</sub> and is computed with</p>
 <p><span class="math display">\[ \text{SS}_{\text{Total}} = \sum_{i=1}^{I}\sum_{j=1}^{n_{i}}\left(Y_{ij}-\bar{Y}_{\cdot\cdot}\right)^{2} \]</span></p>
 <p>where <span class="math inline">\(I\)</span> is the number of groups (=2 in a 2-sample t-test), <span class="math inline">\(n_{i}\)</span> is the sample size in the <span class="math inline">\(i\)</span>th group, and <span class="math inline">\(\bar{Y}_{\cdot\cdot}\)</span> is the sample grand mean as computed with</p>
@@ -494,6 +492,12 @@ Figure 4.3: Biological oxygen demand versus sample location with the group means
 <p>Thus, SS<sub>Total</sub> measures the lack-of-fit of the grand mean to the data or the lack-of-fit of the simple model. SS<sub>Within</sub>, in contrast, measures the lack-of-fit of the group means to the data or the lack-of-fit of the full model.</p>
 <p>In this example, SS<sub>Total</sub>=25.28 and SS<sub>Within</sub>=4.60. Because SS<sub>Within</sub> is less than SS<sub>Total</sub> that means that the full model that uses μ<sub>i</sub> fits the data better than the simple model that uses just <span class="math inline">\(\mu\)</span>.</p>
 <p>However, we knew that this was going to happen as the full model always fits better. What we need now is a measure of how much better the full model fits or, equivalently, a measure of how much the lack-of-fit was reduced by using the full model rather than the simple model.</p>
+<div class="tip">
+<p>SS<sub>Total</sub> measures the lack-of-fit of the simple model, whereas SS<sub>Within</sub> measures the lack-of-fit of the full model.</p>
+</div>
+<div class="tip">
+<p>The full model always fits better than the simple model, even if by just a small amount.</p>
+</div>
 </div>
 <div id="ssamong" class="section level3" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> SS<sub>Among</sub></h3>
@@ -515,15 +519,15 @@ Figure 4.3: Biological oxygen demand versus sample location with the group means
 Figure 4.4: Mean biological oxygen demand versus sample location with the grand mean shown as a red horizontal segment and the group means shown as blue horizontal segments. Residuals between the group means and the grand mean are shown by black vertical dashed lines. The sum of these residuals scaled by the group sample sizes is SS<sub>Among</sub>.
 </p>
 </div>
-<p>From the figure above, it is seen that SS<sub>Among</sub> will increase as the group means become more different. In other words, SS<sub>Among</sub> measures the <strong>signal</strong> in the data.</p>
-<div class="tip">
-<p>SS<sub>Among</sub> is the <strong>signal</strong> (i.e., relative difference in group means) in the data</p>
-</div>
-<p>This can be seen in the interactive graphic below. You can adjust the amount of “signal” in the data by increasing or decreasing the difference between the group means and the grand mean. As you do this note how SS<sub>Among</sub> (and SS<sub>Total</sub>) change.</p>
+<p> </p>
+<p>From the figure above, it is seen that SS<sub>Among</sub> will increase as the group means become more different. This can also be seen by increasing or decreasing the difference between the group means and the grand mean in the interactive graphic below (Note how SS<sub>Among</sub> (and SS<sub>Total</sub>) change).</p>
 <iframe src="https://derek-ogle.shinyapps.io/App_SSTotal_Partitioning/?showcase=0" width="95%" height="800px">
 </iframe>
 <p> </p>
-<p>So, SS<sub>Among</sub> is immensely useful – it is a measure of “benefit” that will be used in a “benefit-to-cost” ratio and it is the “signal” that will be used in a “signal-to-noise” ratio. These ratios are discussed further below. Next we discuss how to measure the “cost” of using the more complex full model.</p>
+<p>So, SS<sub>Among</sub> is immensely useful – it is a measure of “benefit” that will be used in a “benefit-to-cost” ratio that will ultimately be the “signal” that will be used in a “signal-to-noise” ratio. These ratios are In Sections <a href="ModelComparison.html#noise-variances">4.4</a> and <a href="ModelComparison.html#signal-variance-benefit-to-cost">4.5</a>. However, next we discuss how to measure the “cost” of using the more complex full model.</p>
+<div class="tip">
+<p>SS<sub>Among</sub> is the <strong>benefit</strong> (i.e., reduction in lack-of-fit) from using the full model and will ultimately be used to measure the <strong>signal</strong> (i.e., relative difference in group means) in the data.</p>
+</div>
 </div>
 </div>
 <div id="measuring-increase-in-complexity" class="section level2" number="4.3">
@@ -531,12 +535,12 @@ Figure 4.4: Mean biological oxygen demand versus sample location with the grand 
 <p>In this example, df<sub>Total</sub>=20-1 because there is one parameter (the grand mean) in the simple model, and df<sub>Within</sub>=20-2 because there are two parameters (the group means) in the full model. The full model uses more parameters and, thus, the residual degrees-of-freedom is reduced – there is a “cost” to using the full model over the simple model. We need a measure of this “cost.”<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
 <p>Interestingly df<sub>Total</sub> partitions in the same way as SS<sub>Total</sub>; i.e.,</p>
 <p><span class="math display">\[ \text{df}_{\text{Total}} = \text{df}_{\text{Within}} + \text{df}_{\text{Among}} \]</span></p>
-<p>This introduces another new quantity, df<sub>Among</sub>. A quick re-arrangement of the partitioning of df<sub>Total</sub> shows that</p>
+<p>A quick re-arrangement of the partitioning of df<sub>Total</sub> shows that</p>
 <p><span class="math display">\[ \text{df}_{\text{Among}} = \text{df}_{\text{Total}} - \text{df}_{\text{Within}} \]</span></p>
 <p>In this case, df<sub>Among</sub>=19-18=1.</p>
-<p>Thus, df<sub>Among</sub> is the degrees-of-freedom that were “lost” or “used” when the more complicated full model was used compared to the simpler simple model. The df<sub>Among</sub> is also the <strong>difference in number of parameters</strong> between the full and simple models. In other words, df<sub>Among</sub> is how much more complex (in terms of number of parameters) the full model is compared to the simple model. Thus, df<sub>Among</sub> measures the <strong>cost</strong> of using the full model rather than the simple model.</p>
+<p>Thus, df<sub>Among</sub> is the degrees-of-freedom that were “lost” or “used” when the more complex full model was used compared to the less complex simple model. The df<sub>Among</sub> is also the <strong>difference in number of parameters</strong> between the full and simple models. In other words, df<sub>Among</sub> is how much more complex (in terms of number of parameters) the full model is compared to the simple model. Thus, df<sub>Among</sub> measures the <strong>cost</strong> of using the full model rather than the simple model.</p>
 <div class="tip">
-<p>df<sub>Among</sub> is the extra <strong>cost</strong> (i.e., loss of df) from using the full rather than simple model</p>
+<p>df<sub>Among</sub> is the extra <strong>cost</strong> (i.e., loss of df due to more parameters to estimate) from using the full rather than simple model.</p>
 </div>
 <p> </p>
 </div>
@@ -544,49 +548,61 @@ Figure 4.4: Mean biological oxygen demand versus sample location with the grand 
 <h2><span class="header-section-number">4.4</span> “Noise” Variances</h2>
 <p>MS<sub>Total</sub> and MS<sub>Within</sub> are measures of the variance<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> of <strong>individuals</strong> around the grand mean and group means, respectively. Thus, MS<sub>Total</sub> measures the variance or “noise” around the full model, whereas MS<sub>Within</sub> measures the variance or “noise” around the simple model.</p>
 <div class="tip">
-<p>MS<sub>Total</sub> and MS<sub>Within</sub> measure “noise” – i.e., variability of observations around a model</p>
+<p>MS<sub>Total</sub> and MS<sub>Within</sub> measure “noise” – i.e., variability of observations around a model.</p>
 </div>
-<p>Before moving on to discuss MS<sub>Among</sub>, it is worth noting that MS<sub>Total</sub> is</p>
+<p>Note that</p>
 <p><span class="math display">\[ \text{MS}_{\text{Total}} = \frac{\text{SS}_{\text{Total}}}{\text{df}_{\text{Total}}} = \frac{\sum_{i=1}^{I}\sum_{j=1}^{n_{i}}\left(Y_{ij}-\bar{Y}_{\cdot\cdot}\right)^{2}}{n-1} \]</span></p>
-<p>Realizing that the double summation simply means to “sum across all individuals” it is seen that this is the variance (<span class="math inline">\(s^{2}\)</span>) from your introductory statistics course. In other words it is just the variability of the individuals around a mean that ignores that there are groups.</p>
+<p>The double summation simply means to “sum across all individuals.” With this it should be seen that this is same as the variance (<span class="math inline">\(s^{2}\)</span>) from your introductory statistics course. In other words MS<sub>Total</sub> is just the variability of the individuals around a mean that ignores that there are groups.</p>
 <div class="tip">
 <p>MS<sub>Total</sub>=<span class="math inline">\(s^{2}\)</span></p>
 </div>
-<p>Similarly, MS<sub>Within</sub> is</p>
+<p>Similarly,</p>
 <p><span class="math display">\[ \text{MS}_{\text{Within}} = \frac{\text{SS}_{\text{Within}}}{\text{df}_{\text{Within}}} = \frac{\sum_{i=1}^{I}\sum_{j=1}^{n_{i}}\left(Y_{ij}-\bar{Y}_{i\cdot}\right)^{2}}{\sum_{i=1}^{I}n_{i}-I} \]</span></p>
-<p>It is not hard to show algebraically (and for just two groups) that the numerator is <span class="math inline">\(n_{1}s_{1}^{2}+n_{2}s_{2}^{2}\)</span> and that the denominator is <span class="math inline">\(n_{1}+n_{2}-2\)</span>. This numerator and denominator are then simply the pooled sample variance (<span class="math inline">\(s_{p}^{2}\)</span>) from the 2-sample t-test. Thus, MS<sub>Within</sub> with two groups is the same as <span class="math inline">\(s_{p}^{2}\)</span> from the 2-sample t-test.</p>
+<p>It is not hard to show algebraically (and for just two groups) that the numerator (top part) is <span class="math inline">\(n_{1}s_{1}^{2}+n_{2}s_{2}^{2}\)</span> and the denominator (bottom part) is <span class="math inline">\(n_{1}+n_{2}-2\)</span>. With this numerator and denominator, it is evident that MS<sub>Within</sub> (for two groups) is the same as the pooled sample variance (<span class="math inline">\(s_{p}^{2}\)</span>) from the 2-sample t-test.</p>
 <div class="tip">
-<p>MS<sub>Within</sub>=<span class="math inline">\(s_{p}^{2}\)</span></p>
+<p>MS<sub>Within</sub>=<span class="math inline">\(s_{p}^{2}\)</span> from the 2-sample t-test.</p>
 </div>
 <p> </p>
 </div>
 <div id="signal-variance-benefit-to-cost" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> “Signal” Variance (Benefit-to-Cost)</h2>
 <p>Of course SS<sub>Among</sub> divided by df<sub>Among</sub> will be MS<sub>Among</sub>. However, while MS<sub>Among</sub> is still a variance, it has a very different interpretation.</p>
-<p>MS<sub>Among</sub> is NOT a variance of <em>individuals</em>, rather it is a variance of <em>sample means</em>. Sample means can vary (i.e., not be equal) for two reasons – purely due to random sampling variability (i.e., the population means are not different) or the population means really do differ such that the sample means differ. In other words, MS<sub>Among</sub> – the variance among means – is a combination of “noise” and “signal.” Our goal (next) is to disentangle these two reasons for why the sample means differ to determine if there is a real “signal” or not.</p>
+<p>MS<sub>Among</sub> is NOT a variance of <em>individuals</em>, rather it is a variance of <em>sample means</em>. Sample means can vary (i.e., not be equal) for two reasons – random sampling variability<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> or the population means are really different.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> In other words, MS<sub>Among</sub> – the variance among means – is a combination of “noise” and “signal.” Our goal (next) is to disentangle these two reasons for why the sample means differ to determine if there is a real “signal” or not.</p>
 <p>Additionally, MS<sub>Among</sub> is a ratio of the “benefit” (i.e., SS<sub>Among</sub>) to the “cost” (i.e., df<sub>Among</sub>) of using the full model over the simple model. So MS<sub>Among</sub> scales the benefit to the cost of using the full model.</p>
 <p> </p>
 </div>
 <div id="ratio-of-variances-signal-to-noise" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Ratio of Variances (Signal-to-Noise)</h2>
-<p>From the above discussion we have a measure of potential “signal” in MS<sub>Among</sub> and actual “noise” around the full model (the model representing the “signal”) in MS<sub>Within</sub>. The ratio of this “signal” to “noise” is called an F test statistic; i.e.,</p>
+<p>From the above discussion we have a measure of potential “signal” in MS<sub>Among</sub>, but it is contaminated with some “noise,” and actual “noise” around the full model (the model representing the “signal”) in MS<sub>Within</sub>. A ratio of this “signal” to “noise” is called an F test statistic; i.e.,</p>
 <p><span class="math display">\[ \text{F}=\frac{\text{MS}_{\text{Among}}}{\text{MS}_{\text{Within}}} = \frac{\text{Signal}}{\text{Noise}} = \frac{\text{Variance Explained by Full Model}}{\text{Variance Unexplained by Full Model}} \]</span></p>
-<p>If the F-ratio is “large,” then a great deal more variability was explained (i.e., more “signal”) than was unexplained by the full model (i.e., “less noise”) and one would conclude that the full model fits the data significantly better than the simple model, even considering the increased complexity of the full model.</p>
-<p>The question now becomes “when is the F-ratio considered large enough to reject the simple model and conclude that the full model is significantly better?” This question can by comparing the F-ratio test statistic to an F-distribution.</p>
-<p>An F-distribution<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> is right-skewed, with the exact shape of the distribution dictated by two separate degrees-of-freedom – called the numerator and denominator degrees-of-freedom, respectively. The numerator df is equal to the df used in MS<sub>Among</sub>, whereas the denominator df is equal to the df used in MS<sub>Within</sub>. The p-value is always computed as the area under the F-distribution curve to the right of the observed F-ratio test statistic.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
-<div class="tip">
-<p>The p-value is always computed to the <strong>right</strong> on an F-distribution.</p>
+<p>If the F-ratio is “large,” then “signal” is stronger than the “noise.” A large F-ratio also means that more variability was explained than was unexplained by the full model. Thus, large F-ratio values mean that the full model fits the data significantly better than the simple model, even considering the increased complexity of the full model.</p>
+<p>The question now becomes “when is the F-ratio considered large enough to reject the simple model and conclude that the full model is significantly better?” This question is answered by comparing the F-ratio test statistic to an F-distribution.</p>
+<p>An F-distribution<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> is right-skewed, with the exact shape of the distribution dictated by two separate degrees-of-freedom – called the numerator and denominator degrees-of-freedom, respectively. The numerator df is equal to the df used in MS<sub>Among</sub>, whereas the denominator df is equal to the df used in MS<sub>Within</sub>. The p-value is always computed as the area under the F-distribution curve to the right of the observed F-ratio test statistic (Figure <a href="ModelComparison.html#fig:Fpvalue">4.5</a>).<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
+<div class="figure" style="text-align: center"><span id="fig:Fpvalue"></span>
+<img src="Book207_files/figure-html/Fpvalue-1.png" alt="An F distribution with 4 numerator and 20 denominator degrees-of-freedom. The shaded area demonstrates calculating a p-value for an F-ratio of 2.2." width="336" />
+<p class="caption">
+Figure 4.5: An F distribution with 4 numerator and 20 denominator degrees-of-freedom. The shaded area demonstrates calculating a p-value for an F-ratio of 2.2.
+</p>
 </div>
-<p><img src="Book207_files/figure-html/Fpvalue-1.png" width="336" style="display: block; margin: auto;" /></p>
 <p> </p>
-<p>From this it can be seen that a small p-value comes from a large F-ratio, which comes from a large MS<sub>Among</sub> relative to MS<sub>Within</sub>, which means both that the full model explains more variability than is left unexplained and the “signal” is much greater than the “noise,” which means that the full model does fit significantly better than the simple model (even given the increased complexity), and, thus, the means are indeed different, which is what we would conclude from a small p-value. This cascade of measures can be explored with the dynamic graphic below.</p>
-<iframe src="https://derek-ogle.shinyapps.io/App_F_Meaning/?showcase=0" width="95%" height="800px">
+<p>From all of the previous discussion, it can be seen that …</p>
+<ul>
+<li>a small p-value comes from a large F-ratio, which comes from</li>
+<li>a large MS<sub>Among</sub> relative to MS<sub>Within</sub>, which means *that</li>
+<li>the full model explains more variability than is left unexplained and that the “signal” is much greater than the “noise,” which means that</li>
+<li>the full model does fit significantly better than the simple model (even given the increased complexity), and,</li>
+<li>thus, the means are indeed different.</li>
+</ul>
+<p>This cascade of measures can be explored with the dynamic graphic below.</p>
+<iframe src="https://derek-ogle.shinyapps.io/App_F_Meaning/?showcase=0" width="75%" height="800px">
 </iframe>
-<p> </p>
+<div class="tip">
+<p>A <strong>small p-value</strong> results in concluding that the <strong>group means are significantly different</strong>.</p>
+</div>
 </div>
 <div id="anova-table" class="section level2" number="4.7">
 <h2><span class="header-section-number">4.7</span> ANOVA Table</h2>
-<p>The degrees-of-freedom (df), sum-of-squares (SS), mean-squares (MS), F-ratio test statistic (F), and corresponding p-value are summarized in what is called an <strong>analysis of variance (ANOVA) table</strong>.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> The ANOVA table contains rows that correspond to the different measures discussed above: among,<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> within,<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> and total. The df and SS are shown for each source, but the MS is shown only for the within and among sources because MS<sub>Among</sub>+MS<sub>Within</sub>≠MS<sub>Total</sub>.</p>
+<p>The degrees-of-freedom (df), sum-of-squares (SS), mean-squares (MS), F-ratio test statistic (F), and corresponding p-value are summarized in what is called an <strong>analysis of variance (ANOVA) table</strong>.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> The ANOVA table contains rows that correspond to the different measures discussed above: among,<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> within,<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> and total. The df and SS are shown for each source, but the MS is shown only for the within and among sources because MS<sub>Among</sub>+MS<sub>Within</sub>≠MS<sub>Total</sub>.</p>
 <div class="tip">
 <p>SS and df partition, but MS do not! Do not add MS<sub>Among</sub> and MS<sub>Within</sub> to get MS<sub>Total</sub>, instead divide SS<sub>Total</sub> by df<sub>Total</sub>.</p>
 </div>
@@ -667,7 +683,7 @@ Residuals
 </div>
 <div id="two-sample-t-test-revisited-using-linear-models" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Two-Sample t-Test Revisited: Using Linear Models</h2>
-<p>The models for a two-sample t-test can be fit and assessed with <code>lm()</code>. This function requires the same type of formula for its first argument – <code>response~factor</code> – and a data.frame in the <code>data=</code> argument as described for <code>t.test()</code> in Section <a href="T2Review.html#T2analysis">2.2</a>. The results of <code>lm()</code> should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted from the <code>lm()</code> object with <code>anova()</code>. In addition, coefficient results<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> can be extracted with <code>coef()</code>, <code>confint()</code>, and <code>summary()</code>. Note that I like to “column-bind” the coefficients and confidence intervals together for a more succinct representation.</p>
+<p>The models for a two-sample t-test can be fit and assessed with <code>lm()</code>. This function requires the same type of formula for its first argument – <code>response~factor</code> – and a data.frame in the <code>data=</code> argument as described for <code>t.test()</code> in Section <a href="T2Review.html#T2analysis">2.2</a>. The results of <code>lm()</code> should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted from the <code>lm()</code> object with <code>anova()</code>. In addition, coefficient results<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> can be extracted with <code>coef()</code>, <code>confint()</code>, and <code>summary()</code>. Note that I like to “column-bind” the coefficients and confidence intervals together for a more succinct representation.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb12-1"><a href="ModelComparison.html#cb12-1" aria-hidden="true" tabindex="-1"></a>aqua.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span>
 <span id="cb12-2"><a href="ModelComparison.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(aqua.lm)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
@@ -692,7 +708,7 @@ Residuals
 <div id="one-more-look-at-ms-and-f-test" class="section level2" number="4.9">
 <h2><span class="header-section-number">4.9</span> One More Look at MS and F-test</h2>
 <p>Recall from your introductory statistics course that a sampling distribution is the distribution of a statistic from all possible samples. For example, the Central Limit Theorem states that the distribution of sample means is approximately normal, centered on μ, with a standard error of <span class="math inline">\(\frac{\sigma}{\sqrt{n}}\)</span> as long as assumptions about the sample size are met. Further recall that the sampling distribution of the sample means is centered on μ because the sample mean is an unbiased estimator of μ. Similarly, it is also known that the center of the sampling distribution of <span class="math inline">\(s^{2}\)</span> is equal to <span class="math inline">\(\sigma^{2}\)</span> because <span class="math inline">\(s^{2}\)</span> is an unbiased estimate of <span class="math inline">\(\sigma^{2}\)</span>.</p>
-<p>MS<sub>Within</sub> and MS<sub>Among</sub> are statistics just as <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(s^{2}\)</span> are statistics. Thus, MS<sub>Within</sub> and MS<sub>Among</sub> are subject to sampling variability and have sampling distributions. It can be shown<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> that the center of the sampling distribution of MS<sub>Within</sub> is <span class="math inline">\(\sigma^{2}\)</span> and the center of the sampling distribution of MS<sub>Among</sub> is</p>
+<p>MS<sub>Within</sub> and MS<sub>Among</sub> are statistics just as <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(s^{2}\)</span> are statistics. Thus, MS<sub>Within</sub> and MS<sub>Among</sub> are subject to sampling variability and have sampling distributions. It can be shown<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> that the center of the sampling distribution of MS<sub>Within</sub> is <span class="math inline">\(\sigma^{2}\)</span> and the center of the sampling distribution of MS<sub>Among</sub> is</p>
 <p><span class="math display">\[ \sigma^{2} + \frac{1}{I-1}\sum_{i=1}^{I}n_{i}\left(\mu_{i}-\mu\right)^{2} \]</span></p>
 <p>Thus, MS<sub>Among</sub> consists of two “sources” of variability. The first source (<span class="math inline">\(\sigma^{2}\)</span>) is the natural variability that exists among individuals. The second source <span class="math inline">\(\left(\frac{1}{I-1}\sum_{i=1}^{I}n_{i}\left(\mu_{i}-\mu\right)^{2}\right)\)</span> is related to differences among the group means. Therefore, if the group means are all equal – i.e., <span class="math inline">\(\mu_{1}\)</span>=<span class="math inline">\(\mu_{2}\)</span>= <span class="math inline">\(\cdots\)</span> = <span class="math inline">\(\mu_{I}\)</span> = <span class="math inline">\(\mu\)</span> – then the second source of variability is equal to zero and MS<sub>Among</sub> will equal MS<sub>Within</sub>. As soon as the groups begin to differ, the second source of variability will be greater than 0 and MS<sub>Among</sub> will be greater than MS<sub>Within</sub>.</p>
 <p>From this, it follows that if the null hypothesis of equal population means is true (i.e., one mean fits all groups), then the center of the sampling distribution of both MS<sub>Within</sub> and MS<sub>Among</sub> is <span class="math inline">\(\sigma^{2}\)</span>. Therefore, if the null hypothesis is true, then the F test-statistic is expected to be equal to 1, on average, which will always result in a large p-value and a DNR H<sub>0</sub> conclusion. However, if the null hypothesis is false (i.e., separate means are needed for all groups), then the center of the sampling distribution of MS<sub>Within</sub> is <span class="math inline">\(\sigma^{2}\)</span> but the center of the sampling distribution of MS<sub>Among</sub> is <span class="math inline">\(\sigma^{2}\)</span> + “something,” where the “something” is greater than 0 and gets larger as the means become “more different.” Thus, if the null hypothesis is false then the F test-statistic is expected to be greater than 1 and will get larger as the null hypothesis gets “more false.” This analysis of sampling distribution theory illustrates once again that (1) MS<sub>Among</sub> consists of multiple sources of variability and (2) “large” values of the F test-statistic indicate that the null hypothesis is incorrect.</p>
@@ -709,13 +725,15 @@ Residuals
 <li id="fn7"><p>We will be more objective in the following sections, but an examination of the plot above clearly shows that the red line does not represent the observations well.<a href="ModelComparison.html#fnref7" class="footnote-back">↩︎</a></p></li>
 <li id="fn8"><p>The “cost” is obviously 1 in this simple case.<a href="ModelComparison.html#fnref8" class="footnote-back">↩︎</a></p></li>
 <li id="fn9"><p>As discussed in Section <a href="ModelConcepts.html#mean-squares">3.4</a>, SS are not true variances until they are divided by their df and become mean-squares (MS).<a href="ModelComparison.html#fnref9" class="footnote-back">↩︎</a></p></li>
-<li id="fn10"><p>An F-distribution occurs whenever the ratio of two variances is calculated.<a href="ModelComparison.html#fnref10" class="footnote-back">↩︎</a></p></li>
-<li id="fn11"><p>If the F-ratio is computed by hand, then <code>distrib()</code> with <code>distrib="f"</code>, <code>df1=</code>, <code>df2=</code>, and <code>lower.tail=FALSE</code> may be used to calculate the corresponding p-value.<a href="ModelComparison.html#fnref11" class="footnote-back">↩︎</a></p></li>
-<li id="fn12"><p>An ANOVA table does not necessarily mean that an “analysis of variance” method was used. It turns out that all general linear models are summarized with an ANOVA table, regardless of whether a one- or two-way ANOVA method was used.<a href="ModelComparison.html#fnref12" class="footnote-back">↩︎</a></p></li>
-<li id="fn13"><p>Labeled as the factor variable in most statistical software packages including R – that variable was called <code>src</code> in this example.<a href="ModelComparison.html#fnref13" class="footnote-back">↩︎</a></p></li>
-<li id="fn14"><p>Labeled as residuals in R and error in other statistical software packages.<a href="ModelComparison.html#fnref14" class="footnote-back">↩︎</a></p></li>
-<li id="fn15"><p>The coefficient results will be discussed in more detail in Module <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a>.<a href="ModelComparison.html#fnref15" class="footnote-back">↩︎</a></p></li>
-<li id="fn16"><p>This derivation is beyond the scope of this course.<a href="ModelComparison.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>That is sample means will vary from sample to sample even if the population means are not different.<a href="ModelComparison.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>If the population means are different then one would expect the means from samples of those populations to also be different.<a href="ModelComparison.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>An F-distribution occurs whenever the ratio of two variances is calculated.<a href="ModelComparison.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>If the F-ratio is computed by hand, then <code>distrib()</code> with <code>distrib="f"</code>, <code>df1=</code>, <code>df2=</code>, and <code>lower.tail=FALSE</code> may be used to calculate the corresponding p-value.<a href="ModelComparison.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p>An ANOVA table does not necessarily mean that an “analysis of variance” method was used. It turns out that all general linear models are summarized with an ANOVA table, regardless of whether a one- or two-way ANOVA method was used.<a href="ModelComparison.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>Labeled as the factor variable in most statistical software packages including R – that variable was called <code>src</code> in this example.<a href="ModelComparison.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>Labeled as residuals in R and error in other statistical software packages.<a href="ModelComparison.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>The coefficient results will be discussed in more detail in Module <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a>.<a href="ModelComparison.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>This derivation is beyond the scope of this course.<a href="ModelComparison.html#fnref18" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

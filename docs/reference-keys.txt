@@ -8,6 +8,7 @@ fig:Signal2NoiseMetaphor
 fig:SignalNoise1
 fig:SignalNoise2
 fig:SignalNoise3
+fig:WeatherForecast
 fig:TwoModelsEx
 fig:FullResid1
 fig:FullResid2
@@ -18,6 +19,7 @@ fig:Models1
 fig:FullModelResids1
 fig:SimpleModelResids1
 fig:BothModelResids
+fig:Fpvalue
 tab:ANOVA1
 fig:SS-1
 fig:SS-2
