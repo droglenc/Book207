@@ -4,6 +4,7 @@ fig:TwoWay
 fig:SLR
 fig:IVR
 fig:LogReg
+fig:Signal2NoiseMetaphor
 fig:SignalNoise1
 fig:SignalNoise2
 fig:SignalNoise3

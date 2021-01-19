@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-16" />
+<meta name="date" content="2021-01-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -366,9 +366,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="review" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Review</h2>
 <p>The null hypothesis for a 2-sample t-test is H<sub>0</sub>: <span class="math inline">\(\mu_{1}=\mu_{2}\)</span>, where <span class="math inline">\(\mu\)</span> is the population mean and the subscripts represent the two populations. The alternative hypothesis of a 2-sample t-test may be “less than,” “greater than,” or “not equals.” We will use H<sub>A</sub>: <span class="math inline">\(\mu_{1}\ne\mu_{2}\)</span> for most examples in this course.</p>
-<p>The 2-sample t-test assumes that (i) individuals in the populations are independent; (ii) the sample size (n) is great than 40, greater than 15 and the histograms are not strongly skewed, or the histograms are normally distributed; and (iii) the population variances are equal. The assumption of equal variances for the 2-sample t-test is tested with Levene’s test, which uses H<sub>0</sub>: <span class="math inline">\(\sigma_{1}^{2}=\sigma_{2}^{2}\)</span> and H<sub>A</sub>: <span class="math inline">\(\sigma_{1}^{2}\ne\sigma_{2}^{2}\)</span>, where <span class="math inline">\(\sigma^{2}\)</span> is the population variance. If H<sub>0</sub> is rejected for Levene’s test then the variances for both populations are assumed to be equal, such that only one combined sample variance needs to be estimated. That combined sample variance is called the <em>the pooled sample variance</em> and is computed as a weighted mean of the two sample variances,</p>
+<p>The 2-sample t-test assumes that (i) individuals in the populations are independent; (ii) the sample size (<span class="math inline">\(n_{1}+n_{2}\)</span>) is great than 40, greater than 15 and the histograms are not strongly skewed, or the histograms are normally distributed; and (iii) the population variances are equal. The assumption of equal variances for the 2-sample t-test is tested with Levene’s test, which uses H<sub>0</sub>: <span class="math inline">\(\sigma_{1}^{2}=\sigma_{2}^{2}\)</span> and H<sub>A</sub>: <span class="math inline">\(\sigma_{1}^{2}\ne\sigma_{2}^{2}\)</span>, where <span class="math inline">\(\sigma^{2}\)</span> is the population variance. If H<sub>0</sub> is rejected for Levene’s test then the variances for both populations are assumed to be equal, such that only one combined sample variance needs to be estimated. That combined sample variance is called the <em>the pooled sample variance</em> and is computed as a weighted mean of the two sample variances,</p>
 <p><span class="math display">\[ s_{p}^{2}=\frac{(n_{1}-1)s_{1}^{2}+(n_{2}-1)s_{2}^{2}}{n_{1}+n_{2}-2} \]</span></p>
-<p>If the three assumptions are met then the statistic for the 2-sample t-test is <span class="math inline">\(\bar{x}_{1}-\bar{x}_{2}\)</span> which is immediately standardized to a t test statistic with</p>
+<p>If the three assumptions are met then the statistic for the 2-sample t-test is <span class="math inline">\(\bar{x}_{1}-\bar{x}_{2}\)</span> which is standardized to a t test statistic with</p>
 <p><span class="math display">\[ t=\frac{\bar{x}_{1}-\bar{x}_{2}}{\sqrt{s_{p}^{2}\left(\frac{1}{n_{1}}+\frac{1}{n_{2}} \right)}} \]</span></p>
 <p>The t test statistic is converted to a p-value using a t-distribution with <span class="math inline">\(n_{1}+n_{2}-2\)</span> df. Of course, a p-value &lt; α means that H<sub>0</sub> is rejected and the two population means appear to be different. A confidence interval would then be used to fully describe which population mean was greater (or smaller) and by how much.</p>
 <p> </p>
@@ -378,9 +378,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-format" class="section level3" number="2.2.1">
 <h3><span class="header-section-number">2.2.1</span> Data Format</h3>
 <p>Data for a 2-sample t-test must be in stacked format, where measurements are in one column and a label for the populations is in another column. Each row corresponds to the measurement and population of a single individual.</p>
-<p>The data (<a href="https://raw.githubusercontent.com/droglenc/NCData/master/BOD.csv">data</a>, <a href="https://github.com/droglenc/NCData/blob/master/BOD_meta.txt">meta</a>) for the example below are the <a href="https://www.usgs.gov/special-topic/water-science-school/science/biological-oxygen-demand-bod-and-water?qt-science_center_objects=0#qt-science_center_objects">biological oxygen demands (BOD)</a> at the inlet and outlet to an aquaculture facility. These data illustrate stacked data because each row is one water sample with two variables recorded – BOD and where the sample came from.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb3-1"><a href="T2Review.html#cb3-1" aria-hidden="true" tabindex="-1"></a>aqua <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;BOD.csv&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb4-1"><a href="T2Review.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">headtail</span>(aqua)</span></code></pre></div>
+<p>The data in BOD.csv (<a href="https://raw.githubusercontent.com/droglenc/NCData/master/BOD.csv">data</a>, <a href="https://github.com/droglenc/NCData/blob/master/BOD_meta.txt">meta</a>) are the <a href="https://www.usgs.gov/special-topic/water-science-school/science/biological-oxygen-demand-bod-and-water?qt-science_center_objects=0#qt-science_center_objects">biological oxygen demands (BOD)</a> at the inlet and outlet to an aquaculture facility. These data illustrate stacked data because each row is one water sample with two variables recorded – BOD and where the sample came from.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb3-1"><a href="T2Review.html#cb3-1" aria-hidden="true" tabindex="-1"></a>aqua <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;BOD.csv&quot;</span>)   <span class="co"># Loads the data</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb4-1"><a href="T2Review.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">headtail</span>(aqua)  <span class="co"># First and last three rows of the data</span></span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;        BOD    src
 #R&gt;   1  6.782  inlet
 #R&gt;   2  5.809  inlet
@@ -392,13 +392,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Stacked Data</strong>: Data where the quantitative measurements of two or more groups are “stacked” on top of each other and a second variable is used to record to which group (or population) the measurement belongs.</p>
 </div>
 <div class="tip">
-<p>Stacked data is required for the methods used in this course.</p>
+<p>Stacked data are required for the methods used in this course.</p>
 </div>
 <p>Specific <a href="http://derekogle.com/NCMTH107/modules/2Samplet.html">details for performing a 2-sample t-test in R</a> were provided in your introductory statistics course, but will be cursorily reviewed below.</p>
 </div>
 <div id="assumption-checking" class="section level3" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> Assumption Checking</h3>
-<p>The metadata suggests that measurements at the intake and outtake were taken at different times. Thus, there is no reasonable reason to think that individuals are dependent across the two populations. Thus, the independence assumption is met.</p>
+<p>The <a href="https://github.com/droglenc/NCData/blob/master/BOD_meta.txt">meta</a>)data suggests that measurements at the intake and outtake were taken at different times. Thus, there is no reasonable reason to think that BOD measurements are dependent across the two locations. Thus, the independence assumption is met.</p>
 <p>The sample size is less than 40 but greater than 15. The histograms shown below are not particularly informative because of the small sample size. The histogram for the inlet samples appears to be not strongly skewed, but that for the outlet appears to be strongly right-skewed. I am going to continue with this analysis, but I will be cautious with my final interpretations.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb6-1"><a href="T2Review.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>BOD)) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="T2Review.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.5</span>,<span class="at">boundary=</span><span class="dv">0</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span></span>
@@ -432,7 +432,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   sample estimates:
 #R&gt;    mean in group inlet mean in group outlet 
 #R&gt;                 6.6538               8.6873</code></pre>
-<p>A graphic that illustrates the mean BOD with 95% confidence intervals for each sampling location is constructed below. Note that in the code below that the only items you need to change for your own data is in the first line, where <code>data=</code> should be set to the name of your data and <code>x=</code> and <code>y=</code> should be set to the names of the explanatory and response variables, respectively.</p>
+<p>A graphic that illustrates the mean BOD with 95% confidence intervals for each sampling location is constructed below. In the code below you only need to change <code>data=</code> to the name of your data and <code>x=</code> and <code>y=</code> to the names of the explanatory and response variables in the first line and provide appropriate labels for the x- and y-axes in <code>labs()</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb11-1"><a href="T2Review.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>src,<span class="at">y=</span>BOD)) <span class="sc">+</span></span>
 <span id="cb11-2"><a href="T2Review.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha=</span><span class="fl">0.5</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
 <span id="cb11-3"><a href="T2Review.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data=</span>mean_cl_normal,<span class="at">geom=</span><span class="st">&quot;errorbar&quot;</span>,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
@@ -445,35 +445,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="signal-to-noise" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Signal-to-Noise</h2>
-<p>The ratio of signal to noise can be a useful metaphor for understanding hypothesis testing, as we have done here, and model comparisons, as we will do in future modules. In this metaphor, think of “signal” as how different two things are and “noise” as anything that gets in the way of you receiving the signal. For example, the difference in heights of two students standing on the other side of the room is a “signal,” but smoke in the room that makes it difficult to see those students is “noise.” As another example, it may be easy to see an orange kayak (the “signal”) on Lake Superior on a calm day but harder to see it on a wavy day (i.e., more “noise”).</p>
-<p>In a 2-sample t-test, the “signal” is the difference in the two group means (Figure <a href="T2Review.html#fig:SignalNoise1">2.1</a>), which is measured by <span class="math inline">\(\bar{x}_{1}-\bar{x}_{2}\)</span>, the numerator of the t-test statistic. The bigger the difference in sample means the stronger the “signal” that the population means are different.</p>
+<p>The ratio of signal to noise can be a useful metaphor for understanding hypothesis testing, as we have done here, and model comparisons, as we will do in future modules. In this metaphor, think of “signal” as how different two things are and “noise” as anything that gets in the way of you receiving the signal. For example, the lights on a care are a “signal,” but fog on the road is “noise” (Figure <a href="T2Review.html#fig:Signal2NoiseMetaphor">2.1</a>). As another example, it may be easy to see an orange kayak (the “signal”) on Lake Superior on a calm day but harder to see it on a wavy day (i.e., more “noise”; Figure <a href="T2Review.html#fig:Signal2NoiseMetaphor">2.1</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:Signal2NoiseMetaphor"></span>
+<img src="zimgs/Signal2NoiseMetaphor.jpg" alt="Signal-to-noise metahpors - seeing car lights through fog (Left) and seeing a kayak in the waves (Right)." width="75%" />
+<p class="caption">
+Figure 2.1: Signal-to-noise metahpors - seeing car lights through fog (Left) and seeing a kayak in the waves (Right).
+</p>
+</div>
+<p> </p>
+<p>In a 2-sample t-test, the “signal” is the difference in the two group means (Figure <a href="T2Review.html#fig:SignalNoise1">2.2</a>), which is measured by <span class="math inline">\(\bar{x}_{1}-\bar{x}_{2}\)</span>, the numerator of the t-test statistic. The bigger the difference in sample means the stronger the “signal” that the population means are different.</p>
+<div class="figure" style="text-align: center"><span id="fig:SignalNoise1"></span>
+<img src="Book207_files/figure-html/SignalNoise1-1.png" alt="Response variable by group for each individual (points) with group means shown as horizontal segments. The difference in sample means is highlighted as the &quot;signal&quot; in these data." width="336" />
+<p class="caption">
+Figure 2.2: Response variable by group for each individual (points) with group means shown as horizontal segments. The difference in sample means is highlighted as the “signal” in these data.
+</p>
+</div>
 <div class="tip">
 <p>The “signal” is the difference in sample means</p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:SignalNoise1"></span>
-<img src="Book207_files/figure-html/SignalNoise1-1.png" alt="Response variable by group for each indiviual (points) with group means shown as horizontal segments. The difference in sample means is highlighted as the &quot;signal&quot; in these data." width="336" />
+<p>“Noise” is sampling variability, the fact that statistics (e.g., <span class="math inline">\(\bar{x}_{1}\)</span> and <span class="math inline">\(\bar{x}_{2}\)</span>) vary from sample to sample. Sampling variability in a 2-sample t-test is measured by <span class="math inline">\(SE_{\bar{x}_{1}-\bar{x}_{2}}\)</span>, which is the denominator of the t test statistic, or <span class="math inline">\(\sqrt{s_{p}^{2}\left(\frac{1}{n_{1}}+\frac{1}{n_{2}}\right)}\)</span>. This SE increases with increasing <span class="math inline">\(s_{p}^{2}\)</span> and decreases with increasing n<sub>1</sub> and n<sub>2</sub>. So the “noise” increases as the (natural) variability of individuals increases (i.e., <span class="math inline">\(s_{p}^{2}\)</span>; Figure <a href="T2Review.html#fig:SignalNoise2">2.3</a>), but decreases as the sample size increases.</p>
+<div class="figure" style="text-align: center"><span id="fig:SignalNoise2"></span>
+<img src="Book207_files/figure-html/SignalNoise2-1.png" alt="Response variable by group for each individual (points) with group means shown as horizontal segments. The variability of individuals around the group means is highlighted as a part of the &quot;noise&quot; in these data." width="336" />
 <p class="caption">
-Figure 2.1: Response variable by group for each indiviual (points) with group means shown as horizontal segments. The difference in sample means is highlighted as the “signal” in these data.
+Figure 2.3: Response variable by group for each individual (points) with group means shown as horizontal segments. The variability of individuals around the group means is highlighted as a part of the “noise” in these data.
 </p>
 </div>
-<p>“Noise” is sampling variability, the fact that statistics (e.g., <span class="math inline">\(\bar{x}_{1}\)</span> and <span class="math inline">\(\bar{x}_{2}\)</span>) vary from sample to sample. Sampling variability in a 2-sample t-test is measured by <span class="math inline">\(SE_{\bar{x}_{1}-\bar{x}_{2}}\)</span>, which is the denominator of the t test statistic, or <span class="math inline">\(\sqrt{s_{p}^{2}\left(\frac{1}{n_{1}}+\frac{1}{n_{2}}\right)}\)</span>. This SE increases with increasing <span class="math inline">\(s_{p}^{2}\)</span> and decreases with increasing n<sub>1</sub> and n<sub>2</sub>. So the “noise” increases as the natural variability of individuals around their group means (i.e., <span class="math inline">\(s_{p}^{2}\)</span>) increases (Figure <a href="T2Review.html#fig:SignalNoise2">2.2</a>), but decreases as the sample size increases.</p>
 <div class="tip">
 <p>The “noise” is sampling variability</p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:SignalNoise2"></span>
-<img src="Book207_files/figure-html/SignalNoise2-1.png" alt="Response variable by group for each indiviual (points) with group means shown as horizontal segments. The variability of individuals around the group means is highlighted as a part of the &quot;noise&quot; in these data." width="336" />
-<p class="caption">
-Figure 2.2: Response variable by group for each indiviual (points) with group means shown as horizontal segments. The variability of individuals around the group means is highlighted as a part of the “noise” in these data.
-</p>
-</div>
-<p>The ratio of signal to noise is related to whether we will be able to detect the difference between two things or not. If the signal is large relative to the noise then the signal will be detected. In other words, will be able to tell the difference in heights of students if the room is not full of smoke.</p>
-<p>For example, each panel in Figure <a href="T2Review.html#fig:SignalNoise3">2.3</a> has the same signal (difference in means) but the noise (i.e., SE) increases from left to right. In the left-most panel it is very clear that the sample means are different (high signal-to-noise ratio), but in the right-most panel it is less clear that the sample means are different (low signal-to-noise ratio).</p>
+<p>The ratio of signal to noise is related to whether we will be able to detect the difference between two things or not. If the signal is large relative to the noise then the signal will be detected. In other words, we will be able to see the car lights if the road is not foggy or we will more likely see the kayak if the lake is calm.</p>
+<p>For example, each panel in Figure <a href="T2Review.html#fig:SignalNoise3">2.4</a> has the same signal (difference in means) but the noise (i.e., SE) increases from left to right. In the left-most panel it is very clear that the sample means are different (high signal-to-noise ratio), but in the right-most panel it is less clear that the sample means are different (low signal-to-noise ratio).</p>
 <div class="figure" style="text-align: center"><span id="fig:SignalNoise3"></span>
 <img src="Book207_files/figure-html/SignalNoise3-1.png" alt="Response variable by group for each indiviual (points) with group means shown as horizontal segments for three different standard errors (SE; i.e., &quot;noise&quot;). Note that the group means are the same in all three panels." width="720" />
 <p class="caption">
-Figure 2.3: Response variable by group for each indiviual (points) with group means shown as horizontal segments for three different standard errors (SE; i.e., “noise”). Note that the group means are the same in all three panels.
+Figure 2.4: Response variable by group for each indiviual (points) with group means shown as horizontal segments for three different standard errors (SE; i.e., “noise”). Note that the group means are the same in all three panels.
 </p>
 </div>
+<p> </p>
 <p>The t test statistic is a measure of signal (i.e., difference in sample means) to noise (i.e., sampling variability as measured by the SE)</p>
 <p><span class="math display">\[ t=\frac{\bar{x}_{1}-\bar{x}_{2}}{\sqrt{s_{p}^{2}\left(\frac{1}{n_{1}}+\frac{1}{n_{2}} \right)}} = \frac{\text{Signal}}{\text{Noise}} \]</span></p>
 <p>Thus, larger values of the t test statistic indicate a larger signal-to-noise ratio. Larger t test statistics are further into the tail of the t distribution and result in smaller p-values. Therefore, small p-values represent larger signal-to-noise ratios and are more likely to lead to concluding that the population means differ. In other words, you were able to detect the “signal” through the “noise.”</p>
