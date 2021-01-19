@@ -521,7 +521,7 @@ Figure 4.4: Mean biological oxygen demand versus sample location with the grand 
 </div>
 <p> </p>
 <p>From the figure above, it is seen that SS<sub>Among</sub> will increase as the group means become more different. This can also be seen by increasing or decreasing the difference between the group means and the grand mean in the interactive graphic below (Note how SS<sub>Among</sub> (and SS<sub>Total</sub>) change).</p>
-<iframe src="https://derek-ogle.shinyapps.io/App_SSTotal_Partitioning/?showcase=0" width="95%" height="800px">
+<iframe src="https://derek-ogle.shinyapps.io/App_SSTotal_Partitioning/?showcase=0" width="75%" height="800px">
 </iframe>
 <p> </p>
 <p>So, SS<sub>Among</sub> is immensely useful – it is a measure of “benefit” that will be used in a “benefit-to-cost” ratio that will ultimately be the “signal” that will be used in a “signal-to-noise” ratio. These ratios are In Sections <a href="ModelComparison.html#noise-variances">4.4</a> and <a href="ModelComparison.html#signal-variance-benefit-to-cost">4.5</a>. However, next we discuss how to measure the “cost” of using the more complex full model.</p>
@@ -594,7 +594,7 @@ Figure 4.5: An F distribution with 4 numerator and 20 denominator degrees-of-fre
 <li>thus, the means are indeed different.</li>
 </ul>
 <p>This cascade of measures can be explored with the dynamic graphic below.</p>
-<iframe src="https://derek-ogle.shinyapps.io/App_F_Meaning/?showcase=0" width="75%" height="800px">
+<iframe src="https://derek-ogle.shinyapps.io/App_F_Meaning/?showcase=0" width="80%" height="800px">
 </iframe>
 <div class="tip">
 <p>A <strong>small p-value</strong> results in concluding that the <strong>group means are significantly different</strong>.</p>
@@ -602,10 +602,7 @@ Figure 4.5: An F distribution with 4 numerator and 20 denominator degrees-of-fre
 </div>
 <div id="anova-table" class="section level2" number="4.7">
 <h2><span class="header-section-number">4.7</span> ANOVA Table</h2>
-<p>The degrees-of-freedom (df), sum-of-squares (SS), mean-squares (MS), F-ratio test statistic (F), and corresponding p-value are summarized in what is called an <strong>analysis of variance (ANOVA) table</strong>.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> The ANOVA table contains rows that correspond to the different measures discussed above: among,<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> within,<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> and total. The df and SS are shown for each source, but the MS is shown only for the within and among sources because MS<sub>Among</sub>+MS<sub>Within</sub>≠MS<sub>Total</sub>.</p>
-<div class="tip">
-<p>SS and df partition, but MS do not! Do not add MS<sub>Among</sub> and MS<sub>Within</sub> to get MS<sub>Total</sub>, instead divide SS<sub>Total</sub> by df<sub>Total</sub>.</p>
-</div>
+<p>The degrees-of-freedom (df), sum-of-squares (SS), mean-squares (MS), F-ratio test statistic (F), and corresponding p-value are summarized in an <strong>analysis of variance (ANOVA) table</strong>.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> The ANOVA table contains rows that correspond to the different measures discussed above: among,<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> within,<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> and total. The df and SS are shown for each source, but the MS is shown only for the within and among sources because MS<sub>Among</sub>+MS<sub>Within</sub> <strong>≠</strong> MS<sub>Total</sub>.</p>
 <p>An ANOVA table for the BOD measurements at the inlet and outlet sources to the aquaculture facility is in Table <a href="ModelComparison.html#tab:ANOVA1">4.2</a>. Note that R does not show the total row that most softwares do.</p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -613,28 +610,28 @@ Figure 4.5: An F distribution with 4 numerator and 20 denominator degrees-of-fre
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;">
+<th style="text-align:left;font-weight: bold;">
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;font-weight: bold;">
 Df
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;font-weight: bold;">
 Sum Sq
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;font-weight: bold;">
 Mean Sq
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;font-weight: bold;">
 F value
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;font-weight: bold;">
 Pr(&gt;F)
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 src
 </td>
 <td style="text-align:right;">
@@ -654,7 +651,7 @@ src
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 Residuals
 </td>
 <td style="text-align:right;">
@@ -673,17 +670,21 @@ Residuals
 </tr>
 </tbody>
 </table>
-<p>These results indicate that H<sub>0</sub> should be rejected (i.e., F-test p-value &lt;0.00005). Thus, the full model fits the data significantly better than the simple model even given the difference in complexity between the two models and sampling variability. Therefore, there is a significant difference in mean BOD between the two locations.</p>
-<p>In addition to the primary objective of comparing the full and simple models, several items of interest can be identified from an ANOVA table. Using the table above as an example, note the following items:</p>
+<p> </p>
+<p>These results indicate that H<sub>0</sub> should be rejected (i.e., F-test p-value &lt;0.00005). Thus, the full model fits the data significantly better than the simple model even given the increased complexity and sampling variability. Therefore, there is a significant difference in mean BOD between the two source locations.</p>
+<p>In addition to the primary objective of comparing the full and simple models and making a conclusion about the equality of group means, several other items of interest can be identified from an ANOVA table. Using the table above as an example, note that</p>
 <ul>
-<li>The variance within groups is equal to MS<sub>Within</sub> (e.g., MS<sub>Residuals</sub>=0.2556 in this case). This is <span class="math inline">\(s_{p}^{2}\)</span> from the two-sample t-test (because there are only two groups here).</li>
-<li>The common variance about the mean (<span class="math inline">\(s^{2}\)</span>) is given by MS<sub>Total</sub> (e.g., <span class="math inline">\(=\frac{20.6756+4.6008}{1+18}\)</span>=1.3303).</li>
+<li>the variance within groups is (=MS<sub>Within</sub>=MS<sub>Residuals=<span class="math inline">\(s_{p}^{2}\)</span>), and</li>
+<li>the common variance about the mean is NaN (=MS<sub>Total</sub>=<span class="math inline">\(s^{2}\)</span>=<span class="math inline">\(\frac{+}{+}\)</span>).</li>
 </ul>
+<div class="tip">
+<p>SS and df partition, but MS do not! Do not add MS<sub>Among</sub> and MS<sub>Within</sub> to get MS<sub>Total</sub>, instead divide SS<sub>Total</sub> by df<sub>Total</sub>.</p>
+</div>
 <p> </p>
 </div>
 <div id="two-sample-t-test-revisited-using-linear-models" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Two-Sample t-Test Revisited: Using Linear Models</h2>
-<p>The models for a two-sample t-test can be fit and assessed with <code>lm()</code>. This function requires the same type of formula for its first argument – <code>response~factor</code> – and a data.frame in the <code>data=</code> argument as described for <code>t.test()</code> in Section <a href="T2Review.html#T2analysis">2.2</a>. The results of <code>lm()</code> should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted from the <code>lm()</code> object with <code>anova()</code>. In addition, coefficient results<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> can be extracted with <code>coef()</code>, <code>confint()</code>, and <code>summary()</code>. Note that I like to “column-bind” the coefficients and confidence intervals together for a more succinct representation.</p>
+<p>The models for a two-sample t-test can be fit and assessed with <code>lm()</code>. This function requires the same type of formula for its first argument – <code>response~factor</code> – and a data.frame in the <code>data=</code> argument as described for <code>t.test()</code> in Section <a href="T2Review.html#T2analysis">2.2</a>. The results of <code>lm()</code> should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted with <code>anova()</code>. In addition, coefficient results<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> can be extracted with <code>coef()</code> and <code>confint()</code>, noting that I like to “column-bind” the coefficients and confidence intervals together for a more succinct representation.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb12-1"><a href="ModelComparison.html#cb12-1" aria-hidden="true" tabindex="-1"></a>aqua.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span>
 <span id="cb12-2"><a href="ModelComparison.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(aqua.lm)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
@@ -708,10 +709,10 @@ Residuals
 <div id="one-more-look-at-ms-and-f-test" class="section level2" number="4.9">
 <h2><span class="header-section-number">4.9</span> One More Look at MS and F-test</h2>
 <p>Recall from your introductory statistics course that a sampling distribution is the distribution of a statistic from all possible samples. For example, the Central Limit Theorem states that the distribution of sample means is approximately normal, centered on μ, with a standard error of <span class="math inline">\(\frac{\sigma}{\sqrt{n}}\)</span> as long as assumptions about the sample size are met. Further recall that the sampling distribution of the sample means is centered on μ because the sample mean is an unbiased estimator of μ. Similarly, it is also known that the center of the sampling distribution of <span class="math inline">\(s^{2}\)</span> is equal to <span class="math inline">\(\sigma^{2}\)</span> because <span class="math inline">\(s^{2}\)</span> is an unbiased estimate of <span class="math inline">\(\sigma^{2}\)</span>.</p>
-<p>MS<sub>Within</sub> and MS<sub>Among</sub> are statistics just as <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(s^{2}\)</span> are statistics. Thus, MS<sub>Within</sub> and MS<sub>Among</sub> are subject to sampling variability and have sampling distributions. It can be shown<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> that the center of the sampling distribution of MS<sub>Within</sub> is <span class="math inline">\(\sigma^{2}\)</span> and the center of the sampling distribution of MS<sub>Among</sub> is</p>
-<p><span class="math display">\[ \sigma^{2} + \frac{1}{I-1}\sum_{i=1}^{I}n_{i}\left(\mu_{i}-\mu\right)^{2} \]</span></p>
-<p>Thus, MS<sub>Among</sub> consists of two “sources” of variability. The first source (<span class="math inline">\(\sigma^{2}\)</span>) is the natural variability that exists among individuals. The second source <span class="math inline">\(\left(\frac{1}{I-1}\sum_{i=1}^{I}n_{i}\left(\mu_{i}-\mu\right)^{2}\right)\)</span> is related to differences among the group means. Therefore, if the group means are all equal – i.e., <span class="math inline">\(\mu_{1}\)</span>=<span class="math inline">\(\mu_{2}\)</span>= <span class="math inline">\(\cdots\)</span> = <span class="math inline">\(\mu_{I}\)</span> = <span class="math inline">\(\mu\)</span> – then the second source of variability is equal to zero and MS<sub>Among</sub> will equal MS<sub>Within</sub>. As soon as the groups begin to differ, the second source of variability will be greater than 0 and MS<sub>Among</sub> will be greater than MS<sub>Within</sub>.</p>
-<p>From this, it follows that if the null hypothesis of equal population means is true (i.e., one mean fits all groups), then the center of the sampling distribution of both MS<sub>Within</sub> and MS<sub>Among</sub> is <span class="math inline">\(\sigma^{2}\)</span>. Therefore, if the null hypothesis is true, then the F test-statistic is expected to be equal to 1, on average, which will always result in a large p-value and a DNR H<sub>0</sub> conclusion. However, if the null hypothesis is false (i.e., separate means are needed for all groups), then the center of the sampling distribution of MS<sub>Within</sub> is <span class="math inline">\(\sigma^{2}\)</span> but the center of the sampling distribution of MS<sub>Among</sub> is <span class="math inline">\(\sigma^{2}\)</span> + “something,” where the “something” is greater than 0 and gets larger as the means become “more different.” Thus, if the null hypothesis is false then the F test-statistic is expected to be greater than 1 and will get larger as the null hypothesis gets “more false.” This analysis of sampling distribution theory illustrates once again that (1) MS<sub>Among</sub> consists of multiple sources of variability and (2) “large” values of the F test-statistic indicate that the null hypothesis is incorrect.</p>
+<p>MS<sub>Within</sub> and MS<sub>Among</sub> are statistics just as <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(s^{2}\)</span> are statistics. Thus, MS<sub>Within</sub> and MS<sub>Among</sub> are subject to sampling variability and have sampling distributions. It can be shown<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> that the center of the sampling distribution of MS<sub>Within</sub> is <span class="math inline">\(\sigma_{p}^{2}\)</span> and the center of the sampling distribution of MS<sub>Among</sub> is</p>
+<p><span class="math display">\[ \sigma_{p}^{2} + \frac{\sum_{i=1}^{I}n_{i}\left(\mu_{i}-\mu\right)^{2}}{I-1} \]</span></p>
+<p>Thus, MS<sub>Among</sub> consists of two “sources” of variability. The first source (<span class="math inline">\(\sigma_{p}^{2}\)</span>) is the natural variability that exists among individuals (around the group means). The second source <span class="math inline">\(\left(\frac{\sum_{i=1}^{I}n_{i}\left(\mu_{i}-\mu\right)^{2}}{I-1}\right)\)</span> is related to differences among the group means. Therefore, if the group means are all equal – i.e., <span class="math inline">\(\mu_{1}\)</span>=<span class="math inline">\(\mu_{2}\)</span>= <span class="math inline">\(\cdots\)</span> = <span class="math inline">\(\mu_{I}\)</span> = <span class="math inline">\(\mu\)</span> – then the second source of variability is equal to zero and MS<sub>Among</sub> will equal MS<sub>Within</sub>. As soon as the groups begin to differ, the second source of variability will be greater than 0 and MS<sub>Among</sub> will be greater than MS<sub>Within</sub>.</p>
+<p>From this, it follows that if the null hypothesis of equal population means is true (i.e., one mean fits all groups), then the center of the sampling distribution of both MS<sub>Within</sub> and MS<sub>Among</sub> is <span class="math inline">\(\sigma_{p}^{2}\)</span>. Therefore, if the null hypothesis is true, then the F test-statistic is expected to equal 1, on average, which will always result in a large p-value and a DNR H<sub>0</sub> conclusion. However, if the null hypothesis is false (i.e., separate means are needed for all groups), then the center of the sampling distribution of MS<sub>Within</sub> is <span class="math inline">\(\sigma_{p}^{2}\)</span> but the center of the sampling distribution of MS<sub>Among</sub> is <span class="math inline">\(\sigma_{p}^{2}\)</span> + “something,” where the “something” is greater than 0 and gets larger as the means become “more different.” Thus, if the null hypothesis is false then the F test-statistic is expected to be greater than 1 and will get larger as the null hypothesis gets “more false.” This analysis of sampling distribution theory illustrates once again that (1) MS<sub>Among</sub> consists of multiple sources of variability and (2) “large” values of the F test-statistic indicate that the null hypothesis is incorrect.</p>
 
 </div>
 </div>
