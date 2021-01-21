@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-19" />
+<meta name="date" content="2021-01-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -366,7 +366,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="review" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Review</h2>
 <p>The null hypothesis for a 2-sample t-test is H<sub>0</sub>: <span class="math inline">\(\mu_{1}=\mu_{2}\)</span>, where <span class="math inline">\(\mu\)</span> is the population mean and the subscripts represent the two populations. The alternative hypothesis of a 2-sample t-test may be “less than,” “greater than,” or “not equals.” We will use H<sub>A</sub>: <span class="math inline">\(\mu_{1}\ne\mu_{2}\)</span> for most examples in this course.</p>
-<p>The 2-sample t-test assumes that (i) individuals in the populations are independent; (ii) the sample size (<span class="math inline">\(n_{1}+n_{2}\)</span>) is great than 40, greater than 15 and the histograms are not strongly skewed, or the histograms are normally distributed; and (iii) the population variances are equal. The assumption of equal variances for the 2-sample t-test is tested with Levene’s test, which uses H<sub>0</sub>: <span class="math inline">\(\sigma_{1}^{2}=\sigma_{2}^{2}\)</span> and H<sub>A</sub>: <span class="math inline">\(\sigma_{1}^{2}\ne\sigma_{2}^{2}\)</span>, where <span class="math inline">\(\sigma^{2}\)</span> is the population variance. If H<sub>0</sub> is rejected for Levene’s test then the variances for both populations are assumed to be equal, such that only one combined sample variance needs to be estimated. That combined sample variance is called the <em>the pooled sample variance</em> and is computed as a weighted mean of the two sample variances,</p>
+<p>The 2-sample t-test assumes that (i) individuals in the populations are independent; (ii) the sample size (<span class="math inline">\(n_{1}+n_{2}\)</span>) is great than 40, greater than 15 and the histograms are not strongly skewed, or the histograms are normally distributed; and (iii) the population variances are equal. The assumption of equal variances for the 2-sample t-test is tested with Levene’s test, which uses H<sub>0</sub>: <span class="math inline">\(\sigma_{1}^{2}=\sigma_{2}^{2}\)</span> and H<sub>A</sub>: <span class="math inline">\(\sigma_{1}^{2}\ne\sigma_{2}^{2}\)</span>, where <span class="math inline">\(\sigma^{2}\)</span> is the population variance. If H<sub>0</sub> is <em>not</em> rejected for Levene’s test then the variances for both populations are assumed to be equal, such that only one combined sample variance needs to be estimated. That combined sample variance is called the <em>the pooled sample variance</em> and is computed as a weighted mean of the two sample variances,</p>
 <p><span class="math display">\[ s_{p}^{2}=\frac{(n_{1}-1)s_{1}^{2}+(n_{2}-1)s_{2}^{2}}{n_{1}+n_{2}-2} \]</span></p>
 <p>If the three assumptions are met then the statistic for the 2-sample t-test is <span class="math inline">\(\bar{x}_{1}-\bar{x}_{2}\)</span> which is standardized to a t test statistic with</p>
 <p><span class="math display">\[ t=\frac{\bar{x}_{1}-\bar{x}_{2}}{\sqrt{s_{p}^{2}\left(\frac{1}{n_{1}}+\frac{1}{n_{2}} \right)}} \]</span></p>
