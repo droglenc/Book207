@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-21" />
+<meta name="date" content="2021-01-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -398,7 +398,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="assumption-checking" class="section level3" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> Assumption Checking</h3>
-<p>The <a href="https://github.com/droglenc/NCData/blob/master/BOD_meta.txt">meta</a>)data suggests that measurements at the intake and outtake were taken at different times. Thus, there is no reasonable reason to think that BOD measurements are dependent across the two locations. Thus, the independence assumption is met.</p>
+<p>The <a href="https://github.com/droglenc/NCData/blob/master/BOD_meta.txt">meta</a> data suggests that measurements at the intake and outtake were taken at different times. Thus, there is no reasonable reason to think that BOD measurements are dependent across the two locations. Thus, the independence assumption is met.</p>
 <p>The sample size is less than 40 but greater than 15. The histograms shown below are not particularly informative because of the small sample size. The histogram for the inlet samples appears to be not strongly skewed, but that for the outlet appears to be strongly right-skewed. I am going to continue with this analysis, but I will be cautious with my final interpretations.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb6-1"><a href="T2Review.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>BOD)) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="T2Review.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.5</span>,<span class="at">boundary=</span><span class="dv">0</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span></span>

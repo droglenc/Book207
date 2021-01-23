@@ -47,7 +47,7 @@ Stacked data are required for the methods used in this course.
 Specific [details for performing a 2-sample t-test in R](http://derekogle.com/NCMTH107/modules/2Samplet.html) were provided in your introductory statistics course, but will be cursorily reviewed below.
 
 ### Assumption Checking
-The [meta](https://github.com/droglenc/NCData/blob/master/BOD_meta.txt))data suggests that measurements at the intake and outtake were taken at different times. Thus, there is no reasonable reason to think that BOD measurements are dependent across the two locations. Thus, the independence assumption is met.
+The [meta](https://github.com/droglenc/NCData/blob/master/BOD_meta.txt) data suggests that measurements at the intake and outtake were taken at different times. Thus, there is no reasonable reason to think that BOD measurements are dependent across the two locations. Thus, the independence assumption is met.
 
 The sample size is less than 40 but greater than 15. The histograms shown below are not particularly informative because of the small sample size. The histogram for the inlet samples appears to be not strongly skewed, but that for the outlet appears to be strongly right-skewed. I am going to continue with this analysis, but I will be cautious with my final interpretations.
 

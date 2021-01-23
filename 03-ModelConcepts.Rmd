@@ -27,7 +27,7 @@ Mirex <- Mirex %>%
 A model is a representation of something or some phenomena. It is usually a simplification or an abstraction that helps our understanding of the more complex reality. Weather forecasts, for example, are based on mathematical and statistical models (Figure \@ref(fig:WeatherForecast)).
 
 
-```{r WeatherForecast, echo=FALSE, out.width="40%", fig.cap="Weather forecast for Redwoods, CA by meteorologist Dan Romana, an alum of MTH207."}
+```{r WeatherForecast, echo=FALSE, out.width="40%", fig.cap="Weather forecast for Redwoods, CA by meteorologist Dan Romano, an alum of MTH207."}
 knitr::include_graphics("zimgs/Meteorologist.jpg")
 ```
 
