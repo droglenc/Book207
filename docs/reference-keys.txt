@@ -21,9 +21,7 @@ fig:SimpleModelResids1
 fig:BothModelResids
 fig:Fpvalue
 tab:ANOVA1
-fig:SS-1
-fig:SS-2
-fig:SS-3
+fig:SS
 tab:oppANOVA
 fig:MCProblem
 tab:CommonTranformations
@@ -41,7 +39,6 @@ fig:AFAssumptions1
 fig:AFAssumptions2
 tab:AFANOVA
 tab:AFTukey1
-tab:AFTukey2
 fig:AFMeansPlot
 tab:PDSampleSize
 fig:PDAssumptions1

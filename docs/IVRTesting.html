@@ -401,7 +401,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   \text{H}_{\text{A}}&amp;: ``\text{The Coho and Chinook lines are NOT parallel&#39;&#39;} \\
 \end{split}
 \]</span></p>
-<p>More usefully these translate into the following models<a href="#fn86" class="footnote-ref" id="fnref86"><sup>86</sup></a></p>
+<p>More usefully these translate into the following models<a href="#fn90" class="footnote-ref" id="fnref90"><sup>90</sup></a></p>
 <p><span class="math display">\[
 \begin{split}
   \text{H}_{\text{0}}&amp;: \mu_{MIREX|\cdots} = \alpha+\beta WEIGHT+\delta_{1}COHO \\
@@ -421,11 +421,11 @@ Figure 22.1: Hypothetical depictions of the models for the null and alternative 
 <div id="parallel-lines-test-from-two-models-in-r" class="section level4 unnumbered">
 <h4>Parallel Lines Test from Two Models in R</h4>
 <p>The ultimate full model provides the residual MS for the F-ratio <strong>and</strong> also serves as the full model for the parallel lines test. The ultimate full model was fit in Section @ref(ultimate-full-model-in r) as</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb156-1"><a href="IVRTesting.html#cb156-1" aria-hidden="true" tabindex="-1"></a>ivr1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species<span class="sc">+</span>weight<span class="sc">:</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb155-1"><a href="IVRTesting.html#cb155-1" aria-hidden="true" tabindex="-1"></a>ivr1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species<span class="sc">+</span>weight<span class="sc">:</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
 <p>The simple model for the parallel lines test is the ultimate full model without the interaction variable(s).</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb157-1"><a href="IVRTesting.html#cb157-1" aria-hidden="true" tabindex="-1"></a>ivr2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb156-1"><a href="IVRTesting.html#cb156-1" aria-hidden="true" tabindex="-1"></a>ivr2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
 <p>The comparison of the simple and full models can be summarized by submitting the two models to <code>anova()</code> (simple model first).</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb158-1"><a href="IVRTesting.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr2,ivr1)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb157-1"><a href="IVRTesting.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr2,ivr1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Model 1: mirex ~ weight + species
@@ -499,9 +499,9 @@ Figure 22.4: Representation of two sub-model fits that are parallel but with dif
 <div id="coincident-lines-test-from-two-models-in-r" class="section level4 unnumbered">
 <h4>Coincident Lines Test from Two Models in R</h4>
 <p>The full model for the coincident lines test was the simple module for the parallel lines test and was fit previously and saved into <code>ivr2</code>. The simple model for the coincident lines test is the simple linear regression model (i.e., no difference in slopes or intercepts); i.e.,</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb160-1"><a href="IVRTesting.html#cb160-1" aria-hidden="true" tabindex="-1"></a>ivr3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight,<span class="at">data=</span>Mirex)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb159-1"><a href="IVRTesting.html#cb159-1" aria-hidden="true" tabindex="-1"></a>ivr3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight,<span class="at">data=</span>Mirex)</span></code></pre></div>
 <p>These models are compared with <code>anova()</code>; however, the ultimate full model must be included as well so that the proper residual MS (i.e., from the ultimate full model) will be used.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb161-1"><a href="IVRTesting.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr3,ivr2,ivr1)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb160-1"><a href="IVRTesting.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr3,ivr2,ivr1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Model 1: mirex ~ weight
@@ -558,10 +558,10 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 <p> </p>
 <div id="relationship-test-from-two-models-in-r" class="section level4 unnumbered">
 <h4>Relationship Test from Two Models in R</h4>
-<p>The full model for the relationship test was the simple module for the coincident lines test and was fit previously and saved into <code>ivr3</code>. The simple model for the relationship test is the so-called ultimate simple model<a href="#fn87" class="footnote-ref" id="fnref87"><sup>87</sup></a> and is fit with</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb163-1"><a href="IVRTesting.html#cb163-1" aria-hidden="true" tabindex="-1"></a>ivr4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span><span class="dv">1</span>,<span class="at">data=</span>Mirex)</span></code></pre></div>
+<p>The full model for the relationship test was the simple module for the coincident lines test and was fit previously and saved into <code>ivr3</code>. The simple model for the relationship test is the so-called ultimate simple model<a href="#fn91" class="footnote-ref" id="fnref91"><sup>91</sup></a> and is fit with</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb162-1"><a href="IVRTesting.html#cb162-1" aria-hidden="true" tabindex="-1"></a>ivr4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span><span class="dv">1</span>,<span class="at">data=</span>Mirex)</span></code></pre></div>
 <p>These models are compared with <code>anova()</code>, again with the ultimate full model included so that the proper residual MS will be used.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb164-1"><a href="IVRTesting.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr4,ivr3,ivr1)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb163-1"><a href="IVRTesting.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr4,ivr3,ivr1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Model 1: mirex ~ 1
@@ -585,7 +585,7 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 <div id="all-tests-in-r" class="section level2" number="22.5">
 <h2><span class="header-section-number">22.5</span> All Tests in R</h2>
 <p>The parallel lines, coincident lines, and relationship tests of an IVR appears to require fitting four models as shown in the previous three sections. However, these tests can be calculated more succinctly by submitting <strong>ONLY</strong> the ultimate full model (i.e., <code>ivr1</code>) to <code>anova()</code>.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb166-1"><a href="IVRTesting.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr1)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb165-1"><a href="IVRTesting.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Response: mirex
@@ -611,25 +611,25 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 <h2><span class="header-section-number">22.6</span> More Groups (Different Slopes)</h2>
 <p>The previous example with two groups (Coho and Chinook Salmon) can be extended to more than two groups. In this example, we will continue to examine the relationship between mirex concentration in the tissue and weight of the salmon, but among three years (with both species combined).</p>
 <p>Before continuing, take note that the <code>year</code> variable in the <code>Mirex</code> data frame is considered to be numeric.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb168-1"><a href="IVRTesting.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Mirex)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb167-1"><a href="IVRTesting.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Mirex)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   &#39;data.frame&#39;: 122 obs. of  4 variables:
 #R&gt;    $ year   : int  1977 1977 1977 1977 1977 1977 1977 1977 1977 1977 ...
 #R&gt;    $ weight : num  0.41 0.45 1.04 1.09 1.24 1.25 1.3 1.34 1.37 1.49 ...
 #R&gt;    $ mirex  : num  0.16 0.19 0.19 0.1 0.13 0.19 0.28 0.16 0.17 0.2 ...
 #R&gt;    $ species: Factor w/ 2 levels &quot;chinook&quot;,&quot;coho&quot;: 1 1 1 2 1 1 1 2 2 2 ...</code></pre>
 <p>The IVR requires that the “grouping” variable be considered as a factor. If it is not then <code>lm()</code> will not form indicator variables and will instead perform what is called a multiple linear regression. Thus, <code>year</code> must be converted to a factor.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb170-1"><a href="IVRTesting.html#cb170-1" aria-hidden="true" tabindex="-1"></a>Mirex<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">factor</span>(Mirex<span class="sc">$</span>year)</span>
-<span id="cb170-2"><a href="IVRTesting.html#cb170-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Mirex)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb169-1"><a href="IVRTesting.html#cb169-1" aria-hidden="true" tabindex="-1"></a>Mirex<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">factor</span>(Mirex<span class="sc">$</span>year)</span>
+<span id="cb169-2"><a href="IVRTesting.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Mirex)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   &#39;data.frame&#39;: 122 obs. of  4 variables:
 #R&gt;    $ year   : Factor w/ 6 levels &quot;1977&quot;,&quot;1982&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 #R&gt;    $ weight : num  0.41 0.45 1.04 1.09 1.24 1.25 1.3 1.34 1.37 1.49 ...
 #R&gt;    $ mirex  : num  0.16 0.19 0.19 0.1 0.13 0.19 0.28 0.16 0.17 0.2 ...
 #R&gt;    $ species: Factor w/ 2 levels &quot;chinook&quot;,&quot;coho&quot;: 1 1 1 2 1 1 1 2 2 2 ...</code></pre>
 <p>Also, for the sake of having a simple example, only the last three years in the data will be used.</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb172-1"><a href="IVRTesting.html#cb172-1" aria-hidden="true" tabindex="-1"></a>MirexLast3 <span class="ot">&lt;-</span> <span class="fu">filter</span>(Mirex,year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1992</span>,<span class="dv">1996</span>,<span class="dv">1999</span>))</span></code></pre></div>
-<p>The ultimate full model is then fit and the ANOVA table is extracted with<a href="#fn88" class="footnote-ref" id="fnref88"><sup>88</sup></a></p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb173-1"><a href="IVRTesting.html#cb173-1" aria-hidden="true" tabindex="-1"></a>ivrY1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year<span class="sc">+</span>weight<span class="sc">:</span>year,<span class="at">data=</span>MirexLast3)</span>
-<span id="cb173-2"><a href="IVRTesting.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivrY1)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb171-1"><a href="IVRTesting.html#cb171-1" aria-hidden="true" tabindex="-1"></a>MirexLast3 <span class="ot">&lt;-</span> <span class="fu">filter</span>(Mirex,year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1992</span>,<span class="dv">1996</span>,<span class="dv">1999</span>))</span></code></pre></div>
+<p>The ultimate full model is then fit and the ANOVA table is extracted with<a href="#fn92" class="footnote-ref" id="fnref92"><sup>92</sup></a></p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb172-1"><a href="IVRTesting.html#cb172-1" aria-hidden="true" tabindex="-1"></a>ivrY1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year<span class="sc">+</span>weight<span class="sc">:</span>year,<span class="at">data=</span>MirexLast3)</span>
+<span id="cb172-2"><a href="IVRTesting.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivrY1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Response: mirex
@@ -653,9 +653,9 @@ Figure 22.6: Fitted regression lines for mirex in tissue by salmon weight for 19
 <div id="more-groups-same-slopes" class="section level2" number="22.7">
 <h2><span class="header-section-number">22.7</span> More Groups (Same Slopes)</h2>
 <p>For the purposes of having another simple example, suppose that only the first three years from the previous example were considered.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb175-1"><a href="IVRTesting.html#cb175-1" aria-hidden="true" tabindex="-1"></a>MirexFirst3 <span class="ot">&lt;-</span> <span class="fu">filter</span>(Mirex,year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1977</span>,<span class="dv">1982</span>,<span class="dv">1986</span>))</span>
-<span id="cb175-2"><a href="IVRTesting.html#cb175-2" aria-hidden="true" tabindex="-1"></a>ivrY2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year<span class="sc">+</span>weight<span class="sc">:</span>year,<span class="at">data=</span>MirexFirst3)</span>
-<span id="cb175-3"><a href="IVRTesting.html#cb175-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivrY2)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb174-1"><a href="IVRTesting.html#cb174-1" aria-hidden="true" tabindex="-1"></a>MirexFirst3 <span class="ot">&lt;-</span> <span class="fu">filter</span>(Mirex,year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1977</span>,<span class="dv">1982</span>,<span class="dv">1986</span>))</span>
+<span id="cb174-2"><a href="IVRTesting.html#cb174-2" aria-hidden="true" tabindex="-1"></a>ivrY2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year<span class="sc">+</span>weight<span class="sc">:</span>year,<span class="at">data=</span>MirexFirst3)</span>
+<span id="cb174-3"><a href="IVRTesting.html#cb174-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivrY2)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Response: mirex
@@ -679,10 +679,10 @@ Figure 22.7: Fitted regression lines for mirex in tissue by salmon weight for on
 </div>
 <div class="footnotes">
 <hr />
-<ol start="86">
-<li id="fn86"><p>The variables in this model were defined in Modules <a href="IVRVariables.html#IVRVariables">20</a>-<a href="IVRModels.html#IVRModels">21</a>.<a href="IVRTesting.html#fnref86" class="footnote-back">↩︎</a></p></li>
-<li id="fn87"><p>Because you cannot get any simpler than fitting a model without any variables.<a href="IVRTesting.html#fnref87" class="footnote-back">↩︎</a></p></li>
-<li id="fn88"><p>Assumptions should be checked and will be introduced in the next module.<a href="IVRTesting.html#fnref88" class="footnote-back">↩︎</a></p></li>
+<ol start="90">
+<li id="fn90"><p>The variables in this model were defined in Modules <a href="IVRVariables.html#IVRVariables">20</a>-<a href="IVRModels.html#IVRModels">21</a>.<a href="IVRTesting.html#fnref90" class="footnote-back">↩︎</a></p></li>
+<li id="fn91"><p>Because you cannot get any simpler than fitting a model without any variables.<a href="IVRTesting.html#fnref91" class="footnote-back">↩︎</a></p></li>
+<li id="fn92"><p>Assumptions should be checked and will be introduced in the next module.<a href="IVRTesting.html#fnref92" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

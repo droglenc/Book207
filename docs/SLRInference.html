@@ -386,7 +386,7 @@ Figure 15.2: Scatterplot for different samples of 50 observations showing an ell
 </p>
 </div>
 <p> </p>
-<p>However, more objective measure of variability around the line is needed. Recall from Section <a href="SLRFoundations.html#best-fit-line">14.2</a> that a residual measures the distance that an observation is from the line and the RSS is a synthetic measure of how far (in squared units) all individuals are from the line. Dividing the RSS by the corresponding df=<span class="math inline">\(n-2\)</span> makes a mean-square, which is a true variance.<a href="#fn64" class="footnote-ref" id="fnref64"><sup>64</sup></a> Thus, the variance of individuals around the line is</p>
+<p>However, more objective measure of variability around the line is needed. Recall from Section <a href="SLRFoundations.html#best-fit-line">14.2</a> that a residual measures the distance that an observation is from the line and the RSS is a synthetic measure of how far (in squared units) all individuals are from the line. Dividing the RSS by the corresponding df=<span class="math inline">\(n-2\)</span> makes a mean-square, which is a true variance.<a href="#fn68" class="footnote-ref" id="fnref68"><sup>68</sup></a> Thus, the variance of individuals around the line is</p>
 <p><span class="math display">\[
 s^{2}_{Y|X} = \frac{RSS}{n-2} = \frac{\sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X=x_{i}}\right)^{2}}{n-2}
 \]</span></p>
@@ -402,7 +402,7 @@ s^{2}_{Y|X} = \frac{RSS}{n-2} = \frac{\sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X=x
 </div>
 <div id="slope" class="section level2" number="15.2">
 <h2><span class="header-section-number">15.2</span> Slope</h2>
-<p>The sampling distribution of <span class="math inline">\(\hat{\beta}\)</span> follows a normal distribution,<a href="#fn65" class="footnote-ref" id="fnref65"><sup>65</sup></a> is unbiased (so centered on <span class="math inline">\(\beta\)</span>), and has a standard error of</p>
+<p>The sampling distribution of <span class="math inline">\(\hat{\beta}\)</span> follows a normal distribution,<a href="#fn69" class="footnote-ref" id="fnref69"><sup>69</sup></a> is unbiased (so centered on <span class="math inline">\(\beta\)</span>), and has a standard error of</p>
 <p><span class="math display">\[
 SE_{\hat{\beta}} = \sqrt{\frac{s^{2}_{Y|X}}{(n-1)s_{X}^{2}}}
 \]</span></p>
@@ -436,7 +436,7 @@ Figure 15.3: Demonstration of what the best-fit lines would like for the null hy
 </div>
 <div id="intercept" class="section level2" number="15.3">
 <h2><span class="header-section-number">15.3</span> Intercept</h2>
-<p>The sampling distribution of <span class="math inline">\(\hat{\alpha}\)</span> is normally distributed,<a href="#fn66" class="footnote-ref" id="fnref66"><sup>66</sup></a> unbiased (so centered on <span class="math inline">\(\alpha\)</span>), and has a standard error of</p>
+<p>The sampling distribution of <span class="math inline">\(\hat{\alpha}\)</span> is normally distributed,<a href="#fn70" class="footnote-ref" id="fnref70"><sup>70</sup></a> unbiased (so centered on <span class="math inline">\(\alpha\)</span>), and has a standard error of</p>
 <p><span class="math display">\[
 SE_{\hat{\alpha}} = \sqrt{s^{2}_{Y|X}\left(\frac{1}{n}+\frac{\overline{X}^{2}}{(n-1)s_{X}^{2}}\right)}
 \]</span></p>
@@ -456,7 +456,7 @@ H_{A}&amp;: \alpha \neq \alpha_{0}
 t=\frac{\hat{\alpha}-\alpha_{0}}{SE_{\hat{\alpha}}}
 \]</span></p>
 <p>which has <span class="math inline">\(n-2\)</span> df. Familiarly, a confidence interval for <span class="math inline">\(\alpha\)</span> is constructed with <span class="math inline">\(\hat{\alpha} \pm t^{*}SE_{\hat{\alpha}}\)</span>.</p>
-<p>A common automatically computed hypothesis test in SLR is whether the intercept is equal to zero or not. This effectively tests whether the best-fit line “goes” through the origin or not.<a href="#fn67" class="footnote-ref" id="fnref67"><sup>67</sup></a> This hypothesis is rarely of interest because the intercept is often either an extreme extrapolation (i.e., <span class="math inline">\(X=0\)</span> is far from the observed values of <span class="math inline">\(X\)</span>) or <span class="math inline">\(Y=0\)</span> does not make sense for <span class="math inline">\(Y\)</span>. For example, both of these issues are illustrated by asking whether it makes sense to test if the mean gas mileage (<span class="math inline">\(Y\)</span>) is 0 for a car that weighs (<span class="math inline">\(X\)</span>) 0 lbs?</p>
+<p>A common automatically computed hypothesis test in SLR is whether the intercept is equal to zero or not. This effectively tests whether the best-fit line “goes” through the origin or not.<a href="#fn71" class="footnote-ref" id="fnref71"><sup>71</sup></a> This hypothesis is rarely of interest because the intercept is often either an extreme extrapolation (i.e., <span class="math inline">\(X=0\)</span> is far from the observed values of <span class="math inline">\(X\)</span>) or <span class="math inline">\(Y=0\)</span> does not make sense for <span class="math inline">\(Y\)</span>. For example, both of these issues are illustrated by asking whether it makes sense to test if the mean gas mileage (<span class="math inline">\(Y\)</span>) is 0 for a car that weighs (<span class="math inline">\(X\)</span>) 0 lbs?</p>
 <div class="tip">
 <p>Testing if the y-intercept of the best-fit line (fit to raw data) is rarely of much interest as the intercept is often an extrapolation or a response value of 0 is non-sensical.</p>
 </div>
@@ -478,15 +478,15 @@ Figure 15.4: Example of centering the explanatory variable. The original data is
 <div id="slope-and-intercept-in-r" class="section level2" number="15.4">
 <h2><span class="header-section-number">15.4</span> Slope and Intercept in R</h2>
 <p>As shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a> the best-fit line is obtained using <code>lm()</code> with a model of the form <code>response~explanatory</code>. Thus, the linear model for the Mount Everest temperature data is fit with</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb85-1"><a href="SLRInference.html#cb85-1" aria-hidden="true" tabindex="-1"></a>lm1.ev <span class="ot">&lt;-</span> <span class="fu">lm</span>(MeanAirTemp<span class="sc">~</span>Altitude,<span class="at">data=</span>ev)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb84-1"><a href="SLRInference.html#cb84-1" aria-hidden="true" tabindex="-1"></a>lm1.ev <span class="ot">&lt;-</span> <span class="fu">lm</span>(MeanAirTemp<span class="sc">~</span>Altitude,<span class="at">data=</span>ev)</span></code></pre></div>
 <p>As shown in that section, a concise table of the estimated intercept and slope with 95% confidence intervals is constructed with <code>cbind()</code>, <code>coef()</code>, and <code>confint()</code>.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb86-1"><a href="SLRInference.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm1.ev),<span class="fu">confint</span>(lm1.ev))</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb85-1"><a href="SLRInference.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm1.ev),<span class="fu">confint</span>(lm1.ev))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;                        Est        2.5 %       97.5 %
 #R&gt;   (Intercept) 21.388856057 17.442040728 25.335671386
 #R&gt;   Altitude    -0.005634136 -0.006822147 -0.004446125</code></pre>
 <p>While not discussed there, these confidence intervals were computed using <span class="math inline">\(SE_{\hat{\alpha}}\)</span> and <span class="math inline">\(SE_{\hat{\beta}}\)</span> and the confidence interval formulae discussed above.</p>
 <p>More summary information may be extracted by submitting the saved <code>lm()</code> object to <code>summary()</code>.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb88-1"><a href="SLRInference.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1.ev)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb87-1"><a href="SLRInference.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1.ev)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Coefficients:
 #R&gt;                 Estimate Std. Error t value Pr(&gt;|t|)
 #R&gt;   (Intercept) 21.3888561  1.7447131   12.26 6.42e-07
@@ -515,7 +515,7 @@ corresponding parameter is equal to zero (vs. that it is not).</p>
 <div class="defn">
 <p><strong>Fitted value</strong>: Predicted <em>mean</em> value of the response variable for <em>all</em> individuals with a given value of the explanatory variable – i.e., <span class="math inline">\(\hat{\mu}_{Y|X=x_{0}}\)</span></p>
 </div>
-<p>The fitted value is a statistic that is subject to sampling variability. It is known that the fitted values have a sampling distributions that is normally distributed<a href="#fn68" class="footnote-ref" id="fnref68"><sup>68</sup></a> with a mean equal to <span class="math inline">\(\hat{\mu}_{Y|X=x_{0}}\)</span> and a standard error of</p>
+<p>The fitted value is a statistic that is subject to sampling variability. It is known that the fitted values have a sampling distributions that is normally distributed<a href="#fn72" class="footnote-ref" id="fnref72"><sup>72</sup></a> with a mean equal to <span class="math inline">\(\hat{\mu}_{Y|X=x_{0}}\)</span> and a standard error of</p>
 <p><span class="math display">\[
 \text{SE}_{\text{fits}} = \sqrt{s_{Y|X}^{2}\left(\frac{1}{n}+\frac{\left(x_{0}-\bar{X}\right)^{2}}{(n-1)s_{x}^{2}}\right)}
 \]</span></p>
@@ -547,7 +547,7 @@ Figure 15.6: Animation of 100 samples with corresponding regression lines and ho
 <div class="defn">
 <p><strong>Predicted value</strong>: Predicted value of the response variable for <em>an</em> individual with a given value of the explanatory variable. – i.e., <span class="math inline">\(\hat{Y}|X=x_{0}\)</span></p>
 </div>
-<p>Once again, the predicted value is a statistic that is subject to sampling variability. It is known that the predicted values have a sampling distribution that is normally distributed<a href="#fn69" class="footnote-ref" id="fnref69"><sup>69</sup></a> with a mean equal to <span class="math inline">\(\hat{Y}|X=x_{0}\)</span> and a standard error of</p>
+<p>Once again, the predicted value is a statistic that is subject to sampling variability. It is known that the predicted values have a sampling distribution that is normally distributed<a href="#fn73" class="footnote-ref" id="fnref73"><sup>73</sup></a> with a mean equal to <span class="math inline">\(\hat{Y}|X=x_{0}\)</span> and a standard error of</p>
 <p><span class="math display">\[
 \text{SE}_{\text{prediction}} = \sqrt{s_{Y|X}^{2}\left(\frac{1}{n}+\frac{\left(x_{0}-\bar{X}\right)^{2}}{(n-1)s_{x}^{2}}\right)+s_{Y|X}^{2}}
 \]</span></p>
@@ -560,7 +560,7 @@ Figure 15.7: Prediction (red) and confidence bands (blue) around a best-fit line
 </p>
 </div>
 <p> </p>
-<p>The prediction band shown in Figure <a href="SLRInference.html#fig:SLRPredictionBand1">15.7</a> is a 95% “confidence interval” related to the <em>placement of points</em>. To demonstrate this, points and lines from 100 random samples from the same population are plotted in Figure <a href="SLRInference.html#fig:SLRPredictionBand2">15.8</a><a href="#fn70" class="footnote-ref" id="fnref70"><sup>70</sup></a> along with the prediction band from Figure <a href="SLRInference.html#fig:SLRPredictionBand1">15.7</a>. At the end of this animation, it is evident that most (95%-ish) of the random points were contained within the 95% prediction band.</p>
+<p>The prediction band shown in Figure <a href="SLRInference.html#fig:SLRPredictionBand1">15.7</a> is a 95% “confidence interval” related to the <em>placement of points</em>. To demonstrate this, points and lines from 100 random samples from the same population are plotted in Figure <a href="SLRInference.html#fig:SLRPredictionBand2">15.8</a><a href="#fn74" class="footnote-ref" id="fnref74"><sup>74</sup></a> along with the prediction band from Figure <a href="SLRInference.html#fig:SLRPredictionBand1">15.7</a>. At the end of this animation, it is evident that most (95%-ish) of the random points were contained within the 95% prediction band.</p>
 <div class="figure" style="text-align: center"><span id="fig:SLRPredictionBand2"></span>
 <img src="Book207_files/figure-html/SLRPredictionBand2-.gif" alt="Animation of 100 samples with corresponding regression lines and points and how most of the points fit within the prediction bands shown in the previous figure." width="336" />
 <p class="caption">
@@ -582,31 +582,31 @@ value of the response variable at a given value of the explanatory variable. <sp
 <div id="predictions-in-r" class="section level2" number="15.7">
 <h2><span class="header-section-number">15.7</span> Predictions in R</h2>
 <p>As shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a> a prediction can be made in R with <code>predict()</code> using the saved <code>lm()</code> object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the <code>lm()</code> object. A confidence or prediction interval can be constructed by including <code>interval="confidence"</code> or <code>interval="prediction"</code>, respectively.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb90-1"><a href="SLRInference.html#cb90-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="dv">2552</span>)  <span class="co"># create data.frame first to save typing</span></span>
-<span id="cb90-2"><a href="SLRInference.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb89-1"><a href="SLRInference.html#cb89-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="dv">2552</span>)  <span class="co"># create data.frame first to save typing</span></span>
+<span id="cb89-2"><a href="SLRInference.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr     upr
 #R&gt;   1 7.010541 5.740331 8.28075</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb92-1"><a href="SLRInference.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb91-1"><a href="SLRInference.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr      upr
 #R&gt;   1 7.010541 3.468216 10.55287</code></pre>
 <p>Thus, one is 95% confident that the <strong>mean</strong> actual mean air temperature is between 5.74 and 8.28<sup>o</sup>C for <strong>all</strong> stations when the altitude lapse rate is 2552 C/km. In contrast one is 95% confident that the actual mean air temperature is between 3.47 and 10.55<sup>o</sup>C for <strong>a</strong> station when the altitude lapse rate is 2552 C/km.</p>
 <p>Note that multiple predictions can be made at once by including more values in the data frame given to <code>predict()</code>.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb94-1"><a href="SLRInference.html#cb94-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="fu">c</span>(<span class="dv">2552</span>,<span class="dv">3000</span>))</span>
-<span id="cb94-2"><a href="SLRInference.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb93-1"><a href="SLRInference.html#cb93-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="fu">c</span>(<span class="dv">2552</span>,<span class="dv">3000</span>))</span>
+<span id="cb93-2"><a href="SLRInference.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr      upr
 #R&gt;   1 7.010541 5.740331 8.280750
 #R&gt;   2 4.486448 3.457386 5.515509</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb96-1"><a href="SLRInference.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb95-1"><a href="SLRInference.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr       upr
 #R&gt;   1 7.010541 3.468216 10.552866
 #R&gt;   2 4.486448 1.023270  7.949626</code></pre>
 <p>The confidence band can be added to the scatterplot with the best-fit line (as shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a>) by leaving off <code>se=FALSE</code> in <code>geom_smooth()</code>. Use <code>color=</code> to change the color of the best-fit line and <code>fill=</code> to change the color of the confidence band (of so desired).</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb98-1"><a href="SLRInference.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>ev,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Altitude,<span class="at">y=</span>MeanAirTemp)) <span class="sc">+</span> </span>
-<span id="cb98-2"><a href="SLRInference.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb98-3"><a href="SLRInference.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Altitude Lapse Rate (C/km)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mean Air Temperature (C)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb98-4"><a href="SLRInference.html#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
-<span id="cb98-5"><a href="SLRInference.html#cb98-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>)</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-84-1.png" width="336" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb97-1"><a href="SLRInference.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>ev,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Altitude,<span class="at">y=</span>MeanAirTemp)) <span class="sc">+</span> </span>
+<span id="cb97-2"><a href="SLRInference.html#cb97-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb97-3"><a href="SLRInference.html#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Altitude Lapse Rate (C/km)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mean Air Temperature (C)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb97-4"><a href="SLRInference.html#cb97-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
+<span id="cb97-5"><a href="SLRInference.html#cb97-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>)</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-83-1.png" width="336" style="display: block; margin: auto;" /></p>
 <div class="tip">
 <p>Scatterplots depicting the best-fit line should usually be augmented with the confidence band.</p>
 </div>
@@ -616,14 +616,14 @@ value of the response variable at a given value of the explanatory variable. <sp
 </div>
 <div class="footnotes">
 <hr />
-<ol start="64">
-<li id="fn64"><p>Recall from Section <a href="ModelConcepts.html#mean-squares">3.4</a>.<a href="SLRInference.html#fnref64" class="footnote-back">↩︎</a></p></li>
-<li id="fn65"><p>If the assumptions of an SLR are met; see Module <a href="SLRAssumptions.html#SLRAssumptions">17</a><a href="SLRInference.html#fnref65" class="footnote-back">↩︎</a></p></li>
-<li id="fn66"><p>If the assumptions of an SLR are met; see Module <a href="SLRAssumptions.html#SLRAssumptions">17</a><a href="SLRInference.html#fnref66" class="footnote-back">↩︎</a></p></li>
-<li id="fn67"><p>Here this means the mathematical origin where (<span class="math inline">\(X\)</span>,<span class="math inline">\(Y\)</span>)=(0,0).<a href="SLRInference.html#fnref67" class="footnote-back">↩︎</a></p></li>
-<li id="fn68"><p>If the SLR assumptions are met; see Module <a href="SLRAssumptions.html#SLRAssumptions">17</a>.<a href="SLRInference.html#fnref68" class="footnote-back">↩︎</a></p></li>
-<li id="fn69"><p>If the SLR assumptions are met; see Module <a href="SLRAssumptions.html#SLRAssumptions">17</a>.<a href="SLRInference.html#fnref69" class="footnote-back">↩︎</a></p></li>
-<li id="fn70"><p>These are the same random samples as in Figure <a href="SLRInference.html#fig:SLRConfidenceBand2">15.6</a>.<a href="SLRInference.html#fnref70" class="footnote-back">↩︎</a></p></li>
+<ol start="68">
+<li id="fn68"><p>Recall from Section <a href="ModelConcepts.html#mean-squares">3.4</a>.<a href="SLRInference.html#fnref68" class="footnote-back">↩︎</a></p></li>
+<li id="fn69"><p>If the assumptions of an SLR are met; see Module <a href="SLRAssumptions.html#SLRAssumptions">17</a><a href="SLRInference.html#fnref69" class="footnote-back">↩︎</a></p></li>
+<li id="fn70"><p>If the assumptions of an SLR are met; see Module <a href="SLRAssumptions.html#SLRAssumptions">17</a><a href="SLRInference.html#fnref70" class="footnote-back">↩︎</a></p></li>
+<li id="fn71"><p>Here this means the mathematical origin where (<span class="math inline">\(X\)</span>,<span class="math inline">\(Y\)</span>)=(0,0).<a href="SLRInference.html#fnref71" class="footnote-back">↩︎</a></p></li>
+<li id="fn72"><p>If the SLR assumptions are met; see Module <a href="SLRAssumptions.html#SLRAssumptions">17</a>.<a href="SLRInference.html#fnref72" class="footnote-back">↩︎</a></p></li>
+<li id="fn73"><p>If the SLR assumptions are met; see Module <a href="SLRAssumptions.html#SLRAssumptions">17</a>.<a href="SLRInference.html#fnref73" class="footnote-back">↩︎</a></p></li>
+<li id="fn74"><p>These are the same random samples as in Figure <a href="SLRInference.html#fig:SLRConfidenceBand2">15.6</a>.<a href="SLRInference.html#fnref74" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

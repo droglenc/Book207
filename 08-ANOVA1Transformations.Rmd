@@ -1,6 +1,5 @@
 # One-Way Transformations {#ANOVA1Transformations}
-
-As discussed in Module \@ref(ANOVA1Assumptions) a One-Way ANOVA depends on four assumptions being met. If those assumptions are not met, then the results of the one-way ANOVA are invalid. Fortunately, violations of the equality of variances and normality assumptions can often be addressed by transforming the quantitative response variable to a scale where the assumptions are met. For example it is common use the natural log of the response variable rather than the response variable on its original scale.
+A One-Way ANOVA depends on four assumptions being met (see Module \@ref(ANOVA1Assumptions)). If those assumptions are not met, then the results of the one-way ANOVA are invalid. Fortunately, violations of the equality of variances and normality assumptions can often be addressed by transforming the quantitative response variable to a scale where the assumptions are met. For example it is common use the natural log of the response variable rather than the response variable on its original scale.
 
 ::: {.tip data-latex=""}
 If the assumptions of a one-way ANOVA are not met, then the data may be transformed to a scale where the assumptions are met.
@@ -18,18 +17,26 @@ Identification of an appropriate transformation and understanding the resultant 
 &nbsp;
 
 ## Power Transformations
-With power transformations, the response variable is transformed by raising it to a particular power, $\lambda$, i.e., $Y^{\lambda}$ (Table \@ref(tab:CommonTranformations)).
+The response variable may be transformed by raising it to a particular power, $\lambda$, i.e., $Y^{\lambda}$ (Table \@ref(tab:CommonTranformations)).
 
-Table: (\#tab:CommonTranformations) Common power transformations in ANOVAs.
+&nbsp;
 
-|    Power   | Name | Formula | R Code |
-|:----------:|:----:|:-------:|:-------:|
-| $\lambda$=1 | -- | $Y^{1}=Y$ | -- |
-| $\lambda$=0.5 | Square Root | $Y^{0.5}=\sqrt{Y}$ | `df$newvar <- sqrt(df$oldvar)` |
-| $\lambda$=0.33 | Cube Root | $Y^{0.33}=\sqrt[3]{Y}$ | `df$newvar <- df$oldvar^(1/3)` |
-| $\lambda$=0.25 | Fourth Root | $Y^{0.25}=\sqrt[4]{Y}$ | `df$newvar <- df$oldvar^(1/4)` |
-| $\lambda$=0 | Natural log | $log(Y)$ | `df$newvar <- log(df$oldvar)` |
-| $\lambda$=-1 | Inverse | $Y^{-1}=\frac{1}{Y}$ | `df$newvar <- 1/df$oldvar` |
+```{r CommonTranformations, echo=FALSE}
+tibble(Power=c("&lambda;=0.5","&lambda;=0.33","&lambda;=0.25",
+               "&lambda;=0","&lambda;=-1"),
+       Name=c("Square Root","Cube Root","Fourth Root","Natural Log","Inverse"),
+       Formula=c("$Y^{0.5}=\\sqrt{Y}$","$Y^{0.33}=\\sqrt[3]{Y}$",
+                 "$Y^{0.25}=\\sqrt[4]{Y}$","$log(Y)$","$Y^{-1}=\\frac{1}{Y}$"),
+       "R Code"=c("<pre style='padding: 2px; display: inline; background: transparent; border: 0;'>df$newvar &lt;- sqrt(df$oldvar)</pre>",
+                  "<pre style='padding: 2px; display: inline; background: transparent; border: 0;'>df$newvar &lt;- df$oldvar^(1/3)</pre>",
+                  "<pre style='padding: 2px; display: inline; background: transparent; border: 0;'>df$newvar &lt;- df$oldvar^(1/4)</pre>",
+                  "<pre style='padding: 2px; display: inline; background: transparent; border: 0;'>df$newvar &lt;- log(df$oldvar)</pre>",
+                  "<pre style='padding: 2px; display: inline; background: transparent; border: 0;'>df$newvar &lt;- 1/df$oldvar</pre>")) %>%
+  knitr::kable(booktabs=TRUE,escape=FALSE,
+               caption="Common power transformations in ANOVAs.") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::row_spec(c(0,4),bold=TRUE)
+```
 
 &nbsp;
 
@@ -53,22 +60,22 @@ curve(log(x),min(x1),max(x1),n=501,lwd=2,col="black",
       xlab="",ylab="",bty="n",xaxt="n",yaxt="n",tck=0,xaxs="i",yaxs="i")
 xs <- c(0.5,1,5,10)
 ys <- log(xs)
-segments(xs[1],-10,xs[1],ys[1],col="red",lty="dashed")
-segments(xs[1],ys[1],0,ys[1],col="red",lty="dashed")
-points(xs[1],min(y1),col="red",pch=16,xpd=NA)
-points(min(x1),ys[1],col="red",pch=16,xpd=NA)
-segments(xs[2],-10,xs[2],ys[2],col="red",lty="dashed")
-segments(xs[2],ys[2],0,ys[2],col="red",lty="dashed")
-points(xs[2],min(y1),col="red",pch=16,xpd=NA)
-points(min(x1),ys[2],col="red",pch=16,xpd=NA)
-segments(xs[3],-10,xs[3],ys[3],col="blue",lty="dashed")
-segments(xs[3],ys[3],0,ys[3],col="blue",lty="dashed")
-points(xs[3],min(y1),col="blue",pch=16,xpd=NA)
-points(min(x1),ys[3],col="blue",pch=16,xpd=NA)
-segments(xs[4],-10,xs[4],ys[4],col="blue",lty="dashed")
-segments(xs[4],ys[4],0,ys[4],col="blue",lty="dashed")
-points(xs[4],min(y1),col="blue",pch=16,xpd=NA)
-points(min(x1),ys[4],col="blue",pch=16,xpd=NA)
+segments(xs[1],-10,xs[1],ys[1],col=clrs2[2],lty="dashed")
+segments(xs[1],ys[1],0,ys[1],col=clrs2[2],lty="dashed")
+points(xs[1],min(y1),col=clrs2[2],pch=16,xpd=NA)
+points(min(x1),ys[1],col=clrs2[2],pch=16,xpd=NA)
+segments(xs[2],-10,xs[2],ys[2],col=clrs2[2],lty="dashed")
+segments(xs[2],ys[2],0,ys[2],col=clrs2[2],lty="dashed")
+points(xs[2],min(y1),col=clrs2[2],pch=16,xpd=NA)
+points(min(x1),ys[2],col=clrs2[2],pch=16,xpd=NA)
+segments(xs[3],-10,xs[3],ys[3],col=clrs2[1],lty="dashed")
+segments(xs[3],ys[3],0,ys[3],col=clrs2[1],lty="dashed")
+points(xs[3],min(y1),col=clrs2[1],pch=16,xpd=NA)
+points(min(x1),ys[3],col=clrs2[1],pch=16,xpd=NA)
+segments(xs[4],-10,xs[4],ys[4],col=clrs2[1],lty="dashed")
+segments(xs[4],ys[4],0,ys[4],col=clrs2[1],lty="dashed")
+points(xs[4],min(y1),col=clrs2[1],pch=16,xpd=NA)
+points(min(x1),ys[4],col=clrs2[1],pch=16,xpd=NA)
 ```
 
 &nbsp;
@@ -93,22 +100,22 @@ curve(sqrt(x),min(x1),max(x1),n=501,lwd=2,col="black",
       xlab="",ylab="",bty="n",xaxt="n",yaxt="n",tck=0,xaxs="i",yaxs="i")
 xs <- c(0.5,1,5,10)
 ys <- sqrt(xs)
-segments(xs[1],-10,xs[1],ys[1],col="red",lty="dashed")
-segments(xs[1],ys[1],0,ys[1],col="red",lty="dashed")
-points(xs[1],min(y1),col="red",pch=16,xpd=NA)
-points(min(x1),ys[1],col="red",pch=16,xpd=NA)
-segments(xs[2],-10,xs[2],ys[2],col="red",lty="dashed")
-segments(xs[2],ys[2],0,ys[2],col="red",lty="dashed")
-points(xs[2],min(y1),col="red",pch=16,xpd=NA)
-points(min(x1),ys[2],col="red",pch=16,xpd=NA)
-segments(xs[3],-10,xs[3],ys[3],col="blue",lty="dashed")
-segments(xs[3],ys[3],0,ys[3],col="blue",lty="dashed")
-points(xs[3],min(y1),col="blue",pch=16,xpd=NA)
-points(min(x1),ys[3],col="blue",pch=16,xpd=NA)
-segments(xs[4],-10,xs[4],ys[4],col="blue",lty="dashed")
-segments(xs[4],ys[4],0,ys[4],col="blue",lty="dashed")
-points(xs[4],min(y1),col="blue",pch=16,xpd=NA)
-points(min(x1),ys[4],col="blue",pch=16,xpd=NA)
+segments(xs[1],-10,xs[1],ys[1],col=clrs2[2],lty="dashed")
+segments(xs[1],ys[1],0,ys[1],col=clrs2[2],lty="dashed")
+points(xs[1],min(y1),col=clrs2[2],pch=16,xpd=NA)
+points(min(x1),ys[1],col=clrs2[2],pch=16,xpd=NA)
+segments(xs[2],-10,xs[2],ys[2],col=clrs2[2],lty="dashed")
+segments(xs[2],ys[2],0,ys[2],col=clrs2[2],lty="dashed")
+points(xs[2],min(y1),col=clrs2[2],pch=16,xpd=NA)
+points(min(x1),ys[2],col=clrs2[2],pch=16,xpd=NA)
+segments(xs[3],-10,xs[3],ys[3],col=clrs2[1],lty="dashed")
+segments(xs[3],ys[3],0,ys[3],col=clrs2[1],lty="dashed")
+points(xs[3],min(y1),col=clrs2[1],pch=16,xpd=NA)
+points(min(x1),ys[3],col=clrs2[1],pch=16,xpd=NA)
+segments(xs[4],-10,xs[4],ys[4],col=clrs2[1],lty="dashed")
+segments(xs[4],ys[4],0,ys[4],col=clrs2[1],lty="dashed")
+points(xs[4],min(y1),col=clrs2[1],pch=16,xpd=NA)
+points(min(x1),ys[4],col=clrs2[1],pch=16,xpd=NA)
 ```
 
 &nbsp;
@@ -134,22 +141,22 @@ curve(sqrt(x),min(x1),max(x1),n=501,lwd=2,col="black",
       xlab="",ylab="",bty="n",xaxt="n",yaxt="n",tck=0,xaxs="i",yaxs="i")
 xs <- c(0.05,0.1,0.3,0.6)
 ys <- sqrt(xs)
-segments(xs[1],-10,xs[1],ys[1],col="red",lty="dashed")
-segments(xs[1],ys[1],0,ys[1],col="red",lty="dashed")
-points(xs[1],min(y1),col="red",pch=16,xpd=NA)
-points(min(x1),ys[1],col="red",pch=16,xpd=NA)
-segments(xs[2],-10,xs[2],ys[2],col="red",lty="dashed")
-segments(xs[2],ys[2],0,ys[2],col="red",lty="dashed")
-points(xs[2],min(y1),col="red",pch=16,xpd=NA)
-points(min(x1),ys[2],col="red",pch=16,xpd=NA)
-segments(xs[3],-10,xs[3],ys[3],col="blue",lty="dashed")
-segments(xs[3],ys[3],0,ys[3],col="blue",lty="dashed")
-points(xs[3],min(y1),col="blue",pch=16,xpd=NA)
-points(min(x1),ys[3],col="blue",pch=16,xpd=NA)
-segments(xs[4],-10,xs[4],ys[4],col="blue",lty="dashed")
-segments(xs[4],ys[4],0,ys[4],col="blue",lty="dashed")
-points(xs[4],min(y1),col="blue",pch=16,xpd=NA)
-points(min(x1),ys[4],col="blue",pch=16,xpd=NA)
+segments(xs[1],-10,xs[1],ys[1],col=clrs2[2],lty="dashed")
+segments(xs[1],ys[1],0,ys[1],col=clrs2[2],lty="dashed")
+points(xs[1],min(y1),col=clrs2[2],pch=16,xpd=NA)
+points(min(x1),ys[1],col=clrs2[2],pch=16,xpd=NA)
+segments(xs[2],-10,xs[2],ys[2],col=clrs2[2],lty="dashed")
+segments(xs[2],ys[2],0,ys[2],col=clrs2[2],lty="dashed")
+points(xs[2],min(y1),col=clrs2[2],pch=16,xpd=NA)
+points(min(x1),ys[2],col=clrs2[2],pch=16,xpd=NA)
+segments(xs[3],-10,xs[3],ys[3],col=clrs2[1],lty="dashed")
+segments(xs[3],ys[3],0,ys[3],col=clrs2[1],lty="dashed")
+points(xs[3],min(y1),col=clrs2[1],pch=16,xpd=NA)
+points(min(x1),ys[3],col=clrs2[1],pch=16,xpd=NA)
+segments(xs[4],-10,xs[4],ys[4],col=clrs2[1],lty="dashed")
+segments(xs[4],ys[4],0,ys[4],col=clrs2[1],lty="dashed")
+points(xs[4],min(y1),col=clrs2[1],pch=16,xpd=NA)
+points(min(x1),ys[4],col=clrs2[1],pch=16,xpd=NA)
 ```
 
  
@@ -157,15 +164,25 @@ points(min(x1),ys[4],col="blue",pch=16,xpd=NA)
 
 As demonstrated above, the common transformations listed in Table \@ref(tab:CommonTranformations) vary in their ability to "normalize" skewed distributions. Generally the common transformations in Table \@ref(tab:CommonTranformations) are ordered from least to most powerful. In other words, the transformations are ordered from those that "normalize" mildly skewed data to those that "normalize" strongly skewed data.^[Alternatively, the transformations are listed in order from the transformations that "spread out" the small values the least to those that "spread out" the small values the most.]
 
-It is possible to "combine" one of the common powers with the inverse transformation to create a larger array of transformations. For example, $\lambda$=-0.5 is an inverse square-root transformation. These types of transformations are common but less common than those listed in Table \@ref(tab:CommonTranformations).
+It is possible to "combine" one of the common powers with the inverse transformation to create a larger array of transformations. For example, $\lambda$=-0.5 is an inverse square-root transformation. These types of transformations are common but less common than those listed in Table 
+\@ref(tab:CommonTranformations).
 
-Table: (\#tab:CommonInvTranformations) Common inverse power transformations in ANOVAs. These transformations are much less common than those in Table \@ref(tab:CommonTranformations).
+&nbsp;
 
-|    Power   | Name | Formula | R Code |
-|:----------:|:----:|:-------:|:-------:|
-| $\lambda$=-0.25 | Inverse Fourth Root | $Y^{-0.25}=\frac{1}{\sqrt[4]{Y}}$ | `df$ifourrt.y <- df$Y^(-1/4)` |
-| $\lambda$=-0.33 | Inverse Cube Root | $Y^{-0.33}=\frac{1}{\sqrt[3]{Y}}$ | `df$icubert.y <- df$Y^(-1/3)` |
-| $\lambda$=-0.5 | Inverse Square Root | $Y^{-0.5}=\frac{1}{\sqrt{Y}}$ | `df$isqrt.y <- 1/sqrt(df$Y)` |
+```{r CommonInvTranformations, echo=FALSE}
+tibble(Power=c("&lambda;=-0.5","&lambda;=-0.33","&lambda;=-0.25"),
+       Name=c("Inverse Square Root","Inverse Cube Root","Inverse Fourth Root"),
+       Formula=c("$Y^{-0.5}=\\frac{1}{\\sqrt{Y}}$",
+                 "$Y^{-0.33}=\\frac{1}{\\sqrt[3]{Y}}$",
+                 "$Y^{-0.25}=\\frac{1}{\\sqrt[4]{Y}}$"),
+       "R Code"=c("<pre style='padding: 2px; display: inline; background: transparent; border: 0;'>df$newvar &lt;- 1/sqrt(df$oldvar)</pre>",
+                  "<pre style='padding: 2px; display: inline; background: transparent; border: 0;'>df$newvar &lt;- df$oldvar^(-1/3)</pre>",
+                  "<pre style='padding: 2px; display: inline; background: transparent; border: 0;'>df$newvar &lt;- df$oldvar^(-1/4)</pre>")) %>%
+  knitr::kable(booktabs=TRUE,escape=FALSE,
+               caption="Common inverse power transformations in ANOVAs. These transformations are much less common than those in Table \\@ref(tab:CommonTranformations).") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::row_spec(0,bold=TRUE)
+```
 
 &nbsp;
 
@@ -180,14 +197,16 @@ lm1 <- lm(imm~season,data=opp)
 assumptionCheck(lm1,lambday=0)  #lambda=0 corresponds to log-transformation
 ```
 
-Of course, it was shown in Section \@ref(testing-assumptions-in-r) that the assumptions for a One-Way ANOVA with these data had been met; thus, there is no need to explore a transformation here. However, this shows how easily one quickly test various transformations for a given set of data.
+&nbsp;
+
+Of course, it was shown in Section \@ref(testing-assumptions-in-r) that the assumptions for a One-Way ANOVA with these data had been met; thus, there is no need to explore a transformation here. However, this shows how easily one can quickly test various transformations for a given set of data.
 
 Note that `assumptionCheck()` only transform the data "behind-the-scenes." If you want to continue with transformed data then you need to use R code like that shown in the last columns of Tables \@ref(tab:CommonTranformations) and \@ref(tab:CommonInvTranformations).
 
 &nbsp;
 
 ## Transformations from Theory
-Certain special transformations are common in particular fields of study and are generally well-known to scientists in those fields. An example that crosses many fields is the transformation of proportions or percentages data by using the arcsine square-root function (i.e., $\text{sin}^{-1}(\sqrt{Y})$). Also, a possible power transformation may be chosen from theory related to the response variable. For example, it is common to square-root transform response variables that are areas and cube-root transform response variables that are volumes. In addition, discrete counts are often transformed with the square root.
+Certain special transformations are common in particular fields of study and are generally well-known to scientists in those fields. An example that crosses many fields is the transformation of proportions or percentages data by using the arcsine square-root function (i.e., $\text{sin}^{-1}(\sqrt{Y})$). Also, a possible power transformation may be chosen from theory related to the response variable. For example, it is common to square-root transform areas and cube-root transform volumes. In addition, discrete counts are often square-root transformed.
 
 &nbsp;
 
@@ -216,7 +235,7 @@ For example, suppose that the difference in log means for two groups is 0.5. Bac
 
 Alternatively, suppose that the difference in log means for two groups is -0.5. Back-transforming this value gives $e$<sup>-0.5</sup>=`r formatC(exp(-0.5),format="f",digits=3)`. Thus, on the original scale, the mean for the first group is `r formatC(exp(-0.5),format="f",digits=3)` as large as the mean for the second group. Or, the mean for the *second* group is $\frac{1}{`r formatC(exp(-0.5),format="f",digits=3)`}$=`r formatC(1/exp(-0.5),format="f",digits=3)` times larger than the mean for the *first* group.
 
-Log-transformations are very special, as they allow both means and differences in means to be back-transformed to the original scale with a meaningful result. Because of this, the first transformation that you should try in all situations is the log-transformation. Many times we prefer the log-transformation over other transformations, even if the assumptions are not perfectly met with the log-transformation.
+Log-transformations are special as they allow both means and differences in means to be back-transformed to the original scale with a meaningful result. Because of this, **the first transformation that you should try in all situations is the log-transformation.** Many times we prefer the log-transformation over other transformations, even if the assumptions are not perfectly met with the log-transformation.
 
 ::: {.tip data-latex=""}
 Always try the log-transformation first as it allows for meaningful back-transformations of means and differences.
@@ -225,9 +244,7 @@ Always try the log-transformation first as it allows for meaningful back-transfo
 If the log transformation does not work to meet the assumptions of the One-Way ANOVA then you should start with the least strong transformation (i.e., the square root) and successively move through more strong transformations until the assumptions are adequately met.
 
 ## Back-Transformations in R
-Transformations and back-transformations will be illustrated more in this module's assignment and in Module \@ref(ANOVA1Summary). However, the `emmeans()` function introduced in Section \@ref(multiple-comparisons-in-r) makes back-transformations very easy.
-
-While a transformation was not needed for the New Zealand opossums example, let's suppose for illustrative purposes that a square root transformation was used. First, a square root variable is created and a new ANOVA model with this variable is used.
+The `emmeans()` function introduced in Section \@ref(multiple-comparisons-in-r) makes back-transformations very easy.^[Transformations and back-transformations will be illustrated more in this module's assignment and in Module \@ref(ANOVA1Summary).] While a transformation was not needed for the New Zealand opossums example, let's suppose for illustrative purposes that a square root transformation was used. First, a square root variable is created and a new ANOVA model with this variable is used.
 
 ```{r}
 opp$sqrtimm <- sqrt(opp$imm)
@@ -242,7 +259,7 @@ mct <- emmeans(lm2,specs=pairwise~season,tran="sqrt")
 ( mcsumt <- summary(mct,infer=TRUE) )
 ```
 
-More importantly if you declare your transformation with `tran=` then you can use `summary()` to **appropriately** back-transform the results by including `type="response"`. Here, the `$emmeans` results are back-transformed as the *"Intervals are back-transformed from the sqrt scale"* note indicates, but you are reminded that the p-values were computed on the transformed scale with the *"Tests are performed on the sqrt scale"*. The `$contrasts` results are left on the square root scales as noted with *"Note: contrasts are still on the sqrt scale"* because `emmeans()` is smart enough to know that you should not back-transform *differences* when using a square root transformation.
+More importantly if you declare your transformation with `tran=` then you can use `summary()` to **appropriately** back-transform the results by including `type="response"`. Here, the `$emmeans` results are back-transformed as the *"Intervals are back-transformed from the sqrt scale"* note indicates, but you are reminded that the p-values were computed on the transformed scale with the *"Tests are performed on the sqrt scale"* note. The `$contrasts` results are left on the square root scales as noted with *"Note: contrasts are still on the sqrt scale"* because `emmeans()` is smart enough to know that you should not back-transform *differences* when using a square root transformation.
 
 ```{r}
 ( mcsumbt <- summary(mct,infer=TRUE,type="response") )
@@ -275,7 +292,7 @@ mct <- emmeans(lm2,specs=pairwise~season,tran="log")
 ( mcsumt <- summary(mct,infer=TRUE) )
 ```
 
-However, when `type="response"` is used, the `$emmeans` portion of the results are back-transformed with a note again saying so. However, the `$contrasts` portion is now also back-transformed because `emmeans()` is smart enough to know that it is possible (and useful) to back-transform differences from the log scale. In fact the rows in the `$contrasts` portion are appropriately labeled as **ratios** to aid your interpretation.
+When `type="response"` is used the `$emmeans` portion of the results are back-transformed with a note again saying so. However, the `$contrasts` portion is now also back-transformed because `emmeans()` is smart enough to know that it is possible (and useful) to back-transform differences from the log scale. In fact the rows in the `$contrasts` portion are appropriately labeled as **ratios** to aid your interpretation.
 
 ```{r}
 ( mcsumbt <- summary(mct,infer=TRUE,type="response") )
