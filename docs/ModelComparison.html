@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-25" />
+<meta name="date" content="2021-01-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -367,7 +367,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="general" class="section level3" number="4.1.1">
 <h3><span class="header-section-number">4.1.1</span> General</h3>
 <p>Many hypothesis tests can be cast in a framework of competing models. In this module we will cast the familiar 2-sample t-test in this framework which will then serve as a conceptual foundation for all other models in this course.</p>
-<p>The two competing models are generically called the <em>simple</em> and <em>full</em> models (Table <a href="ModelComparison.html#tab:ModelDifferences">4.1</a>). The simple model is simpler than the full model in the sense that it has fewer parameters. However, the simple model fits the data “worse” than a full model. Thus, determining which model to use becomes a question of balancing “fit” (full model fits better than the simple model) with complexity (simple model is less complex than the full model). Because the simple model corresponds to H<sub>0</sub> and the full model corresponds to H<sub>A</sub>, deciding which model to use is the same as deciding which hypothesis is supported by the data.</p>
+<p>The two competing models are generically called the <em>simple</em> and <em>full</em> models (Table <a href="ModelComparison.html#tab:ModelDifferences">4.1</a>). The simple model is simpler than the full model in the sense that it has fewer parameters. However, the simple model fits the data “worse” than the full model. Thus, determining which model to use becomes a question of balancing “fit” (full model fits better than the simple model) with complexity (full model is more complex than the simple model). Because the simple model corresponds to H<sub>0</sub> and the full model corresponds to H<sub>A</sub>, deciding which model to use is the same as deciding which hypothesis is supported by the data.</p>
 <p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -451,11 +451,12 @@ Alternative
 Figure 4.1: Biological oxygen demand versus sample location with group means shown as blue horizontal segments and the grand mean shown as a red horizontal segment.
 </p>
 </div>
+<p> </p>
 <p>In contrast, H<sub>A</sub> in the 2-sample t-test is that the two population means differ (i.e., they are not equal). This hypothesis suggests that two separate means are needed to predict observations in the separate groups. The model for this situation is</p>
 <p><span class="math display">\[ Y_{ij} = \mu_{i} + \epsilon_{ij} \]</span></p>
 <p>where <span class="math inline">\(\mu_{i}\)</span> is the population mean for the <span class="math inline">\(i\)</span>th group. This model means that <span class="math inline">\(\mu_{1}\)</span> is the predicted response value for observations in the first group and <span class="math inline">\(\mu_{2}\)</span> is the predicted response value for observations in the second group. This model looks like the two blue lines in Figure <a href="ModelComparison.html#fig:Models1">4.1</a>.</p>
 <p>Thus, for a 2-sample t-test, the <strong>simple model</strong> corresponds to H<sub>0</sub>: <span class="math inline">\(\mu_{1}=\mu_{2}\)</span> (=<span class="math inline">\(\mu\)</span>), has fewer parameters (i.e., requires only one mean; the red line in the plots above), and fits “worse.”<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> In contrast, the <strong>full model</strong> corresponds to H<sub>A</sub>: <span class="math inline">\(\mu_{1}\ne\mu_{2}\)</span>, has more parameters (i.e., requires two means; the blue lines in the plots above), and fits “better.”</p>
-<p>In the ensuing sections we will develop a method to determine if the increase in “fit” is worth the increase in “complexity.”</p>
+<p>In the ensuing sections we develop a method to determine if the improvement in “fit” is worth the increase in “complexity.”</p>
 <p> </p>
 </div>
 </div>
@@ -490,7 +491,7 @@ Figure 4.3: Biological oxygen demand versus sample location with the group means
 </div>
 <p> </p>
 <p>Thus, SS<sub>Total</sub> measures the lack-of-fit of the grand mean to the data or the lack-of-fit of the simple model. SS<sub>Within</sub>, in contrast, measures the lack-of-fit of the group means to the data or the lack-of-fit of the full model.</p>
-<p>In this example, SS<sub>Total</sub>=25.28 and SS<sub>Within</sub>=4.60. Because SS<sub>Within</sub> is less than SS<sub>Total</sub> that means that the full model that uses μ<sub>i</sub> fits the data better than the simple model that uses just <span class="math inline">\(\mu\)</span>.</p>
+<p>In this example, SS<sub>Total</sub>=25.28 and SS<sub>Within</sub>=4.60. Because SS<sub>Within</sub> is less than SS<sub>Total</sub> that means that the full model that uses <span class="math inline">\(\mu_{i}\)</span> fits the data better than the simple model that uses just <span class="math inline">\(\mu\)</span>.</p>
 <p>However, we knew that this was going to happen as the full model always fits better. What we need now is a measure of how much better the full model fits or, equivalently, a measure of how much the lack-of-fit was reduced by using the full model rather than the simple model.</p>
 <div class="tip">
 <p>SS<sub>Total</sub> measures the lack-of-fit of the simple model, whereas SS<sub>Within</sub> measures the lack-of-fit of the full model.</p>
@@ -501,12 +502,11 @@ Figure 4.3: Biological oxygen demand versus sample location with the group means
 </div>
 <div id="ssamong" class="section level3" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> SS<sub>Among</sub></h3>
-<p>An useful property of SS<sub>Total</sub> is that it “partitions” into two parts according to the following simple formula</p>
+<p>A useful property of SS<sub>Total</sub> is that it “partitions” into two parts according to the following simple formula</p>
 <p><span class="math display">\[ \text{SS}_{\text{Total}} = \text{SS}_{\text{Within}} + \text{SS}_{\text{Among}} \]</span></p>
-<p>This introduces a new quantity, SS<sub>Among</sub>. A quick re-arrangement of the partitioning of SS<sub>Total</sub> shows that</p>
+<p>A quick re-arrangement of the partitioning of SS<sub>Total</sub> shows that</p>
 <p><span class="math display">\[ \text{SS}_{\text{Among}} = \text{SS}_{\text{Total}} - \text{SS}_{\text{Within}} \]</span></p>
-<p>Thus, SS<sub>Among</sub> records how much the lack-of-fit was reduced by using the full model rather than the simple model. In other words, SS<sub>Among</sub> records how much “better” the full model fits the data than the simple model.</p>
-<p>In our example, SS<sub>Among</sub>=25.28-4.60=20.68. Thus, the residual SS from the simple model was reduced by 20.68 when the full model was used.</p>
+<p>Thus, SS<sub>Among</sub> records how much the lack-of-fit was reduced by using the full model rather than the simple model. In other words, SS<sub>Among</sub> records how much “better” the full model fits the data than the simple model. In our example, SS<sub>Among</sub>=25.28-4.60=20.68. Thus, the residual SS from the simple model was reduced by 20.68 when the full model was used.</p>
 <div class="tip">
 <p>SS<sub>Among</sub> is the <strong>benefit</strong> (i.e., reduction in lack-of-fit) of using the full rather than simple model</p>
 </div>
@@ -520,11 +520,11 @@ Figure 4.4: Mean biological oxygen demand versus sample location with the grand 
 </p>
 </div>
 <p> </p>
-<p>From the figure above, it is seen that SS<sub>Among</sub> will increase as the group means become more different. This can also be seen by increasing or decreasing the difference between the group means and the grand mean in the interactive graphic below (Note how SS<sub>Among</sub> (and SS<sub>Total</sub>) change).</p>
+<p>From the figure above, it is seen that SS<sub>Among</sub> will increase as the group means become more different. This can also be seen by increasing or decreasing the difference between the group means and the grand mean in the interactive graphic below. [<em>Note how SS<sub>Among</sub> (and SS<sub>Total</sub>) change.</em>]</p>
 <iframe src="https://derek-ogle.shinyapps.io/App_SSTotal_Partitioning/?showcase=0" width="75%" height="800px">
 </iframe>
 <p> </p>
-<p>So, SS<sub>Among</sub> is immensely useful – it is a measure of “benefit” that will be used in a “benefit-to-cost” ratio that will ultimately be the “signal” that will be used in a “signal-to-noise” ratio. These ratios are In Sections <a href="ModelComparison.html#noise-variances">4.4</a> and <a href="ModelComparison.html#signal-variance-benefit-to-cost">4.5</a>. However, next we discuss how to measure the “cost” of using the more complex full model.</p>
+<p>So, SS<sub>Among</sub> is immensely useful – it is a measure of “benefit” that will be used in a “benefit-to-cost” ratio that will ultimately be the “signal” that will be used in a “signal-to-noise” ratio. These ratios are introduced in Sections <a href="ModelComparison.html#noise-variances">4.4</a> and <a href="ModelComparison.html#signal-variance-benefit-to-cost">4.5</a>. However, next we discuss how to measure the “cost” of using the more complex full model.</p>
 <div class="tip">
 <p>SS<sub>Among</sub> is the <strong>benefit</strong> (i.e., reduction in lack-of-fit) from using the full model and will ultimately be used to measure the <strong>signal</strong> (i.e., relative difference in group means) in the data.</p>
 </div>
@@ -542,7 +542,6 @@ Figure 4.4: Mean biological oxygen demand versus sample location with the grand 
 <div class="tip">
 <p>df<sub>Among</sub> is the extra <strong>cost</strong> (i.e., loss of df due to more parameters to estimate) from using the full rather than simple model.</p>
 </div>
-<p> </p>
 </div>
 <div id="noise-variances" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> “Noise” Variances</h2>
@@ -562,7 +561,6 @@ Figure 4.4: Mean biological oxygen demand versus sample location with the grand 
 <div class="tip">
 <p>MS<sub>Within</sub>=<span class="math inline">\(s_{p}^{2}\)</span> from the 2-sample t-test.</p>
 </div>
-<p> </p>
 </div>
 <div id="signal-variance-benefit-to-cost" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> “Signal” Variance (Benefit-to-Cost)</h2>
@@ -573,11 +571,13 @@ Figure 4.4: Mean biological oxygen demand versus sample location with the grand 
 </div>
 <div id="ratio-of-variances-signal-to-noise" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Ratio of Variances (Signal-to-Noise)</h2>
-<p>From the above discussion we have a measure of potential “signal” in MS<sub>Among</sub>, but it is contaminated with some “noise,” and actual “noise” around the full model (the model representing the “signal”) in MS<sub>Within</sub>. A ratio of this “signal” to “noise” is called an F test statistic; i.e.,</p>
+<p>From the above discussion we have a measure of potential “signal” in MS<sub>Among</sub>, but it is contaminated with some “noise.” Additionally, we have a measure of just “noise” around the full model (the model representing the “signal”) in MS<sub>Within</sub>. A ratio of this “signal” to “noise” is called an F test statistic; i.e.,</p>
+<p> </p>
 <p><span class="math display">\[ \text{F}=\frac{\text{MS}_{\text{Among}}}{\text{MS}_{\text{Within}}} = \frac{\text{Signal}}{\text{Noise}} = \frac{\text{Variance Explained by Full Model}}{\text{Variance Unexplained by Full Model}} \]</span></p>
+<p> </p>
 <p>If the F-ratio is “large,” then “signal” is stronger than the “noise.” A large F-ratio also means that more variability was explained than was unexplained by the full model. Thus, large F-ratio values mean that the full model fits the data significantly better than the simple model, even considering the increased complexity of the full model.</p>
 <p>The question now becomes “when is the F-ratio considered large enough to reject the simple model and conclude that the full model is significantly better?” This question is answered by comparing the F-ratio test statistic to an F-distribution.</p>
-<p>An F-distribution<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> is right-skewed, with the exact shape of the distribution dictated by two separate degrees-of-freedom – called the numerator and denominator degrees-of-freedom, respectively. The numerator df is equal to the df used in MS<sub>Among</sub>, whereas the denominator df is equal to the df used in MS<sub>Within</sub>. The p-value is always computed as the area under the F-distribution curve to the right of the observed F-ratio test statistic (Figure <a href="ModelComparison.html#fig:Fpvalue">4.5</a>).<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
+<p>An F-distribution<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> is right-skewed, with the exact shape of the distribution dictated by two separate df – called the numerator and denominator df, respectively. The numerator df is equal to the df used in MS<sub>Among</sub>, whereas the denominator df is equal to the df used in MS<sub>Within</sub>. The p-value is always computed as the area under the F-distribution curve to the <em>right</em> of the observed F-ratio test statistic (Figure <a href="ModelComparison.html#fig:Fpvalue">4.5</a>).<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
 <div class="figure" style="text-align: center"><span id="fig:Fpvalue"></span>
 <img src="Book207_files/figure-html/Fpvalue-1.png" alt="An F distribution with 4 numerator and 20 denominator degrees-of-freedom. The shaded area demonstrates calculating a p-value for an F-ratio of 2.2." width="336" />
 <p class="caption">
@@ -588,10 +588,10 @@ Figure 4.5: An F distribution with 4 numerator and 20 denominator degrees-of-fre
 <p>From all of the previous discussion, it can be seen that …</p>
 <ul>
 <li>a small p-value comes from a large F-ratio, which comes from</li>
-<li>a large MS<sub>Among</sub> relative to MS<sub>Within</sub>, which means *that</li>
+<li>a large MS<sub>Among</sub> relative to MS<sub>Within</sub>, which means that</li>
 <li>the full model explains more variability than is left unexplained and that the “signal” is much greater than the “noise,” which means that</li>
-<li>the full model does fit significantly better than the simple model (even given the increased complexity), and,</li>
-<li>thus, the means are indeed different.</li>
+<li>the full model does fit significantly better than the simple model (even given the increased complexity), and, thus,</li>
+<li>the means are indeed different.</li>
 </ul>
 <p>This cascade of measures can be explored with the dynamic graphic below.</p>
 <iframe src="https://derek-ogle.shinyapps.io/App_F_Meaning/?showcase=0" width="80%" height="800px">
@@ -674,8 +674,8 @@ Residuals
 <p>These results indicate that H<sub>0</sub> should be rejected (i.e., F-test p-value &lt;0.00005). Thus, the full model fits the data significantly better than the simple model even given the increased complexity and sampling variability. Therefore, there is a significant difference in mean BOD between the two source locations.</p>
 <p>In addition to the primary objective of comparing the full and simple models and making a conclusion about the equality of group means, several other items of interest can be identified from an ANOVA table. Using the table above as an example, note that</p>
 <ul>
-<li>the variance within groups is (=MS<sub>Within</sub>=MS<sub>Residuals=<span class="math inline">\(s_{p}^{2}\)</span>), and</li>
-<li>the common variance about the mean is NaN (=MS<sub>Total</sub>=<span class="math inline">\(s^{2}\)</span>=<span class="math inline">\(\frac{+}{+}\)</span>).</li>
+<li>the variance within groups is 0.2556 (=MS<sub>Within</sub>=MS<sub>Residuals=<span class="math inline">\(s_{p}^{2}\)</span>), and</li>
+<li>the common variance about the mean is 1.3303 (=MS<sub>Total</sub>=<span class="math inline">\(s^{2}\)</span>=<span class="math inline">\(\frac{20.6756+4.6008}{1+18}\)</span>).</li>
 </ul>
 <div class="tip">
 <p>SS and df partition, but MS do not! Do not add MS<sub>Among</sub> and MS<sub>Within</sub> to get MS<sub>Total</sub>, instead divide SS<sub>Total</sub> by df<sub>Total</sub>.</p>

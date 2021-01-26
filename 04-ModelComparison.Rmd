@@ -17,7 +17,7 @@ aqua <- left_join(aqua,aqua_mns,by="src") %>%
 ### General
 Many hypothesis tests can be cast in a framework of competing models. In this module we will cast the familiar 2-sample t-test in this framework which will then serve as a conceptual foundation for all other models in this course.
 
-The two competing models are generically called the *simple* and *full* models (Table \@ref(tab:ModelDifferences)). The simple model is simpler than the full model in the sense that it has fewer parameters. However, the simple model fits the data "worse" than a full model. Thus, determining which model to use becomes a question of balancing "fit" (full model fits better than the simple model) with complexity (simple model is less complex than the full model). Because the simple model corresponds to H<sub>0</sub> and the full model corresponds to H<sub>A</sub>, deciding which model to use is the same as deciding which hypothesis is supported by the data.
+The two competing models are generically called the *simple* and *full* models (Table \@ref(tab:ModelDifferences)). The simple model is simpler than the full model in the sense that it has fewer parameters. However, the simple model fits the data "worse" than the full model. Thus, determining which model to use becomes a question of balancing "fit" (full model fits better than the simple model) with complexity (full model is more complex than the simple model). Because the simple model corresponds to H<sub>0</sub> and the full model corresponds to H<sub>A</sub>, deciding which model to use is the same as deciding which hypothesis is supported by the data.
 
 &nbsp;
 
@@ -55,6 +55,8 @@ ggplot(data=aqua) +
   theme_NCStats()
 ```
 
+&nbsp;
+
 In contrast, H<sub>A</sub> in the 2-sample t-test is that the two population means differ (i.e., they are not equal). This hypothesis suggests that two separate means are needed to predict observations in the separate groups. The model for this situation is
 
 $$ Y_{ij} = \mu_{i} + \epsilon_{ij} $$
@@ -63,7 +65,7 @@ where $\mu_{i}$ is the population mean for the $i$th group. This model means tha
 
 Thus, for a 2-sample t-test, the **simple model** corresponds to H<sub>0</sub>: $\mu_{1}=\mu_{2}$ (=$\mu$), has fewer parameters (i.e., requires only one mean; the red line in the plots above), and fits "worse."^[We will be more objective in the following sections, but an examination of the plot above clearly shows that the red line does not represent the observations well.] In contrast, the **full model** corresponds to H<sub>A</sub>: $\mu_{1}\ne\mu_{2}$, has more parameters (i.e., requires two means; the blue lines in the plots above), and fits "better."
 
-In the ensuing sections we will develop a method to determine if the increase in "fit" is worth the increase in "complexity."
+In the ensuing sections we develop a method to determine if the improvement in "fit" is worth the increase in "complexity."
 
 &nbsp;
 
@@ -88,9 +90,9 @@ ggplot(data=aqua) +
   geom_crossbar(mapping=aes(x=src,y=mn,ymin=mn,ymax=mn),color="transparent") +
   geom_crossbar(mapping=aes(x=1.5,y=gmn,ymin=gmn,ymax=gmn),
                 width=1.25,color=clr_simple) +
-  geom_point(mapping=aes(x=srcjit,y=BOD),alpha=0.25) +
+  geom_point(mapping=aes(x=srcjit,y=BOD),alpha=0.5) +
   geom_segment(data=aqua,mapping=aes(x=srcjit,xend=srcjit,y=BOD,yend=gmn),
-               color=clr_simple,linetype="dashed") +
+               color=clr_simple,linetype="dashed",alpha=0.5) +
   labs(y="Biological Oxygen Demand",x="Water Sample Location",
        title=bquote("Residuals for"~SS[Total])) +
   annotate(geom="text",x=1.7,y=6.5,
@@ -123,9 +125,9 @@ The $\bar{Y}_{i\cdot}$ are used here because they are an estimate of the populat
 ggplot(data=aqua) +
   geom_crossbar(mapping=aes(x=src,y=mn,ymin=mn,ymax=mn),
                 width=0.25,color=clr_full) +
-  geom_point(mapping=aes(x=srcjit,y=BOD),alpha=0.25) +
+  geom_point(mapping=aes(x=srcjit,y=BOD),alpha=0.5) +
   geom_segment(data=aqua,mapping=aes(x=srcjit,xend=srcjit,y=BOD,yend=mn),
-               color=clr_full,linetype="dashed") +
+               color=clr_full,linetype="dashed",alpha=0.5) +
   labs(y="Biological Oxygen Demand",x="Water Sample Location",
        title=bquote("Residuals for"~SS[Within])) +
   annotate(geom="text",x=1.7,y=6.5,
@@ -148,7 +150,7 @@ ggplot(data=aqua) +
 
 Thus, SS<sub>Total</sub> measures the lack-of-fit of the grand mean to the data or the lack-of-fit of the simple model. SS<sub>Within</sub>, in contrast, measures the lack-of-fit of the group means to the data or the lack-of-fit of the full model.
 
-In this example, SS<sub>Total</sub>=`r formatC(sum(aqua$residS^2),format="f",digits=2)` and SS<sub>Within</sub>=`r formatC(sum(aqua$residF^2),format="f",digits=2)`. Because SS<sub>Within</sub> is less than SS<sub>Total</sub> that means that the full model that uses &mu;<sub>i</sub> fits the data better than the simple model that uses just $\mu$.
+In this example, SS<sub>Total</sub>=`r formatC(sum(aqua$residS^2),format="f",digits=2)` and SS<sub>Within</sub>=`r formatC(sum(aqua$residF^2),format="f",digits=2)`. Because SS<sub>Within</sub> is less than SS<sub>Total</sub> that means that the full model that uses $\mu_{i}$ fits the data better than the simple model that uses just $\mu$.
 
 However, we knew that this was going to happen as the full model always fits better. What we need now is a measure of how much better the full model fits or, equivalently, a measure of how much the lack-of-fit was reduced by using the full model rather than the simple model.
 
@@ -162,17 +164,15 @@ The full model always fits better than the simple model, even if by just a small
 :::
 
 ### SS<sub>Among</sub>
-An useful property of SS<sub>Total</sub> is that it "partitions" into two parts according to the following simple formula
+A useful property of SS<sub>Total</sub> is that it "partitions" into two parts according to the following simple formula
 
 $$ \text{SS}_{\text{Total}} = \text{SS}_{\text{Within}} + \text{SS}_{\text{Among}} $$
 
-This introduces a new quantity, SS<sub>Among</sub>. A quick re-arrangement of the partitioning of SS<sub>Total</sub> shows that
+A quick re-arrangement of the partitioning of SS<sub>Total</sub> shows that
 
 $$ \text{SS}_{\text{Among}} = \text{SS}_{\text{Total}} - \text{SS}_{\text{Within}} $$
 
-Thus, SS<sub>Among</sub> records how much the lack-of-fit was reduced by using the full model rather than the simple model. In other words, SS<sub>Among</sub> records how much "better" the full model fits the data than the simple model.
-
-In our example, SS<sub>Among</sub>=`r formatC(sum(aqua$residS^2),format="f",digits=2)`-`r formatC(sum(aqua$residF^2),format="f",digits=2)`=`r formatC(sum(aqua$residS^2)-sum(aqua$residF^2),format="f",digits=2)`. Thus, the residual SS from the simple model was reduced by `r formatC(sum(aqua$residS^2)-sum(aqua$residF^2),format="f",digits=2)` when the full model was used.
+Thus, SS<sub>Among</sub> records how much the lack-of-fit was reduced by using the full model rather than the simple model. In other words, SS<sub>Among</sub> records how much "better" the full model fits the data than the simple model. In our example, SS<sub>Among</sub>=`r formatC(sum(aqua$residS^2),format="f",digits=2)`-`r formatC(sum(aqua$residF^2),format="f",digits=2)`=`r formatC(sum(aqua$residS^2)-sum(aqua$residF^2),format="f",digits=2)`. Thus, the residual SS from the simple model was reduced by `r formatC(sum(aqua$residS^2)-sum(aqua$residF^2),format="f",digits=2)` when the full model was used.
 
 ::: {.tip data-latex=""}
 SS<sub>Among</sub> is the **benefit** (i.e., reduction in lack-of-fit) of using the full rather than simple model
@@ -213,7 +213,7 @@ ggplot(data=aqua) +
 
 &nbsp;
 
-From the figure above, it is seen that SS<sub>Among</sub> will increase as the group means become more different. This can also be seen by increasing or decreasing the difference between the group means and the grand mean in the interactive graphic below (Note how SS<sub>Among</sub> (and SS<sub>Total</sub>) change).
+From the figure above, it is seen that SS<sub>Among</sub> will increase as the group means become more different. This can also be seen by increasing or decreasing the difference between the group means and the grand mean in the interactive graphic below. [*Note how SS<sub>Among</sub> (and SS<sub>Total</sub>) change.*]
 
 ```{r echo=FALSE, out.width="75%"}
 knitr::include_app("https://derek-ogle.shinyapps.io/App_SSTotal_Partitioning/",height='800px')
@@ -221,7 +221,7 @@ knitr::include_app("https://derek-ogle.shinyapps.io/App_SSTotal_Partitioning/",h
 
 &nbsp;
 
-So, SS<sub>Among</sub> is immensely useful -- it is a measure of "benefit" that will be used in a "benefit-to-cost" ratio that will ultimately be the "signal" that will be used in a "signal-to-noise" ratio. These ratios are In Sections \@ref(noise-variances) and \@ref(signal-variance-benefit-to-cost). However, next we discuss how to measure the "cost" of using the more complex full model.
+So, SS<sub>Among</sub> is immensely useful -- it is a measure of "benefit" that will be used in a "benefit-to-cost" ratio that will ultimately be the "signal" that will be used in a "signal-to-noise" ratio. These ratios are introduced in Sections \@ref(noise-variances) and \@ref(signal-variance-benefit-to-cost). However, next we discuss how to measure the "cost" of using the more complex full model.
 
 ::: {.tip data-latex=""}
 SS<sub>Among</sub> is the **benefit** (i.e., reduction in lack-of-fit) from using the full model and will ultimately be used to measure the **signal** (i.e., relative difference in group means) in the data.
@@ -246,8 +246,6 @@ Thus, df<sub>Among</sub> is the degrees-of-freedom that were "lost" or "used" wh
 ::: {.tip data-latex=""}
 df<sub>Among</sub> is the extra **cost** (i.e., loss of df due to more parameters to estimate) from using the full rather than simple model.
 :::
-
-&nbsp;
 
 ## "Noise" Variances
 MS<sub>Total</sub> and MS<sub>Within</sub> are measures of the variance ^[As discussed in Section \@ref(mean-squares), SS are not true variances until they are divided by their df and become mean-squares (MS).] of **individuals** around the grand mean and group means, respectively. Thus, MS<sub>Total</sub> measures the variance or "noise" around the simple model, whereas MS<sub>Within</sub> measures the variance or "noise" around the full model.
@@ -276,8 +274,6 @@ It is not hard to show algebraically (and for just two groups) that the numerato
 MS<sub>Within</sub>=$s_{p}^{2}$ from the 2-sample t-test.
 :::
 
-&nbsp;
-
 ## "Signal" Variance (Benefit-to-Cost)
 Of course SS<sub>Among</sub> divided by df<sub>Among</sub> will be MS<sub>Among</sub>. However, while MS<sub>Among</sub> is still a variance, it has a very different interpretation.
 
@@ -288,15 +284,19 @@ Additionally, MS<sub>Among</sub> is a ratio of the "benefit" (i.e., SS<sub>Among
 &nbsp;
 
 ## Ratio of Variances (Signal-to-Noise)
-From the above discussion we have a measure of potential "signal" in MS<sub>Among</sub>, but it is contaminated with some "noise", and actual "noise" around the full model (the model representing the "signal") in MS<sub>Within</sub>. A ratio of this "signal" to "noise" is called an F test statistic; i.e.,
+From the above discussion we have a measure of potential "signal" in MS<sub>Among</sub>, but it is contaminated with some "noise." Additionally, we have a measure of just "noise" around the full model (the model representing the "signal") in MS<sub>Within</sub>. A ratio of this "signal" to "noise" is called an F test statistic; i.e.,
+
+&nbsp;
 
 $$ \text{F}=\frac{\text{MS}_{\text{Among}}}{\text{MS}_{\text{Within}}} = \frac{\text{Signal}}{\text{Noise}} = \frac{\text{Variance Explained by Full Model}}{\text{Variance Unexplained by Full Model}} $$
+
+&nbsp;
 
 If the F-ratio is "large," then "signal" is stronger than the "noise." A large F-ratio also means that more variability was explained than was unexplained by the full model. Thus, large F-ratio values mean that the full model fits the data significantly better than the simple model, even considering the increased complexity of the full model.
 
 The question now becomes "when is the F-ratio considered large enough to reject the simple model and conclude that the full model is significantly better?" This question is answered by comparing the F-ratio test statistic to an F-distribution.
 
-An F-distribution ^[An F-distribution occurs whenever the ratio of two variances is calculated.] is right-skewed, with the exact shape of the distribution dictated by two separate degrees-of-freedom -- called the numerator and denominator degrees-of-freedom, respectively. The numerator df is equal to the df used in MS<sub>Among</sub>, whereas the denominator df is equal to the df used in MS<sub>Within</sub>. The p-value is always computed as the area under the F-distribution curve to the right of the observed F-ratio test statistic (Figure \@ref(fig:Fpvalue)).^[If the F-ratio is computed by hand, then `distrib()` with `distrib="f"`, `df1=`, `df2=`, and `lower.tail=FALSE` may be used to calculate the corresponding p-value.]
+An F-distribution ^[An F-distribution occurs whenever the ratio of two variances is calculated.] is right-skewed, with the exact shape of the distribution dictated by two separate df -- called the numerator and denominator df, respectively. The numerator df is equal to the df used in MS<sub>Among</sub>, whereas the denominator df is equal to the df used in MS<sub>Within</sub>. The p-value is always computed as the area under the F-distribution curve to the *right* of the observed F-ratio test statistic (Figure \@ref(fig:Fpvalue)).^[If the F-ratio is computed by hand, then `distrib()` with `distrib="f"`, `df1=`, `df2=`, and `lower.tail=FALSE` may be used to calculate the corresponding p-value.]
 
 ```{r Fpvalue, echo=FALSE, fig.cap='An F distribution with 4 numerator and 20 denominator degrees-of-freedom. The shaded area demonstrates calculating a p-value for an F-ratio of 2.2.'}
 dfA <- 4
@@ -326,10 +326,10 @@ b + labs(x="F-Ratio") +
 From all of the previous discussion, it can be seen that ...
 
 * a small p-value comes from a large F-ratio, which comes from
-* a large MS<sub>Among</sub> relative to MS<sub>Within</sub>, which means *that 
+* a large MS<sub>Among</sub> relative to MS<sub>Within</sub>, which means that 
 * the full model explains more variability than is left unexplained and that the "signal" is much greater than the "noise", which means that
-* the full model does fit significantly better than the simple model (even given the increased complexity), and, 
-* thus, the means are indeed different.
+* the full model does fit significantly better than the simple model (even given the increased complexity), and, thus,
+* the means are indeed different.
 
 This cascade of measures can be explored with the dynamic graphic below.
 
@@ -348,8 +348,9 @@ The degrees-of-freedom (df), sum-of-squares (SS), mean-squares (MS), F-ratio tes
 An ANOVA table for the BOD measurements at the inlet and outlet sources to the aquaculture facility is in Table \@ref(tab:ANOVA1). Note that R does not show the total row that most softwares do.
 
 ```{r ANOVA1, echo=FALSE}
-aov <- lm(BOD~src,data=aqua)
-knitr::kable(anova(aov),booktabs=TRUE,digits=4,
+lm1 <- lm(BOD~src,data=aqua)
+aov <- anova(lm1)
+knitr::kable(aov,booktabs=TRUE,digits=4,
              caption='An ANOVA table for biological oxygen demand measurements at two locations of the aquaculture facility. Note that the "Total" row is not shown.') %>%
   kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
   kableExtra::row_spec(0,bold=TRUE) %>%
@@ -358,12 +359,12 @@ knitr::kable(anova(aov),booktabs=TRUE,digits=4,
 
 &nbsp;
 
-These results indicate that H<sub>0</sub> should be rejected (i.e., F-test p-value `r kPvalue(anova(aov)[1,"Pr(>F)"],include.p=FALSE,latex=FALSE)`). Thus, the full model fits the data significantly better than the simple model even given the increased complexity and sampling variability. Therefore, there is a significant difference in mean BOD between the two source locations.
+These results indicate that H<sub>0</sub> should be rejected (i.e., F-test p-value `r kPvalue(aov[1,"Pr(>F)"],include.p=FALSE,latex=FALSE)`). Thus, the full model fits the data significantly better than the simple model even given the increased complexity and sampling variability. Therefore, there is a significant difference in mean BOD between the two source locations.
 
 In addition to the primary objective of comparing the full and simple models and making a conclusion about the equality of group means, several other items of interest can be identified from an ANOVA table. Using the table above as an example, note that
 
 * the variance within groups is `r formatC(aov$"Mean Sq"[2],format="f",digits=4)` (=MS<sub>Within</sub>=MS<sub>Residuals=$s_{p}^{2}$), and
-* the common variance about the mean is `r formatC(sum(aov$"Sum Sq")/sum(aov$Df),format="f",digits=4)` (=MS<sub>Total</sub>=$s^{2}$=$\frac{`r formatC(aov$"Sum Sq"[1],format="f",digits=4)`+`r formatC(aov$"Sum Sq"[2],format="f",digits=4)`}{`r formatC(aov$Df[1],format="f",digits=4)`+`r formatC(aov$Df[2],format="f",digits=4)`}$).
+* the common variance about the mean is `r formatC(sum(aov$"Sum Sq")/sum(aov$Df),format="f",digits=4)` (=MS<sub>Total</sub>=$s^{2}$=$\frac{`r formatC(aov$"Sum Sq"[1],format="f",digits=4)`+`r formatC(aov$"Sum Sq"[2],format="f",digits=4)`}{`r formatC(aov$Df[1],format="f",digits=0)`+`r formatC(aov$Df[2],format="f",digits=0)`}$).
 
 ::: {.tip data-latex=""}
 SS and df partition, but MS do not! Do not add MS<sub>Among</sub> and MS<sub>Within</sub> to get MS<sub>Total</sub>, instead divide SS<sub>Total</sub> by df<sub>Total</sub>.
