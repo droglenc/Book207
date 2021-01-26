@@ -250,7 +250,7 @@ df<sub>Among</sub> is the extra **cost** (i.e., loss of df due to more parameter
 &nbsp;
 
 ## "Noise" Variances
-MS<sub>Total</sub> and MS<sub>Within</sub> are measures of the variance ^[As discussed in Section \@ref(mean-squares), SS are not true variances until they are divided by their df and become mean-squares (MS).] of **individuals** around the grand mean and group means, respectively. Thus, MS<sub>Total</sub> measures the variance or "noise" around the full model, whereas MS<sub>Within</sub> measures the variance or "noise" around the simple model.
+MS<sub>Total</sub> and MS<sub>Within</sub> are measures of the variance ^[As discussed in Section \@ref(mean-squares), SS are not true variances until they are divided by their df and become mean-squares (MS).] of **individuals** around the grand mean and group means, respectively. Thus, MS<sub>Total</sub> measures the variance or "noise" around the simple model, whereas MS<sub>Within</sub> measures the variance or "noise" around the full model.
 
 ::: {.tip data-latex=""}
 MS<sub>Total</sub> and MS<sub>Within</sub> measure "noise" -- i.e., variability of observations around a model.
