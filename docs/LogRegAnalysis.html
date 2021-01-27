@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-26" />
+<meta name="date" content="2021-01-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -372,7 +372,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;    $ outcome: chr  &quot;dead&quot; &quot;dead&quot; &quot;dead&quot; &quot;dead&quot; ...
 #R&gt;    $ conc   : num  49.1 49.1 49.1 49.1 49.1 49.1 49.1 49.1 49.1 49.1 ...</code></pre>
 <p>In this case, we want to model the probability of mortality (i.e., the beetle died) as a function of the concentration of gaseous carbon disulphide. With this objective, a “success” is a “dead” beetle. Thus, “dead” should be coded as “1” and “not dead” (i.e., “alive”) as a “0.” You will recognize this as an indicator variable from Module <a href="IVRVariables.html#IVRVariables">20</a>. In contrast to when we used indicator variables for factors, we need to explicitly create the indicator variable here when it is used as a response variable.</p>
-<p>An indicator variable can be created with <code>ifelse()</code>, which takes a “condition” as its first argument, what should be returned if the condition is “yes” as the second argument, and what should be returned if the condition is “no” as the third argument. The code below creates a new <code>outcome01</code> variable in the <code>bliss</code> data frame that will be <code>1</code> if <code>outcome</code> is <code>dead</code> and <code>0</code> if <code>outcome</code> is not <code>dead</code>.<a href="#fn106" class="footnote-ref" id="fnref106"><sup>106</sup></a></p>
+<p>An indicator variable can be created with <code>ifelse()</code>, which takes a “condition” as its first argument, what should be returned if the condition is “yes” as the second argument, and what should be returned if the condition is “no” as the third argument. The code below creates a new <code>outcome01</code> variable in the <code>bliss</code> data frame that will be <code>1</code> if <code>outcome</code> is <code>dead</code> and <code>0</code> if <code>outcome</code> is not <code>dead</code>.<a href="#fn107" class="footnote-ref" id="fnref107"><sup>107</sup></a></p>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb193-1"><a href="LogRegAnalysis.html#cb193-1" aria-hidden="true" tabindex="-1"></a>bliss<span class="sc">$</span>outcome01 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bliss<span class="sc">$</span>outcome<span class="sc">==</span><span class="st">&quot;dead&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div>
 <p>You should examine the new variable to make sure that it represents what you intended.</p>
 <div class="sourceCode" id="cb194"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb194-1"><a href="LogRegAnalysis.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bliss,<span class="at">n=</span><span class="dv">8</span>)</span></code></pre></div>
@@ -419,7 +419,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="LogRegParametersR" class="section level2" number="27.4">
 <h2><span class="header-section-number">27.4</span> Parameter Estimates</h2>
 <p>The estimated intercept and slope are extracted from the <code>glm()</code> object with <code>coef()</code>.</p>
-<p>Confidence intervals constructed from bootstrap samples require bootstrap samples to be constructed first. There are many ways to construct bootstrap samples in R. We will use <code>Boot()</code> from the <code>car</code> package. This function will be called with <code>car::Boot()</code> so as to not have to load the whole <code>car</code> package. <code>Boot()</code> requires only the saved <code>glm()</code> object as its argument.<a href="#fn107" class="footnote-ref" id="fnref107"><sup>107</sup></a> The results of <code>car::Boot()</code> should be saved to an object.<a href="#fn108" class="footnote-ref" id="fnref108"><sup>108</sup></a></p>
+<p>Confidence intervals constructed from bootstrap samples require bootstrap samples to be constructed first. There are many ways to construct bootstrap samples in R. We will use <code>Boot()</code> from the <code>car</code> package. This function will be called with <code>car::Boot()</code> so as to not have to load the whole <code>car</code> package. <code>Boot()</code> requires only the saved <code>glm()</code> object as its argument.<a href="#fn108" class="footnote-ref" id="fnref108"><sup>108</sup></a> The results of <code>car::Boot()</code> should be saved to an object.<a href="#fn109" class="footnote-ref" id="fnref109"><sup>109</sup></a></p>
 <div class="sourceCode" id="cb199"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb199-1"><a href="LogRegAnalysis.html#cb199-1" aria-hidden="true" tabindex="-1"></a>boot.bliss <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">Boot</span>(glm.bliss)</span></code></pre></div>
 <p>The bootstrap confidence intervals for the intercept and slope are extracted from the <code>Boot()</code> object with <code>confint()</code>. Include <code>type="perc"</code> to perform the last step of the bootstrap steps shown in Section <a href="LogRegModels.html#variability-estimates">26.5</a>.</p>
 <p>As before, I like to combine the parameter estimates and confidence intervals into one presentation.</p>
@@ -565,10 +565,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="footnotes">
 <hr />
-<ol start="106">
-<li id="fn106"><p>Note that R uses <code>==</code> when asking if two things are equal. So the condition in this <code>ifelse()</code> is asking where the <code>oucome</code> variable in <code>bliss</code> is equal to <code>dead</code>.<a href="LogRegAnalysis.html#fnref106" class="footnote-back">↩︎</a></p></li>
-<li id="fn107"><p>The number of bootstrap samples defaults to 999, which is adequate for our purposes. This number of bootstrap samples can be modified with <code>R=</code>.<a href="LogRegAnalysis.html#fnref107" class="footnote-back">↩︎</a></p></li>
-<li id="fn108"><p><code>Boot()</code> may take many seconds to run, depending on the size of the original data frame and the number of bootstrapped samples taken.<a href="LogRegAnalysis.html#fnref108" class="footnote-back">↩︎</a></p></li>
+<ol start="107">
+<li id="fn107"><p>Note that R uses <code>==</code> when asking if two things are equal. So the condition in this <code>ifelse()</code> is asking where the <code>oucome</code> variable in <code>bliss</code> is equal to <code>dead</code>.<a href="LogRegAnalysis.html#fnref107" class="footnote-back">↩︎</a></p></li>
+<li id="fn108"><p>The number of bootstrap samples defaults to 999, which is adequate for our purposes. This number of bootstrap samples can be modified with <code>R=</code>.<a href="LogRegAnalysis.html#fnref108" class="footnote-back">↩︎</a></p></li>
+<li id="fn109"><p><code>Boot()</code> may take many seconds to run, depending on the size of the original data frame and the number of bootstrapped samples taken.<a href="LogRegAnalysis.html#fnref109" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

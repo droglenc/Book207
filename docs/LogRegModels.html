@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-26" />
+<meta name="date" content="2021-01-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -563,12 +563,12 @@ Figure 26.4: Probability of making a putt versus the distance of the putt with b
 <p>Standard errors or confidence intervals for the parameters of the logistic regression model can be computed with normal distribution theory. However, this theory does not hold for all logistic regression models. In addition, methods for computing confidence intervals for predicted probabilities or for predicted values of <span class="math inline">\(X\)</span> for a particular probability are not well formed. Bootstrapping is one method for producing confidence intervals for these parameters.</p>
 <p>Bootstrap confidence intervals are computer intensive, but provide an interval that does not depend on the shape of the underlying sampling distribution. Bootstrapping confidence intervals generally follows these steps:</p>
 <ol style="list-style-type: decimal">
-<li>Generate a bootstrap sample, which is a random sample of individuals from the original sample;<a href="#fn103" class="footnote-ref" id="fnref103"><sup>103</sup></a></li>
+<li>Generate a bootstrap sample, which is a random sample of individuals from the original sample;<a href="#fn104" class="footnote-ref" id="fnref104"><sup>104</sup></a></li>
 <li>Fit the model to the bootstrap sample;</li>
 <li>Compute the statistics of interest (i.e., the slope, intercept, predicted probability, predicted value of <span class="math inline">\(X\)</span>);</li>
-<li>Repeat steps 1-3 500-10000 times;<a href="#fn104" class="footnote-ref" id="fnref104"><sup>104</sup></a></li>
+<li>Repeat steps 1-3 500-10000 times;<a href="#fn105" class="footnote-ref" id="fnref105"><sup>105</sup></a></li>
 <li>Order the results from smallest to largest; and</li>
-<li>Approximate 95% confidence interval with the values of the statistics that have 2.5% and 97.5% of the statistics smaller (i.e., find the middle 95% of the bootstrapped statistics).<a href="#fn105" class="footnote-ref" id="fnref105"><sup>105</sup></a></li>
+<li>Approximate 95% confidence interval with the values of the statistics that have 2.5% and 97.5% of the statistics smaller (i.e., find the middle 95% of the bootstrapped statistics).<a href="#fn106" class="footnote-ref" id="fnref106"><sup>106</sup></a></li>
 </ol>
 <p>A histogram of slopes estimated from 999 bootstrap samples is shown in Figure <a href="LogRegModels.html#fig:PuttsBootSlopeCI">26.5</a>. It is apparent from this example that the sampling distribution of the slopes is not normal and, thus, a confidence interval generated from normal theory would not be appropriate. The 95% bootstrap confidence interval shown in Figure <a href="LogRegModels.html#fig:PuttsBootSlopeCI">26.5</a> matches that in Table <a href="LogRegModels.html#tab:PuttCoefs">26.1</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:PuttsBootSlopeCI"></span>
@@ -692,10 +692,10 @@ Figure 26.10: Probability of the shrub’s presence versus elevation with best-f
 </div>
 <div class="footnotes">
 <hr />
-<ol start="103">
-<li id="fn103"><p>Thus, the individuals must be selected with replacement so that each bootstrap sample is different and different from the original sample.<a href="LogRegModels.html#fnref103" class="footnote-back">↩︎</a></p></li>
-<li id="fn104"><p>The number of bootstrap samples depends on a number of things, including the purpose of the study and how involved the calculations are. In this course, 500-1000 bootstrap samples will be adequate.<a href="LogRegModels.html#fnref104" class="footnote-back">↩︎</a></p></li>
-<li id="fn105"><p>This step tends to produce slightly biased results. There are a number of possible corrections for this bias. However, we will use this method in this course to keep the method simple so that we can stay focused on the concept.<a href="LogRegModels.html#fnref105" class="footnote-back">↩︎</a></p></li>
+<ol start="104">
+<li id="fn104"><p>Thus, the individuals must be selected with replacement so that each bootstrap sample is different and different from the original sample.<a href="LogRegModels.html#fnref104" class="footnote-back">↩︎</a></p></li>
+<li id="fn105"><p>The number of bootstrap samples depends on a number of things, including the purpose of the study and how involved the calculations are. In this course, 500-1000 bootstrap samples will be adequate.<a href="LogRegModels.html#fnref105" class="footnote-back">↩︎</a></p></li>
+<li id="fn106"><p>This step tends to produce slightly biased results. There are a number of possible corrections for this bias. However, we will use this method in this course to keep the method simple so that we can stay focused on the concept.<a href="LogRegModels.html#fnref106" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

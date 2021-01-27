@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-26" />
+<meta name="date" content="2021-01-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -376,7 +376,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="tip">
 <p>An explanatory (or factor) variable must be a character or factor type in R before it can be used in <code>lm()</code> for a Two-Way ANOVA.</p>
 </div>
-<p>When performing a Two-Way ANOVA with <code>lm()</code> the first argument must be a formula of the form <code>response~factorA+factorB+factorA:factorB</code><a href="#fn59" class="footnote-ref" id="fnref59"><sup>59</sup></a> where <code>response</code> is the response variable, <code>factorA</code> and <code>factorB</code> are the two factor variables, and <code>factorA:factorB</code> tells <code>lm()</code> to include the interaction between the two factor variables. Thus, the Two-Way ANOVA model for the tadpole experiment is fit with</p>
+<p>When performing a Two-Way ANOVA with <code>lm()</code> the first argument must be a formula of the form <code>response~factorA+factorB+factorA:factorB</code><a href="#fn60" class="footnote-ref" id="fnref60"><sup>60</sup></a> where <code>response</code> is the response variable, <code>factorA</code> and <code>factorB</code> are the two factor variables, and <code>factorA:factorB</code> tells <code>lm()</code> to include the interaction between the two factor variables. Thus, the Two-Way ANOVA model for the tadpole experiment is fit with</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb53-1"><a href="ANOVA2Analysis.html#cb53-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mass<span class="sc">~</span>density<span class="sc">+</span>uvb<span class="sc">+</span>density<span class="sc">:</span>uvb,<span class="at">data=</span>tad)</span></code></pre></div>
 <p>As usual, the results are saved to an object that will be used to check assumptions, create an ANOVA table, and make multiple comparisons.</p>
 <p> </p>
@@ -550,8 +550,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="footnotes">
 <hr />
-<ol start="59">
-<li id="fn59"><p>This exact model may also be entered with the shorthand <code>response~factorA*factorB</code>.<a href="ANOVA2Analysis.html#fnref59" class="footnote-back">↩︎</a></p></li>
+<ol start="60">
+<li id="fn60"><p>This exact model may also be entered with the shorthand <code>response~factorA*factorB</code>.<a href="ANOVA2Analysis.html#fnref60" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
