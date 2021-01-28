@@ -18,14 +18,14 @@ A significant one-way ANOVA only indicates that at least one pair of means diffe
 ## Multiple Comparison Problem
 The most obvious solution to identify which pairs of means differ is to perform a 2-sample t-test for each pair of groups. Unfortunately, this seemingly simple answer has at least two major problems. First, the number of 2-sample t-tests needed increases dramatically with increasing numbers of groups. Second, the probability of incorrectly concluding that at least one pair of means differs when no pairs actually differ increases dramatically with increasing numbers of groups. Of these two issues, the second is much more problematic and needs to be better understood.
 
-In any one comparison of two means the probability of incorrectly concluding that the means are different when they are actually not different is &alpha;. This incorrect conclusion is called a **pairwise Type I error** because it relates to only one comparison of a pair of means.
+In any one comparison of two means the probability of incorrectly concluding that the means differ when they actually do not differ is &alpha;. This incorrect conclusion is called a **pairwise Type I error** because it relates to only one comparison of a pair of means.
 
-In a situation with three ($I$=3) groups (say A, B, C) then there are three pairwise comparisons ($k$=3) to be made (A to B, A to C, and B to C). A pairwise error could be made on any of these three tests. Making a Type I error on *at least one* of these multiple pairwise tests is called an **experiment-wise Type I error** because it involves all pairwise comparisons in the experiment at hand.
+In a situation with three ($I$=3) groups (say A, B, C) then there are three pairwise comparisons ($k$=3) to be made (A to B, A to C, and B to C). A pairwise error could be made on any of these three tests. Making a Type I error on *at least one* of these multiple pairwise tests is called an **experiment-wise Type I error** because it involves all pairwise comparisons in the "experiment" at hand.
 
 It is important that you notice *at least* in the definition of the experiment-wise error rate. For example, in three comparisons, the incorrect conclusion could be for the first pair, the second pair, the third pair, the first and second pairs, the first and third pairs, the second and third pairs, or all three pairs!!
 
 ::: {.tip data-latex=""}
-A Type I error is rejecting H<sub>0</sub> when H<sub>0</sub> is actually true. In a two-sample t-test, a Type I error is concluding that two means are significantly different when they are not different.
+A Type I error is rejecting H<sub>0</sub> when H<sub>0</sub> is actually true. In a two-sample t-test, a Type I error is concluding that two means differ when they truly do not differ.
 :::
 
 ::: {.defn data-latex=""}
@@ -60,15 +60,13 @@ ggplot(data=mcprob,mapping=aes(x=I,y=ewise05)) +
 ```
 
 ::: {.tip data-latex=""}
-The experiment-wise error rate increases dramatically with increasing numbers of treatment groups.
+The experiment-wise error rate increases dramatically with increasing numbers of groups.
 :::
 
-&nbsp;
-
 ## Correction Methods
-There are many procedures designed to control experiment-wise error rate at a desired level (usually &alpha;). You will here a variety of names like Tukey's HSD, Bonferroni's adjustment, Sidak's method, and Scheffe's method.^[See [here](https://en.wikipedia.org/wiki/Family-wise_error_rate#Controlling_procedures) for a short list of methods.] For simplicity, only the Tukey-Kramer honestly significantly different (i.e., Tukey's HSD or Tukey's) method will be used here.
+There are many procedures -- a few are Tukey's HSD, Bonferroni's adjustment, Sidak's method, and Scheffe's method.^[See [here](https://en.wikipedia.org/wiki/Family-wise_error_rate#Controlling_procedures) for a short list of methods.] -- designed to control experiment-wise error rate at a desired level (usually &alpha;). For simplicity, we will only use the Tukey-Kramer honestly significantly different (i.e., Tukey's HSD or Tukey's) method.
 
-As simplistically as possible, Tukey's test computes the t test statistic for each pair of means as if conducting a 2-sample t-test. However, this test statistic is compared to a "Studentized range" rather than a t distribution to compute the p-value. These "adjusted" p-values are then simply compared to &alpha; to make a decision about the means of each pair. The net result of this modification however is that the experiment-wise error rate across all comparisions is controlled at the desired level when the group sample sizes are equal and is slightly conservative when the group sample sizes differ.
+As simplistically as possible, Tukey's method computes the t test statistic for each pair of means as if conducting a 2-sample t-test. However, this test statistic is compared to a "Studentized range" rather than a t distribution to compute the p-value. These "adjusted" p-values are then compared to &alpha; to make a decision for each pair. The net result of this modification is that the experiment-wise error rate across all comparisons is controlled at the desired level when the group sample sizes are equal and is slightly conservative when the group sample sizes differ.
 
 &nbsp;
 
@@ -82,11 +80,11 @@ lm1 <- lm(imm~season,data=opp)
 anova(lm1)
 ```
 
-Once again, there appears to be some significant difference in the mean immunoglobulin values among the three months (`r kPvalue(aov1$"Pr(>F)"[1],include.p=FALSE,latex=FALSE)`<&alpha;). Thus, a multiple comparisons procedure is warranted here to identify exaclty which pairs of means differ.
+Once again, there appears to be some significant difference in the mean immunoglobulin values among the three months (`r kPvalue(aov1$"Pr(>F)"[1],include.p=FALSE,latex=FALSE)`<&alpha;). Thus, a multiple comparisons procedure is warranted here to identify exactly which pairs of means differ.
 
-There are a number of functions and packages in R for computing Tukey's multiple comparisons. I prefer to use functions in the `emmeans` package because those functions will generalize to other methods, some of which we will use in other modules and some of which you may use in more advanced statistics courses. The `emmeans` package must be attached with `library()` before its functions can be used.^[If you use the template provided with this course then this is done there automatically.]
+There are a number of functions and packages in R for computing Tukey's multiple comparisons. I prefer to use functions in the `emmeans` package because those functions will generalize to other methods, some of which we will use in other modules and some of which you may use in more advanced statistics courses.^[The `emmeans` package must be attached with `library()` before its functions can be used. If you use the template provided with this course then this is done there automatically.]
 
-Tukey's procedure is computed with a two-step process. First, use `emmeans()` with the `lm()` object as the first argument and a `specs=` argument with `pairwise~` followed by the name of the variable that identifies the groups. The results from this function should be saved to an object.
+Tukey's procedure is computed with a two-step process. First, use `emmeans()` with the `lm()` object as the first argument and a `specs=` argument with `pairwise~` followed by the name of the explanatory variable that identifies the groups. The results from this function should be saved to an object.
 
 ```{r}
 mc <- emmeans(lm1,specs=pairwise~season)
@@ -98,19 +96,19 @@ That saved object is then the first argument to `summary()`, which also uses `in
 ( mcsum <- summary(mc,infer=TRUE) )
 ```
 
-The `$contrasts` section contains the actual Tukey's test for each pair of means. In these results the difference in group sample means is under `estimate`, a 95% confidence interval for the **difference** in means is under `lower.CL` and `upper.CL`, and a p-value for testing that the difference in group population means is 0 is under `p.value`. For example, the difference in group **sample** mean immunoglobulin between February and May is `r formatC(mc1$contrasts$estimate[1],format="f",digits=4)`, but the p-value suggests that the **population** mean immunoglobulin does not differ between February and May (`r kPvalue(mc1$contrasts$p.value[1],latex=FALSE)`). In contrast, it appears that the population mean immunoglobulin for opossums in November differed from both those in Feb (`r kPvalue(mc1$contrasts$p.value[2],latex=FALSE)`) and those in May (`r kPvalue(mc1$contrasts$p.value[3],latex=FALSE)`).
+The `$contrasts` section contains the actual Tukey's test for each pair of means. In these results the difference in group sample means is under `estimate`, a 95% confidence interval for the **difference** in means is under `lower.CL` and `upper.CL`, and a p-value for testing that the difference in group population means is 0 is under `p.value`.^[For our purposes, you can ignore the `SE`, `df`, and `t.ratio` columns.] For example, the difference in group **sample** mean immunoglobulin between February and May is `r formatC(mc1$contrasts$estimate[1],format="f",digits=4)`, but the p-value suggests that the **population** mean immunoglobulin does not differ between February and May (`r kPvalue(mc1$contrasts$p.value[1],latex=FALSE)`).^[As with a 2-sample t-test, these test that the *difference* in means is equal to zero, which is the same as testing that the means are equal.] In contrast, it appears that the population mean immunoglobulin for opossums in November differed from both those in Feb (`r kPvalue(mc1$contrasts$p.value[2],latex=FALSE)`) and those in May (`r kPvalue(mc1$contrasts$p.value[3],latex=FALSE)`).
 
 ::: {.tip data-latex=""}
 The **differences** of group means with 95% confidence intervals and p-values are shown in the `$contrasts` section of the results.
 :::
 
-The `$emmeans` section contains the group sample means under `emmean` with 95% confidence intervals under `lower.CL` and `upper.CL`. For example, the sample mean immunoglobulin level for opossums in February was `r formatC(mc1$emmeans$emmean[1],format="f",digits=3)`, with a 95% confidence interval from `r formatC(mc1$emmeans$lower.CL[1],format="f",digits=3)` to `r formatC(mc1$emmeans$upper.CL[1],format="f",digits=3)`. The `t.ratio` and `p.value` in this section test if the group population mean is different than 0. These tests are not often of interest and can largely be ignored.
+The `$emmeans` section contains the group sample means under `emmean` with 95% confidence intervals under `lower.CL` and `upper.CL`. For example, the sample mean immunoglobulin level for opossums in February was `r formatC(mc1$emmeans$emmean[1],format="f",digits=3)`, with a 95% confidence interval from `r formatC(mc1$emmeans$lower.CL[1],format="f",digits=3)` to `r formatC(mc1$emmeans$upper.CL[1],format="f",digits=3)`. The `p.value` in this section test if the group population mean is different than 0. These tests are not often of interest and can usually be ignored.
 
 ::: {.tip data-latex=""}
 The group means with 95% confidence intervals are shown in the `$emmeans` section of the results.
 :::
 
-A plot of group means with 95% confidence intervals using the results in `$emmeans` is slightly different than shown in Sections \@ref(two-sample-t-test-revisited-using-linear-models) and \@ref(one-way-anova-in-r) because the raw data and the means with their confidence intervals are in separate data frames. While this method is slightly more complicated, it will generalize to a wider variety of situationst throughout the course.
+A plot of group means with 95% confidence intervals using the results in `$emmeans` is slightly different than shown in Sections \@ref(two-sample-t-test-revisited-using-linear-models) and \@ref(one-way-anova-in-r) because the raw data and the means with their confidence intervals are in separate data frames. While this method is slightly more complicated, it will generalize to a wider variety of situations seen throughout the course.
 
 The `data=` and `mapping=aes()` arguments are not included in the initial `ggplot()` because we will be drawing variables from two data frames. Thus, `geom_jitter()` below adds the raw data to the plot, jittered to decrease overlap; `geom_errorbar()` creates the error bars from the `$emmeans` object, and `geom_point()` simply overlays the mean from the `$emmeans` object. Note that in the code below you would only need to modify the two `data=` arguments, the three `x=` arguments (to the grouping variables), and the one `y=` argument in `geom_jitter()` (to the response variable).
 
