@@ -40,7 +40,7 @@ The assumption of equal variances can be tested with Levene's homogeneity of var
 $$
 \begin{split}
    \text{H}_{\text{0}} &: \sigma_{1}^{2}=\sigma_{2}^{2}=\cdots=\sigma_{I}^{2} \\
-   \text{H}_{\text{A}} &: \text{At least one pair of variances differ}
+   \text{H}_{\text{A}} &: ``\text{At least one pair of variances differ''}
 \end{split}
 $$
 
@@ -61,8 +61,8 @@ The normality of residuals may also be tested with the Anderson-Darling Normalit
 
 $$ 
 \begin{split}
-   \text{H}_{\text{0}}&: \text{Residuals are normally distributed} \\
-   \text{H}_{\text{A}}&: \text{Residuals are not normally distributed} \\
+   \text{H}_{\text{0}}&: ``\text{Residuals are normally distributed''} \\
+   \text{H}_{\text{A}}&: ``\text{Residuals are not normally distributed''} \\
 \end{split}
 $$
 
@@ -81,7 +81,16 @@ Normality can be tested with the Anderson-Darling test; however, it is affected 
 ## No Outliers
 The one-way ANOVA is very sensitive to outliers. Outliers should be corrected if possible (usually if there is a data transcription or entry problem) or deleted if it is determined that the outlier is clearly an error or is not part of the population of interest. If the outlier is not corrected or deleted, then the relative effect of the outlier on the analysis should be determined by completing the analysis with and without the outlier present. Any differences in results or interpretations due to the presence of the outlier should be clearly explained to the reader.
 
-Outliers may be detected by visual examination of a histogram of residuals. Potential outliers can be more objectively detected with externally Studentized residuals,^[A residual divided by the standard deviation of the residual, where the standard deviation is computed with that individual removed.] which essentially measure how many standard deviations each individual is from its group mean. Studentized residuals follow a t-distribution with df<sub>Within</sub>-1 degrees-of-freedom.^[The extra one is subtracted because the individual residual is not included in the calculation of the standard deviation of residuals.] The Studentized residual is converted to a p-value using a t-distribution to test whether an individual residual is an outlier or not. As these p-values are computed for each residual, this process suffers from the "multiple comparison problem" (see Section \@ref(multiple-comparison-problem)). Thus, the p-values use a Bonferroni method^[An adjusted p-value is computed by multiplying the original p-value by the number of comparisons made (in this case n).] to correct for multiple comparisons so that the likelihood of mistakenly identifying an outlier is controlled at a desirable level. If the Bonferroni adjusted p-value for the most extreme residual is less than &alpha;, then that individual is considered to be a significant outlier and should be flagged for further inspection as described above.
+Outliers may be detected by visual examination of a histogram of residuals. Potential outliers can be more objectively detected with externally Studentized residuals,^[A residual divided by the standard deviation of the residual, where the standard deviation is computed with that individual removed.] which essentially measure how many standard deviations each individual is from its group mean. Studentized residuals follow a t-distribution with df<sub>Within</sub>-1 degrees-of-freedom.^[The extra one is subtracted because the individual residual is not included in the calculation of the standard deviation of residuals.] The Studentized residual is converted to a p-value using a t-distribution to test whether an individual residual is an outlier or not. Thus,  The hypotheses for this test are
+
+$$ 
+\begin{split}
+   \text{H}_{\text{0}}&: ``\text{Individual is not an outlier''} \\
+   \text{H}_{\text{A}}&: ``\text{Individual is an outlier''} \\
+\end{split}
+$$
+
+As these p-values are computed for each residual, this process suffers from the "multiple comparison problem" (see Section \@ref(multiple-comparison-problem)). Thus, the p-values use a Bonferroni method^[An adjusted p-value is computed by multiplying the original p-value by the number of comparisons made (in this case n).] to correct for multiple comparisons so that the likelihood of mistakenly identifying an outlier is controlled at a desirable level. If the Bonferroni adjusted p-value for the most extreme residual is less than &alpha;, then that individual is considered to be a significant outlier and should be flagged for further inspection as described above.
 
 ::: {.tip data-latex=""}
 A one-way ANOVA is very sensitive to outliers.

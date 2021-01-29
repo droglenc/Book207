@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-27" />
+<meta name="date" content="2021-01-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -396,7 +396,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[
 \begin{split}
    \text{H}_{\text{0}} &amp;: \sigma_{1}^{2}=\sigma_{2}^{2}=\cdots=\sigma_{I}^{2} \\
-   \text{H}_{\text{A}} &amp;: \text{At least one pair of variances differ}
+   \text{H}_{\text{A}} &amp;: ``\text{At least one pair of variances differ&#39;&#39;}
 \end{split}
 \]</span></p>
 <p>Thus, a p-value less than α means that the variances are not equal and the assumption of the one-way ANOVA has not been met.<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a></p>
@@ -412,8 +412,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The normality of residuals may also be tested with the Anderson-Darling Normality Test.<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a> The hypotheses for this test are</p>
 <p><span class="math display">\[ 
 \begin{split}
-   \text{H}_{\text{0}}&amp;: \text{Residuals are normally distributed} \\
-   \text{H}_{\text{A}}&amp;: \text{Residuals are not normally distributed} \\
+   \text{H}_{\text{0}}&amp;: ``\text{Residuals are normally distributed&#39;&#39;} \\
+   \text{H}_{\text{A}}&amp;: ``\text{Residuals are not normally distributed&#39;&#39;} \\
 \end{split}
 \]</span></p>
 <p>An Anderson-Darling p-value greater than α indicates that the residuals appear to be normally distributed and the normality assumption is met. An Anderson-Darling p-value less than α suggests that the normality assumption has been violated.</p>
@@ -428,7 +428,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="no-outliers" class="section level2" number="7.4">
 <h2><span class="header-section-number">7.4</span> No Outliers</h2>
 <p>The one-way ANOVA is very sensitive to outliers. Outliers should be corrected if possible (usually if there is a data transcription or entry problem) or deleted if it is determined that the outlier is clearly an error or is not part of the population of interest. If the outlier is not corrected or deleted, then the relative effect of the outlier on the analysis should be determined by completing the analysis with and without the outlier present. Any differences in results or interpretations due to the presence of the outlier should be clearly explained to the reader.</p>
-<p>Outliers may be detected by visual examination of a histogram of residuals. Potential outliers can be more objectively detected with externally Studentized residuals,<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a> which essentially measure how many standard deviations each individual is from its group mean. Studentized residuals follow a t-distribution with df<sub>Within</sub>-1 degrees-of-freedom.<a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a> The Studentized residual is converted to a p-value using a t-distribution to test whether an individual residual is an outlier or not. As these p-values are computed for each residual, this process suffers from the “multiple comparison problem” (see Section <a href="ANOVA1MultipleComparisons.html#multiple-comparison-problem">6.1</a>). Thus, the p-values use a Bonferroni method<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a> to correct for multiple comparisons so that the likelihood of mistakenly identifying an outlier is controlled at a desirable level. If the Bonferroni adjusted p-value for the most extreme residual is less than α, then that individual is considered to be a significant outlier and should be flagged for further inspection as described above.</p>
+<p>Outliers may be detected by visual examination of a histogram of residuals. Potential outliers can be more objectively detected with externally Studentized residuals,<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a> which essentially measure how many standard deviations each individual is from its group mean. Studentized residuals follow a t-distribution with df<sub>Within</sub>-1 degrees-of-freedom.<a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a> The Studentized residual is converted to a p-value using a t-distribution to test whether an individual residual is an outlier or not. Thus, The hypotheses for this test are</p>
+<p><span class="math display">\[ 
+\begin{split}
+   \text{H}_{\text{0}}&amp;: ``\text{Individual is not an outlier&#39;&#39;} \\
+   \text{H}_{\text{A}}&amp;: ``\text{Individual is an outlier&#39;&#39;} \\
+\end{split}
+\]</span></p>
+<p>As these p-values are computed for each residual, this process suffers from the “multiple comparison problem” (see Section <a href="ANOVA1MultipleComparisons.html#multiple-comparison-problem">6.1</a>). Thus, the p-values use a Bonferroni method<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a> to correct for multiple comparisons so that the likelihood of mistakenly identifying an outlier is controlled at a desirable level. If the Bonferroni adjusted p-value for the most extreme residual is less than α, then that individual is considered to be a significant outlier and should be flagged for further inspection as described above.</p>
 <div class="tip">
 <p>A one-way ANOVA is very sensitive to outliers.</p>
 </div>
