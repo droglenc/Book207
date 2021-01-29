@@ -16,24 +16,24 @@ In a One-Way ANOVA the individuals **must be** independent both within and among
 
 A lack of independence may include applying multiple treatments to the same individual, having related individuals either within the same group or specifically spread across the groups, or having individuals that are not separated in space or time. Below are examples where there is a *lack of independence*.
 
-* Researchers measured the self-esteem for 10 people following a specific diet at three time points -- beginning, middle, and end of the study. They wanted to determine if self-esteem increased over the time that individuals were on the diet. This example lacks *among-group* independence because the same 10 people were in each of the "groups" (i.e., beginning, middle, and end time periods).
+* Researchers measured the self-esteem for 10 people on a specific diet at three time points -- beginning, middle, and end of being on the diet. They wanted to determine if self-esteem increased over the time that individuals were on the diet. This example lacks *among-group* independence because the same 10 people were in each of the "groups" (i.e., beginning, middle, and end time periods).
 * Zoo keepers were interested in whether the activity rate of lions differed by time of day. For this study, they recorded the activity rate of all five lions at the same random times in the morning, afternoon, evening, and night across several days. This example lacks *among-group* independence because the same lions were recorded in each period. This example also lacks *within-group* independence because the activity rates were recorded at the same times for each lion. Thus, the lions may be affecting each others' activity rates. For example, if one lion gets up to roam around then the other lions may be more likely to get up to roam around as well.
-* Researchers with the LoonWatch program wanted to determine if mean density of loons differed among Bayfield, Ashland, and Iron counties. For this they asked local volunteers to record the number of loons they observed on several lakes during the same weekend in June. This example illustrates a lack of *within-group* independence as different observers were used in each county. It is possible that the observers in one county are more adept at observing loons on their lakes (for whatever reason -- they know their lakes better, their lakes are smaller, they are more motivated, they spend more time). 
+* Researchers with the LoonWatch program wanted to determine if mean density of loons differed among Bayfield, Ashland, and Iron counties. For this they asked local volunteers to record the number of loons they observed on several lakes during the same weekend in June. This example illustrates a lack of *within-group* independence as different observers were used in each county. It is possible that the observers in one county were more adept at observing loons on their lakes (for whatever reason -- they know their lakes better, their lakes are smaller, they are more motivated, they spend more time). 
 
-There are methods to detect violations of the independence assumption if the observations are related to time (e.g., the first situation above), but for most other situations a violation is only detected by careful consideration of the design of the data collection. Violations that are discovered after the data are collected cannot be corrected and the data have to be analyzed with techniques specific to dependent data.^[Such methods may include repeated measures ANOVA, mixed-models, and hierarchical models.] In other words, designing data collections with independence among individuals is critical and needs to be ascertained before the data are collected.
+There are methods to detect violations of independence if the observations are related to time (e.g., the first situation above), but for most other situations a violation is only detected by careful consideration of the design of the data collection. Violations that are discovered after the data are collected cannot be corrected and the data will have to be analyzed with techniques specific to dependent data.^[Such methods may include repeated measures ANOVA, mixed-models, and hierarchical models.] In other words, designing data collections with independence among individuals is critical and needs to be ascertained before the data are collected.
+
+In this course, data will have already been collected for you and, at times, the description of the data collection may be sparse. To address independence you will be asked to explain why you think dependencies do not exist in the data collection. This may take several sentences. Examples will be provided below and in future analyses.
 
 ::: {.tip data-latex=""}
 Independence of individuals is a **critical** assumption of one-way ANOVAs. Violations of this assumption cannot be corrected.
 :::
-
-In this course, the data will have already been collected for you and, at times, the description of that data collection may be sparse. To address independence you will be asked to explain why you think dependencies do not exist in the data collection. This may take several sentences. Examples will be provided below and in future analyses.
 
 ::: {.tip data-latex=""}
 Independence is generally assessed by considering how the individuals were obtained.
 :::
 
 ## Equal Variances
-Variances among groups must be equal because the estimate of MS<sub>Within</sub> is based on pooling estimates across the groups. In other words, if the variances among each group are equal, then the variance (or MS) for each group is an estimate of the overall MS<sub>Within</sub>. If the variances are equal across groups then combining the variances from each group provides a robust estimate of the overall variance within groups.
+Variances among groups must be equal because the estimate of MS<sub>Within</sub> is based on pooling estimates across the groups. In other words, if group variances are equal, then each group variance is an estimate of the overall variance. If the variances are equal across groups then combining the group variances provides a robust estimate of the overall variance within groups (i.e., MS<sub>Within</sub>).
 
 The assumption of equal variances can be tested with Levene's homogeneity of variances test.^[There are a wide variety of statistical tests for examining equality of variances. We will use the Levene's test in this class because it is common in the literature and simple to implement in most statistical software packages.] The hypotheses tested by Levene's test are
 
@@ -49,13 +49,13 @@ Thus, a p-value less than &alpha; means that the variances are not equal and the
 The equality of variances may be visually examined with a boxplot of full model residuals^[Recall that these are the vertical differences between observations and their group mean.] by group. If the "boxes" on this boxplot are not roughly the same, then the equal variances assumption may be violated. I usually examine the boxplots rather than use a Levene's Test when the sample size is very large because Levene's test can be hyper-sensitive with large samples sizes (i.e., reject H<sub>0</sub> of equal variances when the variances are not practically different).
 
 ::: {.tip data-latex=""}
-Equal variances among groups is a critical assumption of a one-way ANOVA. Violations of this assumption should be corrected.
+Equal variances among groups is a **critical** assumption of a one-way ANOVA. Violations of this assumption should be corrected.
 :::
 
 ## Normality
-The normality of residuals WITHIN each group is difficult to test because there may be many groups being considered or relatively few individuals in each group. Thus the normality of all residuals taken as a whole is often tested. As most linear models are resilient to slight departures from normality, it is thought that if all of the residuals as a whole appear approximately normal then the residuals within each group are likely "normal enough."
+The normality of residuals WITHIN each group is difficult to test because there may be many groups being considered or relatively few individuals in each group. Thus the normality of all residuals taken as a whole is often tested. As most linear models are resilient to slight departures from normality, it is thought that if the residuals as a whole appear approximately normal then the residuals within each group are likely "normal enough."
 
-Normality is often tested by simply viewing a histogram or Q-Q plot of residuals. For an adequate sample size, a histogram that is not strongly skewed is usually adequate for a One-Way ANOVA.
+Normality is often tested by viewing a histogram or Q-Q plot of residuals. For an adequate sample size, a histogram that is not strongly skewed is usually adequate for a One-Way ANOVA.
 
 The normality of residuals may also be tested with the Anderson-Darling Normality Test.^[There are also a wide variety of normality tests. Some authors even argue against the use of hypothesis tests for testing normality and suggest the use of graphical methods instead. For simplicity, the Anderson-Darling normality test will be used throughout this course.] The hypotheses for this test are
 
@@ -71,7 +71,7 @@ An Anderson-Darling p-value greater than &alpha; indicates that the residuals ap
 The results of an Anderson-Darling test should be interpreted cautiously for both small and very large sample sizes. At small sample sizes, the distribution would need to be wildly non-normal for the Anderson-Darling Test to suggest that it is not normal. At very large sample sizes, very small and insubstantial differences from normality may result in the test indicating that the distribution is not normal. Thus, you should always examine the histogram of residuals to decide whether this assumption is adequately met or not.
 
 ::: {.tip data-latex=""}
-A one-way ANOVA is resilient to slight violations of the normality assumption. Severe violations of this assumption should be corrected.
+A one-way ANOVA is resilient to slight violations of the normality assumption. Severe violations of this assumption should be corrected; slight violations are usually not a problem.
 :::
 
 ::: {.tip data-latex=""}
@@ -81,7 +81,7 @@ Normality can be tested with the Anderson-Darling test; however, it is affected 
 ## No Outliers
 The one-way ANOVA is very sensitive to outliers. Outliers should be corrected if possible (usually if there is a data transcription or entry problem) or deleted if it is determined that the outlier is clearly an error or is not part of the population of interest. If the outlier is not corrected or deleted, then the relative effect of the outlier on the analysis should be determined by completing the analysis with and without the outlier present. Any differences in results or interpretations due to the presence of the outlier should be clearly explained to the reader.
 
-Outliers may be detected by visual examination of a histogram of residuals. Potential outliers can be more objectively detected with externally Studentized residuals,^[A residual divided by the standard deviation of the residual, where the standard deviation is computed with that individual removed.] which essentially measure how many standard deviations each individual is from its group mean. Studentized residuals follow a t-distribution with df<sub>Within</sub>-1 degrees-of-freedom.^[The extra one is subtracted because the individual residual is not included in the calculation of the standard deviation of residuals.] The Studentized residual is converted to a p-value using a t-distribution to test whether an individual residual is an outlier or not. Thus,  The hypotheses for this test are
+Outliers may be detected by visual examination of a histogram of residuals. Potential outliers can be more objectively detected with externally Studentized residuals,^[A residual divided by the standard deviation of the residual, where the standard deviation is computed with that individual removed.] which essentially measure how many standard deviations each individual is from its group mean. The Studentized residual is converted to a p-value using a t-distribution with df<sub>Within</sub>-1 degrees-of-freedom.^[The extra one is subtracted because the individual residual is not included in the calculation of the standard deviation of residuals.] to test whether an individual residual is an outlier or not. Thus, the hypotheses for this test are
 
 $$ 
 \begin{split}
@@ -93,7 +93,7 @@ $$
 As these p-values are computed for each residual, this process suffers from the "multiple comparison problem" (see Section \@ref(multiple-comparison-problem)). Thus, the p-values use a Bonferroni method^[An adjusted p-value is computed by multiplying the original p-value by the number of comparisons made (in this case n).] to correct for multiple comparisons so that the likelihood of mistakenly identifying an outlier is controlled at a desirable level. If the Bonferroni adjusted p-value for the most extreme residual is less than &alpha;, then that individual is considered to be a significant outlier and should be flagged for further inspection as described above.
 
 ::: {.tip data-latex=""}
-A one-way ANOVA is very sensitive to outliers.
+A one-way ANOVA is **very sensitive** to outliers.
 :::
 
 ## Testing Assumptions in R
@@ -104,6 +104,8 @@ lm1 <- lm(imm~season,data=opp)
 assumptionCheck(lm1)
 ```
 
+&nbsp;
+
 For a One-Way ANOVA, `assumptionCheck()` produces a histogram of residuals with the Anderson-Darling and outlier test p-values on the left and a boxplot of residuals for each group with the Levene's Test p-value on the right.
 
 ```{r echo=FALSE, results="hide", warning=FALSE}
@@ -112,10 +114,12 @@ out.p <- outlierTest(lm1)$bonf.p[[1]]
 ad.p <- adTest(lm1$residuals)$p.value
 ```
 
-In this case the boxes on the boxplot are similarly sized and the Levene's test p-value (=`r kPvalue(lev.p,latex=FALSE,include.p=FALSE)`) is greater than &alpha; suggesting that the group variances are equal. The histogram of residuals is difficult to assess because the sample size is so small, but it does not appear strongly skewed and the Anderson-Darling p-value (=`r kPvalue(ad.p,latex=FALSE,include.p=FALSE)`) is (barely) greater than &alpha;, which weakly suggests that the residuals are normally distributed. The histogram does not show any "odd" individuals and the outlier test p-value (=`r kPvalue(out.p,latex=FALSE,include.p=FALSE)`) is greater than &alpha; which suggests that there are not any significant outliers in these data. Thus, the three assumptions that can be tested with the data all appear to be met.
+In this case the boxes on the boxplot are similarly sized and the Levene's test p-value (=`r kPvalue(lev.p,latex=FALSE,include.p=FALSE)`) is greater than &alpha; suggesting that the group variances are equal. The histogram of residuals is difficult to assess because the sample size is so small, but it does not appear strongly skewed and the Anderson-Darling p-value (=`r kPvalue(ad.p,latex=FALSE,include.p=FALSE)`) is (barely) greater than &alpha;, which (weakly) suggests that the residuals are normally distributed. The histogram does not show any "odd" individuals and the outlier test p-value (`r kPvalue(out.p,latex=FALSE,include.p=FALSE)`) is greater than &alpha; which suggests that there are not any significant outliers in these data. Thus, the three assumptions that can be tested with the data all appear to be met.
 
 The independence assumption cannot be assessed from the data and must be reasoned through. While there is not much information about this study, I will assume among group independence as there is no suggestion that the same opossums were sampled in each of the three seasons (i.e., no indication that they were tagged or otherwise individually identified). This is particularly clear because the sample size differs across seasons (see table below). I will also assume that there is within-group independence because there is no evidence that the opossums within any given season were somehow related or connected.
 
 ```{r}
 xtabs(~season,data=opp)
 ```
+
+&nbsp;
