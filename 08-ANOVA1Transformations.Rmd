@@ -1,9 +1,5 @@
 # One-Way Transformations {#ANOVA1Transformations}
-A One-Way ANOVA depends on four assumptions being met (see Module \@ref(ANOVA1Assumptions)). If those assumptions are not met, then the results of the one-way ANOVA are invalid. Fortunately, violations of the equality of variances and normality assumptions can often be addressed by transforming the quantitative response variable to a scale where the assumptions are met. For example it is common use the natural log of the response variable rather than the response variable on its original scale.
-
-::: {.tip data-latex=""}
-If the assumptions of a one-way ANOVA are not met, then the data may be transformed to a scale where the assumptions are met.
-:::
+A One-Way ANOVA depends on four assumptions being met (see Module \@ref(ANOVA1Assumptions)). If those assumptions are not met, then the results of the one-way ANOVA are invalid. Fortunately, violations of the equality of variances and normality assumptions can often be addressed by transforming the quantitative response variable to a scale where the assumptions are met. For example it is common to use the natural log of the response variable rather than the original response variable.
 
 Besides the obvious reason related to assumption violations, Fox (1997) gave four arguments for why data that is skewed or has unequal variances should be transformed:
 
@@ -14,7 +10,9 @@ Besides the obvious reason related to assumption violations, Fox (1997) gave fou
 
 Identification of an appropriate transformation and understanding the resultant output is the focus of this module.
 
-&nbsp;
+::: {.tip data-latex=""}
+If the assumptions of a one-way ANOVA are not met, then the data may be transformed to a scale where the assumptions are met.
+:::
 
 ## Power Transformations
 The response variable may be transformed by raising it to a particular power, $\lambda$, i.e., $Y^{\lambda}$ (Table \@ref(tab:CommonTranformations)).
@@ -186,8 +184,11 @@ tibble(Power=c("&lambda;=-0.5","&lambda;=-0.33","&lambda;=-0.25"),
 
 &nbsp;
 
-Power transformations require non-negative and non-zero data. Violations of this restriction can be rectified by adding an amount to all values of the response variable such that all values become positive. This is called *shifting* the data and does not effect the shape of the distribution. In addition, power transformations are not effective if the range of values of the response variable is narrow.^[In effect, the power transformation is basically linear over short ranges and, thus, is not effective.]
+Power transformations require non-negative and non-zero data. Violations of this restriction can be rectified by adding an amount to all values of the response variable such that all values become positive. This is called *shifting* the data and does not change the shape of the distribution. In addition, power transformations are not effective if the range of values of the response variable is narrow.^[In effect, the power transformation is basically linear over short ranges and, thus, is not effective.]
 
+&nbsp;
+
+### Choosing a Power Transformation {-}
 There are several methods to identify the power transformation that is most likely to meet the assumptions of a one-way ANOVA.^[Box and Cox (1964) provided a statistical and graphical method for identifying the appropriate power transformation for the response variable. The details of this method are beyond the scope of this class but, in general, the method searches for a $\lambda$ that minimizes SS<sub>within</sub>). A slightly modified Box and Cox approach is implemented in R by sending a `lm` object to `boxcox()` from the `MASS` package.] One simple method is trial-and-error -- i.e., trying various powers until one is found where the assumptions of the model are most closely met. 
 
 The trial-and-error method is made easier with software. For example, the `assumptionCheck()` function introduced in Section \@ref(testing-assumptions-in-r) can be used to quickly compute the graphs and hypothesis tests for assumption checking *after* the data have been transformed by the power given in the `lambday=` argument. For example, the code and results below show what the assumption checking would look like if the immunoglobulin measurements for the New Zealand opossums had been log transformed.
@@ -201,7 +202,7 @@ assumptionCheck(lm1,lambday=0)  #lambda=0 corresponds to log-transformation
 
 Of course, it was shown in Section \@ref(testing-assumptions-in-r) that the assumptions for a One-Way ANOVA with these data had been met; thus, there is no need to explore a transformation here. However, this shows how easily one can quickly test various transformations for a given set of data.
 
-Note that `assumptionCheck()` only transform the data "behind-the-scenes." If you want to continue with transformed data then you need to use R code like that shown in the last columns of Tables \@ref(tab:CommonTranformations) and \@ref(tab:CommonInvTranformations).
+Note that `assumptionCheck()` only transforms the data "behind-the-scenes." If you want to continue with transformed data then you need to use R code like that shown in the last columns of Tables \@ref(tab:CommonTranformations) and \@ref(tab:CommonInvTranformations).
 
 &nbsp;
 
@@ -213,11 +214,11 @@ Certain special transformations are common in particular fields of study and are
 ## Interpretations After Transformations
 Care must be taken with interpretations following transformations. A few simple rules help in this regard.
 
-First, tell the reader what transformation you used and how you arrived at it. In other words, clearly demonstrate that the assumptions were not met on the original scale and demonstrate that they were met on the transformed scale.
+First, **tell the reader what transformation you used and how you arrived at it**. In other words, clearly demonstrate that the assumptions were not met on the original scale and demonstrate that they were met on the transformed scale.
 
-Second, when making a conclusion from the One-Way ANOVA p-value, refer to the transformed response variable in your conclusions. In other words, say "the mean square root of the response variable differed among groups" rather than "the mean of the response variable differed among groups." It will be implied that the means differed on the original scale, but you strictly tested on the transformed scale so you should be explicit about that here.
+Second, when making a conclusion from the One-Way ANOVA p-value, **refer to the transformed response variable in your conclusions**. In other words, say "the mean square root of the response variable differed among groups" rather than "the mean of the response variable differed among groups." It will be implied that the means differed on the original scale, but you strictly tested on the transformed scale so you should be explicit about that here.
 
-Third, back-transform estimates (and confidence intervals) for "points". In One-Way ANOVA this means that you should back-transform estimates of means. For example, if the response variable was log-transformed such that the **mean log of Y** was 1.356 then this should be back-transformed to the original scale with e<sup>1.356</sup>=`r formatC(exp(1.356),format="f",digits=3)`. Similarly if the response variable was square-root transformed such that the **mean square-root of Y** was 1.356 then this should be back-transformed to the original scale with 1.356<sup>2</sup>=`r formatC(1.356^2,format="f",digits=3)`.
+Third, **back-transform estimates (and confidence intervals) for "points"**. In One-Way ANOVA this means that you should back-transform estimates of means. For example, if the response variable was log-transformed such that the *mean log of Y* was 1.356 then this should be back-transformed to the original scale with e<sup>1.356</sup> = `r formatC(exp(1.356),format="f",digits=3)`. Similarly if the response variable was square-root transformed such that the *mean square-root of Y* was 1.356 then this should be back-transformed to the original scale with 1.356<sup>2</sup> = `r formatC(1.356^2,format="f",digits=3)`.
 
 <!---
 It is known that back-transforming the mean value on the log scale underestimates the mean value on the original scale.^[This stems from the fact that the back-transformed mean value from the log scale is equal to the geometric mean (i.e., the nth root of the product of n values) of the values on the original scale. The geometric mean is always less than the arithmetic mean (i.e., sum of all values divided by n) and, thus, the back-transformed mean always underestimates the arithmetic mean from the original scale.] The most common^[A wide variety of "corrections" for this back-transformation bias have been suggested.] correction for this back-transformation bias^[This correction is derived from the analysis of normal and log-normal distributional theory.] is to multiply the back-transformed value by $e^{\frac{MS_{Within}}{2}}$. This correction factor can be extracted from the `lm` object with `logbtcf()`.
@@ -227,9 +228,9 @@ logbtcf(lm1)
 ```
 --->
 
-Fourth, do **NOT** back-transform "differences" unless those differences are from a log-transformation. In a One-Way ANOVA this translates into whether or not you can back-transform *differences* in means, as would result from multiple comparisons. For example if the result is a difference in the mean square-root of the response variable between groups then do not back-transform this value as it can **not** be back-transformed to anything meaningful. However, if the result is a difference in mean log of the response variable between groups then this **difference** can (and should) be back-transformed to something meaningful.
+Fourth, **do NOT back-transform "differences" unless those differences are from a log-transformation**. In a One-Way ANOVA this translates into whether or not you can back-transform *differences* in means, as would result from multiple comparisons. For example if the result is a difference in the mean square-root of the response variable between groups then do *NOT* back-transform this value as it can not be back-transformed to anything meaningful. However, if the result is a difference in mean log of the response variable between groups then this *difference* can (and should) be back-transformed to something meaningful.
 
-We know from algebra class that the difference in the log of two values is the log of the ratio of the two values -- i.e., $log(a)-log(b) = log(\frac{a}{b})$. Thus, back-transforming the difference in log values results in a ratio of values on the original scale -- i.e., $e^{log(a)-log(b)} = e^{log(\frac{a}{b})} = \frac{a}{b}$. Thus, in a One-Way ANOVA, the back-transformed **difference** in group means on the log scale is the **ratio** of group means on the original scale.
+We know from algebra class that the difference in the logs of two values is the log of the ratio of the two values -- i.e., $log(a)-log(b) = log(\frac{a}{b})$. Thus, back-transforming the difference in log values results in a ratio of values on the original scale -- i.e., $e^{log(a)-log(b)} = e^{log(\frac{a}{b})} = \frac{a}{b}$. Thus, in a One-Way ANOVA, the back-transformed **difference** in group means on the log scale is the **ratio** of group means on the original scale.
 
 For example, suppose that the difference in log means for two groups is 0.5. Back-transforming this value gives $e$<sup>0.5</sup>=`r formatC(exp(0.5),format="f",digits=3)`. Thus, on the original scale, the mean for the first group is `r formatC(exp(0.5),format="f",digits=3)` times larger than the mean for the second group.
 
@@ -237,14 +238,14 @@ Alternatively, suppose that the difference in log means for two groups is -0.5. 
 
 Log-transformations are special as they allow both means and differences in means to be back-transformed to the original scale with a meaningful result. Because of this, **the first transformation that you should try in all situations is the log-transformation.** Many times we prefer the log-transformation over other transformations, even if the assumptions are not perfectly met with the log-transformation.
 
+If the log transformation does not work to meet the assumptions of the One-Way ANOVA then you should start with the least strong transformation (i.e., the square root) and successively move through more strong transformations until the assumptions are adequately met.
+
 ::: {.tip data-latex=""}
 Always try the log-transformation first as it allows for meaningful back-transformations of means and differences.
 :::
 
-If the log transformation does not work to meet the assumptions of the One-Way ANOVA then you should start with the least strong transformation (i.e., the square root) and successively move through more strong transformations until the assumptions are adequately met.
-
 ## Back-Transformations in R
-The `emmeans()` function introduced in Section \@ref(multiple-comparisons-in-r) makes back-transformations very easy.^[Transformations and back-transformations will be illustrated more in this module's assignment and in Module \@ref(ANOVA1Summary).] While a transformation was not needed for the New Zealand opossums example, let's suppose for illustrative purposes that a square root transformation was used. First, a square root variable is created and a new ANOVA model with this variable is used.
+The `emmeans()` function introduced in Section \@ref(multiple-comparisons-in-r) makes back-transformations easy.^[Transformations and back-transformations will be illustrated more in this module's assignment and in Module \@ref(ANOVA1Summary).] While a transformation was not needed for the New Zealand opossums example, let's suppose for illustrative purposes that a square root transformation was used. First, a square root variable is created and a new ANOVA model with this variable is used.
 
 ```{r}
 opp$sqrtimm <- sqrt(opp$imm)
