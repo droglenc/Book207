@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-30" />
+<meta name="date" content="2021-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,9 +212,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html"><i class="fa fa-check"></i><b>11</b> Two-Way Analytical Foundation</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#terminology"><i class="fa fa-check"></i><b>11.1</b> Terminology</a></li>
-<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#total-and-within-ss-df-and-ms"><i class="fa fa-check"></i><b>11.2</b> Total and Within SS, df, and MS</a></li>
-<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#among-ss-df-and-ms"><i class="fa fa-check"></i><b>11.3</b> Among SS, df, and MS</a></li>
-<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.4</b> ANOVA Table</a></li>
+<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#models"><i class="fa fa-check"></i><b>11.2</b> Models</a></li>
+<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sstotal-dftotal-and-mstotal"><i class="fa fa-check"></i><b>11.3</b> SS<sub>Total</sub>, df<sub>Total</sub>, and MS<sub>Total</sub></a></li>
+<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sswithin-dfwithin-and-mswithin"><i class="fa fa-check"></i><b>11.4</b> SS<sub>Within</sub>, df<sub>Within</sub>, and MS<sub>Within</sub></a></li>
+<li class="chapter" data-level="11.5" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#ssamong-dfamong-and-msamong"><i class="fa fa-check"></i><b>11.5</b> SS<sub>Among</sub>, df<sub>Among</sub>, and MS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.6" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#partitioning-ssamong"><i class="fa fa-check"></i><b>11.6</b> Partitioning SS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.7" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.7</b> ANOVA Table</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html"><i class="fa fa-check"></i><b>12</b> Two-Way Analysis</a>
 <ul>
@@ -366,12 +369,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="suggested-workflow-1" class="section level2" number="13.1">
 <h2><span class="header-section-number">13.1</span> Suggested Workflow</h2>
 <p>The following is a process for fitting a Two-Way ANOVA model. Consider this process as you learn to fit Two-Way ANOVA models, but don’t consider this to be a concrete process for all models.</p>
+<!---
+1. Perform a thorough EDA of the quantitative response variable. Pay special attention to the distributional shape, center, dispersion, and outliers within each level of the grouping variable.
+---->
 <ol style="list-style-type: decimal">
-<li>Perform a thorough EDA of the quantitative response variable. Pay special attention to the distributional shape, center, dispersion, and outliers within each treatment/group.</li>
 <li>Show the sample size per group and comment on whether the study was balanced (i.e., same sample size per group) or not.</li>
 <li>Address the independence assumption.
 <ul>
-<li>If this assumption is not met then other analysis methods must be used.</li>
+<li>If this assumption is not met then other analysis methods must be used.<a href="#fn64" class="footnote-ref" id="fnref64"><sup>64</sup></a></li>
 </ul></li>
 <li>Fit the untransformed ultimate full model (i.e., both main effects and the interaction effect) model with <code>lm()</code>.</li>
 <li>Check the other three assumptions for the untransformed model with <code>assumptionCheck()</code>.
@@ -406,24 +411,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="expected-prices-no-transformation" class="section level2" number="13.2">
 <h2><span class="header-section-number">13.2</span> Expected Prices (<em>No Transformation</em>)</h2>
-<p>Managers of a retail store felt that the price that consumers would expect to pay for a product would be influenced by how much the product was promoted and the advertised amount of discount. To examine this, they gathered 160 volunteers (from different households) who would receive information about the store’s products for a 10-week period. Each volunteer was randomly chosen to receive promotions about one particular product 1, 3, 5, or 7 times during that period and with an advertised discount of 10, 20, 30, or 40%. At the end of the 10-week period the researchers asked each participant to report the price they would expect to pay for the product.<a href="#fn63" class="footnote-ref" id="fnref63"><sup>63</sup></a></p>
-<p>The statistical hypotheses to be examined were</p>
+<p><img src="zimgs/RetailStorePrices.jpg" alt="Decoration" class="img-right">
+Managers of a retail store felt that the price that consumers expect to pay for a product would be influenced by how much the product was promoted and the advertised amount of discount. To examine this, they gathered 160 volunteers (from different households) who would receive information about the store’s products for a 10-week period. Each volunteer was randomly chosen to receive promotions about one particular product 1, 3, 5, or 7 times during that period and with an advertised discount of 10, 20, 30, or 40%. At the end of the 10-week period the researchers asked each participant to report the price they expected to pay for the product.<a href="#fn65" class="footnote-ref" id="fnref65"><sup>65</sup></a></p>
+<p>The statistical hypotheses to be examined are</p>
 <p><span class="math display">\[
 \begin{split}
-   H_{0}&amp;: \text{no promotions effect}: \mu_{1} = \mu_{3} = \mu_{5} = \mu_{7} \\
-   H_{A}&amp;: \text{promotions effect}: \text{At least one pair of level means is different}
+   H_{0}&amp;: ``\text{no interaction effect&#39;&#39;} \\
+   H_{A}&amp;: ``\text{interaction effect&#39;&#39;}
 \end{split}
 \]</span></p>
 <p><span class="math display">\[
 \begin{split}
-   H_{0}&amp;: \text{no discount effect}: \mu_{10} = \mu_{20} = \mu_{30} = \mu_{40} \\
-   H_{A}&amp;: \text{discount effect}: \text{At least one pair of level means is different}
+   H_{0}&amp;: ``\text{no promotions effect&#39;&#39;}: \mu_{1} = \mu_{3} = \mu_{5} = \mu_{7} \\
+   H_{A}&amp;: ``\text{promotions effect&#39;&#39;}: \text{At least one pair of level means is different}
 \end{split}
 \]</span></p>
 <p><span class="math display">\[
 \begin{split}
-   H_{0}&amp;: \text{no interaction effect} \\
-   H_{A}&amp;: \text{interaction effect}
+   H_{0}&amp;: ``\text{no discount effect&#39;&#39;}: \mu_{10} = \mu_{20} = \mu_{30} = \mu_{40} \\
+   H_{A}&amp;: ``\text{discount effect&#39;&#39;}: \text{At least one pair of level means is different}
 \end{split}
 \]</span></p>
 <p>where <span class="math inline">\(\mu\)</span> is the mean expected price and the subscripts identify the levels of each factor as defined above.</p>
@@ -535,14 +541,17 @@ Discounts
 </tr>
 </tbody>
 </table>
-<p>Variances among the treatments appear to be constant (Levene’s p=0.4162) and the boxplots of residuals appear fairly similar (Figure <a href="ANOVA2Summary.html#fig:DiscountResidPlot">13.1</a>-Right); the residuals appear to be approximately normally distributed (Anderson-Darling p=0.6255; Figure <a href="ANOVA2Summary.html#fig:DiscountResidPlot">13.1</a>-Left); and there are no significant outliers (outlier test p=0.6285), though some residuals appear somewhat larger in some treatments (Figure <a href="ANOVA2Summary.html#fig:DiscountResidPlot">13.1</a>-Right).</p>
+<p> </p>
+<p>Variances among the treatments appear to be constant (Levene’s p=0.4162) and the boxplots of residuals appear fairly similar given the small group sample size (Figure <a href="ANOVA2Summary.html#fig:DiscountResidPlot">13.1</a>-Right); the residuals appear to be approximately normally distributed (Anderson-Darling p=0.6255; Figure <a href="ANOVA2Summary.html#fig:DiscountResidPlot">13.1</a>-Left); and there are no significant outliers (outlier test p=0.6285), though some residuals appear somewhat larger in some treatments (Figure <a href="ANOVA2Summary.html#fig:DiscountResidPlot">13.1</a>-Right).</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:DiscountResidPlot"></span>
 <img src="Book207_files/figure-html/DiscountResidPlot-1.png" alt="Histogram of residuals (Left) and residual plot (Right) for a Two-way ANOVA of expected price for each combination of number of promotions and discount rate." width="672" />
 <p class="caption">
 Figure 13.1: Histogram of residuals (Left) and residual plot (Right) for a Two-way ANOVA of expected price for each combination of number of promotions and discount rate.
 </p>
 </div>
-<p>The participants were not randomly selected for the study but they were specifically not from the same household and they were randomly allocated to the combination of number of promotions and discount amount. Thus, there is no reason to believe that individuals are connected either within or among treatments. Thus, the independence assumption appears to have also been met. These data will be examined with a Two-Way ANOVA without transformation because the assumptions have been adequately met.</p>
+<p> </p>
+<p>The participants were not randomly selected for the study but they were specifically not from the same household and they were randomly allocated to the combination of number of promotions and discount amount. Thus, there is no reason to believe that individuals are connected either within or among treatments. Thus, the independence assumption appears to have been met. These data will be examined with a Two-Way ANOVA without transformation because all assumptions have been adequately met.</p>
 <p>There does not appear to be a significant interaction effect (p=0.9121; Table <a href="ANOVA2Summary.html#tab:DiscountAnova">13.2</a>). There does however appear to be main effects for both the number of promotions (p&lt;0.00005) and amount of discount (p&lt;0.00005).</p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -650,6 +659,7 @@ Residuals
 </tr>
 </tbody>
 </table>
+<p> </p>
 <p>Tukey’s multiple comparison results suggest that the mean expected price does not differ between when one and three promotions are used (p=0.9476) but does decline from three to five promotions (p&lt;0.00005) and from five to seven promotions (p=0.0079; Table <a href="ANOVA2Summary.html#tab:DiscountPromoTukey">13.3</a>). For example, the mean expected price drops between 0.13 and 0.41 dollars from three to five promotions and between 0.03 and 0.31 dollars from five to seven promotions.</p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -779,6 +789,7 @@ p.value
 </tr>
 </tbody>
 </table>
+<p> </p>
 <p>Tukey’s multiple comparison results suggest that the mean expected price differed between all pairs of amounts of discount (p≤0.0021; Table <a href="ANOVA2Summary.html#tab:DiscountDiscountTukey">13.4</a>). The mean expected price declined between 0.06 and 0.33 dollars from a discount rate of 10% to 20% (p=0.0019) and between 0.26 and 0.53 dollars from a discount rate of 20% to 30% (p&lt;0.00005), but increased between 0.06 and 0.33 dollars from a discount rate of 30% to 40% (p=0.0021).</p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -908,7 +919,9 @@ p.value
 </tr>
 </tbody>
 </table>
+<p> </p>
 <p>From these results it appears that if there is no difference in mean expected price for three or less promotions, but after that the mean expected price drops with increasing numbers of promotions, regardless of the amount of discount offered. Regardless of the number of promotions, consumers expect to pay less with increasing amount of discount up to 30%, but the mean expected price increased when the discount was increased to 40% (Figure <a href="ANOVA2Summary.html#fig:DiscountFitPlot">13.2</a>).</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:DiscountFitPlot"></span>
 <img src="Book207_files/figure-html/DiscountFitPlot-1.png" alt="Mean expected price for each combination of number of promotions and discount amount." width="432" />
 <p class="caption">
@@ -917,45 +930,46 @@ Figure 13.2: Mean expected price for each combination of number of promotions an
 </div>
 <div id="r-code-and-results-3" class="section level4 unnumbered">
 <h4>R Code and Results</h4>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb69-1"><a href="ANOVA2Summary.html#cb69-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/Discount.csv&quot;</span>)</span>
-<span id="cb69-2"><a href="ANOVA2Summary.html#cb69-2" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>Promo <span class="ot">&lt;-</span> <span class="fu">factor</span>(d<span class="sc">$</span>Promo)</span>
-<span id="cb69-3"><a href="ANOVA2Summary.html#cb69-3" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>Discount <span class="ot">&lt;-</span> <span class="fu">factor</span>(d<span class="sc">$</span>Discount)</span>
-<span id="cb69-4"><a href="ANOVA2Summary.html#cb69-4" aria-hidden="true" tabindex="-1"></a>lm1.d <span class="ot">&lt;-</span> <span class="fu">lm</span>(Eprice<span class="sc">~</span>Promo<span class="sc">+</span>Discount<span class="sc">+</span>Promo<span class="sc">:</span>Discount,<span class="at">data=</span>d)</span>
-<span id="cb69-5"><a href="ANOVA2Summary.html#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>Promo<span class="sc">+</span>Discount,<span class="at">data=</span>d)</span>
-<span id="cb69-6"><a href="ANOVA2Summary.html#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.d)</span></code></pre></div>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb70-1"><a href="ANOVA2Summary.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1.d)</span>
-<span id="cb70-2"><a href="ANOVA2Summary.html#cb70-2" aria-hidden="true" tabindex="-1"></a>lm1.d.noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(Eprice<span class="sc">~</span>Promo<span class="sc">+</span>Discount,<span class="at">data=</span>d)</span>
-<span id="cb70-3"><a href="ANOVA2Summary.html#cb70-3" aria-hidden="true" tabindex="-1"></a>mc1.d.promo <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1.d.noint,<span class="at">specs=</span>pairwise<span class="sc">~</span>Promo)</span>
-<span id="cb70-4"><a href="ANOVA2Summary.html#cb70-4" aria-hidden="true" tabindex="-1"></a>( mc1sum.d.promo <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc1.d.promo,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
-<span id="cb70-5"><a href="ANOVA2Summary.html#cb70-5" aria-hidden="true" tabindex="-1"></a>mc1.d.discount <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1.d.noint,<span class="at">specs=</span>pairwise<span class="sc">~</span>Discount)</span>
-<span id="cb70-6"><a href="ANOVA2Summary.html#cb70-6" aria-hidden="true" tabindex="-1"></a>( mc1sum.d.discount <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc1.d.discount,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb70-1"><a href="ANOVA2Summary.html#cb70-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/Discount.csv&quot;</span>)</span>
+<span id="cb70-2"><a href="ANOVA2Summary.html#cb70-2" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>Promo <span class="ot">&lt;-</span> <span class="fu">factor</span>(d<span class="sc">$</span>Promo)        <span class="co"># because recorded as numbers</span></span>
+<span id="cb70-3"><a href="ANOVA2Summary.html#cb70-3" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>Discount <span class="ot">&lt;-</span> <span class="fu">factor</span>(d<span class="sc">$</span>Discount)  <span class="co"># because recorded as numbers</span></span>
+<span id="cb70-4"><a href="ANOVA2Summary.html#cb70-4" aria-hidden="true" tabindex="-1"></a>lm1.d <span class="ot">&lt;-</span> <span class="fu">lm</span>(Eprice<span class="sc">~</span>Promo<span class="sc">+</span>Discount<span class="sc">+</span>Promo<span class="sc">:</span>Discount,<span class="at">data=</span>d)</span>
+<span id="cb70-5"><a href="ANOVA2Summary.html#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>Promo<span class="sc">+</span>Discount,<span class="at">data=</span>d)</span>
+<span id="cb70-6"><a href="ANOVA2Summary.html#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.d)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb71-1"><a href="ANOVA2Summary.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1.d)</span>
+<span id="cb71-2"><a href="ANOVA2Summary.html#cb71-2" aria-hidden="true" tabindex="-1"></a>lm1.d.noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(Eprice<span class="sc">~</span>Promo<span class="sc">+</span>Discount,<span class="at">data=</span>d)</span>
+<span id="cb71-3"><a href="ANOVA2Summary.html#cb71-3" aria-hidden="true" tabindex="-1"></a>mc1.d.promo <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1.d.noint,<span class="at">specs=</span>pairwise<span class="sc">~</span>Promo)</span>
+<span id="cb71-4"><a href="ANOVA2Summary.html#cb71-4" aria-hidden="true" tabindex="-1"></a>( mc1sum.d.promo <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc1.d.promo,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb71-5"><a href="ANOVA2Summary.html#cb71-5" aria-hidden="true" tabindex="-1"></a>mc1.d.discount <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1.d.noint,<span class="at">specs=</span>pairwise<span class="sc">~</span>Discount)</span>
+<span id="cb71-6"><a href="ANOVA2Summary.html#cb71-6" aria-hidden="true" tabindex="-1"></a>( mc1sum.d.discount <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc1.d.discount,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
 <p> </p>
 </div>
 </div>
 <div id="blood-pressure-no-transformation" class="section level2" number="13.3">
 <h2><span class="header-section-number">13.3</span> Blood Pressure (<em>No Transformation</em>)</h2>
-<p>Sodium (Na) plays an important role in the genesis of high blood pressure, and the kidney is the principal organ that regulates the amount of sodium in the body. The kidney contains the Na-K-ATPase enzyme, which is essential for maintaining proper sodium levels. If the enzyme does not function properly, then high blood pressure may result. The activity of this enzyme has been studied in whole kidneys, even though the kidney is known to contain many functionally distinct sites. To see whether any particular site of Na-K-ATPase activity was abnormal with hypertension, <a href="https://journals.physiology.org/doi/abs/10.1152/ajprenal.1985.249.6.f863">Garg <em>et al.</em> (1985)</a> studied Na-K-ATPase activity at different sites along the nephrons of normal rats and specially-bred rats which spontaneously develop hypertension. The sites in the kidney examined were the distal collecting tubule (DCT), cortical collecting duct (CCD), and outer medullary collecting duct (OMCD).</p>
+<p><img src="zimgs/BloodPressure.jpg" alt="Decoration" class="img-right">
+Sodium (Na) plays an important role in the genesis of high blood pressure, and the kidney is the principal organ that regulates the amount of sodium in the body. The kidney contains the <a href="https://en.wikipedia.org/wiki/Na%2B/K%2B-ATPase">Na-K-ATPase enzyme</a>, which is essential for maintaining proper sodium levels. If the enzyme does not function properly, then high blood pressure may result. The activity of this enzyme has been studied in whole kidneys, even though the kidney is known to contain many functionally distinct sites. To see whether any particular site of Na-K-ATPase activity was abnormal with <a href="https://www.mayoclinic.org/diseases-conditions/high-blood-pressure/symptoms-causes/syc-20373410">hypertension</a>, <a href="https://journals.physiology.org/doi/abs/10.1152/ajprenal.1985.249.6.f863">Garg <em>et al.</em> (1985)</a> studied Na-K-ATPase activity at different sites along the <a href="https://en.wikipedia.org/wiki/Nephron">nephrons</a> of normal rats and specially-bred rats which spontaneously develop hypertension. The sites in the kidney examined were the <a href="https://en.wikipedia.org/wiki/Distal_convoluted_tubule">distal collecting tubule</a> (DCT), <a href="https://en.wikipedia.org/wiki/Collecting_duct_system">cortical collecting duct</a> (CCD), and <a href="https://en.wikipedia.org/wiki/Collecting_duct_system#Outer_segment">outer medullary collecting duct</a> (OMCD).</p>
 <p>The researchers hypothesized that the level of Na-K-ATPase would be depressed at all sites in the rats with hypertension. This translates to expecting a rat strain effect but not an interaction effect. The authors were also interested in determining if there was a significant difference in the level of Na-K-ATPase activity at the different sites. Thus, the statistical hypotheses to be examined were</p>
 <p><span class="math display">\[
 \begin{split}
-   H_{0}&amp;: \text{no rat strain effect}: \mu_{Normal} = \mu_{Hyper} \\
-   H_{A}&amp;: \text{rat strain effect}: \mu_{Normal} \neq \mu_{Hyper}
+   H_{0}&amp;: ``\text{no interaction effect&#39;&#39;} \\
+   H_{A}&amp;: ``\text{interaction effect&#39;&#39;}
 \end{split}
 \]</span></p>
 <p><span class="math display">\[
 \begin{split}
-   H_{0}&amp;: \text{no site effect}: \mu_{DCT} = \mu_{CCD} = \mu_{OMCD} \\
-   H_{A}&amp;: \text{site effect}: \text{At least one pair of level means is different}
+   H_{0}&amp;: ``\text{no rat strain effect&#39;&#39;}: \mu_{Normal} = \mu_{Hyper} \\
+   H_{A}&amp;: ``\text{rat strain effect&#39;&#39;}: \mu_{Normal} \neq \mu_{Hyper}
 \end{split}
 \]</span></p>
 <p><span class="math display">\[
 \begin{split}
-   H_{0}&amp;: \text{no interaction effect} \\
-   H_{A}&amp;: \text{interaction effect}
+   H_{0}&amp;: ``\text{no site effect&#39;&#39;}: \mu_{DCT} = \mu_{CCD} = \mu_{OMCD} \\
+   H_{A}&amp;: ``\text{site effect&#39;&#39;}: \text{At least one pair of level means is different}
 \end{split}
 \]</span></p>
 <p>where <span class="math inline">\(\mu\)</span> is the mean Na-K-ATPase activity and the subscripts identify the levels of each factor as defined above.</p>
-<p>Twelve rats were randomly selected for each strain of rat (i.e., normal rats and rats with hypertension) from all rats available in the author’s laboratory. The site of the kidney (DCT, CCD, or OMCD) where the Na-K-ATPase activity (<span class="math inline">\(pmol\cdot(min\cdot mm)^{-1}\)</span>) was recorded on a rat was also randomly selected so that measurements at each location were recorded from four rats.<a href="#fn64" class="footnote-ref" id="fnref64"><sup>64</sup></a></p>
+<p>Twelve rats were randomly selected for each strain of rat (i.e., normal rats and rats with hypertension) from all rats available in the author’s laboratory. The site of the kidney (DCT, CCD, or OMCD) where the Na-K-ATPase activity (<span class="math inline">\(pmol\cdot(min\cdot mm)^{-1}\)</span>) was recorded on a rat was also randomly selected so that measurements at each location were recorded from four rats.<a href="#fn66" class="footnote-ref" id="fnref66"><sup>66</sup></a></p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:NAKSampleSize">Table 13.5: </span>Number of rats in each combination of rat strain and kidney site.
@@ -1020,15 +1034,19 @@ Normal
 </tr>
 </tbody>
 </table>
+<p> </p>
 <p>Variances among treatments appear to be constant (Levene’s p=0.4033) though the boxplots of residuals appear somewhat divergent (Figure <a href="ANOVA2Summary.html#fig:NAKResidPlot">13.3</a>-Right), likely due to the small number of rats per treatment; the residuals appear to be approximately normally distributed (Anderson-Darling p=0.5203; Figure <a href="ANOVA2Summary.html#fig:NAKResidPlot">13.3</a>-Left); and there are no significant outliers (outlier test p=0.1527).</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:NAKResidPlot"></span>
 <img src="Book207_files/figure-html/NAKResidPlot-1.png" alt="Histogram of residuals (Left) and residual plot (Right) for a Two-way ANOVA of Na-K-ATPase activity for each combination of rat type and measurement location." width="672" />
 <p class="caption">
 Figure 13.3: Histogram of residuals (Left) and residual plot (Right) for a Two-way ANOVA of Na-K-ATPase activity for each combination of rat type and measurement location.
 </p>
 </div>
+<p> </p>
 <p>The rats are probably independent among strains as there is no evidence that “normal” and “hypertensive” rats are in any way related. Independence of rats within strains is suspect given that the rats came from the same “pool” of normal and hypertensive rats bred in the lab. This may be acceptable for this experiment, but drawing conclusions to a larger population of rats may be suspect. Finally, rats are likely independent among kidney site groups as a different site was examined for each individual rat. All-in-all, independence is likely met enough to continue with this analysis. Thus, these data will be examined with a two-way ANOVA without transformation because the assumptions have been adequately met.</p>
 <p>There appears to be a (weakly) significant interaction effect (p=0.0404; Table <a href="ANOVA2Summary.html#tab:NAKAnova">13.6</a>); thus, the main effects cannot be interpreted directly from these results.</p>
+<p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:NAKAnova">Table 13.6: </span>Two-way ANOVA results for Na-K-ATPase activity levels among two strains of rats and three sites in the kidney.
@@ -1135,7 +1153,9 @@ Residuals
 </tr>
 </tbody>
 </table>
+<p> </p>
 <p>Tukey’s method was performed on the interaction effect to more specifically describe the differences among group means (Table <a href="ANOVA2Summary.html#tab:NAKTukey">13.7</a>). The mean level of Na-K-ATPase activity was significantly lower for the hypertensive rats then for the normal rats at the DCT site (p=0.0189), but not at the other two sites (p≥0.8359). For example, the mean level of Na-K-ATPase activity was between 2.7 and 38.8 units lower in hypertensive than normal rats at the DCT site. In addition, the mean level of Na-K-ATPase activity was significantly greater at the DCT site than at the CCD and OMCD sites within both strains (p≤0.0029), and Na-K-ATPase activity did not differ between the CCD and OMCD sites for either strain (p≥0.1367). For example, the mean level of Na-K-ATPase activity was between 36.7 and 72.8 units higher at the DCT than at the OMCD site for normal rats.</p>
+<p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:NAKTukey">Table 13.7: </span>Tukey’s multiple comparisons of differences in means among all pairs of combinations of rat strain and kidney measurement site.
@@ -1429,50 +1449,51 @@ Figure 13.4: Mean Na-K-ATPase activity for each combination of rat strain and ki
 </div>
 <div id="r-code-and-results-4" class="section level4 unnumbered">
 <h4>R Code and Results</h4>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb71-1"><a href="ANOVA2Summary.html#cb71-1" aria-hidden="true" tabindex="-1"></a>nak <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/NAKATPase.csv&quot;</span>)</span>
-<span id="cb71-2"><a href="ANOVA2Summary.html#cb71-2" aria-hidden="true" tabindex="-1"></a>lm1.nak <span class="ot">&lt;-</span> <span class="fu">lm</span>(activity<span class="sc">~</span>strain<span class="sc">+</span>site<span class="sc">+</span>strain<span class="sc">:</span>site,<span class="at">data=</span>nak)</span>
-<span id="cb71-3"><a href="ANOVA2Summary.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>strain<span class="sc">+</span>site,<span class="at">data=</span>nak)</span>
-<span id="cb71-4"><a href="ANOVA2Summary.html#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.nak)</span></code></pre></div>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb72-1"><a href="ANOVA2Summary.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1.nak)</span>
-<span id="cb72-2"><a href="ANOVA2Summary.html#cb72-2" aria-hidden="true" tabindex="-1"></a>mc1.nak <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1.nak,<span class="at">specs=</span>pairwise<span class="sc">~</span>site<span class="sc">:</span>strain)</span>
-<span id="cb72-3"><a href="ANOVA2Summary.html#cb72-3" aria-hidden="true" tabindex="-1"></a>( mc1sum.nak <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc1.nak,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
-<span id="cb72-4"><a href="ANOVA2Summary.html#cb72-4" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.1</span>)</span>
-<span id="cb72-5"><a href="ANOVA2Summary.html#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mc1sum.nak<span class="sc">$</span>emmeans,</span>
-<span id="cb72-6"><a href="ANOVA2Summary.html#cb72-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>site,<span class="at">group=</span>strain,<span class="at">color=</span>strain,</span>
-<span id="cb72-7"><a href="ANOVA2Summary.html#cb72-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y=</span>emmean,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL)) <span class="sc">+</span></span>
-<span id="cb72-8"><a href="ANOVA2Summary.html#cb72-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="fl">1.1</span>,<span class="at">alpha=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
-<span id="cb72-9"><a href="ANOVA2Summary.html#cb72-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb72-10"><a href="ANOVA2Summary.html#cb72-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb72-11"><a href="ANOVA2Summary.html#cb72-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Na-K-ATPase Activity&quot;</span>,<span class="at">x=</span><span class="st">&quot;Kidney Measurement Site&quot;</span>) <span class="sc">+</span></span>
-<span id="cb72-12"><a href="ANOVA2Summary.html#cb72-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb72-1"><a href="ANOVA2Summary.html#cb72-1" aria-hidden="true" tabindex="-1"></a>nak <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/NAKATPase.csv&quot;</span>)</span>
+<span id="cb72-2"><a href="ANOVA2Summary.html#cb72-2" aria-hidden="true" tabindex="-1"></a>lm1.nak <span class="ot">&lt;-</span> <span class="fu">lm</span>(activity<span class="sc">~</span>strain<span class="sc">+</span>site<span class="sc">+</span>strain<span class="sc">:</span>site,<span class="at">data=</span>nak)</span>
+<span id="cb72-3"><a href="ANOVA2Summary.html#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>strain<span class="sc">+</span>site,<span class="at">data=</span>nak)</span>
+<span id="cb72-4"><a href="ANOVA2Summary.html#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.nak)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb73-1"><a href="ANOVA2Summary.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1.nak)</span>
+<span id="cb73-2"><a href="ANOVA2Summary.html#cb73-2" aria-hidden="true" tabindex="-1"></a>mc1.nak <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1.nak,<span class="at">specs=</span>pairwise<span class="sc">~</span>site<span class="sc">:</span>strain)</span>
+<span id="cb73-3"><a href="ANOVA2Summary.html#cb73-3" aria-hidden="true" tabindex="-1"></a>( mc1sum.nak <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc1.nak,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb73-4"><a href="ANOVA2Summary.html#cb73-4" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.1</span>)</span>
+<span id="cb73-5"><a href="ANOVA2Summary.html#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mc1sum.nak<span class="sc">$</span>emmeans,</span>
+<span id="cb73-6"><a href="ANOVA2Summary.html#cb73-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>site,<span class="at">group=</span>strain,<span class="at">color=</span>strain,</span>
+<span id="cb73-7"><a href="ANOVA2Summary.html#cb73-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y=</span>emmean,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL)) <span class="sc">+</span></span>
+<span id="cb73-8"><a href="ANOVA2Summary.html#cb73-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="fl">1.1</span>,<span class="at">alpha=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb73-9"><a href="ANOVA2Summary.html#cb73-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb73-10"><a href="ANOVA2Summary.html#cb73-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb73-11"><a href="ANOVA2Summary.html#cb73-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Na-K-ATPase Activity&quot;</span>,<span class="at">x=</span><span class="st">&quot;Kidney Measurement Site&quot;</span>) <span class="sc">+</span></span>
+<span id="cb73-12"><a href="ANOVA2Summary.html#cb73-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
 <p> </p>
 </div>
 </div>
 <div id="crayfish-foraging-transformation" class="section level2" number="13.4">
 <h2><span class="header-section-number">13.4</span> Crayfish Foraging (<em>Transformation</em>)</h2>
-<p><a href="https://www.astacology.org/FCmobileAbstracts.asp?uid=Guest&amp;mid=507&amp;v=11&amp;i=1">Nystrom and Graneli (1996)</a> examined the importance of intraspecific competition for food as a factor regulating survival, growth, and fecundity in Noble Crayfish (<em>Astacus astacus</em>). In one aspect of their research they examined factors that increased the risk of predation. In this part of their study, the authors assumed that the number of active crayfish (i.e., not in shelters) was an indicator of predation risk (i.e., the crayfish are out of their shelters and are thus more vulnerable). The authors hypothesized that the crayfish’s willingness to risk predation would be greater if competition for food was greater. Thus, the authors created two levels of “competition” by regulating how much food the crayfish received (with the assumption that competition is greater with lesser food). The two feeding regimes were that crayfish were fed <em>ad libitum</em> and that they were fed slightly less than a maintenance ration (called “unfed”). In addition, there is ample evidence that crayfish are more active near dusk and at night as darkness provides some protection from predatory fish. To test for this, the authors included a time of day factor in their study, that had three levels: 1200 (noon), 1700, and 1900.</p>
-<p>The authors had a large number of crayfish collected from a local lake that were available to them for this experiment. They randomly placed the crayfish into groups of 50 crayfish that were then “stocked” into plastic tubs that had been filled with sand, small pebbles, and artificial shelters. The tubs were placed haphazardly around an outside area exposed to natural light. Each tub was then assigned a “treatment” that consisted of a combination of feeding levels and the time of day when the number of active crayfish (out of 50) that were active (i.e., not in a shelter) would be recorded.</p>
+<p><img src="zimgs/CrayfishHiding.jpg" alt="Decoration" class="img-right">
+<a href="https://www.astacology.org/FCmobileAbstracts.asp?uid=Guest&amp;mid=507&amp;v=11&amp;i=1">Nystrom and Graneli (1996)</a> examined the importance of intraspecific competition for food as a factor regulating survival, growth, and fecundity in <a href="https://en.wikipedia.org/wiki/Astacus_astacus">Noble Crayfish</a> (<em>Astacus astacus</em>). In one aspect of their research they examined factors that increased the risk of predation. In this part of their study, the authors assumed that the number of active crayfish (i.e., not in shelters) was an indicator of predation risk (i.e., the crayfish are out of their shelters and are thus more vulnerable). The authors hypothesized that the crayfish’s willingness to risk predation would be greater if competition for food was greater. Thus, the authors created two levels of “competition” by regulating how much food the crayfish received (with the assumption that competition is greater with lesser food). The two feeding regimes were that crayfish were fed <a href="https://www.pig333.com/pig-glossary/A/ad-libitum-feeding-free-feeding_8/"><em>ad libitum</em></a> and that they were fed slightly less than a <a href="https://www.kenyaplex.com/questions/25182-define-maintenance-ration-as-used-in-livestock-nutrition.aspx">maintenance ration</a> (called “unfed”). In addition, there is ample evidence that crayfish are more active near <a href="https://en.wikipedia.org/wiki/Dusk">dusk</a> and at night as darkness provides some protection from predatory fish. To test for this, the authors included a time of day factor in their study, that had three levels: 1200 (noon), 1700, and 1900.</p>
+<p>The authors had a large number of crayfish collected from a local lake that were available to them for this experiment. They randomly placed the crayfish into groups of 50 crayfish that were then “stocked” into plastic tubs that had been filled with sand, small pebbles, and artificial shelters. The tubs were placed haphazardly around an outside area exposed to natural light. Each tub was then assigned a “treatment” that consisted of a combination of feeding level and time of day when the number of active crayfish (out of 50) that were active (i.e., not in a shelter) would be recorded.</p>
 <p>The statistical hypotheses to be examined were</p>
 <p><span class="math display">\[
 \begin{split}
-   H_{0}&amp;: \text{no competition effect}: \mu_{Fed} = \mu_{Unfed} \\
-   H_{A}&amp;: \text{competition effect}: \mu_{Fed} \neq \mu_{Unfed}
+   H_{0}&amp;: ``\text{no interaction effect&#39;&#39;} \\
+   H_{A}&amp;: ``\text{interaction effect&#39;&#39;}
 \end{split}
 \]</span></p>
 <p><span class="math display">\[
 \begin{split}
-   H_{0}&amp;: \text{no time effect}: \mu_{1200} = \mu_{1700} = \mu_{1900} \\
-   H_{A}&amp;: \text{time effect}: \text{At least one pair of level means is different}
+   H_{0}&amp;: ``\text{no competition effect&#39;&#39;}: \mu_{Fed} = \mu_{Unfed} \\
+   H_{A}&amp;: ``\text{competition effect&#39;&#39;}: \mu_{Fed} \neq \mu_{Unfed}
 \end{split}
 \]</span></p>
 <p><span class="math display">\[
 \begin{split}
-   H_{0}&amp;: \text{no interaction effect} \\
-   H_{A}&amp;: \text{interaction effect}
+   H_{0}&amp;: ``\text{no time effect&#39;&#39;}: \mu_{1200} = \mu_{1700} = \mu_{1900} \\
+   H_{A}&amp;: ``\text{time effect&#39;&#39;}: \text{At least one pair of level means is different}
 \end{split}
 \]</span></p>
 <p>where <span class="math inline">\(\mu\)</span> is the mean number of active crayfish and the subscripts identify the levels of each factor as defined above.</p>
-<p>This study is not balanced (Table <a href="ANOVA2Summary.html#tab:CrayfishSampleSize">13.8</a>) as the authors chose to record more groups of crayfish at the 1700 (i.e., dusk) time.</p>
+<p>This study is not balanced (Table <a href="ANOVA2Summary.html#tab:CrayfishSampleSize">13.8</a>) as the authors chose to record more groups of crayfish at 1700 (i.e., dusk).</p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:CrayfishSampleSize">Table 13.8: </span>Number of groups of crayfish in each combination of feeding regime and time of day when the number of active crayfish were recorded.
@@ -1483,7 +1504,7 @@ Figure 13.4: Mean Na-K-ATPase activity for each combination of rat strain and ki
 </th>
 <th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; " colspan="3">
 <div style="TRUE">
-Kidney Site
+Time of Day
 </div>
 </th>
 </tr>
@@ -1504,7 +1525,7 @@ Kidney Site
 <tbody>
 <tr grouplength="2">
 <td colspan="4" style="border-bottom: 1px solid;">
-<strong>Strain</strong>
+<strong>‘Competition’</strong>
 </td>
 </tr>
 <tr>
@@ -1537,22 +1558,28 @@ Unfed
 </tr>
 </tbody>
 </table>
+<p> </p>
 <p>The authors appeared to take steps to meet the independence assumption. There appears to be independence across all treatments as they used a different set of 50 crayfish for each treatment. In addition, the tubs were placed haphazardly around the area so there should not be any spatial effect such as all unfed treatments being in the same area. Furthermore, they only recorded the number of active crayfish at one time for each tub of crayfish. It would have been much easier to record all three times for each tub of crayfish but this would have violated the independence assumption and required a different analytical method.</p>
-<p>Variances among the treatments appear not to be constant (Levene’s p=0.0201) and the boxplots of residuals are quite divergent (Figure <a href="ANOVA2Summary.html#fig:CrayfishResidPlot1">13.5</a>-Right); the residuals do not appear to be approximately normally distributed and are quite left-skwed (Anderson-Darling p&lt;0.00005; Figure <a href="ANOVA2Summary.html#fig:CrayfishResidPlot1">13.5</a>-Left); and there are significant outliers (outlier test p=0.0002; Figure <a href="ANOVA2Summary.html#fig:CrayfishResidPlot1">13.5</a>). Clearly the assumptions are not met and a transformation should be considered.</p>
+<p>Variances among the treatments appear not to be constant (Levene’s p=0.0201) and the boxplots of residuals are quite divergent (Figure <a href="ANOVA2Summary.html#fig:CrayfishResidPlot1">13.5</a>-Right); the residuals do not appear to be approximately normally distributed and are quite left-skwed (Anderson-Darling p&lt;0.00005; Figure <a href="ANOVA2Summary.html#fig:CrayfishResidPlot1">13.5</a>-Left); and there are significant outliers (outlier test p=0.0002), especially in the “Unfed:17” and “Unfed:19” groups (Figure <a href="ANOVA2Summary.html#fig:CrayfishResidPlot1">13.5</a>). Clearly the assumptions are not met and a transformation should be considered.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:CrayfishResidPlot1"></span>
 <img src="Book207_files/figure-html/CrayfishResidPlot1-1.png" alt="Histogram of residuals (Left) and residual plot (Right) for a Two-way ANOVA of the number of active crayfish (out of 50) activity for each combination of feeding level and time of day." width="672" />
 <p class="caption">
 Figure 13.5: Histogram of residuals (Left) and residual plot (Right) for a Two-way ANOVA of the number of active crayfish (out of 50) activity for each combination of feeding level and time of day.
 </p>
 </div>
-<p>No transformation worked perfectly for these data. However, a log transformation resulted in equal variances (Levene’s p=0.6259), with boxplots of residuals that are not wildly divergent (Figure <a href="ANOVA2Summary.html#fig:CrayfishResidPlot2">13.6</a>-Right); the residuals do not appear to be approximately normally distributed (p=0.0004), but are not too strongly skewed (Figure <a href="ANOVA2Summary.html#fig:CrayfishResidPlot2">13.6</a>-Left); and there are still significant outliers (outlier test p=0.0104; Figure <a href="ANOVA2Summary.html#fig:CrayfishResidPlot2">13.6</a>), mostly in the Unfed-1700 group. I did not remove outliers as the sample size is already quite small. The assumptions are more closely met on the log scale, so I will continue to analyze the data with this transformation.</p>
+<p> </p>
+<p>No transformation worked perfectly for these data. However, a log transformation resulted in equal variances (Levene’s p=0.6259), with boxplots of residuals that are not wildly divergent (Figure <a href="ANOVA2Summary.html#fig:CrayfishResidPlot2">13.6</a>-Right); residuals that are note approximately normally distributed (p=0.0004) but are not too strongly skewed (Figure <a href="ANOVA2Summary.html#fig:CrayfishResidPlot2">13.6</a>-Left); and in the continue presence of significant outliers (outlier test p=0.0104; Figure <a href="ANOVA2Summary.html#fig:CrayfishResidPlot2">13.6</a>), mostly in the “Unfed-17” group but also in the “Unfed-19” groups. I did not remove outliers as the sample size is already quite small. The assumptions are most closely met on the log scale, so I will continue to analyze the data with this transformation.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:CrayfishResidPlot2"></span>
 <img src="Book207_files/figure-html/CrayfishResidPlot2-1.png" alt="Histogram of residuals (Left) and residual plot (Right) for a Two-way ANOVA of the number of active crayfish (out of 50) activity for each combination of feeding level and time of day." width="672" />
 <p class="caption">
 Figure 13.6: Histogram of residuals (Left) and residual plot (Right) for a Two-way ANOVA of the number of active crayfish (out of 50) activity for each combination of feeding level and time of day.
 </p>
 </div>
+<p> </p>
 <p>There appears to be a significant interaction effect (p=0.0006; Table <a href="ANOVA2Summary.html#tab:CrayfishAnova">13.9</a>); thus, the main effects cannot be interpreted directly from these results.</p>
+<p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:CrayfishAnova">Table 13.9: </span>Two-way ANOVA results for number of active crayfish for two feeding levels and three times of day.
@@ -1659,7 +1686,9 @@ Residuals
 </tr>
 </tbody>
 </table>
+<p> </p>
 <p>Tukey’s multiple comparisons (Table <a href="ANOVA2Summary.html#tab:CrayfishTukey">13.10</a>) show that mean number of active crayfish did not differ by time of day when the crayfish were fed <em>ad libitum</em> (p≥0.5042). In contrast, in the unfed treatments, the mean number of active crayfish increased from 1200 to 1700 (p&lt;0.00005), but not from 1700 to 1900 (p=0.3489). Additionally, the mean number of active fish was greater in the unfed than in the fed treatments for each time of day (p≤0.0013). For example, the mean number of active crayfish in the unfed treatment was between 5.63 and 24.12 <strong>times</strong> greater than the mean number of active crayfish in the fed treatment at 1900.</p>
+<p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:CrayfishTukey">Table 13.10: </span>Tukey’s multiple comparisons for <strong>ratios</strong> of means among all pairs of combinations of feeding levels and times of day. Results were back-transformed from the log scale.
@@ -1941,7 +1970,9 @@ Fed 19 / Unfed 19
 </tr>
 </tbody>
 </table>
-<p>The researcher’s primary hypotheses was supported by this study – crayfish in a high competition situation (i.e., unfed) which more willing to take on predation risk by being active outside their shelters (Figure <a href="ANOVA2Summary.html#fig:CrayfishFitPlot">13.7</a>). Their thought that crayfish would be more active near dusk or at night was partially supported as this was only evident when crayfish were in the high competition scenario.</p>
+<p> </p>
+<p>The researcher’s primary hypotheses was supported by this study – crayfish in a high competition situation (i.e., unfed) were more willing to take on predation risk by being active outside their shelters (Figure <a href="ANOVA2Summary.html#fig:CrayfishFitPlot">13.7</a>). Their thought that crayfish would be more active near dusk or at night was partially supported as this was only evident when crayfish were in the high competition scenario.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:CrayfishFitPlot"></span>
 <img src="Book207_files/figure-html/CrayfishFitPlot-1.png" alt="Mean number of active crayfish for each combination of feeding rate and time of day. Means and confidence intervals are back-transformed from the log scale." width="432" />
 <p class="caption">
@@ -1950,26 +1981,27 @@ Figure 13.7: Mean number of active crayfish for each combination of feeding rate
 </div>
 <div id="r-code-and-results-5" class="section level4 unnumbered">
 <h4>R Code and Results</h4>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb73-1"><a href="ANOVA2Summary.html#cb73-1" aria-hidden="true" tabindex="-1"></a>cray <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/CrayfishCompetition.csv&quot;</span>)</span>
-<span id="cb73-2"><a href="ANOVA2Summary.html#cb73-2" aria-hidden="true" tabindex="-1"></a>cray<span class="sc">$</span>feed <span class="ot">&lt;-</span> <span class="fu">factor</span>(cray<span class="sc">$</span>feed)</span>
-<span id="cb73-3"><a href="ANOVA2Summary.html#cb73-3" aria-hidden="true" tabindex="-1"></a>cray<span class="sc">$</span>time <span class="ot">&lt;-</span> <span class="fu">factor</span>(cray<span class="sc">$</span>time)</span>
-<span id="cb73-4"><a href="ANOVA2Summary.html#cb73-4" aria-hidden="true" tabindex="-1"></a>lm1.cc <span class="ot">&lt;-</span> <span class="fu">lm</span>(active<span class="sc">~</span>feed<span class="sc">+</span>time<span class="sc">+</span>feed<span class="sc">:</span>time,<span class="at">data=</span>cray)</span>
-<span id="cb73-5"><a href="ANOVA2Summary.html#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>feed<span class="sc">+</span>time,<span class="at">data=</span>cray)</span>
-<span id="cb73-6"><a href="ANOVA2Summary.html#cb73-6" aria-hidden="true" tabindex="-1"></a>cray<span class="sc">$</span>logact <span class="ot">&lt;-</span> <span class="fu">log</span>(cray<span class="sc">$</span>active)</span>
-<span id="cb73-7"><a href="ANOVA2Summary.html#cb73-7" aria-hidden="true" tabindex="-1"></a>lm1.cct <span class="ot">&lt;-</span> <span class="fu">lm</span>(logact<span class="sc">~</span>feed<span class="sc">+</span>time<span class="sc">+</span>feed<span class="sc">:</span>time,<span class="at">data=</span>cray)</span>
-<span id="cb73-8"><a href="ANOVA2Summary.html#cb73-8" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.cc,<span class="at">lambday=</span><span class="dv">0</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb74-1"><a href="ANOVA2Summary.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1.cct)</span>
-<span id="cb74-2"><a href="ANOVA2Summary.html#cb74-2" aria-hidden="true" tabindex="-1"></a>mc1.cct <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1.cct,<span class="at">specs=</span>pairwise<span class="sc">~</span>feed<span class="sc">:</span>time,<span class="at">tran=</span><span class="st">&quot;log&quot;</span>,<span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb74-3"><a href="ANOVA2Summary.html#cb74-3" aria-hidden="true" tabindex="-1"></a>( mc1sum.cct <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc1.cct,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
-<span id="cb74-4"><a href="ANOVA2Summary.html#cb74-4" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.1</span>)</span>
-<span id="cb74-5"><a href="ANOVA2Summary.html#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mc1sum.cct<span class="sc">$</span>emmeans,</span>
-<span id="cb74-6"><a href="ANOVA2Summary.html#cb74-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>time,<span class="at">group=</span>feed,<span class="at">color=</span>feed,</span>
-<span id="cb74-7"><a href="ANOVA2Summary.html#cb74-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y=</span>response,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL)) <span class="sc">+</span></span>
-<span id="cb74-8"><a href="ANOVA2Summary.html#cb74-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="fl">1.1</span>,<span class="at">alpha=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
-<span id="cb74-9"><a href="ANOVA2Summary.html#cb74-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb74-10"><a href="ANOVA2Summary.html#cb74-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb74-11"><a href="ANOVA2Summary.html#cb74-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Active Crayfish (out of 50)&quot;</span>,<span class="at">x=</span><span class="st">&quot;Time of Day&quot;</span>) <span class="sc">+</span></span>
-<span id="cb74-12"><a href="ANOVA2Summary.html#cb74-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb74-1"><a href="ANOVA2Summary.html#cb74-1" aria-hidden="true" tabindex="-1"></a>cray <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/CrayfishCompetition.csv&quot;</span>)</span>
+<span id="cb74-2"><a href="ANOVA2Summary.html#cb74-2" aria-hidden="true" tabindex="-1"></a>cray<span class="sc">$</span>time <span class="ot">&lt;-</span> <span class="fu">factor</span>(cray<span class="sc">$</span>time)   <span class="do">## because recorded as a number</span></span>
+<span id="cb74-3"><a href="ANOVA2Summary.html#cb74-3" aria-hidden="true" tabindex="-1"></a>lm1.cc <span class="ot">&lt;-</span> <span class="fu">lm</span>(active<span class="sc">~</span>feed<span class="sc">+</span>time<span class="sc">+</span>feed<span class="sc">:</span>time,<span class="at">data=</span>cray)</span>
+<span id="cb74-4"><a href="ANOVA2Summary.html#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>feed<span class="sc">+</span>time,<span class="at">data=</span>cray)</span>
+<span id="cb74-5"><a href="ANOVA2Summary.html#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.cc)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb75-1"><a href="ANOVA2Summary.html#cb75-1" aria-hidden="true" tabindex="-1"></a>cray<span class="sc">$</span>logact <span class="ot">&lt;-</span> <span class="fu">log</span>(cray<span class="sc">$</span>active)</span>
+<span id="cb75-2"><a href="ANOVA2Summary.html#cb75-2" aria-hidden="true" tabindex="-1"></a>lm1.cct <span class="ot">&lt;-</span> <span class="fu">lm</span>(logact<span class="sc">~</span>feed<span class="sc">+</span>time<span class="sc">+</span>feed<span class="sc">:</span>time,<span class="at">data=</span>cray)</span>
+<span id="cb75-3"><a href="ANOVA2Summary.html#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.cc,<span class="at">lambday=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb76-1"><a href="ANOVA2Summary.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1.cct)</span>
+<span id="cb76-2"><a href="ANOVA2Summary.html#cb76-2" aria-hidden="true" tabindex="-1"></a>mc1.cct <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1.cct,<span class="at">specs=</span>pairwise<span class="sc">~</span>feed<span class="sc">:</span>time,<span class="at">tran=</span><span class="st">&quot;log&quot;</span>,<span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span>
+<span id="cb76-3"><a href="ANOVA2Summary.html#cb76-3" aria-hidden="true" tabindex="-1"></a>( mc1sum.cct <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc1.cct,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb76-4"><a href="ANOVA2Summary.html#cb76-4" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.1</span>)</span>
+<span id="cb76-5"><a href="ANOVA2Summary.html#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mc1sum.cct<span class="sc">$</span>emmeans,</span>
+<span id="cb76-6"><a href="ANOVA2Summary.html#cb76-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>time,<span class="at">group=</span>feed,<span class="at">color=</span>feed,</span>
+<span id="cb76-7"><a href="ANOVA2Summary.html#cb76-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y=</span>response,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL)) <span class="sc">+</span></span>
+<span id="cb76-8"><a href="ANOVA2Summary.html#cb76-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="fl">1.1</span>,<span class="at">alpha=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb76-9"><a href="ANOVA2Summary.html#cb76-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb76-10"><a href="ANOVA2Summary.html#cb76-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb76-11"><a href="ANOVA2Summary.html#cb76-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Active Crayfish (out of 50)&quot;</span>,<span class="at">x=</span><span class="st">&quot;Time of Day&quot;</span>) <span class="sc">+</span></span>
+<span id="cb76-12"><a href="ANOVA2Summary.html#cb76-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<p> </p>
 
 </div>
 </div>
@@ -1979,9 +2011,10 @@ Figure 13.7: Mean number of active crayfish for each combination of feeding rate
 
 <div class="footnotes">
 <hr />
-<ol start="63">
-<li id="fn63"><p>This example is modified from <a href="https://www.macmillanlearning.com/college/us/product/The-Practice-of-Statistics-for-Business-and-Economics/p/1319109004">Alwyn <em>et al.</em> (2020)</a> who based it on <a href="https://psycnet.apa.org/record/1992-21809-001">Kalwani and Kim (1992)</a>.<a href="ANOVA2Summary.html#fnref63" class="footnote-back">↩︎</a></p></li>
-<li id="fn64"><p>A better design would have measured the Na-K-ATPase activity at all three sites from the same rates. However, this would have violated the independence assumption and required other methods (repeated-measures or mixed-models) to analyze the data.<a href="ANOVA2Summary.html#fnref64" class="footnote-back">↩︎</a></p></li>
+<ol start="64">
+<li id="fn64"><p>This will not be the case in this course.<a href="ANOVA2Summary.html#fnref64" class="footnote-back">↩︎</a></p></li>
+<li id="fn65"><p>This example is modified from <a href="https://www.macmillanlearning.com/college/us/product/The-Practice-of-Statistics-for-Business-and-Economics/p/1319109004">Alwyn <em>et al.</em> (2020)</a> who based it on <a href="https://psycnet.apa.org/record/1992-21809-001">Kalwani and Kim (1992)</a>.<a href="ANOVA2Summary.html#fnref65" class="footnote-back">↩︎</a></p></li>
+<li id="fn66"><p>A better design would have measured the Na-K-ATPase activity at all three sites from the same rates. However, this would have violated the independence assumption and required other methods (repeated-measures or mixed-models) to analyze the data.<a href="ANOVA2Summary.html#fnref66" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

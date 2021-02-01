@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-30" />
+<meta name="date" content="2021-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,9 +212,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html"><i class="fa fa-check"></i><b>11</b> Two-Way Analytical Foundation</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#terminology"><i class="fa fa-check"></i><b>11.1</b> Terminology</a></li>
-<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#total-and-within-ss-df-and-ms"><i class="fa fa-check"></i><b>11.2</b> Total and Within SS, df, and MS</a></li>
-<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#among-ss-df-and-ms"><i class="fa fa-check"></i><b>11.3</b> Among SS, df, and MS</a></li>
-<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.4</b> ANOVA Table</a></li>
+<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#models"><i class="fa fa-check"></i><b>11.2</b> Models</a></li>
+<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sstotal-dftotal-and-mstotal"><i class="fa fa-check"></i><b>11.3</b> SS<sub>Total</sub>, df<sub>Total</sub>, and MS<sub>Total</sub></a></li>
+<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sswithin-dfwithin-and-mswithin"><i class="fa fa-check"></i><b>11.4</b> SS<sub>Within</sub>, df<sub>Within</sub>, and MS<sub>Within</sub></a></li>
+<li class="chapter" data-level="11.5" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#ssamong-dfamong-and-msamong"><i class="fa fa-check"></i><b>11.5</b> SS<sub>Among</sub>, df<sub>Among</sub>, and MS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.6" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#partitioning-ssamong"><i class="fa fa-check"></i><b>11.6</b> Partitioning SS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.7" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.7</b> ANOVA Table</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html"><i class="fa fa-check"></i><b>12</b> Two-Way Analysis</a>
 <ul>
@@ -373,7 +376,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Show the sample size per group and comment on whether the study was balanced (i.e., same sample size per group) or not.</li>
 <li>Address the independence assumption.
 <ul>
-<li>If this assumption is not met then other analysis methods should be used.</li>
+<li>If this assumption is not met then other analysis methods should be used.<a href="#fn45" class="footnote-ref" id="fnref45"><sup>45</sup></a></li>
 </ul></li>
 <li>Fit the untransformed full model (i.e., separate group means) with <code>lm()</code>.</li>
 <li>Check the other three assumptions for the untransformed model with <code>assumptionCheck()</code>.
@@ -712,7 +715,7 @@ Figure 9.2: Mean (with 95% confidence interval) of tomato growth at each nematod
 <div id="ant-foraging-transformation" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> Ant Foraging (<em>Transformation</em>)</h2>
 <p><img src="zimgs/RedWoodAnts.jpg" alt="Decoration" class="img-right">
-<a href="https://en.wikipedia.org/wiki/Formica_rufa">Red wood ants</a> (<em>Formica rufa</em>) forage for food (mainly insects and “honeydew” produced by aphids) both on the ground and in the canopies of trees. Rowan, Oak, and Sycamore trees support very different communities of insect herbivores (including aphids) and it would be interesting to know whether the foraging efficiency of ant colonies is affected by the type of trees available to them. As part of an investigation of the foraging of <em>Formica rufa</em>, observations were made of the prey being carried by ants down trunks of trees. The total biomass of prey being transported was measured over a 30-minute sampling period on different tree specimens. The results were expressed as the biomass (dry weight in mg) of prey divided by the total number of ants leaving the tree to give a rate of food collected per ant per half hour.<a href="#fn45" class="footnote-ref" id="fnref45"><sup>45</sup></a></p>
+<a href="https://en.wikipedia.org/wiki/Formica_rufa">Red wood ants</a> (<em>Formica rufa</em>) forage for food (mainly insects and “honeydew” produced by aphids) both on the ground and in the canopies of trees. Rowan, Oak, and Sycamore trees support very different communities of insect herbivores (including aphids) and it would be interesting to know whether the foraging efficiency of ant colonies is affected by the type of trees available to them. As part of an investigation of the foraging of <em>Formica rufa</em>, observations were made of the prey being carried by ants down trunks of trees. The total biomass of prey being transported was measured over a 30-minute sampling period on different tree specimens. The results were expressed as the biomass (dry weight in mg) of prey divided by the total number of ants leaving the tree to give a rate of food collected per ant per half hour.<a href="#fn46" class="footnote-ref" id="fnref46"><sup>46</sup></a></p>
 <p>The statistical hypotheses to be examined are</p>
 <p><span class="math display">\[
 \begin{split}
@@ -1297,7 +1300,8 @@ Figure 9.8: <strong>Back-transformed</strong> mean (with 95% confidence interval
 <div class="footnotes">
 <hr />
 <ol start="45">
-<li id="fn45"><p>This example is directly from <a href="https://dzchilds.github.io/stats-for-bio/" class="uri">https://dzchilds.github.io/stats-for-bio/</a><a href="ANOVA1Summary.html#fnref45" class="footnote-back">↩︎</a></p></li>
+<li id="fn45"><p>This will not be the case in this course.<a href="ANOVA1Summary.html#fnref45" class="footnote-back">↩︎</a></p></li>
+<li id="fn46"><p>This example is directly from <a href="https://dzchilds.github.io/stats-for-bio/" class="uri">https://dzchilds.github.io/stats-for-bio/</a><a href="ANOVA1Summary.html#fnref46" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

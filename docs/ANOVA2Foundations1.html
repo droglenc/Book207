@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-30" />
+<meta name="date" content="2021-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,9 +212,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html"><i class="fa fa-check"></i><b>11</b> Two-Way Analytical Foundation</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#terminology"><i class="fa fa-check"></i><b>11.1</b> Terminology</a></li>
-<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#total-and-within-ss-df-and-ms"><i class="fa fa-check"></i><b>11.2</b> Total and Within SS, df, and MS</a></li>
-<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#among-ss-df-and-ms"><i class="fa fa-check"></i><b>11.3</b> Among SS, df, and MS</a></li>
-<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.4</b> ANOVA Table</a></li>
+<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#models"><i class="fa fa-check"></i><b>11.2</b> Models</a></li>
+<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sstotal-dftotal-and-mstotal"><i class="fa fa-check"></i><b>11.3</b> SS<sub>Total</sub>, df<sub>Total</sub>, and MS<sub>Total</sub></a></li>
+<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sswithin-dfwithin-and-mswithin"><i class="fa fa-check"></i><b>11.4</b> SS<sub>Within</sub>, df<sub>Within</sub>, and MS<sub>Within</sub></a></li>
+<li class="chapter" data-level="11.5" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#ssamong-dfamong-and-msamong"><i class="fa fa-check"></i><b>11.5</b> SS<sub>Among</sub>, df<sub>Among</sub>, and MS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.6" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#partitioning-ssamong"><i class="fa fa-check"></i><b>11.6</b> Partitioning SS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.7" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.7</b> ANOVA Table</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html"><i class="fa fa-check"></i><b>12</b> Two-Way Analysis</a>
 <ul>
@@ -364,10 +367,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Module 10</span> Two-Way Conceptual Foundation</h1>
 <p>In contrast to a <a href="ANOVA1Foundations.html#ANOVA1Foundations">one-way ANOVA</a>, a two-way ANOVA allows for simultaneously determining whether the mean of a quantitative response variable differs according to the levels of two grouping variables or an interaction between the two. For example, consider the following situations:</p>
 <ul>
-<li>Determining the effect of UV-B light intensity and tadpole density on mean growth of plains leopard frog (<em>Rana blairi</em>) tadpoles (<a href="https://conbio.onlinelibrary.wiley.com/doi/abs/10.1111/j.1523-1739.2000.99364.x">Smith <em>et al.</em> 2000</a>).</li>
+<li>Determining the effect of UV-B light intensity and tadpole density on mean growth of Plains Leopard Frog (<em>Rana blairi</em>) tadpoles (<a href="https://conbio.onlinelibrary.wiley.com/doi/abs/10.1111/j.1523-1739.2000.99364.x">Smith <em>et al.</em> 2000</a>).</li>
 <li>Whether mean monoterpene levels in Douglas firs (<em>Pseudotsuga menziesii</em>) differ depending on exposure to ambient or elevated levels of CO<sub>2</sub> and ambient or elevated levels of temperature (<a href="https://onlinelibrary-wiley-com.ezproxy.uwsp.edu/doi/full/10.1034/j.1399-3054.2003.00035.x">Snow <em>et al.</em> 2003</a>).</li>
 <li>Whether mean microcystin-LR concentration (a common cyanotoxin) differed by time (days) and exposure type (control (no exposure), direct exposure, or indirect exposure) to duckweed (<em>Lemna gibba</em>) (<a href="https://onlinelibrary-wiley-com.ezproxy.uwsp.edu/doi/abs/10.1002/tox.20079">LeBlanc <em>et al.</em> 2005</a>).</li>
-<li>Determining if the mean Na-K-ATPase activity level differs among locations of the kidney and between normal and hypertensive rats (<a href="https://journals-physiology-org.ezproxy.uwsp.edu/doi/abs/10.1152/ajprenal.1985.249.6.f863">Garg <em>et al.</em> 1985</a>).</li>
+<li>Whether the mean rating of the “attractiveness” of a college campus differed between people who viewed a website about the campus and those that viewed the campus through GoogleMaps using a virtual-reality headset and among three different age groups of viewers (<a href="https://www.researchgate.net/profile/Saravanan_Govindarajan2/publication/329191563_Estimation_of_Microwave_Dielectric_Constant_Using_Artificial_Neural_Networks/links/5c0b85a14585157ac1b0b53f/Estimation-of-Microwave-Dielectric-Constant-Using-Artificial-Neural-Networks.pdf#page=440">Singh <em>et al.</em> 2019</a>).</li>
 </ul>
 <p>The theory and application of two-way ANOVAs are discussed in this module. The presentation here depends heavily on the foundational material discussed for <a href="ANOVA1Foundations.html#ANOVA1Foundations">One-Way ANOVAs</a>.</p>
 <p> </p>
@@ -376,12 +379,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It is both possible and advantageous to manipulate more than one factor at a time to determine the effect of those factors on the response variable. For example, an experimenter may manipulate both the density of tadpoles and the level of exposure to UV-B light to determine the effect of both of these explanatory variables on body mass of tadpoles. The design of such an experiment and why it is beneficial to simultaneously manipulate two factors, as compared to varying each of those factors alone in two separate experiments, is examined in this section.</p>
 <div id="design" class="section level3" number="10.1.1">
 <h3><span class="header-section-number">10.1.1</span> Design</h3>
-<p>Suppose that we are interested in the impact of two different UV-B light intensity levels (simply called “High” and “Low”) and the density of tadpoles (1, 2, and 4 individuals per tank) on the body mass (g) of tadpoles. Further suppose that we have access to 90 tanks in which to conduct this work, where each tank will be stocked with a certain number of tadpoles and exposed to a certain UV-B light intensity. After a period of time the body mass of the tadpoles will be recorded (as a surrogate for growth).</p>
-<p>Note here that in experiments like this the explanatory variables are often called <strong>factors</strong>. Thus, we are considering two factors in this study. Observational studies usually will use explanatory variable rather than factor.</p>
-<p>One way to design this study would be to separate the 90 tanks available for the experiment into two sets. One set of tanks would be used to determine the effect of UV-B light intensity on tadpole body mass and the other set of tanks would be used to determine the effect of density on tadpole body mass. The tanks within each group would be randomly allocated to the different levels of each of the factors. This is called a “one factor at a time” (OFAT) design and might look like that shown in Table <a href="ANOVA2Foundations1.html#tab:TadpoleOFAT">10.1</a>.</p>
+<p><img src="zimgs/Tadpoles.jpg" alt="Decoration" class="img-right">
+Suppose that we are interested in the impact of two different UV-B light intensity levels (simply called “High” and “Low”) and the density of tadpoles (1, 2, and 4 individuals per tank) on the body mass (g) of tadpoles. Further suppose that we have access to 90 tanks in which to conduct this work, where each tank will be stocked with one of the tadpole densities and exposed to one of the UV-B light intensities. After a period of time the body mass of the tadpoles will be recorded (as a surrogate for growth).</p>
+<div class="tip">
+<p>Explanatory variables are usually called <strong>factors</strong> in experiments. Observational studies usually will use explanatory variable rather than factor.</p>
+</div>
+<p>One way to design this experiment would be to separate the 90 tanks available for the experiment into two sets. One set of tanks would be used to determine the effect of UV-B light intensity on tadpole body mass and the other set of tanks would be used to determine the effect of density on tadpole body mass. The tanks within each group would be randomly allocated to the different levels of each of the factors. This is called a “one factor at a time” (OFAT) design and might look like that shown in Table <a href="ANOVA2Foundations1.html#tab:TadpoleOFAT">10.1</a>.</p>
+<p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:TadpoleOFAT">Table 10.1: </span>Schematic of two OFAT experiments with UV-B light intensity and density of tadpoles. Tank numbers correspond to the random allocation of individual tanks to each treatment.
+<span id="tab:TadpoleOFAT">Table 10.1: </span>Schematic of two OFAT experiments with UV-B light intensity and tadpole density. Numbers in each cell represent tanks randomly allocated to each treatment.
 </caption>
 <thead>
 <tr>
@@ -395,7 +402,7 @@ Tanks
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 High
 </td>
 <td style="text-align:left;">
@@ -403,7 +410,7 @@ High
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 Low
 </td>
 <td style="text-align:left;">
@@ -425,7 +432,7 @@ Tanks
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 1 Tadpole
 </td>
 <td style="text-align:left;">
@@ -433,7 +440,7 @@ Tanks
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 2 Tadpoles
 </td>
 <td style="text-align:left;">
@@ -441,7 +448,7 @@ Tanks
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 4 Tadpoles
 </td>
 <td style="text-align:left;">
@@ -451,10 +458,11 @@ Tanks
 </tbody>
 </table>
 <p> </p>
-<p>In contrast, an alternative way to design this study would be to create “treatments”<a href="#fn46" class="footnote-ref" id="fnref46"><sup>46</sup></a> where each level of one factor is combined with each level of the other factor. In this example, there would be six treatments as two levels of UV-B light intensity would be “crossed” with three levels of tadpole density. Tanks would be randomly allocated to treatments. This type of design is called a “completely crossed factorial design” (CCFD) and might look like that shown in Table <a href="ANOVA2Foundations1.html#tab:TadpoleCrossed">10.2</a>.</p>
+<p>In contrast, this experiment could be designed to create “treatments”<a href="#fn47" class="footnote-ref" id="fnref47"><sup>47</sup></a> where each level of one factor is combined with each level of the other factor. In this example, there would be six treatments as two levels of UV-B light intensity would be “crossed” with three levels of tadpole density. Tanks would be randomly allocated to treatments. This type of design is called a “completely crossed factorial design” (CCFD) and might look like that shown in Table <a href="ANOVA2Foundations1.html#tab:TadpoleCrossed">10.2</a>.</p>
+<p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:TadpoleCrossed">Table 10.2: </span>Schematic depicting the crossing of three levels of UV-B light intensity with two levels of tadpole density to produce six treatments. Numbers in each cell represent individual tanks exposed to that treatment.
+<span id="tab:TadpoleCrossed">Table 10.2: </span>Schematic depicting the crossing of three levels of UV-B light intensity with two levels of tadpole density to produce six treatments. Numbers in each cell represent individual tanks randomly allocated to each treatment.
 </caption>
 <thead>
 <tr>
@@ -471,10 +479,10 @@ Tanks
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 High
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 1 Tadpole
 </td>
 <td style="text-align:left;">
@@ -482,10 +490,10 @@ High
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 High
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 2 Tadpoles
 </td>
 <td style="text-align:left;">
@@ -493,10 +501,10 @@ High
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 High
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 4 Tadpoles
 </td>
 <td style="text-align:left;">
@@ -504,10 +512,10 @@ High
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 Low
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 1 Tadpole
 </td>
 <td style="text-align:left;">
@@ -515,10 +523,10 @@ Low
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 Low
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 2 Tadpoles
 </td>
 <td style="text-align:left;">
@@ -526,10 +534,10 @@ Low
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 Low
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;">
 4 Tadpoles
 </td>
 <td style="text-align:left;">
@@ -541,12 +549,12 @@ Low
 <div class="defn">
 <p><strong>Completely crossed factorial design (CCFD)</strong>: A study design where each level of one explanatory variable (or factor) is combined with each level of the other explanatory variable (or factor) to form groups (or treatments).</p>
 </div>
-<p> </p>
 </div>
 </div>
 <div id="interaction-effects" class="section level2" number="10.2">
 <h2><span class="header-section-number">10.2</span> Interaction Effects</h2>
 <p>An interaction among factors is said to exist if the effect of one explanatory variable on the mean response depends on the level of the other explanatory variable. For example, if the mean body mass of the tadpoles <em>increased</em> across densities in the low light intensity treatments but <em>decreased</em> across densities in the high light intensity treatments (Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction">10.1</a>-Left), then an interaction between the density of tadpoles and UV-B light intensities is said to exist. However, if the pattern among tadpole densities is the same in both the low and high density light intensities (Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction">10.1</a>-Right), then no interaction exists between the factors.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:TadpoleInteraction"></span>
 <img src="Book207_files/figure-html/TadpoleInteraction-1.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating a hypothetical interaction effect (Left) and a lack of an interaction effect (Right)." width="336" /><img src="Book207_files/figure-html/TadpoleInteraction-2.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating a hypothetical interaction effect (Left) and a lack of an interaction effect (Right)." width="336" />
 <p class="caption">
@@ -556,61 +564,64 @@ Figure 10.1: Interaction plot (mean growth rate for each treatment connected wit
 <div class="defn">
 <p><strong>Interaction effect</strong>: When the effect of one explanatory variable (or factor) on the mean response is significantly different among the levels of the other explanatory variable (or factor).</p>
 </div>
-<p>The tell-tale sign of an interaction effect is if you describe the effect of a factor on the mean response differently depending on the level of the other explanatory variable. For example, in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a>-Left the effect of tadpole density on mean body mass is increasing in the high UV-B light intensity treatments, but is neither increasing or decreasing in the low UV-B light intensity treatments. The fact that density had a different effect on mean body mass in the different UV-B light treatments tells of an interaction effect. In Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a>-Right mean body mass increases with increasing density but at a very different rate (at least for densities of 1 to 2 tadpoles per tank). Again, this is a different conclusion about the effect of density on mean body mass depending on level of UV-B light; thus this represents an interaction effect.</p>
+<p>The tell-tale sign of an interaction effect is if you describe the effect of a factor on the mean response differently depending on the level of the other explanatory variable. For example, in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a>-Left the effect of tadpole density on mean body mass is increasing in the high UV-B light intensity treatments, but is neither increasing nor decreasing in the low UV-B light intensity treatments. The fact that density had a different effect on mean body mass in the different UV-B light treatments tells of an interaction effect. In Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a>-Right mean body mass increases with increasing density but at a very different rate (at least for densities of 1 to 2 tadpoles per tank). Again, this is a different conclusion about the effect of density on mean body mass depending on level of UV-B light; thus this represents an interaction effect.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:TadpoleInteraction2"></span>
 <img src="Book207_files/figure-html/TadpoleInteraction2-1.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical interaction effects." width="336" /><img src="Book207_files/figure-html/TadpoleInteraction2-2.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical interaction effects." width="336" />
 <p class="caption">
 Figure 10.2: Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical interaction effects.
 </p>
 </div>
-<p>In Module <a href="ANOVA2Foundations2.html#ANOVA2Foundations2">11</a> we will develop objective mathematical measures of whether an interaction effect exists.<a href="#fn47" class="footnote-ref" id="fnref47"><sup>47</sup></a> However, in addition to the concept above, an interaction effect will look like means that are connected for levels of one explanatory variable that “do not track together” for levels of the other explanatory variable. For example, in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a>-Left the “blue line” (connecting high UV-B light treatments) is steadily increasing whereas the “red line” (connecting low UV-B light treatments) is steadily flat – i.e., they don’t “track” together, which indicates an interaction effect. The two lines also do not track together in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a> - Right.</p>
+<p> </p>
+<p>In Module <a href="ANOVA2Foundations2.html#ANOVA2Foundations2">11</a> we will develop objective mathematical measures of whether an interaction effect exists.<a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a> However, in addition to the concept above, an interaction effect will look like means that are connected for levels of one explanatory variable that “do not track together” for levels of the other explanatory variable. For example, in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a>-Left the “blue line” (connecting high UV-B light treatments) is steadily increasing whereas the “red line” (connecting low UV-B light treatments) is steadily flat – i.e., they don’t “track” together, which indicates an interaction effect. The two lines also do not track together in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a> - Right.</p>
 <div class="tip">
 <p>An interaction effect is evident if the “lines” in an interaction plot do not largely “track together.”</p>
 </div>
-<p> </p>
 </div>
 <div id="main-effects" class="section level2" number="10.3">
 <h2><span class="header-section-number">10.3</span> Main Effects</h2>
-<p>A main effect occurs when there is a difference in the mean response among levels of an explanatory variable <em>that is consistent across the levels of the other explanatory variable</em>. Thus, by definition, a main effect cannot exist if an interaction effect exists. Thus, do not try to identify main effects when an interaction is present.</p>
+<p>A main effect occurs when there is a difference in the mean response among levels of an explanatory variable <em>that is consistent across the levels of the other explanatory variable</em>. Thus, by definition, a main effect cannot exist if an interaction effect exists. Thus, do not try to identify main effects when an interaction effect is present.</p>
 <div class="tip">
 <p>Do <strong>not</strong> identify main effects when an interact effect exists.</p>
 </div>
-<p>For example, Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction">10.1</a>-Right showed no significant interaction; thus, main effects can be assessed. In that case, the main effect of density is that mean body mass decreased when density increased from 1 to 2 tadpoles per tank and continued to decrease at a slower rate when the density increased from 2 to 4 tadpoles per tank. From the same figure, the effect of UV-B light density is that mean body mass was greater at a low than at a high UV-B intensity.<a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a></p>
+<p>For example, Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction">10.1</a>-Right showed no significant interaction; thus, main effects can be assessed. In that case, the main effect of density is that mean body mass decreased when density increased from 1 to 2 tadpoles per tank and continued to decrease at a slower rate when the density increased from 2 to 4 tadpoles per tank. From the same figure, the effect of UV-B light density is that mean body mass was greater at a low than at a high UV-B intensity.<a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a></p>
 <p>Main effects can also be determined for both interaction plots in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleNoInteraction2">10.3</a>. The main effect for density in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleNoInteraction2">10.3</a>-Left is the same as that described for Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction">10.1</a>-Right. However, in this case there is no UV-B main effect because there is no separation in means by UV-B light level at each level of density. In other words the red line for low UV-B light and the blue line for high UV-B light are (nearly) directly on top of each other, so there is no difference in means due to UV-B light and thus no main effect of UV-B light.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:TadpoleNoInteraction2"></span>
-<img src="Book207_files/figure-html/TadpoleNoInteraction2-1.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical lack2 of interaction effects." width="336" /><img src="Book207_files/figure-html/TadpoleNoInteraction2-2.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical lack2 of interaction effects." width="336" />
+<img src="Book207_files/figure-html/TadpoleNoInteraction2-1.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical lacks of interaction effects." width="336" /><img src="Book207_files/figure-html/TadpoleNoInteraction2-2.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical lacks of interaction effects." width="336" />
 <p class="caption">
-Figure 10.3: Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical lack2 of interaction effects.
+Figure 10.3: Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical lacks of interaction effects.
 </p>
 </div>
-<p>In Figure <a href="ANOVA2Foundations1.html#fig:TadpoleNoInteraction2">10.3</a>-Right, there is no main effect of tadpole density as the mean body mass at each density within each UV-B light level is the same; i.e., mean body mass does not differ by density. However, there is a UV-B light main effect as mean body mass at the high UV-B light intensity is always<a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a> greater than mean body mass at the low UV-B light intensity.</p>
+<p> </p>
+<p>In Figure <a href="ANOVA2Foundations1.html#fig:TadpoleNoInteraction2">10.3</a>-Right, there is no main effect of tadpole density as the mean body mass at each density within each UV-B light level is the same; i.e., mean body mass does not differ by density. However, there is a UV-B light main effect as mean body mass at the high UV-B light intensity is always<a href="#fn50" class="footnote-ref" id="fnref50"><sup>50</sup></a> greater than mean body mass at the low UV-B light intensity.</p>
 <p>As a reminder, only assess main effects if there is no interaction effect. Visually a main effect of the factor shown on the x-axis will be evident if the lines connecting the means are <em>not</em> horizontal (i.e., the means differ). In contrast, a main effect of the factor not shown on the x-axis (but shown as a legend) will be evident if the lines connecting the means are <em>not</em> right on top of each other.</p>
 <p> </p>
 </div>
 <div id="advantages-of-ccfd" class="section level2" number="10.4">
 <h2><span class="header-section-number">10.4</span> Advantages of CCFD</h2>
 <p>A two-factor CCFD has two major advantages over two separate OFAT experiments.</p>
-<p>First, the CCFD allocates individuals more efficiently than the two OFAT experiments. For example, in the CCFD of the tadpole experiment, all 90 individuals were used to identify differences among the light intensities <strong>AND</strong> all 90 individuals were used to identify differences among the densities of tadpoles. However, in the OFAT experiments, only 44 individuals<a href="#fn50" class="footnote-ref" id="fnref50"><sup>50</sup></a> were used to identify differences among the light intensities and only 45 individuals were used to identify differences among the tadpole densities.</p>
-<div class="tip">
-<p>CCFD studies effectively increase the sample size for identifying effects on the response variable.</p>
-</div>
-<p>Efficiency in allocation of individuals effectively leads to an increased sample size for determining the effect of any one factor. An increased sample size means more precise estimates of means<a href="#fn51" class="footnote-ref" id="fnref51"><sup>51</sup></a> and more statistical power. Statistical power is the probability of correctly rejecting a false null hypothesis. In lay terms, statistical power is the ability to correctly identify a difference in means when a difference in means really exists. Relatedly, the increased sample size means that smaller effect sizes can be identified. In practice this means that smaller differences in means will be found to be statistically different. In yet other words, a smaller “signal” can be detected. Finally, the increased efficiency means that the same power and detectable effect size can be obtained with a smaller overall sample size and, thus, lower costs.</p>
-<div class="tip">
-<p>More efficient use of individuals in CCFD studies results in increased power and increased ability to detect small effect sizes, or lower costs to obtain the same power and effect size detectability.</p>
-</div>
+<p>First, the CCFD allocates individuals more efficiently than the two OFAT experiments. For example, in the CCFD of the tadpole experiment, all 90 individuals were used to identify differences among the light intensities <strong>AND</strong> all 90 individuals were used to identify differences among the densities of tadpoles. However, in the OFAT experiments, only 44 individuals<a href="#fn51" class="footnote-ref" id="fnref51"><sup>51</sup></a> were used to identify differences among the light intensities and only 45 individuals were used to identify differences among the tadpole densities.</p>
+<p>Efficiency in allocation of individuals effectively leads to an increased sample size for determining the effect of any one factor. An increased sample size means more precise estimates of means<a href="#fn52" class="footnote-ref" id="fnref52"><sup>52</sup></a> and more statistical power. Statistical power is the probability of correctly rejecting a false null hypothesis. In lay terms, statistical power is the ability to correctly identify a difference in means when a difference in means really exists. Relatedly, the increased sample size means that smaller effect sizes can be identified. In practice this means that smaller differences in means will be found to be statistically different. In yet other words, a smaller “signal” can be detected. Finally, the increased efficiency means that the same power and detectable effect size can be obtained with a smaller overall sample size and, thus, lower costs.</p>
 <p>A second advantage of CCFD studies is that they allow researchers to identify if an interaction effect exists between the two explanatory variables. An interaction effect cannot be detected in OFAT studies because the two explanatory variables are not considered simultaneously.</p>
+<div class="tip">
+<p>CCFD studies effectively increase the sample size for identifying effects on the response variable. More efficient use of individuals in CCFD studies results in increased power and increased ability to detect small effect sizes, or lower costs to obtain the same power and effect size detectability.</p>
+</div>
+<div class="tip">
+<p>CCFD studies allow for the possible detection of an interaction effect.</p>
+</div>
 
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="46">
-<li id="fn46"><p>The combination of levels is often called a “treatment” in an experiment. In an observational study it would just be called a “group.”<a href="ANOVA2Foundations1.html#fnref46" class="footnote-back">↩︎</a></p></li>
-<li id="fn47"><p>That is, we will use a p-value.<a href="ANOVA2Foundations1.html#fnref47" class="footnote-back">↩︎</a></p></li>
-<li id="fn48"><p>The blue line was always below the red line by roughly the same amount.<a href="ANOVA2Foundations1.html#fnref48" class="footnote-back">↩︎</a></p></li>
-<li id="fn49"><p>For each density.<a href="ANOVA2Foundations1.html#fnref49" class="footnote-back">↩︎</a></p></li>
-<li id="fn50"><p>One individual was not used in order to have equal numbers of individuals in each treatment.<a href="ANOVA2Foundations1.html#fnref50" class="footnote-back">↩︎</a></p></li>
-<li id="fn51"><p>That is, a reduced SE<a href="ANOVA2Foundations1.html#fnref51" class="footnote-back">↩︎</a></p></li>
+<ol start="47">
+<li id="fn47"><p>The combination of levels is often called a “treatment” in an experiment. In an observational study it would just be called a “group.”<a href="ANOVA2Foundations1.html#fnref47" class="footnote-back">↩︎</a></p></li>
+<li id="fn48"><p>That is, we will use a p-value.<a href="ANOVA2Foundations1.html#fnref48" class="footnote-back">↩︎</a></p></li>
+<li id="fn49"><p>The blue line was always below the red line by roughly the same amount.<a href="ANOVA2Foundations1.html#fnref49" class="footnote-back">↩︎</a></p></li>
+<li id="fn50"><p>For each density.<a href="ANOVA2Foundations1.html#fnref50" class="footnote-back">↩︎</a></p></li>
+<li id="fn51"><p>One individual was not used in order to have equal numbers of individuals in each treatment.<a href="ANOVA2Foundations1.html#fnref51" class="footnote-back">↩︎</a></p></li>
+<li id="fn52"><p>That is, a reduced SE<a href="ANOVA2Foundations1.html#fnref52" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

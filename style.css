@@ -56,6 +56,11 @@ div.defn {
   margin-bottom: 0.25em;
 }
 
+.RMESSAGE {
+  background-color: Yellow;
+  color: Red;
+}
+
 .RWARNING {
   background-color: Khaki;
 }

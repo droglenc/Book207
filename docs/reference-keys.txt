@@ -227,11 +227,10 @@ terminology
 definitions
 graphing
 symbols
-total-and-within-ss-df-and-ms
 models
 sstotal-dftotal-and-mstotal
 sswithin-dfwithin-and-mswithin
-among-ss-df-and-ms
+ssamong-dfamong-and-msamong
 partitioning-ssamong
 anova-table-1
 ANOVA2Analysis

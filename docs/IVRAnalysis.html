@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-30" />
+<meta name="date" content="2021-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,9 +212,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html"><i class="fa fa-check"></i><b>11</b> Two-Way Analytical Foundation</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#terminology"><i class="fa fa-check"></i><b>11.1</b> Terminology</a></li>
-<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#total-and-within-ss-df-and-ms"><i class="fa fa-check"></i><b>11.2</b> Total and Within SS, df, and MS</a></li>
-<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#among-ss-df-and-ms"><i class="fa fa-check"></i><b>11.3</b> Among SS, df, and MS</a></li>
-<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.4</b> ANOVA Table</a></li>
+<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#models"><i class="fa fa-check"></i><b>11.2</b> Models</a></li>
+<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sstotal-dftotal-and-mstotal"><i class="fa fa-check"></i><b>11.3</b> SS<sub>Total</sub>, df<sub>Total</sub>, and MS<sub>Total</sub></a></li>
+<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sswithin-dfwithin-and-mswithin"><i class="fa fa-check"></i><b>11.4</b> SS<sub>Within</sub>, df<sub>Within</sub>, and MS<sub>Within</sub></a></li>
+<li class="chapter" data-level="11.5" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#ssamong-dfamong-and-msamong"><i class="fa fa-check"></i><b>11.5</b> SS<sub>Among</sub>, df<sub>Among</sub>, and MS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.6" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#partitioning-ssamong"><i class="fa fa-check"></i><b>11.6</b> Partitioning SS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.7" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.7</b> ANOVA Table</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html"><i class="fa fa-check"></i><b>12</b> Two-Way Analysis</a>
 <ul>
@@ -369,7 +372,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="tip">
 <p>The assumptions of an IVR are the same as the assumptions for an SLR. Thus, methods for assessing the assumptions are the same as those methods used for an SLR</p>
 </div>
-<p>An important point to note, though, is that the IVR assumptions are assessed on the ultimate full model. If the assumptions are not met on the ultimate full model, then transformations for the response and the covariate<a href="#fn96" class="footnote-ref" id="fnref96"><sup>96</sup></a> should be considered such that a transformed version of the ultimate full model meets the assumptions.<a href="#fn97" class="footnote-ref" id="fnref97"><sup>97</sup></a> Once an ultimate full model is found where all of the assumptions are met, then it is assumed that all assumptions will be met for any subset of the ultimate full model that has non-significant explanatory variables removed.</p>
+<p>An important point to note, though, is that the IVR assumptions are assessed on the ultimate full model. If the assumptions are not met on the ultimate full model, then transformations for the response and the covariate<a href="#fn98" class="footnote-ref" id="fnref98"><sup>98</sup></a> should be considered such that a transformed version of the ultimate full model meets the assumptions.<a href="#fn99" class="footnote-ref" id="fnref99"><sup>99</sup></a> Once an ultimate full model is found where all of the assumptions are met, then it is assumed that all assumptions will be met for any subset of the ultimate full model that has non-significant explanatory variables removed.</p>
 <div class="tip">
 <p>IVR assumptions are assessed for the ultimate full model. Assumptions do not need to be assessed for simpler models that only have variables from the ultimate full model removed.</p>
 </div>
@@ -383,10 +386,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Figure 23.1: Fitted regression lines for mirex in tissue by salmon weight for 1992, 1996, and 1999. Note that the IVR indicated that these lines are not parallel.
 </p>
 </div>
-<p>The <code>emtrends()</code> function from the <code>emmeans</code> package<a href="#fn98" class="footnote-ref" id="fnref98"><sup>98</sup></a> can be used to test for differences among all pairs of slopes using a Tukey-like correction. This function requires the ultimate full model as its first argument (<code>ivrY1</code> here as fit in Section <a href="IVRTesting.html#parallel-lines-test">22.2</a>), a <code>specs=</code> argument with <code>pairwise~</code> followed by the name of the factor variable in the ultimate full model, and <code>var=</code> followed by the name of the covariate in the ultimate full model.<a href="#fn99" class="footnote-ref" id="fnref99"><sup>99</sup></a> The results of this function should be saved to an object.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb176-1"><a href="IVRAnalysis.html#cb176-1" aria-hidden="true" tabindex="-1"></a>smc <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(ivrY1,pairwise<span class="sc">~</span>year,<span class="at">var=</span><span class="st">&quot;weight&quot;</span>)</span></code></pre></div>
+<p>The <code>emtrends()</code> function from the <code>emmeans</code> package<a href="#fn100" class="footnote-ref" id="fnref100"><sup>100</sup></a> can be used to test for differences among all pairs of slopes using a Tukey-like correction. This function requires the ultimate full model as its first argument (<code>ivrY1</code> here as fit in Section <a href="IVRTesting.html#parallel-lines-test">22.2</a>), a <code>specs=</code> argument with <code>pairwise~</code> followed by the name of the factor variable in the ultimate full model, and <code>var=</code> followed by the name of the covariate in the ultimate full model.<a href="#fn101" class="footnote-ref" id="fnref101"><sup>101</sup></a> The results of this function should be saved to an object.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb178-1"><a href="IVRAnalysis.html#cb178-1" aria-hidden="true" tabindex="-1"></a>smc <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(ivrY1,pairwise<span class="sc">~</span>year,<span class="at">var=</span><span class="st">&quot;weight&quot;</span>)</span></code></pre></div>
 <p>That saved object is then the first argument to <code>summary()</code>, which also includes <code>infer=TRUE</code>. The results are in sections labeled as <code>$emmeans</code> and <code>$contrasts</code>.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb177-1"><a href="IVRAnalysis.html#cb177-1" aria-hidden="true" tabindex="-1"></a>( smcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(smc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb179-1"><a href="IVRAnalysis.html#cb179-1" aria-hidden="true" tabindex="-1"></a>( smcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(smc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   $emtrends
 #R&gt;    year weight.trend      SE df lower.CL upper.CL t.ratio p.value
 #R&gt;    1992      0.02653 0.00483 44  0.01679   0.0363 5.489   &lt;.0001 
@@ -429,7 +432,7 @@ Figure 23.1: Fitted regression lines for mirex in tissue by salmon weight for 19
 </div>
 <div id="multiple-comparisons-for-intercepts" class="section level2" number="23.3">
 <h2><span class="header-section-number">23.3</span> Multiple Comparisons for Intercepts</h2>
-<p>In Section <a href="IVRTesting.html#more-groups-same-slopes">22.7</a> of the last module, the IVR indicated that the first three years (1977, 1982, and 1986) had the same slopes and that at least some of those years had different intercepts (Figure <a href="IVRAnalysis.html#fig:IVRMirexYearF3a">23.2</a>).<a href="#fn100" class="footnote-ref" id="fnref100"><sup>100</sup></a> An examination of Figure <a href="IVRAnalysis.html#fig:IVRMirexYearF3a">23.2</a> suggests that the intercept for 1977 may be greater than the intercepts for 1982 and 1986, which likely do not differ significantly. Again, an objective method is needed to determine which pairs of intercepts significantly differ.</p>
+<p>In Section <a href="IVRTesting.html#more-groups-same-slopes">22.7</a> of the last module, the IVR indicated that the first three years (1977, 1982, and 1986) had the same slopes and that at least some of those years had different intercepts (Figure <a href="IVRAnalysis.html#fig:IVRMirexYearF3a">23.2</a>).<a href="#fn102" class="footnote-ref" id="fnref102"><sup>102</sup></a> An examination of Figure <a href="IVRAnalysis.html#fig:IVRMirexYearF3a">23.2</a> suggests that the intercept for 1977 may be greater than the intercepts for 1982 and 1986, which likely do not differ significantly. Again, an objective method is needed to determine which pairs of intercepts significantly differ.</p>
 <div class="figure" style="text-align: center"><span id="fig:IVRMirexYearF3a"></span>
 <img src="Book207_files/figure-html/IVRMirexYearF3a-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. Note that the IVR indicated that these lines are parallel, there is a signficant relationship, and at least one of the lines has a different intercept." width="432" />
 <p class="caption">
@@ -437,10 +440,10 @@ Figure 23.2: Fitted regression lines for mirex in tissue by salmon weight for on
 </p>
 </div>
 <p>The <code>emmeans()</code> function from the <code>emmeans</code> package can be used to determine which pairs of intercepts differ (using a Tukey’s correction). However, before using this function a new model with the insignificant interaction term removed should be fit.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb179-1"><a href="IVRAnalysis.html#cb179-1" aria-hidden="true" tabindex="-1"></a>ivrY2a <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year,<span class="at">data=</span>MirexFirst3)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb181-1"><a href="IVRAnalysis.html#cb181-1" aria-hidden="true" tabindex="-1"></a>ivrY2a <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year,<span class="at">data=</span>MirexFirst3)</span></code></pre></div>
 <p>The use of <code>emmeans</code> here is exactly the same as it was in Section <a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r">6.3</a>. Specifically, the model without the interaction term is the first argument and <code>pairwise~</code> is followed by the name of the factor variable in the model. The results are then submitted to <code>summary()</code> with <code>infer=TRUE</code> and the results are given in two sections labeled <code>$emmeans</code> and <code>$contrasts</code>.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb180-1"><a href="IVRAnalysis.html#cb180-1" aria-hidden="true" tabindex="-1"></a>imc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2a,pairwise<span class="sc">~</span>year)</span>
-<span id="cb180-2"><a href="IVRAnalysis.html#cb180-2" aria-hidden="true" tabindex="-1"></a>( imcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb182-1"><a href="IVRAnalysis.html#cb182-1" aria-hidden="true" tabindex="-1"></a>imc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2a,pairwise<span class="sc">~</span>year)</span>
+<span id="cb182-2"><a href="IVRAnalysis.html#cb182-2" aria-hidden="true" tabindex="-1"></a>( imcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   $emmeans
 #R&gt;    year emmean     SE df lower.CL upper.CL t.ratio p.value
 #R&gt;    1977  0.238 0.0123 68    0.213    0.262 19.392  &lt;.0001 
@@ -484,9 +487,9 @@ Figure 23.3: Fitted regression lines for mirex in tissue by salmon weight for on
 <div class="tip">
 <p>The mean value of the response at the mean value of the covariate, along with 95% confidence intervals and p-values, are shown in the <code>$emmeans</code> section of the results.</p>
 </div>
-<p>The <code>emmeans()</code> function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extreme extrapolation as discussed in Section <a href="SLRInference.html#intercept">15.3</a>. It is possible to compute the mean values of the response at other values of the covariate by using <code>cov.reduce=</code> in <code>emmeans()</code>. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure <a href="IVRAnalysis.html#fig:IVRExampleIntercepts2">23.4</a>).<a href="#fn101" class="footnote-ref" id="fnref101"><sup>101</sup></a> Because the lines are parallel this does not change anything in the <code>$contrasts</code> portion of the output. However, the <code>$emmeans</code> portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb182-1"><a href="IVRAnalysis.html#cb182-1" aria-hidden="true" tabindex="-1"></a>imc2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2a,pairwise<span class="sc">~</span>year,<span class="at">cov.reduce=</span>min)</span>
-<span id="cb182-2"><a href="IVRAnalysis.html#cb182-2" aria-hidden="true" tabindex="-1"></a>( imc2sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc2,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<p>The <code>emmeans()</code> function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extreme extrapolation as discussed in Section <a href="SLRInference.html#intercept">15.3</a>. It is possible to compute the mean values of the response at other values of the covariate by using <code>cov.reduce=</code> in <code>emmeans()</code>. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure <a href="IVRAnalysis.html#fig:IVRExampleIntercepts2">23.4</a>).<a href="#fn103" class="footnote-ref" id="fnref103"><sup>103</sup></a> Because the lines are parallel this does not change anything in the <code>$contrasts</code> portion of the output. However, the <code>$emmeans</code> portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb184-1"><a href="IVRAnalysis.html#cb184-1" aria-hidden="true" tabindex="-1"></a>imc2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2a,pairwise<span class="sc">~</span>year,<span class="at">cov.reduce=</span>min)</span>
+<span id="cb184-2"><a href="IVRAnalysis.html#cb184-2" aria-hidden="true" tabindex="-1"></a>( imc2sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc2,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   $emmeans
 #R&gt;    year emmean     SE df lower.CL upper.CL t.ratio p.value
 #R&gt;    1977 0.1460 0.0143 68   0.1174    0.175 10.181  &lt;.0001 
@@ -515,13 +518,13 @@ Figure 23.4: Fitted regression lines for mirex in tissue by salmon weight for on
 </div>
 <div class="footnotes">
 <hr />
-<ol start="96">
-<li id="fn96"><p>If the covariate is transformed then any interaction terms with the covariate should be recreated using the transformed covariate.<a href="IVRAnalysis.html#fnref96" class="footnote-back">↩︎</a></p></li>
-<li id="fn97"><p>The methods and rules for transforming these variables in an IVR are the same as those used for an SLR (see <a href="SLRTransformations.html#SLRTransformations">18</a>).<a href="IVRAnalysis.html#fnref97" class="footnote-back">↩︎</a></p></li>
-<li id="fn98"><p>The <code>emmeans</code> package was introduced in Section <a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r">6.3</a>.<a href="IVRAnalysis.html#fnref98" class="footnote-back">↩︎</a></p></li>
-<li id="fn99"><p>Except for <code>var=</code> this is the same as for <code>emmeans()</code> described in Section <a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r">6.3</a><a href="IVRAnalysis.html#fnref99" class="footnote-back">↩︎</a></p></li>
-<li id="fn100"><p>Recall from last module that those three years were chosen simply to serve as an example. Choosing these years has nothing to do with the analysis from the previous section.<a href="IVRAnalysis.html#fnref100" class="footnote-back">↩︎</a></p></li>
-<li id="fn101"><p>You can get the mean values of the response at a covariate of 0 (i.e., the actual y-intercepts) by using <code>cov.reduce=function(x) 0</code>.<a href="IVRAnalysis.html#fnref101" class="footnote-back">↩︎</a></p></li>
+<ol start="98">
+<li id="fn98"><p>If the covariate is transformed then any interaction terms with the covariate should be recreated using the transformed covariate.<a href="IVRAnalysis.html#fnref98" class="footnote-back">↩︎</a></p></li>
+<li id="fn99"><p>The methods and rules for transforming these variables in an IVR are the same as those used for an SLR (see <a href="SLRTransformations.html#SLRTransformations">18</a>).<a href="IVRAnalysis.html#fnref99" class="footnote-back">↩︎</a></p></li>
+<li id="fn100"><p>The <code>emmeans</code> package was introduced in Section <a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r">6.3</a>.<a href="IVRAnalysis.html#fnref100" class="footnote-back">↩︎</a></p></li>
+<li id="fn101"><p>Except for <code>var=</code> this is the same as for <code>emmeans()</code> described in Section <a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r">6.3</a><a href="IVRAnalysis.html#fnref101" class="footnote-back">↩︎</a></p></li>
+<li id="fn102"><p>Recall from last module that those three years were chosen simply to serve as an example. Choosing these years has nothing to do with the analysis from the previous section.<a href="IVRAnalysis.html#fnref102" class="footnote-back">↩︎</a></p></li>
+<li id="fn103"><p>You can get the mean values of the response at a covariate of 0 (i.e., the actual y-intercepts) by using <code>cov.reduce=function(x) 0</code>.<a href="IVRAnalysis.html#fnref103" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

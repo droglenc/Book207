@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-30" />
+<meta name="date" content="2021-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,9 +212,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html"><i class="fa fa-check"></i><b>11</b> Two-Way Analytical Foundation</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#terminology"><i class="fa fa-check"></i><b>11.1</b> Terminology</a></li>
-<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#total-and-within-ss-df-and-ms"><i class="fa fa-check"></i><b>11.2</b> Total and Within SS, df, and MS</a></li>
-<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#among-ss-df-and-ms"><i class="fa fa-check"></i><b>11.3</b> Among SS, df, and MS</a></li>
-<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.4</b> ANOVA Table</a></li>
+<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#models"><i class="fa fa-check"></i><b>11.2</b> Models</a></li>
+<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sstotal-dftotal-and-mstotal"><i class="fa fa-check"></i><b>11.3</b> SS<sub>Total</sub>, df<sub>Total</sub>, and MS<sub>Total</sub></a></li>
+<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sswithin-dfwithin-and-mswithin"><i class="fa fa-check"></i><b>11.4</b> SS<sub>Within</sub>, df<sub>Within</sub>, and MS<sub>Within</sub></a></li>
+<li class="chapter" data-level="11.5" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#ssamong-dfamong-and-msamong"><i class="fa fa-check"></i><b>11.5</b> SS<sub>Among</sub>, df<sub>Among</sub>, and MS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.6" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#partitioning-ssamong"><i class="fa fa-check"></i><b>11.6</b> Partitioning SS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.7" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.7</b> ANOVA Table</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html"><i class="fa fa-check"></i><b>12</b> Two-Way Analysis</a>
 <ul>
@@ -548,20 +551,20 @@ Figure 19.2: Scatterplot of temperature anomaly versuse CO2 concentration with t
 <p>Finally, the predicted mean temperature anomaly for all times when the CO<sub>2</sub> concentration was 360 ppm is between 29.2 and 36.0.</p>
 <div id="r-code-and-results-6" class="section level4 unnumbered">
 <h4>R Code and Results</h4>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb138-1"><a href="SLRSummary.html#cb138-1" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/NCMTH107/modules/CE/GSI_data.csv&quot;</span>)</span>
-<span id="cb138-2"><a href="SLRSummary.html#cb138-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cc)</span>
-<span id="cb138-3"><a href="SLRSummary.html#cb138-3" aria-hidden="true" tabindex="-1"></a>lm.cc <span class="ot">&lt;-</span> <span class="fu">lm</span>(Temp<span class="sc">~</span>CO2,<span class="at">data=</span>cc)</span>
-<span id="cb138-4"><a href="SLRSummary.html#cb138-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.cc)</span></code></pre></div>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb139-1"><a href="SLRSummary.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.cc)</span>
-<span id="cb139-2"><a href="SLRSummary.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.cc)</span>
-<span id="cb139-3"><a href="SLRSummary.html#cb139-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.cc),<span class="fu">confint</span>(lm.cc))</span>
-<span id="cb139-4"><a href="SLRSummary.html#cb139-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cc,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>CO2,<span class="at">y=</span>Temp)) <span class="sc">+</span> </span>
-<span id="cb139-5"><a href="SLRSummary.html#cb139-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb139-6"><a href="SLRSummary.html#cb139-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;CO2 Concentration (ppm)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Temperature Anomaly (1/100C)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb139-7"><a href="SLRSummary.html#cb139-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
-<span id="cb139-8"><a href="SLRSummary.html#cb139-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb140-1"><a href="SLRSummary.html#cb140-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">CO2=</span><span class="dv">360</span>)</span>
-<span id="cb140-2"><a href="SLRSummary.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm.cc,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb140-1"><a href="SLRSummary.html#cb140-1" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/NCMTH107/modules/CE/GSI_data.csv&quot;</span>)</span>
+<span id="cb140-2"><a href="SLRSummary.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cc)</span>
+<span id="cb140-3"><a href="SLRSummary.html#cb140-3" aria-hidden="true" tabindex="-1"></a>lm.cc <span class="ot">&lt;-</span> <span class="fu">lm</span>(Temp<span class="sc">~</span>CO2,<span class="at">data=</span>cc)</span>
+<span id="cb140-4"><a href="SLRSummary.html#cb140-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.cc)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb141-1"><a href="SLRSummary.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.cc)</span>
+<span id="cb141-2"><a href="SLRSummary.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.cc)</span>
+<span id="cb141-3"><a href="SLRSummary.html#cb141-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.cc),<span class="fu">confint</span>(lm.cc))</span>
+<span id="cb141-4"><a href="SLRSummary.html#cb141-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cc,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>CO2,<span class="at">y=</span>Temp)) <span class="sc">+</span> </span>
+<span id="cb141-5"><a href="SLRSummary.html#cb141-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb141-6"><a href="SLRSummary.html#cb141-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;CO2 Concentration (ppm)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Temperature Anomaly (1/100C)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb141-7"><a href="SLRSummary.html#cb141-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
+<span id="cb141-8"><a href="SLRSummary.html#cb141-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb142-1"><a href="SLRSummary.html#cb142-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">CO2=</span><span class="dv">360</span>)</span>
+<span id="cb142-2"><a href="SLRSummary.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm.cc,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <p> </p>
 </div>
 </div>
@@ -725,27 +728,27 @@ Figure 19.5: Scatterplot of log above ground biomass on log diameter at breast h
 <p>In conclusion, a significant and very strong relationship was found between the natural log above-ground biomass and the natural log diameter-at-breast-height for trees in the Miombo Woodlands. A model was developed from this relationship that can be used to predict above-ground biomass of a tree from the measured DBH of the tree.</p>
 <div id="r-code-and-results-7" class="section level4 unnumbered">
 <h4>R Code and Results</h4>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb141-1"><a href="SLRSummary.html#cb141-1" aria-hidden="true" tabindex="-1"></a>tm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/droglenc/NCData/master/TreesMiombo.csv&quot;</span>)</span>
-<span id="cb141-2"><a href="SLRSummary.html#cb141-2" aria-hidden="true" tabindex="-1"></a>tm <span class="ot">&lt;-</span> <span class="fu">filterD</span>(tm,<span class="sc">!</span>outlier)   <span class="do">## data entry error removed</span></span>
-<span id="cb141-3"><a href="SLRSummary.html#cb141-3" aria-hidden="true" tabindex="-1"></a>lm.tm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(AGB<span class="sc">~</span>DBH,<span class="at">data=</span>tm)</span>
-<span id="cb141-4"><a href="SLRSummary.html#cb141-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.tm1)</span></code></pre></div>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb142-1"><a href="SLRSummary.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.tm1,<span class="at">lambday=</span><span class="dv">0</span>,<span class="at">lambdax=</span><span class="dv">0</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb143-1"><a href="SLRSummary.html#cb143-1" aria-hidden="true" tabindex="-1"></a>tm<span class="sc">$</span>logDBH <span class="ot">&lt;-</span> <span class="fu">log</span>(tm<span class="sc">$</span>DBH)</span>
-<span id="cb143-2"><a href="SLRSummary.html#cb143-2" aria-hidden="true" tabindex="-1"></a>tm<span class="sc">$</span>logAGB <span class="ot">&lt;-</span> <span class="fu">log</span>(tm<span class="sc">$</span>AGB)</span>
-<span id="cb143-3"><a href="SLRSummary.html#cb143-3" aria-hidden="true" tabindex="-1"></a>lm.tm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(logAGB<span class="sc">~</span>logDBH,<span class="at">data=</span>tm)</span>
-<span id="cb143-4"><a href="SLRSummary.html#cb143-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.tm2)</span>
-<span id="cb143-5"><a href="SLRSummary.html#cb143-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.tm2)</span>
-<span id="cb143-6"><a href="SLRSummary.html#cb143-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>tm,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>logDBH,<span class="at">y=</span>logAGB)) <span class="sc">+</span> </span>
-<span id="cb143-7"><a href="SLRSummary.html#cb143-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb143-8"><a href="SLRSummary.html#cb143-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;log Diameter at Breast Height&quot;</span>,<span class="at">y=</span><span class="st">&quot;log Above Ground Biomass&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb143-9"><a href="SLRSummary.html#cb143-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
-<span id="cb143-10"><a href="SLRSummary.html#cb143-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb144-1"><a href="SLRSummary.html#cb144-1" aria-hidden="true" tabindex="-1"></a>aov.p.tm2 <span class="ot">&lt;-</span> <span class="fu">anova</span>(lm.tm2)<span class="sc">$</span><span class="st">&quot;Pr(&gt;F)&quot;</span>[<span class="dv">1</span>]</span>
-<span id="cb144-2"><a href="SLRSummary.html#cb144-2" aria-hidden="true" tabindex="-1"></a>( cfs.tm2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.tm2),<span class="fu">confint</span>(lm.tm2)) )</span>
-<span id="cb144-3"><a href="SLRSummary.html#cb144-3" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(cfs.tm2)</span>
-<span id="cb144-4"><a href="SLRSummary.html#cb144-4" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">logDBH=</span><span class="fu">log</span>(<span class="dv">50</span>))</span>
-<span id="cb144-5"><a href="SLRSummary.html#cb144-5" aria-hidden="true" tabindex="-1"></a>( pl50 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm.tm2,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>) )</span>
-<span id="cb144-6"><a href="SLRSummary.html#cb144-6" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(pl50)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb143-1"><a href="SLRSummary.html#cb143-1" aria-hidden="true" tabindex="-1"></a>tm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/droglenc/NCData/master/TreesMiombo.csv&quot;</span>)</span>
+<span id="cb143-2"><a href="SLRSummary.html#cb143-2" aria-hidden="true" tabindex="-1"></a>tm <span class="ot">&lt;-</span> <span class="fu">filterD</span>(tm,<span class="sc">!</span>outlier)   <span class="do">## data entry error removed</span></span>
+<span id="cb143-3"><a href="SLRSummary.html#cb143-3" aria-hidden="true" tabindex="-1"></a>lm.tm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(AGB<span class="sc">~</span>DBH,<span class="at">data=</span>tm)</span>
+<span id="cb143-4"><a href="SLRSummary.html#cb143-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.tm1)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb144-1"><a href="SLRSummary.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.tm1,<span class="at">lambday=</span><span class="dv">0</span>,<span class="at">lambdax=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb145-1"><a href="SLRSummary.html#cb145-1" aria-hidden="true" tabindex="-1"></a>tm<span class="sc">$</span>logDBH <span class="ot">&lt;-</span> <span class="fu">log</span>(tm<span class="sc">$</span>DBH)</span>
+<span id="cb145-2"><a href="SLRSummary.html#cb145-2" aria-hidden="true" tabindex="-1"></a>tm<span class="sc">$</span>logAGB <span class="ot">&lt;-</span> <span class="fu">log</span>(tm<span class="sc">$</span>AGB)</span>
+<span id="cb145-3"><a href="SLRSummary.html#cb145-3" aria-hidden="true" tabindex="-1"></a>lm.tm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(logAGB<span class="sc">~</span>logDBH,<span class="at">data=</span>tm)</span>
+<span id="cb145-4"><a href="SLRSummary.html#cb145-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.tm2)</span>
+<span id="cb145-5"><a href="SLRSummary.html#cb145-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.tm2)</span>
+<span id="cb145-6"><a href="SLRSummary.html#cb145-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>tm,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>logDBH,<span class="at">y=</span>logAGB)) <span class="sc">+</span> </span>
+<span id="cb145-7"><a href="SLRSummary.html#cb145-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb145-8"><a href="SLRSummary.html#cb145-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;log Diameter at Breast Height&quot;</span>,<span class="at">y=</span><span class="st">&quot;log Above Ground Biomass&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb145-9"><a href="SLRSummary.html#cb145-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
+<span id="cb145-10"><a href="SLRSummary.html#cb145-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb146-1"><a href="SLRSummary.html#cb146-1" aria-hidden="true" tabindex="-1"></a>aov.p.tm2 <span class="ot">&lt;-</span> <span class="fu">anova</span>(lm.tm2)<span class="sc">$</span><span class="st">&quot;Pr(&gt;F)&quot;</span>[<span class="dv">1</span>]</span>
+<span id="cb146-2"><a href="SLRSummary.html#cb146-2" aria-hidden="true" tabindex="-1"></a>( cfs.tm2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.tm2),<span class="fu">confint</span>(lm.tm2)) )</span>
+<span id="cb146-3"><a href="SLRSummary.html#cb146-3" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(cfs.tm2)</span>
+<span id="cb146-4"><a href="SLRSummary.html#cb146-4" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">logDBH=</span><span class="fu">log</span>(<span class="dv">50</span>))</span>
+<span id="cb146-5"><a href="SLRSummary.html#cb146-5" aria-hidden="true" tabindex="-1"></a>( pl50 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm.tm2,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>) )</span>
+<span id="cb146-6"><a href="SLRSummary.html#cb146-6" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(pl50)</span></code></pre></div>
 
 </div>
 </div>

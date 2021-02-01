@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-30" />
+<meta name="date" content="2021-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,9 +212,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html"><i class="fa fa-check"></i><b>11</b> Two-Way Analytical Foundation</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#terminology"><i class="fa fa-check"></i><b>11.1</b> Terminology</a></li>
-<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#total-and-within-ss-df-and-ms"><i class="fa fa-check"></i><b>11.2</b> Total and Within SS, df, and MS</a></li>
-<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#among-ss-df-and-ms"><i class="fa fa-check"></i><b>11.3</b> Among SS, df, and MS</a></li>
-<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.4</b> ANOVA Table</a></li>
+<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#models"><i class="fa fa-check"></i><b>11.2</b> Models</a></li>
+<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sstotal-dftotal-and-mstotal"><i class="fa fa-check"></i><b>11.3</b> SS<sub>Total</sub>, df<sub>Total</sub>, and MS<sub>Total</sub></a></li>
+<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sswithin-dfwithin-and-mswithin"><i class="fa fa-check"></i><b>11.4</b> SS<sub>Within</sub>, df<sub>Within</sub>, and MS<sub>Within</sub></a></li>
+<li class="chapter" data-level="11.5" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#ssamong-dfamong-and-msamong"><i class="fa fa-check"></i><b>11.5</b> SS<sub>Among</sub>, df<sub>Among</sub>, and MS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.6" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#partitioning-ssamong"><i class="fa fa-check"></i><b>11.6</b> Partitioning SS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.7" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.7</b> ANOVA Table</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html"><i class="fa fa-check"></i><b>12</b> Two-Way Analysis</a>
 <ul>
@@ -563,12 +566,12 @@ Figure 26.4: Probability of making a putt versus the distance of the putt with b
 <p>Standard errors or confidence intervals for the parameters of the logistic regression model can be computed with normal distribution theory. However, this theory does not hold for all logistic regression models. In addition, methods for computing confidence intervals for predicted probabilities or for predicted values of <span class="math inline">\(X\)</span> for a particular probability are not well formed. Bootstrapping is one method for producing confidence intervals for these parameters.</p>
 <p>Bootstrap confidence intervals are computer intensive, but provide an interval that does not depend on the shape of the underlying sampling distribution. Bootstrapping confidence intervals generally follows these steps:</p>
 <ol style="list-style-type: decimal">
-<li>Generate a bootstrap sample, which is a random sample of individuals from the original sample;<a href="#fn106" class="footnote-ref" id="fnref106"><sup>106</sup></a></li>
+<li>Generate a bootstrap sample, which is a random sample of individuals from the original sample;<a href="#fn108" class="footnote-ref" id="fnref108"><sup>108</sup></a></li>
 <li>Fit the model to the bootstrap sample;</li>
 <li>Compute the statistics of interest (i.e., the slope, intercept, predicted probability, predicted value of <span class="math inline">\(X\)</span>);</li>
-<li>Repeat steps 1-3 500-10000 times;<a href="#fn107" class="footnote-ref" id="fnref107"><sup>107</sup></a></li>
+<li>Repeat steps 1-3 500-10000 times;<a href="#fn109" class="footnote-ref" id="fnref109"><sup>109</sup></a></li>
 <li>Order the results from smallest to largest; and</li>
-<li>Approximate 95% confidence interval with the values of the statistics that have 2.5% and 97.5% of the statistics smaller (i.e., find the middle 95% of the bootstrapped statistics).<a href="#fn108" class="footnote-ref" id="fnref108"><sup>108</sup></a></li>
+<li>Approximate 95% confidence interval with the values of the statistics that have 2.5% and 97.5% of the statistics smaller (i.e., find the middle 95% of the bootstrapped statistics).<a href="#fn110" class="footnote-ref" id="fnref110"><sup>110</sup></a></li>
 </ol>
 <p>A histogram of slopes estimated from 999 bootstrap samples is shown in Figure <a href="LogRegModels.html#fig:PuttsBootSlopeCI">26.5</a>. It is apparent from this example that the sampling distribution of the slopes is not normal and, thus, a confidence interval generated from normal theory would not be appropriate. The 95% bootstrap confidence interval shown in Figure <a href="LogRegModels.html#fig:PuttsBootSlopeCI">26.5</a> matches that in Table <a href="LogRegModels.html#tab:PuttCoefs">26.1</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:PuttsBootSlopeCI"></span>
@@ -692,10 +695,10 @@ Figure 26.10: Probability of the shrub’s presence versus elevation with best-f
 </div>
 <div class="footnotes">
 <hr />
-<ol start="106">
-<li id="fn106"><p>Thus, the individuals must be selected with replacement so that each bootstrap sample is different and different from the original sample.<a href="LogRegModels.html#fnref106" class="footnote-back">↩︎</a></p></li>
-<li id="fn107"><p>The number of bootstrap samples depends on a number of things, including the purpose of the study and how involved the calculations are. In this course, 500-1000 bootstrap samples will be adequate.<a href="LogRegModels.html#fnref107" class="footnote-back">↩︎</a></p></li>
-<li id="fn108"><p>This step tends to produce slightly biased results. There are a number of possible corrections for this bias. However, we will use this method in this course to keep the method simple so that we can stay focused on the concept.<a href="LogRegModels.html#fnref108" class="footnote-back">↩︎</a></p></li>
+<ol start="108">
+<li id="fn108"><p>Thus, the individuals must be selected with replacement so that each bootstrap sample is different and different from the original sample.<a href="LogRegModels.html#fnref108" class="footnote-back">↩︎</a></p></li>
+<li id="fn109"><p>The number of bootstrap samples depends on a number of things, including the purpose of the study and how involved the calculations are. In this course, 500-1000 bootstrap samples will be adequate.<a href="LogRegModels.html#fnref109" class="footnote-back">↩︎</a></p></li>
+<li id="fn110"><p>This step tends to produce slightly biased results. There are a number of possible corrections for this bias. However, we will use this method in this course to keep the method simple so that we can stay focused on the concept.<a href="LogRegModels.html#fnref110" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
