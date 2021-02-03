@@ -96,7 +96,7 @@ obs2_26
 
 &nbsp;
 
-The mean response for the $i$th level of Factor A and the $j$th level of Factor B is denoted by $\overline{Y}_{ij\cdot}$. The $\overline{Y}_{ij\cdot}$ are called **treatment means** in an experiment or **group means** in an observational study. The "dot" in $\overline{Y}_{ij\cdot}$ replaces the subscript in $Y_{ijk}$ that was summed across when computing the mean. Treatment means are calculated by summing across individuals in a treatment (the $k$ subscript), thus the $k$ subscript is replaced with a dot. As an example, the treatment mean body mass for tadpoles in the 1 tadpole density ($i$=1) and low UV-B light intensity ($k$=2) would be $\overline{Y}_{12\cdot}$ (Figure \@ref(fig:TadpoleTMNS)).^[This figure is similar to the interaction plots from Module \@ref(ANOVA1Foundations1).]
+The mean response for the $i$th level of Factor A and the $j$th level of Factor B is denoted by $\overline{Y}_{ij\cdot}$. The $\overline{Y}_{ij\cdot}$ are called **treatment means** in an experiment or **group means** in an observational study. The "dot" in $\overline{Y}_{ij\cdot}$ replaces the subscript in $Y_{ijk}$ that was summed across when computing the mean. Treatment means are calculated by summing across individuals in a treatment (the $k$ subscript), thus the $k$ subscript is replaced with a dot. As an example, the treatment mean body mass for tadpoles in the 1 tadpole density ($i$=1) and low UV-B light intensity ($j$=2) would be $\overline{Y}_{12\cdot}$ (Figure \@ref(fig:TadpoleTMNS)).^[This figure is similar to the interaction plots from Module \@ref(ANOVA1Foundations1).]
 
 &nbsp;
 
