@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-03" />
+<meta name="date" content="2021-02-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -379,7 +379,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p> </p>
 <div id="the-data" class="section level4 unnumbered">
 <h4>The Data</h4>
-<p>Throughout the SLR modules, an example data set will be used that is the actual mean air temperatures and altitude lapse rates taken during the winter at eleven locations at various altitudes on Mount Everest. The “altitude lapse rate” is an index that was designed to be related to air temperature but adjusted for altitude. In this case, the researchers are testing to see if this index can be used to adequately predict the actual air temperature. Thus, actual air temperature is the response variable and altitude lapse rate is the explanatory variable.</p>
+<p><img src="zimgs/MountEverest.jpg" alt="Decoration" class="img-right">
+Throughout the SLR modules, an example data set will be used that is the actual mean air temperatures and <a href="https://en.wikipedia.org/wiki/Lapse_rate">altitude lapse rates</a> taken during the winter at eleven locations at various altitudes on <a href="https://en.wikipedia.org/wiki/Mount_Everest">Mount Everest</a>. The “altitude lapse rate” is an index that was designed to be related to air temperature but adjusted for altitude. In this case, the researchers are testing to see if this index can be used to adequately predict the actual air temperature. Thus, actual air temperature is the response variable and altitude lapse rate is the explanatory variable.</p>
+<p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:EverestData">Table 14.1: </span>Actual air temperature (<code>MeanAirTemp</code>) and altitude lapse rate (<code>Altitude</code>) data for Mount Everest in the winter.
@@ -392,130 +394,130 @@ Altitude
 <th style="text-align:right;">
 MeanAirTemp
 </th>
-<th style="text-align:left;">
+<th style="text-align:right;">
 Season
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 2076
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 10.36
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;width: 1.3in; ">
 Winter
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 2552
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 9.64
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;width: 1.3in; ">
 Winter
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 2578
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 6.07
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;width: 1.3in; ">
 Winter
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 2632
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 5.14
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;width: 1.3in; ">
 Winter
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 2857
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 6.57
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;width: 1.3in; ">
 Winter
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 2865
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 3.71
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;width: 1.3in; ">
 Winter
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 3009
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 3.14
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;width: 1.3in; ">
 Winter
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 3574
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 1.36
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;width: 1.3in; ">
 Winter
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 3978
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 -0.07
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;width: 1.3in; ">
 Winter
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 4220
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 -3.79
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;width: 1.3in; ">
 Winter
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 5018
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;width: 1.3in; ">
 -6.07
 </td>
-<td style="text-align:left;">
+<td style="text-align:right;width: 1.3in; ">
 Winter
 </td>
 </tr>
@@ -529,47 +531,51 @@ Winter
 <p><span class="math display">\[
 \mu_{Y|X} = \alpha + \beta X
 \]</span></p>
-<p>where <span class="math inline">\(Y\)</span> is the response variable, <span class="math inline">\(X\)</span> is the explanatory variable, <span class="math inline">\(\alpha\)</span> is the y-intercept, and <span class="math inline">\(\beta\)</span> is the slope. The left-hand-side of this equation is read as “the mean of Y at a given value of X.” This terminology is used because the best-fit line models the mean values of <span class="math inline">\(Y\)</span> at each value of <span class="math inline">\(X\)</span> rather than the <em>individuals</em> themselves. This model is for the population and thus, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are the population y-intercept and slope, respectively.</p>
+<p>where <span class="math inline">\(Y\)</span> is the response variable, <span class="math inline">\(X\)</span> is the explanatory variable, <span class="math inline">\(\alpha\)</span> is the y-intercept, and <span class="math inline">\(\beta\)</span> is the slope. The <span class="math inline">\(\mu_{Y|X}\)</span> is read as “the mean of Y at a given value of X.” The <span class="math inline">\(\mu_{Y|X}\)</span> is used because the best-fit line models the mean values of <span class="math inline">\(Y\)</span> at each value of <span class="math inline">\(X\)</span> rather than the <em>individuals</em> themselves. This model is for the population and thus, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are the population y-intercept and slope, respectively.</p>
 <p>The equation of the best-fit line determined from the sample is</p>
 <p><span class="math display">\[
 \hat{\mu}_{Y|X} = \hat{\alpha} + \hat{\beta}X
 \]</span></p>
 <p>where a “hat” on a parameter means that the value is an estimate and thus a statistic. Therefore, <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> are the sample y-intercept and slope.</p>
 <div class="tip">
-<p>Remember that statistics like <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> are subject to sampling variability (i.e., vary from sample to sample) and have corresponding standard errors (to be shown in Module <a href="SLRInference.html#SLRInference">15</a>).</p>
+<p>Statistics like <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> are subject to sampling variability (i.e., vary from sample to sample) and have corresponding standard errors (to be shown in Module <a href="SLRInference.html#SLRInference">15</a>).</p>
 </div>
-<p> </p>
 </div>
 <div id="best-fit-line" class="section level2" number="14.2">
 <h2><span class="header-section-number">14.2</span> Best-Fit Line</h2>
 <p>A line is simply a model for data and from that model we can make predictions for the response variable by plugging a value of <span class="math inline">\(x\)</span> into the line equation. For example, a prediction using the <span class="math inline">\(i\)</span>th individual’s value of <span class="math inline">\(x\)</span> is given by <span class="math inline">\(\hat{\mu}_{Y|X=x_{i}}=\hat{\alpha}+\hat{\beta}x_{i}\)</span>, where <span class="math inline">\(\hat{\mu}_{Y|X=x_{i}}\)</span> is read as “the predicted mean of <span class="math inline">\(Y\)</span> when <span class="math inline">\(X\)</span> is equal to <span class="math inline">\(x_{i}\)</span>.” Visually this prediction is found by locating the value of <span class="math inline">\(x_{i}\)</span> on the x-axis, rising vertically until the line is met, and then moving horizontally to the y-axis. This is demonstrated in Figure <a href="SLRFoundations.html#fig:SLRPredictDemo">14.1</a> for individual #2.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:SLRPredictDemo"></span>
 <img src="Book207_files/figure-html/SLRPredictDemo-1.png" alt="Scatterplot of actual mean air temperature versus altitude lapse rate with the best-fit line shown and the prediction demonstrated for individual 2." width="336" />
 <p class="caption">
 Figure 14.1: Scatterplot of actual mean air temperature versus altitude lapse rate with the best-fit line shown and the prediction demonstrated for individual 2.
 </p>
 </div>
-<p>As noted in previous modules, the residual is the vertical difference between an individual’s observed value of the response variable (i.e., <span class="math inline">\(y_{i}\)</span>) and a predicted value of the response variable based on the equation of a line and the individual’s value of the explanatory variable (i.e., <span class="math inline">\(\hat{\mu}_{Y|X=x_{i}}\)</span>). Thus, a residual is <span class="math inline">\(y_{i}-\hat{\mu}_{Y|X=x_{i}}\)</span> and measures how close the line is to that point. A residual for the second individual is demonstrated in Figure <a href="SLRFoundations.html#fig:SLRResidDemo">14.2</a>.</p>
+<p> </p>
+<p>As noted in previous modules, the residual is the vertical difference between an individual’s observed value of the response variable (i.e., <span class="math inline">\(y_{i}\)</span>) and <span class="math inline">\(\hat{\mu}_{Y|X=x_{i}}\)</span>, the predicted value of the response variable using the individual’s value of the explanatory variable. Thus, a residual is <span class="math inline">\(y_{i}-\hat{\mu}_{Y|X=x_{i}}\)</span> and measures how close the line is to that point. A residual for the second individual is demonstrated in Figure <a href="SLRFoundations.html#fig:SLRResidDemo">14.2</a>.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:SLRResidDemo"></span>
 <img src="Book207_files/figure-html/SLRResidDemo-1.png" alt="Same as previous figure except that the residual for individual #2 is highlighted with the red vertical line." width="336" />
 <p class="caption">
 Figure 14.2: Same as previous figure except that the residual for individual #2 is highlighted with the red vertical line.
 </p>
 </div>
-<p>Based on previous modules, an overall measure of the lack-of-fit of the line to the data is the sum of all squared residuals or the residual sum-of-squares (RSS); i.e.,</p>
+<p> </p>
+<p>Based on previous modules, an overall measure of the lack-of-fit of the line to the data is the sum of all squared residuals; i.e.,</p>
 <p><span class="math display">\[
 RSS = \sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X=x_{i}}\right)^{2}
 \]</span></p>
 <p> </p>
 <p><strong>The</strong> best-fit line is defined by the <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> out of all possible choices<a href="#fn69" class="footnote-ref" id="fnref69"><sup>69</sup></a> for <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> that minimize the RSS (Figure <a href="SLRFoundations.html#fig:DemoBFLandRSS">14.3</a>).<a href="#fn70" class="footnote-ref" id="fnref70"><sup>70</sup></a></p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:DemoBFLandRSS"></span>
-<img src="Book207_files/figure-html/DemoBFLandRSS-.gif" alt="Scatterplot with candidate best-fit lines (blue line) and residuals (vertical red dashed lines) in left pane and the residual sum-of-squares for all candidate lines (gray) with the current line highlighted with a red dot. Note how the candidate line is on the best-fit line when the RSS is smallest." width="672" />
+<img src="Book207_files/figure-html/DemoBFLandRSS-.gif" alt="Scatterplot with the best-fit line (light gray) and candidate best-fit lines (blue line) and residuals (vertical red dashed lines) in the left pane and the residual sum-of-squares for all candidate lines (gray) with the current line highlighted with a red dot. Note how the candidate line is on the best-fit line when the RSS is smallest." width="672" />
 <p class="caption">
-Figure 14.3: Scatterplot with candidate best-fit lines (blue line) and residuals (vertical red dashed lines) in left pane and the residual sum-of-squares for all candidate lines (gray) with the current line highlighted with a red dot. Note how the candidate line is on the best-fit line when the RSS is smallest.
+Figure 14.3: Scatterplot with the best-fit line (light gray) and candidate best-fit lines (blue line) and residuals (vertical red dashed lines) in the left pane and the residual sum-of-squares for all candidate lines (gray) with the current line highlighted with a red dot. Note how the candidate line is on the best-fit line when the RSS is smallest.
 </p>
 </div>
 <p> </p>
-<p>Mathematical statisticians have proven that the <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> that minimize the RSS are given by</p>
+<p>Mathematical statisticians have proven that the <span class="math inline">\(\hat{\beta}\)</span> and <span class="math inline">\(\hat{\alpha}\)</span> that minimize the RSS are given by</p>
 <p><span class="math display">\[
 \hat{\beta}=r\frac{s_{Y}}{s_{X}}
 \]</span></p>
@@ -587,17 +593,17 @@ Figure 14.3: Scatterplot with candidate best-fit lines (blue line) and residuals
 </div>
 <div id="best-fit-line-in-r" class="section level2" number="14.3">
 <h2><span class="header-section-number">14.3</span> Best-Fit Line in R</h2>
-<p>The data for Mount Everest temperature data is loaded below and restricted to just the data from Winter.</p>
+<p>The Mount Everest temperature data is loaded and restricted to just Winter below.</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb77-1"><a href="SLRFoundations.html#cb77-1" aria-hidden="true" tabindex="-1"></a>ev <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/droglenc/NCData/master/EverestTemps.csv&quot;</span>)</span>
 <span id="cb77-2"><a href="SLRFoundations.html#cb77-2" aria-hidden="true" tabindex="-1"></a>ev <span class="ot">&lt;-</span> <span class="fu">filter</span>(ev,Season<span class="sc">==</span><span class="st">&quot;Winter&quot;</span>)</span></code></pre></div>
-<p>A best-fit regression line is obtained using the familiar <code>lm()</code> with a formula of the form <code>response~explanatory</code> and the data frame in <code>data=</code>. As usual, the results of this function should be assigned to an object that can be given to other functions to extract specific results.</p>
+<p>A best-fit regression line is obtained using <code>response~explanatory</code> with <code>data=</code>.</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb78-1"><a href="SLRFoundations.html#cb78-1" aria-hidden="true" tabindex="-1"></a>lm1.ev <span class="ot">&lt;-</span> <span class="fu">lm</span>(MeanAirTemp<span class="sc">~</span>Altitude,<span class="at">data=</span>ev)</span></code></pre></div>
-<p>The estimated intercept and slope (i.e., the <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span>) and corresponding 95% confidence intervals are extracted from the <code>lm()</code> object with <code>coef()</code> and <code>confint()</code>, respectively. I like to “column bind” these two results together to make a synthetic summary table.</p>
+<p>The estimated intercept and slope (i.e., the <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span>) and corresponding 95% confidence intervals are extracted from the <code>lm()</code> object with <code>coef()</code> and <code>confint()</code>, respectively. I “column bind” these results together to make a synthetic summary table.</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb79-1"><a href="SLRFoundations.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm1.ev),<span class="fu">confint</span>(lm1.ev))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;                        Est        2.5 %       97.5 %
 #R&gt;   (Intercept) 21.388856057 17.442040728 25.335671386
 #R&gt;   Altitude    -0.005634136 -0.006822147 -0.004446125</code></pre>
-<p>These results show that the slope of the best-fit line is -0.0056 (95% CI: -0.0068 - -0.0044) and the intercept is 21.39 (95% CI: 17.44 - 25.34). Thus, the equation of the best-fit line is Mean Air Temperature = 21.39 - 0.0056Altitude Lapse Rate. From this slope, it appears that the actual air temperature will decrease by 0.0056, on average, for each 1 C/km increase in the altitude lapse rate.</p>
+<p>These results show that the slope of the best-fit line is -0.0056 (95% CI: -0.0068 - -0.0044) and the intercept is 21.39 (95% CI: 17.44 - 25.34). Thus, the equation of the best-fit line is Mean Air Temperature = 21.39 - 0.0056×Altitude Lapse Rate. From this slope, it appears that the actual air temperature will decrease by between -0.0068 and -0.0044, on average, for each 1 C/km increase in the altitude lapse rate.</p>
 <p>Of course, the mean actual air temperature can be predicted by plugging a value of the altitude lapse rate into the equation of the line. For example, the predicted mean actual air temperature if the altitude lapse rate is 2552 is 21.39 - 0.0056×2552 = 7.10<sup>o</sup>C. This can also be found with <code>predict()</code> using the saved <code>lm()</code> object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the <code>lm()</code> object.<a href="#fn71" class="footnote-ref" id="fnref71"><sup>71</sup></a></p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb81-1"><a href="SLRFoundations.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="dv">2552</span>))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          1 
@@ -613,6 +619,7 @@ Figure 14.3: Scatterplot with candidate best-fit lines (blue line) and residuals
 <span id="cb85-4"><a href="SLRFoundations.html#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
 <span id="cb85-5"><a href="SLRFoundations.html#cb85-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-75-1.png" width="336" style="display: block; margin: auto;" /></p>
+<p> </p>
 
 </div>
 </div>

@@ -90,9 +90,7 @@ fig:SLRConfidenceBand2
 fig:SLRPredictionBand1
 fig:SLRPredictionBand2
 fig:SLRModelsVisual
-fig:SLRModelsResids-1
-fig:SLRModelsResids-2
-fig:SLRModelsResids-3
+fig:SLRModelsResids
 tab:EverestSLRANOVA
 fig:FLPResid1
 fig:FLPResid2

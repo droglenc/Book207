@@ -64,6 +64,7 @@ d <- data.frame(nm=c(nm1,nm2,nm3,nm4),
                 p=c(p1,p2,p3,p4),
                 r=c(r1,r2,r3,r4))
 
+## These are here just to see what is going on during production (i.e,. run locally)
 ggplot(data=d,mapping=aes(x=x,y=y)) +
   geom_point(pch=21,color="black",bg="lightgray") +
   geom_smooth(method="lm",se=FALSE) +
@@ -90,27 +91,30 @@ A *residual plot* is a scatterplot of these residuals on the y-axis and the pred
 
 Figure \@ref(fig:FLPResid1) shows a scatterplot with the best-fit line on the left and the corresponding residual plot on the right. Four points are shown to help understand how the two plots are related. This example is fairly straightforward as the residual plot essentially flattens the best-fit line and then zooms in the y-axis scale.
 
+&nbsp;
+
 ```{r FLPResid1, echo=FALSE, fig.show="hold", fig.cap="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)."}
 tmp <- filter(d,nm=="Heteroscedastic") %>%
   mutate(row=row_number(),
          lbl=ifelse(row %in% c(12,35,47,50),as.character(row),""))
 flp1 <- ggplot(data=tmp,mapping=aes(x=x,y=y,label=lbl)) +
   geom_point(pch=21,color="black",bg="lightgray") +
-  geom_point(data=filter(tmp,lbl!=""),mapping=aes(x=x,y=y),color="red") +
-  ggrepel::geom_text_repel(min.segment.length=0.5,box.padding=1,max.overlaps=Inf,force=5,
-                           arrow=ARROW,
-                           size=lbl_text_size,color="red",segment.color="black") +
-  geom_smooth(method="lm",se=FALSE) +
+  geom_point(data=filter(tmp,lbl!=""),mapping=aes(x=x,y=y),color=clr_simple) +
+  ggrepel::geom_text_repel(min.segment.length=0.5,box.padding=1,
+                           max.overlaps=Inf,force=5,
+                           arrow=ARROW,segment.color=lbl_clr,
+                           size=lbl_text_size,color=lbl_clr) +
+  geom_smooth(method="lm",se=FALSE,color=clr_full,size=1) +
   labs(x="Explanatory Variable",y="Response Variable") +
   theme_NCStats() +
   theme(axis.text=element_blank(),aspect.ratio=1)
 residp1 <- ggplot(data=tmp,mapping=aes(x=p,y=r,label=lbl)) +
   geom_point(pch=21,color="black",bg="lightgray") +
-  geom_point(data=filter(tmp,lbl!=""),mapping=aes(x=p,y=r),color="red") +
+  geom_point(data=filter(tmp,lbl!=""),mapping=aes(x=p,y=r),color=clr_simple) +
   ggrepel::geom_text_repel(min.segment.length=0.5,box.padding=1,max.overlaps=Inf,
-                           arrow=ARROW,
-                           size=lbl_text_size,color="red",segment.color="black") +
-  geom_hline(yintercept=0,color="blue",size=1) +
+                           arrow=ARROW,segment.color=lbl_clr,
+                           size=lbl_text_size,color=lbl_clr) +
+  geom_hline(yintercept=0,color=clr_full,size=1,linetype="dashed") +
   scale_y_continuous(breaks=0) +
   labs(x="Predicted Values",y="Residuals") +
   theme_NCStats() +
@@ -122,6 +126,8 @@ residp1
 &nbsp;
 
 Figure \@ref(fig:FLPResid2) is arranged similarly to Figure \@ref(fig:FLPResid1). However, in this case the scatterplot exhibits a negative relationship which makes the "transformation" to the residual plot not as obvious. With a negative relationship, the "largest" predicted values correspond to points on the left side of the scatterplot, but they end up on the right side of the residual plot. Of course, vice-versa is also true. This is most obvious with the 38th and 39th points in Figure \@ref(fig:FLPResid2).
+
+&nbsp;
 
 ```{r FLPResid2, echo=FALSE, fig.show="hold", fig.cap="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)."}
 y2a <- -slp*x2+int+e2
@@ -135,20 +141,22 @@ tmp2 <- data.frame(x=x2,y=y2a,p=p2a,r=r2a) %>%
 flp2 <- ggplot(data=tmp2,mapping=aes(x=x,y=y,label=lbl)) +
   geom_point(pch=21,color="black",bg="lightgray") +
   geom_point(data=filter(tmp2,lbl!=""),mapping=aes(x=x,y=y),color="red") +
-  ggrepel::geom_text_repel(min.segment.length=0.5,box.padding=1,max.overlaps=Inf,force=5,
-                           arrow=ARROW,
-                           size=lbl_text_size,color="red",segment.color="black") +
-  geom_smooth(method="lm",se=FALSE) +
+  ggrepel::geom_text_repel(min.segment.length=0.5,box.padding=1,
+                           max.overlaps=Inf,force=5,
+                           arrow=ARROW,segment.color=lbl_clr,
+                           size=lbl_text_size,color=lbl_clr) +
+  geom_smooth(method="lm",se=FALSE,color=clr_full,size=1) +
   labs(x="Explanatory Variable",y="Response Variable") +
   theme_NCStats() +
   theme(axis.text=element_blank(),aspect.ratio=1)
 residp2 <- ggplot(data=tmp2,mapping=aes(x=p,y=r,label=lbl)) +
   geom_point(pch=21,color="black",bg="lightgray") +
   geom_point(data=filter(tmp2,lbl!=""),mapping=aes(x=p,y=r),color="red") +
-  ggrepel::geom_text_repel(min.segment.length=0.5,box.padding=1,max.overlaps=Inf,
-                           arrow=ARROW,
-                           size=lbl_text_size,color="red",segment.color="black") +
-  geom_hline(yintercept=0,color="blue",size=1) +
+  ggrepel::geom_text_repel(min.segment.length=0.5,
+                           box.padding=1,max.overlaps=Inf,
+                           arrow=ARROW,segment.color=lbl_clr,
+                           size=lbl_text_size,color=clr_simple) +
+  geom_hline(yintercept=0,color=clr_full,size=1,linetype="dashed") +
   scale_y_continuous(breaks=0) +
   labs(x="Predicted Values",y="Residuals") +
   theme_NCStats() +
@@ -169,7 +177,7 @@ If the homoscedasticity and linear assumptions (discussed below) are adequately 
 tmp <- filter(d,nm=="Assumptions Met")
 ggplot(data=tmp,mapping=aes(x=p,y=r)) +
   geom_point(pch=21,color="black",bg="lightgray") +
-  geom_hline(yintercept=0,color="blue",size=1) +
+  geom_hline(yintercept=0,color=clr_full,size=1,linetype="dashed") +
   labs(x="Predicted Values",y="Residual") +
   theme_NCStats() +
   theme(axis.text=element_blank(),aspect.ratio=1,
@@ -186,13 +194,13 @@ A residual plot that exhibits no discernible or obvious patterns suggests that t
 The independence assumption is largely the same as it was for a One- and Two-Way ANOVA, except that there is no need to compare within and among groups as there are no groups in an SLR. Thus, in an SLR, you need to ascertain whether individuals are independent of each other or not. This is accomplished by considering the sampling design as you did before. Individuals that are dependent are usually connected in space or time with the most common dependency occurring when multiple measurements are made on the same individuals.^[If individuals are ordered by time or space then the Durbin-Watson statistic can be used to determine if the individuals are serially correlated or not. Generally, the H<sub>0</sub>: "not serially correlated" and H<sub>A</sub>: "is serially correlated" are the hypotheses for the Durbin-Watson test. Thus, p-values <&alpha; result in the rejection of H<sub>0</sub> and the conclusion of a lack of independence. In this case, the regression assumption would be violated and other methods, primarily time-series methods, should be considered.] 
 
 ## Homoscedasticity
-Strictly speaking "homoscedasticity" means that the the variances of $Y$ at each given value of $X$ are equal. Seldom will you have enough multiple observations at the same value of $X$ to test this explicitly. Thus, in practice, homoscedasticity translates into assessing whether the same general variance or scatter of points exists around the line for all values of $X$. Heteroscedasticity, or non-constant variance around the line, will generally appear as a cone or funnel shape on a residual plot (Figure \@ref(fig:SLRAssumptionsHetero)). Sometimes the funnel-shape may be difficult to see if the linearity assumption is also not met (Figure \@ref(fig:SLRAssumptionsHetero)-Right). Make sure to compare these residual plots to Figure \@ref(fig:SLRAssumptionsMet).
+Strictly speaking "homoscedasticity" means that the the variances of $Y$ at each given value of $X$ are equal. Seldom are there enough observations at the same value of $X$ to test this assumption explicitly. Thus, in practice, homoscedasticity translates into assessing whether the same general variance or scatter of points around the line exists for all values of $X$. Heteroscedasticity, or non-constant variance around the line, will generally appear as a cone or funnel shape on a residual plot (Figure \@ref(fig:SLRAssumptionsHetero)). Sometimes the funnel-shape may be difficult to see if the linearity assumption is also not met (Figure \@ref(fig:SLRAssumptionsHetero)-Right). Make sure to compare these residual plots to Figure \@ref(fig:SLRAssumptionsMet).
 
 ```{r SLRAssumptionsHetero, echo=FALSE, fig.width=7, fig.cap="Residual plot where the homoscedasticity assumption has NOT been adequately met."}
 tmp <- filter(d,grepl("Heteroscedastic",nm))
 ggplot(data=tmp,mapping=aes(x=p,y=r)) +
   geom_point(pch=21,color="black",bg="lightgray") +
-  geom_hline(yintercept=0,color="blue",size=1) +
+  geom_hline(yintercept=0,color=clr_full,size=1,linetype="dashed") +
   labs(x="Predicted Values",y="Residual") +
   theme_NCStats() +
   theme(axis.text=element_blank(),aspect.ratio=1,
@@ -209,7 +217,9 @@ The no outliers assumption for SLR is assessed exactly as it was for a One- and 
 
 In SLR, some individuals may be considered *influential points* that draw the best-fit line towards them. Some very highly influential points may so strongly draw the line to them that the line will come very close to the point and the outlier test will not identify the point as an outlier (Figure \@ref(fig:SLRInfluentialPoint)-Left). Thus, I strongly urge you to look for "abnormal" points in your residual plots (Figure \@ref(fig:SLRInfluentialPoint)-Right) rather than relying solely on the outlier test to identify problem points.
 
-```{r SLRInfluentialPoint, echo=FALSE, fig.show="hold", fig.cap="Scatterplot with a best-fit line for all points (dashed red) and all points excluding the red point (solid black) (Left) and the residual plot from the fit to all points (Right)."}
+&nbsp;
+
+```{r SLRInfluentialPoint, echo=FALSE, fig.show="hold", fig.cap="Scatterplot with a best-fit line for all points (red) and all points excluding the red point (blue) (Left) and the residual plot from the fit to all points (Right)."}
 Infl1 <- tibble(x=c(1,2,3,4,5,7),
                 y=c(1+x[-6]+rnorm(length(x)-1,0,0.3),2))
 lm1 <- lm(y~x,data=Infl1)
@@ -221,22 +231,27 @@ Infl2 <- Infl1[-6,]
 flpInfl <- ggplot() +
   geom_point(data=Infl1,mapping=aes(x=x,y=y),color="red") +
   geom_smooth(data=Infl1,mapping=aes(x=x,y=y),method="lm",se=FALSE,
-              color="red",linetype="dashed") +
-  geom_point(data=Infl2,mapping=aes(x=x,y=y),pch=21,color="black",bg="lightgray") +
-  geom_smooth(data=Infl2,mapping=aes(x=x,y=y),method="lm",se=FALSE) +
+              color=clr_simple) +
+  geom_point(data=Infl2,mapping=aes(x=x,y=y),
+             pch=21,color="black",bg="lightgray") +
+  geom_smooth(data=Infl2,mapping=aes(x=x,y=y),
+              method="lm",se=FALSE,color=clr_full) +
   labs(x="Explanatory Variable",y="Response Variable") +
   theme_NCStats() +
   theme(axis.text=element_blank(),aspect.ratio=1)
 residInfl <- ggplot() +
-  geom_hline(yintercept=0,color="red",linetype="dashed",size=1) +
+  geom_hline(yintercept=0,color=clr_full,linetype="dashed",size=1) +
   geom_point(data=Infl1,mapping=aes(x=p,y=r),color="red") +
-  geom_point(data=Infl2,mapping=aes(x=p,y=r),pch=21,color="black",bg="lightgray") +
-  labs(x="Predicted Values",y="Residuals") +
+  geom_point(data=Infl2,mapping=aes(x=p,y=r),
+             pch=21,color="black",bg="lightgray") +
+  labs(x="Predicted Values",y="Residual") +
   theme_NCStats() +
   theme(axis.text=element_blank(),aspect.ratio=1)
 flpInfl
 residInfl
 ```
+
+&nbsp;
 
 Influential points are a huge problem in SLR because they make the best-fit line not represent the vast majority of the data. Influential points should be removed from the data if they are clearly an error. However, if they are not an error then the SLR should be fit both with and without the point and then a narrative should be constructed that describes how the points influences the regression results.
 
@@ -245,13 +260,15 @@ Influential points are a huge problem in SLR because they make the best-fit line
 :::
 
 ## Linearity
-The linearity assumption is the most important assumption in SLR; i.e., the form of the bivariate relationship must be linear in order to fit a line to it! Problems with the linearity assumption are diagnosed by examination of the residual plot. The most common departures from linearity look like parabolas on the residual plot (Figure \@ref(fig:SLRAssumptionsNonlinear)), but more "complicated" structures may also be noted. A non-linearity may be difficult to diagnose if the homoscedasticity assumption is also not met (Figure \@ref(fig:SLRAssumptionsNonlinear)-Right). Make sure to compare these residual plots to Figure \@ref(fig:SLRAssumptionsMet).
+The linearity assumption is the most important assumption in SLR; i.e., the form of the bivariate relationship must be linear in order to fit a line to it! Problems with the linearity assumption are diagnosed by examination of the residual plot. The most common departures from linearity look like parabolas on the residual plot (Figure \@ref(fig:SLRAssumptionsNonlinear)), but more "complicated" structures may also be noted. Either way, a general curve or non-linearity will be apparent in the residual plot of the linearity assumption has been violated. A non-linearity may be difficult to diagnose if the homoscedasticity assumption is also not met (Figure \@ref(fig:SLRAssumptionsNonlinear)-Right). Make sure to compare these residual plots to Figure \@ref(fig:SLRAssumptionsMet).
+
+&nbsp;
 
 ```{r SLRAssumptionsNonlinear, echo=FALSE, fig.width=7, fig.cap="Residual plot where linearity assumption has NOT been adequately met."}
 tmp <- filter(d,grepl("linear",nm))
 ggplot(data=tmp,mapping=aes(x=p,y=r)) +
   geom_point(pch=21,color="black",bg="lightgray") +
-  geom_hline(yintercept=0,color="blue",size=1) +
+  geom_hline(yintercept=0,color=clr_full,size=1,linetype="dashed") +
   labs(x="Predicted Values",y="Residual") +
   theme_NCStats() +
   theme(axis.text=element_blank(),aspect.ratio=1,
@@ -263,10 +280,14 @@ ggplot(data=tmp,mapping=aes(x=p,y=r)) +
 &nbsp;
 
 ## Testing Assumptions in R
-The residual plot, histogram of residuals, Anderson-Darling test p-value, and outlier test p-value can all be constructed by submitting the saved `lm()` object to `assumptionCheck()`.^[This is exactly as you did for a One- and Two-Way ANOVA.] For example, the results below indicated that all assumptions are adequately met for the Mount Everest air temperature and altitude lapse rate regression -- i.e., there is no discernible or obvious curve or funnel-shape to the residual plot, the Anderson-Darling p-value indicates that the residuals are normally distributed, and the outlier test p-value does not indicate the presence of any outliers. It should be noted, however, that the sample size is very small in this case.
+The residual plot, histogram of residuals, Anderson-Darling test p-value, and outlier test p-value can all be constructed by submitting the saved `lm()` object to `assumptionCheck()`.^[This is exactly as you did for a One- and Two-Way ANOVA.] For example, the results below indicate that all assumptions are adequately met for the Mount Everest air temperature and altitude lapse rate regression -- i.e., there is no discernible or obvious curve or funnel-shape to the residual plot, the Anderson-Darling p-value indicates that the residuals are normally distributed, and the outlier test p-value does not indicate the presence of any outliers. It should be noted, however, that the sample size is very small in this case.
 
-```{r fig.width=7}
+```{r fig.width=7,fig.height=3.75}
 assumptionCheck(lm1.ev)
 ```
 
+&nbsp;
+
 If the linearity, homoscedasticity, normality, or no outliers assumptions are not met then transformations for the response variable, explanatory variable, or both should be considered (see Module \@ref(SLRTransformations)).
+
+&nbsp;

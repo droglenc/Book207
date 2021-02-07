@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-03" />
+<meta name="date" content="2021-02-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -387,9 +387,9 @@ Figure 23.1: Fitted regression lines for mirex in tissue by salmon weight for 19
 </p>
 </div>
 <p>The <code>emtrends()</code> function from the <code>emmeans</code> package<a href="#fn100" class="footnote-ref" id="fnref100"><sup>100</sup></a> can be used to test for differences among all pairs of slopes using a Tukey-like correction. This function requires the ultimate full model as its first argument (<code>ivrY1</code> here as fit in Section <a href="IVRTesting.html#parallel-lines-test">22.2</a>), a <code>specs=</code> argument with <code>pairwise~</code> followed by the name of the factor variable in the ultimate full model, and <code>var=</code> followed by the name of the covariate in the ultimate full model.<a href="#fn101" class="footnote-ref" id="fnref101"><sup>101</sup></a> The results of this function should be saved to an object.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb178-1"><a href="IVRAnalysis.html#cb178-1" aria-hidden="true" tabindex="-1"></a>smc <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(ivrY1,pairwise<span class="sc">~</span>year,<span class="at">var=</span><span class="st">&quot;weight&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb177-1"><a href="IVRAnalysis.html#cb177-1" aria-hidden="true" tabindex="-1"></a>smc <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(ivrY1,pairwise<span class="sc">~</span>year,<span class="at">var=</span><span class="st">&quot;weight&quot;</span>)</span></code></pre></div>
 <p>That saved object is then the first argument to <code>summary()</code>, which also includes <code>infer=TRUE</code>. The results are in sections labeled as <code>$emmeans</code> and <code>$contrasts</code>.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb179-1"><a href="IVRAnalysis.html#cb179-1" aria-hidden="true" tabindex="-1"></a>( smcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(smc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb178-1"><a href="IVRAnalysis.html#cb178-1" aria-hidden="true" tabindex="-1"></a>( smcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(smc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   $emtrends
 #R&gt;    year weight.trend      SE df lower.CL upper.CL t.ratio p.value
 #R&gt;    1992      0.02653 0.00483 44  0.01679   0.0363 5.489   &lt;.0001 
@@ -440,10 +440,10 @@ Figure 23.2: Fitted regression lines for mirex in tissue by salmon weight for on
 </p>
 </div>
 <p>The <code>emmeans()</code> function from the <code>emmeans</code> package can be used to determine which pairs of intercepts differ (using a Tukey’s correction). However, before using this function a new model with the insignificant interaction term removed should be fit.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb181-1"><a href="IVRAnalysis.html#cb181-1" aria-hidden="true" tabindex="-1"></a>ivrY2a <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year,<span class="at">data=</span>MirexFirst3)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb180-1"><a href="IVRAnalysis.html#cb180-1" aria-hidden="true" tabindex="-1"></a>ivrY2a <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year,<span class="at">data=</span>MirexFirst3)</span></code></pre></div>
 <p>The use of <code>emmeans</code> here is exactly the same as it was in Section <a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r">6.3</a>. Specifically, the model without the interaction term is the first argument and <code>pairwise~</code> is followed by the name of the factor variable in the model. The results are then submitted to <code>summary()</code> with <code>infer=TRUE</code> and the results are given in two sections labeled <code>$emmeans</code> and <code>$contrasts</code>.</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb182-1"><a href="IVRAnalysis.html#cb182-1" aria-hidden="true" tabindex="-1"></a>imc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2a,pairwise<span class="sc">~</span>year)</span>
-<span id="cb182-2"><a href="IVRAnalysis.html#cb182-2" aria-hidden="true" tabindex="-1"></a>( imcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb181-1"><a href="IVRAnalysis.html#cb181-1" aria-hidden="true" tabindex="-1"></a>imc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2a,pairwise<span class="sc">~</span>year)</span>
+<span id="cb181-2"><a href="IVRAnalysis.html#cb181-2" aria-hidden="true" tabindex="-1"></a>( imcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   $emmeans
 #R&gt;    year emmean     SE df lower.CL upper.CL t.ratio p.value
 #R&gt;    1977  0.238 0.0123 68    0.213    0.262 19.392  &lt;.0001 
@@ -488,8 +488,8 @@ Figure 23.3: Fitted regression lines for mirex in tissue by salmon weight for on
 <p>The mean value of the response at the mean value of the covariate, along with 95% confidence intervals and p-values, are shown in the <code>$emmeans</code> section of the results.</p>
 </div>
 <p>The <code>emmeans()</code> function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extreme extrapolation as discussed in Section <a href="SLRInference.html#intercept">15.3</a>. It is possible to compute the mean values of the response at other values of the covariate by using <code>cov.reduce=</code> in <code>emmeans()</code>. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure <a href="IVRAnalysis.html#fig:IVRExampleIntercepts2">23.4</a>).<a href="#fn103" class="footnote-ref" id="fnref103"><sup>103</sup></a> Because the lines are parallel this does not change anything in the <code>$contrasts</code> portion of the output. However, the <code>$emmeans</code> portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb184-1"><a href="IVRAnalysis.html#cb184-1" aria-hidden="true" tabindex="-1"></a>imc2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2a,pairwise<span class="sc">~</span>year,<span class="at">cov.reduce=</span>min)</span>
-<span id="cb184-2"><a href="IVRAnalysis.html#cb184-2" aria-hidden="true" tabindex="-1"></a>( imc2sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc2,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb183-1"><a href="IVRAnalysis.html#cb183-1" aria-hidden="true" tabindex="-1"></a>imc2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2a,pairwise<span class="sc">~</span>year,<span class="at">cov.reduce=</span>min)</span>
+<span id="cb183-2"><a href="IVRAnalysis.html#cb183-2" aria-hidden="true" tabindex="-1"></a>( imc2sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc2,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   $emmeans
 #R&gt;    year emmean     SE df lower.CL upper.CL t.ratio p.value
 #R&gt;    1977 0.1460 0.0143 68   0.1174    0.175 10.181  &lt;.0001 

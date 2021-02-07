@@ -4,7 +4,9 @@ Specific parts of a full Simple Linear Regression (SLR) analysis were described 
 ## Suggested Workflow
 The following is a process for fitting a SLR. Consider this process as you learn to fit SLR models, but don't consider this to be a concrete process for all models.
 
+<!----
 1. Perform a thorough EDA. Pay close attention to the form, strength, and outliers on the scatterplot of the response and explanatory variables.
+---->
 1. Show the overall sample size.
 1. Address the independence assumption.
     * If this assumption is not met then other analysis methods must be used.
@@ -29,14 +31,15 @@ The following is a process for fitting a SLR. Consider this process as you learn
 &nbsp;
 
 ## Climate Change Data (*No Transformation*)
-Climate researchers examined the relationship between global temperature anomaly and the concentration of CO<sub>2</sub> in the atmosphere. Temperature anomaly data was recorded as the Global Land-Ocean Temperature Index from the Goddard Institute of Space Studies (GISTEMP). It is reported in units of 1/100<sup>o</sup>C increase above the 1950-1980 mean. The CO<sub>2</sub> data are from The Earth System Research Laboratory of the National Oceanic and Atmospheric Administration (NOAA). Specifically, these data are a record of annual mean atmospheric CO<sub>2</sub> concentration at Mauna Loa Observatory, Hawaii, and constitute the longest continuous record of atmospheric CO<sub>2</sub> concentration. This remote location at high altitude in Hawaii was chosen because it is relatively unaffected by any local emissions and so is representative of the global concentration of a well-mixed gas like CO<sub>2</sub>. These observations were started by C. David Keeling of the Scripps Institution of Oceanography in March of 1958 and are often referred to as the Keeling Curve. Data are reported as a dry mole fraction defined as the number of molecules of carbon dioxide divided by the number of molecules of dry air multiplied by one million (ppm). Our goal here is to determine if the variability in the temperature anomaly records can be reasonably explained by the CO<sub>2</sub> values in the same year.
+<img src="zimgs/MaunaLoa.jpg" alt="Decoration" class="img-right">
+Climate researchers examined the relationship between [global temperature anomaly](https://climate.nasa.gov/vital-signs/global-temperature/) and the [concentration of CO<sub>2</sub> in the atmosphere](https://climate.nasa.gov/vital-signs/carbon-dioxide/). Temperature anomaly data were recorded as the Global Land-Ocean Temperature Index from the Goddard Institute of Space Studies ([GISTEMP](https://data.giss.nasa.gov/gistemp/)) in units of 1/100<sup>o</sup>C increase above the 1950-1980 mean. The CO<sub>2</sub> data are from The Earth System Research Laboratory of the National Oceanic and Atmospheric Administration ([ESRL-NOAA](https://www.esrl.noaa.gov/)). Specifically, these data are a record of annual mean atmospheric CO<sub>2</sub> concentration at [Mauna Loa Observatory](https://www.esrl.noaa.gov/gmd/obop/mlo/) Hawaii, which constitute the longest continuous record of atmospheric CO<sub>2</sub> concentrations. This remote location at high altitude in Hawaii was chosen because it is relatively unaffected by any local emissions and so is representative of the global concentration of a well-mixed gas like CO<sub>2</sub>. These observations were started by [C. David Keeling](https://scrippsco2.ucsd.edu/history_legacy/charles_david_keeling_biography.html) of the [Scripps Institution of Oceanography](https://scripps.ucsd.edu/) in March of 1958 and are often referred to as [the Keeling Curve](https://keelingcurve.ucsd.edu/). Data are reported as a dry mole fraction defined as the number of molecules of carbon dioxide divided by the number of molecules of dry air multiplied by one million (ppm). Our goal here is to determine if the variability in the temperature anomaly records can be reasonably explained by the CO<sub>2</sub> values in the same year.
 
 The statistical hypotheses to be examined are
 
 $$
 \begin{split}
-\text{H}_{\text{0}}&: ``\text{no relationship between temperature anomaly and CO2 values}'' \\
-\text{H}_{\text{A}}&: ``\text{is a relationship between temperature anomaly and CO2 values}'' \\
+\text{H}_{\text{0}}&: ``\text{no relationship between temperature anomaly and CO2 values''} \\
+\text{H}_{\text{A}}&: ``\text{is a relationship between temperature anomaly and CO2 values''} \\
 \end{split}
 $$
 ```{r echo=FALSE}
@@ -51,9 +54,9 @@ nd <- data.frame(CO2=360)
 c360 <- predict(lm.cc,newdata=nd,interval="confidence")
 ```
 
-Data was recorded for `r n` years. The data between years is likely not independent as knowing the temperature anomaly and CO<sub>2</sub> values in any given year likely are a good indicator of the values in the next year. This temporal dependence should probably be included in the analysis. However, these data are recorded on an annual basis and it does not make much sense to include only a random sample of years. Thus, to better understand the relationship between these two variables, I will continue with this analysis assuming independence.
+Data were recorded for `r n` years. The data between years is likely not independent as knowing the temperature anomaly and CO<sub>2</sub> values in any given year likely are a good indicator of the values in the next year. This temporal dependence should probably be included in the analysis. However, these data are recorded on an annual basis and it does not make much sense to include only a random sample of years. Thus, to better understand the relationship between these two variables, I will continue with this analysis assuming independence.
 
-The assumptions are met as the residual plots show no obvious curvature or funneling (Figure \@ref(fig:CCAssumptions1)-Right), the histogram of residuals is not strongly skewed (Figure \@ref(fig:CCAssumptions1)-Left) and the Anderson-Darling tests suggests that it is approximately normal (`r kPvalue(ad.p.cc,latex=FALSE)`), and the there are not obvious outliers (`r kPvalue(out.p.cc,latex=FALSE)`). Thus, the analysis can continue without any transformations.
+The assumptions are met as the residual plots show no obvious curvature or funneling (Figure \@ref(fig:CCAssumptions1)-Right), the histogram of residuals is not strongly skewed (Figure \@ref(fig:CCAssumptions1)-Left; Anderson-Darling `r kPvalue(ad.p.cc,latex=FALSE)`), and there are no obvious outliers (`r kPvalue(out.p.cc,latex=FALSE)`). Thus, the analysis can continue without any transformations.
 
 ```{r CCAssumptions1, echo=FALSE, fig.width=7, fig.cap="Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of temperature anomaly on CO2 data."}
 assumptionCheck(lm.cc)
@@ -63,20 +66,27 @@ assumptionCheck(lm.cc)
 
 The temperature anomaly and CO<sub>2</sub> data appear to be significantly related (`r kPvalue(aov.p.cc,latex=FALSE)`; Table \@ref(tab:ccANOVA)). In fact, `r formatC(100*rSquared(lm.cc),format="f",digits=1)`% of the variability in the temperature anomaly is explained by knowing the value of the CO<sub>2</sub> concentration.
 
+&nbsp;
+
 ```{r ccANOVA, echo=FALSE}
 knitr::kable(anova(lm.cc),booktabs=TRUE,digits=c(0,1,1,3,4),
              caption="ANOVA table for simple linear regression of temperature anomaly on CO2 data.") %>%
-    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1:6,width="0.9in") %>%
+  kableExtra::column_spec(2,width="0.4in")
 ```
 
 &nbsp;
 
 In fact, it appears that as as the CO<sub>2</sub> levels increase by 1 ppm then the temperature anomaly increases by between `r formatC(cfs.cc["CO2","2.5 %"],format="f",digits=2)` and `r formatC(cfs.cc["CO2","97.5 %"],format="f",digits=2)` 1/100<sup>o</sup>C (Table \@ref(tab:ccCoefs); Figure \@ref(fig:ccFitPlot)).
 
+&nbsp;
+
 ```{r ccCoefs, echo=FALSE}
 knitr::kable(cfs.cc,booktabs=TRUE,digits=c(2,2,2),
              caption="Intercept and slope, along with 95% confidence intervals, for simple linear regression of temperature anomaly on CO2 data.") %>%
-    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1:4,width="0.9in")
 ```
 
 &nbsp;
@@ -91,7 +101,10 @@ ggplot(data=cc,mapping=aes(x=CO2,y=Temp)) +
 
 &nbsp;
 
-Finally, the predicted mean temperature anomaly for all times when the CO<sub>2</sub> concentration was 360 ppm is between `r formatC(c360[1,"lwr"],format="f",digits=1)` and `r formatC(c360[1,"upr"],format="f",digits=1)`.
+Finally, the predicted mean temperature anomaly for all times when the CO<sub>2</sub> concentration was 360 ppm is between `r formatC(c360[1,"lwr"],format="f",digits=1)` and `r formatC(c360[1,"upr"],format="f",digits=1)` 1/100<sup>o</sup>C.
+
+In conclusion, a significantly positive and strong relationship was found between the mean temperature anomaly and the global CO<sub>2</sub> concentration. A model was developed from this relationship that can be used to predict the temperatuare anomaly from the CO<sub>2</sub> concentration.
+
 
 #### R Code and Results {-}
 ```{r prompt=FALSE, results="hide", fig.show="hide"}
@@ -110,9 +123,10 @@ predict(lm.cc,newdata=nd,interval="confidence")
 &nbsp;
 
 ## Forest Allometrics (Transformation)
-Understanding the carbon dynamics in forests is important to understanding ecological processes and managing forests. The amount of carbon stored in a tree is related to tree biomass. Measuring the biomass of a tree is a tedious process that also results in the harvest (i.e., death) of the tree. However, biomass is often related to other simple metrics (e.g., diameter-at-breast-height (DBH) or tree height) that can be made without harming the tree. Thus, forest scientists have developed a series of equations (called allometric equations) that can be used to predict tree biomass from simple metrics for a variety of trees in a variety of locations.
+<img src="zimgs/TreeMeasurement.jpg" alt="Decoration" class="img-right">
+Understanding the [carbon dynamics](https://terra.nasa.gov/science/carbon-cycle-and-ecosystems) in forests is important to understanding ecological processes and managing forests. The amount of carbon stored in a tree is related to tree biomass. Measuring the biomass of a tree is a tedious process that also results in the harvest (i.e., death) of the tree. However, biomass is often related to other simple metrics (e.g., [diameter-at-breast-height](https://en.wikipedia.org/wiki/Diameter_at_breast_heightfo) (DBH) or tree height) that can be made without harming the tree. Thus, forest scientists have developed a series of equations (called [allometric equations](https://en.wikipedia.org/wiki/Tree_allometry)) that can be used to predict tree biomass from simple metrics for a variety of trees in a variety of locations.
 
-The [Miombo Woodlands](https://en.wikipedia.org/wiki/Central_Zambezian_miombo_woodlands) is the largest continuous dry deciduous forest in the world. It extends across much of Central, Eastern, and Southern Africa including parts of Angola, the Democratic Republic of Congo, Malawi, Mozambique, Tanzania, Zambia, and Zimbabwe. The woodlands are rich in plant diversity and have the potential to contain a substantial amount of carbon. There is, however, significant uncertainty in the amount of biomass carbon in the Miombo Woodlands. The objective of this study ([Kuyah *et al.* 2016](https://www.mdpi.com/1999-4907/7/2/13)) is to develop allometric equations that can be used to reliably estimate biomass of trees in the Miombo Woodlands so that biomass carbon can be more reliably estimated.
+The [Miombo Woodlands](https://en.wikipedia.org/wiki/Central_Zambezian_miombo_woodlands) is the largest continuous dry [deciduous forest](https://biologydictionary.net/deciduous-forest/) in the world. It extends across much of Central, Eastern, and Southern Africa including parts of Angola, the Democratic Republic of Congo, Malawi, Mozambique, Tanzania, Zambia, and Zimbabwe. The woodlands are rich in plant diversity and have the potential to contain a substantial amount of carbon. There is, however, significant uncertainty in the amount of biomass carbon in the Miombo Woodlands. The objective of this study ([Kuyah *et al.* 2016](https://www.mdpi.com/1999-4907/7/2/13)) is to develop allometric equations that can be used to reliably estimate biomass of trees in the Miombo Woodlands so that biomass carbon can be more reliably estimated.
 
 Trees for building allometric models were sampled from three 10 km by 10 km sites located in the districts of Kasungu, Salima, and Neno. A total of 88 trees (33 species) were harvested from six plots in Kasungu, seventeen plots in Salima, and five plots in Neno. The DBH (cm) of each tree was measured using diameter tape. Each tree was felled by cutting at the lowest possible point using a chainsaw. The length (m) of the felled tree was measured along the longest axis with a measuring tape. This measurement was used as the total tree height in the analysis. Felled trees were separated into stem, branches, and twigs (leaves and small branches). Total biomass (kg) of the tree (above-ground biomass; AGB) and the separate biomasses (kg) of the stems, branches, and twigs was recorded. The data are stored in TreesMiombo.csv ([data](https://raw.githubusercontent.com/droglenc/NCData/master/TreesMiombo.csv), [meta](https://github.com/droglenc/NCData/blob/master/TreesMiombo_meta.txt)). This analysis will attempt to predict AGB from DBH.
 
@@ -120,8 +134,8 @@ The statistical hypotheses to be examined are
 
 $$
 \begin{split}
-\text{H}_{\text{0}}&: ``\text{no relationship between above ground biomass and diameter at breast height}'' \\
-\text{H}_{\text{A}}&: ``\text{is a relationship between above ground biomass and diameter at breast height}'' \\
+\text{H}_{\text{0}}&: ``\text{no relationship between above ground biomass and diameter at breast height''} \\
+\text{H}_{\text{A}}&: ``\text{is a relationship between above ground biomass and diameter at breast height''} \\
 \end{split}
 $$
 
@@ -145,7 +159,7 @@ pl50 <- predict(lm.tm2,newdata=nd,interval="prediction")
 p50 <- exp(pl50)
 ```
 
-There is some concern over independence because some of the trees presumably came from the same plot and it is possible that one tree might have an impact on another tree. That impact may have been on the overall growth of the tree through density-dependent factors and it is hard to imagine how one tree could effect another tree with respect to the *relationship* between above ground biomass and diameter at breast height. Thus, I will continue with analysis assuming independence.
+There is some concern over independence because some of the trees presumably came from the same plot and it is possible that one tree might have an impact on another tree. That impact may have been on the overall growth of the tree through density-dependent factors, but it is hard to imagine how one tree could effect another tree with respect to the *relationship* between above ground biomass and diameter at breast height. Thus, I will continue with this analysis assuming independence.
 
 The residual plot (Figure \@ref(fig:tmAssumptions1)-Right) indicates a lack of linearity and homoscedasticity as there is both a clear curve and funnel present. There also appears to be a lack of normality in the residuals (Anderson-Darling `r kPvalue(ad.p.tm1,latex=FALSE)`) and the presence of outliers (outlier test `r kPvalue(out.p.tm1,latex=FALSE)`). These results all indicate that a transformation should be explored.
 
@@ -155,7 +169,9 @@ assumptionCheck(lm.tm1)
 
 &nbsp;
 
-Allometric relationships between weights (i.e., biomass) and lengths (i.e., height) tend to follow power functions, which can be linearized with the log of both variables. When both variables were transformed the relationship was largely linear and homoscedastic (Figure \@ref(fig:tmAssumptions2)-Right), the residuals appear to be normal (Anderson-Darling `r kPvalue(ad.p.tm2,latex=FALSE)`; Figure \@ref(fig:tmAssumptions2)-Left), and no outliers are present (outlier test `r kPvalue(out.p.tm2,latex=FALSE)`). Thus, the linear regression model was fit to the log-log transformed data as all assumptions were met.
+Allometric relationships between weights (i.e., biomass) and lengths (i.e., height) tend to follow a power function, which can be linearized by log-transforming both variables. When both variables were transformed the relationship was largely linear and homoscedastic (Figure \@ref(fig:tmAssumptions2)-Right), the residuals appeared to be normal (Anderson-Darling `r kPvalue(ad.p.tm2,latex=FALSE)`; Figure \@ref(fig:tmAssumptions2)-Left), and no outliers were present (outlier test `r kPvalue(out.p.tm2,latex=FALSE)`). Thus, the linear regression model was fit to the log-log transformed data as all assumptions were met on this scale.
+
+&nbsp;
 
 ```{r tmAssumptions2, echo=FALSE, fig.width=7, fig.cap="Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands."}
 assumptionCheck(lm.tm1,lambday=0,lambdax=0)
@@ -165,20 +181,28 @@ assumptionCheck(lm.tm1,lambday=0,lambdax=0)
 
 The log above ground biomass and log diameter at breast height appear to be significantly related (`r kPvalue(aov.p.tm2,latex=FALSE)`; Table \@ref(tab:tmANOVA)). In fact, `r formatC(100*rSquared(lm.tm2),format="f",digits=1)`% of the variability in the above ground biomass is explained by knowing the value of the diameter at breast height.
 
+&nbsp;
+
 ```{r tmANOVA, echo=FALSE}
 knitr::kable(anova(lm.tm2),booktabs=TRUE,digits=c(0,2,2,2,4),
              caption="ANOVA table for simple linear regression of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands.") %>%
-    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1:6,width="0.9in") %>%
+  kableExtra::column_spec(2,width="0.4in")
 ```
 
 &nbsp;
 
-In fact, it appears that as as the log diameter at breast height increases by 1 unit then the log above ground biomass increases by between `r formatC(cfs.tm2["logDBH","2.5 %"],format="f",digits=2)` and `r formatC(cfs.tm2["logDBH","97.5 %"],format="f",digits=2)` units (Table \@ref(tab:tmCoefs); Figure \@ref(fig:tmFitPlot)). More importantly, as the diameter at breast height increases by a multiple of 2.718 the above ground biomass increases by a multiple of between `r formatC(btcfs.tm2["logDBH","2.5 %"],format="f",digits=2)` and `r formatC(btcfs.tm2["logDBH","97.5 %"],format="f",digits=2)`.
+It appears that as as the log diameter at breast height increases by 1 unit then the log above ground biomass increases by between `r formatC(cfs.tm2["logDBH","2.5 %"],format="f",digits=2)` and `r formatC(cfs.tm2["logDBH","97.5 %"],format="f",digits=2)` units (Table \@ref(tab:tmCoefs); Figure \@ref(fig:tmFitPlot)). More importantly, as the diameter at breast height increases by a multiple of 2.718 the above ground biomass increases by a multiple of between `r formatC(btcfs.tm2["logDBH","2.5 %"],format="f",digits=2)` and `r formatC(btcfs.tm2["logDBH","97.5 %"],format="f",digits=2)`.
+
+&nbsp;
 
 ```{r tmCoefs, echo=FALSE}
 knitr::kable(cfs.tm2,booktabs=TRUE,digits=c(2,2,2),
              caption="Intercept and slope, along with 95% confidence intervals, for simple linear regression of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands.") %>%
-    kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1:4,width="0.9in")
 ```
 
 &nbsp;
@@ -195,7 +219,7 @@ ggplot(data=tm,mapping=aes(x=logDBH,y=logAGB)) +
 
 Finally, the predicted above ground biomass for a tree with a diameter at breast height of 50 cm is between `r formatC(p50[1,"lwr"],format="f",digits=1)` and `r formatC(p50[1,"upr"],format="f",digits=1)` kg.
 
-In conclusion, a significant and very strong relationship was found between the natural log above-ground biomass and the natural log diameter-at-breast-height for trees in the Miombo Woodlands. A model was developed from this relationship that can be used to predict above-ground biomass of a tree from the measured DBH of the tree.
+In conclusion, a significantly positive and very strong relationship was found between the natural log above-ground biomass and the natural log diameter-at-breast-height for trees in the Miombo Woodlands. A model was developed from this relationship that can be used to predict above-ground biomass of a tree from the measured DBH of the tree.
 
 #### R Code and Results {-}
 ```{r prompt=FALSE, results="hide", fig.show="hide"}
@@ -217,3 +241,5 @@ nd <- data.frame(logDBH=log(50))
 ( pl50 <- predict(lm.tm2,newdata=nd,interval="prediction") )
 exp(pl50)
 ```
+
+&nbsp;

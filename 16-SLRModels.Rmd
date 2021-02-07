@@ -1,6 +1,6 @@
 # SLR Models {#SLRModels}
 
-As with all linear models, the important hypothesis tests of SLR can be reduced to comparing two models' lack-of-fit to data. The description below relies heavily on your previous understanding of full and simple models (see Modules \@ref(ModelConcepts) and \@ref(ModelComparison)).
+As with all linear models, the important hypothesis tests of SLR can be reduced to comparing the lackw-of-fit for two competing models. The description below relies heavily on your previous understanding of full and simple models (see Modules \@ref(ModelConcepts) and \@ref(ModelComparison)).
 
 ## Models
 The full model in SLR is the equation of the best-fit line modified with an error term to represent individuals; i.e.,
@@ -9,13 +9,15 @@ $$
 Y_{i} = \alpha + \beta X_{i} + \epsilon_{i}
 $$
 
-where $i$ is an index for individuals. The simple model corresponds with $H_{0}:\beta=0$ and is thus
+where $i$ is an index for individuals. The simple model corresponds to $H_{0}:\beta=0$ and is thus
 
 $$
 Y_{i} = \alpha + \epsilon_{i}
 $$
 
 Furthermore, it can be shown algebraically that the $\alpha$ in the simple model is $\mu_{Y}$.^[By substituting the formula for the intercept ($\alpha=\mu_{Y} - \hat{\beta}\mu_{X}$) into $\mu_{Y|X} = \alpha + \beta X$, an alternative form of the equation of the line is $\mu_{Y|X} =\mu_{Y}+\beta\left(X-\mu_{X}\right)$. Thus, if $\beta=0$ as in $H_{0}$ then the simple model in $H_{0}$ reduces to $\mu_{Y|X}=\mu_{Y}$.]
+
+&nbsp;
 
 ```{r SLRModelsVisual, echo=FALSE, fig.cap="Scatterplot illustrating two competing models for describing the relationship between actual mean temperature and altitude lapse rate for Mount Everest in the winter. The horizontal red line is placed at the mean actual mean air temperatures and represents the simple model, whereas the blue line is the best-fit line and represents the full model."}
 lm1.ev <- lm(MeanAirTemp~Altitude,data=ev)
@@ -31,37 +33,39 @@ slr <- ggplot(data=ev2,mapping=aes(x=Altitude,y=MeanAirTemp)) +
   theme_NCStats()
 slr +
   # point to simple model
-  geom_hline(mapping=aes(yintercept=mMeanAirTemp),color="red",size=1.25) +
+  geom_hline(mapping=aes(yintercept=mMeanAirTemp),color=clr_simple,size=1) +
   annotate(geom="text",x=4300,y=9,label="Simple Model",
-           size=lbl_text_size,vjust=-0.5) +
+           size=lbl_text_size,color=lbl_clr,vjust=-0.5) +
   annotate(geom="segment",x=4300,y=9,xend=4300,yend=ev2$mMeanAirTemp[1],
-           arrow=ARROW) +
+           arrow=ARROW,color=lbl_clr) +
   # point to full model
-  geom_smooth(method="lm",se=FALSE,color="blue",size=1.25) +
+  geom_smooth(method="lm",se=FALSE,color=clr_full,size=1) +
   annotate(geom="text",x=3200,y=-4,label="Full Model",
-           size=lbl_text_size,vjust=1.5) +
+           size=lbl_text_size,color=lbl_clr,vjust=1.5) +
   annotate(geom="segment",x=3200,y=-4,
            xend=3700,yend=predict(lm1.ev,data.frame(Altitude=3700)),
-           arrow=ARROW) +
+           arrow=ARROW,color=lbl_clr) +
   # point to y-bar
   annotate(geom="text",x=2200,y=1,label=expression(mu[Y]),parse=TRUE,
-           size=lbl_text_size,vjust=0.75,hjust=-0.1) +
+           size=lbl_text_size,color=lbl_clr,vjust=0.75,hjust=-0.1) +
   annotate(geom="segment",x=2200,y=1,xend=-Inf,yend=ev2$mMeanAirTemp[1],
-           arrow=ARROW)
+           arrow=ARROW,color=lbl_clr)
 ```
+
+&nbsp;
+
+Comparing Figure \@ref(fig:SLRModelsVisual) to Figure \@ref(fig:SlopeHypotheses) reveals that testing the simple versus the full model is the same as testing that the slope is equal to zero or not. In other words, testing for a relationship between $Y$ and $X$ is the same as testing that the mean value of $Y$ is the same for all $X$s (i.e., simple model with no slope) or whether the mean value of $Y$ depends on the value of $X$ (i.e., full model with a slope).
 
 ::: {.tip data-latex=""}
 The simple model in SLR represents a flat line at the mean of the response variable. The full model in SLR represents a line with a significant slope.
 :::
-
-Comparing Figure \@ref(fig:SLRModelsVisual) to Figure \@ref(fig:SlopeHypotheses) reveals that testing the simple versus the full model is the same as testing that the slope is equal to zero or not. In other words, testing for a relationship between $Y$ and $X$ is the same as testing that the mean value of $Y$ is the same for all $X$s (i.e., simple model with no slope) or whether the mean value of $Y$ depends on the value of $X$ (i.e., full model with a slope).
 
 ::: {.tip data-latex=""}
 Determining whether the simple or full model should be used in SLR is a test of whether the two variables are statistically related.
 :::
 
 ## ANOVA Table
-Of course, the lack-of-fit of the a model is measured by summing the squared residuals using predictions from the model. The lack-of-fit of the simple model is calculated with residuals from the mean value of the response variable (Figure \@ref(fig:SLRModelsResids)-Left) or
+Of course, the lack-of-fit of a model is measured by summing the squared residuals using predictions from the model. The lack-of-fit of the simple model is calculated with residuals from the mean value of the response variable (Figure \@ref(fig:SLRModelsResids)-Left) or
 
 $$ \text{SS}_{\text{Total}} = \sum_{i=1}^{n}\left(y_{i}-\overline{Y}_{\cdot}\right)^{2} $$
 
@@ -71,59 +75,65 @@ $$ \text{SS}_{\text{Residual}} = \sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X}\right
 
 This is termed SS<sub>Residual</sub> in SLR, but it is exactly analogous to SS<sub>Within</sub> from Modules \@ref(ANOVA1Foundations) and \ref(ANOVA2Foundations2).
 
-```{r SLRModelsResids, echo=FALSE, fig.width=8.5/3, fig.height=3, fig.cap="Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs."}
+&nbsp;
+
+```{r SLRModelsResids, echo=FALSE, fig.show="hold", fig.width=8/3, fig.height=3, fig.cap="Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs."}
 SST <- slr +
   # Label a point
   annotate(geom="text",x=3500,y=9,
            label=expression(plain("One of")~Y[i]),parse=TRUE,
-           size=lbl_text_size,hjust=-0.1) +
+           size=lbl_text_size,color=lbl_clr,hjust=-0.1) +
   annotate(geom="segment",x=3500,y=9,xend=ev2$Altitude[3],yend=ev2$MeanAirTemp[2],
-           arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+           arrow=ARROW,color=lbl_clr) +
   # Label the model
-  geom_hline(mapping=aes(yintercept=mMeanAirTemp),color="red",size=1.25) +
+  geom_hline(mapping=aes(yintercept=mMeanAirTemp),color=clr_simple,size=1) +
   annotate(geom="text",x=2300,y=-2,
            label=expression(bar(Y)*plain(.)),parse=TRUE,
-           size=lbl_text_size,vjust=1.5) +
+           size=lbl_text_size,color=lbl_clr,vjust=1.5) +
   annotate(geom="segment",x=2300,y=-2,xend=2300,yend=ev2$mMeanAirTemp[1],
-           arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+           arrow=ARROW,color=lbl_clr) +
   # Show the residuals
-  geom_segment(aes(xend=Altitude,yend=mMeanAirTemp),linetype="dashed",color="red") +
+  geom_segment(aes(xend=Altitude,yend=mMeanAirTemp),
+               linetype="dashed",color=clr_simple) +
   labs(title=bquote("Residuals for"~SS[Total])) +
   theme(aspect.ratio=1,plot.title=element_text(size=12))
 SSres <- slr +
   # Label a point
   annotate(geom="text",x=3500,y=9,
            label=expression(plain("One of")~Y[i]),parse=TRUE,
-           size=lbl_text_size,hjust=-0.1) +
+           size=lbl_text_size,color=lbl_clr,hjust=-0.1) +
   annotate(geom="segment",x=3500,y=9,xend=ev2$Altitude[3],yend=ev2$MeanAirTemp[2],
-           arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+           arrow=ARROW,color=lbl_clr) +
   # Label the model
-  geom_smooth(method="lm",se=FALSE,color="blue",size=1.25) +
-  annotate(geom="text",x=3200,y=-4,label=expression(hat(alpha)+hat(beta)*X),parse=TRUE,
-           size=lbl_text_size,hjust=1,vjust=1) +
+  geom_smooth(method="lm",se=FALSE,color=clr_full,size=1) +
+  annotate(geom="text",x=3200,y=-4,
+           label=expression(hat(alpha)+hat(beta)*X),parse=TRUE,
+           size=lbl_text_size,color=lbl_clr,hjust=1,vjust=1) +
   annotate(geom="segment",x=3200,y=-4,
            xend=3700,yend=predict(lm1.ev,data.frame(Altitude=3700)),
-           arrow=ARROW) +
+           arrow=ARROW,color=lbl_clr) +
   # Show the residuals
-  geom_segment(aes(xend=Altitude,yend=pMeanAirTemp),linetype="dashed",color="blue") +
+  geom_segment(aes(xend=Altitude,yend=pMeanAirTemp),
+               linetype="dashed",color=clr_full) +
   labs(title=bquote("Residuals for"~SS[Residual]),y="") +
   theme(aspect.ratio=1,plot.title=element_text(size=12))
 SSreg <-  ggplot(data=ev2,mapping=aes(x=Altitude,y=MeanAirTemp)) +
-  geom_point(color="white") +
+  geom_point(color="transparent") +
   # Show the simple model
-  geom_hline(mapping=aes(yintercept=mMeanAirTemp),color="red",size=1.25) +
+  geom_hline(mapping=aes(yintercept=mMeanAirTemp),color=clr_simple,size=1) +
   annotate(geom="text",x=4300,y=8,
            label=expression(bar(Y)*plain(.)),parse=TRUE,
-           size=lbl_text_size,vjust=-0.5) +
+           size=lbl_text_size,color=lbl_clr,vjust=-0.5) +
   annotate(geom="segment",x=4300,y=8,xend=4300,yend=ev2$mMeanAirTemp[1],
-           arrow=arrow(length=unit(0.2,"cm"),type="closed")) +
+           arrow=ARROW,color=lbl_clr) +
   # Show the full model
-  geom_smooth(method="lm",se=FALSE,color="blue",size=1.25) +
-  annotate(geom="text",x=3200,y=-4,label=expression(hat(alpha)+hat(beta)*X),parse=TRUE,
-           size=lbl_text_size,hjust=1,vjust=1) +
+  geom_smooth(method="lm",se=FALSE,color=clr_full,size=1) +
+  annotate(geom="text",x=3200,y=-4,
+           label=expression(hat(alpha)+hat(beta)*X),parse=TRUE,
+           size=lbl_text_size,color=lbl_clr,hjust=1,vjust=1) +
   annotate(geom="segment",x=3200,y=-4,
            xend=3700,yend=predict(lm1.ev,data.frame(Altitude=3700)),
-           arrow=ARROW) +
+           arrow=ARROW,color=lbl_clr) +
   # Show the residuals
   geom_segment(aes(xend=Altitude,y=mMeanAirTemp,yend=pMeanAirTemp),
                linetype="dashed",color="black") +
@@ -141,19 +151,19 @@ SSreg
 SS<sub>Total</sub> measures the lack-of=fit of the simplest model, which is just the mean of the response variable. Thus, SS<sub>Total</sub> measures the maximum lack-of-fit of any model to the response variable.
 :::
 
-As always, SS<sub>Total</sub> partitions into two parts, labeled here as SS<sub>Residual</sub> and SS<sub>Regression</sub>. As stated above SS<sub>Residual</sub> is exactly analogous to SS<sub>Within</sub>. Similarly SS<sub>Regression</sub> is exactly analogous to SS<sub>Among</sub>. Thus, SS<sub>Regression</sub> measures the reduction in lack-of-fit from using the full model over the simple model (i.e., how much better the full model fits) and is a measure of the "signal" in the data. Specifically, SS<sub>Regression</sub> is calculate from the difference in predictions between the full and simple models (Figure \@ref(fig:SLRModelsResids)-Right); i.e.,
+As always, SS<sub>Total</sub> partitions into two parts, labeled here as SS<sub>Residual</sub> and SS<sub>Regression</sub>. As stated above SS<sub>Residual</sub> is exactly analogous to SS<sub>Within</sub>. Similarly SS<sub>Regression</sub> is exactly analogous to SS<sub>Among</sub>. Thus, SS<sub>Regression</sub> measures the reduction in lack-of-fit from using the full model over the simple model (i.e., how much better the full model fits) and will become a measure of the "signal" in the data. Specifically, SS<sub>Regression</sub> is calculated from the difference in predictions from the full and simple models (Figure \@ref(fig:SLRModelsResids)-Right); i.e.,
 
 $$\text{SS}_{\text{Regression}} = \sum_{i=1}^{n}\left((\hat{\alpha}+\hat{\beta}x_{i})-\overline{Y}\right)^{2}$$
 
-The df are similar to those discussed for a One-Way and Two-Way ANOVA. The df<sub>Total</sub> are $n-1$ as before and because there is only one parameter in the simple model. The df<sub>Residual</sub> is $n-2$ because the full model has two parameters (i.e., $\alpha$ and $\beta$). The df<sub>Total</sub> partitions as before which leaves df<sub>Regression</sub>=1, which is the difference in parameters between the full and simple models. As you can see, df<sub>Regression</sub> is exactly analogous to df<sub>Among</sub>.
+The df are similar to those discussed for a One-Way and Two-Way ANOVA. The df<sub>Total</sub> are $n-1$ because there is only one parameter in the simple model. The df<sub>Residual</sub> is $n-2$ because the full model has two parameters (i.e., $\alpha$ and $\beta$). The df<sub>Total</sub> partitions as before which leaves df<sub>Regression</sub>=1, which is the difference in parameters between the full and simple models. As you can see, df<sub>Regression</sub> is exactly analogous to df<sub>Among</sub>.
 
 ::: {.tip data-latex=""}
 df<sub>Regression</sub> is always 1 in SLR.
 :::
 
-Per usual, MS are calculated by dividing SS by their respective df. As with the other models MS<sub>Total</sub>=$s_{Y}^{2}$ an is the total natural variability of observations (around the simple model of a single mean). The MS<sub>Residual</sub> is the natural variability of observations around the best-fit line (i.e., the full model) and is, thus, $s_{Y|X}^{2}$, which was discussed in Section \@ref(variability-around-the-line). Finally, MS<sub>Regression</sub> is a measure of the variability of the best-fit line around the simple mean.
+Per usual, MS are calculated by dividing SS by their respective df. As with the other models MS<sub>Total</sub>=$s_{Y}^{2}$, the total natural variability of observations (around the simple model of a single mean). The MS<sub>Residual</sub> is $s_{Y|X}^{2}$, the natural variability of observations around the best-fit line (i.e., the full model; see Section \@ref(variability-around-the-line)). Finally, MS<sub>Regression</sub> is a measure of the variability of the best-fit line around the simple mean.
 
-The F test statistic is computed as a ratio of the variance explained by the full model (i.e., the "signal") the variance unexplained by the full model (i.e., the "noise") as described in Section \@ref(ratio-of-variances-signal-to-noise), In SLR, this translates to
+The F test statistic is computed as a ratio of the variance explained by the full model (i.e., the "signal") to the variance unexplained by the full model (i.e., the "noise") as described in Section \@ref(ratio-of-variances-signal-to-noise). In SLR, this translates to
 
 $$ F = \frac{MS_{Regression}}{MS_{Residual}} $$
 
@@ -161,20 +171,31 @@ which will have df<sub>Regression</sub> numerator and df<sub>Residual</sub> deno
 
 The SS, MS, df, F, and p-value just discussed are summarized in an ANOVA table. Even though this is called an ANOVA table, the method is still a *Simple Linear Regression*. The ANOVA table is simply a common way to summarize the calculations needed to compare two models, whether those models are part of the One-Way ANOVA, Two-Way ANOVA, or Simple Linear Regression *methods.*
 
+```{r echo=FALSE}
+aov1 <- anova(lm1.ev)
+```
+
 The ANOVA table for the Mount Everest air temperature and altitude lapse rate analysis is in Table \@ref(tab:EverestSLRANOVA). These results indicate that there is a significant relationship between the actual mean air temperature and the altitude lapse rate at stations on Mount Everest in the Winter (`r kPvalue(aov1[1,"Pr(>F)"],latex=FALSE)`). This same result indicates that a full model with a slope term is significantly "better" at fitting the observed data then a simple model that does not contain a slope term.
 
+&nbsp;
+
 ```{r EverestSLRANOVA, echo=FALSE}
-aov1 <- anova(lm1.ev)
-knitr::kable(aov1,booktabs=TRUE,digits=c(0,3,3,3),
+knitr::kable(aov1,booktabs=TRUE,digits=c(0,3,3,3,6),
              caption='An ANOVA table for the simple linear regression of actual mean air temperature on altitude lapse rate for locations on Mount Everest in the Winter. Note that the "Total" row is not shown.') %>%
-  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1:6,width="1in") %>%
+  kableExtra::column_spec(2,width="0.5in")
 ```
+
+&nbsp;
 
 In addition to the primary objective of comparing the full and simple models, several items of interest can be identified from the ANOVA table in Table \@ref(tab:EverestSLRANOVA).
 
-* The variance of individuals around the regression line ($s_{Y|X}^{2}$) is given by MS<sub>Residual</sub> as `r formatC(aov1[2,"Mean Sq"],format="f",digits=3)`).
-* The variance of individuals around the overall mean ($s_{Y}^{2}$) is given by MS<sub>Total</sub> as `r formatC(sum(aov1[,"Sum Sq"])/sum(aov1[,"Df"]),format="f",digits=3)` (=$\frac{`r formatC(aov1[1,"Sum Sq"],format="f",digits=3)`+`r formatC(aov1[2,"Sum Sq"],format="f",digits=3)`}{`r aov1[1,"Df"]`+`r aov1[2,"Df"]`}$ = $\frac{`r formatC(sum(aov1[,"Sum Sq"]),format="f",digits=3)`}{`r sum(aov1[,"Df"])`}$).
+* The variance of individuals around the regression line ($s_{Y|X}^{2}$) is MS<sub>Residual</sub> = `r formatC(aov1[2,"Mean Sq"],format="f",digits=3)`.
+* The variance of individuals around the overall mean ($s_{Y}^{2}$) is MS<sub>Total</sub> = `r formatC(sum(aov1[,"Sum Sq"])/sum(aov1[,"Df"]),format="f",digits=3)` (=$\frac{`r formatC(aov1[1,"Sum Sq"],format="f",digits=3)`+`r formatC(aov1[2,"Sum Sq"],format="f",digits=3)`}{`r aov1[1,"Df"]`+`r aov1[2,"Df"]`}$ = $\frac{`r formatC(sum(aov1[,"Sum Sq"]),format="f",digits=3)`}{`r sum(aov1[,"Df"])`}$).
 * The F test statistic is equal to the square of the t test statistic from testing $H_{0}:\beta =0$ (see results from `summary()` in Section \@ref(slope-and-intercept-in-r)).^[This is a general rule between the t and F distributions. An F with $1$ numerator df and $\nu$ denominator df is equal to the square of a t with $\nu$ df.]
+
+&nbsp;
 
 The ANOVA table for a SLR is obtained by submitting the saved `lm()` object to `anova()`. For example, Table \@ref(tab:EverestSLRANOVA) was obtained with `anova(lm1.ev)`.
 
@@ -194,3 +215,5 @@ r^{2} = \frac{SS_{Regression}}{SS_{Total}}
 $$
 
 Note also that the coeffcient of determination is found in the `summary()` results shown above behind the "Multiple R-squared:" label.
+
+&nbsp;

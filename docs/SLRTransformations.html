@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-03" />
+<meta name="date" content="2021-02-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -365,35 +365,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="SLRTransformations" class="section level1" number="18">
 <h1><span class="header-section-number">Module 18</span> SLR Transformations</h1>
-<p>The five assumptions of SLR and methods to assess their validity were introduced in Module <a href="SLRAssumptions.html#SLRAssumptions">17</a>. If one or more of the linearity, homoscedasticity, normality, or outlier assumptions are violated, then the data may be transformed to a different scale where the assumptions are met. Either the response variable, explanatory variable, or both may be transformed. In general, the family of power transformations (see Section <a href="ANOVA1Transformations.html#power-transformations">8.1</a>) will be considered for both the response and explanatory variables, although some special transformations can be used in specific situations (e.g., <span class="math inline">\(\sin^{-1}\sqrt{Y}\)</span> for proportions or percentage data).</p>
-<p>Power transformations may be selected based on theory, trial-and-error until assumptions are met, or from paste experience. Transformations from two common theoretical relationships and the trial-and-error method are discussed in the next two sections.</p>
+<p>The five assumptions of SLR and methods to assess their validity were introduced in Module <a href="SLRAssumptions.html#SLRAssumptions">17</a>. If one or more of the linearity, homoscedasticity, normality, or outlier assumptions are violated, then the data may be transformed to a different scale where the assumptions may be met. Either the response variable, explanatory variable, or both may be transformed. In general, the family of power transformations (see Section <a href="ANOVA1Transformations.html#power-transformations">8.1</a>) will be considered for both the response and explanatory variables, although some special transformations can be used in specific situations (e.g., <span class="math inline">\(\sin^{-1}\sqrt{Y}\)</span> for proportions or percentage data).</p>
+<p>Power transformations may be selected based on theory, trial-and-error until assumptions are met, or from past experience. Transformations from two common theoretical relationships and the trial-and-error method are discussed in the next two sections.</p>
 <div id="transformations-from-theoretical-relationships" class="section level2" number="18.1">
 <h2><span class="header-section-number">18.1</span> Transformations from Theoretical Relationships</h2>
 <div id="power-functions" class="section level3" number="18.1.1">
 <h3><span class="header-section-number">18.1.1</span> Power Functions</h3>
 <p>A power function is represented by <span class="math inline">\(Y=aX^{b}\)</span> where <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> are variables (as always) and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are parameters to be estimated. The power function is quite common and has been used to model relationships between the weight and length (or height) of animals, demand for money based on inventory theory, metabolic rate and body mass, money over time (with discretely compounded interest), and drug dose and size, among other applications.</p>
 <p>Functions with exponents will generally be non-linear.<a href="#fn85" class="footnote-ref" id="fnref85"><sup>85</sup></a> Thus, a power function is non-linear and will show a period of increasing increase if <span class="math inline">\(b&gt;1\)</span>, decreasing increase if <span class="math inline">\(0&lt;b&lt;1\)</span>, or decreasing decrease if <span class="math inline">\(b&lt;0\)</span> (Figure <a href="SLRTransformations.html#fig:PowerFunEx1">18.1</a>).</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:PowerFunEx1"></span>
 <img src="Book207_files/figure-html/PowerFunEx1-1.png" alt="Shapes of power function for three values of the b exponent. Note that this is plotted on the raw or original scale." width="336" />
 <p class="caption">
 Figure 18.1: Shapes of power function for three values of the b exponent. Note that this is plotted on the raw or original scale.
 </p>
 </div>
-<p>Also, as a general rule, if a simple function has an exponent then taking the logarithm<a href="#fn86" class="footnote-ref" id="fnref86"><sup>86</sup></a> of both sides tends to “linearize” the function. To show this relies on the following three properties of logarithms.</p>
+<p> </p>
+<p>As a general rule, taking the logarithm<a href="#fn86" class="footnote-ref" id="fnref86"><sup>86</sup></a> of both sides of a function that has an exponent tends to “linearize” that function. Showing this rule relies on the following three properties of logarithms.</p>
 <ol style="list-style-type: decimal">
 <li>The log of a product is the sum of the logs – i.e., <span class="math inline">\(log(uv)=log(u)+log(v)\)</span></li>
 <li>The log of a base with an exponent is the exponent times the log of the base – i.e., <span class="math inline">\(log(u^{v})=vlog(u)\)</span></li>
 <li>The log of the number <span class="math inline">\(e\)</span> is 1 – i.e., <span class="math inline">\(log(e)=1\)</span></li>
 </ol>
-<p>With these rules, taking the logarithm of both sides of the power function simplifies as follows:</p>
+<p>Thus, taking the logarithm of both sides of the power function simplifies as follows:</p>
 <p><span class="math display">\[
 \begin{split}
 log(Y) &amp;= log(aX^{b}) \\
-log(Y) &amp;= log(a) + log(X^{b}) \\
+\vdots \;\;\;\; &amp;= log(a) + log(X^{b}) \\
 log(Y) &amp;= log(a) + blog(X)
 \end{split}
 \]</span></p>
-<p>Here <span class="math inline">\(log(Y)\)</span> and <span class="math inline">\(log(X)\)</span> are still variables and <span class="math inline">\(log(a)\)</span> is still a constant. Thus, this is the equation of the line where the response variable is <span class="math inline">\(log(Y)\)</span>, the explanatory variable is <span class="math inline">\(log(X)\)</span>, the y-intercept is <span class="math inline">\(log(a)\)</span>, and the slope is <span class="math inline">\(b\)</span>. The power functions shown in Figure <a href="SLRTransformations.html#fig:PowerFunEx1">18.1</a> are shown again in Figure <a href="SLRTransformations.html#fig:PowerFunEx2">18.2</a> but are plotted with both axes on the log scale.</p>
+<p>The final result is the equation of a line where the response variable is <span class="math inline">\(log(Y)\)</span>, the explanatory variable is <span class="math inline">\(log(X)\)</span>, the y-intercept is <span class="math inline">\(log(a)\)</span>, and the slope is <span class="math inline">\(b\)</span>. Thus, a power function is “linearized” by log-transforming both the response and explanatory variables. For example, the power functions shown in Figure <a href="SLRTransformations.html#fig:PowerFunEx1">18.1</a> are shown again in Figure <a href="SLRTransformations.html#fig:PowerFunEx2">18.2</a> but are plotted with both axes on the log scale.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:PowerFunEx2"></span>
 <img src="Book207_files/figure-html/PowerFunEx2-1.png" alt="Same as previous figure but with both axes plotted on the logarithm scale." width="336" />
 <p class="caption">
@@ -403,7 +406,7 @@ Figure 18.2: Same as previous figure but with both axes plotted on the logarithm
 <div class="tip">
 <p>Transforming <strong>both</strong> the response and explanatory variable to the logarithm scale will “linearize” a power function relationship.</p>
 </div>
-<p>In some instances the researcher may be interested in the value of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> from the original power function. These values can be found by fitting a SLR to <span class="math inline">\(log(Y)\)</span> and <span class="math inline">\(log(X)\)</span> and noting from above that the y-intercept is an estimate of <span class="math inline">\(log(a)\)</span> and the slope is an estimate of <span class="math inline">\(b\)</span>. Thus, <span class="math inline">\(b\)</span> is simply the slope. An estimate of <span class="math inline">\(a\)</span> requires back-transforming the y-intercept value as shown below</p>
+<p>In some instances the researcher may be interested in the value of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> for the original power function. These values may be found by fitting a SLR to <span class="math inline">\(log(Y)\)</span> and <span class="math inline">\(log(X)\)</span> and noting from above that the y-intercept is an estimate of <span class="math inline">\(log(a)\)</span> and the slope is an estimate of <span class="math inline">\(b\)</span>. Thus, <span class="math inline">\(b\)</span> is simply the slope. An estimate of <span class="math inline">\(a\)</span> requires back-transforming the y-intercept value as shown below</p>
 <p><span class="math display">\[
 \begin{split}
 \text{y-intercept} &amp;= log(a) \\
@@ -418,22 +421,25 @@ e^{\text{y-intercept}} &amp;= a
 </div>
 <div id="exponential-functions" class="section level3" number="18.1.2">
 <h3><span class="header-section-number">18.1.2</span> Exponential Functions</h3>
-<p>An exponential function is represented by <span class="math inline">\(Y=ae^{bX}\)</span> where <span class="math inline">\(Y\)</span>, <span class="math inline">\(X\)</span>, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are define as with a power function. Exponential functions are also quite common and have been used to model growth of organisms over time (with unlimited resources), change in money over time with continuously compounded interest, prognostication for recover and number of days in the hospital, and radioactive decay over time.</p>
+<p>An exponential function is represented by <span class="math inline">\(Y=ae^{bX}\)</span> where <span class="math inline">\(Y\)</span>, <span class="math inline">\(X\)</span>, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are defined as with a power function. Exponential functions are also quite common and have been used to model growth of organisms over time (with unlimited resources), change in money over time with continuously compounded interest, prognostication for recovery and number of days in the hospital, and radioactive decay over time.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:ExpoFunEx1"></span>
 <img src="Book207_files/figure-html/ExpoFunEx1-1.png" alt="Shapes of an exponential function for two values of the b parameter. Note that this is plotted on the raw or original scale." width="336" />
 <p class="caption">
 Figure 18.3: Shapes of an exponential function for two values of the b parameter. Note that this is plotted on the raw or original scale.
 </p>
 </div>
+<p> </p>
 <p>Again, the exponential function has an exponent so we can try to linearize this function by applying logarithms to both sides.</p>
 <p><span class="math display">\[
 \begin{split}
 log(Y) &amp;= log(ae^{bX}) \\
-log(Y) &amp;= log(a) + log(e^{bX}) \\
+\vdots \;\;\;\; &amp;= log(a) + log(e^{bX}) \\
 log(Y) &amp;= log(a) + bX
 \end{split}
 \]</span></p>
-<p>Here <span class="math inline">\(log(Y)\)</span> is still a variable and <span class="math inline">\(log(a)\)</span> is still a constant. Thus, this is the equation of the line where the response variable is <span class="math inline">\(log(Y)\)</span>, the explanatory variable is unchanged at <span class="math inline">\(X\)</span>, the y-intercept is <span class="math inline">\(log(a)\)</span>, and the slope is <span class="math inline">\(b\)</span>. The exponential functions shown in Figure <a href="SLRTransformations.html#fig:ExpoFunEx1">18.3</a> are shown again in Figure <a href="SLRTransformations.html#fig:ExpoFunEx2">18.4</a> but are plotted with the y-axis on the log scale.</p>
+<p>Thef inal result is the equation of a line where the response variable is <span class="math inline">\(log(Y)\)</span>, the explanatory variable is unchanged at <span class="math inline">\(X\)</span>, the y-intercept is <span class="math inline">\(log(a)\)</span>, and the slope is <span class="math inline">\(b\)</span>. Thus, an exponential function is “linearized” by log-transforming only the response variable. The exponential functions shown in Figure <a href="SLRTransformations.html#fig:ExpoFunEx1">18.3</a> are shown again in Figure <a href="SLRTransformations.html#fig:ExpoFunEx2">18.4</a> but are plotted with the y-axis on the log scale.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:ExpoFunEx2"></span>
 <img src="Book207_files/figure-html/ExpoFunEx2-1.png" alt="Same as previous figure but plotted with the y-axis on the logarithm scale." width="336" />
 <p class="caption">
@@ -443,7 +449,7 @@ Figure 18.4: Same as previous figure but plotted with the y-axis on the logarith
 <div class="tip">
 <p>Transforming <strong>only</strong> the response variable to the logarithm scale will “linearize” an exponential function relationship.</p>
 </div>
-<p>Estimates of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> from the original exponentnial function are found by fitting a SLR to <span class="math inline">\(log(Y)\)</span> and <span class="math inline">\(X\)</span> and noting from above that the y-intercept is an estimate of <span class="math inline">\(log(a)\)</span> and the slope is an estimate of <span class="math inline">\(b\)</span>. Thus, <span class="math inline">\(b\)</span> is simply the slope and <span class="math inline">\(a\)</span> is estimated with <span class="math inline">\(e^{\text{y-intercept}}\)</span>, exactly as with the power function.</p>
+<p>Estimates of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> from the original exponential function are found by fitting a SLR to <span class="math inline">\(log(Y)\)</span> and <span class="math inline">\(X\)</span> and noting from above that the y-intercept is an estimate of <span class="math inline">\(log(a)\)</span> and the slope is an estimate of <span class="math inline">\(b\)</span>. Thus, <span class="math inline">\(b\)</span> is simply the slope and <span class="math inline">\(a\)</span> is estimated with <span class="math inline">\(e^{\text{y-intercept}}\)</span>, exactly as with the power function.</p>
 <div class="tip">
 <p>The parameters for an exponentnial function are estimated by fitting a SLR to <span class="math inline">\(log(Y)\)</span>-<span class="math inline">\(X\)</span> data and estimating <span class="math inline">\(b\)</span> with the slope and <span class="math inline">\(a\)</span> with the back-transformed intercept, i.e., <span class="math inline">\(a=e^{\text{y-intercept}}\)</span></p>
 </div>
@@ -463,29 +469,31 @@ Figure 18.4: Same as previous figure but plotted with the y-axis on the logarith
 </div>
 <div id="back-transformation-in-slr" class="section level2" number="18.3">
 <h2><span class="header-section-number">18.3</span> Back-Transformation in SLR</h2>
-<p>Back-transformations were discussed in detail in Section <a href="ANOVA1Transformations.html#interpretations-after-transformations">8.3</a> and many of those details pertain here. In SLR, the y-intercept, fitted values, and predicted values are all “point estimates” and can be back-transformed without issue. In other words, you can simply reverse the transformation for these values, not matter what transformation was used, and interpret the value directly on the original scale.</p>
-<p>The slope, however, is a “difference” in means and can only be back-transformed if a log transformation was used, as discussed in Section <a href="ANOVA1Transformations.html#interpretations-after-transformations">8.3</a>. A slope back-transformed from the log scale (for the response variable) has a specific mean but the exact wording of that meaning depends on whether the eplanatory variable was log-transformed or not.</p>
+<p>Back-transformations were discussed in detail in Section <a href="ANOVA1Transformations.html#interpretations-after-transformations">8.3</a> and many of those details pertain here. In SLR, the y-intercept, fitted values, and predicted values are all “point estimates” and can be back-transformed from any transformation without issue. In other words, you can simply reverse the transformation for these values, no matter what transformation was used, and interpret the value directly on the original scale.</p>
+<p>The slope, however, is a “difference” in means and can only be back-transformed if a log transformation was used, as discussed in Section <a href="ANOVA1Transformations.html#interpretations-after-transformations">8.3</a>. A slope back-transformed from the log scale (for the response variable) has a specific meaning but the exact wording of that meaning depends on whether the explanatory variable was log-transformed or not.</p>
 <p>We begin by addressing the slope back-transformed from the log-scale for the situation where the explanatory variable was NOT log-transformed. First, note that the the slope (<span class="math inline">\(\beta\)</span>) on the log-transformed scale describes how the mean log of <span class="math inline">\(Y\)</span> changes for a one unit change in <span class="math inline">\(X\)</span>; i.e.,</p>
 <p><span class="math display">\[
 \begin{split}
 log\left(\mu_{Y|X+1}\right)-log\left(\mu_{Y|X}\right) &amp;= \left[\alpha+\beta (X+1)\right] - \left[\alpha+\beta X\right] \\
-&amp;= \left[\alpha+\beta X\right]+\beta - \left[\alpha+\beta X\right] \\
-&amp;= \beta
+\vdots \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; &amp;= \left[\alpha+\beta X\right]+\beta - \left[\alpha+\beta X\right] \\
+log\left(\mu_{Y|X+1}\right)-log\left(\mu_{Y|X}\right) &amp;= \beta
 \end{split}
 \]</span></p>
 <p>Thus, <span class="math inline">\(log(Y)\)</span> changes by <strong>adding</strong> <span class="math inline">\(\beta\)</span> as <span class="math inline">\(X\)</span> increases by 1 unit. In other words, <span class="math inline">\(\beta\)</span> is a difference in two means (the mean of <span class="math inline">\(log(Y)\)</span> at <span class="math inline">\(X\)</span>s that are 1 unit apart). For example, in Figure <a href="SLRTransformations.html#fig:BtransSlope1">18.5</a>-Left, the slope on the log-transformed scale indicates that for a one unit increase in <span class="math inline">\(X\)</span> that the predicted value of <span class="math inline">\(log(Y)\)</span> increases by adding 0.25 units.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:BtransSlope1"></span>
 <img src="Book207_files/figure-html/BtransSlope1-1.png" alt="Demonstration of the additive nature of the slope on the log-scale (Left) and multiplicative nature of the back-transformed slope on the original scale (Right)." width="336" /><img src="Book207_files/figure-html/BtransSlope1-2.png" alt="Demonstration of the additive nature of the slope on the log-scale (Left) and multiplicative nature of the back-transformed slope on the original scale (Right)." width="336" />
 <p class="caption">
 Figure 18.5: Demonstration of the additive nature of the slope on the log-scale (Left) and multiplicative nature of the back-transformed slope on the original scale (Right).
 </p>
 </div>
+<p> </p>
 <p>However, when both sides of the above equation are raised to the power of <span class="math inline">\(e\)</span> (i.e., back-transformed)</p>
 <p><span class="math display">\[
 \begin{split}
 e^{\beta} &amp;= e^{log(\mu_{Y|X+1})-log(\mu_{Y|X})} \\
-&amp;= e^{log\left(\frac{\mu_{Y|X+1}}{\mu_{Y|X}}\right)} \\
-&amp;= \frac{\mu_{Y|X+1}}{\mu_{Y|X}}
+\vdots \;\; &amp;= e^{log\left(\frac{\mu_{Y|X+1}}{\mu_{Y|X}}\right)} \\
+e^{\beta} &amp;= \frac{\mu_{Y|X+1}}{\mu_{Y|X}}
 \end{split}
 \]</span></p>
 <p>it becomes clear that <span class="math inline">\(e^{\beta}\)</span> is no longer a <strong>difference</strong> in means, rather it is a <strong>ratio</strong> of two means. Thus, the mean of <span class="math inline">\(Y\)</span> (on the original scale) at <span class="math inline">\(X+1\)</span> is a <strong>multiple</strong> of the mean of <span class="math inline">\(Y\)</span> at <span class="math inline">\(X\)</span>. Therefore, on the original scale you multiply rather than add when increasing <span class="math inline">\(X\)</span> by 1 unit. For example, in Figure <a href="SLRTransformations.html#fig:BtransSlope1">18.5</a>-Right, a one unit increase in <span class="math inline">\(X\)</span> (the original scale) results in a <span class="math inline">\(Y\)</span> that increases by a <strong>multiple</strong> of 1.284. For example, an increase in <span class="math inline">\(X\)</span> from 4 to 5 results in an increase in <span class="math inline">\(Y\)</span> from 2.72 to 3.49 (=2.27×1.284). Similarly, an increase in <span class="math inline">\(X\)</span> from 8 to 9 results in an incrase in <span class="math inline">\(Y\)</span> from 7.39 to 9.49 (=7.39×1.284).</p>
@@ -498,11 +506,10 @@ Figure 18.6: Demonstration of the additive nature of the slope on the log-scale 
 </div>
 <div class="tip">
 <p>The slope back-transformed from a log-transformation represents the
-<strong>ratio</strong> of two means separated by one unit of the explanatory variable on the original
-scale when the explanatory variable was <strong>not</strong> transformed.</p>
+<strong>ratio</strong> of two means separated by one unit of the explanatory variable on the original scale when the explanatory variable was <strong>not</strong> transformed.</p>
 </div>
-<p>If the explanatory variable was also log-transformed then the interpretation of the back-transformed slope is more complicated. In this case, we must also “back-transform” the “one unit increase” in <span class="math inline">\(log(X)\)</span> when considering the the back-transformed slope on the original scale. Thus, the slope backtransformed from the case where both the response and explanatory variable were log-transformed is the <strong>multiplicative</strong> change in <span class="math inline">\(Y\)</span> when <span class="math inline">\(X\)</span> is multiplied by <span class="math inline">\(e^{\beta}\)</span>=2.718.</p>
-<p>For exapmle, in Figure <a href="SLRTransformations.html#fig:BtransSlope3">18.7</a> the slope on the log-log-transformed scale is 0.25. Thus, <span class="math inline">\(log(Y)\)</span> increases by adding 0.25 when <span class="math inline">\(log(X)\)</span> increases by 1 unit. However, on the original scale <span class="math inline">\(Y\)</span> increases by a multiple of <span class="math inline">\(e^{0.25}\)</span>=1.284 each time that <span class="math inline">\(X\)</span> increases by a multiple of <span class="math inline">\(e^{1}\)</span>=2.718. For example, when <span class="math inline">\(X\)</span> increases from 7.39 to 20.98 (7.39×2.718) then <span class="math inline">\(Y\)</span> increases from 1.65 to 2.12 (=1.65×1.284). As another example, when <span class="math inline">\(X\)</span> increases from 54.60 to 148.41 (54.60×2.718) then <span class="math inline">\(Y\)</span> increases from 2.72 to 3.49 (=2.72×1.284).</p>
+<p>If the explanatory variable was also log-transformed then the interpretation of the back-transformed slope is more complicated. In this case, we must also “back-transform” the “one unit increase” in <span class="math inline">\(log(X)\)</span> when considering the back-transformed slope on the original scale. Thus, the slope back-transformed from the case where both the response and explanatory variable were log-transformed is the <strong>multiplicative</strong> change in <span class="math inline">\(Y\)</span> when <span class="math inline">\(X\)</span> is multiplied by <span class="math inline">\(e^{\beta}\)</span>=2.718.</p>
+<p>For example, in Figure <a href="SLRTransformations.html#fig:BtransSlope3">18.7</a> the slope on the log-log-transformed scale is 0.25. Thus, <span class="math inline">\(log(Y)\)</span> increases by adding 0.25 when <span class="math inline">\(log(X)\)</span> increases by 1 unit. However, on the original scale <span class="math inline">\(Y\)</span> increases by a multiple of <span class="math inline">\(e^{0.25}\)</span>=1.284 each time that <span class="math inline">\(X\)</span> increases by a multiple of <span class="math inline">\(e^{1}\)</span>=2.718. For example, when <span class="math inline">\(X\)</span> increases from 7.39 to 20.98 (7.39×2.718) then <span class="math inline">\(Y\)</span> increases from 1.65 to 2.12 (=1.65×1.284). As another example, when <span class="math inline">\(X\)</span> increases from 54.60 to 148.41 (54.60×2.718) then <span class="math inline">\(Y\)</span> increases from 2.72 to 3.49 (=2.72×1.284).</p>
 <div class="figure" style="text-align: center"><span id="fig:BtransSlope3"></span>
 <img src="Book207_files/figure-html/BtransSlope3-1.png" alt="Demonstration of the additive nature of the slope on the log-log-scale (Left) and multiplicative nature of the back-transformed slope (and multiplicative change along the x-axis) on the original scale (Right)." width="336" /><img src="Book207_files/figure-html/BtransSlope3-2.png" alt="Demonstration of the additive nature of the slope on the log-log-scale (Left) and multiplicative nature of the back-transformed slope (and multiplicative change along the x-axis) on the original scale (Right)." width="336" />
 <p class="caption">
@@ -525,115 +532,128 @@ scale when the explanatory variable <strong>was</strong> log-transformed.</p>
 <p>The following are some quick examples of transforming data, fitting new models, and interpretations of those model results. These are not full examples in the sense that all assumptions are thoroughly met, etc. Full examples will be demonstrated in Module <a href="SLRSummary.html#SLRSummary">19</a>.</p>
 <div id="petrels" class="section level3" number="18.4.1">
 <h3><span class="header-section-number">18.4.1</span> Petrels</h3>
-<p><a href="http://www.jstor.org/stable/4318?seq=1#page_scan_tab_contents">Croxall (1982)</a> examined the weight loss of adult petrels during periods of egg incubation. He examined 13 species but some had measurements for both sexes such that 19 measurements were recorded. For each measurement the mean initial weight (g) and mean weight lost (g/g/d) were recorded. The intent of this part of the study was to determine if the mean initial weight significantly explained variability in mean weight lost for the petrel species.</p>
+<p><img src="zimgs/PetrelNest.jpg" alt="Decoration" class="img-right">
+<a href="http://www.jstor.org/stable/4318?seq=1#page_scan_tab_contents">Croxall (1982)</a> examined the weight loss of adult <a href="https://en.wikipedia.org/wiki/Petrel">petrels</a> during periods of egg incubation. He examined 13 species but some had measurements for both sexes such that 19 measurements were recorded. For each measurement the mean initial weight (g) and mean weight lost (g/g/d) were recorded. The intent of this part of the study was to determine if the mean initial weight significantly explained variability in mean weight lost for the petrel species.</p>
 <p>The data are loaded below, the initial SLR is fit with weight loss as the response variable, and the assumptions are quickly checked. It is clear that the form of the relationship is not linear. The other assumptions are also not met, but these are likely affected by the non-linearity.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb103-1"><a href="SLRTransformations.html#cb103-1" aria-hidden="true" tabindex="-1"></a>petrels <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/Petrels.csv&quot;</span>)</span>
-<span id="cb103-2"><a href="SLRTransformations.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(petrels)</span></code></pre></div>
+<p> </p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb102-1"><a href="SLRTransformations.html#cb102-1" aria-hidden="true" tabindex="-1"></a>petrels <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/Petrels.csv&quot;</span>)</span>
+<span id="cb102-2"><a href="SLRTransformations.html#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(petrels)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   &#39;data.frame&#39;: 19 obs. of  4 variables:
 #R&gt;    $ species    : chr  &quot;Diomedea exulans&quot; &quot;Diomedea exulans&quot; &quot;Diomedea melanophris&quot; &quot;Diomedea melanophris&quot; ...
 #R&gt;    $ sex        : chr  &quot;male&quot; &quot;female&quot; &quot;male&quot; &quot;female&quot; ...
 #R&gt;    $ weight     : int  10577 9022 3922 3694 3751 3624 3305 3000 2996 668 ...
 #R&gt;    $ weight.loss: num  0.0087 0.0096 0.013 0.011 0.01 0.012 0.011 0.0125 0.0109 0.0128 ...</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb105-1"><a href="SLRTransformations.html#cb105-1" aria-hidden="true" tabindex="-1"></a>lm.ptrls1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight.loss<span class="sc">~</span>weight,<span class="at">data=</span>petrels)</span>
-<span id="cb105-2"><a href="SLRTransformations.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.ptrls1)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb104-1"><a href="SLRTransformations.html#cb104-1" aria-hidden="true" tabindex="-1"></a>lm.ptrls1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight.loss<span class="sc">~</span>weight,<span class="at">data=</span>petrels)</span>
+<span id="cb104-2"><a href="SLRTransformations.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.ptrls1)</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-87-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p> </p>
 <p>Through a process of trial-and-error, it appears that log-transforming both weight loss and initial weight results in the assumptions being met. Thus, log-transformations for both variables were added to the data.frame and were used in a second linear model.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb106-1"><a href="SLRTransformations.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.ptrls1,<span class="at">lambday=</span><span class="dv">0</span>,<span class="at">lambdax=</span><span class="dv">0</span>)</span></code></pre></div>
+<p> </p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb105-1"><a href="SLRTransformations.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.ptrls1,<span class="at">lambday=</span><span class="dv">0</span>,<span class="at">lambdax=</span><span class="dv">0</span>)</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-88-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb107-1"><a href="SLRTransformations.html#cb107-1" aria-hidden="true" tabindex="-1"></a>petrels<span class="sc">$</span>logwtloss <span class="ot">&lt;-</span> <span class="fu">log</span>(petrels<span class="sc">$</span>weight.loss)</span>
-<span id="cb107-2"><a href="SLRTransformations.html#cb107-2" aria-hidden="true" tabindex="-1"></a>petrels<span class="sc">$</span>logwt <span class="ot">&lt;-</span> <span class="fu">log</span>(petrels<span class="sc">$</span>weight)</span>
-<span id="cb107-3"><a href="SLRTransformations.html#cb107-3" aria-hidden="true" tabindex="-1"></a>lm.ptrls2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(logwtloss<span class="sc">~</span>logwt,<span class="at">data=</span>petrels)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb106-1"><a href="SLRTransformations.html#cb106-1" aria-hidden="true" tabindex="-1"></a>petrels<span class="sc">$</span>logwtloss <span class="ot">&lt;-</span> <span class="fu">log</span>(petrels<span class="sc">$</span>weight.loss)</span>
+<span id="cb106-2"><a href="SLRTransformations.html#cb106-2" aria-hidden="true" tabindex="-1"></a>petrels<span class="sc">$</span>logwt <span class="ot">&lt;-</span> <span class="fu">log</span>(petrels<span class="sc">$</span>weight)</span>
+<span id="cb106-3"><a href="SLRTransformations.html#cb106-3" aria-hidden="true" tabindex="-1"></a>lm.ptrls2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(logwtloss<span class="sc">~</span>logwt,<span class="at">data=</span>petrels)</span></code></pre></div>
+<p> </p>
 <p>There is a significant relationship between log mean weight loss and log mean initial weight (p&lt;0.00005). It appears that 89.2% of the variability in log mean weight loss is explained by knowing the log mean initial weight of the birds.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb108-1"><a href="SLRTransformations.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.ptrls2)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb107-1"><a href="SLRTransformations.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.ptrls2)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Response: logwtloss
 #R&gt;             Df Sum Sq Mean Sq F value    Pr(&gt;F)
 #R&gt;   logwt      1 6.5113  6.5113  140.65 1.204e-09
 #R&gt;   Residuals 17 0.7870  0.0463</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb110-1"><a href="SLRTransformations.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.ptrls2)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb109-1"><a href="SLRTransformations.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.ptrls2)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] 0.8921662</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb112-1"><a href="SLRTransformations.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>petrels,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>logwt,<span class="at">y=</span>logwtloss)) <span class="sc">+</span>  </span>
-<span id="cb112-2"><a href="SLRTransformations.html#cb112-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span>  </span>
-<span id="cb112-3"><a href="SLRTransformations.html#cb112-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;log Mean Initial Weight&quot;</span>,<span class="at">y=</span><span class="st">&quot;log Mean Weight Loss&quot;</span>) <span class="sc">+</span>  </span>
-<span id="cb112-4"><a href="SLRTransformations.html#cb112-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
-<span id="cb112-5"><a href="SLRTransformations.html#cb112-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb111-1"><a href="SLRTransformations.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>petrels,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>logwt,<span class="at">y=</span>logwtloss)) <span class="sc">+</span>  </span>
+<span id="cb111-2"><a href="SLRTransformations.html#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb111-3"><a href="SLRTransformations.html#cb111-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;log Mean Initial Weight&quot;</span>,<span class="at">y=</span><span class="st">&quot;log Mean Weight Loss&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb111-4"><a href="SLRTransformations.html#cb111-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
+<span id="cb111-5"><a href="SLRTransformations.html#cb111-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-90-1.png" width="336" style="display: block; margin: auto;" /></p>
-<p>The slope indicates that as the log mean initial weight increases by 1 then the log mean weight loss will decrease by between 0.276 and 0.396. Because both the response and the explanatory variable were log-transformed, the back-transformed slope means that as the mean initial weight increases by a multiple of 2.718 then the mean weight loss is multiplied by between 0.673 and 0.758. In other words, as the mean initial weight increases by a multiple of 2.718 then the mean weight loss decreases by between 24.2 and 32.7%.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb113-1"><a href="SLRTransformations.html#cb113-1" aria-hidden="true" tabindex="-1"></a>( cfs <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Ests=</span><span class="fu">coef</span>(lm.ptrls2),<span class="fu">confint</span>(lm.ptrls2)) )  <span class="do">## log-log scale </span></span></code></pre></div>
+<p> </p>
+<p>The slope indicates that as the log mean initial weight increases by 1 then the log mean weight loss will decrease by between 0.276 and 0.396. Because both the response and the explanatory variable were log-transformed, the back-transformed slope means that as the mean initial weight increases by a multiple of 2.718 then the mean weight loss is multiplied by between 0.673 and 0.758. In other words, as the mean initial weight increases by a multiple of 2.718 then the mean weight loss decreases by a multiple between 0.673 and 0.758.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb112-1"><a href="SLRTransformations.html#cb112-1" aria-hidden="true" tabindex="-1"></a>( cfs <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Ests=</span><span class="fu">coef</span>(lm.ptrls2),<span class="fu">confint</span>(lm.ptrls2)) )  <span class="do">## log-log scale </span></span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;                     Ests      2.5 %     97.5 %
 #R&gt;   (Intercept) -1.7340329 -2.1516113 -1.3164546
 #R&gt;   logwt       -0.3363196 -0.3961507 -0.2764885</code></pre>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb115-1"><a href="SLRTransformations.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(cfs)  <span class="do">## back-transformed to original scale</span></span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb114-1"><a href="SLRTransformations.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(cfs)  <span class="do">## back-transformed to original scale</span></span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;                    Ests     2.5 %    97.5 %
 #R&gt;   (Intercept) 0.1765709 0.1162966 0.2680841
 #R&gt;   logwt       0.7143948 0.6729053 0.7584423</code></pre>
 <p>The predicted log mean weight loss for a bird species with a mean initial weight of 4000 g is between -4.998 and -4.049. However, back-transformed to the original scale, the predicted mean weight loss for a bird species with a mean initial weight of 4000 g is between 0.0068 and 0.0174 g/g/d.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb117-1"><a href="SLRTransformations.html#cb117-1" aria-hidden="true" tabindex="-1"></a>iw <span class="ot">&lt;-</span> <span class="dv">4000</span></span>
-<span id="cb117-2"><a href="SLRTransformations.html#cb117-2" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">logwt=</span><span class="fu">log</span>(iw))</span>
-<span id="cb117-3"><a href="SLRTransformations.html#cb117-3" aria-hidden="true" tabindex="-1"></a>( p4000 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm.ptrls2,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;predict&quot;</span>) )  <span class="co"># log scale</span></span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb116-1"><a href="SLRTransformations.html#cb116-1" aria-hidden="true" tabindex="-1"></a>iw <span class="ot">&lt;-</span> <span class="dv">4000</span></span>
+<span id="cb116-2"><a href="SLRTransformations.html#cb116-2" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">logwt=</span><span class="fu">log</span>(iw))</span>
+<span id="cb116-3"><a href="SLRTransformations.html#cb116-3" aria-hidden="true" tabindex="-1"></a>( p4000 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm.ptrls2,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;predict&quot;</span>) )  <span class="co"># log scale</span></span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;           fit       lwr       upr
 #R&gt;   1 -4.523484 -4.998201 -4.048767</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb119-1"><a href="SLRTransformations.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(p4000)  <span class="co"># back-transformed to original scale</span></span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb118-1"><a href="SLRTransformations.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(p4000)  <span class="co"># back-transformed to original scale</span></span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;            fit         lwr        upr
 #R&gt;   1 0.01085115 0.006750078 0.01744386</code></pre>
+<p> </p>
 </div>
 <div id="bac-and-crashing" class="section level3" number="18.4.2">
 <h3><span class="header-section-number">18.4.2</span> BAC and Crashing</h3>
-<p>A study was published in 2007 that investigated the relative risk of being in a crash (RRC) relative to a person’s blood alcohol content (BAC). The researchers examined data from 2871 crashes and derived a measure of the relative risk of being in a car accident. The relative risk was scaled so that individuals with a blood alcohol content of 0 had a relative risk of 1. Thus, all other relative risk values are in comparison to a driver with a BAC of 0. For example, a relative risk of 3 would mean that persons with that BAC level are three times more likely to be in a car accident than a person with a BAC of 0. The researchers wanted to explain how the relative risk of a crash was related to BAC level. [<em>Note that BAC was multiplied by 100 so that a one unit change would be within the range of the data and, thus, would be meaningful.</em>]</p>
+<p><img src="zimgs/SobrietySign.jpg" alt="Decoration" class="img-right">
+A study was published in 2007 that investigated the relative risk of being in a crash (RRC) relative to a person’s blood alcohol content (BAC). The researchers examined data from 2871 crashes and derived a measure of the relative risk of being in a car accident. The relative risk was scaled so that individuals with a blood alcohol content of 0 had a relative risk of 1. Thus, all other relative risk values are in comparison to a driver with a BAC of 0. For example, a relative risk of 3 would mean that persons with that BAC level are three times more likely to be in a car accident than a person with a BAC of 0. The researchers wanted to explain how the relative risk of a crash was related to BAC level. [<em>Note that BAC was multiplied by 100 so that a one unit change would be within the range of the data and, thus, would be meaningful.</em>]</p>
 <p>The data are loaded below, the initial SLR is fit with relative risk of a crash as the response variable, and the assumptions are quickly checked. It is clear that the form of the relationship is not linear. The scatterplot also clearly shows that a linear model is not appropriate for these data. The other assumptions are also not met, but these are likely affected by the non-linearity.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb121-1"><a href="SLRTransformations.html#cb121-1" aria-hidden="true" tabindex="-1"></a>cr <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/crash.csv&quot;</span>)</span>
-<span id="cb121-2"><a href="SLRTransformations.html#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cr)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb120-1"><a href="SLRTransformations.html#cb120-1" aria-hidden="true" tabindex="-1"></a>cr <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/crash.csv&quot;</span>)</span>
+<span id="cb120-2"><a href="SLRTransformations.html#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cr)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   &#39;data.frame&#39;: 12 obs. of  2 variables:
 #R&gt;    $ BAC: int  0 1 3 5 7 9 11 13 15 17 ...
 #R&gt;    $ RRC: num  1 1.24 1.85 3.37 7.17 ...</code></pre>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb123-1"><a href="SLRTransformations.html#cb123-1" aria-hidden="true" tabindex="-1"></a>lm.cr <span class="ot">&lt;-</span> <span class="fu">lm</span>(RRC<span class="sc">~</span>BAC,<span class="at">data=</span>cr)</span>
-<span id="cb123-2"><a href="SLRTransformations.html#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.cr)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb122-1"><a href="SLRTransformations.html#cb122-1" aria-hidden="true" tabindex="-1"></a>lm.cr <span class="ot">&lt;-</span> <span class="fu">lm</span>(RRC<span class="sc">~</span>BAC,<span class="at">data=</span>cr)</span>
+<span id="cb122-2"><a href="SLRTransformations.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.cr)</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-93-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb124-1"><a href="SLRTransformations.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cr,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>BAC,<span class="at">y=</span>RRC)) <span class="sc">+</span>  </span>
-<span id="cb124-2"><a href="SLRTransformations.html#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span>  </span>
-<span id="cb124-3"><a href="SLRTransformations.html#cb124-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Blood Alcohol Content (x100)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Relative Risk of a Crash&quot;</span>) <span class="sc">+</span>  </span>
-<span id="cb124-4"><a href="SLRTransformations.html#cb124-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
-<span id="cb124-5"><a href="SLRTransformations.html#cb124-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb123-1"><a href="SLRTransformations.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cr,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>BAC,<span class="at">y=</span>RRC)) <span class="sc">+</span>  </span>
+<span id="cb123-2"><a href="SLRTransformations.html#cb123-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb123-3"><a href="SLRTransformations.html#cb123-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Blood Alcohol Content (x100)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Relative Risk of a Crash&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb123-4"><a href="SLRTransformations.html#cb123-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
+<span id="cb123-5"><a href="SLRTransformations.html#cb123-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-94-1.png" width="336" style="display: block; margin: auto;" /></p>
+<p> </p>
 <p>Through a process of trial-and-error, it appears that log-transforming just the relative risk of a crash results in the assumptions being met. A second linear model was fit with log relative risk of a crash.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb125-1"><a href="SLRTransformations.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.cr,<span class="at">lambday=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb124-1"><a href="SLRTransformations.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.cr,<span class="at">lambday=</span><span class="dv">0</span>)</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-95-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb126-1"><a href="SLRTransformations.html#cb126-1" aria-hidden="true" tabindex="-1"></a>cr<span class="sc">$</span>logRRC <span class="ot">&lt;-</span> <span class="fu">log</span>(cr<span class="sc">$</span>RRC)</span>
-<span id="cb126-2"><a href="SLRTransformations.html#cb126-2" aria-hidden="true" tabindex="-1"></a>lm.cr2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(logRRC<span class="sc">~</span>BAC,<span class="at">data=</span>cr)</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb125-1"><a href="SLRTransformations.html#cb125-1" aria-hidden="true" tabindex="-1"></a>cr<span class="sc">$</span>logRRC <span class="ot">&lt;-</span> <span class="fu">log</span>(cr<span class="sc">$</span>RRC)</span>
+<span id="cb125-2"><a href="SLRTransformations.html#cb125-2" aria-hidden="true" tabindex="-1"></a>lm.cr2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(logRRC<span class="sc">~</span>BAC,<span class="at">data=</span>cr)</span></code></pre></div>
+<p> </p>
 <p>There is a significant relationship between log relative risk of a crash and blood alcohol content (p&lt;0.00005). It appears that 99.3% of the variability in log relative risk of a crash is explained by knowing the blood alcohol content.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb127-1"><a href="SLRTransformations.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.cr2)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb126-1"><a href="SLRTransformations.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.cr2)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
 #R&gt;   
 #R&gt;   Response: logRRC
 #R&gt;             Df Sum Sq Mean Sq F value    Pr(&gt;F)
 #R&gt;   BAC        1 33.690  33.690  1452.2 3.692e-12
 #R&gt;   Residuals 10  0.232   0.023</code></pre>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb129-1"><a href="SLRTransformations.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.cr2)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb128-1"><a href="SLRTransformations.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.cr2)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   [1] 0.9931612</code></pre>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb131-1"><a href="SLRTransformations.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cr,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>BAC,<span class="at">y=</span>logRRC)) <span class="sc">+</span>  </span>
-<span id="cb131-2"><a href="SLRTransformations.html#cb131-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span>  </span>
-<span id="cb131-3"><a href="SLRTransformations.html#cb131-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Blood Alcohol Content (x100)&quot;</span>,<span class="at">y=</span><span class="st">&quot;log Relative Risk of a Crash&quot;</span>) <span class="sc">+</span>  </span>
-<span id="cb131-4"><a href="SLRTransformations.html#cb131-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
-<span id="cb131-5"><a href="SLRTransformations.html#cb131-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb130-1"><a href="SLRTransformations.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cr,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>BAC,<span class="at">y=</span>logRRC)) <span class="sc">+</span>  </span>
+<span id="cb130-2"><a href="SLRTransformations.html#cb130-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb130-3"><a href="SLRTransformations.html#cb130-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Blood Alcohol Content (x100)&quot;</span>,<span class="at">y=</span><span class="st">&quot;log Relative Risk of a Crash&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb130-4"><a href="SLRTransformations.html#cb130-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
+<span id="cb130-5"><a href="SLRTransformations.html#cb130-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-97-1.png" width="336" style="display: block; margin: auto;" /></p>
+<p> </p>
 <p>The slope indicates that as the blood alcohol content increases by 0.01 (because the BAC was multiplied by 100) then the log relative risk of a crash will increase by between 0.233 and 0.262. Because only the response variable was log-transformed, the back-transformed slope means that as the blood alcohol content increases by 0.01 then the relative risk of an accident increases by a multiple of between 1.262 and 1.299. So, as the blood alcohol content increases by 0.01 then the relative risk of an accident increases by between 26.2 and 29.9%.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb132-1"><a href="SLRTransformations.html#cb132-1" aria-hidden="true" tabindex="-1"></a>( cfs <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.cr2),<span class="fu">confint</span>(lm.cr2)))</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb131-1"><a href="SLRTransformations.html#cb131-1" aria-hidden="true" tabindex="-1"></a>( cfs <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.cr2),<span class="fu">confint</span>(lm.cr2)))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;                        Est      2.5 %    97.5 %
 #R&gt;   (Intercept) -0.003342789 -0.1789921 0.1723065
 #R&gt;   BAC          0.247289672  0.2328310 0.2617483</code></pre>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb134-1"><a href="SLRTransformations.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(cfs)</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb133-1"><a href="SLRTransformations.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(cfs)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;                     Est     2.5 %   97.5 %
 #R&gt;   (Intercept) 0.9966628 0.8361125 1.188042
 #R&gt;   BAC         1.2805500 1.2621682 1.299200</code></pre>
+<p> </p>
 <p>The predicted mean log relative risk of a crash for all drivers with a blood alcohol content of 0.10 (so 10 for the BAC variable) is between 2.116 and 2.823. However, back-transformed to the original scale, the predicted relative risk of a crash for all drivers with a blood alcohol content of 0.10 is between 8.30 and 16.82.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb136-1"><a href="SLRTransformations.html#cb136-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">BAC=</span><span class="dv">10</span>)</span>
-<span id="cb136-2"><a href="SLRTransformations.html#cb136-2" aria-hidden="true" tabindex="-1"></a>( p10 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm.cr2,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;predict&quot;</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb135-1"><a href="SLRTransformations.html#cb135-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">BAC=</span><span class="dv">10</span>)</span>
+<span id="cb135-2"><a href="SLRTransformations.html#cb135-2" aria-hidden="true" tabindex="-1"></a>( p10 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm.cr2,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;predict&quot;</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr      upr
 #R&gt;   1 2.469554 2.116327 2.822781</code></pre>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb138-1"><a href="SLRTransformations.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(p10)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb137-1"><a href="SLRTransformations.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(p10)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr      upr
 #R&gt;   1 11.81717 8.300589 16.82358</code></pre>
+<p> </p>
 
 </div>
 </div>

@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-03" />
+<meta name="date" content="2021-02-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -365,20 +365,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="SLRInference" class="section level1" number="15">
 <h1><span class="header-section-number">Module 15</span> SLR Inference</h1>
-<p>The best-fit line is computed from a sample, thus it is a statistic that is subject to sampling variability. In other words, the best-fit line will vary from sample to sample taken from the same population (Figure <a href="SLRInference.html#fig:BFLSamplingVariability">15.1</a>).</p>
+<p>The best-fit line is computed from a sample and is thus a statistic that is subject to sampling variability. In other words, the best-fit line will vary from sample to sample taken from the same population (Figure <a href="SLRInference.html#fig:BFLSamplingVariability">15.1</a>).</p>
 <div class="figure" style="text-align: center"><span id="fig:BFLSamplingVariability"></span>
-<img src="Book207_files/figure-html/BFLSamplingVariability-.gif" alt="Scatterplot for a population of 500 points with the population line shown in gray. Each of 100 samples of 50 points and their respective best-fit line is shown in red in each frame of the animation. Note how each sample produces a similar but ultimately different best-fit line." width="336" />
+<img src="Book207_files/figure-html/BFLSamplingVariability-.gif" alt="Scatterplot for a population of 500 points with the population line shown in gray. Each of 100 samples of 50 points and their respective best-fit line is shown in blue in each frame of the animation. Note how each sample produces a similar but ultimately different best-fit line." width="336" />
 <p class="caption">
-Figure 15.1: Scatterplot for a population of 500 points with the population line shown in gray. Each of 100 samples of 50 points and their respective best-fit line is shown in red in each frame of the animation. Note how each sample produces a similar but ultimately different best-fit line.
+Figure 15.1: Scatterplot for a population of 500 points with the population line shown in gray. Each of 100 samples of 50 points and their respective best-fit line is shown in blue in each frame of the animation. Note how each sample produces a similar but ultimately different best-fit line.
 </p>
 </div>
 <p> </p>
-<p>Given the above, then any statistic derived from the best-fit line – such as <span class="math inline">\(\hat{\alpha}\)</span>, <span class="math inline">\(\hat{\beta}\)</span>, and <span class="math inline">\(\hat{\mu}_{Y|X=x_{i}}\)</span> introduced in Module <a href="SLRFoundations.html#SLRFoundations">14</a> – will also be subject to sampling variability. Thus, to construct confidence intervals and perform hypothesis tests with these statistics we need to measure their <em>standard errors</em> (SE).</p>
+<p>Given the above, any statistic derived from the best-fit line – such as <span class="math inline">\(\hat{\alpha}\)</span>, <span class="math inline">\(\hat{\beta}\)</span>, and <span class="math inline">\(\hat{\mu}_{Y|X=x_{i}}\)</span> introduced in Module <a href="SLRFoundations.html#SLRFoundations">14</a> – will also be subject to sampling variability. Thus, to construct confidence intervals and perform hypothesis tests with these statistics we need to measure their <em>standard error</em> (SE).</p>
+<p>In this module, a measurement for variability around the line is introduced and then used to derive SE for <span class="math inline">\(\hat{\alpha}\)</span>, <span class="math inline">\(\hat{\beta}\)</span>, and <span class="math inline">\(\hat{\mu}_{Y|X=x_{i}}\)</span>. These are then used to make inferences (confidence intervals and hypothesis tests) for <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, and <span class="math inline">\(\mu_{Y|X=x_{i}}\)</span>.</p>
 <div class="tip">
 <p><span class="math inline">\(\hat{\alpha}\)</span>, <span class="math inline">\(\hat{\beta}\)</span>, and <span class="math inline">\(\hat{\mu}_{Y|X=x_{i}}\)</span> are all subject to sampling variability.</p>
 </div>
-<p>In this module, a measurement for variability around the line is introduced and then used to derive SE for <span class="math inline">\(\hat{\alpha}\)</span>, <span class="math inline">\(\hat{\beta}\)</span>, and <span class="math inline">\(\hat{\mu}_{Y|X=x_{i}}\)</span>. These are then used to make inferences (confidence intervals and hypothesis tests) for <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, and <span class="math inline">\(\mu_{Y|X=x_{i}}\)</span>.</p>
-<p> </p>
 <div id="variability-around-the-line" class="section level2" number="15.1">
 <h2><span class="header-section-number">15.1</span> Variability Around the Line</h2>
 <p>The SEs for statistics related to the best-fit line (i.e., <span class="math inline">\(\hat{\alpha}\)</span>, <span class="math inline">\(\hat{\beta}\)</span>, and <span class="math inline">\(\hat{\mu}_{Y|X=x_{i}}\)</span>) depend on the variability of observations around the best-fit line. The variability of observations around the line can be visualized as an “envelope” that contains most of the observations (Figure <a href="SLRInference.html#fig:BFLNaturalVariability">15.2</a>). The “bigger” the envelope then the more variability among observations there is.</p>
@@ -389,7 +388,7 @@ Figure 15.2: Scatterplot for different samples of 50 observations showing an ell
 </p>
 </div>
 <p> </p>
-<p>However, more objective measure of variability around the line is needed. Recall from Section <a href="SLRFoundations.html#best-fit-line">14.2</a> that a residual measures the distance that an observation is from the line and the RSS is a synthetic measure of how far (in squared units) all individuals are from the line. Dividing the RSS by the corresponding df=<span class="math inline">\(n-2\)</span> makes a mean-square, which is a true variance.<a href="#fn73" class="footnote-ref" id="fnref73"><sup>73</sup></a> Thus, the variance of individuals around the line is</p>
+<p>However, a more objective measure of variability around the line is needed. Recall from Section <a href="SLRFoundations.html#best-fit-line">14.2</a> that a residual measures the distance that an observation is from the line and the RSS is a synthetic measure of how far (in squared units) all individuals are from the line. Dividing the RSS by the corresponding df=<span class="math inline">\(n-2\)</span> makes a mean-square, which is a true variance.<a href="#fn73" class="footnote-ref" id="fnref73"><sup>73</sup></a> Thus, the variance of individuals around the line is</p>
 <p><span class="math display">\[
 s^{2}_{Y|X} = \frac{RSS}{n-2} = \frac{\sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X=x_{i}}\right)^{2}}{n-2}
 \]</span></p>
@@ -409,7 +408,7 @@ s^{2}_{Y|X} = \frac{RSS}{n-2} = \frac{\sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X=x
 <p><span class="math display">\[
 SE_{\hat{\beta}} = \sqrt{\frac{s^{2}_{Y|X}}{(n-1)s_{X}^{2}}}
 \]</span></p>
-<p>Don’t memorize this formula; rather note how <span class="math inline">\(SE_{\hat{\beta}}\)</span> increases with increasing <span class="math inline">\(s^{2}_{Y|X}\)</span>) but decreases with increasing <span class="math inline">\(n\)</span> or <span class="math inline">\(s_{X}^{2}\)</span>.</p>
+<p>Don’t memorize this formula; rather note how <span class="math inline">\(SE_{\hat{\beta}}\)</span> increases with increasing <span class="math inline">\(s^{2}_{Y|X}\)</span> but decreases with increasing <span class="math inline">\(n\)</span> or <span class="math inline">\(s_{X}^{2}\)</span>.</p>
 <div class="tip">
 <p>Variability in the slope increases with increasing variability of observations around the line, decreases with increasing sample size, and decreases with increasing variability in the explanatory variable.</p>
 </div>
@@ -426,6 +425,7 @@ t=\frac{\hat{\beta}-\beta_{0}}{SE_{\hat{\beta}}}
 \]</span></p>
 <p>which has <span class="math inline">\(n-2\)</span> df. Familiarly, a confidence interval for <span class="math inline">\(\beta\)</span> is constructed with <span class="math inline">\(\hat{\beta} \pm t^{*}SE_{\hat{\beta}}\)</span>.</p>
 <p>The most common hypothesis to test in SLR is whether the slope is equal to zero or not. A slope of zero represents a “flat” best-fit line (Figure <a href="SLRInference.html#fig:SlopeHypotheses">15.3</a>) which indicates that the mean of <span class="math inline">\(Y\)</span> does not increase or decrease with increasing <span class="math inline">\(X\)</span>. If this is the case then <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> are not related. Thus, testing <span class="math inline">\(H_{0}: \beta = 0\)</span> versus <span class="math inline">\(H_{A}: \beta \ne 0\)</span> is testing whether <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> are statistically related or not – a key question in SLR!</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:SlopeHypotheses"></span>
 <img src="Book207_files/figure-html/SlopeHypotheses-1.png" alt="Demonstration of what the best-fit lines would like for the null hypothesis that the slope is zero or there is no relationship between Y and X (red) or the alternative hypothesis that the slope is not zero and there is a relationship between Y and X (blue). Note that two possibilities are shown for the alternative hypothesis because the slope could be positive (solid) or negative (dashed)" width="336" />
 <p class="caption">
@@ -443,7 +443,7 @@ Figure 15.3: Demonstration of what the best-fit lines would like for the null hy
 <p><span class="math display">\[
 SE_{\hat{\alpha}} = \sqrt{s^{2}_{Y|X}\left(\frac{1}{n}+\frac{\overline{X}^{2}}{(n-1)s_{X}^{2}}\right)}
 \]</span></p>
-<p>Again, don’t memorize this formula; rather note that <span class="math inline">\(SE_{\hat{\alpha}}\)</span>, as did <span class="math inline">\(SE_{\hat{\beta}}\)</span>, increases with <span class="math inline">\(s^{2}_{Y|X}\)</span>) but decreases with increasing <span class="math inline">\(n\)</span> and <span class="math inline">\(s_{X}^{2}\)</span>. However, also note that <span class="math inline">\(SE_{\hat{\alpha}}\)</span> increases with increasing <span class="math inline">\(\overline{X}\)</span>. This positive relationship between <span class="math inline">\(SE_{\hat{\alpha}}\)</span> and <span class="math inline">\(\overline{X}\)</span> indicates that <span class="math inline">\(\hat{\alpha}\)</span> is more variable the further <span class="math inline">\(\overline{X}\)</span> is from <span class="math inline">\(x=0\)</span>. In other words, <span class="math inline">\(\hat{\alpha}\)</span> is more variable when the intercept is more of an extrapolation.</p>
+<p>Again, don’t memorize this formula; rather note that <span class="math inline">\(SE_{\hat{\alpha}}\)</span>, as did <span class="math inline">\(SE_{\hat{\beta}}\)</span>, increases with <span class="math inline">\(s^{2}_{Y|X}\)</span> but decreases with increasing <span class="math inline">\(n\)</span> and <span class="math inline">\(s_{X}^{2}\)</span>. However, also note that <span class="math inline">\(SE_{\hat{\alpha}}\)</span> increases with increasing <span class="math inline">\(\overline{X}\)</span>. This positive relationship between <span class="math inline">\(SE_{\hat{\alpha}}\)</span> and <span class="math inline">\(\overline{X}\)</span> indicates that <span class="math inline">\(\hat{\alpha}\)</span> is more variable the further <span class="math inline">\(\overline{X}\)</span> is from <span class="math inline">\(x=0\)</span>. In other words, <span class="math inline">\(\hat{\alpha}\)</span> is more variable when the intercept is more of an extrapolation.</p>
 <div class="tip">
 <p>Variability in the intercept increases with increasing variability of observations around the line and increasing mean of the explanatory variable, but decreases with increasing sample size and increasing variability in the explanatory variable.</p>
 </div>
@@ -464,6 +464,7 @@ t=\frac{\hat{\alpha}-\alpha_{0}}{SE_{\hat{\alpha}}}
 <p>Testing if the y-intercept of the best-fit line (fit to raw data) is rarely of much interest as the intercept is often an extrapolation or a response value of 0 is non-sensical.</p>
 </div>
 <p>The y-intercept, and tests about the y-intercept, can be made more useful by centering the explanatory variable. A variable is centered by subtracting the mean from every observation of that variable. For example, a new variable <span class="math inline">\(X^{*}\)</span> is constructed by centering <span class="math inline">\(X\)</span>; i.e., <span class="math inline">\(X^{*}=X-\overline{X}\)</span>. Centering <span class="math inline">\(X\)</span> simply horizontally shifts the plot to being centered on <span class="math inline">\(X^{*}=0\)</span> rather than on <span class="math inline">\(X=\overline{X}\)</span> (Figure <a href="SLRInference.html#fig:Centering">15.4</a>).</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:Centering"></span>
 <img src="Book207_files/figure-html/Centering-1.gif" alt="Example of centering the explanatory variable. The original data is centered on 5, whereas the centered data is centered on 0. The vertical dashed line highlights the mean value of 'X' for the original and centered data. Note how the intercept but not the slope of the equation changes after centering." width="70%" />
 <p class="caption">
@@ -480,16 +481,15 @@ Figure 15.4: Example of centering the explanatory variable. The original data is
 </div>
 <div id="slope-and-intercept-in-r" class="section level2" number="15.4">
 <h2><span class="header-section-number">15.4</span> Slope and Intercept in R</h2>
-<p>As shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a> the best-fit line is obtained using <code>lm()</code> with a model of the form <code>response~explanatory</code>. Thus, the linear model for the Mount Everest temperature data is fit with</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb86-1"><a href="SLRInference.html#cb86-1" aria-hidden="true" tabindex="-1"></a>lm1.ev <span class="ot">&lt;-</span> <span class="fu">lm</span>(MeanAirTemp<span class="sc">~</span>Altitude,<span class="at">data=</span>ev)</span></code></pre></div>
-<p>As shown in that section, a concise table of the estimated intercept and slope with 95% confidence intervals is constructed with <code>cbind()</code>, <code>coef()</code>, and <code>confint()</code>.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb87-1"><a href="SLRInference.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm1.ev),<span class="fu">confint</span>(lm1.ev))</span></code></pre></div>
+<p>As shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a> a concise table of the estimated intercept and slope with 95% confidence intervals for the Mount Everest temperature data is constructed as below.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb86-1"><a href="SLRInference.html#cb86-1" aria-hidden="true" tabindex="-1"></a>lm1.ev <span class="ot">&lt;-</span> <span class="fu">lm</span>(MeanAirTemp<span class="sc">~</span>Altitude,<span class="at">data=</span>ev)</span>
+<span id="cb86-2"><a href="SLRInference.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm1.ev),<span class="fu">confint</span>(lm1.ev))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;                        Est        2.5 %       97.5 %
 #R&gt;   (Intercept) 21.388856057 17.442040728 25.335671386
 #R&gt;   Altitude    -0.005634136 -0.006822147 -0.004446125</code></pre>
 <p>While not discussed there, these confidence intervals were computed using <span class="math inline">\(SE_{\hat{\alpha}}\)</span> and <span class="math inline">\(SE_{\hat{\beta}}\)</span> and the confidence interval formulae discussed above.</p>
 <p>More summary information may be extracted by submitting the saved <code>lm()</code> object to <code>summary()</code>.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb89-1"><a href="SLRInference.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1.ev)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb88-1"><a href="SLRInference.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1.ev)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Coefficients:
 #R&gt;                 Estimate Std. Error t value Pr(&gt;|t|)
 #R&gt;   (Intercept) 21.3888561  1.7447131   12.26 6.42e-07
@@ -518,12 +518,13 @@ corresponding parameter is equal to zero (vs. that it is not).</p>
 <div class="defn">
 <p><strong>Fitted value</strong>: Predicted <em>mean</em> value of the response variable for <em>all</em> individuals with a given value of the explanatory variable – i.e., <span class="math inline">\(\hat{\mu}_{Y|X=x_{0}}\)</span></p>
 </div>
-<p>The fitted value is a statistic that is subject to sampling variability. It is known that the fitted values have a sampling distributions that is normally distributed<a href="#fn77" class="footnote-ref" id="fnref77"><sup>77</sup></a> with a mean equal to <span class="math inline">\(\hat{\mu}_{Y|X=x_{0}}\)</span> and a standard error of</p>
+<p>Fitted values have a sampling distributions that is normally distributed<a href="#fn77" class="footnote-ref" id="fnref77"><sup>77</sup></a> with a mean equal to <span class="math inline">\(\hat{\mu}_{Y|X=x_{0}}\)</span> and a standard error of</p>
 <p><span class="math display">\[
 \text{SE}_{\text{fits}} = \sqrt{s_{Y|X}^{2}\left(\frac{1}{n}+\frac{\left(x_{0}-\bar{X}\right)^{2}}{(n-1)s_{x}^{2}}\right)}
 \]</span></p>
 <p>Once again, don’t memorize this formula but again note that <span class="math inline">\(\text{SE}_{\text{fits}}\)</span> increases with increasing <span class="math inline">\(s_{Y|X}^{2}\)</span> and decreases with increasing <span class="math inline">\(n\)</span> and <span class="math inline">\(s_{x}^{2}\)</span>. However, also note that the <span class="math inline">\(\text{SE}_{\text{fits}}\)</span> increases as <span class="math inline">\(x_{0}\)</span> is further from <span class="math inline">\(\overline{X}\)</span>. In other words, there is more variability in predicting the mean of <span class="math inline">\(Y\)</span> for values of <span class="math inline">\(X\)</span> further from the mean of <span class="math inline">\(X\)</span>. Thus, the most precise prediction of the mean of <span class="math inline">\(Y\)</span> is made when <span class="math inline">\(X=\overline{X}\)</span>.</p>
 <p>A confidence interval for <span class="math inline">\(\mu_{Y|X=x_{0}}\)</span> is computed with <span class="math inline">\(\hat{\mu}_{Y|X=x_{0}}\pm t^{*}\text{SE}_{\text{fits}}\)</span>. Computing this confidence interval for all values of <span class="math inline">\(x_{0}\)</span> and plotting it produces what is called a <strong>confidence band</strong> (Figure <a href="SLRInference.html#fig:SLRConfidenceBand1">15.5</a>). Confidence bands will always have a “saddle shape” because, as stated above, the prediction of <span class="math inline">\(\mu_{Y|X=x_{0}}\)</span> is always most precise (narrowest) when <span class="math inline">\(X=\overline{X}\)</span>.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:SLRConfidenceBand1"></span>
 <img src="Book207_files/figure-html/SLRConfidenceBand1-1.png" alt="Confidence bands around a best-fit line." width="336" />
 <p class="caption">
@@ -532,6 +533,7 @@ Figure 15.5: Confidence bands around a best-fit line.
 </div>
 <p> </p>
 <p>The confidence band shown in Figure <a href="SLRInference.html#fig:SLRConfidenceBand1">15.5</a> is a 95% “confidence interval” related to the <em>placement of the line</em>. To demonstrate this, lines from 100 random samples from the same population are plotted in Figure <a href="SLRInference.html#fig:SLRConfidenceBand2">15.6</a> along with the confidence band from Figure <a href="SLRInference.html#fig:SLRConfidenceBand1">15.5</a>. At the end of this animation, it is evident that most (95%-ish) of the random regression lines were contained within the 95% confidence band.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:SLRConfidenceBand2"></span>
 <img src="Book207_files/figure-html/SLRConfidenceBand2-.gif" alt="Animation of 100 samples with corresponding regression lines and how most of the regression lines fit within the confidence bands shown in the previous figure." width="336" />
 <p class="caption">
@@ -542,20 +544,20 @@ Figure 15.6: Animation of 100 samples with corresponding regression lines and ho
 <div class="tip">
 <p>Confidence bands are built from <span class="math inline">\(\text{SE}_{\text{fits}}\)</span> and are confidence intervals for <span class="math inline">\(\mu_{Y|X=x_{0}}\)</span> and “the placement of the best-fit line.”</p>
 </div>
-<p> </p>
 </div>
 <div id="predicting-individuals" class="section level2" number="15.6">
 <h2><span class="header-section-number">15.6</span> Predicting Individuals</h2>
-<p>In addition to predicting the mean value of the response for all individuals with a given value of the explanatory variable, it is common to predict <strong>the value</strong> of the response for <strong>an</strong> individual. Given that our best guess for <strong>an</strong> individual is that they “are average,” this prediction is the same as that use for the mean, but will be labeled as <span class="math inline">\(\hat{Y}|X=x_{0}\)</span> to help keep it separate. This second objective (predict the individual) is called finding a <em>predicted value</em>.</p>
+<p>In addition to predicting the mean value of the response for all individuals with a given value of the explanatory variable, it is common to predict <strong>the value</strong> of the response for <strong>an</strong> individual. Given that our best guess for <strong>an</strong> individual is that they “are average,” this prediction is the same as that used for the mean, but will be labeled as <span class="math inline">\(\hat{Y}|X=x_{0}\)</span> to help keep it separate. This second objective (predict the individual) is called finding a <em>predicted value</em>.</p>
 <div class="defn">
 <p><strong>Predicted value</strong>: Predicted value of the response variable for <em>an</em> individual with a given value of the explanatory variable. – i.e., <span class="math inline">\(\hat{Y}|X=x_{0}\)</span></p>
 </div>
-<p>Once again, the predicted value is a statistic that is subject to sampling variability. It is known that the predicted values have a sampling distribution that is normally distributed<a href="#fn78" class="footnote-ref" id="fnref78"><sup>78</sup></a> with a mean equal to <span class="math inline">\(\hat{Y}|X=x_{0}\)</span> and a standard error of</p>
+<p>Predicted values have a sampling distribution that is normally distributed<a href="#fn78" class="footnote-ref" id="fnref78"><sup>78</sup></a> with a mean equal to <span class="math inline">\(\hat{Y}|X=x_{0}\)</span> and a standard error of</p>
 <p><span class="math display">\[
 \text{SE}_{\text{prediction}} = \sqrt{s_{Y|X}^{2}\left(\frac{1}{n}+\frac{\left(x_{0}-\bar{X}\right)^{2}}{(n-1)s_{x}^{2}}\right)+s_{Y|X}^{2}}
 \]</span></p>
-<p>This formula has two parts separate at the second plus sign. The first part in front of the plus sign is <strong>exactly</strong> the same as <span class="math inline">\(\text{SE}_{\text{fits}}\)</span> and represents variability in placement of the line. The second part is <span class="math inline">\(s_{Y|X}^{2}\)</span> and represents variability of individuals around the line. Thus, variability in predicting an individual consists of variability in placing the line and then variability of individuals around that line.</p>
-<p>A confidence interval for <span class="math inline">\(Y|X=x_{0}\)</span> is computed with <span class="math inline">\(\hat{Y}|X=x_{0}\pm t^{*}\text{SE}_{\text{prediction}}\)</span>, but is called a <strong>prediction interval</strong> to keep it distinct from the prediction of the mean response. Computing this prediction interval for all values of <span class="math inline">\(x_{0}\)</span> and plotting it produces what is called a <strong>prediction band</strong> (Figure <a href="SLRInference.html#fig:SLRPredictionBand1">15.7</a>). Prediction bands will always have a “saddle shape” from “predicting the line placement” an will be wider than the confidence bands because of the added variability of predicting an individual.</p>
+<p>This formula has two parts separated at the second plus sign. The first part in front of the plus sign is <strong>exactly</strong> the same as <span class="math inline">\(\text{SE}_{\text{fits}}\)</span> and represents variability in placement of the line. The second part is <span class="math inline">\(s_{Y|X}^{2}\)</span> and represents variability of individuals around the line. Thus, variability in predicting an individual consists of variability in placing the line <strong>AND</strong> then variability of individuals around that line.</p>
+<p>A confidence interval for <span class="math inline">\(Y|X=x_{0}\)</span> is computed with <span class="math inline">\(\hat{Y}|X=x_{0}\pm t^{*}\text{SE}_{\text{prediction}}\)</span>, but is called a <strong>prediction interval</strong> to keep it distinct from the prediction of the mean response. Computing this prediction interval for all values of <span class="math inline">\(x_{0}\)</span> and plotting it produces what is called a <strong>prediction band</strong> (Figure <a href="SLRInference.html#fig:SLRPredictionBand1">15.7</a>). Prediction bands will always have a “saddle shape” from “predicting the line placement” and will be wider than the confidence bands because of the added variability of predicting an individual.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:SLRPredictionBand1"></span>
 <img src="Book207_files/figure-html/SLRPredictionBand1-1.png" alt="Prediction (red) and confidence bands (blue) around a best-fit line." width="336" />
 <p class="caption">
@@ -564,6 +566,7 @@ Figure 15.7: Prediction (red) and confidence bands (blue) around a best-fit line
 </div>
 <p> </p>
 <p>The prediction band shown in Figure <a href="SLRInference.html#fig:SLRPredictionBand1">15.7</a> is a 95% “confidence interval” related to the <em>placement of points</em>. To demonstrate this, points and lines from 100 random samples from the same population are plotted in Figure <a href="SLRInference.html#fig:SLRPredictionBand2">15.8</a><a href="#fn79" class="footnote-ref" id="fnref79"><sup>79</sup></a> along with the prediction band from Figure <a href="SLRInference.html#fig:SLRPredictionBand1">15.7</a>. At the end of this animation, it is evident that most (95%-ish) of the random points were contained within the 95% prediction band.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:SLRPredictionBand2"></span>
 <img src="Book207_files/figure-html/SLRPredictionBand2-.gif" alt="Animation of 100 samples with corresponding regression lines and points and how most of the points fit within the prediction bands shown in the previous figure." width="336" />
 <p class="caption">
@@ -585,35 +588,36 @@ value of the response variable at a given value of the explanatory variable. <sp
 <div id="predictions-in-r" class="section level2" number="15.7">
 <h2><span class="header-section-number">15.7</span> Predictions in R</h2>
 <p>As shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a> a prediction can be made in R with <code>predict()</code> using the saved <code>lm()</code> object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the <code>lm()</code> object. A confidence or prediction interval can be constructed by including <code>interval="confidence"</code> or <code>interval="prediction"</code>, respectively.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb91-1"><a href="SLRInference.html#cb91-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="dv">2552</span>)  <span class="co"># create data.frame first to save typing</span></span>
-<span id="cb91-2"><a href="SLRInference.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb90-1"><a href="SLRInference.html#cb90-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="dv">2552</span>)  <span class="co"># create data.frame first to save typing</span></span>
+<span id="cb90-2"><a href="SLRInference.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr     upr
 #R&gt;   1 7.010541 5.740331 8.28075</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb93-1"><a href="SLRInference.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb92-1"><a href="SLRInference.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr      upr
 #R&gt;   1 7.010541 3.468216 10.55287</code></pre>
 <p>Thus, one is 95% confident that the <strong>mean</strong> actual mean air temperature is between 5.74 and 8.28<sup>o</sup>C for <strong>all</strong> stations when the altitude lapse rate is 2552 C/km. In contrast one is 95% confident that the actual mean air temperature is between 3.47 and 10.55<sup>o</sup>C for <strong>a</strong> station when the altitude lapse rate is 2552 C/km.</p>
 <p>Note that multiple predictions can be made at once by including more values in the data frame given to <code>predict()</code>.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb95-1"><a href="SLRInference.html#cb95-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="fu">c</span>(<span class="dv">2552</span>,<span class="dv">3000</span>))</span>
-<span id="cb95-2"><a href="SLRInference.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb94-1"><a href="SLRInference.html#cb94-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="fu">c</span>(<span class="dv">2552</span>,<span class="dv">3000</span>))</span>
+<span id="cb94-2"><a href="SLRInference.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr      upr
 #R&gt;   1 7.010541 5.740331 8.280750
 #R&gt;   2 4.486448 3.457386 5.515509</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb97-1"><a href="SLRInference.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb96-1"><a href="SLRInference.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;          fit      lwr       upr
 #R&gt;   1 7.010541 3.468216 10.552866
 #R&gt;   2 4.486448 1.023270  7.949626</code></pre>
-<p>The confidence band can be added to the scatterplot with the best-fit line (as shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a>) by leaving off <code>se=FALSE</code> in <code>geom_smooth()</code>. Use <code>color=</code> to change the color of the best-fit line and <code>fill=</code> to change the color of the confidence band (of so desired).</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb99-1"><a href="SLRInference.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>ev,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Altitude,<span class="at">y=</span>MeanAirTemp)) <span class="sc">+</span> </span>
-<span id="cb99-2"><a href="SLRInference.html#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb99-3"><a href="SLRInference.html#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Altitude Lapse Rate (C/km)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mean Air Temperature (C)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb99-4"><a href="SLRInference.html#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
-<span id="cb99-5"><a href="SLRInference.html#cb99-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>)</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-83-1.png" width="336" style="display: block; margin: auto;" /></p>
+<p>The confidence band can be added to the scatterplot with the best-fit line (as shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a>) by leaving off <code>se=FALSE</code> in <code>geom_smooth()</code>. Use <code>color=</code> to change the color of the best-fit line and <code>fill=</code> to change the color of the confidence band (if so desired).</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb98-1"><a href="SLRInference.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>ev,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Altitude,<span class="at">y=</span>MeanAirTemp)) <span class="sc">+</span> </span>
+<span id="cb98-2"><a href="SLRInference.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb98-3"><a href="SLRInference.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Altitude Lapse Rate (C/km)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mean Air Temperature (C)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb98-4"><a href="SLRInference.html#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
+<span id="cb98-5"><a href="SLRInference.html#cb98-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>)</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-82-1.png" width="336" style="display: block; margin: auto;" /></p>
 <div class="tip">
 <p>Scatterplots depicting the best-fit line should usually be augmented with the confidence band.</p>
 </div>
 <p>Adding the prediction bands is more work because it is not automatically computed within any <code>geom</code>.</p>
+<p> </p>
 
 </div>
 </div>

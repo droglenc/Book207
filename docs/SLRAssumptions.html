@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-03" />
+<meta name="date" content="2021-02-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -379,6 +379,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For any given best-fit line, the predicted values of <span class="math inline">\(Y\)</span> for each observed value of <span class="math inline">\(X\)</span> is obtained by plugging each <span class="math inline">\(X\)</span> into the equation of the line. Predicted values are relatively “large” where the line is highest and relatively “small” where the line is lowest relative to the y-axis. A residual is computed for each value of <span class="math inline">\(X\)</span> as well by subtracting the predicted value of <span class="math inline">\(Y\)</span> from the observed value of <span class="math inline">\(Y\)</span>. Observations near the best-fit line have relatively “small” residuals, those far from the best-fit line have relatively “large” residuals. In addition, observations above the line have positive residuals whereas those below the line have negative residuals.<a href="#fn82" class="footnote-ref" id="fnref82"><sup>82</sup></a></p>
 <p>A <em>residual plot</em> is a scatterplot of these residuals on the y-axis and the predicted values on the x-axis. The residual plot “transforms” the scatterplot by first “flattening” the best-fit line and placing it at 0 on the y-axis and then expanding the y-axis to remove any “dead” white space in the plot. This “transformation” effectively zooms in on the best-fit line so that you can better see how the points relate to the line.</p>
 <p>Figure <a href="SLRAssumptions.html#fig:FLPResid1">17.1</a> shows a scatterplot with the best-fit line on the left and the corresponding residual plot on the right. Four points are shown to help understand how the two plots are related. This example is fairly straightforward as the residual plot essentially flattens the best-fit line and then zooms in the y-axis scale.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:FLPResid1"></span>
 <img src="Book207_files/figure-html/FLPResid1-1.png" alt="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)." width="336" /><img src="Book207_files/figure-html/FLPResid1-2.png" alt="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)." width="336" />
 <p class="caption">
@@ -387,6 +388,7 @@ Figure 17.1: Scatterplot with best-fit line and four points highlighted (Left) a
 </div>
 <p> </p>
 <p>Figure <a href="SLRAssumptions.html#fig:FLPResid2">17.2</a> is arranged similarly to Figure <a href="SLRAssumptions.html#fig:FLPResid1">17.1</a>. However, in this case the scatterplot exhibits a negative relationship which makes the “transformation” to the residual plot not as obvious. With a negative relationship, the “largest” predicted values correspond to points on the left side of the scatterplot, but they end up on the right side of the residual plot. Of course, vice-versa is also true. This is most obvious with the 38th and 39th points in Figure <a href="SLRAssumptions.html#fig:FLPResid2">17.2</a>.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:FLPResid2"></span>
 <img src="Book207_files/figure-html/FLPResid2-1.png" alt="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)." width="336" /><img src="Book207_files/figure-html/FLPResid2-2.png" alt="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)." width="336" />
 <p class="caption">
@@ -414,7 +416,7 @@ Figure 17.3: Residual plot where the homoscedasticity and linearity assumptions 
 </div>
 <div id="homoscedasticity" class="section level2" number="17.3">
 <h2><span class="header-section-number">17.3</span> Homoscedasticity</h2>
-<p>Strictly speaking “homoscedasticity” means that the the variances of <span class="math inline">\(Y\)</span> at each given value of <span class="math inline">\(X\)</span> are equal. Seldom will you have enough multiple observations at the same value of <span class="math inline">\(X\)</span> to test this explicitly. Thus, in practice, homoscedasticity translates into assessing whether the same general variance or scatter of points exists around the line for all values of <span class="math inline">\(X\)</span>. Heteroscedasticity, or non-constant variance around the line, will generally appear as a cone or funnel shape on a residual plot (Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsHetero">17.4</a>). Sometimes the funnel-shape may be difficult to see if the linearity assumption is also not met (Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsHetero">17.4</a>-Right). Make sure to compare these residual plots to Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsMet">17.3</a>.</p>
+<p>Strictly speaking “homoscedasticity” means that the the variances of <span class="math inline">\(Y\)</span> at each given value of <span class="math inline">\(X\)</span> are equal. Seldom are there enough observations at the same value of <span class="math inline">\(X\)</span> to test this assumption explicitly. Thus, in practice, homoscedasticity translates into assessing whether the same general variance or scatter of points around the line exists for all values of <span class="math inline">\(X\)</span>. Heteroscedasticity, or non-constant variance around the line, will generally appear as a cone or funnel shape on a residual plot (Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsHetero">17.4</a>). Sometimes the funnel-shape may be difficult to see if the linearity assumption is also not met (Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsHetero">17.4</a>-Right). Make sure to compare these residual plots to Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsMet">17.3</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:SLRAssumptionsHetero"></span>
 <img src="Book207_files/figure-html/SLRAssumptionsHetero-1.png" alt="Residual plot where the homoscedasticity assumption has NOT been adequately met." width="672" />
 <p class="caption">
@@ -430,12 +432,14 @@ Figure 17.4: Residual plot where the homoscedasticity assumption has NOT been ad
 <h2><span class="header-section-number">17.5</span> No Outliers or Influential Points</h2>
 <p>The no outliers assumption for SLR is assessed exactly as it was for a One- and Two-Way ANOVA; i.e., with an outlier test and a histogram of residuals (see Section <a href="ANOVA1Assumptions.html#no-outliers">7.4</a>).</p>
 <p>In SLR, some individuals may be considered <em>influential points</em> that draw the best-fit line towards them. Some very highly influential points may so strongly draw the line to them that the line will come very close to the point and the outlier test will not identify the point as an outlier (Figure <a href="SLRAssumptions.html#fig:SLRInfluentialPoint">17.5</a>-Left). Thus, I strongly urge you to look for “abnormal” points in your residual plots (Figure <a href="SLRAssumptions.html#fig:SLRInfluentialPoint">17.5</a>-Right) rather than relying solely on the outlier test to identify problem points.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:SLRInfluentialPoint"></span>
-<img src="Book207_files/figure-html/SLRInfluentialPoint-1.png" alt="Scatterplot with a best-fit line for all points (dashed red) and all points excluding the red point (solid black) (Left) and the residual plot from the fit to all points (Right)." width="336" /><img src="Book207_files/figure-html/SLRInfluentialPoint-2.png" alt="Scatterplot with a best-fit line for all points (dashed red) and all points excluding the red point (solid black) (Left) and the residual plot from the fit to all points (Right)." width="336" />
+<img src="Book207_files/figure-html/SLRInfluentialPoint-1.png" alt="Scatterplot with a best-fit line for all points (red) and all points excluding the red point (blue) (Left) and the residual plot from the fit to all points (Right)." width="336" /><img src="Book207_files/figure-html/SLRInfluentialPoint-2.png" alt="Scatterplot with a best-fit line for all points (red) and all points excluding the red point (blue) (Left) and the residual plot from the fit to all points (Right)." width="336" />
 <p class="caption">
-Figure 17.5: Scatterplot with a best-fit line for all points (dashed red) and all points excluding the red point (solid black) (Left) and the residual plot from the fit to all points (Right).
+Figure 17.5: Scatterplot with a best-fit line for all points (red) and all points excluding the red point (blue) (Left) and the residual plot from the fit to all points (Right).
 </p>
 </div>
+<p> </p>
 <p>Influential points are a huge problem in SLR because they make the best-fit line not represent the vast majority of the data. Influential points should be removed from the data if they are clearly an error. However, if they are not an error then the SLR should be fit both with and without the point and then a narrative should be constructed that describes how the points influences the regression results.</p>
 <div class="defn">
 <p><strong>Influential Point:</strong> An individual whose inclusion in the data set substantially impacts the coefficients of the fitted line.</p>
@@ -443,7 +447,8 @@ Figure 17.5: Scatterplot with a best-fit line for all points (dashed red) and al
 </div>
 <div id="linearity" class="section level2" number="17.6">
 <h2><span class="header-section-number">17.6</span> Linearity</h2>
-<p>The linearity assumption is the most important assumption in SLR; i.e., the form of the bivariate relationship must be linear in order to fit a line to it! Problems with the linearity assumption are diagnosed by examination of the residual plot. The most common departures from linearity look like parabolas on the residual plot (Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsNonlinear">17.6</a>), but more “complicated” structures may also be noted. A non-linearity may be difficult to diagnose if the homoscedasticity assumption is also not met (Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsNonlinear">17.6</a>-Right). Make sure to compare these residual plots to Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsMet">17.3</a>.</p>
+<p>The linearity assumption is the most important assumption in SLR; i.e., the form of the bivariate relationship must be linear in order to fit a line to it! Problems with the linearity assumption are diagnosed by examination of the residual plot. The most common departures from linearity look like parabolas on the residual plot (Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsNonlinear">17.6</a>), but more “complicated” structures may also be noted. Either way, a general curve or non-linearity will be apparent in the residual plot of the linearity assumption has been violated. A non-linearity may be difficult to diagnose if the homoscedasticity assumption is also not met (Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsNonlinear">17.6</a>-Right). Make sure to compare these residual plots to Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsMet">17.3</a>.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:SLRAssumptionsNonlinear"></span>
 <img src="Book207_files/figure-html/SLRAssumptionsNonlinear-1.png" alt="Residual plot where linearity assumption has NOT been adequately met." width="672" />
 <p class="caption">
@@ -454,10 +459,12 @@ Figure 17.6: Residual plot where linearity assumption has NOT been adequately me
 </div>
 <div id="testing-assumptions-in-r-1" class="section level2" number="17.7">
 <h2><span class="header-section-number">17.7</span> Testing Assumptions in R</h2>
-<p>The residual plot, histogram of residuals, Anderson-Darling test p-value, and outlier test p-value can all be constructed by submitting the saved <code>lm()</code> object to <code>assumptionCheck()</code>.<a href="#fn84" class="footnote-ref" id="fnref84"><sup>84</sup></a> For example, the results below indicated that all assumptions are adequately met for the Mount Everest air temperature and altitude lapse rate regression – i.e., there is no discernible or obvious curve or funnel-shape to the residual plot, the Anderson-Darling p-value indicates that the residuals are normally distributed, and the outlier test p-value does not indicate the presence of any outliers. It should be noted, however, that the sample size is very small in this case.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb102-1"><a href="SLRAssumptions.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.ev)</span></code></pre></div>
+<p>The residual plot, histogram of residuals, Anderson-Darling test p-value, and outlier test p-value can all be constructed by submitting the saved <code>lm()</code> object to <code>assumptionCheck()</code>.<a href="#fn84" class="footnote-ref" id="fnref84"><sup>84</sup></a> For example, the results below indicate that all assumptions are adequately met for the Mount Everest air temperature and altitude lapse rate regression – i.e., there is no discernible or obvious curve or funnel-shape to the residual plot, the Anderson-Darling p-value indicates that the residuals are normally distributed, and the outlier test p-value does not indicate the presence of any outliers. It should be noted, however, that the sample size is very small in this case.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb101-1"><a href="SLRAssumptions.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.ev)</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-86-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p> </p>
 <p>If the linearity, homoscedasticity, normality, or no outliers assumptions are not met then transformations for the response variable, explanatory variable, or both should be considered (see Module <a href="SLRTransformations.html#SLRTransformations">18</a>).</p>
+<p> </p>
 
 </div>
 </div>

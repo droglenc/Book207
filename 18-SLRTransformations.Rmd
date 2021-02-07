@@ -1,13 +1,15 @@
 # SLR Transformations {#SLRTransformations}
-The five assumptions of SLR and methods to assess their validity were introduced in Module \@ref(SLRAssumptions). If one or more of the linearity, homoscedasticity, normality, or outlier assumptions are violated, then the data may be transformed to a different scale where the assumptions are met. Either the response variable, explanatory variable, or both may be transformed. In general, the family of power transformations (see Section \@ref(power-transformations)) will be considered for both the response and explanatory variables, although some special transformations can be used in specific situations (e.g., $\sin^{-1}\sqrt{Y}$ for proportions or percentage data).
+The five assumptions of SLR and methods to assess their validity were introduced in Module \@ref(SLRAssumptions). If one or more of the linearity, homoscedasticity, normality, or outlier assumptions are violated, then the data may be transformed to a different scale where the assumptions may be met. Either the response variable, explanatory variable, or both may be transformed. In general, the family of power transformations (see Section \@ref(power-transformations)) will be considered for both the response and explanatory variables, although some special transformations can be used in specific situations (e.g., $\sin^{-1}\sqrt{Y}$ for proportions or percentage data).
 
-Power transformations may be selected based on theory, trial-and-error until assumptions are met, or from paste experience. Transformations from two common theoretical relationships and the trial-and-error method are discussed in the next two sections.
+Power transformations may be selected based on theory, trial-and-error until assumptions are met, or from past experience. Transformations from two common theoretical relationships and the trial-and-error method are discussed in the next two sections.
 
 ## Transformations from Theoretical Relationships
 ### Power Functions
 A power function is represented by $Y=aX^{b}$ where $Y$ and $X$ are variables (as always) and $a$ and $b$ are parameters to be estimated. The power function is quite common and has been used to model relationships between the weight and length (or height) of animals, demand for money based on inventory theory, metabolic rate and body mass, money over time (with discretely compounded interest), and drug dose and size, among other applications.
 
 Functions with exponents will generally be non-linear.^[Except for trivial choices of the exponent, such as $b=0$ or $b=1$ in the power function.] Thus, a power function is non-linear and will show a period of increasing increase if $b>1$, decreasing increase if $0<b<1$, or decreasing decrease if $b<0$ (Figure \@ref(fig:PowerFunEx1)).
+
+&nbsp;
 
 ```{r PowerFunEx1, echo=FALSE, fig.cap="Shapes of power function for three values of the b exponent. Note that this is plotted on the raw or original scale."}
 pwr <- function(x,a,b) a*x^b
@@ -30,23 +32,27 @@ pwrfun +
   ggtitle("Power Functions")
 ```
 
-Also, as a general rule, if a simple function has an exponent then taking the logarithm^[As we have throughout this course, we are using natural logarithms here.] of both sides tends to "linearize" the function. To show this relies on the following three properties of logarithms.
+&nbsp;
+
+As a general rule, taking the logarithm^[As we have throughout this course, we are using natural logarithms here.] of both sides of a function that has an exponent tends to "linearize" that function. Showing this rule relies on the following three properties of logarithms.
 
 1. The log of a product is the sum of the logs -- i.e., $log(uv)=log(u)+log(v)$
 1. The log of a base with an exponent is the exponent times the log of the base -- i.e., $log(u^{v})=vlog(u)$
 1. The log of the number $e$ is 1 -- i.e., $log(e)=1$
 
-With these rules, taking the logarithm of both sides of the power function simplifies as follows:
+Thus, taking the logarithm of both sides of the power function simplifies as follows:
 
 $$
 \begin{split}
 log(Y) &= log(aX^{b}) \\
-log(Y) &= log(a) + log(X^{b}) \\
+\vdots \;\;\;\; &= log(a) + log(X^{b}) \\
 log(Y) &= log(a) + blog(X)
 \end{split}
 $$
 
-Here $log(Y)$ and $log(X)$ are still variables and $log(a)$ is still a constant. Thus, this is the equation of the line where the response variable is $log(Y)$, the explanatory variable is $log(X)$, the y-intercept is $log(a)$, and the slope is $b$. The power functions shown in  Figure \@ref(fig:PowerFunEx1) are shown again in Figure \@ref(fig:PowerFunEx2) but are plotted with both axes on the log scale.
+The final result is the equation of a line where the response variable is $log(Y)$, the explanatory variable is $log(X)$, the y-intercept is $log(a)$, and the slope is $b$. Thus, a power function is "linearized" by log-transforming both the response and explanatory variables. For example, the power functions shown in Figure \@ref(fig:PowerFunEx1) are shown again in Figure \@ref(fig:PowerFunEx2) but are plotted with both axes on the log scale.
+
+&nbsp;
 
 ```{r PowerFunEx2, echo=FALSE, fig.cap="Same as previous figure but with both axes plotted on the logarithm scale."}
 pwrfun +
@@ -59,7 +65,7 @@ pwrfun +
 Transforming **both** the response and explanatory variable to the logarithm scale will "linearize" a power function relationship.
 :::
 
-In some instances the researcher may be interested in the value of $a$ and $b$ from the original power function. These values can be found by fitting a SLR to $log(Y)$ and $log(X)$ and noting from above that the y-intercept is an estimate of $log(a)$ and the slope is an estimate of $b$. Thus, $b$ is simply the slope. An estimate of $a$ requires back-transforming the y-intercept value as shown below
+In some instances the researcher may be interested in the value of $a$ and $b$ for the original power function. These values may be found by fitting a SLR to $log(Y)$ and $log(X)$ and noting from above that the y-intercept is an estimate of $log(a)$ and the slope is an estimate of $b$. Thus, $b$ is simply the slope. An estimate of $a$ requires back-transforming the y-intercept value as shown below
 
 $$
 \begin{split}
@@ -76,7 +82,9 @@ The parameters for a power function are estimated by fitting a SLR to $log(Y)$-$
 :::
 
 ### Exponential Functions
-An exponential function is represented by $Y=ae^{bX}$ where $Y$, $X$, $a$ and $b$ are define as with a power function. Exponential functions are also quite common and have been used to model growth of organisms over time (with unlimited resources), change in money over time with continuously compounded interest, prognostication for recover and number of days in the hospital, and radioactive decay over time.
+An exponential function is represented by $Y=ae^{bX}$ where $Y$, $X$, $a$ and $b$ are defined as with a power function. Exponential functions are also quite common and have been used to model growth of organisms over time (with unlimited resources), change in money over time with continuously compounded interest, prognostication for recovery and number of days in the hospital, and radioactive decay over time.
+
+&nbsp;
 
 ```{r ExpoFunEx1, echo=FALSE, fig.cap="Shapes of an exponential function for two values of the b parameter. Note that this is plotted on the raw or original scale."}
 expo <- function(x,a,b) a*exp(b*x)
@@ -96,17 +104,21 @@ expofun +
   ggtitle("Exponential Functions")
 ```
 
+&nbsp;
+
 Again, the exponential function has an exponent so we can try to linearize this function by applying logarithms to both sides.
 
 $$
 \begin{split}
 log(Y) &= log(ae^{bX}) \\
-log(Y) &= log(a) + log(e^{bX}) \\
+\vdots \;\;\;\; &= log(a) + log(e^{bX}) \\
 log(Y) &= log(a) + bX
 \end{split}
 $$
 
-Here $log(Y)$ is still a variable and $log(a)$ is still a constant. Thus, this is the equation of the line where the response variable is $log(Y)$, the explanatory variable is unchanged at $X$, the y-intercept is $log(a)$, and the slope is $b$. The exponential functions shown in Figure \@ref(fig:ExpoFunEx1) are shown again in Figure \@ref(fig:ExpoFunEx2) but are plotted with the y-axis on the log scale.
+Thef inal result is the equation of a line where the response variable is $log(Y)$, the explanatory variable is unchanged at $X$, the y-intercept is $log(a)$, and the slope is $b$. Thus, an exponential function is "linearized" by log-transforming only the response variable. The exponential functions shown in Figure \@ref(fig:ExpoFunEx1) are shown again in Figure \@ref(fig:ExpoFunEx2) but are plotted with the y-axis on the log scale.
+
+&nbsp;
 
 ```{r ExpoFunEx2, echo=FALSE, fig.cap="Same as previous figure but plotted with the y-axis on the logarithm scale."}
 expofun +
@@ -118,7 +130,7 @@ expofun +
 Transforming **only** the response variable to the logarithm scale will "linearize" an exponential function relationship.
 :::
 
-Estimates of $a$ and $b$ from the original exponentnial function are found by fitting a SLR to $log(Y)$ and $X$ and noting from above that the y-intercept is an estimate of $log(a)$ and the slope is an estimate of $b$. Thus, $b$ is simply the slope and $a$ is estimated with $e^{\text{y-intercept}}$, exactly as with the power function.
+Estimates of $a$ and $b$ from the original exponential function are found by fitting a SLR to $log(Y)$ and $X$ and noting from above that the y-intercept is an estimate of $log(a)$ and the slope is an estimate of $b$. Thus, $b$ is simply the slope and $a$ is estimated with $e^{\text{y-intercept}}$, exactly as with the power function.
 
 ::: {.tip data-latex=""}
 The parameters for an exponentnial function are estimated by fitting a SLR to $log(Y)$-$X$ data and estimating $b$ with the slope and $a$ with the back-transformed intercept, i.e., $a=e^{\text{y-intercept}}$
@@ -138,21 +150,23 @@ Note that with the above process that you will (i) try to find a transformation 
 The trial-and-error method can be completed with `assumptionCheck()` largely as descried in Section \@ref(power-transformations) but noting that both `lambday=` and `lambdax=` may be used for the $Y$ and $X$ variables, respectively.
 
 ## Back-Transformation in SLR
-Back-transformations were discussed in detail in Section \@ref(interpretations-after-transformations) and many of those details pertain here. In SLR, the y-intercept, fitted values, and predicted values are all "point estimates" and can be back-transformed without issue. In other words, you can simply reverse the transformation for these values, not matter what transformation was used, and interpret the value directly on the original scale.
+Back-transformations were discussed in detail in Section \@ref(interpretations-after-transformations) and many of those details pertain here. In SLR, the y-intercept, fitted values, and predicted values are all "point estimates" and can be back-transformed from any transformation without issue. In other words, you can simply reverse the transformation for these values, no matter what transformation was used, and interpret the value directly on the original scale.
 
-The slope, however, is a "difference" in means and can only be back-transformed if a log transformation was used, as discussed in Section \@ref(interpretations-after-transformations). A slope back-transformed from the log scale (for the response variable) has a specific mean but the exact wording of that meaning depends on whether the eplanatory variable was log-transformed or not.
+The slope, however, is a "difference" in means and can only be back-transformed if a log transformation was used, as discussed in Section \@ref(interpretations-after-transformations). A slope back-transformed from the log scale (for the response variable) has a specific meaning but the exact wording of that meaning depends on whether the explanatory variable was log-transformed or not.
 
 We begin by addressing the slope back-transformed from the log-scale for the situation where the explanatory variable was NOT log-transformed. First, note that the the slope ($\beta$) on the log-transformed scale describes how the mean log of $Y$ changes for a one unit change in $X$; i.e., 
 
 $$
 \begin{split}
 log\left(\mu_{Y|X+1}\right)-log\left(\mu_{Y|X}\right) &= \left[\alpha+\beta (X+1)\right] - \left[\alpha+\beta X\right] \\
-&= \left[\alpha+\beta X\right]+\beta - \left[\alpha+\beta X\right] \\
-&= \beta
+\vdots \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; &= \left[\alpha+\beta X\right]+\beta - \left[\alpha+\beta X\right] \\
+log\left(\mu_{Y|X+1}\right)-log\left(\mu_{Y|X}\right) &= \beta
 \end{split}
 $$
 
 Thus, $log(Y)$ changes by **adding** $\beta$ as $X$ increases by 1 unit. In other words, $\beta$ is a difference in two means (the mean of $log(Y)$ at $X$s that are 1 unit apart). For example, in Figure \@ref(fig:BtransSlope1)-Left, the slope on the log-transformed scale indicates that for a one unit increase in $X$ that the predicted value of $log(Y)$ increases by adding 0.25 units.
+
+&nbsp;
 
 ```{r BtransSlope1, echo=FALSE, fig.show="hold", fig.cap="Demonstration of the additive nature of the slope on the log-scale (Left) and multiplicative nature of the back-transformed slope on the original scale (Right)."}
 a <- 1; b <- 1/4
@@ -168,65 +182,81 @@ trans1 <- ggplot(data=tmp,mapping=aes(x=x,y=logy)) +
   scale_x_continuous(name="Explanatory Variable",breaks=pts$x) +
   scale_y_continuous(name="log Response Variable",breaks=pts$logy) +
   theme_NCStats() +
-  theme(aspect.ratio=1,panel.grid.major=element_line(color="gray90",linetype="dashed")) +
-  geom_point(data=pts,mapping=aes(x=x,y=logy),pch=21,color="black",bg="lightgray") +
+  theme(aspect.ratio=1,panel.grid.major=element_line(color="gray90",
+                                                     linetype="dashed")) +
   ## First example
   geom_segment(x=pts$x[1],xend=pts$x[2],y=pts$logy[1],yend=pts$logy[1],
                color="red") +
   geom_segment(x=pts$x[2],xend=pts$x[2],y=pts$logy[1],yend=pts$logy[2],
                color="red") +
-  geom_text(x=mean(pts$x[1:2]),y=pts$logy[1],label="1",vjust=1.25,size=lbl_text_size) +
+  geom_text(x=mean(pts$x[1:2]),y=pts$logy[1],label="1",
+            vjust=1.25,size=lbl_text_size,color=lbl_clr) +
   geom_text(x=pts$x[2],y=mean(pts$logy[1:2]),
-            label=expression(beta==0.25),parse=TRUE,hjust=-0.25,size=lbl_text_size) +
+            label=expression(beta==0.25),parse=TRUE,
+            hjust=-0.25,size=lbl_text_size,color=lbl_clr) +
   ## second example
   geom_segment(x=pts$x[3],xend=pts$x[4],y=pts$logy[3],yend=pts$logy[3],
                color="red") +
   geom_segment(x=pts$x[4],xend=pts$x[4],y=pts$logy[3],yend=pts$logy[4],
                color="red") +
-  geom_text(x=mean(pts$x[3:4]),y=pts$logy[3],label="1",vjust=1.25,size=lbl_text_size) +
+  geom_text(x=mean(pts$x[3:4]),y=pts$logy[3],label="1",
+            vjust=1.25,size=lbl_text_size,color=lbl_clr) +
   geom_text(x=7,y=mean(pts$logy[3:4]),
-            label=expression(beta==0.25),parse=TRUE,hjust=1.1,size=lbl_text_size) +
+            label=expression(beta==0.25),parse=TRUE,
+            hjust=1.1,size=lbl_text_size,color=lbl_clr) +
   annotate(geom="segment",x=7,xend=9,
            y=mean(pts$logy[3:4]),yend=mean(pts$logy[3:4]),
-           arrow=ARROW)
+           arrow=ARROW,color=lbl_clr) +
+  ## put points on last
+  geom_point(data=pts,mapping=aes(x=x,y=logy),
+             pch=21,color="black",bg="lightgray")
 
 btrans1 <- ggplot(data=tmp,mapping=aes(x=x,y=y)) +
   geom_path(size=1) +
   scale_x_continuous(name="Explanatory Variable",breaks=pts$x) +
   scale_y_continuous(name="Response Variable",breaks=round(pts$y,2)) +
   theme_NCStats() +
-  theme(aspect.ratio=1,panel.grid.major=element_line(color="gray90",linetype="dashed")) +
-  geom_point(data=pts,mapping=aes(x=x,y=y),pch=21,color="black",bg="lightgray") +
+  theme(aspect.ratio=1,panel.grid.major=element_line(color="gray90",
+                                                     linetype="dashed")) +
   ## First example
   geom_segment(x=pts$x[1],xend=pts$x[2],y=pts$y[1],yend=pts$y[1],
                color="red") +
   geom_segment(x=pts$x[2],xend=pts$x[2],y=pts$y[1],yend=pts$y[2],
                color="red") +
-  geom_text(x=mean(pts$x[1:2]),y=pts$y[1],label="1",vjust=1.25,size=lbl_text_size) +
-  geom_text(x=pts$x[2],y=mean(pts$y[1:2],size=lbl_text_size),
-            label=expression(e^{beta}==1.284),parse=TRUE,hjust=-0.25) +
+  geom_text(x=mean(pts$x[1:2]),y=pts$y[1],label="1",
+            vjust=1.25,size=lbl_text_size,color=lbl_clr) +
+  geom_text(x=pts$x[2],y=mean(pts$y[1:2]),
+            label=expression(e^{beta}==1.284),parse=TRUE,
+            size=lbl_text_size,color=lbl_clr,hjust=-0.25) +
   ## second example
   geom_segment(x=pts$x[3],xend=pts$x[4],y=pts$y[3],yend=pts$y[3],
                color="red") +
   geom_segment(x=pts$x[4],xend=pts$x[4],y=pts$y[3],yend=pts$y[4],
                color="red") +
-  geom_text(x=mean(pts$x[3:4]),y=pts$y[3],label="1",vjust=1.25,size=lbl_text_size) +
+  geom_text(x=mean(pts$x[3:4]),y=pts$y[3],label="1",
+            vjust=1.25,size=lbl_text_size,color=lbl_clr) +
   geom_text(x=7,y=mean(pts$y[3:4]),
-            label=expression(e^{beta}==1.284),parse=TRUE,hjust=1.1,size=lbl_text_size) +
+            label=expression(e^{beta}==1.284),parse=TRUE,
+            hjust=1.1,size=lbl_text_size,color=lbl_clr) +
   annotate(geom="segment",x=7,xend=9,
            y=mean(pts$y[3:4]),yend=mean(pts$y[3:4]),
-           arrow=ARROW)
+           arrow=ARROW,color=lbl_clr) +
+  ## put points on last
+  geom_point(data=pts,mapping=aes(x=x,y=y),pch=21,color="black",bg="lightgray")
+
 trans1
 btrans1
 ```
+
+&nbsp;
 
 However, when both sides of the above equation are raised to the power of $e$ (i.e., back-transformed)
 
 $$
 \begin{split}
 e^{\beta} &= e^{log(\mu_{Y|X+1})-log(\mu_{Y|X})} \\
-&= e^{log\left(\frac{\mu_{Y|X+1}}{\mu_{Y|X}}\right)} \\
-&= \frac{\mu_{Y|X+1}}{\mu_{Y|X}}
+\vdots \;\; &= e^{log\left(\frac{\mu_{Y|X+1}}{\mu_{Y|X}}\right)} \\
+e^{\beta} &= \frac{\mu_{Y|X+1}}{\mu_{Y|X}}
 \end{split}
 $$
 
@@ -248,68 +278,78 @@ trans2 <- ggplot(data=tmp,mapping=aes(x=x,y=logy)) +
   scale_x_continuous(name="Explanatory Variable",breaks=pts$x) +
   scale_y_continuous(name="log Response Variable",breaks=pts$logy) +
   theme_NCStats() +
-  theme(aspect.ratio=1,panel.grid.major=element_line(color="gray90",linetype="dashed")) +
-  geom_point(data=pts,mapping=aes(x=x,y=logy),pch=21,color="black",bg="lightgray") +
+  theme(aspect.ratio=1,panel.grid.major=element_line(color="gray90",
+                                                     linetype="dashed")) +
   ## First example
   geom_segment(x=pts$x[1],xend=pts$x[2],y=pts$logy[1],yend=pts$logy[1],
                color="red") +
   geom_segment(x=pts$x[2],xend=pts$x[2],y=pts$logy[1],yend=pts$logy[2],
                color="red") +
-  geom_text(x=mean(pts$x[1:2]),y=pts$logy[1],label="1",vjust=-0.25,size=lbl_text_size) +
+  geom_text(x=mean(pts$x[1:2]),y=pts$logy[1],label="1",
+            vjust=-0.25,size=lbl_text_size,color=lbl_clr) +
   geom_text(x=pts$x[2],y=mean(pts$logy[1:2]),
-            label=expression(beta==-0.25),parse=TRUE,hjust=-0.25,size=lbl_text_size) +
+            label=expression(beta==-0.25),parse=TRUE,
+            hjust=-0.25,size=lbl_text_size,color=lbl_clr) +
   ## second example
   geom_segment(x=pts$x[3],xend=pts$x[4],y=pts$logy[3],yend=pts$logy[3],
                color="red") +
   geom_segment(x=pts$x[4],xend=pts$x[4],y=pts$logy[3],yend=pts$logy[4],
                color="red") +
-  geom_text(x=mean(pts$x[3:4]),y=pts$logy[3],label="1",vjust=-0.25,size=lbl_text_size) +
+  geom_text(x=mean(pts$x[3:4]),y=pts$logy[3],label="1",
+            vjust=-0.25,size=lbl_text_size,color=lbl_clr) +
   geom_text(x=5,y=mean(pts$logy[3:4]),
-            label=expression(beta==-0.25),parse=TRUE,hjust=1.1,size=lbl_text_size) +
+            label=expression(beta==-0.25),parse=TRUE,
+            hjust=1.1,size=lbl_text_size,color=lbl_clr) +
   annotate(geom="segment",x=5,xend=7,
            y=mean(pts$logy[3:4]),yend=mean(pts$logy[3:4]),
-           arrow=ARROW)
+           arrow=ARROW,color=lbl_clr) +
+  geom_point(data=pts,mapping=aes(x=x,y=logy),
+             pch=21,color="black",bg="lightgray")
 
 btrans2 <- ggplot(data=tmp,mapping=aes(x=x,y=y)) +
   geom_path(size=1) +
   scale_x_continuous(name="Explanatory Variable",breaks=pts$x) +
   scale_y_continuous(name="Response Variable",breaks=round(pts$y,2)) +
   theme_NCStats() +
-  theme(aspect.ratio=1,panel.grid.major=element_line(color="gray90",linetype="dashed")) +
-  geom_point(data=pts,mapping=aes(x=x,y=y),pch=21,color="black",bg="lightgray") +
+  theme(aspect.ratio=1,panel.grid.major=element_line(color="gray90",
+                                                     linetype="dashed")) +
   ## First example
   geom_segment(x=pts$x[1],xend=pts$x[2],y=pts$y[1],yend=pts$y[1],
                color="red") +
   geom_segment(x=pts$x[2],xend=pts$x[2],y=pts$y[1],yend=pts$y[2],
                color="red") +
-  geom_text(x=mean(pts$x[1:2]),y=pts$y[1],label="1",vjust=-0.25,size=lbl_text_size) +
+  geom_text(x=mean(pts$x[1:2]),y=pts$y[1],label="1",
+            vjust=-0.25,size=lbl_text_size,color=lbl_clr) +
   geom_text(x=pts$x[2],y=mean(pts$y[1:2],size=lbl_text_size),
-            label=expression(e^{beta}==0.779),parse=TRUE,hjust=-0.25,vjust=0.25) +
+            label=expression(e^{beta}==0.779),parse=TRUE,
+            hjust=-0.25,vjust=0.25,size=lbl_text_size,color=lbl_clr) +
   ## second example
   geom_segment(x=pts$x[3],xend=pts$x[4],y=pts$y[3],yend=pts$y[3],
                color="red") +
   geom_segment(x=pts$x[4],xend=pts$x[4],y=pts$y[3],yend=pts$y[4],
                color="red") +
-  geom_text(x=mean(pts$x[3:4]),y=pts$y[3],label="1",vjust=-0.25,size=lbl_text_size) +
+  geom_text(x=mean(pts$x[3:4]),y=pts$y[3],label="1",
+            vjust=-0.25,size=lbl_text_size,color=lbl_clr) +
   geom_text(x=5,y=mean(pts$y[3:4]),
             label=expression(e^{beta}==0.779),parse=TRUE,
-            hjust=1.1,vjust=0.25,size=lbl_text_size) +
+            hjust=1.1,vjust=0.25,size=lbl_text_size,color=lbl_clr) +
   annotate(geom="segment",x=5,xend=7,
            y=mean(pts$y[3:4]),yend=mean(pts$y[3:4]),
-           arrow=ARROW)
+           arrow=ARROW,color=lbl_clr) +
+  geom_point(data=pts,mapping=aes(x=x,y=y),pch=21,color="black",bg="lightgray")
+
 trans2
 btrans2
 ```
 
 ::: {.tip data-latex=""}
 The slope back-transformed from a log-transformation represents the
-**ratio** of two means separated by one unit of the explanatory variable on the original
-scale when the explanatory variable was **not** transformed.
+**ratio** of two means separated by one unit of the explanatory variable on the original scale when the explanatory variable was **not** transformed.
 :::
 
-If the explanatory variable was also log-transformed then the interpretation of the back-transformed slope is more complicated. In this case, we must also "back-transform" the "one unit increase" in $log(X)$ when considering the the back-transformed slope on the original scale. Thus, the slope backtransformed from the case where both the response and explanatory variable were log-transformed is the **multiplicative** change in $Y$ when $X$ is multiplied by $e^{\beta}$=2.718.
+If the explanatory variable was also log-transformed then the interpretation of the back-transformed slope is more complicated. In this case, we must also "back-transform" the "one unit increase" in $log(X)$ when considering the back-transformed slope on the original scale. Thus, the slope back-transformed from the case where both the response and explanatory variable were log-transformed is the **multiplicative** change in $Y$ when $X$ is multiplied by $e^{\beta}$=2.718.
 
-For exapmle, in Figure \@ref(fig:BtransSlope3) the slope on the log-log-transformed scale is 0.25. Thus, $log(Y)$ increases by adding 0.25 when $log(X)$ increases by 1 unit. However, on the original scale $Y$ increases by a multiple of $e^{0.25}$=1.284 each time that $X$ increases by a multiple of $e^{1}$=2.718. For example, when $X$ increases from 7.39 to 20.98 (7.39&times;2.718) then $Y$ increases from 1.65 to 2.12 (=1.65&times;1.284). As another example, when $X$ increases from 54.60 to 148.41 (54.60&times;2.718) then $Y$ increases from 2.72 to 3.49 (=2.72&times;1.284).
+For example, in Figure \@ref(fig:BtransSlope3) the slope on the log-log-transformed scale is 0.25. Thus, $log(Y)$ increases by adding 0.25 when $log(X)$ increases by 1 unit. However, on the original scale $Y$ increases by a multiple of $e^{0.25}$=1.284 each time that $X$ increases by a multiple of $e^{1}$=2.718. For example, when $X$ increases from 7.39 to 20.98 (7.39&times;2.718) then $Y$ increases from 1.65 to 2.12 (=1.65&times;1.284). As another example, when $X$ increases from 54.60 to 148.41 (54.60&times;2.718) then $Y$ increases from 2.72 to 3.49 (=2.72&times;1.284).
 
 ```{r BtransSlope3, echo=FALSE, fig.show="hold", fig.cap="Demonstration of the additive nature of the slope on the log-log-scale (Left) and multiplicative nature of the back-transformed slope (and multiplicative change along the x-axis) on the original scale (Right)."}
 a <- 1; b <- 1/4
@@ -327,61 +367,70 @@ trans3 <- ggplot(data=tmp,mapping=aes(x=logx,y=logy)) +
   scale_x_continuous(name="log Explanatory Variable",breaks=pts$logx) +
   scale_y_continuous(name="log Response Variable",breaks=pts$logy) +
   theme_NCStats() +
-  theme(aspect.ratio=1,panel.grid.major=element_line(color="gray90",linetype="dashed")) +
-  geom_point(data=pts,mapping=aes(x=logx,y=logy),pch=21,color="black",bg="lightgray") +
+  theme(aspect.ratio=1,panel.grid.major=element_line(color="gray90",
+                                                     linetype="dashed")) +
   ## First example
   geom_segment(x=pts$logx[1],xend=pts$logx[2],y=pts$logy[1],yend=pts$logy[1],
                color="red") +
   geom_segment(x=pts$logx[2],xend=pts$logx[2],y=pts$logy[1],yend=pts$logy[2],
                color="red") +
-  geom_text(x=mean(pts$logx[1:2]),y=pts$logy[1],label="1",vjust=1.25,size=lbl_text_size) +
+  geom_text(x=mean(pts$logx[1:2]),y=pts$logy[1],label="1",
+            vjust=1.25,size=lbl_text_size,color=lbl_clr) +
   geom_text(x=pts$logx[2],y=mean(pts$logy[1:2]),
-            label=expression(beta==0.25),parse=TRUE,hjust=-0.25,size=lbl_text_size) +
+            label=expression(beta==0.25),parse=TRUE,
+            hjust=-0.25,size=lbl_text_size,color=lbl_clr) +
   ## Second example
   geom_segment(x=pts$logx[3],xend=pts$logx[4],y=pts$logy[3],yend=pts$logy[3],
                color="red") +
   geom_segment(x=pts$logx[4],xend=pts$logx[4],y=pts$logy[3],yend=pts$logy[4],
                color="red") +
-  geom_text(x=mean(pts$logx[3:4]),y=pts$logy[3],label="1",vjust=1.25,size=lbl_text_size) +
+  geom_text(x=mean(pts$logx[3:4]),y=pts$logy[3],label="1",
+            vjust=1.25,size=lbl_text_size,color=lbl_clr) +
   geom_text(x=3,y=mean(pts$logy[3:4]),
-            label=expression(beta==0.25),parse=TRUE,hjust=1,size=lbl_text_size) +
+            label=expression(beta==0.25),parse=TRUE,
+            hjust=1,size=lbl_text_size,color=lbl_clr) +
   annotate(geom="segment",x=3,xend=5,
            y=mean(pts$logy[3:4]),yend=mean(pts$logy[3:4]),
-           arrow=ARROW)
+           arrow=ARROW,color=lbl_clr) +
+  geom_point(data=pts,mapping=aes(x=logx,y=logy),
+             pch=21,color="black",bg="lightgray")
 
 btrans3 <- ggplot(data=tmp,mapping=aes(x=x,y=y)) +
   geom_path(size=1) +
   scale_x_continuous(name="Explanatory Variable",breaks=round(pts$x,2)) +
   scale_y_continuous(name="Response Variable",breaks=round(pts$y,2)) +
   theme_NCStats() +
-  theme(aspect.ratio=1,panel.grid.major=element_line(color="gray90",linetype="dashed")) +
-  geom_point(data=pts,mapping=aes(x=x,y=y),pch=21,color="black",bg="lightgray") +
+  theme(aspect.ratio=1,panel.grid.major=element_line(color="gray90",
+                                                     linetype="dashed")) +
   ## First example
   geom_segment(x=pts$x[1],xend=pts$x[2],y=pts$y[1],yend=pts$y[1],
                color="red") +
   geom_segment(x=pts$x[2],xend=pts$x[2],y=pts$y[1],yend=pts$y[2],
                color="red") +
-  geom_text(x=125,y=1.1,size=lbl_text_size,
-            label=expression(e^{1}==2.718),parse=TRUE) +
+  geom_text(x=125,y=1.1,label=expression(e^{1}==2.718),parse=TRUE,
+            size=lbl_text_size,color=lbl_clr) +
   annotate(geom="segment",x=90,xend=mean(pts$x[1:2]),
            y=1.1,yend=mean(pts$y[1]),
-           arrow=ARROW) +
-  geom_text(x=pts$x[2],y=mean(pts$y[1:2],size=lbl_text_size),
-            label=expression(e^{beta}==1.284),parse=TRUE,hjust=-0.1) +
+           arrow=ARROW,color=lbl_clr) +
+  geom_text(x=pts$x[2],y=mean(pts$y[1:2]),
+            label=expression(e^{beta}==1.284),parse=TRUE,
+            hjust=-0.1,size=lbl_text_size,color=lbl_clr) +
   ## Second example
   geom_segment(x=pts$x[3],xend=pts$x[4],y=pts$y[3],yend=pts$y[3],
                color="red") +
   geom_segment(x=pts$x[4],xend=pts$x[4],y=pts$y[3],yend=pts$y[4],
                color="red") +
-  geom_text(x=90,y=pts$y[4],size=lbl_text_size,
-            label=expression(e^{beta}==1.284),parse=TRUE,hjust=1.1) +
+  geom_text(x=90,y=pts$y[4],label=expression(e^{beta}==1.284),parse=TRUE,
+            hjust=1.1,size=lbl_text_size,color=lbl_clr) +
   annotate(geom="segment",x=90,xend=pts$x[4],
            y=pts$y[4],yend=mean(pts$y[3:4]),
-           arrow=ARROW) +
+           arrow=ARROW,color=lbl_clr) +
   annotate(geom="segment",x=120,xend=mean(pts$x[3:4]),
            y=1.2,yend=pts$y[3],
-           arrow=ARROW) +
-  theme(axis.text.x=element_text(angle=90,vjust=0.5))
+           arrow=ARROW,color=lbl_clr) +
+  theme(axis.text.x=element_text(angle=90,vjust=0.5)) +
+  geom_point(data=pts,mapping=aes(x=x,y=y),pch=21,color="black",bg="lightgray")
+
 trans3
 btrans3
 ```
@@ -403,9 +452,12 @@ Do **NOT** back-transform slopes if other than a log transformation was used.
 The following are some quick examples of transforming data, fitting new models, and interpretations of those model results. These are not full examples in the sense that all assumptions are thoroughly met, etc. Full examples will be demonstrated in Module \@ref(SLRSummary).
 
 ### Petrels
-[Croxall (1982)](http://www.jstor.org/stable/4318?seq=1#page_scan_tab_contents) examined the weight loss of adult petrels during periods of egg incubation. He examined 13 species but some had measurements for both sexes such that 19 measurements were recorded. For each measurement the mean initial weight (g) and mean weight lost (g/g/d) were recorded. The intent of this part of the study was to determine if the mean initial weight significantly explained variability in mean weight lost for the petrel species.
+<img src="zimgs/PetrelNest.jpg" alt="Decoration" class="img-right">
+[Croxall (1982)](http://www.jstor.org/stable/4318?seq=1#page_scan_tab_contents) examined the weight loss of adult [petrels](https://en.wikipedia.org/wiki/Petrel) during periods of egg incubation. He examined 13 species but some had measurements for both sexes such that 19 measurements were recorded. For each measurement the mean initial weight (g) and mean weight lost (g/g/d) were recorded. The intent of this part of the study was to determine if the mean initial weight significantly explained variability in mean weight lost for the petrel species.
 
 The data are loaded below, the initial SLR is fit with weight loss as the response variable, and the assumptions are quickly checked. It is clear that the form of the relationship is not linear. The other assumptions are also not met, but these are likely affected by the non-linearity.
+
+&nbsp;
 
 ```{r fig.width=7}
 petrels <- read.csv("http://derekogle.com/Book207/data/Petrels.csv")
@@ -414,7 +466,11 @@ lm.ptrls1 <- lm(weight.loss~weight,data=petrels)
 assumptionCheck(lm.ptrls1)
 ```
 
+&nbsp;
+
 Through a process of trial-and-error, it appears that log-transforming both weight loss and initial weight results in the assumptions being met. Thus, log-transformations for both variables were added to the data.frame and were used in a second linear model.
+
+&nbsp;
 
 ```{r fig.width=7}
 assumptionCheck(lm.ptrls1,lambday=0,lambdax=0)
@@ -435,6 +491,8 @@ p4000 <- predict(lm.ptrls2,newdata=nd,interval="predict")
 btp4000 <- exp(p4000)
 ```
 
+&nbsp;
+
 There is a significant relationship between log mean weight loss and log mean initial weight (`r kPvalue(aov.ptrls2$"Pr(>F)"[1],latex=FALSE)`). It appears that `r formatC(100*rsq.ptrls2,format="f",digits=1)`% of the variability in log mean weight loss is explained by knowing the log mean initial weight of the birds.
 
 ```{r}
@@ -447,7 +505,9 @@ ggplot(data=petrels,mapping=aes(x=logwt,y=logwtloss)) +
   geom_smooth(method="lm")
 ```
 
-The slope indicates that as the log mean initial weight increases by 1 then the log mean weight loss will decrease by between `r formatC(-1*cf.ptrls2["logwt","97.5 %"],format="f",digits=3)` and `r formatC(-1*cf.ptrls2["logwt","2.5 %"],format="f",digits=3)`. Because both the response and the explanatory variable were log-transformed, the back-transformed slope means that as the mean initial weight increases by a multiple of 2.718 then the mean weight loss is multiplied by between `r formatC(btcf.ptrls2["logwt","2.5 %"],format="f",digits=3)` and `r formatC(btcf.ptrls2["logwt","97.5 %"],format="f",digits=3)`. In other words, as the mean initial weight increases by a multiple of 2.718 then the mean weight loss decreases by between `r formatC(100*(1-btcf.ptrls2["logwt","97.5 %"]),format="f",digits=1)` and `r formatC(100*(1-btcf.ptrls2["logwt","2.5 %"]),format="f",digits=1)`%.
+&nbsp;
+
+The slope indicates that as the log mean initial weight increases by 1 then the log mean weight loss will decrease by between `r formatC(-1*cf.ptrls2["logwt","97.5 %"],format="f",digits=3)` and `r formatC(-1*cf.ptrls2["logwt","2.5 %"],format="f",digits=3)`. Because both the response and the explanatory variable were log-transformed, the back-transformed slope means that as the mean initial weight increases by a multiple of 2.718 then the mean weight loss is multiplied by between `r formatC(btcf.ptrls2["logwt","2.5 %"],format="f",digits=3)` and `r formatC(btcf.ptrls2["logwt","97.5 %"],format="f",digits=3)`. In other words, as the mean initial weight increases by a multiple of 2.718 then the mean weight loss decreases by a multiple between `r formatC(btcf.ptrls2["logwt","2.5 %"],format="f",digits=3)` and `r formatC(btcf.ptrls2["logwt","97.5 %"],format="f",digits=3)`.
 
 ```{r}
 ( cfs <- cbind(Ests=coef(lm.ptrls2),confint(lm.ptrls2)) )  ## log-log scale 
@@ -463,7 +523,10 @@ nd <- data.frame(logwt=log(iw))
 exp(p4000)  # back-transformed to original scale
 ```
 
+&nbsp;
+
 ### BAC and Crashing
+<img src="zimgs/SobrietySign.jpg" alt="Decoration" class="img-right">
 A study was published in 2007 that investigated the relative risk of being in a crash (RRC) relative to a person's blood alcohol content (BAC). The researchers examined data from 2871 crashes and derived a measure of the relative risk of being in a car accident. The relative risk was scaled so that individuals with a blood alcohol content of 0 had a relative risk of 1. Thus, all other relative risk values are in comparison to a driver with a BAC of 0. For example, a relative risk of 3 would mean that persons with that BAC level are three times more likely to be in a car accident than a person with a BAC of 0. The researchers wanted to explain how the relative risk of a crash was related to BAC level. [*Note that BAC was multiplied by 100 so that a one unit change would be within the range of the data and, thus, would be meaningful.*]
 
 The data are loaded below, the initial SLR is fit with relative risk of a crash as the response variable, and the assumptions are quickly checked. It is clear that the form of the relationship is not linear. The scatterplot also clearly shows that a linear model is not appropriate for these data. The other assumptions are also not met, but these are likely affected by the non-linearity.
@@ -481,6 +544,8 @@ ggplot(data=cr,mapping=aes(x=BAC,y=RRC)) +
   theme_NCStats() +  
   geom_smooth(method="lm")
 ```
+
+&nbsp;
 
 Through a process of trial-and-error, it appears that log-transforming just the relative risk of a crash results in the assumptions being met. A second linear model was fit with log relative risk of a crash.
 
@@ -501,6 +566,8 @@ p10 <- predict(lm.cr2,newdata=nd,interval="predict")
 btp10 <- exp(p10)
 ```
 
+&nbsp;
+
 There is a significant relationship between log relative risk of a crash and blood alcohol content (`r kPvalue(aov.cr2$"Pr(>F)"[1],latex=FALSE)`). It appears that `r formatC(100*rsq.cr2,format="f",digits=1)`% of the variability in log relative risk of a crash is explained by knowing the blood alcohol content.
 
 ```{r}
@@ -513,12 +580,16 @@ ggplot(data=cr,mapping=aes(x=BAC,y=logRRC)) +
   geom_smooth(method="lm")
 ```
 
+&nbsp;
+
 The slope indicates that as the blood alcohol content increases by 0.01 (because the BAC was multiplied by 100) then the log relative risk of a crash will increase by between `r formatC(cf.cr2["BAC","2.5 %"],format="f",digits=3)` and `r formatC(cf.cr2["BAC","97.5 %"],format="f",digits=3)`. Because only the response variable was log-transformed, the back-transformed slope means that as the blood alcohol content increases by 0.01 then the relative risk of an accident increases by a multiple of between `r formatC(btcf.cr2["BAC","2.5 %"],format="f",digits=3)` and `r formatC(btcf.cr2["BAC","97.5 %"],format="f",digits=3)`. So, as the blood alcohol content increases by 0.01 then the relative risk of an accident increases by between `r formatC(100*(btcf.cr2["BAC","2.5 %"]-1),format="f",digits=1)` and `r formatC(100*(btcf.cr2["BAC","97.5 %"]-1),format="f",digits=1)`%.
 
 ```{r}
 ( cfs <- cbind(Est=coef(lm.cr2),confint(lm.cr2)))
 exp(cfs)
 ```
+
+&nbsp;
 
 The predicted mean log relative risk of a crash for all drivers with a blood alcohol content of 0.10 (so 10 for the BAC variable) is between `r formatC(p10[1,"lwr"],format="f",digits=3)` and `r formatC(p10[1,"upr"],format="f",digits=3)`. However, back-transformed to the original scale, the predicted relative risk of a crash for all drivers with a blood alcohol content of 0.10 is between `r formatC(btp10[1,"lwr"],format="f",digits=2)` and `r formatC(btp10[1,"upr"],format="f",digits=2)`.
 
@@ -527,3 +598,5 @@ nd <- data.frame(BAC=10)
 ( p10 <- predict(lm.cr2,newdata=nd,interval="predict") )
 exp(p10)
 ```
+
+&nbsp;
