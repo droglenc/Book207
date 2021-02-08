@@ -6,15 +6,15 @@ Consider the situation introduced in Module \@ref(IVRVariables) where researcher
 
 The *ultimate full model* for this situation is
 
+&nbsp;
+
 $$
 \mu_{MIREX|WEIGHT,COHO} = \alpha+\beta WEIGHT+\delta_{1}COHO+\gamma_{1}WEIGHT:COHO
 $$
 
-This is called the **ultimate full model** because the model cannot get more complicated that this for this situation as all variables of interest are included in the model. In subsequent modules, simpler models with fewer variables (and parameters) than this one will also be considered.
+&nbsp;
 
-::: {.tip data-latex=""}
-The covariate, indicator, and interaction variables are entered in that order into the ultimate full model of an IVR to allow for consistent and simple interpretations.
-:::
+This is called the **ultimate full model** because the model cannot get more complicated that this for this situation as all variables of interest are included in the model. In subsequent modules, simpler models with fewer variables (and parameters) than this one will also be considered.
 
 Specific parameters are used in the ultimate full model of an IVR as shown above. Specifically, they are as follows:
 
@@ -25,8 +25,14 @@ Specific parameters are used in the ultimate full model of an IVR as shown above
 
 Each of these parameters has a specific meaning or interpretation that will be better understood by reducing the ultimate full model to its constituent sub-models.
 
+::: {.tip data-latex=""}
+The covariate, indicator, and interaction variables are entered in that order into the ultimate full model of an IVR to allow for consistent and simple interpretations.
+:::
+
 ## Sub-Models
 The ultimate full model in IVR contains sub-models that are SLR models for each group represented by the indicator variables. The sub-models can be revealed by substituting appropriate values for the indicator variables in the ultimate full model. For example $COHO=0$ for the "non-Coho" group (i.e., Chinook). Thus, to find the sub-model for Chinook Salmon, plug 0 for $COHO$ in the ultimate full model and simplify.
+
+&nbsp;
 
 $$
 \begin{split}
@@ -37,7 +43,11 @@ $$
 \end{split}
 $$
 
+&nbsp;
+
 Similarly, the sub-model for Coho is found by plugging 1 for $COHO$ in the ultimate full model and simplifying.
+
+&nbsp;
 
 $$
 \begin{split}
@@ -48,10 +58,7 @@ $$
   &=(\alpha+\delta_{1})+(\beta+\gamma_{1})WEIGHT \\
 \end{split}
 $$
-
-::: {.tip data-latex=""}
-Sub-models are found by appropriately substituting "0"s and "1"s for the indicator variable(s) in the IVR ultimate full model and simplifying.
-:::
+&nbsp;
 
 These sub-models can be appended to the tables from Module \@ref(IVRVariables) to provide a succinct summary.
 
@@ -60,19 +67,21 @@ data.frame(Species=c("Chinook (Reference)","Coho"),COHO=c(0,1),
            "Sub-Model ($\\mu_{MIREX|WEIGHT}=$)"=c("$\\alpha+\\beta WEIGHT$",
                       "$(\\alpha+\\delta_{1})+(\\beta+\\gamma_{1})WEIGHT$"),
            check.names=FALSE) %>%
-  knitr::kable(booktabs=TRUE,row.names=FALSE) %>%
-  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  knitr::kable(booktabs=TRUE,row.names=FALSE,align="lcl") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1,width="1.8in") %>%
+  kableExtra::column_spec(2,width="0.9in") %>%
+  kableExtra::column_spec(3,width="2.5in") %>%
+  kableExtra::row_spec(0,bold=TRUE)
 ```
 
 &nbsp;
 
 Examination of the sub-models for each group shows that each sub-model is itself an SLR model. The sub-model for Chinook Salmon is an SLR with a slope of $\beta$ and an intercept of $\alpha$. In contrast, the sub-model for Coho Salmon is an SLR with a slope of $\beta+\gamma_{1}$ and an intercept of $\alpha+\delta_{1}$.
 
-::: {.tip data-latex=""}
-Each sub-model is an SLR for one of the groups represented in the IVR ultimate full model.
-:::
-
 The process is similar when there are more than two groups, except that 0s and 1s must be substituted for multiple indicator variables. For example, the ultimate full model for the situation when three years (1977, 1982, and 1986) were considered is
+
+&nbsp;
 
 $$
 \begin{split}
@@ -81,7 +90,11 @@ $$
 \end{split}
 $$
 
+&nbsp;
+
 To find the sub-model for 1982, for example, requires plugging 1 in for $YEAR1982$ and 0 for $YEAR1986$ and simplifying
+
+&nbsp;
 
 $$
 \begin{split}
@@ -91,6 +104,8 @@ $$
 \end{split}
 $$
 
+&nbsp;
+
 A similar process can be used to find the sub-models for 1977 and 1986.^[You should do this to make sure that you understand how to properly substitute in the 0s and 1s.] The sub-models are then summarized in the following table.
 
 ```{r echo=FALSE}
@@ -99,13 +114,25 @@ data.frame(Year=c("1977 (Reference)","1982","1986"),YEAR1982=c(0,1,0),YEAR1986=c
                       "$(\\alpha+\\delta_{1})+(\\beta+\\gamma_{1})WEIGHT$",
                       "$(\\alpha+\\delta_{2})+(\\beta+\\gamma_{2})WEIGHT$"),
            check.names=FALSE) %>%
-  knitr::kable(booktabs=TRUE,row.names=FALSE) %>%
-  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  knitr::kable(booktabs=TRUE,row.names=FALSE,align="lccl") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1,width="1.7in") %>%
+  kableExtra::column_spec(2:3,width="1.1in") %>%
+  kableExtra::column_spec(4,width="2.5in") %>%
+  kableExtra::row_spec(0,bold=TRUE)
 ```
 
 &nbsp;
 
 Once again, each sub-model is itself an SLR model. For example, the slopes are $\beta$, $\beta+\gamma_{1}$, and $\beta+\gamma_{2}$ for the years 1977, 1982, and 1986, respectively.
+
+::: {.tip data-latex=""}
+Sub-models are found by appropriately substituting "0"s and "1"s for the indicator variable(s) in the IVR ultimate full model and simplifying.
+:::
+
+::: {.tip data-latex=""}
+Each sub-model is an SLR for one of the groups represented in the IVR ultimate full model.
+:::
 
 ::: {.tip data-latex=""}
 The sub-model for the reference group is always $\mu_{Y|X}=\alpha+\beta X$. The slopes for the other groups always have a $\gamma_{i}$ added to $\beta$ and the intercepts always have a $\delta_{i}$ added to $\alpha$.
@@ -116,6 +143,8 @@ Careful examination of the sub-models in the tables above help illustrate what t
 
 However, what are $\delta_{i}$ and $\gamma_{i}$? To answer this, consider the following algebra for the difference in intercepts between the $i$th group and the reference group.
 
+&nbsp;
+
 $$
 \begin{split}
 i\text{th Group's Intercept} - \text{Reference Group's Intercept} &= (\alpha+\delta_{i}) - \alpha \\
@@ -123,7 +152,11 @@ i\text{th Group's Intercept} - \text{Reference Group's Intercept} &= (\alpha+\de
 \end{split}
 $$
 
+&nbsp;
+
 Thus, $\delta_{i}$ is the additive difference between intercepts for the $i$th and reference groups. Similar algebra shows that $\gamma_{i}$ is the additive difference in slopes between the $i$th group and the reference group.
+
+&nbsp;
 
 $$
 \begin{split}
@@ -132,12 +165,16 @@ i\text{th Group's Slope} - \text{Reference Group's Slope} &= (\beta+\gamma_{i}) 
 \end{split}
 $$
 
+&nbsp;
+
 In summary, the parameters in the ultimate full model have the following interpretations (see Figure \@ref(fig:IVRCoefficients)).
 
 * $\alpha$: y-intercept term for the reference group.
 * $\beta$: slope for the reference group.
 * $\delta_{i}$: difference in y-intercepts between the $i$th group and the reference group.
 * $\gamma_{i}$: difference in slopes between the $i$th group and the reference group.
+
+&nbsp;
 
 ```{r IVRCoefficients, echo=FALSE, warning=FALSE, fig.cap="Representation of two sub-models fit with the ultimate full model in an IVR with the geometric meaning of each parameter. The red line is the sub-model for the reference group. Note that $\\alpha$=2, $\\beta$=0.4, $\\delta_{1}$=-1.6, and $\\gamma_{1}$=0.45 in this example."}
 a <- 2
@@ -214,6 +251,8 @@ The ultimate full model of an IVR can represent four situations between two grou
 * *Same Intercept*: Separate non-parallel lines with the same y-intercept are needed for both groups (i.e., $\delta_{1}=0$ and $\gamma_{1}\neq0$)
 * Completely Separate Lines*: Two completely separate lines are needed for both groups (i.e., $\delta_{1}\neq0$ and $\gamma_{1}\neq0$).
 
+&nbsp;
+
 ```{r IVRSituations, echo=FALSE, fig.width=5, fig.height=5, fig.cap="Hypothetical depictions of four situations that can occur for the relationship between a response variable and a covariate for two groups."}
 a <- 1
 b <- 0.5
@@ -239,8 +278,10 @@ ggplot(data=IVR4Sits,mapping=aes(x=x,y=y,color=group)) +
         legend.position="none")
 ```
 
+&nbsp;
+
 ## Ultimate Full Model in R
-Fitting ultimate full model in R is straightforward because it is essentially the same as fitting a Two-Way ANOVA with `lm()` (see \@ref(model-fitting-in-r)) and R automatically creates the indicator variables behind the scenes. The ultimate full model for an IVR is fit in `lm()` with a formula of the form `response~covariate+factor+covariated:factor` (*in that order to match what we did above*).^[Shorthand for fitting this model is `response~covariate*factor`.]
+Fitting ultimate full model in R is straightforward because it is essentially the same as fitting a Two-Way ANOVA with `lm()` (see \@ref(model-fitting-in-r)) and R automatically creates the indicator variables behind the scenes. The ultimate full model for an IVR is fit in `lm()` with a formula of the form `response~covariate+factor+covariate:factor` (*in that order to match what we did above*).^[Shorthand for fitting this model is `response~covariate*factor`.]
 
 ```{r}
 ivr1 <- lm(mirex~weight+species+weight:species,data=Mirex)
@@ -271,6 +312,8 @@ ggplot(data=Mirex,mapping=aes(x=weight,y=mirex,color=species)) +
   geom_smooth(method="lm",se=FALSE)
 ```
 
+&nbsp;
+
 From this plot, note that the intercept for Coho is less than the intercept for Chinook (as you would expect because $\hat{\delta}_{1}$=`r formatC(cf.m1[3,"Ests"],format="f",digits=3)`) and the slope for Coho is greater than (i.e., steeper) than that for Chinook (as you would expect because $\hat{\gamma}_{1}$=`r formatC(cf.m1[4,"Ests"],format="f",digits=3)`)
 
 #### Predictions {-}
@@ -296,3 +339,5 @@ The results may be easier to read if you bind together the new data.frame and th
 nd <- data.frame(weight=c(5,3),species=c("chinook","coho"))
 cbind(nd,predict(ivr1,newdata=nd,interval="prediction"))
 ```
+
+&nbsp;

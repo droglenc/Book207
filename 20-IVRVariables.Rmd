@@ -20,14 +20,17 @@ In this course, we will only consider one factor, though the methods described h
 &nbsp;
 
 #### Example Data {-}
+<img src="zimgs/Salmon.jpg" alt="Decoration" class="img-right">
 Throughout this and the next few modules, we will refer to a study by [Makarewicz *et al.* (2003)](https://pubmed.ncbi.nlm.nih.gov/12731833/), who examined the relationship between the concentration of mirex in the tissue and the weight of salmon.^[Mirex is a chlorinated hydrocarbon that was commercialized as an insecticide. Use of mirex was banned in 1976 because of its impact on the environment.] They collected these data on Coho Salmon (*Oncorhynchus kisutch*) and Chinook Salmon (*Oncorhynchus tshawytscha*) in six different years. They were interested in determining if the relationship between mirex and weight differed between the two species or if it differed among years (Table \@ref(tab:MirexData)).
 
 ```{r MirexData, echo=FALSE}
 data(Mirex)
 peek(Mirex,n=8) %>%
-  knitr::kable(booktabs=TRUE,row.names=FALSE,
+  knitr::kable(booktabs=TRUE,row.names=FALSE,align="rrrr",
                caption="Subset of the Mirex in salmon data.") %>%
-  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1:4,width="0.9in") %>%
+  kableExtra::row_spec(0,bold=TRUE)
 ```
 
 &nbsp;
@@ -60,15 +63,7 @@ $$
 
 Importantly, both of these indicator variables would not be used as each one exhausts the possibilities. For example if *COHO*=1 you know you have a Coho Salmon and if *COHO*=0 you know that you have a Chinook Salmon.
 
-::: {.tip data-latex=""}
-Indicator variables will be coded as 0 for individuals that do NOT have the characteristic of interest and 1 for individuals that do have the characteristic of interest.
-:::
-
 An indicator variable should be named after the characteristic denoted by a 1. This will provide consistency so that it will be easy to remember what the indicator variable represents and how the coding was made. The two examples above followed this rule -- the *COHO* indicator variable was a 1 when the fish was a Coho Salmon and the *CHINOOK* indicator variable was a 1 when the fish was a Chinook Salmon.
-
-::: {.tip data-latex=""}
-Indicator variables should be named after the "1" group so that it is easy to remember the coding scheme being used.
-:::
 
 So, if a factor with two levels can be cast as two indicator variables, but only one of those indicator variables is needed, then which one should be used? For the most part, it does not matter as there will be some differences in the analytical output but the ultimate conclusions will be the same. However, the levels of factor variables in R are ordered alphabetically. With this, the first level is assigned a 0 in R and the second level is assigned a 1. Thus, R will create indicator variables named after the alphabetically second group. To maintain consistency with R we will follow this convention. Thus, we would use the *COHO* indicator variable as "Coho" comes after "Chinook."
 
@@ -76,11 +71,19 @@ The relationship between the original factor variable and the indicator variable
 
 ```{r echo=FALSE}
 data.frame(species=unique(Mirex$species),COHO=c(0,1)) %>%
-  knitr::kable(booktabs=TRUE,row.names=FALSE) %>%
-  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  knitr::kable(booktabs=TRUE,row.names=FALSE,align="cc") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1:2,width="0.9in") %>%
+  kableExtra::row_spec(0,bold=TRUE)
 ```
 
-&nbsp;
+::: {.tip data-latex=""}
+Indicator variables will be coded as 0 for individuals that do NOT have the characteristic of interest and 1 for individuals that do have the characteristic of interest.
+:::
+
+::: {.tip data-latex=""}
+Indicator variables should be named after the "1" group so that it is easy to remember the coding scheme being used.
+:::
 
 #### More than Two Levels {-}
 Combinations of indicator variables can be used to code factor variables that consist of more than two levels. For example, Makarewicz *et al.* (2003) were also interested in determining if the relationship between mirex concentrations and weight of the salmon differed among six collection years. For simplicity and space considerations, let's consider that they were interested in only three years -- 1977, 1982, and 1986. In this simpler situation, two indicator variables would be created to represent the year factor variable.
@@ -105,25 +108,29 @@ Note that it is possible to create a third dummy variable to represent salmon co
 
 ```{r echo=FALSE}
 data.frame(year=c(1977,1982,1986),YEAR1982=c(0,1,0),YEAR1986=c(0,0,1)) %>%
-  knitr::kable(booktabs=TRUE,row.names=FALSE) %>%
-  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  knitr::kable(booktabs=TRUE,row.names=FALSE,align="c") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1,width="0.9in") %>%
+  kableExtra::column_spec(2:3,width="1.0in") %>%
+  kableExtra::row_spec(0,bold=TRUE)
 ```
 
-::: {.tip data-latex=""}
-One less indicator variable is needed then the number of categories in the factor variable.
-:::
-
 The level denoted by the group with "0"s for all related indicator variables is called the **reference group**. In the last example above, the salmon collected in 1977 would be considered the reference group. It will be shown in Module \@ref(IVRModels) that all comparisons of intercepts and slopes in the analysis will "refer" to this group of individuals.
-
-\defn{Reference group}{The category or group that is represented by zeroes for all indicator variables.}
 
 Suppose, for illustration purposes, that fish collected in 1982 were to be considered the reference group rather than fish collected in 1977. In this situation, the \var{YEAR1982} indicator variable would be replaced with the \var{YEAR1977} indicator variable in the model and the table relating the year variable to the indicator variables would be as shown below.
 
 ```{r echo=FALSE}
 data.frame(year=c(1977,1982,1986),YEAR1977=c(1,0,0),YEAR1986=c(0,0,1)) %>%
-  knitr::kable(booktabs=TRUE,row.names=FALSE) %>%
-  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  knitr::kable(booktabs=TRUE,row.names=FALSE,align="c") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1,width="0.9in") %>%
+  kableExtra::column_spec(2:3,width="1.0in") %>%
+  kableExtra::row_spec(0,bold=TRUE)
 ```
+
+::: {.tip data-latex=""}
+One less indicator variable is needed then the number of categories in the factor variable.
+:::
 
 ::: {.defn data-latex=""}
 **Reference group**: The category or group that is represented by zeroes for all indicator variables.
@@ -133,20 +140,10 @@ data.frame(year=c(1977,1982,1986),YEAR1977=c(1,0,0),YEAR1986=c(0,0,1)) %>%
 Changing the reference group in an analysis requires changing the indicator variables used in the analysis.
 :::
 
-&nbsp;
-
 ## Interaction Variables
 An **interaction variable** is an explanatory variable that is the product of two or more other explanatory variables (see Module \@ref(ANOVA2Foundations1)). In IVR models, interaction variables are created between the covariate and **each** of the indicator variables. Thus, there will always be as many interaction variables as there are indicator variables in an IVR. For example, in the example with Coho and Chinook Salmon, there would be one interaction variable -- COHO:Weight. However, in the the example with the three years of data there would be two interaction variables -- YEAR1982:Weight and YEAR1986:Weight.
 
-::: {.tip data-latex=""}
-In IVR, interaction variables are constructed from the covariate and **each** indicator variable. Thus, there are as many interaction as indicator variables in an IVR.
-:::
-
 Interaction variables serve the same purpose in an IVR as they did in a Two-Way ANOVA (see Modules \@ref(ANOVA2Foundations1)). That is, the interaction variable is used to identify if the effect of one explanatory variable (here the covariate) on the response variable differs depending on the other explanatory variable (here the factor). In other words, an interaction variable will be used to determine if the effect of the covariate on the response variable differs among roups (i.e., levels of the factor). For example, the interaction variable will allow us to determine if the effect of weight of the salmon on the concentration of mirex in the tissue differs by species of salmon.
-
-::: {.tip data-latex=""}
-Interaction variables in IVR are used to determine if the effect of the covariate on the response variable differs among groups defined by the indicator variable(s).
-:::
 
 The interaction between two variables in an IVR model may best be illustrated by looking at the examples in Figure \@ref(fig:IVRInteraction). In the panel on the left, the effect of salmon weight (the covariate) on mirex concentration in the tissue (the response) is the same for Coho and Chinook Salmon. This is illustrated by each group having the same slope.^[In regression the "effect" of the explanatory variable on the response variable is measured by the slope.] However, in the panel on the right, different slopes indicate that the effect of salmon weight on mirex concentration in the tissue differs between the two species. In this particular example, the relationship is "flatter" for Coho than for Chinook Salmon. Thus, an interaction exists for the situation depicted in Figure \@ref(fig:IVRInteraction)-Right, because the effect of the covariate on the response depends on which group is being considered. Graphically, an interaction is illustrated by non-parallel lines.
 
@@ -170,5 +167,15 @@ ggplot(data=d,mapping=aes(x=x,y=y,group=species,color=species)) +
 ```
 
 ::: {.tip data-latex=""}
+Interaction variables in IVR are constructed from the covariate and **each** indicator variable. Thus, there are as many interaction as indicator variables in an IVR.
+:::
+
+::: {.tip data-latex=""}
+Interaction variables in IVR are used to determine if the effect of the covariate on the response variable differs among groups defined by the indicator variable(s).
+:::
+
+::: {.tip data-latex=""}
 Parallel lines indicate no interaction effect; non-parallel lines indicate an interaction effect.
 :::
+
+&nbsp;

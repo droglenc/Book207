@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-06" />
+<meta name="date" content="2021-02-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -370,13 +370,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">21.1</span> Ultimate Full Model</h2>
 <p>Consider the situation introduced in Module <a href="IVRVariables.html#IVRVariables">20</a> where researchers examined the effect of salmon weight on mirex concentration in the tissue for two species of salmon (Coho and Chinook). In this case, there is one quantitative response variable (<span class="math inline">\(MIREX\)</span>), one covariate (<span class="math inline">\(WEIGHT\)</span>), and one indicator variable (<span class="math inline">\(COHO\)</span>) generated from a factor variable with only two categories (i.e., species). In addition, there is an interaction variable between <span class="math inline">\(WEIGHT\)</span> and <span class="math inline">\(COHO\)</span>.</p>
 <p>The <em>ultimate full model</em> for this situation is</p>
+<p> </p>
 <p><span class="math display">\[
 \mu_{MIREX|WEIGHT,COHO} = \alpha+\beta WEIGHT+\delta_{1}COHO+\gamma_{1}WEIGHT:COHO
 \]</span></p>
+<p> </p>
 <p>This is called the <strong>ultimate full model</strong> because the model cannot get more complicated that this for this situation as all variables of interest are included in the model. In subsequent modules, simpler models with fewer variables (and parameters) than this one will also be considered.</p>
-<div class="tip">
-<p>The covariate, indicator, and interaction variables are entered in that order into the ultimate full model of an IVR to allow for consistent and simple interpretations.</p>
-</div>
 <p>Specific parameters are used in the ultimate full model of an IVR as shown above. Specifically, they are as follows:</p>
 <ul>
 <li><span class="math inline">\(\alpha\)</span>: an overall intercept term.</li>
@@ -385,10 +384,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\gamma_{i}\)</span>: coefficient on the interaction between the covariate and the ith indicator variable.</li>
 </ul>
 <p>Each of these parameters has a specific meaning or interpretation that will be better understood by reducing the ultimate full model to its constituent sub-models.</p>
+<div class="tip">
+<p>The covariate, indicator, and interaction variables are entered in that order into the ultimate full model of an IVR to allow for consistent and simple interpretations.</p>
+</div>
 </div>
 <div id="sub-models" class="section level2" number="21.2">
 <h2><span class="header-section-number">21.2</span> Sub-Models</h2>
 <p>The ultimate full model in IVR contains sub-models that are SLR models for each group represented by the indicator variables. The sub-models can be revealed by substituting appropriate values for the indicator variables in the ultimate full model. For example <span class="math inline">\(COHO=0\)</span> for the “non-Coho” group (i.e., Chinook). Thus, to find the sub-model for Chinook Salmon, plug 0 for <span class="math inline">\(COHO\)</span> in the ultimate full model and simplify.</p>
+<p> </p>
 <p><span class="math display">\[
 \begin{split}
   \mu_{MIREX|WEIGHT,COHO} &amp;= \alpha+\beta WEIGHT+\delta_{1}COHO+\gamma_{1}WEIGHT:COHO \\
@@ -397,7 +400,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   &amp;=\alpha+\beta WEIGHT\\
 \end{split}
 \]</span></p>
+<p> </p>
 <p>Similarly, the sub-model for Coho is found by plugging 1 for <span class="math inline">\(COHO\)</span> in the ultimate full model and simplifying.</p>
+<p> </p>
 <p><span class="math display">\[
 \begin{split}
   \mu_{MIREX|WEIGHT,COHO} &amp;= \alpha+\beta WEIGHT+\delta_{1}COHO+\gamma_{1}WEIGHT:COHO \\
@@ -406,45 +411,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   &amp;=\alpha+\delta_{1}+\beta WEIGHT+\gamma_{1}WEIGHT \\
   &amp;=(\alpha+\delta_{1})+(\beta+\gamma_{1})WEIGHT \\
 \end{split}
-\]</span></p>
-<div class="tip">
-<p>Sub-models are found by appropriately substituting “0”s and “1”s for the indicator variable(s) in the IVR ultimate full model and simplifying.</p>
-</div>
+\]</span>
+ </p>
 <p>These sub-models can be appended to the tables from Module <a href="IVRVariables.html#IVRVariables">20</a> to provide a succinct summary.</p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th style="text-align:left;font-weight: bold;">
 Species
 </th>
-<th style="text-align:right;">
+<th style="text-align:center;font-weight: bold;">
 COHO
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;font-weight: bold;">
 Sub-Model (<span class="math inline">\(\mu_{MIREX|WEIGHT}=\)</span>)
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;width: 1.8in; ">
 Chinook (Reference)
 </td>
-<td style="text-align:right;">
+<td style="text-align:center;width: 0.9in; ">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;width: 2.5in; ">
 <span class="math inline">\(\alpha+\beta WEIGHT\)</span>
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;width: 1.8in; ">
 Coho
 </td>
-<td style="text-align:right;">
+<td style="text-align:center;width: 0.9in; ">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;width: 2.5in; ">
 <span class="math inline">\((\alpha+\delta_{1})+(\beta+\gamma_{1})WEIGHT\)</span>
 </td>
 </tr>
@@ -452,17 +455,17 @@ Coho
 </table>
 <p> </p>
 <p>Examination of the sub-models for each group shows that each sub-model is itself an SLR model. The sub-model for Chinook Salmon is an SLR with a slope of <span class="math inline">\(\beta\)</span> and an intercept of <span class="math inline">\(\alpha\)</span>. In contrast, the sub-model for Coho Salmon is an SLR with a slope of <span class="math inline">\(\beta+\gamma_{1}\)</span> and an intercept of <span class="math inline">\(\alpha+\delta_{1}\)</span>.</p>
-<div class="tip">
-<p>Each sub-model is an SLR for one of the groups represented in the IVR ultimate full model.</p>
-</div>
 <p>The process is similar when there are more than two groups, except that 0s and 1s must be substituted for multiple indicator variables. For example, the ultimate full model for the situation when three years (1977, 1982, and 1986) were considered is</p>
+<p> </p>
 <p><span class="math display">\[
 \begin{split}
 \mu_{MIREX|WEIGHT,\cdots} = &amp; \alpha+\beta WEIGHT + \delta_{1}YEAR1982 + \delta_{2}YEAR1986 + \\
  &amp; \gamma_{1}WEIGHT:YEAR1982 + \gamma_{2}WEIGHT:YEAR1986 \\
 \end{split}
 \]</span></p>
+<p> </p>
 <p>To find the sub-model for 1982, for example, requires plugging 1 in for <span class="math inline">\(YEAR1982\)</span> and 0 for <span class="math inline">\(YEAR1986\)</span> and simplifying</p>
+<p> </p>
 <p><span class="math display">\[
 \begin{split}
 \mu_{MIREX|WEIGHT,\cdots} &amp;= \alpha+\beta WEIGHT + \delta_{1}1 + \delta_{2}0 +  \gamma_{1}WEIGHT:1 + \gamma_{2}WEIGHT:0 \\
@@ -470,64 +473,65 @@ Coho
 &amp;= (\alpha+\delta_{1}) + (\beta+\gamma_{1})WEIGHT
 \end{split}
 \]</span></p>
+<p> </p>
 <p>A similar process can be used to find the sub-models for 1977 and 1986.<a href="#fn93" class="footnote-ref" id="fnref93"><sup>93</sup></a> The sub-models are then summarized in the following table.</p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th style="text-align:left;font-weight: bold;">
 Year
 </th>
-<th style="text-align:right;">
+<th style="text-align:center;font-weight: bold;">
 YEAR1982
 </th>
-<th style="text-align:right;">
+<th style="text-align:center;font-weight: bold;">
 YEAR1986
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;font-weight: bold;">
 Sub-Model (<span class="math inline">\(\mu_{MIREX|WEIGHT}=\)</span>)
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;width: 1.7in; ">
 1977 (Reference)
 </td>
-<td style="text-align:right;">
+<td style="text-align:center;width: 1.1in; ">
 0
 </td>
-<td style="text-align:right;">
+<td style="text-align:center;width: 1.1in; ">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;width: 2.5in; ">
 <span class="math inline">\(\alpha+\beta WEIGHT\)</span>
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;width: 1.7in; ">
 1982
 </td>
-<td style="text-align:right;">
+<td style="text-align:center;width: 1.1in; ">
 1
 </td>
-<td style="text-align:right;">
+<td style="text-align:center;width: 1.1in; ">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;width: 2.5in; ">
 <span class="math inline">\((\alpha+\delta_{1})+(\beta+\gamma_{1})WEIGHT\)</span>
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;width: 1.7in; ">
 1986
 </td>
-<td style="text-align:right;">
+<td style="text-align:center;width: 1.1in; ">
 0
 </td>
-<td style="text-align:right;">
+<td style="text-align:center;width: 1.1in; ">
 1
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;width: 2.5in; ">
 <span class="math inline">\((\alpha+\delta_{2})+(\beta+\gamma_{2})WEIGHT\)</span>
 </td>
 </tr>
@@ -536,6 +540,12 @@ Sub-Model (<span class="math inline">\(\mu_{MIREX|WEIGHT}=\)</span>)
 <p> </p>
 <p>Once again, each sub-model is itself an SLR model. For example, the slopes are <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\beta+\gamma_{1}\)</span>, and <span class="math inline">\(\beta+\gamma_{2}\)</span> for the years 1977, 1982, and 1986, respectively.</p>
 <div class="tip">
+<p>Sub-models are found by appropriately substituting “0”s and “1”s for the indicator variable(s) in the IVR ultimate full model and simplifying.</p>
+</div>
+<div class="tip">
+<p>Each sub-model is an SLR for one of the groups represented in the IVR ultimate full model.</p>
+</div>
+<div class="tip">
 <p>The sub-model for the reference group is always <span class="math inline">\(\mu_{Y|X}=\alpha+\beta X\)</span>. The slopes for the other groups always have a <span class="math inline">\(\gamma_{i}\)</span> added to <span class="math inline">\(\beta\)</span> and the intercepts always have a <span class="math inline">\(\delta_{i}\)</span> added to <span class="math inline">\(\alpha\)</span>.</p>
 </div>
 </div>
@@ -543,19 +553,23 @@ Sub-Model (<span class="math inline">\(\mu_{MIREX|WEIGHT}=\)</span>)
 <h2><span class="header-section-number">21.3</span> Interpreting Parameter Estimates</h2>
 <p>Careful examination of the sub-models in the tables above help illustrate what the model parameters (i.e., <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\delta_{i}\)</span>, and <span class="math inline">\(\gamma_{i}\)</span>) mean. The sub-model for the reference groups is always <span class="math inline">\(\mu_{Y|X}=\alpha+\beta X\)</span>; thus, <span class="math inline">\(\alpha\)</span> is the intercept and <span class="math inline">\(\beta\)</span> is the slope <em>for the reference group</em>. From above, it is also evident that the intercept for the <span class="math inline">\(i\)</span>th group is <span class="math inline">\(\alpha+\delta_{i}\)</span> and the slope for the <span class="math inline">\(i\)</span>th group is <span class="math inline">\(\beta+\gamma_{i}\)</span>.</p>
 <p>However, what are <span class="math inline">\(\delta_{i}\)</span> and <span class="math inline">\(\gamma_{i}\)</span>? To answer this, consider the following algebra for the difference in intercepts between the <span class="math inline">\(i\)</span>th group and the reference group.</p>
+<p> </p>
 <p><span class="math display">\[
 \begin{split}
 i\text{th Group&#39;s Intercept} - \text{Reference Group&#39;s Intercept} &amp;= (\alpha+\delta_{i}) - \alpha \\
 &amp;= \delta_{i}
 \end{split}
 \]</span></p>
+<p> </p>
 <p>Thus, <span class="math inline">\(\delta_{i}\)</span> is the additive difference between intercepts for the <span class="math inline">\(i\)</span>th and reference groups. Similar algebra shows that <span class="math inline">\(\gamma_{i}\)</span> is the additive difference in slopes between the <span class="math inline">\(i\)</span>th group and the reference group.</p>
+<p> </p>
 <p><span class="math display">\[
 \begin{split}
 i\text{th Group&#39;s Slope} - \text{Reference Group&#39;s Slope} &amp;= (\beta+\gamma_{i}) - \beta \\
 &amp;= \gamma_{i}
 \end{split}
 \]</span></p>
+<p> </p>
 <p>In summary, the parameters in the ultimate full model have the following interpretations (see Figure <a href="IVRModels.html#fig:IVRCoefficients">21.1</a>).</p>
 <ul>
 <li><span class="math inline">\(\alpha\)</span>: y-intercept term for the reference group.</li>
@@ -563,6 +577,7 @@ i\text{th Group&#39;s Slope} - \text{Reference Group&#39;s Slope} &amp;= (\beta+
 <li><span class="math inline">\(\delta_{i}\)</span>: difference in y-intercepts between the <span class="math inline">\(i\)</span>th group and the reference group.</li>
 <li><span class="math inline">\(\gamma_{i}\)</span>: difference in slopes between the <span class="math inline">\(i\)</span>th group and the reference group.</li>
 </ul>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:IVRCoefficients"></span>
 <img src="Book207_files/figure-html/IVRCoefficients-1.png" alt="Representation of two sub-models fit with the ultimate full model in an IVR with the geometric meaning of each parameter. The red line is the sub-model for the reference group. Note that $\alpha$=2, $\beta$=0.4, $\delta_{1}$=-1.6, and $\gamma_{1}$=0.45 in this example." width="336" />
 <p class="caption">
@@ -584,16 +599,18 @@ Figure 21.1: Representation of two sub-models fit with the ultimate full model i
 <li><em>Same Intercept</em>: Separate non-parallel lines with the same y-intercept are needed for both groups (i.e., <span class="math inline">\(\delta_{1}=0\)</span> and <span class="math inline">\(\gamma_{1}\neq0\)</span>)</li>
 <li>Completely Separate Lines*: Two completely separate lines are needed for both groups (i.e., <span class="math inline">\(\delta_{1}\neq0\)</span> and <span class="math inline">\(\gamma_{1}\neq0\)</span>).</li>
 </ul>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:IVRSituations"></span>
 <img src="Book207_files/figure-html/IVRSituations-1.png" alt="Hypothetical depictions of four situations that can occur for the relationship between a response variable and a covariate for two groups." width="480" />
 <p class="caption">
 Figure 21.2: Hypothetical depictions of four situations that can occur for the relationship between a response variable and a covariate for two groups.
 </p>
 </div>
+<p> </p>
 </div>
 <div id="ultimate-full-model-in-r" class="section level2" number="21.4">
 <h2><span class="header-section-number">21.4</span> Ultimate Full Model in R</h2>
-<p>Fitting ultimate full model in R is straightforward because it is essentially the same as fitting a Two-Way ANOVA with <code>lm()</code> (see <a href="ANOVA2Analysis.html#model-fitting-in-r">12.1</a>) and R automatically creates the indicator variables behind the scenes. The ultimate full model for an IVR is fit in <code>lm()</code> with a formula of the form <code>response~covariate+factor+covariated:factor</code> (<em>in that order to match what we did above</em>).<a href="#fn94" class="footnote-ref" id="fnref94"><sup>94</sup></a></p>
+<p>Fitting ultimate full model in R is straightforward because it is essentially the same as fitting a Two-Way ANOVA with <code>lm()</code> (see <a href="ANOVA2Analysis.html#model-fitting-in-r">12.1</a>) and R automatically creates the indicator variables behind the scenes. The ultimate full model for an IVR is fit in <code>lm()</code> with a formula of the form <code>response~covariate+factor+covariate:factor</code> (<em>in that order to match what we did above</em>).<a href="#fn94" class="footnote-ref" id="fnref94"><sup>94</sup></a></p>
 <div class="sourceCode" id="cb146"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb146-1"><a href="IVRModels.html#cb146-1" aria-hidden="true" tabindex="-1"></a>ivr1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species<span class="sc">+</span>weight<span class="sc">:</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
 <div id="extracting-parameter-estimates" class="section level4 unnumbered">
 <h4>Extracting Parameter Estimates</h4>
@@ -616,6 +633,7 @@ Figure 21.2: Hypothetical depictions of four situations that can occur for the r
 <span id="cb149-4"><a href="IVRModels.html#cb149-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
 <span id="cb149-5"><a href="IVRModels.html#cb149-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-112-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p> </p>
 <p>From this plot, note that the intercept for Coho is less than the intercept for Chinook (as you would expect because <span class="math inline">\(\hat{\delta}_{1}\)</span>=-0.051) and the slope for Coho is greater than (i.e., steeper) than that for Chinook (as you would expect because <span class="math inline">\(\hat{\gamma}_{1}\)</span>=0.012)</p>
 </div>
 <div id="predictions" class="section level4 unnumbered">
@@ -638,6 +656,7 @@ Figure 21.2: Hypothetical depictions of four situations that can occur for the r
 <pre class="ROUTPUT"><code>#R&gt;     weight species       fit          lwr       upr
 #R&gt;   1      5 chinook 0.1834880  0.001557795 0.3654182
 #R&gt;   2      3    coho 0.1496893 -0.032402319 0.3317810</code></pre>
+<p> </p>
 
 </div>
 </div>

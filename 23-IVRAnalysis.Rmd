@@ -4,11 +4,11 @@ Modules \@ref(IVRVariables)-\@ref(IVRTesting) build a conceptual and analytical 
 ## Assumptions & Transformations
 The assumptions for an IVR are the same as those for an SLR -- independence, linearity, homoscedasticity, normality, and no outliers (see Module \@ref(SLRAssumptions)). Methods for assessing the validity of these assumptions are also essentially the same as those used for an SLR. In other words, residual plots will be used to examine linearity and assess homoscedasticity, an Anderson-Darling test and a histogram of the residuals will be used to assess the normality of residuals, and a residual plot and an outlier test will be used to diagnose outliers and influential points.
 
+An important point to note, though, is that the IVR assumptions are assessed on the ultimate full model. If the assumptions are not met on the ultimate full model, then transformations for the response and the covariate^[If the covariate is transformed then any interaction terms with the covariate should be recreated using the transformed covariate.] should be considered such that a transformed version of the ultimate full model meets the assumptions.^[The methods and rules for transforming these variables in an IVR are the same as those used for an SLR (see \@ref(SLRTransformations)).] Once an ultimate full model is found where all of the assumptions are met, then it is assumed that all assumptions will be met for any subset of the ultimate full model that has non-significant explanatory variables removed.
+
 ::: {.tip data-latex=""}
 The assumptions of an IVR are the same as the assumptions for an SLR. Thus, methods for assessing the assumptions are the same as those methods used for an SLR
 :::
-
-An important point to note, though, is that the IVR assumptions are assessed on the ultimate full model. If the assumptions are not met on the ultimate full model, then transformations for the response and the covariate^[If the covariate is transformed then any interaction terms with the covariate should be recreated using the transformed covariate.] should be considered such that a transformed version of the ultimate full model meets the assumptions.^[The methods and rules for transforming these variables in an IVR are the same as those used for an SLR (see \@ref(SLRTransformations)).] Once an ultimate full model is found where all of the assumptions are met, then it is assumed that all assumptions will be met for any subset of the ultimate full model that has non-significant explanatory variables removed.
 
 ::: {.tip data-latex=""}
 IVR assumptions are assessed for the ultimate full model. Assumptions do not need to be assessed for simpler models that only have variables from the ultimate full model removed.
@@ -17,9 +17,13 @@ IVR assumptions are assessed for the ultimate full model. Assumptions do not nee
 ## Multiple Comparisons for Slopes
 In Section \@ref(more-groups-different-slopes) of the last module, the IVR indicated that some slopes between mirex concentration in the tissue and salmon weight differed among 1992, 1996, and 1999 (Figure \@ref(fig:IVRMirexYearL3a)). An examination of Figure \@ref(fig:IVRMirexYearL3a) suggests that the slopes for 1992, 1996, and 1999 are all likely not the same. However, an objective method is needed to determine which pairs of slopes actually differ. Parallel lines tests for IVRs taking two years at a time could be used but this is inefficient and would increase the experiment-wise error rate (recall from Section \@ref(multiple-comparison-problem)).
 
+&nbsp;
+
 ```{r IVRMirexYearL3a, echo=FALSE, fig.width=4.5, fig.cap="Fitted regression lines for mirex in tissue by salmon weight for 1992, 1996, and 1999. Note that the IVR indicated that these lines are not parallel."}
 <<IVRMirexYearL3>>
 ```
+
+&nbsp;
 
 The `emtrends()` function from the `emmeans` package^[The `emmeans` package was introduced in Section \@ref(multiple-comparisons-in-r).] can be used to test for differences among all pairs of slopes using a Tukey-like correction. This function requires the ultimate full model as its first argument (`ivrY1` here as fit in Section \@ref(parallel-lines-test)), a `specs=` argument with `pairwise~` followed by the name of the factor variable in the ultimate full model, and `var=` followed by the name of the covariate in the ultimate full model.^[Except for `var=` this is the same as for `emmeans()` described in Section \@ref(multiple-comparisons-in-r)] The results of this function should be saved to an object.
 
@@ -64,20 +68,24 @@ The slopes with 95% confidence intervals and p-values for testing if the slope i
 ## Multiple Comparisons for Intercepts
 In Section \@ref(more-groups-same-slopes) of the last module, the IVR indicated that the first three years (1977, 1982, and 1986) had the same slopes and that at least some of those years had different intercepts (Figure \@ref(fig:IVRMirexYearF3a)).^[Recall from last module that those three years were chosen simply to serve as an example. Choosing these years has nothing to do with the analysis from the previous section.] An examination of Figure \@ref(fig:IVRMirexYearF3a) suggests that the intercept for 1977 may be greater than the intercepts for 1982 and 1986, which likely do not differ significantly. Again, an objective method is needed to determine which pairs of intercepts significantly differ.
 
+&nbsp;
+
 ```{r IVRMirexYearF3a, echo=FALSE, fig.width=4.5, fig.cap="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. Note that the IVR indicated that these lines are parallel, there is a signficant relationship, and at least one of the lines has a different intercept."}
 <<IVRMirexYearF3>>
 ```
 
+&nbsp;
+
 The `emmeans()` function from the `emmeans` package can be used to determine which pairs of intercepts differ (using a Tukey's correction). However, before using this function a new model with the insignificant interaction term removed should be fit.
 
 ```{r}
-ivrY2a <- lm(mirex~weight+year,data=MirexFirst3)
+ivrY2_noint <- lm(mirex~weight+year,data=MirexFirst3)
 ```
 
 The use of `emmeans` here is exactly the same as it was in Section \@ref(multiple-comparisons-in-r). Specifically, the model without the interaction term is the first argument and `pairwise~` is followed by the name of the factor variable in the model. The results are then submitted to `summary()` with `infer=TRUE` and the results are given in two sections labeled `$emmeans` and `$contrasts`.
 
 ```{r}
-imc <- emmeans(ivrY2a,pairwise~year)
+imc <- emmeans(ivrY2_noint,pairwise~year)
 ( imcsum <- summary(imc,infer=TRUE) )
 ```
 
@@ -101,14 +109,18 @@ The results in `$emmeans` portion contains information about the mean of the res
 
 For example, the sample mean mirex concentration in 1977 for a salmon with the sample mean weight of all salmon is `r formatC(imcsum$emmeans$emmean[1],format="f",digits=3)`, one is 95% confident that the population mean mirex concentration in 1977 for a salmon with the sample mean weight of all salmon is between `r formatC(imcsum$emmeans$lower.CL[1],format="f",digits=3)` and `r formatC(imcsum$emmeans$upper.CL[1],format="f",digits=3)` mg/kg, and the population mean mirex concentration at the sample mean salmon weight in 1977 is not equal to 0 (`r kPvalue(imcsum$emmeans$p.value[1],latex=FALSE)`). A visual of the sample means under `emmeans` is shown in Figure \@ref(fig:IVRExampleIntercepts).
 
+&nbsp;
+
 ```{r IVRExampleIntercepts, echo=FALSE, fig.width=4.5, fig.cap="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. The mean mirex concentration at the mean salmon weight is shown for each year to demonstrate the results of the `emmeans()` function."}
 tmp <- data.frame(year=imcsum$emmeans$year,
                   mirex=imcsum$emmeans$emmean,
                   weight=mean(MirexFirst3$weight))
 
 ggplot(data=MirexFirst3,mapping=aes(x=weight,y=mirex,color=year)) +
-  geom_vline(data=tmp,mapping=aes(xintercept=weight),linetype="dashed",color="gray70") +
-  geom_smooth(method="lm",se=FALSE) +
+  geom_vline(data=tmp,mapping=aes(xintercept=weight),
+             linetype="dashed",color="gray70") +
+  geom_smooth(method="lm",se=FALSE,
+              mapping=aes(y=predict(ivrY2_noint,MirexFirst3))) +
   geom_point(data=tmp,pch=21,size=2,fill="white",show.legend=FALSE) +
   geom_text(data=tmp,mapping=aes(label=formatC(mirex,format="f",digits=3)),
             show.legend=FALSE,hjust=c(1.25,1.1,-0.25),vjust=c(-0.15,-0.15,0.75),
@@ -123,6 +135,8 @@ ggplot(data=MirexFirst3,mapping=aes(x=weight,y=mirex,color=year)) +
            arrow=ARROW)
 ```
 
+&nbsp;
+
 ::: {.tip data-latex=""}
 The mean value of the response at the mean value of the covariate, along with 95% confidence intervals and p-values, are shown in the `$emmeans` section of the results.
 :::
@@ -130,21 +144,25 @@ The mean value of the response at the mean value of the covariate, along with 95
 The `emmeans()` function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extreme extrapolation as discussed in Section \@ref(intercept). It is possible to compute the mean values of the response at other values of the covariate by using `cov.reduce=` in `emmeans()`. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure \@ref(fig:IVRExampleIntercepts2)).^[You can get the mean values of the response at a covariate of 0 (i.e., the actual y-intercepts) by using `cov.reduce=function(x) 0`.] Because the lines are parallel this does not change anything in the `$contrasts` portion of the output. However, the `$emmeans` portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.
 
 ```{r}
-imc2 <- emmeans(ivrY2a,pairwise~year,cov.reduce=min)
+imc2 <- emmeans(ivrY2_noint,pairwise~year,cov.reduce=min)
 ( imc2sum <- summary(imc2,infer=TRUE) )
 ```
 
-```{r IVRExampleIntercepts2, echo=FALSE, fig.width=5, fig.cap="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. The mean mirex concentration at the MINIMUM salmon weight is shown for each year to demonstrate the results of the `emmeans()` function."}
+&nbsp;
+
+```{r IVRExampleIntercepts2, echo=FALSE, fig.width=4.5, fig.cap="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. The mean mirex concentration at the MINIMUM salmon weight is shown for each year to demonstrate the results of the `emmeans()` function."}
 tmp <- data.frame(year=imc2sum$emmeans$year,
                   mirex=imc2sum$emmeans$emmean,
                   weight=min(MirexFirst3$weight))
 
 ggplot(data=MirexFirst3,mapping=aes(x=weight,y=mirex,color=year)) +
-  geom_vline(data=tmp,mapping=aes(xintercept=weight),linetype="dashed",color="gray70") +
-  geom_smooth(method="lm",se=FALSE) +
+  geom_vline(data=tmp,mapping=aes(xintercept=weight),
+             linetype="dashed",color="gray70") +
+  geom_smooth(method="lm",se=FALSE,
+              mapping=aes(y=predict(ivrY2_noint,MirexFirst3))) +
   geom_point(data=tmp,pch=21,size=2,fill="white",show.legend=FALSE) +
   geom_text(data=tmp,mapping=aes(label=formatC(mirex,format="f",digits=3)),
-            show.legend=FALSE,hjust=c(1.25,1.1,-0.25),vjust=c(-0.15,-0.15,0.75),
+            show.legend=FALSE,hjust=c(1.2,1.2,1.2),vjust=c(-0.15,-0.15,0.75),
             size=lbl_text_size) +
   scale_color_manual(values=clrs3) +
   xlim(-1.5,11.5) +
@@ -157,3 +175,4 @@ ggplot(data=MirexFirst3,mapping=aes(x=weight,y=mirex,color=year)) +
            arrow=ARROW)
 ```
 
+&nbsp;

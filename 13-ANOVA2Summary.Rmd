@@ -243,7 +243,7 @@ assumptionCheck(lm1.nak)
 
 &nbsp;
 
-The rats are probably independent among strains as there is no evidence that "normal" and "hypertensive" rats are in any way related. Independence of rats within strains is suspect given that the rats came from the same "pool" of normal and hypertensive rats bred in the lab. This may be acceptable for this experiment, but drawing conclusions to a larger population of rats may be suspect. Finally, rats are likely independent among kidney site groups as a different site was examined for each individual rat. All-in-all, independence is likely met enough to continue with this analysis. Thus, these data will be examined with a two-way ANOVA without transformation because the assumptions have been adequately met.
+The rats are probably independent among strains as there is no evidence that "normal" and "hypertensive" rats are in any way related or that a rat could be in both groups. Independence of rats within strains is suspect given that the rats came from the same "pool" of normal and hypertensive rats bred in the lab. This may be acceptable for this experiment, but drawing conclusions to a larger population of rats may be suspect. Finally, rats are likely independent among kidney site groups as a different site was examined for each individual rat (i.e., all three sites were not examined on the same rat). All-in-all, independence is likely met enough to continue with this analysis. Thus, these data will be examined with a two-way ANOVA without transformation because the assumptions have been adequately met.
 
 ```{r echo=FALSE}
 aov1.nak <- anova(lm1.nak)

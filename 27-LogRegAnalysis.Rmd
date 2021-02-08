@@ -2,7 +2,8 @@
 Modules \@ref(LogRegFoundations) and \@ref(LogRegModels) described the basics of fitting a logistic regression and understanding the meanings of the parameter estimates, predicted probabilities, and predicted values of the explanatory variable for a given probability. This module will demonstrate how to perform those analyses using R.
 
 ## Data Preparation
-Bliss (1935), in a classic study, examined the mortality response of beetles to various concentrations of gaseous carbon disulphide (mg/liter). The concentration and whether or not the beetle survived the exposure to that concentration was recorded for each beetle in Bliss.csv ([data](https://raw.githubusercontent.com/droglenc/NCData/master/Bliss.csv), [meta](https://github.com/droglenc/NCData/blob/master/Bliss_meta.txt)). These data are loaded and briefly examined below.
+<img src="zimgs/Beetle.jpg" alt="Decoration" class="img-right">
+[Bliss (1935)](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1744-7348.1935.tb07713.x), in a classic study, examined the mortality response of a [beetle (*Tribolium confusum*)](https://en.wikipedia.org/wiki/Confused_flour_beetle) to various concentrations of gaseous [carbon disulphide](https://en.wikipedia.org/wiki/Carbon_disulfide) (mg/liter). The concentration and whether or not the beetle survived the exposure to that concentration was recorded for each beetle in Bliss.csv ([data](https://raw.githubusercontent.com/droglenc/NCData/master/Bliss.csv), [meta](https://github.com/droglenc/NCData/blob/master/Bliss_meta.txt)). These data are loaded and briefly examined below.
 
 ```{r}
 bliss <- read.csv("https://raw.githubusercontent.com/droglenc/NCData/master/Bliss.csv")

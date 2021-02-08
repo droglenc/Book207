@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-06" />
+<meta name="date" content="2021-02-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -369,10 +369,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="assumptions-transformations" class="section level2" number="23.1">
 <h2><span class="header-section-number">23.1</span> Assumptions &amp; Transformations</h2>
 <p>The assumptions for an IVR are the same as those for an SLR – independence, linearity, homoscedasticity, normality, and no outliers (see Module <a href="SLRAssumptions.html#SLRAssumptions">17</a>). Methods for assessing the validity of these assumptions are also essentially the same as those used for an SLR. In other words, residual plots will be used to examine linearity and assess homoscedasticity, an Anderson-Darling test and a histogram of the residuals will be used to assess the normality of residuals, and a residual plot and an outlier test will be used to diagnose outliers and influential points.</p>
+<p>An important point to note, though, is that the IVR assumptions are assessed on the ultimate full model. If the assumptions are not met on the ultimate full model, then transformations for the response and the covariate<a href="#fn98" class="footnote-ref" id="fnref98"><sup>98</sup></a> should be considered such that a transformed version of the ultimate full model meets the assumptions.<a href="#fn99" class="footnote-ref" id="fnref99"><sup>99</sup></a> Once an ultimate full model is found where all of the assumptions are met, then it is assumed that all assumptions will be met for any subset of the ultimate full model that has non-significant explanatory variables removed.</p>
 <div class="tip">
 <p>The assumptions of an IVR are the same as the assumptions for an SLR. Thus, methods for assessing the assumptions are the same as those methods used for an SLR</p>
 </div>
-<p>An important point to note, though, is that the IVR assumptions are assessed on the ultimate full model. If the assumptions are not met on the ultimate full model, then transformations for the response and the covariate<a href="#fn98" class="footnote-ref" id="fnref98"><sup>98</sup></a> should be considered such that a transformed version of the ultimate full model meets the assumptions.<a href="#fn99" class="footnote-ref" id="fnref99"><sup>99</sup></a> Once an ultimate full model is found where all of the assumptions are met, then it is assumed that all assumptions will be met for any subset of the ultimate full model that has non-significant explanatory variables removed.</p>
 <div class="tip">
 <p>IVR assumptions are assessed for the ultimate full model. Assumptions do not need to be assessed for simpler models that only have variables from the ultimate full model removed.</p>
 </div>
@@ -380,12 +380,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="multiple-comparisons-for-slopes" class="section level2" number="23.2">
 <h2><span class="header-section-number">23.2</span> Multiple Comparisons for Slopes</h2>
 <p>In Section <a href="IVRTesting.html#more-groups-different-slopes">22.6</a> of the last module, the IVR indicated that some slopes between mirex concentration in the tissue and salmon weight differed among 1992, 1996, and 1999 (Figure <a href="IVRAnalysis.html#fig:IVRMirexYearL3a">23.1</a>). An examination of Figure <a href="IVRAnalysis.html#fig:IVRMirexYearL3a">23.1</a> suggests that the slopes for 1992, 1996, and 1999 are all likely not the same. However, an objective method is needed to determine which pairs of slopes actually differ. Parallel lines tests for IVRs taking two years at a time could be used but this is inefficient and would increase the experiment-wise error rate (recall from Section <a href="ANOVA1MultipleComparisons.html#multiple-comparison-problem">6.1</a>).</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:IVRMirexYearL3a"></span>
 <img src="Book207_files/figure-html/IVRMirexYearL3a-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for 1992, 1996, and 1999. Note that the IVR indicated that these lines are not parallel." width="432" />
 <p class="caption">
 Figure 23.1: Fitted regression lines for mirex in tissue by salmon weight for 1992, 1996, and 1999. Note that the IVR indicated that these lines are not parallel.
 </p>
 </div>
+<p> </p>
 <p>The <code>emtrends()</code> function from the <code>emmeans</code> package<a href="#fn100" class="footnote-ref" id="fnref100"><sup>100</sup></a> can be used to test for differences among all pairs of slopes using a Tukey-like correction. This function requires the ultimate full model as its first argument (<code>ivrY1</code> here as fit in Section <a href="IVRTesting.html#parallel-lines-test">22.2</a>), a <code>specs=</code> argument with <code>pairwise~</code> followed by the name of the factor variable in the ultimate full model, and <code>var=</code> followed by the name of the covariate in the ultimate full model.<a href="#fn101" class="footnote-ref" id="fnref101"><sup>101</sup></a> The results of this function should be saved to an object.</p>
 <div class="sourceCode" id="cb177"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb177-1"><a href="IVRAnalysis.html#cb177-1" aria-hidden="true" tabindex="-1"></a>smc <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(ivrY1,pairwise<span class="sc">~</span>year,<span class="at">var=</span><span class="st">&quot;weight&quot;</span>)</span></code></pre></div>
 <p>That saved object is then the first argument to <code>summary()</code>, which also includes <code>infer=TRUE</code>. The results are in sections labeled as <code>$emmeans</code> and <code>$contrasts</code>.</p>
@@ -433,16 +435,18 @@ Figure 23.1: Fitted regression lines for mirex in tissue by salmon weight for 19
 <div id="multiple-comparisons-for-intercepts" class="section level2" number="23.3">
 <h2><span class="header-section-number">23.3</span> Multiple Comparisons for Intercepts</h2>
 <p>In Section <a href="IVRTesting.html#more-groups-same-slopes">22.7</a> of the last module, the IVR indicated that the first three years (1977, 1982, and 1986) had the same slopes and that at least some of those years had different intercepts (Figure <a href="IVRAnalysis.html#fig:IVRMirexYearF3a">23.2</a>).<a href="#fn102" class="footnote-ref" id="fnref102"><sup>102</sup></a> An examination of Figure <a href="IVRAnalysis.html#fig:IVRMirexYearF3a">23.2</a> suggests that the intercept for 1977 may be greater than the intercepts for 1982 and 1986, which likely do not differ significantly. Again, an objective method is needed to determine which pairs of intercepts significantly differ.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:IVRMirexYearF3a"></span>
 <img src="Book207_files/figure-html/IVRMirexYearF3a-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. Note that the IVR indicated that these lines are parallel, there is a signficant relationship, and at least one of the lines has a different intercept." width="432" />
 <p class="caption">
 Figure 23.2: Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. Note that the IVR indicated that these lines are parallel, there is a signficant relationship, and at least one of the lines has a different intercept.
 </p>
 </div>
+<p> </p>
 <p>The <code>emmeans()</code> function from the <code>emmeans</code> package can be used to determine which pairs of intercepts differ (using a Tukey’s correction). However, before using this function a new model with the insignificant interaction term removed should be fit.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb180-1"><a href="IVRAnalysis.html#cb180-1" aria-hidden="true" tabindex="-1"></a>ivrY2a <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year,<span class="at">data=</span>MirexFirst3)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb180-1"><a href="IVRAnalysis.html#cb180-1" aria-hidden="true" tabindex="-1"></a>ivrY2_noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year,<span class="at">data=</span>MirexFirst3)</span></code></pre></div>
 <p>The use of <code>emmeans</code> here is exactly the same as it was in Section <a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r">6.3</a>. Specifically, the model without the interaction term is the first argument and <code>pairwise~</code> is followed by the name of the factor variable in the model. The results are then submitted to <code>summary()</code> with <code>infer=TRUE</code> and the results are given in two sections labeled <code>$emmeans</code> and <code>$contrasts</code>.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb181-1"><a href="IVRAnalysis.html#cb181-1" aria-hidden="true" tabindex="-1"></a>imc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2a,pairwise<span class="sc">~</span>year)</span>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb181-1"><a href="IVRAnalysis.html#cb181-1" aria-hidden="true" tabindex="-1"></a>imc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2_noint,pairwise<span class="sc">~</span>year)</span>
 <span id="cb181-2"><a href="IVRAnalysis.html#cb181-2" aria-hidden="true" tabindex="-1"></a>( imcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   $emmeans
 #R&gt;    year emmean     SE df lower.CL upper.CL t.ratio p.value
@@ -478,17 +482,19 @@ Figure 23.2: Fitted regression lines for mirex in tissue by salmon weight for on
 <li><code>p.value</code>: a p-value for testing if the population mean of the response variable at the sample mean of the covariate is equal to 0 or not.</li>
 </ul>
 <p>For example, the sample mean mirex concentration in 1977 for a salmon with the sample mean weight of all salmon is 0.238, one is 95% confident that the population mean mirex concentration in 1977 for a salmon with the sample mean weight of all salmon is between 0.213 and 0.262 mg/kg, and the population mean mirex concentration at the sample mean salmon weight in 1977 is not equal to 0 (p&lt;0.00005). A visual of the sample means under <code>emmeans</code> is shown in Figure <a href="IVRAnalysis.html#fig:IVRExampleIntercepts">23.3</a>.</p>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:IVRExampleIntercepts"></span>
 <img src="Book207_files/figure-html/IVRExampleIntercepts-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. The mean mirex concentration at the mean salmon weight is shown for each year to demonstrate the results of the `emmeans()` function." width="432" />
 <p class="caption">
 Figure 23.3: Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. The mean mirex concentration at the mean salmon weight is shown for each year to demonstrate the results of the <code>emmeans()</code> function.
 </p>
 </div>
+<p> </p>
 <div class="tip">
 <p>The mean value of the response at the mean value of the covariate, along with 95% confidence intervals and p-values, are shown in the <code>$emmeans</code> section of the results.</p>
 </div>
 <p>The <code>emmeans()</code> function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extreme extrapolation as discussed in Section <a href="SLRInference.html#intercept">15.3</a>. It is possible to compute the mean values of the response at other values of the covariate by using <code>cov.reduce=</code> in <code>emmeans()</code>. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure <a href="IVRAnalysis.html#fig:IVRExampleIntercepts2">23.4</a>).<a href="#fn103" class="footnote-ref" id="fnref103"><sup>103</sup></a> Because the lines are parallel this does not change anything in the <code>$contrasts</code> portion of the output. However, the <code>$emmeans</code> portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb183-1"><a href="IVRAnalysis.html#cb183-1" aria-hidden="true" tabindex="-1"></a>imc2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2a,pairwise<span class="sc">~</span>year,<span class="at">cov.reduce=</span>min)</span>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb183-1"><a href="IVRAnalysis.html#cb183-1" aria-hidden="true" tabindex="-1"></a>imc2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2_noint,pairwise<span class="sc">~</span>year,<span class="at">cov.reduce=</span>min)</span>
 <span id="cb183-2"><a href="IVRAnalysis.html#cb183-2" aria-hidden="true" tabindex="-1"></a>( imc2sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc2,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   $emmeans
 #R&gt;    year emmean     SE df lower.CL upper.CL t.ratio p.value
@@ -507,12 +513,14 @@ Figure 23.3: Fitted regression lines for mirex in tissue by salmon weight for on
 #R&gt;   Confidence level used: 0.95 
 #R&gt;   Conf-level adjustment: tukey method for comparing a family of 3 estimates 
 #R&gt;   P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<p> </p>
 <div class="figure" style="text-align: center"><span id="fig:IVRExampleIntercepts2"></span>
-<img src="Book207_files/figure-html/IVRExampleIntercepts2-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. The mean mirex concentration at the MINIMUM salmon weight is shown for each year to demonstrate the results of the `emmeans()` function." width="480" />
+<img src="Book207_files/figure-html/IVRExampleIntercepts2-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. The mean mirex concentration at the MINIMUM salmon weight is shown for each year to demonstrate the results of the `emmeans()` function." width="432" />
 <p class="caption">
 Figure 23.4: Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. The mean mirex concentration at the MINIMUM salmon weight is shown for each year to demonstrate the results of the <code>emmeans()</code> function.
 </p>
 </div>
+<p> </p>
 
 </div>
 </div>
