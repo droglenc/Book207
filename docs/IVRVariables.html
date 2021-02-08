@@ -382,7 +382,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-data" class="section level4 unnumbered">
 <h4>Example Data</h4>
 <p><img src="zimgs/Salmon.jpg" alt="Decoration" class="img-right">
-Throughout this and the next few modules, we will refer to a study by <a href="https://pubmed.ncbi.nlm.nih.gov/12731833/">Makarewicz <em>et al.</em> (2003)</a>, who examined the relationship between the concentration of mirex in the tissue and the weight of salmon.<a href="#fn89" class="footnote-ref" id="fnref89"><sup>89</sup></a> They collected these data on Coho Salmon (<em>Oncorhynchus kisutch</em>) and Chinook Salmon (<em>Oncorhynchus tshawytscha</em>) in six different years. They were interested in determining if the relationship between mirex and weight differed between the two species or if it differed among years (Table <a href="IVRVariables.html#tab:MirexData">20.1</a>).</p>
+Throughout this and the next few modules, we will refer to a study by <a href="https://pubmed.ncbi.nlm.nih.gov/12731833/">Makarewicz <em>et al.</em> (2003)</a>, who examined the relationship between the concentration of <a href="https://en.wikipedia.org/wiki/Mirex">mirex</a> in the tissue and the weight of salmon.<a href="#fn89" class="footnote-ref" id="fnref89"><sup>89</sup></a> They collected these data on <a href="https://en.wikipedia.org/wiki/Coho_salmon">Coho Salmon</a> (<em>Oncorhynchus kisutch</em>) and <a href="https://en.wikipedia.org/wiki/Chinook_salmon">Chinook Salmon</a> (<em>Oncorhynchus tshawytscha</em>) in six different years. They were interested in determining if the relationship between mirex and weight differed between the two species or if it differed among years (Table <a href="IVRVariables.html#tab:MirexData">20.1</a>).</p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:MirexData">Table 20.1: </span>Subset of the Mirex in salmon data.
@@ -524,28 +524,25 @@ chinook
 <h2><span class="header-section-number">20.1</span> Indicator Variables</h2>
 <div id="only-two-levels" class="section level4 unnumbered">
 <h4>Only Two Levels</h4>
-<p>The factor variable must be converted to numeric codes to be included in a linear model. An <strong>indicator variable</strong> contains the numeric “codes” created from the factor variable. Specifically, an indicator variable consists of 0s and 1s, where a 1 indicates that the individual has a certain characteristic and a 0 indicates that it does not have the characteristic.<a href="#fn90" class="footnote-ref" id="fnref90"><sup>90</sup></a></p>
-<div class="defn">
-<p><strong>Indicator Variable</strong>: A variable that is a numerical representation of a dichotomous (or binary or binomial) categorical variable.</p>
-</div>
-<p>For example, the <em>species</em> factor variable in the salmon mirex data could be converted to an indicator variable of</p>
+<p>An <strong>indicator variable</strong> contains numeric “codes” created from a factor variable, which are required for inclusion in a linear model. Specifically, an indicator variable consists of 0s and 1s, where a 1 indicates that the individual has a certain characteristic and a 0 indicates that it does not have the characteristic.<a href="#fn90" class="footnote-ref" id="fnref90"><sup>90</sup></a></p>
+<p>For example, the <em>species</em> factor variable in the salmon mirex data could be converted to an indicator variable that is designed as follows:</p>
 <p><span class="math display">\[
   COHO = \left\{\begin{array}{l}
   1 \text{ if a Coho salmon }\\
   0 \text{ if NOT a Coho salmon}
   \end{array}  \right.
 \]</span></p>
-<p>Alternatively, it could also be cast as</p>
+<p>Alternatively, the same factor variable could be used to create the following indicator variable:</p>
 <p><span class="math display">\[
   CHINOOK = \left\{\begin{array}{l}
   1 \text{ if a Chinook salmon }\\
   0 \text{ if NOT a Chinook salmon}
   \end{array}  \right.
 \]</span></p>
-<p>Importantly, both of these indicator variables would not be used as each one exhausts the possibilities. For example if <em>COHO</em>=1 you know you have a Coho Salmon and if <em>COHO</em>=0 you know that you have a Chinook Salmon.</p>
-<p>An indicator variable should be named after the characteristic denoted by a 1. This will provide consistency so that it will be easy to remember what the indicator variable represents and how the coding was made. The two examples above followed this rule – the <em>COHO</em> indicator variable was a 1 when the fish was a Coho Salmon and the <em>CHINOOK</em> indicator variable was a 1 when the fish was a Chinook Salmon.</p>
-<p>So, if a factor with two levels can be cast as two indicator variables, but only one of those indicator variables is needed, then which one should be used? For the most part, it does not matter as there will be some differences in the analytical output but the ultimate conclusions will be the same. However, the levels of factor variables in R are ordered alphabetically. With this, the first level is assigned a 0 in R and the second level is assigned a 1. Thus, R will create indicator variables named after the alphabetically second group. To maintain consistency with R we will follow this convention. Thus, we would use the <em>COHO</em> indicator variable as “Coho” comes after “Chinook.”</p>
-<p>The relationship between the original factor variable and the indicator variable is easy to keep track of when there are only two groups, it is more work when there are more groups (see next section). To prepare for this, we often organize a table such as that below, where the groups are shown in the left-most column and the indicator variable(s) with its codes are shown in the right-most column(s).</p>
+<p>Importantly, both of these indicator variables would not be used as each one exhausts the possibilities. For example, if <em>COHO</em>=1 you know you have a Coho Salmon and if <em>COHO</em>=0 you know that you have a Chinook Salmon.</p>
+<p>For consistency and ease of remembering the coding, an indicator variable should be named after the characteristic denoted by a 1. The two examples above followed this rule – the <em>COHO</em> indicator variable was a 1 when the fish was a Coho Salmon and the <em>CHINOOK</em> indicator variable was a 1 when the fish was a Chinook Salmon.</p>
+<p>If a factor with two levels can be cast as two indicator variables, but only one of those indicator variables is needed, then which one should be used? Analytically, it does not matter as the same conclusions will be reached no matter which indicator variable you use. However, in R, factor levels are arranged alphabetically and a 0 is assigned to the first level and, thus, a 1 is assigned to the second level. Thus, R names indicator variable after the alphabetically second group. To maintain consistency with R you should follow this convention. For example, R will and we should use <em>COHO</em> as “Coho” comes after “Chinook.”</p>
+<p>The relationship between the original factor variable and the indicator variable is easy to keep track of when there are only two groups, but is more work with more groups (see next section). A table with groups shown in the left-most column and the indicator variable(s) with its codes shown in the right-most column(s) will help keep track of the codings when there are more groups.</p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -576,6 +573,9 @@ coho
 </tr>
 </tbody>
 </table>
+<div class="defn">
+<p><strong>Indicator Variable</strong>: A variable that is a numerical representation of a dichotomous (or binary or binomial) categorical variable.</p>
+</div>
 <div class="tip">
 <p>Indicator variables will be coded as 0 for individuals that do NOT have the characteristic of interest and 1 for individuals that do have the characteristic of interest.</p>
 </div>
@@ -585,7 +585,7 @@ coho
 </div>
 <div id="more-than-two-levels" class="section level4 unnumbered">
 <h4>More than Two Levels</h4>
-<p>Combinations of indicator variables can be used to code factor variables that consist of more than two levels. For example, Makarewicz <em>et al.</em> (2003) were also interested in determining if the relationship between mirex concentrations and weight of the salmon differed among six collection years. For simplicity and space considerations, let’s consider that they were interested in only three years – 1977, 1982, and 1986. In this simpler situation, two indicator variables would be created to represent the year factor variable.</p>
+<p>Combinations of indicator variables can be used to code factor variables that consist of more than two levels. For example, Makarewicz <em>et al.</em> (2003) were also interested in determining if the relationship between mirex concentration and weight of the salmon differed among six collection years. For simplicity and space considerations, let’s consider that they were interested in only three years – 1977, 1982, and 1986. In this simpler situation, two indicator variables would be created to represent the <em>year</em> factor variable. For example,</p>
 <p><span class="math display">\[
   YEAR1982 = \left\{\begin{array}{l}
   1 \text{ if collected in 1982 }\\
@@ -599,7 +599,8 @@ coho
   0 \text{ if NOT collected in 1986}
   \end{array}  \right.
 \]</span></p>
-<p>Note that it is possible to create a third dummy variable to represent salmon collected in 1977. However, this indicator variable is redundant with the <em>YEAR1982</em> and <em>YEAR1986</em> indicator variables because if <em>YEAR1982</em>=0 and <em>YEAR1986</em>=0 then the salmon must have been collected in 1977. This illustrates the rule that the number of indicator variables required is one less than the number of levels to be coded.<a href="#fn91" class="footnote-ref" id="fnref91"><sup>91</sup></a></p>
+<p>Note that it is possible to create a third dummy variable to represent salmon collected in 1977. However, this indicator variable is redundant with <em>YEAR1982</em> and <em>YEAR1986</em> because when <em>YEAR1982</em>=0 and <em>YEAR1986</em>=0 then the salmon must have been collected in 1977. This illustrates the rule that the number of indicator variables required is one less than the number of levels to be coded.<a href="#fn91" class="footnote-ref" id="fnref91"><sup>91</sup></a> An example table showing the codings is below.</p>
+<p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -650,8 +651,10 @@ YEAR1986
 </tr>
 </tbody>
 </table>
-<p>The level denoted by the group with “0”s for all related indicator variables is called the <strong>reference group</strong>. In the last example above, the salmon collected in 1977 would be considered the reference group. It will be shown in Module <a href="IVRModels.html#IVRModels">21</a> that all comparisons of intercepts and slopes in the analysis will “refer” to this group of individuals.</p>
-<p>Suppose, for illustration purposes, that fish collected in 1982 were to be considered the reference group rather than fish collected in 1977. In this situation, the  indicator variable would be replaced with the  indicator variable in the model and the table relating the year variable to the indicator variables would be as shown below.</p>
+<p> </p>
+<p>The level denoted by the group with “0”s for all related indicator variables is called the <strong>reference group</strong>. In the last example above, salmon collected in 1977 would be the reference group. It will be shown in Module <a href="IVRModels.html#IVRModels">21</a> that all comparisons of intercepts and slopes in the analysis will “refer” to this group of individuals.</p>
+<p>Suppose, for illustration purposes, that you wanted fish collected in 1982 to be the reference group. In this situation, <em>YEAR1982</em> would be replaced with <em>YEAR1977</em> and the table relating the <em>year</em> factor variable to the indicator variables would be as shown below.</p>
+<p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -702,6 +705,7 @@ YEAR1986
 </tr>
 </tbody>
 </table>
+<p> </p>
 <div class="tip">
 <p>One less indicator variable is needed then the number of categories in the factor variable.</p>
 </div>
@@ -715,13 +719,13 @@ YEAR1986
 </div>
 <div id="interaction-variables" class="section level2" number="20.2">
 <h2><span class="header-section-number">20.2</span> Interaction Variables</h2>
-<p>An <strong>interaction variable</strong> is an explanatory variable that is the product of two or more other explanatory variables (see Module <a href="ANOVA2Foundations1.html#ANOVA2Foundations1">10</a>). In IVR models, interaction variables are created between the covariate and <strong>each</strong> of the indicator variables. Thus, there will always be as many interaction variables as there are indicator variables in an IVR. For example, in the example with Coho and Chinook Salmon, there would be one interaction variable – COHO:Weight. However, in the the example with the three years of data there would be two interaction variables – YEAR1982:Weight and YEAR1986:Weight.</p>
-<p>Interaction variables serve the same purpose in an IVR as they did in a Two-Way ANOVA (see Modules <a href="ANOVA2Foundations1.html#ANOVA2Foundations1">10</a>). That is, the interaction variable is used to identify if the effect of one explanatory variable (here the covariate) on the response variable differs depending on the other explanatory variable (here the factor). In other words, an interaction variable will be used to determine if the effect of the covariate on the response variable differs among roups (i.e., levels of the factor). For example, the interaction variable will allow us to determine if the effect of weight of the salmon on the concentration of mirex in the tissue differs by species of salmon.</p>
-<p>The interaction between two variables in an IVR model may best be illustrated by looking at the examples in Figure <a href="IVRVariables.html#fig:IVRInteraction">20.1</a>. In the panel on the left, the effect of salmon weight (the covariate) on mirex concentration in the tissue (the response) is the same for Coho and Chinook Salmon. This is illustrated by each group having the same slope.<a href="#fn92" class="footnote-ref" id="fnref92"><sup>92</sup></a> However, in the panel on the right, different slopes indicate that the effect of salmon weight on mirex concentration in the tissue differs between the two species. In this particular example, the relationship is “flatter” for Coho than for Chinook Salmon. Thus, an interaction exists for the situation depicted in Figure <a href="IVRVariables.html#fig:IVRInteraction">20.1</a>-Right, because the effect of the covariate on the response depends on which group is being considered. Graphically, an interaction is illustrated by non-parallel lines.</p>
+<p>An <strong>interaction variable</strong> is an explanatory variable that is the product of two or more other explanatory variables (see Module <a href="ANOVA2Foundations1.html#ANOVA2Foundations1">10</a>). In IVR models, interaction variables are created between the covariate and <strong>each</strong> of the indicator variables. Thus, there will always be as many interaction variables as there are indicator variables in an IVR. For example, in the example with Coho and Chinook Salmon, there would be one interaction variable – <em>COHO</em>:<em>Weight</em>. However, in the the example with the three years of data there would be two interaction variables – <em>YEAR1982</em>:<em>Weight</em> and <em>YEAR1986</em>:<em>Weight</em>.</p>
+<p>Interaction variables serve the same purpose in an IVR as they did in a Two-Way ANOVA (see Module <a href="ANOVA2Foundations1.html#ANOVA2Foundations1">10</a>). That is, the interaction variable is used to identify if the effect of one explanatory variable (here the covariate) on the response variable differs depending on the other explanatory variable (here the factor). In other words, an interaction variable will be used to determine if the effect of the covariate on the response variable differs among groups (i.e., levels of the factor). For example, the interaction variable will be used to determine if the effect of weight of the salmon on the concentration of mirex in the tissue differs by species of salmon.</p>
+<p>The interaction between two variables in an IVR model is illustrated with the examples in Figure <a href="IVRVariables.html#fig:IVRInteraction">20.1</a>. In the left panel, the effect of salmon weight (the covariate) on mirex concentration in the tissue (the response) is the same for Coho and Chinook Salmon. This is illustrated by each species having the same slope.<a href="#fn92" class="footnote-ref" id="fnref92"><sup>92</sup></a> However, different slopes in the right panel indicate that the effect of salmon weight on mirex concentration in the tissue differs between the two species. In this particular example, the relationship is “flatter” for Coho than for Chinook Salmon. Thus, an interaction exists for the situation depicted in Figure <a href="IVRVariables.html#fig:IVRInteraction">20.1</a>-Right, because the effect of the covariate on the response depends on which group is being considered. Graphically, an interaction is illustrated by non-parallel lines.</p>
 <div class="figure" style="text-align: center"><span id="fig:IVRInteraction"></span>
-<img src="Book207_files/figure-html/IVRInteraction-1.png" alt="Idealized fitted-line plots representing SLR fit to two groups. The graph on the left indicates the absence of an interaction. The graph on the right indicates the presence of an interaction." width="672" />
+<img src="Book207_files/figure-html/IVRInteraction-1.png" alt="Idealized fitted-line plots representing an IVR fit to two groups. The graph on the left indicates the absence of an interaction. The graph on the right indicates the presence of an interaction." width="672" />
 <p class="caption">
-Figure 20.1: Idealized fitted-line plots representing SLR fit to two groups. The graph on the left indicates the absence of an interaction. The graph on the right indicates the presence of an interaction.
+Figure 20.1: Idealized fitted-line plots representing an IVR fit to two groups. The graph on the left indicates the absence of an interaction. The graph on the right indicates the presence of an interaction.
 </p>
 </div>
 <div class="tip">

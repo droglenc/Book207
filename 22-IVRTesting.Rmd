@@ -1,8 +1,8 @@
 # IVR Testing {#IVRTesting}
-Hypothesis testing in an Indicator Variable Regression (IVR) is the same as that for a One-Way ANOVA, Two-Way ANOVA, and Simple Linear Regression (SLR). However, it can feel different. Fortunately, this is where all of your hard work with respect to comparing models is going to pay off. Lets revisit the F-ratio test statistic (from Section \@ref(ratio-of-variances-signal-to-noise)) before discussing three specific hypotheses of an IVR.
+Hypothesis testing in an Indicator Variable Regression (IVR) is the same as that for the three previous methods, but it can feel different. Fortunately, this is where all of your hard work with respect to comparing models is going to pay off. Lets revisit the F-ratio test statistic (from Section \@ref(ratio-of-variances-signal-to-noise)) before discussing three specific hypotheses of an IVR.
 
 ## F-ratio Test Statistic
-The F-ratio test statistic was $\text{F}=\frac{\text{MS}_{\text{Among}}}{\text{MS}_{\text{Within}}}$ for a One-Way ANOVA, the same for a Two-Way ANOVA except that MS<sub>Among</sub> was replaced with MS<sub>A</sub>, MS<sub>B</sub>, or MS<sub>A:B</sub>, and was $\text{F}=\frac{\text{MS}_{\text{Regression}}}{\text{MS}_{\text{Residual}}}$ for SLR. While these F-ratios all have different symbols in them they are all  
+The F-ratio test statistic was $\text{F}=\frac{\text{MS}_{\text{Among}}}{\text{MS}_{\text{Within}}}$ for a One-Way ANOVA, the same for a Two-Way ANOVA except that MS<sub>Among</sub> was replaced with MS<sub>A</sub>, MS<sub>B</sub>, or MS<sub>A:B</sub>, and was $\text{F}=\frac{\text{MS}_{\text{Regression}}}{\text{MS}_{\text{Residual}}}$ for SLR. While these F-ratios all have different symbols they are all have this same general format: 
 
 &nbsp;
 
@@ -12,9 +12,9 @@ $$
 
 &nbsp;
 
-Note that the "noise" is always the residual MS from fitting the ultimate full model. In other words, the "noise" is the unexplained variance after all explanatory variables have been considered.
+Note that the "noise" is always the residual MS from fitting the ultimate full model. In other words, the "noise" is the unexplained variance after ALL explanatory variables have been considered.
 
-The "signal" or variance explained by the full model (that is not explained by the simple model) is a bit tricky with an IVR because what exactly the simple and full models are depends on the hypotheses being tested. These hypotheses and models are discussed in the next three sections. However, the variability explained by the full model is simply the difference in lack-of-fit between the two models divided by the difference in number of parameters between the two models. This is the "benefit-to-cost" ratio from Section \@ref(ratio-of-variances-signal-to-noise) and is generically
+The "signal" or variance explained by the full model (that is not explained by the simple model) is a bit tricky with an IVR because what exactly the simple and full models are depends on the hypotheses being tested. These hypotheses and models are discussed in the next three sections. However, the variance explained by the full model is simply the difference in lack-of-fit between the two models divided by the difference in number of parameters between the two models. This is the "benefit-to-cost" ratio from Section \@ref(ratio-of-variances-signal-to-noise) and is generically
 
 &nbsp;
 
@@ -69,7 +69,7 @@ $$
 
 &nbsp;
 
-Take note that the H<sub>A</sub> includes the interaction term, whereas H<sub>0</sub> does not. Recall from Section \@ref(interpreting-parameter-estimates) that coefficients on the interaction terms correspond to differences in slopes. Without this parameter, the H<sub>0</sub> corresponds to lines that are parallel, whereas the H<sub>A</sub> with this parameter corresponds to lines with different slopes (and, thus, lines that are not parallel; Figure \@ref(fig:ParallelLinesTestModels)).
+Take note that H<sub>A</sub> includes the interaction term, whereas H<sub>0</sub> does not. Recall from Section \@ref(interpreting-parameter-estimates) that coefficients on the interaction terms correspond to differences in slopes. The H<sub>0</sub> without this parameter corresponds to lines that are parallel, whereas H<sub>A</sub> with this parameter corresponds to lines with different slopes (and, thus, lines that are not parallel; Figure \@ref(fig:ParallelLinesTestModels)).
 
 &nbsp;
 
@@ -98,7 +98,7 @@ A parallel lines test is conducted by comparing the ultimate full model to the m
 :::
 
 #### Parallel Lines Test from Two Models in R {-}
-The ultimate full model provides the residual MS for the F-ratio **and** also serves as the full model for the parallel lines test. The ultimate full model was fit in Section \@ref(ultimate-full-model-in r) as
+The ultimate full model provides the residual MS for the F-ratio **and** also serves as the full model for the parallel lines test. The ultimate full model was fit in Section \@ref(ultimate-full-model-in-r) as
 
 ```{r}
 ivr1 <- lm(mirex~weight+species+weight:species,data=Mirex)
@@ -126,7 +126,7 @@ aov1.rms <- formatC(aov1$RSS[2]/aov1$Res.Df[2],format="f",digits=5)
 aov1.f <- formatC(aov1$"Sum of Sq"[2]/(aov1$RSS[2]/aov1$Res.Df[2]),format="f",digits=5)
 ```
 
-The first two columns of these results (`Res.Df` and `RSS`) are the residual df and RSS for each model (the simple model is listed first). As the full model here is also the ultimate full model, the residual MS for the denominator (bottom part) of the F-ratio is computed from the second row of these two columns. The next two columns (`Df` and `Sum of Sq`) are the differences between the residual df and SS of the two models; thus, these columns contain the four parts needed for the numerator (top part) of the F-Ratio. Thus, the F-ratio is computed with
+The first two columns of these results (`Res.Df` and `RSS`) are the residual df and RSS for each model (the simple model is listed first). As the full model here is also the ultimate full model, the residual MS for the denominator (bottom part) of the F-ratio is computed from the second row of these two columns. The next two columns (`Df` and `Sum of Sq`) are the differences between the residual df and SS of the two models; thus, these columns contain the two parts needed for the numerator (top part) of the F-Ratio. Thus, the F-ratio is computed with
 
 &nbsp;
 
@@ -138,16 +138,16 @@ $$
 
 This calculation is the same (within rounding) as the value under `F` in the `anova()` results. The corresponding p-value is under the `Pr(>F)` column.
 
-This p-value is larger than our typical rejection level of 0.05. Thus, we conclude that H<sub>0</sub> is NOT rejected, the simple model is adequate (as compared to the full model), the slopes appear to be equal, and the lines are parallel. With parallel lines, one concludes that the *relationship* between mirex concentration in the tissue and weight of the salmon is the *same* for Coho and Chinook.
+This p-value is larger than our typical rejection level of 0.05. Thus, we conclude that H<sub>0</sub> is NOT rejected, the simple model is adequate (as compared to the full model), the slopes appear to be equal, and the lines are parallel. With parallel lines, one concludes that the *relationship* between mirex concentration in the tissue and weight of the salmon is the *same* for Coho and Chinook Salmon.
 
-Two other hypothesis tests are considered in the next two sections. However, note that the parallel lines test **is always considered first.** The parallel lines test  uses the interactions between the covariate and indicator variable(s). Thus, this is exactly the same as what we did with the Two-Way ANOVA, where the significance of the interaction effect was assessed first, before deciding whether main effects could be considered.
+Two other hypothesis tests are considered in the next two sections. However, note that the parallel lines test **is always considered first**, because it is basically testing for an interaction effect. Thus, if the lines are not parallel (i.e., there is an interaction effect) then you will not perform the tests in the next two sections. Note that this is exactly what you did with the Two-Way ANOVA, where the significance of the interaction effect was assessed first, before deciding whether main effects could be considered.
 
 ::: {.tip data-latex=""}
 The parallel lines test is ALWAYS conducted first as it involves the interaction variable(s).
 :::
 
 ## Coincident Lines Test
-If the groups are found to be parallel (i.e., have equal slopes) then you should proceed to determine if the groups also have equal intercepts. If the lines are both parallel and have equal intercepts then they are the same line, or are coincident. Thus, this test is called the **coincident lines test**.
+**If the groups are found to be parallel** (i.e., have equal slopes) then you should proceed to determine if the groups also have equal intercepts. If the lines are both parallel and have equal intercepts then they are the same line, or are coincident. Thus, this test is called the **coincident lines test**.
 
 In words, the hypotheses for a coincident lines test are
 
@@ -175,7 +175,7 @@ $$
 
 &nbsp;
 
-There are several important things to consider here. First, the H<sub>A</sub> here was the H<sub>0</sub> in the parallel lines test. This illustrates that some models can be either a full or a simple model depending on the hypothesis being tested. Second, interaction variables are not present in either model because the coincident lines test is only considered for parallel lines (and, thus, the interaction term depicting the difference in slopes is not included). Third, the difference in the two models is the inclusion of the indicator variable and its $\delta_{i}$ coefficient. Recall from Section \@ref(interpreting-parameter-estimates) that $\delta_{i}$ measures the differences in intercepts. Without this parameter (and the $\gamma_{i}$), the H<sub>0</sub> corresponds to two lines that are exactly the same, whereas the H<sub>A</sub> with this parameter corresponds to two line with different intercepts (but the same slope; Figure \@ref(fig:CoincidentLinesTestModels)).
+There are several important things to consider here. First, H<sub>A</sub> here was H<sub>0</sub> in the parallel lines test. This illustrates that whether a model is a full or a simple model may depend on the hypothesis being tested. Second, interaction variables are not present in either model because the coincident lines test is only considered for parallel lines (and, thus, the interaction term depicting the difference in slopes is not included). Third, the difference between the two models is the inclusion of the indicator variable and its $\delta_{i}$ coefficient. Recall from Section \@ref(interpreting-parameter-estimates) that $\delta_{i}$ measures the differences in intercepts. The H<sub>0</sub> without this parameter (and without $\gamma_{i}$) corresponds to lines that are exactly the same, whereas H<sub>A</sub> with this parameter corresponds to some lines that have different intercepts (but the same slope; Figure \@ref(fig:CoincidentLinesTestModels)).
 
 &nbsp;
 
@@ -197,9 +197,9 @@ ggplot(data=CLT,mapping=aes(x=x,y=y,color=group)) +
 
 &nbsp;
 
-This needs to be very clear -- the **coincident lines test is relevant only if the lines have already been found to be parallel.** Thus, you will only test for equal intercepts **AFTER** having determined that the lines are parallel. If the lines are not parallel then you will **NOT** conduct a coincident lines test. The reasoning for this can be thought of in at least two ways.
+This needs to be very clear -- the **coincident lines test is relevant only if the lines have already been found to be parallel.** Thus, you will only test for equal intercepts **AFTER** having already determined that the lines are parallel. If the lines are not parallel then you will **NOT** conduct a coincident lines test. The reasoning for this can be thought of in at least two ways.
 
-First, differences in intercepts come from examining the indicator variable(s). The indicator variables stem from one original factor variable and, thus, can be thought of as a "main effect." If the parallel lines test indicates non-parallel lines then a significant interaction term has been found to be an important contributor to the model. As was learned with a two-way ANOVA, if an interaction exists in the model then the main effect terms should not be interpreted.
+First, differences in intercepts come from examining the indicator variable(s). The indicator variables stem from one original factor variable and, thus, can be thought of as a "main effect." If the parallel lines test indicates non-parallel lines then a significant interaction has been found to be an important contributor to the model. As was learned with a two-way ANOVA, if an interaction exists in the model then the main effects should not be interpreted.
 
 Second, if the lines are not parallel then the significance of the intercept term depends on the relative magnitude of the slopes and "how far" the observed data is from $X=0$. For example, the intercepts in Figure \@ref(fig:IVRInterceptIssue)-Left are statistically different. However, if the center of the observed data was on $X=0$ as in Figure \@ref(fig:IVRInterceptIssue)-Right then the intercepts would not be statistically different. In summary, **the test for equal intercepts is not useful if the slopes differ between groups**.
 
@@ -225,7 +225,7 @@ ggplot(data=II,mapping=aes(x=x,y=y,color=grp)) +
 
 &nbsp;
 
-On the other hand, if the lines are parallel then the coincident lines test is very important. **With parallel lines the difference in intercepts is a measure of the vertical difference between the lines for every value of the covariate.** Thus, the difference in intercepts is a measure of the difference in the response variable between the groups at the same value of the covariate. The coincident lines test tests whether this constant difference is significantly different than 0 or not. In other words, do the values of $Y$ for each group differ for every value of $X$.
+On the other hand, if the lines are parallel then the coincident lines test is very important. **With parallel lines the difference in intercepts is a measure of the vertical difference between the lines for every value of the covariate.** Thus, the difference in intercepts is a measure of the difference in the response variable between the groups at the same value of the covariate. The coincident lines test tests whether this constant difference is significantly different than 0 or not. In other words, do the values of $Y$ for each group differ for each value of $X$.
 
 &nbsp;
 
@@ -265,7 +265,7 @@ The coincident lines test (assuming parallel lines) tests whether the mean of th
 :::
 
 #### Coincident Lines Test from Two Models in R {-}
-The full model for the coincident lines test was the simple module for the parallel lines test and was fit previously and saved into `ivr2`. The simple model for the coincident lines test is the simple linear regression model (i.e., no difference in slopes or intercepts); i.e., 
+The full model for the coincident lines test was the simple model for the parallel lines test and was fit previously and saved as `ivr2`. The simple model for the coincident lines test is the simple linear regression model (i.e., no difference in slopes or intercepts); i.e., 
 
 ```{r}
 ivr3 <- lm(mirex~weight,data=Mirex)
@@ -296,14 +296,14 @@ $$
 
 &nbsp;
 
-Again, this is the F test-statistic (within rounding) shown in the `anova()` results.
+Again, this is the F test-statistic (within rounding) shown in the (second row of the) `anova()` results.
 
-This p-value (`r kPvalue(aov2$"Pr(>F)"[2],latex=FALSE)`) is larger than our typical rejection level of 0.05. Thus, we conclude that the H<sub>0</sub> is NOT rejected, the simple model is adequate (as compared to the full model), the intercepts appear to be equal, and the lines are coincident. With coincident lines, one can conclude, in addition to the relationship not differing between groups (i.e., parallel lines), that the mean mirex concentration in the tissue does NOT differ between Coho and Chinook Salmon of the same weight, no matter what that weight is.
+This p-value (`r kPvalue(aov2$"Pr(>F)"[2],latex=FALSE)`) is larger than our typical rejection level of 0.05. Thus, we conclude that H<sub>0</sub> is NOT rejected, the simple model is adequate (as compared to the full model), the intercepts appear to be equal, and the lines are coincident. With coincident lines, one can conclude, in addition to the relationship not differing between groups (i.e., parallel lines), that the mean mirex concentration in the tissue does NOT differ between Coho and Chinook Salmon of the same weight, no matter what that weight is.
 
 &nbsp;
 
 ## Relationship Test
-If the lines are found to be parallel then you should also determine if the lines represent a relationship or not. This reduces to determining if the slope of the reference group is different from zero (a flat line) or not (not a flat line). As the lines are parallel, the decision for the reference group will extend to the other groups.
+**If the lines are found to be parallel** then you should also determine if the lines represent a relationship or not. This reduces to determining if the slope of the reference group is different from zero (a flat line) or not (not a flat line). As the lines are parallel, the decision for the reference group will extend to the other groups.
 
 In words, the hypotheses for the relationship test are
 
@@ -370,7 +370,7 @@ A relationship test is only appropriate if the lines are parallel.
 :::
 
 #### Relationship Test from Two Models in R {-}
-The full model for the relationship test was the simple module for the coincident lines test and was fit previously and saved into `ivr3`. The simple model for the relationship test is the so-called ultimate simple model^[Because you cannot get any simpler than fitting a model without any variables.] and is fit with 
+The full model for the relationship test was the simple module for the coincident lines test and was fit previously and saved as `ivr3`. The simple model for the relationship test is the so-called ultimate simple model^[Because you cannot get any simpler than fitting a model without any variables.] and is fit with 
 
 ```{r}
 ivr4 <- lm(mirex~1,data=Mirex)
@@ -401,7 +401,7 @@ $$
 
 &nbsp;
 
-Again, this is the F test-statistic (within rounding) shown in the `anova()` results.
+Again, this is the F test-statistic (within rounding) shown in the (second row of the) `anova()` results.
 
 This p-value (`r kPvalue(aov3$"Pr(>F)"[2],latex=FALSE)`) is less than our typical rejection level of 0.05. Thus, one would conclude that H<sub>0</sub> is rejected, the simple model is not adequate and the full model is needed, the slope for the coincident lines is not 0, and there is a relationship between mirex in the tissue and the weight of the salmon.
 
@@ -422,22 +422,22 @@ A close comparison of this one set of results to the results in the three previo
 
 Thus, as with a Two-Way ANOVA, this table should be read from the bottom to the top. If the interaction variable is significant (i.e., non-parallel lines) then the two "main effects" should not be considered. However, if no interaction effect is present (i.e., parallel lines) then the other two "effects" can be considered.
 
-So, in reality, fit the ultimate full model and submitting it to `anova()` to construct this one table from which all three tests (if appropriate) can be assessed.
+So, in practice, fit the ultimate full model and submit it to `anova()` to construct this one table from which all three tests (if appropriate) can be assessed.
 
 ::: {.tip data-latex=""}
 The parallel lines, coincident lines, and relationship test results are in the rows from `anova()` labeled with the interaction variable, the original factor variable, and the covariate, respectively.
 :::
 
 ## More Groups (Different Slopes)
-The previous example with two groups (Coho and Chinook Salmon) can be extended to more than two groups. In this example, we will continue to examine the relationship between mirex concentration in the tissue and weight of the salmon, but among three years (with both species combined).
+The previous example with two groups (Coho and Chinook Salmon) can be extended to more than two groups. In this example, we continue to examine the relationship between mirex concentration in the tissue and weight of the salmon, but among three years (with both species combined).
 
-Before continuing, take note that the `year` variable in the `Mirex` data frame is considered to be numeric.
+Before continuing, take note that `year` in the `Mirex` data frame is considered numeric.
 
 ```{r}
 str(Mirex)
 ```
 
-The IVR requires that the "grouping" variable be considered as a factor. If it is not then `lm()` will not form indicator variables and will instead perform what is called a multiple linear regression. Thus, `year` must be converted to a factor.
+The IVR requires that the "grouping" variable be a factor. If it is not then `lm()` will not form indicator variables and will instead perform what is called a multiple linear regression. Thus, `year` must be converted to a factor.
 
 ```{r}
 Mirex$year <- factor(Mirex$year)
@@ -457,7 +457,7 @@ ivrY1 <- lm(mirex~weight+year+weight:year,data=MirexLast3)
 anova(ivrY1)
 ```
 
-In this case, the p-value for the interaction (`r kPvalue(anova(ivrY1)$"Pr(>F)"[3],latex=FALSE)`) is less than 0.05, which suggests that the interaction term is important to the model (it explains a significant portion of variability) and that **at least** one of the groups has a different slope than the other groups (Figure \@ref(fig:IVRMirexYearL3)). Note the "at least" in the previous sentence. This is the same issue you ran into with One- and Two-Way ANOVAs -- rejecting H<sub>0</sub> simply means that there is some difference among the groups, not that they are all different. Multiple comparisons for slopes will be introduced in the next module.
+In this case, the p-value for the interaction (`r kPvalue(anova(ivrY1)$"Pr(>F)"[3],latex=FALSE)`) is less than 0.05, which suggests that the interaction term is important to the model (it explains a significant portion of variability) and that **at least** one of the groups has a different slope than the other groups (Figure \@ref(fig:IVRMirexYearL3)). Note the "at least" in the previous sentence. This is a familiar issue -- rejecting H<sub>0</sub> simply means that there is some difference among groups, not that they are all different. Multiple comparisons for slopes are introduced in the next module.
 
 &nbsp;
 
@@ -476,7 +476,7 @@ If there are more than two groups, then a significant parallel lines test means 
 :::
 
 ## More Groups (Same Slopes)
-For the purposes of having another simple example, suppose that only the first three years from the previous example were considered.
+For the purposes of having another simple example, suppose that only the first three years from the salmon data are considered.
 
 ```{r}
 MirexFirst3 <- filter(Mirex,year %in% c(1977,1982,1986))
@@ -490,7 +490,7 @@ aovY2.clt <- kPvalue(aovY2$"Pr(>F)"[2],latex=FALSE)
 aovY2.rt <- kPvalue(aovY2$"Pr(>F)"[1],latex=FALSE)
 ```
 
-With these results it is seen that the lines for the three years are parallel (`r aovY2.plt`); thus, the relationship between mirex concentration in the tissue and weight of the salmon does not differ across the three years (Figure \@ref(fig:IVRMirexYearF3)). There does appear to be a significant relationship between mirex concentration in the tissue and weight of the salmon (`r aovY2.rt`). Finally, it appears the mirex concentration in the salmon at the same weight of salmon differ between **at least** one pair of years (`r aovY2.clt`). Again, in the next module, multiple comparison methods for distinguishing which pairs of means have different intercepts will be introduced.
+With these results it is seen that the lines for the three years are parallel (`r aovY2.plt`); thus, the relationship between mirex concentration in the tissue and weight of the salmon does not differ among these three years (Figure \@ref(fig:IVRMirexYearF3)). There does appear to be a significant relationship between mirex concentration in the tissue and weight of the salmon (`r aovY2.rt`). Finally, it appears that mean mirex concentration in salmon of the same weight differs between **at least** one pair of years (`r aovY2.clt`). Again, in the next module, multiple comparison methods for distinguishing which pairs of groups have different intercepts will be introduced.
 
 &nbsp;
 

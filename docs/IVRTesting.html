@@ -365,17 +365,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="IVRTesting" class="section level1" number="22">
 <h1><span class="header-section-number">Module 22</span> IVR Testing</h1>
-<p>Hypothesis testing in an Indicator Variable Regression (IVR) is the same as that for a One-Way ANOVA, Two-Way ANOVA, and Simple Linear Regression (SLR). However, it can feel different. Fortunately, this is where all of your hard work with respect to comparing models is going to pay off. Lets revisit the F-ratio test statistic (from Section <a href="ModelComparison.html#ratio-of-variances-signal-to-noise">4.6</a>) before discussing three specific hypotheses of an IVR.</p>
+<p>Hypothesis testing in an Indicator Variable Regression (IVR) is the same as that for the three previous methods, but it can feel different. Fortunately, this is where all of your hard work with respect to comparing models is going to pay off. Lets revisit the F-ratio test statistic (from Section <a href="ModelComparison.html#ratio-of-variances-signal-to-noise">4.6</a>) before discussing three specific hypotheses of an IVR.</p>
 <div id="f-ratio-test-statistic" class="section level2" number="22.1">
 <h2><span class="header-section-number">22.1</span> F-ratio Test Statistic</h2>
-<p>The F-ratio test statistic was <span class="math inline">\(\text{F}=\frac{\text{MS}_{\text{Among}}}{\text{MS}_{\text{Within}}}\)</span> for a One-Way ANOVA, the same for a Two-Way ANOVA except that MS<sub>Among</sub> was replaced with MS<sub>A</sub>, MS<sub>B</sub>, or MS<sub>A:B</sub>, and was <span class="math inline">\(\text{F}=\frac{\text{MS}_{\text{Regression}}}{\text{MS}_{\text{Residual}}}\)</span> for SLR. While these F-ratios all have different symbols in them they are all</p>
+<p>The F-ratio test statistic was <span class="math inline">\(\text{F}=\frac{\text{MS}_{\text{Among}}}{\text{MS}_{\text{Within}}}\)</span> for a One-Way ANOVA, the same for a Two-Way ANOVA except that MS<sub>Among</sub> was replaced with MS<sub>A</sub>, MS<sub>B</sub>, or MS<sub>A:B</sub>, and was <span class="math inline">\(\text{F}=\frac{\text{MS}_{\text{Regression}}}{\text{MS}_{\text{Residual}}}\)</span> for SLR. While these F-ratios all have different symbols they are all have this same general format:</p>
 <p> </p>
 <p><span class="math display">\[
 \text{F}=\frac{\text{Variance EXPLAINED by the full model}}{\text{Variance UNEXPLAINED by the ultimate full model}}=\frac{``\text{Signal&#39;&#39;}}{``\text{Noise&#39;&#39;}}
 \]</span></p>
 <p> </p>
-<p>Note that the “noise” is always the residual MS from fitting the ultimate full model. In other words, the “noise” is the unexplained variance after all explanatory variables have been considered.</p>
-<p>The “signal” or variance explained by the full model (that is not explained by the simple model) is a bit tricky with an IVR because what exactly the simple and full models are depends on the hypotheses being tested. These hypotheses and models are discussed in the next three sections. However, the variability explained by the full model is simply the difference in lack-of-fit between the two models divided by the difference in number of parameters between the two models. This is the “benefit-to-cost” ratio from Section <a href="ModelComparison.html#ratio-of-variances-signal-to-noise">4.6</a> and is generically</p>
+<p>Note that the “noise” is always the residual MS from fitting the ultimate full model. In other words, the “noise” is the unexplained variance after ALL explanatory variables have been considered.</p>
+<p>The “signal” or variance explained by the full model (that is not explained by the simple model) is a bit tricky with an IVR because what exactly the simple and full models are depends on the hypotheses being tested. These hypotheses and models are discussed in the next three sections. However, the variance explained by the full model is simply the difference in lack-of-fit between the two models divided by the difference in number of parameters between the two models. This is the “benefit-to-cost” ratio from Section <a href="ModelComparison.html#ratio-of-variances-signal-to-noise">4.6</a> and is generically</p>
 <p> </p>
 <p><span class="math display">\[
 ``\text{Signal&#39;&#39;}=\frac{\text{RSS}_{\text{Simple}}-\text{RSS}_{\text{Full}}}{\text{df}_{\text{Simple}}-\text{df}_{\text{Full}}} = \frac{``\text{Benefit (decrease in lack-of fit)&#39;&#39;}}{``\text{Cost (increase in parameters)&#39;&#39;}}
@@ -403,7 +403,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \end{split}
 \]</span></p>
 <p> </p>
-<p>More usefully these translate into the following models<a href="#fn95" class="footnote-ref" id="fnref95"><sup>95</sup></a></p>
+<p>More usefully these translate into the following models<a href="#fn96" class="footnote-ref" id="fnref96"><sup>96</sup></a></p>
 <p> </p>
 <p><span class="math display">\[
 \begin{split}
@@ -412,7 +412,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \end{split}
 \]</span></p>
 <p> </p>
-<p>Take note that the H<sub>A</sub> includes the interaction term, whereas H<sub>0</sub> does not. Recall from Section <a href="IVRModels.html#interpreting-parameter-estimates">21.3</a> that coefficients on the interaction terms correspond to differences in slopes. Without this parameter, the H<sub>0</sub> corresponds to lines that are parallel, whereas the H<sub>A</sub> with this parameter corresponds to lines with different slopes (and, thus, lines that are not parallel; Figure <a href="IVRTesting.html#fig:ParallelLinesTestModels">22.1</a>).</p>
+<p>Take note that H<sub>A</sub> includes the interaction term, whereas H<sub>0</sub> does not. Recall from Section <a href="IVRModels.html#interpreting-parameter-estimates">21.3</a> that coefficients on the interaction terms correspond to differences in slopes. The H<sub>0</sub> without this parameter corresponds to lines that are parallel, whereas H<sub>A</sub> with this parameter corresponds to lines with different slopes (and, thus, lines that are not parallel; Figure <a href="IVRTesting.html#fig:ParallelLinesTestModels">22.1</a>).</p>
 <p> </p>
 <div class="figure" style="text-align: center"><span id="fig:ParallelLinesTestModels"></span>
 <img src="Book207_files/figure-html/ParallelLinesTestModels-1.png" alt="Hypothetical depictions of the models for the null and alternative hypotheses of the parallel lines test." width="672" />
@@ -428,7 +428,7 @@ Figure 22.1: Hypothetical depictions of the models for the null and alternative 
 </div>
 <div id="parallel-lines-test-from-two-models-in-r" class="section level4 unnumbered">
 <h4>Parallel Lines Test from Two Models in R</h4>
-<p>The ultimate full model provides the residual MS for the F-ratio <strong>and</strong> also serves as the full model for the parallel lines test. The ultimate full model was fit in Section @ref(ultimate-full-model-in r) as</p>
+<p>The ultimate full model provides the residual MS for the F-ratio <strong>and</strong> also serves as the full model for the parallel lines test. The ultimate full model was fit in Section <a href="IVRModels.html#ultimate-full-model-in-r">21.4</a> as</p>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb156-1"><a href="IVRTesting.html#cb156-1" aria-hidden="true" tabindex="-1"></a>ivr1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species<span class="sc">+</span>weight<span class="sc">:</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
 <p>The simple model for the parallel lines test is the ultimate full model without the interaction variable(s).</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb157-1"><a href="IVRTesting.html#cb157-1" aria-hidden="true" tabindex="-1"></a>ivr2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
@@ -441,15 +441,15 @@ Figure 22.1: Hypothetical depictions of the models for the null and alternative 
 #R&gt;     Res.Df     RSS Df Sum of Sq      F  Pr(&gt;F)
 #R&gt;   1    119 1.00708                            
 #R&gt;   2    118 0.97964  1  0.027444 3.3057 0.07158</code></pre>
-<p>The first two columns of these results (<code>Res.Df</code> and <code>RSS</code>) are the residual df and RSS for each model (the simple model is listed first). As the full model here is also the ultimate full model, the residual MS for the denominator (bottom part) of the F-ratio is computed from the second row of these two columns. The next two columns (<code>Df</code> and <code>Sum of Sq</code>) are the differences between the residual df and SS of the two models; thus, these columns contain the four parts needed for the numerator (top part) of the F-Ratio. Thus, the F-ratio is computed with</p>
+<p>The first two columns of these results (<code>Res.Df</code> and <code>RSS</code>) are the residual df and RSS for each model (the simple model is listed first). As the full model here is also the ultimate full model, the residual MS for the denominator (bottom part) of the F-ratio is computed from the second row of these two columns. The next two columns (<code>Df</code> and <code>Sum of Sq</code>) are the differences between the residual df and SS of the two models; thus, these columns contain the two parts needed for the numerator (top part) of the F-Ratio. Thus, the F-ratio is computed with</p>
 <p> </p>
 <p><span class="math display">\[
 \text{F}=\frac{\frac{\text{RSS}_{\text{Simple}}-\text{RSS}_{\text{Full}}}{\text{df}_{\text{Simple}}-\text{df}_{\text{Full}}}}{\text{RMS}_{\text{Ultimate Full}}} =\frac{\frac{1.00708-0.97964}{119-118}}{\frac{0.97964}{118}} = \frac{\frac{0.027444}{1}}{0.00830} = \frac{0.02744}{0.00830} = 3.30566
 \]</span></p>
 <p> </p>
 <p>This calculation is the same (within rounding) as the value under <code>F</code> in the <code>anova()</code> results. The corresponding p-value is under the <code>Pr(&gt;F)</code> column.</p>
-<p>This p-value is larger than our typical rejection level of 0.05. Thus, we conclude that H<sub>0</sub> is NOT rejected, the simple model is adequate (as compared to the full model), the slopes appear to be equal, and the lines are parallel. With parallel lines, one concludes that the <em>relationship</em> between mirex concentration in the tissue and weight of the salmon is the <em>same</em> for Coho and Chinook.</p>
-<p>Two other hypothesis tests are considered in the next two sections. However, note that the parallel lines test <strong>is always considered first.</strong> The parallel lines test uses the interactions between the covariate and indicator variable(s). Thus, this is exactly the same as what we did with the Two-Way ANOVA, where the significance of the interaction effect was assessed first, before deciding whether main effects could be considered.</p>
+<p>This p-value is larger than our typical rejection level of 0.05. Thus, we conclude that H<sub>0</sub> is NOT rejected, the simple model is adequate (as compared to the full model), the slopes appear to be equal, and the lines are parallel. With parallel lines, one concludes that the <em>relationship</em> between mirex concentration in the tissue and weight of the salmon is the <em>same</em> for Coho and Chinook Salmon.</p>
+<p>Two other hypothesis tests are considered in the next two sections. However, note that the parallel lines test <strong>is always considered first</strong>, because it is basically testing for an interaction effect. Thus, if the lines are not parallel (i.e., there is an interaction effect) then you will not perform the tests in the next two sections. Note that this is exactly what you did with the Two-Way ANOVA, where the significance of the interaction effect was assessed first, before deciding whether main effects could be considered.</p>
 <div class="tip">
 <p>The parallel lines test is ALWAYS conducted first as it involves the interaction variable(s).</p>
 </div>
@@ -457,7 +457,7 @@ Figure 22.1: Hypothetical depictions of the models for the null and alternative 
 </div>
 <div id="coincident-lines-test" class="section level2" number="22.3">
 <h2><span class="header-section-number">22.3</span> Coincident Lines Test</h2>
-<p>If the groups are found to be parallel (i.e., have equal slopes) then you should proceed to determine if the groups also have equal intercepts. If the lines are both parallel and have equal intercepts then they are the same line, or are coincident. Thus, this test is called the <strong>coincident lines test</strong>.</p>
+<p><strong>If the groups are found to be parallel</strong> (i.e., have equal slopes) then you should proceed to determine if the groups also have equal intercepts. If the lines are both parallel and have equal intercepts then they are the same line, or are coincident. Thus, this test is called the <strong>coincident lines test</strong>.</p>
 <p>In words, the hypotheses for a coincident lines test are</p>
 <p> </p>
 <p><span class="math display">\[
@@ -476,7 +476,7 @@ Figure 22.1: Hypothetical depictions of the models for the null and alternative 
 \end{split}
 \]</span></p>
 <p> </p>
-<p>There are several important things to consider here. First, the H<sub>A</sub> here was the H<sub>0</sub> in the parallel lines test. This illustrates that some models can be either a full or a simple model depending on the hypothesis being tested. Second, interaction variables are not present in either model because the coincident lines test is only considered for parallel lines (and, thus, the interaction term depicting the difference in slopes is not included). Third, the difference in the two models is the inclusion of the indicator variable and its <span class="math inline">\(\delta_{i}\)</span> coefficient. Recall from Section <a href="IVRModels.html#interpreting-parameter-estimates">21.3</a> that <span class="math inline">\(\delta_{i}\)</span> measures the differences in intercepts. Without this parameter (and the <span class="math inline">\(\gamma_{i}\)</span>), the H<sub>0</sub> corresponds to two lines that are exactly the same, whereas the H<sub>A</sub> with this parameter corresponds to two line with different intercepts (but the same slope; Figure <a href="IVRTesting.html#fig:CoincidentLinesTestModels">22.2</a>).</p>
+<p>There are several important things to consider here. First, H<sub>A</sub> here was H<sub>0</sub> in the parallel lines test. This illustrates that whether a model is a full or a simple model may depend on the hypothesis being tested. Second, interaction variables are not present in either model because the coincident lines test is only considered for parallel lines (and, thus, the interaction term depicting the difference in slopes is not included). Third, the difference between the two models is the inclusion of the indicator variable and its <span class="math inline">\(\delta_{i}\)</span> coefficient. Recall from Section <a href="IVRModels.html#interpreting-parameter-estimates">21.3</a> that <span class="math inline">\(\delta_{i}\)</span> measures the differences in intercepts. The H<sub>0</sub> without this parameter (and without <span class="math inline">\(\gamma_{i}\)</span>) corresponds to lines that are exactly the same, whereas H<sub>A</sub> with this parameter corresponds to some lines that have different intercepts (but the same slope; Figure <a href="IVRTesting.html#fig:CoincidentLinesTestModels">22.2</a>).</p>
 <p> </p>
 <div class="figure" style="text-align: center"><span id="fig:CoincidentLinesTestModels"></span>
 <img src="Book207_files/figure-html/CoincidentLinesTestModels-1.png" alt="Hypothetical depictions of the models for the null and alternative hypotheses of the coincident lines test." width="672" />
@@ -485,8 +485,8 @@ Figure 22.2: Hypothetical depictions of the models for the null and alternative 
 </p>
 </div>
 <p> </p>
-<p>This needs to be very clear – the <strong>coincident lines test is relevant only if the lines have already been found to be parallel.</strong> Thus, you will only test for equal intercepts <strong>AFTER</strong> having determined that the lines are parallel. If the lines are not parallel then you will <strong>NOT</strong> conduct a coincident lines test. The reasoning for this can be thought of in at least two ways.</p>
-<p>First, differences in intercepts come from examining the indicator variable(s). The indicator variables stem from one original factor variable and, thus, can be thought of as a “main effect.” If the parallel lines test indicates non-parallel lines then a significant interaction term has been found to be an important contributor to the model. As was learned with a two-way ANOVA, if an interaction exists in the model then the main effect terms should not be interpreted.</p>
+<p>This needs to be very clear – the <strong>coincident lines test is relevant only if the lines have already been found to be parallel.</strong> Thus, you will only test for equal intercepts <strong>AFTER</strong> having already determined that the lines are parallel. If the lines are not parallel then you will <strong>NOT</strong> conduct a coincident lines test. The reasoning for this can be thought of in at least two ways.</p>
+<p>First, differences in intercepts come from examining the indicator variable(s). The indicator variables stem from one original factor variable and, thus, can be thought of as a “main effect.” If the parallel lines test indicates non-parallel lines then a significant interaction has been found to be an important contributor to the model. As was learned with a two-way ANOVA, if an interaction exists in the model then the main effects should not be interpreted.</p>
 <p>Second, if the lines are not parallel then the significance of the intercept term depends on the relative magnitude of the slopes and “how far” the observed data is from <span class="math inline">\(X=0\)</span>. For example, the intercepts in Figure <a href="IVRTesting.html#fig:IVRInterceptIssue">22.3</a>-Left are statistically different. However, if the center of the observed data was on <span class="math inline">\(X=0\)</span> as in Figure <a href="IVRTesting.html#fig:IVRInterceptIssue">22.3</a>-Right then the intercepts would not be statistically different. In summary, <strong>the test for equal intercepts is not useful if the slopes differ between groups</strong>.</p>
 <p> </p>
 <div class="figure" style="text-align: center"><span id="fig:IVRInterceptIssue"></span>
@@ -496,7 +496,7 @@ Figure 22.3: Representation of two sub-model fits with non-parallel lines. The l
 </p>
 </div>
 <p> </p>
-<p>On the other hand, if the lines are parallel then the coincident lines test is very important. <strong>With parallel lines the difference in intercepts is a measure of the vertical difference between the lines for every value of the covariate.</strong> Thus, the difference in intercepts is a measure of the difference in the response variable between the groups at the same value of the covariate. The coincident lines test tests whether this constant difference is significantly different than 0 or not. In other words, do the values of <span class="math inline">\(Y\)</span> for each group differ for every value of <span class="math inline">\(X\)</span>.</p>
+<p>On the other hand, if the lines are parallel then the coincident lines test is very important. <strong>With parallel lines the difference in intercepts is a measure of the vertical difference between the lines for every value of the covariate.</strong> Thus, the difference in intercepts is a measure of the difference in the response variable between the groups at the same value of the covariate. The coincident lines test tests whether this constant difference is significantly different than 0 or not. In other words, do the values of <span class="math inline">\(Y\)</span> for each group differ for each value of <span class="math inline">\(X\)</span>.</p>
 <p> </p>
 <div class="figure" style="text-align: center"><span id="fig:DiffIntercepts"></span>
 <img src="Book207_files/figure-html/DiffIntercepts-1.png" alt="Representation of two sub-model fits that are parallel but with different intercepts (not coincident). The difference in intercepts is shown at X=0, but since the lines are parallel this is the same difference at every value of X, four others of which are shown." width="336" />
@@ -516,7 +516,7 @@ Figure 22.4: Representation of two sub-model fits that are parallel but with dif
 </div>
 <div id="coincident-lines-test-from-two-models-in-r" class="section level4 unnumbered">
 <h4>Coincident Lines Test from Two Models in R</h4>
-<p>The full model for the coincident lines test was the simple module for the parallel lines test and was fit previously and saved into <code>ivr2</code>. The simple model for the coincident lines test is the simple linear regression model (i.e., no difference in slopes or intercepts); i.e.,</p>
+<p>The full model for the coincident lines test was the simple model for the parallel lines test and was fit previously and saved as <code>ivr2</code>. The simple model for the coincident lines test is the simple linear regression model (i.e., no difference in slopes or intercepts); i.e.,</p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb160-1"><a href="IVRTesting.html#cb160-1" aria-hidden="true" tabindex="-1"></a>ivr3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight,<span class="at">data=</span>Mirex)</span></code></pre></div>
 <p>These models are compared with <code>anova()</code>; however, the ultimate full model must be included as well so that the proper residual MS (i.e., from the ultimate full model) will be used.</p>
 <div class="sourceCode" id="cb161"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb161-1"><a href="IVRTesting.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr3,ivr2,ivr1)</span></code></pre></div>
@@ -535,14 +535,14 @@ Figure 22.4: Representation of two sub-model fits that are parallel but with dif
 \text{F}=\frac{\frac{\text{RSS}_{\text{Simple}}-\text{RSS}_{\text{Full}}}{\text{df}_{\text{Simple}}-\text{df}_{\text{Full}}}}{\text{RMS}_{\text{Ultimate Full}}} =\frac{\frac{1.00758-1.00708}{120-119}}{0.00830} = \frac{\frac{0.00050}{1}}{0.00830} = \frac{0.00050}{0.00830} = 0.06002
 \]</span></p>
 <p> </p>
-<p>Again, this is the F test-statistic (within rounding) shown in the <code>anova()</code> results.</p>
-<p>This p-value (p=0.8087) is larger than our typical rejection level of 0.05. Thus, we conclude that the H<sub>0</sub> is NOT rejected, the simple model is adequate (as compared to the full model), the intercepts appear to be equal, and the lines are coincident. With coincident lines, one can conclude, in addition to the relationship not differing between groups (i.e., parallel lines), that the mean mirex concentration in the tissue does NOT differ between Coho and Chinook Salmon of the same weight, no matter what that weight is.</p>
+<p>Again, this is the F test-statistic (within rounding) shown in the (second row of the) <code>anova()</code> results.</p>
+<p>This p-value (p=0.8087) is larger than our typical rejection level of 0.05. Thus, we conclude that H<sub>0</sub> is NOT rejected, the simple model is adequate (as compared to the full model), the intercepts appear to be equal, and the lines are coincident. With coincident lines, one can conclude, in addition to the relationship not differing between groups (i.e., parallel lines), that the mean mirex concentration in the tissue does NOT differ between Coho and Chinook Salmon of the same weight, no matter what that weight is.</p>
 <p> </p>
 </div>
 </div>
 <div id="relationship-test" class="section level2" number="22.4">
 <h2><span class="header-section-number">22.4</span> Relationship Test</h2>
-<p>If the lines are found to be parallel then you should also determine if the lines represent a relationship or not. This reduces to determining if the slope of the reference group is different from zero (a flat line) or not (not a flat line). As the lines are parallel, the decision for the reference group will extend to the other groups.</p>
+<p><strong>If the lines are found to be parallel</strong> then you should also determine if the lines represent a relationship or not. This reduces to determining if the slope of the reference group is different from zero (a flat line) or not (not a flat line). As the lines are parallel, the decision for the reference group will extend to the other groups.</p>
 <p>In words, the hypotheses for the relationship test are</p>
 <p> </p>
 <p><span class="math display">\[
@@ -580,7 +580,7 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 </div>
 <div id="relationship-test-from-two-models-in-r" class="section level4 unnumbered">
 <h4>Relationship Test from Two Models in R</h4>
-<p>The full model for the relationship test was the simple module for the coincident lines test and was fit previously and saved into <code>ivr3</code>. The simple model for the relationship test is the so-called ultimate simple model<a href="#fn96" class="footnote-ref" id="fnref96"><sup>96</sup></a> and is fit with</p>
+<p>The full model for the relationship test was the simple module for the coincident lines test and was fit previously and saved as <code>ivr3</code>. The simple model for the relationship test is the so-called ultimate simple model<a href="#fn97" class="footnote-ref" id="fnref97"><sup>97</sup></a> and is fit with</p>
 <div class="sourceCode" id="cb163"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb163-1"><a href="IVRTesting.html#cb163-1" aria-hidden="true" tabindex="-1"></a>ivr4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span><span class="dv">1</span>,<span class="at">data=</span>Mirex)</span></code></pre></div>
 <p>These models are compared with <code>anova()</code>, again with the ultimate full model included so that the proper residual MS will be used.</p>
 <div class="sourceCode" id="cb164"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb164-1"><a href="IVRTesting.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr4,ivr3,ivr1)</span></code></pre></div>
@@ -599,7 +599,7 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 \text{F}=\frac{\frac{\text{RSS}_{\text{Simple}}-\text{RSS}_{\text{Full}}}{\text{df}_{\text{Simple}}-\text{df}_{\text{Full}}}}{\text{RMS}_{\text{Ultimate Full}}} =\frac{\frac{1.23056-1.00758}{121-120}}{0.00830} = \frac{\frac{0.22298}{1}}{0.00830} = \frac{0.22298}{0.00830} = 26.8586
 \]</span></p>
 <p> </p>
-<p>Again, this is the F test-statistic (within rounding) shown in the <code>anova()</code> results.</p>
+<p>Again, this is the F test-statistic (within rounding) shown in the (second row of the) <code>anova()</code> results.</p>
 <p>This p-value (p&lt;0.00005) is less than our typical rejection level of 0.05. Thus, one would conclude that H<sub>0</sub> is rejected, the simple model is not adequate and the full model is needed, the slope for the coincident lines is not 0, and there is a relationship between mirex in the tissue and the weight of the salmon.</p>
 <p> </p>
 </div>
@@ -623,22 +623,22 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 <li>The <code>weight</code> (i.e., the covariate) row corresponds to the relationship test.</li>
 </ul>
 <p>Thus, as with a Two-Way ANOVA, this table should be read from the bottom to the top. If the interaction variable is significant (i.e., non-parallel lines) then the two “main effects” should not be considered. However, if no interaction effect is present (i.e., parallel lines) then the other two “effects” can be considered.</p>
-<p>So, in reality, fit the ultimate full model and submitting it to <code>anova()</code> to construct this one table from which all three tests (if appropriate) can be assessed.</p>
+<p>So, in practice, fit the ultimate full model and submit it to <code>anova()</code> to construct this one table from which all three tests (if appropriate) can be assessed.</p>
 <div class="tip">
 <p>The parallel lines, coincident lines, and relationship test results are in the rows from <code>anova()</code> labeled with the interaction variable, the original factor variable, and the covariate, respectively.</p>
 </div>
 </div>
 <div id="more-groups-different-slopes" class="section level2" number="22.6">
 <h2><span class="header-section-number">22.6</span> More Groups (Different Slopes)</h2>
-<p>The previous example with two groups (Coho and Chinook Salmon) can be extended to more than two groups. In this example, we will continue to examine the relationship between mirex concentration in the tissue and weight of the salmon, but among three years (with both species combined).</p>
-<p>Before continuing, take note that the <code>year</code> variable in the <code>Mirex</code> data frame is considered to be numeric.</p>
+<p>The previous example with two groups (Coho and Chinook Salmon) can be extended to more than two groups. In this example, we continue to examine the relationship between mirex concentration in the tissue and weight of the salmon, but among three years (with both species combined).</p>
+<p>Before continuing, take note that <code>year</code> in the <code>Mirex</code> data frame is considered numeric.</p>
 <div class="sourceCode" id="cb168"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb168-1"><a href="IVRTesting.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Mirex)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   &#39;data.frame&#39;: 122 obs. of  4 variables:
 #R&gt;    $ year   : int  1977 1977 1977 1977 1977 1977 1977 1977 1977 1977 ...
 #R&gt;    $ weight : num  0.41 0.45 1.04 1.09 1.24 1.25 1.3 1.34 1.37 1.49 ...
 #R&gt;    $ mirex  : num  0.16 0.19 0.19 0.1 0.13 0.19 0.28 0.16 0.17 0.2 ...
 #R&gt;    $ species: Factor w/ 2 levels &quot;chinook&quot;,&quot;coho&quot;: 1 1 1 2 1 1 1 2 2 2 ...</code></pre>
-<p>The IVR requires that the “grouping” variable be considered as a factor. If it is not then <code>lm()</code> will not form indicator variables and will instead perform what is called a multiple linear regression. Thus, <code>year</code> must be converted to a factor.</p>
+<p>The IVR requires that the “grouping” variable be a factor. If it is not then <code>lm()</code> will not form indicator variables and will instead perform what is called a multiple linear regression. Thus, <code>year</code> must be converted to a factor.</p>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb170-1"><a href="IVRTesting.html#cb170-1" aria-hidden="true" tabindex="-1"></a>Mirex<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">factor</span>(Mirex<span class="sc">$</span>year)</span>
 <span id="cb170-2"><a href="IVRTesting.html#cb170-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Mirex)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   &#39;data.frame&#39;: 122 obs. of  4 variables:
@@ -648,7 +648,7 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 #R&gt;    $ species: Factor w/ 2 levels &quot;chinook&quot;,&quot;coho&quot;: 1 1 1 2 1 1 1 2 2 2 ...</code></pre>
 <p>Also, for the sake of having a simple example, only the last three years in the data will be used.</p>
 <div class="sourceCode" id="cb172"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb172-1"><a href="IVRTesting.html#cb172-1" aria-hidden="true" tabindex="-1"></a>MirexLast3 <span class="ot">&lt;-</span> <span class="fu">filter</span>(Mirex,year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1992</span>,<span class="dv">1996</span>,<span class="dv">1999</span>))</span></code></pre></div>
-<p>The ultimate full model is then fit and the ANOVA table is extracted with<a href="#fn97" class="footnote-ref" id="fnref97"><sup>97</sup></a></p>
+<p>The ultimate full model is then fit and the ANOVA table is extracted with<a href="#fn98" class="footnote-ref" id="fnref98"><sup>98</sup></a></p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb173-1"><a href="IVRTesting.html#cb173-1" aria-hidden="true" tabindex="-1"></a>ivrY1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year<span class="sc">+</span>weight<span class="sc">:</span>year,<span class="at">data=</span>MirexLast3)</span>
 <span id="cb173-2"><a href="IVRTesting.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivrY1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
@@ -659,7 +659,7 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 #R&gt;   year         2 0.205825 0.102912 27.2149 2.028e-08
 #R&gt;   weight:year  2 0.042176 0.021088  5.5767   0.00694
 #R&gt;   Residuals   44 0.166385 0.003781</code></pre>
-<p>In this case, the p-value for the interaction (p=0.0069) is less than 0.05, which suggests that the interaction term is important to the model (it explains a significant portion of variability) and that <strong>at least</strong> one of the groups has a different slope than the other groups (Figure <a href="IVRTesting.html#fig:IVRMirexYearL3">22.6</a>). Note the “at least” in the previous sentence. This is the same issue you ran into with One- and Two-Way ANOVAs – rejecting H<sub>0</sub> simply means that there is some difference among the groups, not that they are all different. Multiple comparisons for slopes will be introduced in the next module.</p>
+<p>In this case, the p-value for the interaction (p=0.0069) is less than 0.05, which suggests that the interaction term is important to the model (it explains a significant portion of variability) and that <strong>at least</strong> one of the groups has a different slope than the other groups (Figure <a href="IVRTesting.html#fig:IVRMirexYearL3">22.6</a>). Note the “at least” in the previous sentence. This is a familiar issue – rejecting H<sub>0</sub> simply means that there is some difference among groups, not that they are all different. Multiple comparisons for slopes are introduced in the next module.</p>
 <p> </p>
 <div class="figure" style="text-align: center"><span id="fig:IVRMirexYearL3"></span>
 <img src="Book207_files/figure-html/IVRMirexYearL3-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for 1992, 1996, and 1999. Note that the IVR indicated that these lines are not  parallel." width="432" />
@@ -674,7 +674,7 @@ Figure 22.6: Fitted regression lines for mirex in tissue by salmon weight for 19
 </div>
 <div id="more-groups-same-slopes" class="section level2" number="22.7">
 <h2><span class="header-section-number">22.7</span> More Groups (Same Slopes)</h2>
-<p>For the purposes of having another simple example, suppose that only the first three years from the previous example were considered.</p>
+<p>For the purposes of having another simple example, suppose that only the first three years from the salmon data are considered.</p>
 <div class="sourceCode" id="cb175"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb175-1"><a href="IVRTesting.html#cb175-1" aria-hidden="true" tabindex="-1"></a>MirexFirst3 <span class="ot">&lt;-</span> <span class="fu">filter</span>(Mirex,year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1977</span>,<span class="dv">1982</span>,<span class="dv">1986</span>))</span>
 <span id="cb175-2"><a href="IVRTesting.html#cb175-2" aria-hidden="true" tabindex="-1"></a>ivrY2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year<span class="sc">+</span>weight<span class="sc">:</span>year,<span class="at">data=</span>MirexFirst3)</span>
 <span id="cb175-3"><a href="IVRTesting.html#cb175-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivrY2)</span></code></pre></div>
@@ -686,7 +686,7 @@ Figure 22.6: Fitted regression lines for mirex in tissue by salmon weight for 19
 #R&gt;   year         2 0.05719 0.02859  7.8306 0.0008881
 #R&gt;   weight:year  2 0.00089 0.00044  0.1218 0.8855178
 #R&gt;   Residuals   66 0.24101 0.00365</code></pre>
-<p>With these results it is seen that the lines for the three years are parallel (p=0.8855); thus, the relationship between mirex concentration in the tissue and weight of the salmon does not differ across the three years (Figure <a href="IVRTesting.html#fig:IVRMirexYearF3">22.7</a>). There does appear to be a significant relationship between mirex concentration in the tissue and weight of the salmon (p&lt;0.00005). Finally, it appears the mirex concentration in the salmon at the same weight of salmon differ between <strong>at least</strong> one pair of years (p=0.0009). Again, in the next module, multiple comparison methods for distinguishing which pairs of means have different intercepts will be introduced.</p>
+<p>With these results it is seen that the lines for the three years are parallel (p=0.8855); thus, the relationship between mirex concentration in the tissue and weight of the salmon does not differ among these three years (Figure <a href="IVRTesting.html#fig:IVRMirexYearF3">22.7</a>). There does appear to be a significant relationship between mirex concentration in the tissue and weight of the salmon (p&lt;0.00005). Finally, it appears that mean mirex concentration in salmon of the same weight differs between <strong>at least</strong> one pair of years (p=0.0009). Again, in the next module, multiple comparison methods for distinguishing which pairs of groups have different intercepts will be introduced.</p>
 <p> </p>
 <div class="figure" style="text-align: center"><span id="fig:IVRMirexYearF3"></span>
 <img src="Book207_files/figure-html/IVRMirexYearF3-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. Note that the IVR indicated that these lines are parallel, there is a signficant relationship, and at least one of the lines has a different intercept." width="432" />
@@ -704,10 +704,10 @@ Figure 22.7: Fitted regression lines for mirex in tissue by salmon weight for on
 </div>
 <div class="footnotes">
 <hr />
-<ol start="95">
-<li id="fn95"><p>The variables in this model were defined in Modules <a href="IVRVariables.html#IVRVariables">20</a>-<a href="IVRModels.html#IVRModels">21</a>.<a href="IVRTesting.html#fnref95" class="footnote-back">↩︎</a></p></li>
-<li id="fn96"><p>Because you cannot get any simpler than fitting a model without any variables.<a href="IVRTesting.html#fnref96" class="footnote-back">↩︎</a></p></li>
-<li id="fn97"><p>Assumptions should be checked and will be introduced in the next module.<a href="IVRTesting.html#fnref97" class="footnote-back">↩︎</a></p></li>
+<ol start="96">
+<li id="fn96"><p>The variables in this model were defined in Modules <a href="IVRVariables.html#IVRVariables">20</a>-<a href="IVRModels.html#IVRModels">21</a>.<a href="IVRTesting.html#fnref96" class="footnote-back">↩︎</a></p></li>
+<li id="fn97"><p>Because you cannot get any simpler than fitting a model without any variables.<a href="IVRTesting.html#fnref97" class="footnote-back">↩︎</a></p></li>
+<li id="fn98"><p>Assumptions should be checked and will be introduced in the next module.<a href="IVRTesting.html#fnref98" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
