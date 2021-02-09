@@ -174,7 +174,7 @@ mc1.d.promo <- emmeans(lm1.d.noint,specs=pairwise~Promo)
 ( mc1sum.d.promo <- summary(mc1.d.promo,infer=TRUE) )
 mc1.d.discount <- emmeans(lm1.d.noint,specs=pairwise~Discount)
 ( mc1sum.d.discount <- summary(mc1.d.discount,infer=TRUE) )
-<<DicountFitPlot>>
+<<DiscountFitPlot>>
 ```
 
 &nbsp;
