@@ -25,13 +25,13 @@ In Section \@ref(more-groups-different-slopes), IVR indicated that some slopes b
 
 &nbsp;
 
-The `emtrends()` function from the `emmeans` package^[The `emmeans` package was introduced in Section \@ref(multiple-comparisons-in-r).] can be used to test for differences among all pairs of slopes using a Tukey-like correction. This function requires the ultimate full model as its first argument (`ivrY1` here as fit in Section \@ref(parallel-lines-test)), a `specs=` argument with `pairwise~` followed by the name of the factor variable in the ultimate full model, and `var=` followed by the name of the covariate in the ultimate full model.^[Except for `var=` this is the same as for `emmeans()` described in Section \@ref(multiple-comparisons-in-r)] The results of this function should be saved to an object.
+The `emtrends()` function from the `emmeans` package^[The `emmeans` package was introduced in Section \@ref(multiple-comparisons-in-r).] can be used to test for differences among all pairs of slopes using a Tukey-like correction. This function requires the ultimate full model as its first argument (`ivrY1` here as fit in Section \@ref(parallel-lines-test)), a `specs=` argument with `pairwise~` followed by the name of the factor variable in the ultimate full model, and `var=` followed by the name of the covariate in the ultimate full model (which **must** be in quotes).^[Except for `var=` this is the same as for `emmeans()` described in Section \@ref(multiple-comparisons-in-r)] The results of this function should be saved to an object.
 
 ```{r}
 smc <- emtrends(ivrY1,pairwise~year,var="weight")
 ```
 
-That saved object is then the first argument to `summary()`, which also includes `infer=TRUE`. The results are in sections labeled as `$emmeans` and `$contrasts`.
+That saved object is then the first argument to `summary()`, which also includes `infer=TRUE`. The results are in sections labeled as `$emtrends` and `$contrasts`.
 
 ```{r}
 ( smcsum <- summary(smc,infer=TRUE) )
@@ -41,9 +41,9 @@ The `$contrasts` section contains the Tukey-corrected tests for each pair of slo
 
 * `estimate`: the *difference* in group sample slopes,
 * `lower.CL` and `upper.CL`: 95% confidence interval for the *difference* in slopes, and
-* `p.value`: p-value for testing that the *difference* in group population slopes is 0 or not.
+* `p.value`: p-value for testing that the *difference* in slopes is 0 or not.
 
-For example, the sample slope for 1992 is `r formatC(smcsum$contrasts$estimate[1],format="f",digits=5)` greater than the sample slope for 1996, one is 95% confident that the population slope for 1992 is between `r formatC(smcsum$contrasts$lower.CL[1],format="f",digits=6)` and `r formatC(smcsum$contrasts$upper.CL[1],format="f",digits=4)` greater than the population slope for 1996, and that the population slopes differ between these two years (`r kPvalue(smcsum$contrasts$p.value[1],latex=FALSE)`). In contrast, the sample slope for 1996 is `r formatC(smcsum$contrasts$estimate[3],format="f",digits=5)` greater than the sample slope for 1999, one is 95% confident that the population slope for 1996 is between `r formatC(-1*smcsum$contrasts$lower.CL[3],format="f",digits=6)` less than and `r formatC(smcsum$contrasts$upper.CL[3],format="f",digits=4)` greater than the population slope for 1999, and the population slopes do NOT differ between these two years (`r kPvalue(smcsum$contrasts$p.value[3],latex=FALSE)`).
+For example, the sample slope for 1992 is `r formatC(smcsum$contrasts$estimate[1],format="f",digits=5)` greater than the sample slope for 1996, one is 95% confident that the population slope for 1992 is between `r formatC(smcsum$contrasts$lower.CL[1],format="f",digits=6)` and `r formatC(smcsum$contrasts$upper.CL[1],format="f",digits=4)` greater than the population slope for 1996, and the population slopes differ between 1992 and 1996 (`r kPvalue(smcsum$contrasts$p.value[1],latex=FALSE)`). In contrast, the sample slope for 1996 is `r formatC(smcsum$contrasts$estimate[3],format="f",digits=5)` greater than the sample slope for 1999, one is 95% confident that the population slope for 1996 is between `r formatC(-1*smcsum$contrasts$lower.CL[3],format="f",digits=6)` less than and `r formatC(smcsum$contrasts$upper.CL[3],format="f",digits=4)` greater than the population slope for 1999, and the population slopes do NOT differ between these two years (`r kPvalue(smcsum$contrasts$p.value[3],latex=FALSE)`).
 
 An examination of all of the `$contrast` results suggests that the slope from 1992 differed significantly from the slopes of 1996 (`r kPvalue(smcsum$contrasts$p.value[1],latex=FALSE)`) and 1999 (`r kPvalue(smcsum$contrasts$p.value[2],latex=FALSE)`), but the slopes for 1996 and 1999 did not differ (`r kPvalue(smcsum$contrasts$p.value[3],latex=FALSE)`).
 
@@ -57,7 +57,7 @@ The `$emtrends` section of the output contains information about the individual 
 * `lower.CL` and `upper.CL`: 95% confidence interval for the slope, and
 * `p.value`: p-value for the test whether the slope is 0 or not (i.e., is there a relationship or not).
 
-For example, the sample slope for 1992 is `r formatC(smcsum$emtrends$weight.trend[1],format="f",digits=5)`, one is 95% confidence interval that the population slope for 1992 is between `r formatC(smcsum$emtrends$lower.CL[1],format="f",digits=5)` and `r formatC(smcsum$emtrends$upper.CL[1],format="f",digits=4)`, and there was a significant relationship between mirex in the tissue and salmon weight in 1992 (`r kPvalue(smcsum$emtrends$p.value[1],latex=FALSE)`).
+For example, the sample slope for 1992 is `r formatC(smcsum$emtrends$weight.trend[1],format="f",digits=5)`, one is 95% confident that the population slope for 1992 is between `r formatC(smcsum$emtrends$lower.CL[1],format="f",digits=5)` and `r formatC(smcsum$emtrends$upper.CL[1],format="f",digits=4)`, and there is a significant relationship between mirex in the tissue and salmon weight in 1992 (`r kPvalue(smcsum$emtrends$p.value[1],latex=FALSE)`).
 
 An examination of all of the results in `$emtrends` shows that the only slope that was not significantly different from 0 was for 1999. Thus, there was a significant relationship between mirex concentration in the tissue and salmon weight for 1992 and 1996, but not for 1999.
 
@@ -93,21 +93,21 @@ The important parts of the `$contrasts` portion are
 
 * `estimate`: the difference in sample intercepts,
 * `lower.CL` and `upper.CL`: 95% confidence intervals for the difference in intercepts, and
-* `p.value`: p-value for whether the differences in intercepts is 0.
+* `p.value`: p-value for whether the differences in intercepts is 0 or not.
 
-For example, the sample intercept for 1977 is `r formatC(imcsum$contrasts$estimate[1],format="f",digits=4)` mg/kg greater than the intercept for 1982, the population intercept for 1977 is between `r formatC(imcsum$contrasts$lower.CL[1],format="f",digits=4)` and `r formatC(imcsum$contrasts$upper.CL[1],format="f",digits=4)` greater than the population intercept for 1982, and the intercepts for these two years are significantly different (`r kPvalue(imcsum$contrasts$p.value[1],latex=FALSE)`). Because these two years are parallel, the sample mean mirex concentration for 1977 is `r formatC(imcsum$contrasts$estimate[1],format="f",digits=4)` mg/kg greater than the sample mean mirex concentration for 1982 for all salmon weights.
+For example, the sample intercept for 1977 is `r formatC(imcsum$contrasts$estimate[1],format="f",digits=4)` mg/kg greater than the intercept for 1982, the population intercept for 1977 is between `r formatC(imcsum$contrasts$lower.CL[1],format="f",digits=4)` and `r formatC(imcsum$contrasts$upper.CL[1],format="f",digits=4)` greater than the population intercept for 1982, and the intercepts for these two years are significantly different (`r kPvalue(imcsum$contrasts$p.value[1],latex=FALSE)`). Because these two years are parallel, the sample mean mirex concentration for 1977 is `r formatC(imcsum$contrasts$estimate[1],format="f",digits=4)` mg/kg greater than the sample mean mirex concentration for 1982 **for all salmon weights**.
 
 ::: {.tip data-latex=""}
 The **difference** in group intercepts with 95% confidence intervals and p-values are shown in the `$contrasts` section of the results.
 :::
 
-The results in `$emmeans` portion contains information about the mean of the response variable at the mean of the covariate. In other words, this information is about the intercepts for the *centered* covariate (see Section \@ref(intercept)). Specifically,
+The results in the `$emmeans` portion contains information about the mean of the response variable at the mean of the covariate. In other words, this information is about the intercepts for the *centered* covariate (see Section \@ref(intercept)). Specifically,
 
 * `emmean`: sample mean of the response variable at the sample mean of the covariate,
 * `lower.CL` and `upper.CL`: 95% confidence interval for the population mean of the response variable at the sample mean of the covariate, and
 * `p.value`: a p-value for testing if the population mean of the response variable at the sample mean of the covariate is equal to 0 or not.
 
-For example, the sample mean mirex concentration in 1977 for a salmon with the sample mean weight of all salmon is `r formatC(imcsum$emmeans$emmean[1],format="f",digits=3)`, one is 95% confident that the population mean mirex concentration in 1977 for a salmon with the sample mean weight of all salmon is between `r formatC(imcsum$emmeans$lower.CL[1],format="f",digits=3)` and `r formatC(imcsum$emmeans$upper.CL[1],format="f",digits=3)` mg/kg, and the population mean mirex concentration at the sample mean salmon weight in 1977 is not equal to 0 (`r kPvalue(imcsum$emmeans$p.value[1],latex=FALSE)`). A visual of the sample means under `emmeans` is shown in Figure \@ref(fig:IVRExampleIntercepts).
+For example, the sample mean mirex concentration in 1977 for salmon with the sample mean weight of all salmon is `r formatC(imcsum$emmeans$emmean[1],format="f",digits=3)`, one is 95% confident that the population mean mirex concentration in 1977 for a salmon with the sample mean weight of all salmon is between `r formatC(imcsum$emmeans$lower.CL[1],format="f",digits=3)` and `r formatC(imcsum$emmeans$upper.CL[1],format="f",digits=3)` mg/kg, and the population mean mirex concentration at the sample mean salmon weight in 1977 is not equal to 0 (`r kPvalue(imcsum$emmeans$p.value[1],latex=FALSE)`). A visual of the sample means under `emmeans` is shown in Figure \@ref(fig:IVRExampleIntercepts).
 
 &nbsp;
 
@@ -129,7 +129,8 @@ ggplot(data=MirexFirst3,mapping=aes(x=weight,y=mirex,color=year)) +
   labs(x="Weight (kg)",y="Mirex Concentration (mg/kg)") +
   theme_NCStats() +
   annotate(geom="text",x=5,y=0.12,
-           label=paste0("Mean Weight = ",formatC(tmp$weight[1],format="f",digits=3)),
+           label=paste0("Mean Weight = ",
+                        formatC(tmp$weight[1],format="f",digits=3)),
            size=lbl_text_size,hjust=-0.02) +
   annotate(geom="segment",x=5,y=0.12,xend=tmp$weight[1],yend=-Inf,
            arrow=ARROW)
@@ -141,7 +142,7 @@ ggplot(data=MirexFirst3,mapping=aes(x=weight,y=mirex,color=year)) +
 The mean value of the response at the mean value of the covariate, along with 95% confidence intervals and p-values, are shown in the `$emmeans` section of the results.
 :::
 
-The `emmeans()` function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extreme extrapolation as discussed in Section \@ref(intercept). It is possible to compute the mean values of the response at other values of the covariate by using `cov.reduce=` in `emmeans()`. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure \@ref(fig:IVRExampleIntercepts2)).^[You can get the mean values of the response at a covariate of 0 (i.e., the actual y-intercepts) by using `cov.reduce=function(x) 0`.] Because the lines are parallel this does not change anything in the `$contrasts` portion of the output. However, the `$emmeans` portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.
+The `emmeans()` function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extrapolation as discussed in Section \@ref(intercept). It is possible to compute the mean values of the response at other values of the covariate by using `cov.reduce=` in `emmeans()`. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure \@ref(fig:IVRExampleIntercepts2)).^[You can get the mean values of the response at a covariate of 0 (i.e., the actual y-intercepts) by using `cov.reduce=function(x) 0`.] Because the lines are parallel this does not change anything in the `$contrasts` portion of the output. However, the `$emmeans` portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.
 
 ```{r}
 imc2 <- emmeans(ivrY2_noint,pairwise~year,cov.reduce=min)

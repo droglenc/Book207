@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-08" />
+<meta name="date" content="2021-02-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -379,16 +379,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>If this assumption is not met then other analysis methods must be used.</li>
 </ul></li>
 <li>Fit the untransformed ultimate full model with <code>lm()</code>.</li>
-<li>Check the other four assumptions for the untransformed model with assumptionCheck().
+<li>Check the other four assumptions for the untransformed model with <code>assumptionCheck()</code>.
 <ul>
-<li>Check the linearity of the relationship with the residual plot.</li>
+<li>Check linearity of the relationship with the residual plot.</li>
 <li>Check homoscedasticity with the residual plot.</li>
 <li>Check normality of residuals with an Anderson-Darling test and histogram of residuals.</li>
 <li>Check outliers and influential points with the outlier test and residual plot.</li>
 </ul></li>
 <li>If an assumption or assumptions are violated, then attempt to find a transformation where the assumptions are met.
 <ul>
-<li>Use trial-and-error with assumptionCheck(), theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
+<li>Use trial-and-error with <code>assumptionCheck()</code>, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
 <ul>
 <li>Attempt transformations with the response variable first.</li>
 <li>Generally only ever transform the explanatory variable with logarithms.</li>
@@ -403,7 +403,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>As appropriate, perform multiple comparisons to identify specific differences.
 <ul>
-<li>If a significant interact exists (i.e., non-parallel lines) then use <code>emtrend()</code> and <code>summary()</code> to identify specific slopes that differ.</li>
+<li>If a significant interact exists (i.e., non-parallel lines) then use <code>emtrends()</code> and <code>summary()</code> to identify specific slopes that differ.</li>
 <li>If a significant interaction does not exist (i.e., parallel lines) but the lines are not coincident (i.e., different slopes) …
 <ul>
 <li>Fit a new model without the insignificant interaction term.</li>
@@ -935,14 +935,16 @@ Figure 24.2: Fitted lines for the regression of energy density on percent dry we
 <div class="sourceCode" id="cb186"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb186-1"><a href="IVRSummary.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr1.nrg)</span>
 <span id="cb186-2"><a href="IVRSummary.html#cb186-2" aria-hidden="true" tabindex="-1"></a>mc1.nrg <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(ivr1.nrg,<span class="at">specs=</span>pairwise<span class="sc">~</span>species,<span class="at">var=</span><span class="st">&quot;dw&quot;</span>)</span>
 <span id="cb186-3"><a href="IVRSummary.html#cb186-3" aria-hidden="true" tabindex="-1"></a>( mc1sum.nrg <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc1.nrg,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
-<span id="cb186-4"><a href="IVRSummary.html#cb186-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr2.nrg)</span>
-<span id="cb186-5"><a href="IVRSummary.html#cb186-5" aria-hidden="true" tabindex="-1"></a>mc2.nrg <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivr2.nrg,<span class="at">specs=</span>pairwise<span class="sc">~</span>species)</span>
-<span id="cb186-6"><a href="IVRSummary.html#cb186-6" aria-hidden="true" tabindex="-1"></a>( mc2sum.nrg <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc2.nrg,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
-<span id="cb186-7"><a href="IVRSummary.html#cb186-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>nrg,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>dw,<span class="at">y=</span>ed,<span class="at">color=</span>species)) <span class="sc">+</span> </span>
-<span id="cb186-8"><a href="IVRSummary.html#cb186-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb186-9"><a href="IVRSummary.html#cb186-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Percent Dry Weight&quot;</span>,<span class="at">y=</span><span class="st">&quot;Energy Density (J/g)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb186-10"><a href="IVRSummary.html#cb186-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
-<span id="cb186-11"><a href="IVRSummary.html#cb186-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<span id="cb186-4"><a href="IVRSummary.html#cb186-4" aria-hidden="true" tabindex="-1"></a>nrg2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(nrg,species<span class="sc">!=</span><span class="st">&quot;bayanchovy&quot;</span>)</span>
+<span id="cb186-5"><a href="IVRSummary.html#cb186-5" aria-hidden="true" tabindex="-1"></a>ivr2.nrg <span class="ot">&lt;-</span> <span class="fu">lm</span>(ed<span class="sc">~</span>dw<span class="sc">+</span>species,<span class="at">data=</span>nrg2)</span>
+<span id="cb186-6"><a href="IVRSummary.html#cb186-6" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr2.nrg)</span>
+<span id="cb186-7"><a href="IVRSummary.html#cb186-7" aria-hidden="true" tabindex="-1"></a>mc2.nrg <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivr2.nrg,<span class="at">specs=</span>pairwise<span class="sc">~</span>species)</span>
+<span id="cb186-8"><a href="IVRSummary.html#cb186-8" aria-hidden="true" tabindex="-1"></a>( mc2sum.nrg <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc2.nrg,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
+<span id="cb186-9"><a href="IVRSummary.html#cb186-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>nrg,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>dw,<span class="at">y=</span>ed,<span class="at">color=</span>species)) <span class="sc">+</span> </span>
+<span id="cb186-10"><a href="IVRSummary.html#cb186-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb186-11"><a href="IVRSummary.html#cb186-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Percent Dry Weight&quot;</span>,<span class="at">y=</span><span class="st">&quot;Energy Density (J/g)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb186-12"><a href="IVRSummary.html#cb186-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
+<span id="cb186-13"><a href="IVRSummary.html#cb186-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p> </p>
 </div>
 </div>
@@ -1142,7 +1144,7 @@ Residuals
 </tbody>
 </table>
 <p> </p>
-<p>The back-transformed mean above-ground biomass at the back-transformed mean crown area differs among all habitats (p≤0.0001; Table <a href="IVRSummary.html#tab:ShrubIntercepts2">24.8</a>). The back-transformed mean above-ground biomass at the back-transformed mean crown area is between 5.5 and 16.4% greater in the soil crust (FC) than fixed dune (FD) habitats, between 15.8 and 27.7% greater in the soil crust (FC) than semi-fixed dune (FD) habitats, and between 4.3 and 15.4% greater in the fixed dune (FD) than semi-fixed dune habitats (Table <a href="IVRSummary.html#tab:ShrubIntercepts2">24.8</a>).</p>
+<p>The back-transformed mean above-ground biomass at the back-transformed mean crown area differs among all habitats (p≤0.0001; Table <a href="IVRSummary.html#tab:ShrubIntercepts2">24.8</a>). The back-transformed mean above-ground biomass at the back-transformed mean crown area is between 1.055 and 1.164% greater in the soil crust (FC) than fixed dune (FD) habitats, between 1.158 and 1.277 times greater in the soil crust (FC) than semi-fixed dune (FD) habitats, and between 1.043 and 1.154 times greater in the fixed dune (FD) than semi-fixed dune habitats (Table <a href="IVRSummary.html#tab:ShrubIntercepts2">24.8</a>).</p>
 <p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -1263,6 +1265,7 @@ Figure 24.6: Back-transformed mean above-ground biomass of <em>Artemisia</em> (a
 <span id="cb190-4"><a href="IVRSummary.html#cb190-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
 <span id="cb190-5"><a href="IVRSummary.html#cb190-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Mean Above-Ground Biomass (kg)&quot;</span>,<span class="at">x=</span><span class="st">&quot;Habitat&quot;</span>) <span class="sc">+</span></span>
 <span id="cb190-6"><a href="IVRSummary.html#cb190-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<p> </p>
 
 </div>
 </div>

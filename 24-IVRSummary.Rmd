@@ -11,13 +11,13 @@ The following is a process for fitting an IVR. Consider this process as you lear
 1. Assess the independence assumption.
     * If this assumption is not met then other analysis methods must be used.
 1. Fit the untransformed ultimate full model with `lm()`.
-1. Check the other four assumptions for the untransformed model with assumptionCheck().
-    * Check the linearity of the relationship with the residual plot.
+1. Check the other four assumptions for the untransformed model with `assumptionCheck()`.
+    * Check linearity of the relationship with the residual plot.
     * Check homoscedasticity with the residual plot.
     * Check normality of residuals with an Anderson-Darling test and histogram of residuals.
     * Check outliers and influential points with the outlier test and residual plot.
 1. If an assumption or assumptions are violated, then attempt to find a transformation where the assumptions are met.
-    * Use trial-and-error with assumptionCheck(), theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
+    * Use trial-and-error with `assumptionCheck()`, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
         * Attempt transformations with the response variable first.
         * Generally only ever transform the explanatory variable with logarithms.
     * If only an outlier or influential observation exists (i.e., linear, homoscedastic, and normal residuals) and no transformation corrects the “problem,” then consider removing that observation from the data set.
@@ -26,7 +26,7 @@ The following is a process for fitting an IVR. Consider this process as you lear
     * If a significant interaction exists then do NOT interpret the main effects!!
     * If a significant interaction does NOT exist then interpret the main effects (i.e., interpret the coincident lines and relationship test p-values).
 1. As appropriate, perform multiple comparisons to identify specific differences.
-    * If a significant interact exists (i.e., non-parallel lines) then use `emtrend()` and `summary()` to identify specific slopes that differ.
+    * If a significant interact exists (i.e., non-parallel lines) then use `emtrends()` and `summary()` to identify specific slopes that differ.
     * If a significant interaction does not exist (i.e., parallel lines) but the lines are not coincident (i.e., different slopes) ...
         * Fit a new model without the insignificant interaction term.
         * Use `emmeans()` and `summary()` to identify specific mean values of the response at the mean value of the covariate that differ.
@@ -145,7 +145,7 @@ mc1sum.nrg$contrasts[,c(1,2,5,6,8)] %>%
   kableExtra::row_spec(0,bold=TRUE)
 ```
 
-```{r NRDData2, echo=FALSE}
+```{r NRGData2, echo=FALSE}
 nrg2 <- filter(nrg,species!="bayanchovy")
 ivr2.nrg <- lm(ed~dw+species,data=nrg2)
 ```
@@ -329,13 +329,13 @@ mc2t.shrub <- emmeans(ivr2t.shrub,specs=pairwise~Habitat,trans="log")
 ( mc2tsum.shrub <- summary(mc2t.shrub,infer=TRUE,type="response") )
 ```
 ```{r echo=FALSE}
-mc2tsum.shrub.LCIs <- formatC(100*(mc2tsum.shrub$contrasts$lower.CL-1),format="f",digits=1)
-mc2tsum.shrub.UCIs <- formatC(100*(mc2tsum.shrub$contrasts$upper.CL-1),format="f",digits=1)
+mc2tsum.shrub.LCIs <- formatC(mc2tsum.shrub$contrasts$lower.CL,format="f",digits=3)
+mc2tsum.shrub.UCIs <- formatC(mc2tsum.shrub$contrasts$upper.CL,format="f",digits=3)
 ```
 
 &nbsp;
 
-The back-transformed mean above-ground biomass at the back-transformed mean crown area differs among all habitats (p&leq;`r kPvalue(max(mc2tsum.shrub$contrasts$p.value),latex=FALSE, include.p=FALSE)`; Table \@ref(tab:ShrubIntercepts2)). The back-transformed mean above-ground biomass at the back-transformed mean crown area is between `r mc2tsum.shrub.LCIs[1]` and `r mc2tsum.shrub.UCIs[1]`% greater in the soil crust (FC) than fixed dune (FD) habitats, between `r mc2tsum.shrub.LCIs[2]` and `r mc2tsum.shrub.UCIs[2]`% greater in the soil crust (FC) than semi-fixed dune (FD) habitats, and between `r mc2tsum.shrub.LCIs[3]` and `r mc2tsum.shrub.UCIs[3]`% greater in the fixed dune (FD) than semi-fixed dune habitats (Table \@ref(tab:ShrubIntercepts2)).
+The back-transformed mean above-ground biomass at the back-transformed mean crown area differs among all habitats (p&leq;`r kPvalue(max(mc2tsum.shrub$contrasts$p.value),latex=FALSE, include.p=FALSE)`; Table \@ref(tab:ShrubIntercepts2)). The back-transformed mean above-ground biomass at the back-transformed mean crown area is between `r mc2tsum.shrub.LCIs[1]` and `r mc2tsum.shrub.UCIs[1]`% greater in the soil crust (FC) than fixed dune (FD) habitats, between `r mc2tsum.shrub.LCIs[2]` and `r mc2tsum.shrub.UCIs[2]` times greater in the soil crust (FC) than semi-fixed dune (FD) habitats, and between `r mc2tsum.shrub.LCIs[3]` and `r mc2tsum.shrub.UCIs[3]` times greater in the fixed dune (FD) than semi-fixed dune habitats (Table \@ref(tab:ShrubIntercepts2)).
 
 &nbsp;
 
@@ -388,3 +388,5 @@ anova(ivr1t.shrub)
 <<ShrubFitPlot>>
 <<ShrubMeansPlot>>
 ```
+
+&nbsp;
