@@ -10,7 +10,7 @@ bliss <- read.csv("https://raw.githubusercontent.com/droglenc/NCData/master/Blis
 str(bliss)
 ```
 
-In this case, we want to model the probability of mortality (i.e., the beetle died) as a function of the concentration of gaseous carbon disulphide. With this objective, a "success" is a "dead" beetle. Thus, "dead" should be coded as "1" and "not dead" (i.e., "alive") as a "0". You will recognize this as an indicator variable from Module \@ref(IVRVariables). In contrast to when we used indicator variables for factors, we need to explicitly create the indicator variable here when it is used as a response variable.
+In this case, we want to model the probability of mortality (i.e., the beetle died) as a function of the concentration of gaseous carbon disulphide. With this objective, a "success" is a "dead" beetle. Thus, "dead" should be coded as "1" and "alive" (i.e., "not dead") as a "0". Indicator variables used as the response variable in a logistic regression model must be explicitly created by you.^[In contrast to indicator variables derived from factors behind-the-scenes as in Module \@ref(IVRVariables).]
 
 An indicator variable can be created with `ifelse()`, which takes a "condition" as its first argument, what should be returned if the condition is "yes" as the second argument, and what should be returned if the condition is "no" as the third argument. The code below creates a new `outcome01` variable in the `bliss` data frame that will be `1` if `outcome` is `dead` and `0` if `outcome` is not `dead`.^[Note that R uses `==` when asking if two things are equal. So the condition in this `ifelse()` is asking where the `oucome` variable in `bliss` is equal to `dead`.]
 
@@ -29,7 +29,7 @@ The binary response variable must be explicitly converted to an indicator variab
 :::
 
 ## Fitting the Model
-The logistic regression model is fit with `glm()`, which is the **generalized linear model** function in R. The first argument to `glm()` is a formula of the form `var01~qvar` where `var01` is the indicator response variable created above and `qvar` is the quantitative explanatory variable, the data frame that contains these variables is in `data=`, and `family=binomial`. The `family=binomial` argument is critical because that is what tells `glm()` that the response variable should be treated as an indicator rather than quantitative variable. This signals `glm()` to fit a logistic regression model. The results of `glm()` should be saved to an object.
+The logistic regression model is fit with `glm()`, which is the **generalized linear model** function in R. The first argument to `glm()` is a formula of the form `var01~qvar` where `var01` is the indicator response variable created above and `qvar` is the quantitative explanatory variable, the data frame that contains these variables is in `data=`, and `family=binomial`. The `family=binomial` argument is critical because this tells `glm()` that the response variable should be treated as an indicator rather than quantitative variable, which signals `glm()` to fit a logistic regression model.
 
 ```{r}
 glm.bliss <- glm(outcome01~conc,data=bliss,family=binomial)
@@ -53,7 +53,7 @@ The p-value (under `Pr(>Chi)`) is very small in this case which indicates that t
 ## Parameter Estimates {#LogRegParametersR}
 The estimated intercept and slope are extracted from the `glm()` object with `coef()`.
 
-Confidence intervals constructed from bootstrap samples require bootstrap samples to be constructed first. There are many ways to construct bootstrap samples in R. We will use `Boot()` from the `car` package. This function will be called with `car::Boot()` so as to not have to load the whole `car` package. `Boot()` requires only the saved `glm()` object as its argument.^[The number of bootstrap samples defaults to 999, which is adequate for our purposes. This number of bootstrap samples can be modified with `R=`.] The results of `car::Boot()` should be saved to an object.^[`Boot()` may take many seconds to run, depending on the size of the original data frame and the number of bootstrapped samples taken.]
+Confidence intervals constructed from bootstrap samples require bootstrap samples to be constructed first. There are many ways to construct bootstrap samples in R. We will use `Boot()` from the `car` package. This function will be called with `car::Boot()` so as to not have to load the entire `car` package. `Boot()` requires only the saved `glm()` object as its argument.^[The number of bootstrap samples defaults to 999, which is adequate for our purposes. This number of bootstrap samples can be modified with `R=`.] The results of `car::Boot()` should be saved to an object.^[`Boot()` may take many seconds to run, depending on the size of the original data frame and the number of bootstrapped samples taken.]
 
 ```{r}
 boot.bliss <- car::Boot(glm.bliss)
@@ -116,17 +116,19 @@ The intercepts are in the first column and the slopes are in the second. For exa
 round(boot.bliss$t[,2],2)
 ```
 
-Second, note that `predProb()` takes a value of $X$ at which to make the prediction as its first argument, an intercept as the second argument, and the slope as the third argument. If this function is given **all** of the bootstrapped intercepts and slopes then it will make a prediction at the supplied value of `x` for each bootstrapped sample. For example, the code below computes the predicted probability of mortality at a concentration of 70 mg/L for each bootstrapped sample and then examines the first six of those values.
+Second, note that `predProb()` takes a value of $X$ at which to make the prediction as its first argument, an intercept as the second argument, and the slope as the third argument. If this function is given **all** of the bootstrapped intercepts and slopes then it will make a prediction at the supplied value of `x` for each bootstrapped sample. For example, the code below computes the predicted probability of mortality at a concentration of 70 mg/L for each bootstrapped sample (again, rounded to save space).
 
 ```{r}
 p70 <- predProb(70,boot.bliss$t[,1],boot.bliss$t[,2])
-head(p70)
+```
+```{r echo=FALSE}
+round(p70,2)
 ```
 
 The 95% bootstrapped confidence interval is between the two values in `p70` that have 2.5% and 97.5% of the values lower. These values are found with `quantile()` given the vector of values as the first argument, the percentages to "cut off" at as proportions in `probs=`, and `type=1` so that the quantiles computed here are the same as those in `confint()` above. For example, the 95% confidence interval for the predicted probability for a concentration of 70 mg/L is computed with
 
 ```{r}
-( ci70 <- quantile(p70,c(0.025,0.975)) )
+( ci70 <- quantile(p70,c(0.025,0.975),type=1) )
 ```
 
 Thus, one is 95% confident that the predicted probability of mortality for beetles exposed to 70 mg/l calcium disulphide is between `r formatC(ci70[1],format="f",digits=3)` and `r formatC(ci70[2],format="f",digits=3)`.
@@ -135,7 +137,7 @@ A similar process is used to predict the concentration where 50%, for example, o
 
 ```{r}
 x50 <- predX(0.5,boot.bliss$t[,1],boot.bliss$t[,2])
-( ci50 <- quantile(x50,c(0.025,0.975)) )
+( ci50 <- quantile(x50,c(0.025,0.975),type=1) )
 ```
 
 Thus, one is 95% confident that the predicted concentration where 50% of the beetles would be dead is between `r formatC(ci50[1],format="f",digits=1)` and  `r formatC(ci50[2],format="f",digits=1)`.
@@ -152,3 +154,5 @@ ggplot(data=bliss,mapping=aes(x=conc,y=outcome01)) +
   labs(x="Concentration of Disulphide",y="Probability of Mortality") +
   theme_NCStats()
 ```
+
+&nbsp;

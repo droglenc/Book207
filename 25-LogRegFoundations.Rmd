@@ -41,11 +41,13 @@ dsum <- d %>%
 
 The response variable in a logistic regression is categorical. How do you make a plot with categorical data on the y-axis? How do you construct a "regression" model when the y-axis variable is categorical?
 
-In this course, we will only consider *binary* response variables; i.e., there are only two categories. The two categories will generically be labeled as "success" and "failure," where success and failure is defined by the researcher. For example, a researcher may be interested in the probability of a heart attack and, thus, would define a "success" as having a heart attack.
+In this course, we will only consider *binary* response variables; i.e., only two categories. The two categories will generically be labeled as "success" and "failure," where success and failure is defined by the researcher. For example, a researcher may be interested in the probability of a heart attack and, thus, would define a "success" as having a heart attack.
 
 The binary response variable in a logistic regression will be treated as an indicator variable, where a "success" is coded as a "1" and a "failure" is coded as a "0".^[See Section \@ref(indicator-variables) for more discussion about indicator variables.] Treating this variable as "quantitative" will allow us to use techniques from previous modules.
 
 However, fitting a linear regression to this response variable plotted against the quantitative explanatory variable immediately exposes two problems (Figure \@ref(fig:LogRegRaw)). First, the linearity (and homoscedasticity) assumptions of linear regression are not met. Second, predicted probabilities from this model can be less than 0 and greater than 1, even within the observed domain of the explanatory variable. Clearly, a linear regression cannot be used to model this type of data.
+
+&nbsp;
 
 ```{r LogRegRaw, echo=FALSE, fig.width=4, fig.cap="Plot of the binary response variable, as an indicator variable, versus a quantitative explanatory variable with the best-fit linear regression line super-imposed. Note that darker points have more individuals over-plotted at that coordinate."}
 ggplot(data=d,mapping=aes(x=x,y=iv)) +
@@ -61,7 +63,7 @@ ggplot(data=d,mapping=aes(x=x,y=iv)) +
 
 &nbsp;
 
-Recall that all previous linear models dealt with the **mean** of the response variable. Logistic regression is no different in that it attempts to model the mean of $Y$ at each value of $X$. As a simple example consider the five observations of "success" and "failure" below at one particular value of $X$, wher $Z$ is the indicator variable that corresponds to $Y$.
+Recall that all previous linear models dealt with the **mean** of the response variable. Logistic regression is no different in that it attempts to model the mean of $Y$ at each value of $X$. As a simple example consider the five observations of "success" and "failure" below at one particular value of $X$, where $Z$ is the indicator variable that corresponds to $Y$.
 
 ```
  X    Y      Z
@@ -74,18 +76,16 @@ Recall that all previous linear models dealt with the **mean** of the response v
 
 In this example the mean of $Z$ is $\frac{1+0+0+1+1}{5}$=$\frac{3}{5}$=0.6. Lets also calculate the proportion of "successes" in $Y$ as $\frac{\text{Number of Successes}}{\text{Total Number of Observations}}$=$\frac{3}{5}$=0.6. Thus, because $0$s and $1$s are used in the indicator variable, the mean of the indicator variable is the same as the probability of success for the corresponding factor variable.
 
-::: {.tip data-latex=""}
-In logistic regression we will model the probability of success, while realizing that this is the same as modeling the mean of $Y$ at given values of $X$.
-:::
+In many situations it is hard to visualize the probability of success versus the explanatory variable because few values of $X$ have multiple observations of $Y$. Thus, a visual is constructed by computing the probability of success ($p_{i}$) within $i$ "windows" of $X$ values. For example, Figure \@ref(fig:LogRegProb) shows the probability of success calculated within "windows" of $X$ that are 2.5 units wide.
 
-In many situations it is hard to visualize the probability of success versus the explanatory variable because few values of $X$ have multiple observations of $Y$. Thus, a visual is constructed by computing the probability of success ($p_{i}$) within $i$ "windows" of $X$ values. For example, Figure \@ref(fig:LogRegProb) shows the probability of success calculated within "windows" of $X$ that were 2.5 units wide.
+&nbsp;
 
 ```{r LogRegProb, echo=FALSE, fig.width=4, fig.cap="Plot of the binary response variable, as an indicator variable, versus a quantitative explanatory variable with the vertical lines representing 'windows' in which the probability of 'success' (red circles) were calculated. These are the same data as in the previous figure."}
 ggplot() +
   geom_vline(data=dsum,mapping=aes(xintercept=xcat),color="gray80",linetype="dashed") +
   geom_point(data=d,mapping=aes(x=x,y=iv),alpha=0.025) +
   geom_point(data=dsum,mapping=aes(x=xcat+1.25,y=psucc),
-             pch=21,color="black",fill="red",size=1.75) +
+             pch=21,color="black",fill=clr_simple,size=1.75) +
   labs(x="Quantitative Variable",y="Binary Response Variable") +
   scale_y_continuous(expand=expansion(mult=0.03),limits=c(0,1),
                      sec.axis=sec_axis(trans=~.*1,breaks=c(0,1),
@@ -96,14 +96,18 @@ ggplot() +
 
 &nbsp;
 
-From Figure \@ref(fig:LogRegProb), it is obvious that a model for the probability of "success" is non-linear. As is usual, when the assumptions of a model are not met then we need to consider a transformation. The transformation required for a logistic regression is a bit involved and will be introduced in the next two sections.
+From Figure \@ref(fig:LogRegProb), it is obvious that a model for the probability of "success" is non-linear. As is usual, when the assumptions of a model are not met then a transformation is considered. The transformation required for a logistic regression is introduced in the next two sections.
+
+::: {.tip data-latex=""}
+In logistic regression the probability of success is modeled, whichi is the same as modeling the mean of $Y$ at given values of $X$.
+:::
 
 ## Odds
-The first step in transforming probabilities of success is to calculate the **odds of success**. The odds of "success" is the probability of "success" divided by the probability of "failure"; i.e.,
+The first step in transforming probabilities of success is to calculate **odds of success**. The odds of "success" is the probability of "success" divided by the probability of "failure"; i.e.,
 
 \[ odds_{i} = \frac{p_{i}}{1-p_{i}} \]
 
-Thinking in terms of odds takes some practice. For example, an odds of 5 means that the probability of "success" is five times more likely than the probability of "failure." In contrast, an odds of 0.2 means that the probability of "failure" is five times (i.e., $\frac{1}{0.2}$=5) more likely than the probability of "success."
+For example, an odds of 5 means that the probability of "success" is five times more likely than the probability of "failure." In contrast, an odds of 0.2 means that the probability of "failure" is five times (i.e., $\frac{1}{0.2}$=5) more likely than the probability of "success."
 
 ::: {.defn data-latex=""}
 **Odds**: The ratio of the probability of "success" to the probability of "failure."
@@ -111,11 +115,13 @@ Thinking in terms of odds takes some practice. For example, an odds of 5 means t
 
 Odds have two important characteristics. First, an odds of 1 means that the probability of "success" is the same as the probability of "failure.". Second, odds are bounded below by 0 (i.e., negative odds are impossible) but are not bounded above (i.e., odds can increase to positive infinity; Figure \@ref(fig:LogRegOdds)).
 
+&nbsp;
+
 ```{r LogRegOdds, echo=FALSE, fig.cap="Plot of the odds of 'success' for the same probabilities of 'success' in the previous figure."}
 ggplot(data=dsum) +
   geom_vline(mapping=aes(xintercept=xcat),color="gray80",linetype="dashed") +
   geom_point(mapping=aes(x=xcat+1.25,y=odds),
-             pch=21,color="black",fill="red",size=1.75) +
+             pch=21,color="black",fill=clr_simple,size=1.75) +
   labs(x="Quantitative Variable",y="Odds of Success") +
   scale_y_continuous(expand=expansion(mult=0.03),limits=c(0,NA)) +
   scale_x_continuous(expand=expansion(mult=0.02)) +
@@ -124,20 +130,24 @@ ggplot(data=dsum) +
 
 &nbsp;
 
-From \@ref(fig:LogRegOdds) it is clear that plotting odds versus the explanatory variable is still not linear. Thus, the odds still need to be transformed before a linear model can be fit.
+Plotting odds versus the explanatory variable is still not linear (Figure \@ref(fig:LogRegOdds)). Thus, odds still need to be transformed before a linear model can be fit.
 
 ## Log Odds and the Logit Transformation
 While the plot of the odds of "success" versus the quantitative explanatory variable is not linear, it does have the characteristic shape of an exponential function (Figure \@ref(fig:LogRegOdds)). Exponential functions are "linearized" by log transforming the response variable (see Section \@ref(exponential-functions)). The log of the odds is called the "logit" transformation of the probability of "success." Thus,
 
 $$ logit(p_{i}) = log(odds_{i}) = log\left(\frac{p_{i}}{1-p_{i}}\right) $$
 
+&nbsp;
+
 The plot of $logit(p_{i})$ versus the explanatory variable is generally linear (Figure \@ref(fig:LogRegLogit)).
+
+&nbsp;
 
 ```{r LogRegLogit, echo=FALSE, fig.cap="Plot of the log odds of 'success' (i.e., the logit transformed probability of 'success') for the same odds of 'success' in the previous figure."}
 ggplot(data=dsum) +
   geom_vline(mapping=aes(xintercept=xcat),color="gray80",linetype="dashed") +
   geom_point(mapping=aes(x=xcat+1.25,y=logodds),
-             pch=21,color="black",fill="red",size=1.75) +
+             pch=21,color="black",fill=clr_simple,size=1.75) +
   labs(x="Quantitative Variable",y="Odds of Success") +
   scale_y_continuous(expand=expansion(mult=0.03)) +
   scale_x_continuous(expand=expansion(mult=0.02)) +
@@ -148,12 +158,16 @@ ggplot(data=dsum) +
 
 Therefore, the logit transformation is a common transformation for "linearizing" the relationship between the probability of "success" and the quantitative explanatory variable. The logit transformation is the basis for a logistic regression, such that the logistic regression model is
 
+&nbsp;
+
 $$ log\left(\frac{p_{i}}{1-p_{i}}\right) = \alpha + \beta x_{i} $$
 
-where $\alpha$ is the "intercept" parameter and $\beta$ is the "slope" parameter. This model is discussed in more detail in the next module.
+&nbsp;
+
+where $\alpha$ is the "intercept" parameter and $\beta$ is the "slope" parameter.
 
 ## Back-Transformation Introduction
-While it will be discussed more in the next modules, it is evident from the logistic regression model above that that model is used to predict log odds. However, log odds are largely uninterpretable and should be back-transformed to the odds by exponentiating (i.e., $\text{odds}=e^{\text{log(odds)}}$.
+While it will be discussed more in the next modules, it is evident from the logistic regression model above that that model is used to predict log odds. However, log odds are largely uninterpretable and should be back-transformed to the odds by exponentiating (i.e., $\text{odds}=e^{\text{log(odds)}}$).
 
 An equation for predicting odds can also be obtained with algebra, starting with the logistic regression equation.
 
@@ -165,10 +179,14 @@ p &= (1-p)e^{\alpha+\beta X} \\
 p &= e^{\alpha+\beta X}-pe^{\alpha+\beta X} \\
 p + pe^{\alpha+\beta X} &= e^{\alpha+\beta X} \\
 p\left(1+e^{\alpha+\beta X}\right) &= e^{\alpha+\beta X} \\
-p &= \frac{e^{\alpha+\beta X}}{1+e^{\alpha+\beta X}} = \frac{e^{log(odds)}}{1+e^{log(odds)}} = \frac{\text{odds}}{1+\text{odds}}
+p &= \frac{e^{\alpha+\beta X}}{1+e^{\alpha+\beta X}} \\
+\vdots \; &= \frac{e^{log(odds)}}{1+e^{log(odds)}} \\
+p &= \frac{\text{odds}}{1+\text{odds}}
 \end{split}
 $$
 
-Thus, a probability can be calculated from the odds with $p=\frac{\text{odds}}{1+\text{odds}}$.
+&nbsp;
 
-These relationships will be expanded upon in the next module.
+Thus, a probability can be calculated from the odds with $p=\frac{\text{odds}}{1+\text{odds}}$. These relationships will be expanded upon in the next module.
+
+&nbsp;

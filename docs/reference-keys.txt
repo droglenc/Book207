@@ -153,13 +153,13 @@ tab:PuttExpCoefs
 fig:PuttsOdds
 fig:PuttsProb
 fig:PuttsPredX
-fig:PuttsBootSlopeCI
-fig:PuttsBootPred50CI
 tab:ShrubCoefs
 fig:shrubLogOdds
 fig:shrubOdds
 fig:shrubProb
 fig:shrubPredX
+fig:PuttsBootSlopeCI
+fig:PuttsBootPred50CI
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -317,8 +317,8 @@ LogRegSlope
 back-transformed-slope
 predictions-1
 reverse-predictions
-variability-estimates
 another-example
+variability-estimates
 LogRegAnalysis
 data-preparation
 fitting-the-model

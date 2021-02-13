@@ -1,13 +1,17 @@
 # Models and Predictions {#LogRegModels}
-The logistic regression model, using the logit transformation, was briefly introduced at the end of Module \@ref(LogRegFoundations) as 
+The logistic regression model, using the logit transformation, is
+
+&nbsp;
 
 $$ log\left(\frac{p_{i}}{1-p_{i}}\right) = \alpha + \beta x_{i} $$
 
-where $\alpha$ is the "intercept" parameter and $\beta$ is the "slope" parameter. As noted there, this represents a linear model of log odds plotted against values of the explanatory variable. In this module, interpretations of the slope, back-transformed slope, predictions, and "reverse" predictions are described.
+&nbsp;
+
+where $\alpha$ is the "intercept" parameter and $\beta$ is the "slope" parameter (Module \@ref(LogRegFoundations)). This represents a linear model of log odds plotted against values of the explanatory variable. In this module, interpretations of the slope, back-transformed slope, predictions, and "reverse" predictions are described.
 
 #### Example Data {-}
 <img src="zimgs/Putting.jpg" alt="Decoration" class="img-right">
-Data that was collected by a student a few years ago will be used throughout this and the next module. The student putted a golf ball 10 times from every 1 foot between 1 and 25 feet from the hole. For each putt she recorded whether she made the putt or not. She wanted to model the probability of making the putt as a function of distance to the hole.
+Data collected by a student a few years ago will be used throughout this and the next module. The student putted a golf ball 10 times from every 1 foot between 1 and 25 feet from the hole. For each putt she recorded whether she made the putt or not. She wanted to model the probability of making the putt as a function of distance to the hole.
 
 &nbsp;
 
@@ -26,7 +30,8 @@ sum.putts <- putts %>%
   as.data.frame()
 
 bfl.putts <- tibble(distance=1:25,
-                    lodds=as.numeric(predict(glm.putts,data.frame(distance=distance))),
+                    lodds=as.numeric(predict(glm.putts,
+                                             data.frame(distance=distance))),
                     odds=exp(lodds),
                     p=odds/(1+odds))
 
@@ -48,19 +53,24 @@ The slope for any linear regression represents the average additive change in th
 
 The estimated slope for the golf putt data is `r formatC(cfs.putts[2,1],format="f",digits=3)` with a 95% confidence interval from `r formatC(cfs.putts[2,2],format="f",digits=3)` to `r formatC(cfs.putts[2,3],format="f",digits=3)` (Table \@ref(tab:PuttCoefs)). Thus, as the length of the putt increases by one foot, the **log odds** that the student made the putt **de**creases by `r formatC(cfs.putts[2,1],format="f",digits=3)` (95% CI: `r formatC(-1*cfs.putts[2,3],format="f",digits=3)`, `r formatC(-1*cfs.putts[2,2],format="f",digits=3)`; Figure \@ref(fig:PuttsLogOdds)).
 
+&nbsp;
+
 ```{r PuttCoefs, echo=FALSE}
 cfs.putts %>%
   knitr::kable(booktabs=TRUE,digits=c(3,3,3),
                caption="Parameter estimates from the logistic regression with the golf putting data.") %>%
-  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1,bold=TRUE,width="1.1in") %>%
+  kableExtra::column_spec(2:4,width="0.9in") %>%
+  kableExtra::row_spec(0,bold=TRUE)
 ```
 
 &nbsp;
 
 ```{r PuttsLogOdds, echo=FALSE, fig.show="hold", fig.cap="Log odds of making a putt versus the distance of the putt with best-fit line superimposed. The right panel is 'zoomed in' on distances of 5 to 15 so that the slope could be better seen."}
 flp.lodds.putts <- ggplot(mapping=aes(x=distance,y=lodds)) +
-  geom_point(data=sum.putts,pch=21,color="black",fill="red",size=1.75) +
-  geom_line(data=bfl.putts,color="blue",size=1) +
+  geom_point(data=sum.putts,pch=21,color="black",fill=clr_simple,size=1.75) +
+  geom_line(data=bfl.putts,color=clr_full,size=1) +
   labs(x="Distance of Putt (ft)",y="log Odds of Making Putt") +
   theme_NCStats()
 
@@ -108,41 +118,54 @@ The slope for a logistic regression is the **additive** change in the **log odds
 
 
 ## Back-Transformed Slope
-Log odds are nearly impossible to interpret. The change in log odds are even hard to interpret. Fortunately, a useful interpretation emerges when the slope is back-transformed by exponentiation.
+Log odds are nearly impossible to interpret; the change in log odds are even more difficult to interpret. Fortunately, a useful interpretation emerges when the slope is back-transformed by exponentiation.
 
 Mathematically, the slope of the logistic regression looks like this:
 
+&nbsp;
+
 $$ \beta = \text{log}(\text{ODDS}(Y|X+1)) - \text{log}(\text{ODDS}(Y|X)) $$
 
+&nbsp;
+
 where $ODDS(Y|X)$ generically represents the odds of $Y$ being a "success" at a given value of $X$. However, back-transforming the slope (i.e., exponentiating the slope) looks like
+
+&nbsp;
 
 $$
 \begin{split}
 e^{\beta} &= \text{log}(\text{ODDS}(Y|X+1)) - \text{log}(\text{ODDS}(Y|X)) \\
-&= \text{log}\left(\frac{\text{ODDS}(Y|X+1)}{\text{ODDS}(Y|X)}\right) \\
-&= \frac{\text{ODDS}(Y|X+1)}{\text{ODDS}(Y|X)} \\
+\vdots \;\; &= \text{log}\left(\frac{\text{ODDS}(Y|X+1)}{\text{ODDS}(Y|X)}\right) \\
+e^{\beta} &= \frac{\text{ODDS}(Y|X+1)}{\text{ODDS}(Y|X)} \\
 \end{split}
 $$
+
+&nbsp;
 
 Thus, the exponentiated slope is the **multiplicative** change in the odds of a "success" for a unit change in $X$. The exponentiated slope is called an **odds ratio** because it is a ratio of odds at two values of $X$ (that differ by one unit).
 
 For example, $\hat{\beta}$=0.2 means that the log odds of a "success" increases by 0.2, on average, for a one unit increase in $X$. The corresponding exponentiated slope, $e^{0.2}$=`r formatC(exp(0.2),format="f",digits=2)`, indicates that the **odds** of a "success" are `r formatC(exp(0.2),format="f",digits=2)` **times** greater for a one unit increase in $X$. The exponentiated slope does not indicate what the odds are, only that the odds are `r formatC(exp(0.2),format="f",digits=2)` **times** greater with an increase of one unit in the explanatory variable.
 
-The exponentiated estimated slope for the golf putt data is `r formatC(ecfs.putts[2,1],format="f",digits=3)` with a 95% confidence interval from `r formatC(ecfs.putts[2,2],format="f",digits=3)` to `r formatC(ecfs.putts[2,3],format="f",digits=3)` (Table \@ref(tab:PuttExpCoefs)). Thus, as the length of the putt increases by one foot, the **odds** that the student made the putt is `r formatC(ecfs.putts[2,1],format="f",digits=3)` (95% CI: `r formatC(ecfs.putts[2,2],format="f",digits=3)`, `r formatC(ecfs.putts[2,3],format="f",digits=3)`) times lower (Figure \@ref(fig:PuttsOdds)). In other words, as the length of the putt increases by one foot, the **odds** that the student made the putt decreases by `r formatC((1-ecfs.putts[2,1])*100,format="f",digits=1)`% (95% CI: `r formatC((1-ecfs.putts[2,3])*100,format="f",digits=1)`, `r formatC((1-ecfs.putts[2,2])*100,format="f",digits=1)`).
+The exponentiated estimated slope for the golf putt data is `r formatC(ecfs.putts[2,1],format="f",digits=3)` with a 95% confidence interval from `r formatC(ecfs.putts[2,2],format="f",digits=3)` to `r formatC(ecfs.putts[2,3],format="f",digits=3)` (Table \@ref(tab:PuttExpCoefs)). Thus, as the length of the putt increases by one foot, the **odds** that the student made the putt is `r formatC(ecfs.putts[2,1],format="f",digits=3)` (95% CI: `r formatC(ecfs.putts[2,2],format="f",digits=3)`, `r formatC(ecfs.putts[2,3],format="f",digits=3)`) times lower (Figure \@ref(fig:PuttsOdds)). In other words, as the length of the putt increases by one foot, the **odds** that the student made the putt decreases by a multiple of `r formatC(ecfs.putts[2,1],format="f",digits=3)`, or by `r formatC((1-ecfs.putts[2,1])*100,format="f",digits=1)`% (95% CI: `r formatC((1-ecfs.putts[2,3])*100,format="f",digits=1)`, `r formatC((1-ecfs.putts[2,2])*100,format="f",digits=1)`).
+
+&nbsp;
 
 ```{r PuttExpCoefs, echo=FALSE}
 ecfs.putts %>%
   knitr::kable(booktabs=TRUE,digits=c(3,3,3),
                caption="Exponentiated parameter estimates from the logistic regression with the golf putting data. Note that the intercepts values are not useful.") %>%
-  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1,bold=TRUE,width="1.1in") %>%
+  kableExtra::column_spec(2:4,width="0.9in") %>%
+  kableExtra::row_spec(0,bold=TRUE)
 ```
 
 &nbsp;
 
 ```{r PuttsOdds, echo=FALSE, fig.show="hold", fig.cap="Odds of making a putt versus the distance of the putt with best-fit line superimposed. The right panel is 'zoomed in' on distances of 5 to 15 so that the exponentiated slope could be better seen."}
 flp.odds.putts <- ggplot(mapping=aes(x=distance,y=odds)) +
-  geom_point(data=sum.putts,pch=21,color="black",fill="red",size=1.75) +
-  geom_line(data=bfl.putts,color="blue",size=1) +
+  geom_point(data=sum.putts,pch=21,color="black",fill=clr_simple,size=1.75) +
+  geom_line(data=bfl.putts,color=clr_full,size=1) +
   labs(x="Distance of Putt (ft)",y="Odds of Making Putt") +
   theme_NCStats()
 
@@ -188,21 +211,21 @@ Again, look closely at Figure \@ref(fig:PuttsOdds)-Right to understand the meani
 The exponentiated slope for a logistic regression is the **multiplicative** change in the **odds** for a unit change in the explanatory variable.
 :::
 
-&nbsp;
-
 ## Predictions
 The fitted logistic regression model can be used to make predictions. However, you must be very careful what is being predicted (i.e., the log odds) and how to back-transform (exponentiation gives the odds, not the probability).
 
 Plugging a value of $X$ into the fitted logistic regression equation will predict a value for the log odds. For example, the predicted **log odds** for making a 6 foot putt is `r formatC(cfs.putts[1,1],format="f",digits=3)`-`r formatC(-1*cfs.putts[2,1],format="f",digits=3)`&times;6 = `r formatC(bfl.putts$lodds[6],format="f",digits=3)` (values of &alpha; and &beta; from Table \@ref(tab:PuttCoefs) and log odds prediction shown in Figure \@ref(fig:PuttsLogOdds)).
 
-Of course, predicting the log odds is not that useful. However, exponentiating this value results in the odds. Thus, the **odds** of making a 6 foot putt is e<sup>`r formatC(bfl.putts$lodds[6],format="f",digits=3)`</sup>=`r formatC(bfl.putts$odds[6],format="f",digits=3)` (Figure \@ref(fig:PuttsOdds)). Thus, the probability of making the 6 foot putt is nearly twice as likely as not making the 6 foot putt.
+Exponentiating this value results in the odds. Thus, the **odds** of making a 6 foot putt is e<sup>`r formatC(bfl.putts$lodds[6],format="f",digits=3)`</sup>=`r formatC(bfl.putts$odds[6],format="f",digits=3)` (Figure \@ref(fig:PuttsOdds)). Thus, the probability of making the 6 foot putt is nearly twice as likely as not making the 6 foot putt.
 
 Finally, one most often wants to predict the **probability** of "success." As shown in Module \@ref(LogRegFoundations), a probability can be computed from the odds with $p = \frac{\text{odds}}{\text{1+odds}}$. Thus, for example, the probability of making the 6 foot putt is $\frac{`r formatC(bfl.putts$odds[6],format="f",digits=3)`}{1+`r formatC(bfl.putts$odds[6],format="f",digits=3)`}$=`r formatC(bfl.putts$p[6],format="f",digits=3)` (Figure \@ref(fig:PuttsProb)). Therefore, the students makes a 6 foot put about 66% of the time on average (so, about 2 out of every 3).
 
+&nbsp;
+
 ```{r PuttsProb, echo=FALSE, fig.cap="Probability of making a putt versus the distance of the putt with best-fit line superimposed and the prediction of the probability of making a 6 foot is shown."}
 puttsProb <- ggplot(mapping=aes(x=distance,y=p)) +
-  geom_point(data=sum.putts,pch=21,color="black",fill="red",size=1.75) +
-  geom_line(data=bfl.putts,color="blue",size=1) +
+  geom_point(data=sum.putts,pch=21,color="black",fill=clr_simple,size=1.75) +
+  geom_line(data=bfl.putts,color=clr_full,size=1) +
   labs(x="Distance of Putt (ft)",y="Probability of Making Putt") +
   theme_NCStats()
 puttsProb +
@@ -221,6 +244,8 @@ In logistic regression it is fairly common to ask a specific version of the gene
 
 Solving the logistic regression equation for $X$ provides an equation to answer these types of questions. The algebra to solve for $X$ is shown below, beginning with the logistic regression equation.
 
+&nbsp;
+
 $$
 \begin{split}
 log\left(\frac{p}{1-p}\right) &= \alpha+\beta X \\
@@ -230,106 +255,49 @@ X &= \frac{log\left(\frac{p}{1-p}\right)-\alpha}{\beta} \\
 \end{split}
 $$
 
+&nbsp;
+
 For example, the distance for which the probability of making the putt is 0.1 is
+
+&nbsp;
 
 $$
 \frac{log\left(\frac{0.1}{1-0.1}\right)-`r formatC(cfs.putts[1,1],format="f",digits=3)`}{`r formatC(cfs.putts[2,1],format="f",digits=3)`} = `r formatC((log(0.1/0.9)-cfs.putts[1,1])/cfs.putts[2,1],format="f",digits=2)`.
 $$
 
+&nbsp;
+
 where values of &alpha; and &beta; are from Table \@ref(tab:PuttCoefs). This prediction is shown in Figure \@ref(fig:PuttsPredX).
 
+&nbsp;
+
 ```{r PuttsPredX, echo=FALSE, fig.cap="Probability of making a putt versus the distance of the putt with best-fit line superimposed and the prediction of the distances where the probabililty of making the putt is 0.10 and 0.50."}
-predX <- round((log(c(0.1,0.5)/(1-c(0.1,0.5)))-cfs.putts[1,1])/cfs.putts[2,1],2)
+probs <- c(0.1,0.5)
+predX <- round((log(probs/(1-probs))-cfs.putts[1,1])/cfs.putts[2,1],2)
 predXlbls <- formatC(predX,format="f",digits=2)
 
 puttsProb +
-  scale_y_continuous(expand=expansion(mult=0.03),breaks=c(0.25,0.5)) +
+  scale_y_continuous(expand=expansion(mult=0.03),breaks=c(0,probs,1)) +
   scale_x_continuous(expand=expansion(mult=0.02),breaks=predX) +
-  geom_segment(aes(x=-Inf,xend=predX[1],y=0.1,yend=0.1),
+  geom_segment(aes(x=-Inf,xend=predX[1],y=probs[1],yend=probs[1]),
                linetype="dashed",arrow=ARROW) +
-  geom_segment(aes(x=predX[1],xend=predX[1],y=0.1,yend=-Inf),
+  geom_segment(aes(x=predX[1],xend=predX[1],y=probs[1],yend=-Inf),
                linetype="dashed",arrow=ARROW) +
-  geom_segment(aes(x=-Inf,xend=predX[2],y=0.5,yend=0.5),
+  geom_segment(aes(x=-Inf,xend=predX[2],y=probs[2],yend=probs[2]),
                linetype="dashed",arrow=ARROW) +
-  geom_segment(aes(x=predX[2],xend=predX[2],y=0.5,yend=-Inf),
+  geom_segment(aes(x=predX[2],xend=predX[2],y=probs[2],yend=-Inf),
                linetype="dashed",arrow=ARROW)
 ```
 
 &nbsp;
 
-Because $log(\left(\frac{0.5}{1-0.5}\right)$=$log(1)$=0, this equation reduces to $X=\frac{-\alpha}{\beta}$ for a probability of 0.5. Thus, the distance for which the probability of making the putt is 0.5 is `r formatC(-1*cfs.putts[1,1]/cfs.putts[2,1],format="f",digits=2)` ft (Figure \@ref(fig:PuttsPredX)).
+Because $log(\left(\frac{0.5}{1-0.5}\right)$=$log(1)$=0, the equation for predicting $X$ for a given $p$ reduces to $X=\frac{-\alpha}{\beta}$ for $p$=0.5. Thus, the distance for which the probability of making the putt is 0.5 is `r formatC(-1*cfs.putts[1,1]/cfs.putts[2,1],format="f",digits=2)` ft (Figure \@ref(fig:PuttsPredX)).
 
 &nbsp;
-
-## Variability Estimates
-Standard errors or confidence intervals for the parameters of the logistic regression model can be computed with normal distribution theory. However, this theory does not hold for all logistic regression models. In addition, methods for computing confidence intervals for predicted probabilities or for predicted values of $X$ for a particular probability are not well formed. Bootstrapping is one method for producing confidence intervals for these parameters.
-
-Bootstrap confidence intervals are computer intensive, but provide an interval that does not depend on the shape of the underlying sampling distribution. Bootstrapping confidence intervals generally follows these steps:
-
-1. Generate a bootstrap sample, which is a random sample of individuals from the original sample;^[Thus, the individuals must be selected with replacement so that each bootstrap sample is different and different from the original sample.]
-1. Fit the model to the bootstrap sample;
-1. Compute the statistics of interest (i.e., the slope, intercept, predicted probability, predicted value of $X$);
-1. Repeat steps 1-3 500-10000 times;^[The number of bootstrap samples depends on a number of things, including the purpose of the study and how involved the calculations are. In this course, 500-1000 bootstrap samples will be adequate.]
-1. Order the results from smallest to largest; and
-1. Approximate 95% confidence interval with the values of the statistics that have 2.5% and 97.5% of the statistics smaller (i.e., find the middle 95% of the bootstrapped statistics).^[This step tends to produce slightly biased results. There are a number of possible corrections for this bias. However, we will use this method in this course to keep the method simple so that we can stay focused on the concept.]
-
-A histogram of slopes estimated from 999 bootstrap samples is shown in Figure \@ref(fig:PuttsBootSlopeCI). It is apparent from this example that the sampling distribution of the slopes is not normal and, thus, a confidence interval generated from normal theory would not be appropriate. The 95% bootstrap confidence interval shown in Figure \@ref(fig:PuttsBootSlopeCI) matches that in Table \@ref(tab:PuttCoefs). 
-
-```{r PuttsBootSlopeCI, echo=FALSE, fig.cap="Histogram of logistic regression slopes from the golf putt example estimated from 999 bootstrap samples. The two values denoted mark the values with 2.5% and 97.5% of the slopes smaller and thus represents a 95% bootstrap confidence interval for the slope."}
-tmp <- as.data.frame(boot.putts$t) %>%
-  rename(Intercept=`(Intercept)`,Slope=distance) %>%
-  mutate(dist50=-Intercept/Slope)
-
-ggplot(data=tmp,mapping=aes(x=Slope)) +
-  geom_histogram(color="black",fill="gray80",binwidth=0.01) +
-  scale_y_continuous(name="Frequency of Bootstrap Samples",
-                     expand=expansion(mult=c(0,0.03))) +
-  scale_x_continuous(name="Slope Estimate") +
-  theme_NCStats() +
-  geom_segment(data=data.frame(),
-               aes(x=cfs.putts[2,2:3],xend=cfs.putts[2,2:3],
-                   y=c(40,40),yend=c(-Inf,-Inf)),arrow=ARROW) +
-  geom_text(data=data.frame(),
-            aes(x=cfs.putts[2,2:3],y=c(40,40),
-                label=formatC(cfs.putts[2,2:3],format="f",digits=3)),
-            size=lbl_text_size,vjust=-0.4)
-```
-
-&nbsp;
-
-```{r echo=FALSE}
-ciPred50 <- quantile(tmp$dist50,probs=c(0.025,0.975),type=1)
-```
-
-Bootstrapping is particularly useful for *derived* statistics like predicting the $X$ for a given probability. A histogram of predicted distances where the probability of making the putt is 0.50 estimated from 999 bootstrap samples is shown in Figure \@ref(fig:PuttsBootPred50CI). Thus, one is 95% confident that the distance of the putt where the probability of making the putt is 0.50 is between `r formatC(ciPred50[[1]],format="f",digits=2)` and  `r formatC(ciPred50[[2]],format="f",digits=2)` feet.
-
-```{r PuttsBootPred50CI, echo=FALSE, fig.cap="Histogram of the predicted distance where the probability making the putt is 0.50 estimated from 999 bootstrap samples. The two values denoted mark the values with 2.5% and 97.5% of the distances smaller and thus represents a 95% bootstrap confidence interval for the distance."}
-ggplot(data=tmp,mapping=aes(x=dist50)) +
-  geom_histogram(color="black",fill="gray80",binwidth=0.1) +
-  scale_y_continuous(name="Frequency of Bootstrap Samples",
-                     expand=expansion(mult=c(0,0.03))) +
-  scale_x_continuous(name="Predicted Distance for p=0.5") +
-  theme_NCStats() +
-  geom_segment(data=data.frame(),
-               aes(x=ciPred50,xend=ciPred50,
-                   y=c(40,40),yend=c(-Inf,-Inf)),arrow=ARROW) +
-  geom_text(data=data.frame(),
-            aes(x=ciPred50,y=c(40,40),
-                label=formatC(ciPred50,format="f",digits=2)),
-            size=lbl_text_size,vjust=-0.4)
-```
-
-&nbsp;
-
-Actual construction of the bootstrap confidence intervals is illustrated in the next module.
-
-::: {.tip data-latex=""}
-The bootstrap method will be used to constructed confidence intervals for parameters in a logistic regression as typical normal theory is not always reliable with logistic regressions.
-:::
-
 
 ## Another Example
-As another example data about the presence or absence of a common shrub (*Berberis repens*) in the [Bryce Canyon National Park](https://www.nps.gov/brca/index.htm) Utah will be used. Here the researchers recorded whether the shrub was present or not in many 10m&times;10m plots throughout the park. They also recorded the elevation (among other things) of the plot. They wanted to model the effect of elevation on the presence of the shrub.
+<img src="zimgs/BryceCanyon.jpg" alt="Decoration" class="img-right">
+As another example data about the presence or absence of a [common shrub (*Berberis repens*)](http://southwestdesertflora.com/WebsiteFolders/All_Species/Berberidaceae/Berberis%20repens,%20Creeping%20Barberry.html) in the [Bryce Canyon National Park](https://www.nps.gov/brca/index.htm) Utah will be used. Here the researchers recorded whether the shrub was present or not in many 10m&times;10m plots throughout the park. They also recorded the elevation (among other things) of the plot. They wanted to model the effect of elevation on the presence of the shrub.
 
 ```{r echo=FALSE}
 shrub <- read.csv("https://derekogle.com/Book207/data/BryceShrub.csv") %>%
@@ -364,21 +332,26 @@ cfs.shrub <- cbind(Ests=coef(glm.shrub),confint(boot.shrub,type="perc"))
 ecfs.shrub <- exp(cfs.shrub)
 ```
 
-The estimated slope for the shrub data indicates that as the elevation increases by one meter, the **log odds** that the shrub is present **in**creases by `r formatC(cfs.shrub[2,1],format="f",digits=4)` (95% CI: `r formatC(cfs.shrub[2,2],format="f",digits=4)`, `r formatC(cfs.shrub[2,3],format="f",digits=4)`; Table \@ref(tab:ShrubCoefs)). The interpretation of the slope is made difficult by the fact that a 1 m change is a very small movement along the x-axis in this case where the elevations range from near 2000 to near 2800. However, if a 1 unit change in $X$ results in an additive change in $Y$ of the slope, then, for example, a 100 unit change in $X$ results in an additive change in $Y$ of 100 slopes. Thus, for example, if the elevation increases by 100 m then the log odds of the presence of the shrub will increase by 100&times;`r formatC(cfs.shrub[2,1],format="f",digits=4)`=`r formatC(100*cfs.shrub[2,1],format="f",digits=3)` (Figure \@ref(fig:shrubLogOdds)).
+The estimated slope for the shrub data indicates that as the elevation increases by one meter, the **log odds** that the shrub is present **in**creases by `r formatC(cfs.shrub[2,1],format="f",digits=4)` (95% CI: `r formatC(cfs.shrub[2,2],format="f",digits=4)`, `r formatC(cfs.shrub[2,3],format="f",digits=4)`; Table \@ref(tab:ShrubCoefs)). The interpretation of the slope is made difficult by the fact that a 1 m change is a very small movement along the x-axis in this case where the elevations range from near 2000 to near 2800. However, if a 1 unit change in $X$ results in an additive change in $Y$ of the slope, then, for example, a 100 unit change in $X$ results in an additive change in $Y$ of 100 slopes. Thus, for example, if the elevation increases by 100 m then the log odds of the presence of the shrub will increase by 100&times;`r formatC(cfs.shrub[2,1],format="f",digits=4)`=`r formatC(100*cfs.shrub[2,1],format="f",digits=2)` (Figure \@ref(fig:shrubLogOdds)).
+
+&nbsp;
 
 ```{r ShrubCoefs, echo=FALSE}
 cfs.shrub %>%
   knitr::kable(booktabs=TRUE,digits=c(4,4,4),
                caption="Parameter estimates from the logistic regression with the shrub presence data.") %>%
-  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1,bold=TRUE,width="1.1in") %>%
+  kableExtra::column_spec(2:4,width="1.0in") %>%
+  kableExtra::row_spec(0,bold=TRUE)
 ```
 
 &nbsp;
 
 ```{r shrubLogOdds, echo=FALSE, fig.show="hold", fig.cap="Log odds of shrub presence versus elevation with best-fit line superimposed. The right panel is 'zoomed in' on elevations of 2250 to 2600 m so that the slope could be better seen."}
 flp.lodds.shrub <- ggplot(mapping=aes(x=elev,y=lodds)) +
-  geom_point(data=sum.shrub,pch=21,color="black",fill="red",size=1.75) +
-  geom_line(data=bfl.shrub,color="blue",size=1) +
+  geom_point(data=sum.shrub,pch=21,color="black",fill=clr_simple,size=1.75) +
+  geom_line(data=bfl.shrub,color=clr_full,size=1) +
   labs(x="Elevation (m)",y="log Odds of Shrub Presence") +
   theme_NCStats()
 
@@ -399,7 +372,8 @@ flp.lodds.shrub2 <- flp.lodds.shrub +
   geom_text(aes(x=mean(pts.shrub$elev[1:2]),y=pts.shrub$lodds[1],label="100"),
             vjust=1.25,size=lbl_text_size) +
   geom_text(aes(x=pts.shrub$elev[2],y=mean(pts.shrub$lodds[1:2])),
-            label=expression(100*beta==0.90),parse=TRUE,hjust=-0.1,size=lbl_text_size) +
+            label=expression(100*beta==0.90),parse=TRUE,hjust=-0.1,
+            size=lbl_text_size) +
   ## Second example
   geom_segment(aes(x=pts.shrub$elev[3],xend=pts.shrub$elev[4],
                y=pts.shrub$lodds[3],yend=pts.shrub$lodds[3]),
@@ -410,7 +384,8 @@ flp.lodds.shrub2 <- flp.lodds.shrub +
   geom_text(aes(x=mean(pts.shrub$elev[3:4]),y=pts.shrub$lodds[3],label="100"),
             vjust=1.25,size=lbl_text_size) +
   geom_text(aes(x=2525,y=mean(pts.shrub$lodds[3:4])),
-            label=expression(100*beta==0.90),parse=TRUE,hjust=1.1,size=lbl_text_size) +
+            label=expression(100*beta==0.90),parse=TRUE,hjust=1.1,
+            size=lbl_text_size) +
   geom_segment(aes(x=2525,xend=2600,
                    y=mean(pts.shrub$lodds[3:4]),yend=mean(pts.shrub$lodds[3:4])),
                arrow=ARROW)
@@ -425,14 +400,14 @@ flp.lodds.shrub2
 If a 1 unit change in $X$ is very small relative to the range of $X$ then multiplying the slope by an amount $b$ will describe the **additive** change in the **log odds** for a $b$ unit change in the explanatory variable.
 :::
 
-The exponentiated estimated slope for the shrub data would have the same issue with scale described above for the estimated slope. The same remedy may be used but, as usual, you must be very careful with the interpretation. Exponentiating 100 times the slope suggests that as the elevation increases by 100 m, the **odds** that the shrub is present **in**creases `r formatC(ecfs.shrub[2,1]^100,format="f",digits=3)` (95% CI: `r formatC(ecfs.shrub[2,2]^100,format="f",digits=3)`, `r formatC(ecfs.shrub[2,3]^100,format="f",digits=3)`) times (Figure \@ref(fig:shrubOdds)).
+The exponentiated estimated slope for the shrub data would have the same issue with scale described above for the estimated slope. The same remedy may be used but, as usual, you must be very careful with the interpretation. Exponentiating 100 times the slope suggests that as the elevation increases by 100 m, the **odds** that the shrub is present **in**creases `r formatC(ecfs.shrub[2,1]^100,format="f",digits=3)` (95% CI: `r formatC(ecfs.shrub[2,2]^100,format="f",digits=3)`, `r formatC(ecfs.shrub[2,3]^100,format="f",digits=3)`) **times** (Figure \@ref(fig:shrubOdds)).
 
 &nbsp;
 
 ```{r shrubOdds, echo=FALSE, fig.show="hold", fig.cap="Odds of shrub presence versus elevation with best-fit line superimposed. The right panel is 'zoomed in' on elevations of 2250 to 2600 m so that the exponentiated slope could be better seen."}
 flp.odds.shrub <- ggplot(mapping=aes(x=elev,y=odds)) +
-  geom_point(data=sum.shrub,pch=21,color="black",fill="red",size=1.75) +
-  geom_line(data=bfl.shrub,color="blue",size=1) +
+  geom_point(data=sum.shrub,pch=21,color="black",fill=clr_simple,size=1.75) +
+  geom_line(data=bfl.shrub,color=clr_full,size=1) +
   labs(x="Elevation (m)",y="Odds of Shrub Presence") +
   theme_NCStats()
   
@@ -479,17 +454,21 @@ flp.odds.shrub2
 The exponentiated $b$&times;slope for a logistic regression is the **multiplicative** change in the **odds** for a $b$ unit change in the explanatory variable.
 :::
 
-The predicted **log odds** for the presence of the shrub at an elevation of 2350 m is `r formatC(cfs.shrub[1,1],format="f",digits=3)`-`r formatC(-1*cfs.shrub[2,1],format="f",digits=4)`&times;2350 = `r formatC(pts.shrub$lodds[2],format="f",digits=3)` (values of &alpha; and &beta; from Table \@ref(tab:ShrubCoefs) and log odds prediction shown in Figure \@ref(fig:shrubLogOdds)). The **odds** of the shrub's presence at an elevation of 2350 m is e<sup>`r formatC(pts.shrub$lodds[2],format="f",digits=3)`</sup>=`r formatC(pts.shrub$odds[2],format="f",digits=3)` (Figure \@ref(fig:shrubOdds)). Thus, the probability of the shrub being present at 2350 m is `r formatC(pts.shrub$odds[2]*100,format="f",digits=1)` of the probability that it is not present. Alternatively, the probability that the shrub is not present at 2350 m is `r formatC(1/pts.shrub$odds[2],format="f",digits=3)` times the probability that it is present at that elevation (i.e., $\frac{1}{`r formatC(pts.shrub$odds[2],format="f",digits=3)`}$). The probability that the shrub is present at 2350 m is `r formatC(pts.shrub$p[2],format="f",digits=3)` (=$\frac{`r formatC(pts.shrub$odds[2],format="f",digits=3)`}{1+`r formatC(pts.shrub$odds[2],format="f",digits=3)`}$; Figure \@ref(fig:shrubProb)). Therefore, a little more than 1 out of every 3 plots at 2350 m will have the shrub.
+The predicted **log odds** for the presence of the shrub at an elevation of 2350 m is `r formatC(cfs.shrub[1,1],format="f",digits=3)`-`r formatC(-1*cfs.shrub[2,1],format="f",digits=4)`&times;2350 = `r formatC(pts.shrub$lodds[2],format="f",digits=3)` (values of &alpha; and &beta; from Table \@ref(tab:ShrubCoefs) and log odds prediction shown in Figure \@ref(fig:shrubLogOdds)). The **odds** of the shrub's presence at an elevation of 2350 m is e<sup>`r formatC(pts.shrub$lodds[2],format="f",digits=3)`</sup>=`r formatC(pts.shrub$odds[2],format="f",digits=3)` (Figure \@ref(fig:shrubOdds)). Thus, the probability of the shrub being present at 2350 m is `r formatC(pts.shrub$odds[2],format="f",digits=1)` times the probability that it is not present. Alternatively, the probability that the shrub is not present at 2350 m is `r formatC(1/pts.shrub$odds[2],format="f",digits=3)` times the probability that it is present at that elevation (i.e., $\frac{1}{`r formatC(pts.shrub$odds[2],format="f",digits=3)`}$). The probability that the shrub is present at 2350 m is `r formatC(pts.shrub$p[2],format="f",digits=3)` (=$\frac{`r formatC(pts.shrub$odds[2],format="f",digits=3)`}{1+`r formatC(pts.shrub$odds[2],format="f",digits=3)`}$; Figure \@ref(fig:shrubProb)). Therefore, a little more than 1 out of every 3 plots at 2350 m will have the shrub.
+
+&nbsp;
 
 ```{r shrubProb, echo=FALSE, fig.cap="Probability of the shrub's presence versus elevation with best-fit line superimposed and the prediction of the probability at 2350 m."}
 shrubProb <- ggplot(mapping=aes(x=elev,y=p)) +
-  geom_point(data=sum.shrub,pch=21,color="black",fill="red",size=1.75) +
-  geom_line(data=bfl.shrub,color="blue",size=1) +
+  geom_point(data=sum.shrub,pch=21,color="black",fill=clr_simple,size=1.75) +
+  geom_line(data=bfl.shrub,color=clr_full,size=1) +
   labs(x="Elevation (m)",y="Probability of Shrub Presence") +
   theme_NCStats()
 shrubProb +
-  scale_y_continuous(expand=expansion(mult=0.03),breaks=c(0,0.25,0.378,0.5,0.75,1)) +
-  scale_x_continuous(expand=expansion(mult=0.02),breaks=c(2000,2200,2350,2600,2800)) +
+  scale_y_continuous(expand=expansion(mult=0.03),
+                     breaks=c(0,0.25,0.378,0.5,0.75,1)) +
+  scale_x_continuous(expand=expansion(mult=0.02),
+                     breaks=c(2000,2200,2350,2600,2800)) +
   geom_segment(aes(x=2350,xend=2350,y=-Inf,yend=pts.shrub$p[2]),
                linetype="dashed",arrow=ARROW) +
   geom_segment(aes(x=2350,xend=-Inf,y=pts.shrub$p[2],yend=pts.shrub$p[2]),
@@ -500,25 +479,106 @@ shrubProb +
 
 Finally, the elevation for which the probability of the shrub's presence is 0.75 is
 
+&nbsp;
+
 $$
 \frac{log\left(\frac{0.95}{1-0.95}\right)-`r formatC(cfs.shrub[1,1],format="f",digits=3)`}{`r formatC(cfs.shrub[2,1],format="f",digits=4)`} = `r formatC((log(0.95/0.05)-cfs.shrub[1,1])/cfs.shrub[2,1],format="f",digits=1)`.
 $$
 
+&nbsp;
+
 where values of &alpha; and &beta; are from Table \@ref(tab:ShrubCoefs). Similarly, the elevation where there is an equal probability of the shrub being present or not is `r formatC((-1*cfs.shrub[1,1])/cfs.shrub[2,1],format="f",digits=1)` (=$\frac{-(`r formatC(cfs.shrub[1,1],format="f",digits=3)`)}{`r formatC(cfs.shrub[2,1],format="f",digits=4)`}$). These predictions are shown in Figure \@ref(fig:shrubPredX).
 
+&nbsp;
+
 ```{r shrubPredX, echo=FALSE, fig.cap="Probability of the shrub's presence versus elevation with best-fit line superimposed and the prediction of elevations where the probabililty of the shrub's presence is 0.50 and 0.75."}
-predX <- round((log(c(0.5,0.95)/(1-c(0.5,0.95)))-cfs.shrub[1,1])/cfs.shrub[2,1],1)
+probs <- c(0.5,0.95)
+predX <- round((log(probs/(1-probs))-cfs.shrub[1,1])/cfs.shrub[2,1],1)
 predXlbls <- formatC(predX,format="f",digits=2)
 
 shrubProb +
   scale_y_continuous(expand=expansion(mult=0.03),breaks=c(0.5,0.95)) +
   scale_x_continuous(expand=expansion(mult=0.02),breaks=predX) +
-  geom_segment(aes(x=-Inf,xend=predX[1],y=0.5,yend=0.5),
+  geom_segment(aes(x=-Inf,xend=predX[1],y=probs[1],yend=probs[1]),
                linetype="dashed",arrow=ARROW) +
-  geom_segment(aes(x=predX[1],xend=predX[1],y=0.5,yend=-Inf),
+  geom_segment(aes(x=predX[1],xend=predX[1],y=probs[1],yend=-Inf),
                linetype="dashed",arrow=ARROW) +
-  geom_segment(aes(x=-Inf,xend=predX[2],y=0.95,yend=0.95),
+  geom_segment(aes(x=-Inf,xend=predX[2],y=probs[2],yend=probs[2]),
                linetype="dashed",arrow=ARROW) +
-  geom_segment(aes(x=predX[2],xend=predX[2],y=0.95,yend=-Inf),
+  geom_segment(aes(x=predX[2],xend=predX[2],y=probs[2],yend=-Inf),
                linetype="dashed",arrow=ARROW)
 ```
+
+&nbsp;
+
+## Variability Estimates
+Standard errors or confidence intervals for the parameters of the logistic regression model can be computed with normal distribution theory. However, this theory does not hold for all logistic regression models. In addition, methods for computing confidence intervals for predicted probabilities or for predicted values of $X$ for a particular probability are not well formed. Bootstrapping is one method for producing confidence intervals for these parameters.
+
+Bootstrap confidence intervals are computer intensive, but provide an interval that does not depend on the shape of the underlying sampling distribution. Bootstrapping confidence intervals generally follows these steps:
+
+1. Generate a bootstrap sample, which is a random sample of individuals from the original sample;^[Thus, the individuals must be selected with replacement so that each bootstrap sample is different and different from the original sample.]
+1. Fit the model to the bootstrap sample;
+1. Compute the statistics of interest (i.e., the slope, intercept, predicted probability, predicted value of $X$);
+1. Repeat steps 1-3 between 500 and10000 times;^[The number of bootstrap samples depends on a number of things, including the purpose of the study and how involved the calculations are. In this course, 500-1000 bootstrap samples will be adequate.]
+1. Order the results from smallest to largest; and
+1. Approximate 95% confidence interval with the values of the statistics that have 2.5% and 97.5% of the statistics smaller (i.e., find the middle 95% of the bootstrapped statistics).^[This step tends to produce slightly biased results. There are a number of possible corrections for this bias. However, we will use this method in this course to keep the method simple so that we can stay focused on the concept.]
+
+A histogram of slopes estimated from 999 bootstrap samples is shown in Figure \@ref(fig:PuttsBootSlopeCI). It is apparent from this example that the sampling distribution of the slopes is not normal and, thus, a confidence interval generated from normal theory would not be appropriate. The 95% bootstrap confidence interval shown in Figure \@ref(fig:PuttsBootSlopeCI) matches that in Table \@ref(tab:PuttCoefs).
+
+&nbsp;
+
+```{r PuttsBootSlopeCI, echo=FALSE, fig.cap="Histogram of logistic regression slopes from the golf putt example estimated from 999 bootstrap samples. The two values denoted mark the values with 2.5% and 97.5% of the slopes smaller and thus represents a 95% bootstrap confidence interval for the slope."}
+tmp <- as.data.frame(boot.putts$t) %>%
+  rename(Intercept=`(Intercept)`,Slope=distance) %>%
+  mutate(dist50=-Intercept/Slope)
+
+ggplot(data=tmp,mapping=aes(x=Slope)) +
+  geom_histogram(color="black",fill="gray80",binwidth=0.01) +
+  scale_y_continuous(name="Frequency of Bootstrap Samples",
+                     expand=expansion(mult=c(0,0.03))) +
+  scale_x_continuous(name="Slope Estimate") +
+  theme_NCStats() +
+  geom_segment(data=data.frame(),
+               aes(x=cfs.putts[2,2:3],xend=cfs.putts[2,2:3],
+                   y=c(40,40),yend=c(-Inf,-Inf)),arrow=ARROW) +
+  geom_text(data=data.frame(),
+            aes(x=cfs.putts[2,2:3],y=c(40,40),
+                label=formatC(cfs.putts[2,2:3],format="f",digits=3)),
+            size=lbl_text_size,vjust=-0.4)
+```
+
+&nbsp;
+
+```{r echo=FALSE}
+ciPred50 <- quantile(tmp$dist50,probs=c(0.025,0.975),type=1)
+```
+
+Bootstrapping is particularly useful for *derived* statistics like predicting the $X$ for a given probability. A histogram of predicted distances where the probability of making the putt is 0.50 estimated from 999 bootstrap samples is shown in Figure \@ref(fig:PuttsBootPred50CI). Thus, one is 95% confident that the distance of the putt where the probability of making the putt is 0.50 is between `r formatC(ciPred50[[1]],format="f",digits=2)` and  `r formatC(ciPred50[[2]],format="f",digits=2)` feet.
+
+&nbsp;
+
+```{r PuttsBootPred50CI, echo=FALSE, fig.cap="Histogram of the predicted distance where the probability making the putt is 0.50 estimated from 999 bootstrap samples. The two values denoted mark the values with 2.5% and 97.5% of the distances smaller and thus represents a 95% bootstrap confidence interval for the distance."}
+ggplot(data=tmp,mapping=aes(x=dist50)) +
+  geom_histogram(color="black",fill="gray80",binwidth=0.1) +
+  scale_y_continuous(name="Frequency of Bootstrap Samples",
+                     expand=expansion(mult=c(0,0.03))) +
+  scale_x_continuous(name="Predicted Distance for p=0.5") +
+  theme_NCStats() +
+  geom_segment(data=data.frame(),
+               aes(x=ciPred50,xend=ciPred50,
+                   y=c(40,40),yend=c(-Inf,-Inf)),arrow=ARROW) +
+  geom_text(data=data.frame(),
+            aes(x=ciPred50,y=c(40,40),
+                label=formatC(ciPred50,format="f",digits=2)),
+            size=lbl_text_size,vjust=-0.4)
+```
+
+&nbsp;
+
+Actual construction of the bootstrap confidence intervals is illustrated in the next module.
+
+::: {.tip data-latex=""}
+The bootstrap method will be used to constructed confidence intervals for parameters in a logistic regression as typical normal theory is not always reliable with logistic regressions.
+:::
+
+&nbsp;

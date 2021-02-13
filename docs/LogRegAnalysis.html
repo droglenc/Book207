@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-10" />
+<meta name="date" content="2021-02-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -329,8 +329,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="26.2" data-path="LogRegModels.html"><a href="LogRegModels.html#back-transformed-slope"><i class="fa fa-check"></i><b>26.2</b> Back-Transformed Slope</a></li>
 <li class="chapter" data-level="26.3" data-path="LogRegModels.html"><a href="LogRegModels.html#predictions-1"><i class="fa fa-check"></i><b>26.3</b> Predictions</a></li>
 <li class="chapter" data-level="26.4" data-path="LogRegModels.html"><a href="LogRegModels.html#reverse-predictions"><i class="fa fa-check"></i><b>26.4</b> “Reverse” Predictions</a></li>
-<li class="chapter" data-level="26.5" data-path="LogRegModels.html"><a href="LogRegModels.html#variability-estimates"><i class="fa fa-check"></i><b>26.5</b> Variability Estimates</a></li>
-<li class="chapter" data-level="26.6" data-path="LogRegModels.html"><a href="LogRegModels.html#another-example"><i class="fa fa-check"></i><b>26.6</b> Another Example</a></li>
+<li class="chapter" data-level="26.5" data-path="LogRegModels.html"><a href="LogRegModels.html#another-example"><i class="fa fa-check"></i><b>26.5</b> Another Example</a></li>
+<li class="chapter" data-level="26.6" data-path="LogRegModels.html"><a href="LogRegModels.html#variability-estimates"><i class="fa fa-check"></i><b>26.6</b> Variability Estimates</a></li>
 </ul></li>
 <li class="chapter" data-level="27" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html"><i class="fa fa-check"></i><b>27</b> Analysis</a>
 <ul>
@@ -375,8 +375,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="ROUTPUT"><code>#R&gt;   &#39;data.frame&#39;: 481 obs. of  2 variables:
 #R&gt;    $ outcome: chr  &quot;dead&quot; &quot;dead&quot; &quot;dead&quot; &quot;dead&quot; ...
 #R&gt;    $ conc   : num  49.1 49.1 49.1 49.1 49.1 49.1 49.1 49.1 49.1 49.1 ...</code></pre>
-<p>In this case, we want to model the probability of mortality (i.e., the beetle died) as a function of the concentration of gaseous carbon disulphide. With this objective, a “success” is a “dead” beetle. Thus, “dead” should be coded as “1” and “not dead” (i.e., “alive”) as a “0.” You will recognize this as an indicator variable from Module <a href="IVRVariables.html#IVRVariables">20</a>. In contrast to when we used indicator variables for factors, we need to explicitly create the indicator variable here when it is used as a response variable.</p>
-<p>An indicator variable can be created with <code>ifelse()</code>, which takes a “condition” as its first argument, what should be returned if the condition is “yes” as the second argument, and what should be returned if the condition is “no” as the third argument. The code below creates a new <code>outcome01</code> variable in the <code>bliss</code> data frame that will be <code>1</code> if <code>outcome</code> is <code>dead</code> and <code>0</code> if <code>outcome</code> is not <code>dead</code>.<a href="#fn112" class="footnote-ref" id="fnref112"><sup>112</sup></a></p>
+<p>In this case, we want to model the probability of mortality (i.e., the beetle died) as a function of the concentration of gaseous carbon disulphide. With this objective, a “success” is a “dead” beetle. Thus, “dead” should be coded as “1” and “alive” (i.e., “not dead”) as a “0.” Indicator variables used as the response variable in a logistic regression model must be explicitly created by you.<a href="#fn112" class="footnote-ref" id="fnref112"><sup>112</sup></a></p>
+<p>An indicator variable can be created with <code>ifelse()</code>, which takes a “condition” as its first argument, what should be returned if the condition is “yes” as the second argument, and what should be returned if the condition is “no” as the third argument. The code below creates a new <code>outcome01</code> variable in the <code>bliss</code> data frame that will be <code>1</code> if <code>outcome</code> is <code>dead</code> and <code>0</code> if <code>outcome</code> is not <code>dead</code>.<a href="#fn113" class="footnote-ref" id="fnref113"><sup>113</sup></a></p>
 <div class="sourceCode" id="cb194"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb194-1"><a href="LogRegAnalysis.html#cb194-1" aria-hidden="true" tabindex="-1"></a>bliss<span class="sc">$</span>outcome01 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bliss<span class="sc">$</span>outcome<span class="sc">==</span><span class="st">&quot;dead&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div>
 <p>You should examine the new variable to make sure that it represents what you intended.</p>
 <div class="sourceCode" id="cb195"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb195-1"><a href="LogRegAnalysis.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bliss,<span class="at">n=</span><span class="dv">8</span>)</span></code></pre></div>
@@ -395,7 +395,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="fitting-the-model" class="section level2" number="27.2">
 <h2><span class="header-section-number">27.2</span> Fitting the Model</h2>
-<p>The logistic regression model is fit with <code>glm()</code>, which is the <strong>generalized linear model</strong> function in R. The first argument to <code>glm()</code> is a formula of the form <code>var01~qvar</code> where <code>var01</code> is the indicator response variable created above and <code>qvar</code> is the quantitative explanatory variable, the data frame that contains these variables is in <code>data=</code>, and <code>family=binomial</code>. The <code>family=binomial</code> argument is critical because that is what tells <code>glm()</code> that the response variable should be treated as an indicator rather than quantitative variable. This signals <code>glm()</code> to fit a logistic regression model. The results of <code>glm()</code> should be saved to an object.</p>
+<p>The logistic regression model is fit with <code>glm()</code>, which is the <strong>generalized linear model</strong> function in R. The first argument to <code>glm()</code> is a formula of the form <code>var01~qvar</code> where <code>var01</code> is the indicator response variable created above and <code>qvar</code> is the quantitative explanatory variable, the data frame that contains these variables is in <code>data=</code>, and <code>family=binomial</code>. The <code>family=binomial</code> argument is critical because this tells <code>glm()</code> that the response variable should be treated as an indicator rather than quantitative variable, which signals <code>glm()</code> to fit a logistic regression model.</p>
 <div class="sourceCode" id="cb197"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb197-1"><a href="LogRegAnalysis.html#cb197-1" aria-hidden="true" tabindex="-1"></a>glm.bliss <span class="ot">&lt;-</span> <span class="fu">glm</span>(outcome01<span class="sc">~</span>conc,<span class="at">data=</span>bliss,<span class="at">family=</span>binomial)</span></code></pre></div>
 <div class="tip">
 <p>Logistic regressions are fit in R with <code>glm()</code> rather than <code>lm()</code> because logistic regression is a <em>generalized</em> rather than a <em>general</em> linear model.</p>
@@ -423,9 +423,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="LogRegParametersR" class="section level2" number="27.4">
 <h2><span class="header-section-number">27.4</span> Parameter Estimates</h2>
 <p>The estimated intercept and slope are extracted from the <code>glm()</code> object with <code>coef()</code>.</p>
-<p>Confidence intervals constructed from bootstrap samples require bootstrap samples to be constructed first. There are many ways to construct bootstrap samples in R. We will use <code>Boot()</code> from the <code>car</code> package. This function will be called with <code>car::Boot()</code> so as to not have to load the whole <code>car</code> package. <code>Boot()</code> requires only the saved <code>glm()</code> object as its argument.<a href="#fn113" class="footnote-ref" id="fnref113"><sup>113</sup></a> The results of <code>car::Boot()</code> should be saved to an object.<a href="#fn114" class="footnote-ref" id="fnref114"><sup>114</sup></a></p>
+<p>Confidence intervals constructed from bootstrap samples require bootstrap samples to be constructed first. There are many ways to construct bootstrap samples in R. We will use <code>Boot()</code> from the <code>car</code> package. This function will be called with <code>car::Boot()</code> so as to not have to load the entire <code>car</code> package. <code>Boot()</code> requires only the saved <code>glm()</code> object as its argument.<a href="#fn114" class="footnote-ref" id="fnref114"><sup>114</sup></a> The results of <code>car::Boot()</code> should be saved to an object.<a href="#fn115" class="footnote-ref" id="fnref115"><sup>115</sup></a></p>
 <div class="sourceCode" id="cb200"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb200-1"><a href="LogRegAnalysis.html#cb200-1" aria-hidden="true" tabindex="-1"></a>boot.bliss <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">Boot</span>(glm.bliss)</span></code></pre></div>
-<p>The bootstrap confidence intervals for the intercept and slope are extracted from the <code>Boot()</code> object with <code>confint()</code>. Include <code>type="perc"</code> to perform the last step of the bootstrap steps shown in Section <a href="LogRegModels.html#variability-estimates">26.5</a>.</p>
+<p>The bootstrap confidence intervals for the intercept and slope are extracted from the <code>Boot()</code> object with <code>confint()</code>. Include <code>type="perc"</code> to perform the last step of the bootstrap steps shown in Section <a href="LogRegModels.html#variability-estimates">26.6</a>.</p>
 <p>As before, I like to combine the parameter estimates and confidence intervals into one presentation.</p>
 <div class="sourceCode" id="cb201"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb201-1"><a href="LogRegAnalysis.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Ests=</span><span class="fu">coef</span>(glm.bliss),<span class="fu">confint</span>(boot.bliss,<span class="at">type=</span><span class="st">&quot;perc&quot;</span>))</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;                      Ests       2.5 %      97.5 %
@@ -436,7 +436,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">27.5</span> Predictions</h2>
 <div id="functions-for-bootstrapping" class="section level3" number="27.5.1">
 <h3><span class="header-section-number">27.5.1</span> Functions for Bootstrapping</h3>
-<p>The bootstrap method was introduced in Section <a href="LogRegModels.html#variability-estimates">26.5</a> as a way to estimate reliable confidence intervals for predicted probabilities and values of the explanatory variable for a given probability. Applying the bootstrap method for derived metrics like these requires specific functions to calculate the predicted probability for a given value of <span class="math inline">\(X\)</span> and the value of <span class="math inline">\(X\)</span> for a given probability. The <code>predProb()</code> below is the R version of</p>
+<p>The bootstrap method was introduced in Section <a href="LogRegModels.html#variability-estimates">26.6</a> as a way to estimate reliable confidence intervals for predicted probabilities and values of the explanatory variable for a given probability. Applying the bootstrap method for derived metrics like these requires specific functions to calculate the predicted probability for a given value of <span class="math inline">\(X\)</span> and the value of <span class="math inline">\(X\)</span> for a given probability. The <code>predProb()</code> below is the R version of</p>
 <p><span class="math display">\[ p = \frac{e^{\alpha+\beta X}}{1+e^{\alpha+\beta X}} \]</span></p>
 <p>from Module <a href="LogRegFoundations.html#LogRegFoundations">25</a> and <code>predX()</code> below is the R version of</p>
 <p><span class="math display">\[ X = \frac{log\left(\frac{p}{1-p}\right)-\alpha}{\beta} \]</span></p>
@@ -537,20 +537,85 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   [961] 0.24 0.27 0.23 0.23 0.26 0.24 0.24 0.27 0.23 0.27 0.25 0.24 0.26 0.26 0.26
 #R&gt;   [976] 0.24 0.23 0.24 0.26 0.26 0.26 0.24 0.29 0.26 0.26 0.24 0.31 0.27 0.27 0.22
 #R&gt;   [991] 0.27 0.24 0.23 0.22 0.27 0.27 0.26 0.26 0.25</code></pre>
-<p>Second, note that <code>predProb()</code> takes a value of <span class="math inline">\(X\)</span> at which to make the prediction as its first argument, an intercept as the second argument, and the slope as the third argument. If this function is given <strong>all</strong> of the bootstrapped intercepts and slopes then it will make a prediction at the supplied value of <code>x</code> for each bootstrapped sample. For example, the code below computes the predicted probability of mortality at a concentration of 70 mg/L for each bootstrapped sample and then examines the first six of those values.</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb212-1"><a href="LogRegAnalysis.html#cb212-1" aria-hidden="true" tabindex="-1"></a>p70 <span class="ot">&lt;-</span> <span class="fu">predProb</span>(<span class="dv">70</span>,boot.bliss<span class="sc">$</span>t[,<span class="dv">1</span>],boot.bliss<span class="sc">$</span>t[,<span class="dv">2</span>])</span>
-<span id="cb212-2"><a href="LogRegAnalysis.html#cb212-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(p70)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] 0.9352690 0.9374018 0.9412677 0.9372674 0.9368530 0.9402995</code></pre>
+<p>Second, note that <code>predProb()</code> takes a value of <span class="math inline">\(X\)</span> at which to make the prediction as its first argument, an intercept as the second argument, and the slope as the third argument. If this function is given <strong>all</strong> of the bootstrapped intercepts and slopes then it will make a prediction at the supplied value of <code>x</code> for each bootstrapped sample. For example, the code below computes the predicted probability of mortality at a concentration of 70 mg/L for each bootstrapped sample (again, rounded to save space).</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb212-1"><a href="LogRegAnalysis.html#cb212-1" aria-hidden="true" tabindex="-1"></a>p70 <span class="ot">&lt;-</span> <span class="fu">predProb</span>(<span class="dv">70</span>,boot.bliss<span class="sc">$</span>t[,<span class="dv">1</span>],boot.bliss<span class="sc">$</span>t[,<span class="dv">2</span>])</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;     [1] 0.94 0.94 0.94 0.94 0.94 0.94 0.94 0.92 0.95 0.93 0.95 0.92 0.94 0.92 0.92
+#R&gt;    [16] 0.94 0.93 0.92 0.93 0.96 0.94 0.95 0.94 0.92 0.95 0.92 0.92 0.93 0.93 0.95
+#R&gt;    [31] 0.94 0.94 0.92 0.92 0.95 0.95 0.95 0.91 0.90 0.96 0.94 0.93 0.94 0.94 0.92
+#R&gt;    [46] 0.93 0.95 0.92 0.94 0.91 0.94 0.94 0.94 0.91 0.92 0.91 0.92 0.94 0.94 0.93
+#R&gt;    [61] 0.94 0.93 0.93 0.93 0.91 0.94 0.94 0.92 0.93 0.96 0.94 0.91 0.93 0.93 0.94
+#R&gt;    [76] 0.91 0.94 0.92 0.93 0.92 0.93 0.95 0.94 0.94 0.95 0.93 0.94 0.93 0.93 0.95
+#R&gt;    [91] 0.93 0.94 0.90 0.92 0.92 0.93 0.94 0.93 0.92 0.94 0.95 0.94 0.94 0.93 0.95
+#R&gt;   [106] 0.93 0.94 0.93 0.95 0.93 0.93 0.93 0.93 0.93 0.94 0.95 0.92 0.92 0.94 0.95
+#R&gt;   [121] 0.93 0.92 0.94 0.91 0.94 0.95 0.91 0.94 0.91 0.92 0.94 0.94 0.95 0.91 0.94
+#R&gt;   [136] 0.92 0.94 0.94 0.91 0.93 0.91 0.93 0.94 0.94 0.93 0.94 0.93 0.94 0.96 0.93
+#R&gt;   [151] 0.96 0.95 0.93 0.91 0.96 0.92 0.97 0.94 0.93 0.94 0.93 0.95 0.92 0.93 0.92
+#R&gt;   [166] 0.94 0.95 0.91 0.94 0.94 0.93 0.95 0.94 0.95 0.92 0.94 0.94 0.95 0.95 0.93
+#R&gt;   [181] 0.96 0.95 0.94 0.92 0.93 0.90 0.92 0.95 0.90 0.92 0.94 0.95 0.94 0.92 0.94
+#R&gt;   [196] 0.92 0.93 0.90 0.96 0.92 0.95 0.94 0.93 0.94 0.91 0.93 0.94 0.92 0.94 0.95
+#R&gt;   [211] 0.94 0.97 0.94 0.95 0.94 0.91 0.92 0.94 0.92 0.92 0.93 0.93 0.94 0.92 0.89
+#R&gt;   [226] 0.92 0.95 0.94 0.95 0.94 0.93 0.92 0.93 0.95 0.93 0.90 0.93 0.92 0.91 0.89
+#R&gt;   [241] 0.94 0.91 0.90 0.91 0.93 0.93 0.90 0.93 0.93 0.93 0.89 0.91 0.93 0.94 0.94
+#R&gt;   [256] 0.94 0.95 0.93 0.95 0.94 0.92 0.95 0.94 0.94 0.92 0.92 0.89 0.97 0.94 0.95
+#R&gt;   [271] 0.91 0.91 0.95 0.90 0.93 0.92 0.94 0.95 0.95 0.93 0.91 0.91 0.92 0.95 0.94
+#R&gt;   [286] 0.93 0.95 0.93 0.94 0.94 0.92 0.94 0.94 0.95 0.94 0.93 0.93 0.93 0.96 0.95
+#R&gt;   [301] 0.95 0.93 0.90 0.92 0.94 0.94 0.94 0.94 0.94 0.94 0.92 0.95 0.93 0.93 0.95
+#R&gt;   [316] 0.94 0.95 0.94 0.95 0.91 0.95 0.96 0.94 0.95 0.93 0.93 0.95 0.95 0.93 0.96
+#R&gt;   [331] 0.95 0.91 0.94 0.93 0.93 0.95 0.94 0.94 0.93 0.96 0.95 0.94 0.93 0.95 0.94
+#R&gt;   [346] 0.92 0.95 0.93 0.92 0.92 0.93 0.94 0.93 0.96 0.92 0.93 0.93 0.93 0.94 0.93
+#R&gt;   [361] 0.93 0.93 0.93 0.92 0.94 0.96 0.92 0.94 0.94 0.94 0.93 0.94 0.93 0.96 0.92
+#R&gt;   [376] 0.95 0.91 0.92 0.94 0.97 0.94 0.95 0.92 0.91 0.92 0.92 0.96 0.95 0.92 0.93
+#R&gt;   [391] 0.92 0.93 0.94 0.93 0.91 0.94 0.93 0.93 0.91 0.90 0.95 0.95 0.95 0.94 0.92
+#R&gt;   [406] 0.93 0.96 0.93 0.91 0.92 0.93 0.94 0.93 0.92 0.94 0.93 0.93 0.92 0.94 0.95
+#R&gt;   [421] 0.93 0.92 0.94 0.91 0.93 0.92 0.94 0.92 0.96 0.92 0.91 0.94 0.92 0.97 0.94
+#R&gt;   [436] 0.93 0.94 0.93 0.92 0.94 0.92 0.95 0.93 0.93 0.95 0.93 0.95 0.89 0.94 0.92
+#R&gt;   [451] 0.92 0.93 0.92 0.95 0.93 0.94 0.95 0.94 0.93 0.95 0.92 0.95 0.94 0.94 0.93
+#R&gt;   [466] 0.93 0.93 0.92 0.93 0.93 0.93 0.91 0.95 0.96 0.94 0.93 0.92 0.94 0.96 0.94
+#R&gt;   [481] 0.94 0.94 0.94 0.93 0.94 0.93 0.94 0.92 0.93 0.94 0.91 0.93 0.93 0.94 0.93
+#R&gt;   [496] 0.94 0.93 0.92 0.94 0.94 0.91 0.92 0.93 0.95 0.93 0.93 0.94 0.92 0.90 0.92
+#R&gt;   [511] 0.95 0.93 0.96 0.93 0.94 0.92 0.94 0.93 0.94 0.94 0.94 0.94 0.95 0.90 0.95
+#R&gt;   [526] 0.94 0.93 0.93 0.92 0.92 0.92 0.94 0.91 0.93 0.92 0.93 0.94 0.93 0.94 0.93
+#R&gt;   [541] 0.94 0.93 0.94 0.93 0.95 0.96 0.93 0.94 0.93 0.92 0.94 0.94 0.94 0.92 0.93
+#R&gt;   [556] 0.95 0.93 0.91 0.94 0.94 0.94 0.92 0.93 0.93 0.95 0.92 0.95 0.95 0.93 0.92
+#R&gt;   [571] 0.95 0.91 0.90 0.91 0.94 0.91 0.95 0.95 0.96 0.94 0.92 0.94 0.93 0.94 0.93
+#R&gt;   [586] 0.95 0.94 0.94 0.95 0.91 0.95 0.91 0.93 0.95 0.94 0.92 0.94 0.94 0.93 0.95
+#R&gt;   [601] 0.93 0.93 0.95 0.94 0.92 0.91 0.94 0.94 0.95 0.92 0.95 0.93 0.93 0.93 0.95
+#R&gt;   [616] 0.93 0.93 0.93 0.92 0.92 0.92 0.94 0.93 0.93 0.96 0.94 0.91 0.96 0.93 0.96
+#R&gt;   [631] 0.93 0.93 0.93 0.95 0.94 0.93 0.93 0.94 0.91 0.92 0.94 0.93 0.92 0.94 0.94
+#R&gt;   [646] 0.95 0.94 0.92 0.92 0.91 0.94 0.92 0.90 0.94 0.93 0.95 0.93 0.93 0.92 0.94
+#R&gt;   [661] 0.94 0.92 0.95 0.91 0.94 0.93 0.93 0.95 0.93 0.95 0.89 0.93 0.93 0.92 0.96
+#R&gt;   [676] 0.93 0.91 0.92 0.91 0.93 0.93 0.93 0.91 0.94 0.93 0.94 0.95 0.94 0.93 0.93
+#R&gt;   [691] 0.95 0.95 0.95 0.92 0.95 0.93 0.93 0.92 0.95 0.93 0.91 0.93 0.91 0.95 0.95
+#R&gt;   [706] 0.93 0.92 0.93 0.92 0.95 0.93 0.95 0.94 0.92 0.93 0.94 0.93 0.92 0.96 0.94
+#R&gt;   [721] 0.93 0.95 0.94 0.94 0.95 0.93 0.93 0.94 0.94 0.92 0.91 0.93 0.92 0.93 0.92
+#R&gt;   [736] 0.94 0.95 0.92 0.92 0.94 0.92 0.93 0.93 0.96 0.94 0.91 0.93 0.94 0.95 0.94
+#R&gt;   [751] 0.92 0.94 0.94 0.92 0.92 0.93 0.90 0.95 0.93 0.93 0.92 0.94 0.94 0.93 0.93
+#R&gt;   [766] 0.96 0.96 0.90 0.91 0.91 0.94 0.92 0.92 0.94 0.95 0.94 0.93 0.93 0.92 0.95
+#R&gt;   [781] 0.94 0.93 0.96 0.94 0.93 0.92 0.95 0.94 0.93 0.92 0.92 0.92 0.92 0.93 0.93
+#R&gt;   [796] 0.95 0.92 0.90 0.89 0.93 0.95 0.92 0.94 0.95 0.94 0.94 0.94 0.91 0.93 0.92
+#R&gt;   [811] 0.94 0.95 0.94 0.96 0.93 0.94 0.95 0.95 0.92 0.93 0.93 0.93 0.93 0.93 0.94
+#R&gt;   [826] 0.93 0.94 0.92 0.93 0.95 0.92 0.93 0.94 0.93 0.91 0.94 0.94 0.95 0.92 0.94
+#R&gt;   [841] 0.93 0.89 0.93 0.91 0.92 0.95 0.95 0.94 0.90 0.95 0.93 0.94 0.91 0.94 0.92
+#R&gt;   [856] 0.93 0.95 0.95 0.94 0.95 0.94 0.94 0.95 0.93 0.95 0.93 0.92 0.97 0.91 0.94
+#R&gt;   [871] 0.93 0.91 0.95 0.93 0.94 0.93 0.93 0.93 0.92 0.94 0.93 0.93 0.93 0.91 0.95
+#R&gt;   [886] 0.93 0.94 0.93 0.94 0.93 0.92 0.94 0.93 0.95 0.92 0.95 0.93 0.96 0.94 0.93
+#R&gt;   [901] 0.92 0.96 0.92 0.92 0.94 0.93 0.93 0.94 0.95 0.91 0.94 0.95 0.89 0.95 0.94
+#R&gt;   [916] 0.95 0.95 0.93 0.92 0.91 0.94 0.94 0.92 0.93 0.97 0.91 0.94 0.95 0.94 0.94
+#R&gt;   [931] 0.95 0.91 0.95 0.95 0.90 0.92 0.92 0.95 0.94 0.92 0.94 0.96 0.94 0.91 0.93
+#R&gt;   [946] 0.94 0.91 0.92 0.92 0.93 0.94 0.96 0.92 0.91 0.94 0.94 0.93 0.94 0.95 0.95
+#R&gt;   [961] 0.93 0.95 0.93 0.91 0.95 0.93 0.93 0.96 0.93 0.95 0.94 0.92 0.93 0.91 0.94
+#R&gt;   [976] 0.92 0.93 0.92 0.94 0.94 0.95 0.93 0.96 0.92 0.94 0.94 0.95 0.95 0.94 0.91
+#R&gt;   [991] 0.93 0.94 0.92 0.91 0.94 0.94 0.92 0.93 0.95</code></pre>
 <p>The 95% bootstrapped confidence interval is between the two values in <code>p70</code> that have 2.5% and 97.5% of the values lower. These values are found with <code>quantile()</code> given the vector of values as the first argument, the percentages to “cut off” at as proportions in <code>probs=</code>, and <code>type=1</code> so that the quantiles computed here are the same as those in <code>confint()</code> above. For example, the 95% confidence interval for the predicted probability for a concentration of 70 mg/L is computed with</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb214-1"><a href="LogRegAnalysis.html#cb214-1" aria-hidden="true" tabindex="-1"></a>( ci70 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(p70,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>)) )</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb214-1"><a href="LogRegAnalysis.html#cb214-1" aria-hidden="true" tabindex="-1"></a>( ci70 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(p70,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>),<span class="at">type=</span><span class="dv">1</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;        2.5%     97.5% 
-#R&gt;   0.9032931 0.9581815</code></pre>
+#R&gt;   0.9031287 0.9581880</code></pre>
 <p>Thus, one is 95% confident that the predicted probability of mortality for beetles exposed to 70 mg/l calcium disulphide is between 0.903 and 0.958.</p>
 <p>A similar process is used to predict the concentration where 50%, for example, of the beetles will have died, except that <code>predX()</code> from above is used and it requires the probability of interest as a proportion as the first argument.</p>
 <div class="sourceCode" id="cb216"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb216-1"><a href="LogRegAnalysis.html#cb216-1" aria-hidden="true" tabindex="-1"></a>x50 <span class="ot">&lt;-</span> <span class="fu">predX</span>(<span class="fl">0.5</span>,boot.bliss<span class="sc">$</span>t[,<span class="dv">1</span>],boot.bliss<span class="sc">$</span>t[,<span class="dv">2</span>])</span>
-<span id="cb216-2"><a href="LogRegAnalysis.html#cb216-2" aria-hidden="true" tabindex="-1"></a>( ci50 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x50,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>)) )</span></code></pre></div>
+<span id="cb216-2"><a href="LogRegAnalysis.html#cb216-2" aria-hidden="true" tabindex="-1"></a>( ci50 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x50,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>),<span class="at">type=</span><span class="dv">1</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;       2.5%    97.5% 
-#R&gt;   58.31069 60.44455</code></pre>
+#R&gt;   58.29188 60.44497</code></pre>
 <p>Thus, one is 95% confident that the predicted concentration where 50% of the beetles would be dead is between 58.3 and 60.4.</p>
 <p> </p>
 </div>
@@ -563,16 +628,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb218-3"><a href="LogRegAnalysis.html#cb218-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;glm&quot;</span>,<span class="at">method.args=</span><span class="fu">list</span>(<span class="at">family=</span>binomial)) <span class="sc">+</span></span>
 <span id="cb218-4"><a href="LogRegAnalysis.html#cb218-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Concentration of Disulphide&quot;</span>,<span class="at">y=</span><span class="st">&quot;Probability of Mortality&quot;</span>) <span class="sc">+</span></span>
 <span id="cb218-5"><a href="LogRegAnalysis.html#cb218-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-168-1.png" width="336" style="display: block; margin: auto;" /></p>
+<p><img src="Book207_files/figure-html/unnamed-chunk-169-1.png" width="336" style="display: block; margin: auto;" /></p>
+<p> </p>
 
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="112">
-<li id="fn112"><p>Note that R uses <code>==</code> when asking if two things are equal. So the condition in this <code>ifelse()</code> is asking where the <code>oucome</code> variable in <code>bliss</code> is equal to <code>dead</code>.<a href="LogRegAnalysis.html#fnref112" class="footnote-back">↩︎</a></p></li>
-<li id="fn113"><p>The number of bootstrap samples defaults to 999, which is adequate for our purposes. This number of bootstrap samples can be modified with <code>R=</code>.<a href="LogRegAnalysis.html#fnref113" class="footnote-back">↩︎</a></p></li>
-<li id="fn114"><p><code>Boot()</code> may take many seconds to run, depending on the size of the original data frame and the number of bootstrapped samples taken.<a href="LogRegAnalysis.html#fnref114" class="footnote-back">↩︎</a></p></li>
+<li id="fn112"><p>In contrast to indicator variables derived from factors behind-the-scenes as in Module <a href="IVRVariables.html#IVRVariables">20</a>.<a href="LogRegAnalysis.html#fnref112" class="footnote-back">↩︎</a></p></li>
+<li id="fn113"><p>Note that R uses <code>==</code> when asking if two things are equal. So the condition in this <code>ifelse()</code> is asking where the <code>oucome</code> variable in <code>bliss</code> is equal to <code>dead</code>.<a href="LogRegAnalysis.html#fnref113" class="footnote-back">↩︎</a></p></li>
+<li id="fn114"><p>The number of bootstrap samples defaults to 999, which is adequate for our purposes. This number of bootstrap samples can be modified with <code>R=</code>.<a href="LogRegAnalysis.html#fnref114" class="footnote-back">↩︎</a></p></li>
+<li id="fn115"><p><code>Boot()</code> may take many seconds to run, depending on the size of the original data frame and the number of bootstrapped samples taken.<a href="LogRegAnalysis.html#fnref115" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
