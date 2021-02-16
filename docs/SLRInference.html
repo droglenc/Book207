@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-13" />
+<meta name="date" content="2021-02-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -501,8 +501,7 @@ Figure 15.4: Example of centering the explanatory variable. The original data is
 <p>There are two portions of output from <code>summary()</code>. The top portion under “Coefficients:” contains information about the intercept in the row labeled “(Intercept)” and information about the slope in the row labeled with the name of the explanatory variable. Thus <span class="math inline">\(\hat{\alpha}\)</span> (=21.39) and <span class="math inline">\(\hat{\beta}\)</span> (=-0.0056) are under “Estimate” and the <span class="math inline">\(SE_{\hat{\alpha}}\)</span> (=1.74) and <span class="math inline">\(SE_{\hat{\beta}}\)</span> (=0.00053) are under “Std. Error.”</p>
 <p>The values under “t value” and “Pr(&gt;|t|)” are the t test statistic and corresponding p-value for testing that the corresponding parameter is equal to zero or not. Because the specific value in the tests is zero, the t test statistic shown here is simply the “Estimate” divided by the “Std. Error.” For example, the test statistic for testing <span class="math inline">\(H_{0}: \beta = 0\)</span> versus <span class="math inline">\(H_{A}: \beta \ne 0\)</span> is <span class="math inline">\(t=\frac{-0.0056}{0.0005}\)</span> = -10.73. The corresponding p-value (0.000002) suggests that <span class="math inline">\(H_{0}\)</span> should be rejected and one would conclude that there is a significant relationship between the actual mean air temperature and the altitude lapse rate.</p>
 <div class="tip">
-<p>The default p-values printed by most softwares are ONLY for the specific <span class="math inline">\(H_{0}\)</span> that the
-corresponding parameter is equal to zero (vs. that it is not).</p>
+<p>The default p-values printed by most softwares are ONLY for the specific <span class="math inline">\(H_{0}\)</span> that the corresponding parameter is equal to zero (vs. that it is not).</p>
 </div>
 <p>The remaining output from <code>summary()</code> is largely redundant with what will be discussed more thoroughly in Module <a href="SLRModels.html#SLRModels">16</a>. However, it should be noted that <span class="math inline">\(s_{Y|X}\)</span> is given after “Residual standard error:” Thus, in this case, the <strong>standard deviation</strong> of observations around the best-fit line is 1.462. The <strong>variance</strong> of the observations around the best fit line (<span class="math inline">\(s_{Y|X}^{2}\)</span>) discussed in Section <a href="SLRInference.html#variability-around-the-line">15.1</a> is this value squared or 1.462<sup>2</sup>=2.137.</p>
 <p> </p>

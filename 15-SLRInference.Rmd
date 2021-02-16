@@ -234,11 +234,10 @@ ggplot(data=dat,aes(x=X,y=Y)) +
   geom_smooth(method="lm",se=FALSE,color=clr_full) +
   geom_text(data=res,aes(x=xlbls,y=ylbls,label=lbls),
             size=lbl_text_size,color=lbl_clr) +
-  scale_x_continuous(name="Response Variable",
+  scale_x_continuous(name="Explanatory Variable",
                      limits=c(-2,7),expand=expansion(mult=c(0,0.03)),
                      breaks=seq(-4,8,2)) +
-  scale_y_continuous(name="Explanatory Variable",limits=c(8.5,12.5)) +
-  labs(y="Response Variable",x="Explanatory Variable") +
+  scale_y_continuous(name="Response Variable",limits=c(8.5,12.5)) +
   theme_NCStats() +
   gganimate::transition_states(rev(set))
 ```
@@ -280,8 +279,7 @@ There are two portions of output from `summary()`. The top portion under "Coeffi
 The values under "t value" and "Pr(>|t|)" are the t test statistic and corresponding p-value for testing that the corresponding parameter is equal to zero or not. Because the specific value in the tests is zero, the t test statistic shown here is simply the "Estimate" divided by the "Std. Error." For example, the test statistic for testing $H_{0}: \beta = 0$ versus $H_{A}: \beta \ne 0$ is $t=\frac{`r formatC(coef1.ev["Altitude","Estimate"],format="f",digits=4)`}{`r formatC(coef1.ev["Altitude","Std. Error"],format="f",digits=4)`}$ = `r formatC(coef1.ev["Altitude","t value"],format="f",digits=2)`. The corresponding p-value (`r kPvalue(coef1.ev["Altitude","Pr(>|t|)"],digits=6,latex=FALSE,include.p=FALSE)`) suggests that $H_{0}$ should be rejected and one would conclude that there is a significant relationship between the actual mean air temperature and the altitude lapse rate.
 
 ::: {.tip data-latex=""}
-The default p-values printed by most softwares are ONLY for the specific $H_{0}$ that the
-corresponding parameter is equal to zero (vs. that it is not).
+The default p-values printed by most softwares are ONLY for the specific $H_{0}$ that the corresponding parameter is equal to zero (vs. that it is not).
 :::
 
 The remaining output from `summary()` is largely redundant with what will be discussed more thoroughly in Module \@ref(SLRModels). However, it should be noted that $s_{Y|X}$ is given after "Residual standard error:". Thus, in this case, the **standard deviation** of observations around the best-fit line is `r formatC(sigma.ev,format="f",digits=3)`. The **variance** of the observations around the best fit line ($s_{Y|X}^{2}$) discussed in Section \@ref(variability-around-the-line) is this value squared or `r formatC(sigma.ev,format="f",digits=3)`<sup>2</sup>=`r formatC(sigma.ev^2,format="f",digits=3)`.
