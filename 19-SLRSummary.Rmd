@@ -78,7 +78,7 @@ knitr::kable(anova(lm.cc),booktabs=TRUE,digits=c(0,1,1,3,4),
 
 &nbsp;
 
-In fact, it appears that as as the CO<sub>2</sub> levels increase by 1 ppm then the temperature anomaly increases by between `r formatC(cfs.cc["CO2","2.5 %"],format="f",digits=2)` and `r formatC(cfs.cc["CO2","97.5 %"],format="f",digits=2)` 1/100<sup>o</sup>C (Table \@ref(tab:ccCoefs); Figure \@ref(fig:ccFitPlot)).
+In fact, it appears that as as the CO<sub>2</sub> levels increase by 1 ppm then the mean temperature anomaly increases by between `r formatC(cfs.cc["CO2","2.5 %"],format="f",digits=2)` and `r formatC(cfs.cc["CO2","97.5 %"],format="f",digits=2)` 1/100<sup>o</sup>C (Table \@ref(tab:ccCoefs); Figure \@ref(fig:ccFitPlot)).
 
 &nbsp;
 
@@ -179,7 +179,7 @@ assumptionCheck(lm.tm1,lambday=0,lambdax=0)
 
 &nbsp;
 
-The log above ground biomass and log diameter at breast height appear to be significantly related (`r kPvalue(aov.p.tm2,latex=FALSE)`; Table \@ref(tab:tmANOVA)). In fact, `r formatC(100*rSquared(lm.tm2),format="f",digits=1)`% of the variability in the above ground biomass is explained by knowing the value of the diameter at breast height.
+The log above ground biomass and log diameter at breast height appear to be significantly related (`r kPvalue(aov.p.tm2,latex=FALSE)`; Table \@ref(tab:tmANOVA)). In fact, `r formatC(100*rSquared(lm.tm2),format="f",digits=1)`% of the variability in the log above ground biomass is explained by knowing the value of the log diameter at breast height.
 
 &nbsp;
 
@@ -193,7 +193,7 @@ knitr::kable(anova(lm.tm2),booktabs=TRUE,digits=c(0,2,2,2,4),
 
 &nbsp;
 
-It appears that as as the log diameter at breast height increases by 1 unit then the log above ground biomass increases by between `r formatC(cfs.tm2["logDBH","2.5 %"],format="f",digits=2)` and `r formatC(cfs.tm2["logDBH","97.5 %"],format="f",digits=2)` units (Table \@ref(tab:tmCoefs); Figure \@ref(fig:tmFitPlot)). More importantly, as the diameter at breast height increases by a multiple of 2.718 the above ground biomass increases by a multiple of between `r formatC(btcfs.tm2["logDBH","2.5 %"],format="f",digits=2)` and `r formatC(btcfs.tm2["logDBH","97.5 %"],format="f",digits=2)`.
+It appears that as as the log diameter at breast height increases by 1 unit then the mean log above ground biomass increases by between `r formatC(cfs.tm2["logDBH","2.5 %"],format="f",digits=2)` and `r formatC(cfs.tm2["logDBH","97.5 %"],format="f",digits=2)` units (Table \@ref(tab:tmCoefs); Figure \@ref(fig:tmFitPlot)). More importantly, as the diameter at breast height increases by a multiple of 2.718 the mean above ground biomass increases by a multiple of between `r formatC(btcfs.tm2["logDBH","2.5 %"],format="f",digits=2)` and `r formatC(btcfs.tm2["logDBH","97.5 %"],format="f",digits=2)`.
 
 &nbsp;
 
