@@ -753,12 +753,11 @@ Figure 19.5: Scatterplot of log above ground biomass on log diameter at breast h
 <span id="cb144-8"><a href="SLRSummary.html#cb144-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;log Diameter at Breast Height&quot;</span>,<span class="at">y=</span><span class="st">&quot;log Above Ground Biomass&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb144-9"><a href="SLRSummary.html#cb144-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
 <span id="cb144-10"><a href="SLRSummary.html#cb144-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb145-1"><a href="SLRSummary.html#cb145-1" aria-hidden="true" tabindex="-1"></a>aov.p.tm2 <span class="ot">&lt;-</span> <span class="fu">anova</span>(lm.tm2)<span class="sc">$</span><span class="st">&quot;Pr(&gt;F)&quot;</span>[<span class="dv">1</span>]</span>
-<span id="cb145-2"><a href="SLRSummary.html#cb145-2" aria-hidden="true" tabindex="-1"></a>( cfs.tm2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.tm2),<span class="fu">confint</span>(lm.tm2)) )</span>
-<span id="cb145-3"><a href="SLRSummary.html#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(cfs.tm2)</span>
-<span id="cb145-4"><a href="SLRSummary.html#cb145-4" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">logDBH=</span><span class="fu">log</span>(<span class="dv">50</span>))</span>
-<span id="cb145-5"><a href="SLRSummary.html#cb145-5" aria-hidden="true" tabindex="-1"></a>( pl50 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm.tm2,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>) )</span>
-<span id="cb145-6"><a href="SLRSummary.html#cb145-6" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(pl50)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb145-1"><a href="SLRSummary.html#cb145-1" aria-hidden="true" tabindex="-1"></a>( cfs.tm2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.tm2),<span class="fu">confint</span>(lm.tm2)) )</span>
+<span id="cb145-2"><a href="SLRSummary.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(cfs.tm2)</span>
+<span id="cb145-3"><a href="SLRSummary.html#cb145-3" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">logDBH=</span><span class="fu">log</span>(<span class="dv">50</span>))</span>
+<span id="cb145-4"><a href="SLRSummary.html#cb145-4" aria-hidden="true" tabindex="-1"></a>( pl50 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm.tm2,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>) )</span>
+<span id="cb145-5"><a href="SLRSummary.html#cb145-5" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(pl50)</span></code></pre></div>
 <p> </p>
 
 </div>

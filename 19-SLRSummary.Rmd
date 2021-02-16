@@ -234,7 +234,6 @@ lm.tm2 <- lm(logAGB~logDBH,data=tm)
 anova(lm.tm2)
 rSquared(lm.tm2)
 <<tmFitPlot>>
-aov.p.tm2 <- anova(lm.tm2)$"Pr(>F)"[1]
 ( cfs.tm2 <- cbind(Est=coef(lm.tm2),confint(lm.tm2)) )
 exp(cfs.tm2)
 nd <- data.frame(logDBH=log(50))
