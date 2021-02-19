@@ -7,6 +7,8 @@ The following is a process for fitting a SLR. Consider this process as you learn
 <!----
 1. Perform a thorough EDA. Pay close attention to the form, strength, and outliers on the scatterplot of the response and explanatory variables.
 ---->
+1. Briefly introduce the study (i.e., provide some background for why this study is being conducted).
+1. State the hypotheses to be tested.
 1. Show the overall sample size.
 1. Address the independence assumption.
     * If this assumption is not met then other analysis methods must be used.

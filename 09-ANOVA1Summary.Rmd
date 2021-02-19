@@ -8,7 +8,9 @@ The process of fitting and interpreting linear models is as much an art as it is
 <!---
 1. Perform a thorough EDA of the quantitative response variable. Pay special attention to the distributional shape, center, dispersion, and outliers within each level of the grouping variable.
 ---->
-1. Show the sample size per group and comment on whether the study was balanced (i.e., same sample size per group) or not.
+1. Briefly introduce the study (i.e., provide some background for why this study is being conducted).
+1. State the hypotheses to be tested.
+1. Show the sample size per group using `xtabs()` and comment on whether the study was balanced (i.e., same sample size per group) or not.
 1. Address the independence assumption.
     * If this assumption is not met then other analysis methods should be used.^[This will not be the case in this course.]
 1. Fit the untransformed full model (i.e., separate group means) with `lm()`.

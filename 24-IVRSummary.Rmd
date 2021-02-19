@@ -7,7 +7,9 @@ The following is a process for fitting an IVR. Consider this process as you lear
 <!----
 1. Perform a thorough EDA. Pay close attention to the form, strength, and outliers on the scatterplot of the response and explanatory variables separated by each level of the factor (You can add `facet_wrap(vars(FACTOR)))` (where `FACTOR` is replaced with the factor variable in the IVR) to `ggplot()` code that constructs a scatterplot to separate by groups.)
 ---->
-1. Show the sample size by group using `xtabs()`.
+1. Briefly introduce the study (i.e., provide some background for why this study is being conducted).
+1. State the hypotheses to be tested.
+1. Show the sample size per group using `xtabs()` and comment on whether the study was balanced (i.e., same sample size per group) or not.
 1. Assess the independence assumption.
     * If this assumption is not met then other analysis methods must be used.
 1. Fit the untransformed ultimate full model with `lm()`.

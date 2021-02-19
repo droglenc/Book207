@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-16" />
+<meta name="date" content="2021-02-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -373,7 +373,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 1. Perform a thorough EDA. Pay close attention to the form, strength, and outliers on the scatterplot of the response and explanatory variables separated by each level of the factor (You can add `facet_wrap(vars(FACTOR)))` (where `FACTOR` is replaced with the factor variable in the IVR) to `ggplot()` code that constructs a scatterplot to separate by groups.)
 ---->
 <ol style="list-style-type: decimal">
-<li>Show the sample size by group using <code>xtabs()</code>.</li>
+<li>Briefly introduce the study (i.e., provide some background for why this study is being conducted).</li>
+<li>State the hypotheses to be tested.</li>
+<li>Show the sample size per group using <code>xtabs()</code> and comment on whether the study was balanced (i.e., same sample size per group) or not.</li>
 <li>Assess the independence assumption.
 <ul>
 <li>If this assumption is not met then other analysis methods must be used.</li>
