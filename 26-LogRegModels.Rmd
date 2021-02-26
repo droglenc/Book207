@@ -425,10 +425,12 @@ flp.odds.shrub2 <- flp.odds.shrub +
   geom_segment(aes(x=pts.shrub$elev[2],xend=pts.shrub$elev[2],
                y=pts.shrub$odds[1],yend=pts.shrub$odds[2]),
                color="red") +
-  geom_text(aes(x=mean(pts.shrub$elev[1:2]),y=pts.shrub$odds[1],label="100"),
+  geom_text(aes(x=mean(pts.shrub$elev[1:2]),y=pts.shrub$odds[1],
+                label="100"),
             vjust=1.25,size=lbl_text_size) +
   geom_text(aes(x=pts.shrub$elev[2],y=mean(pts.shrub$odds[1:2])),
-            label=expression(e^{100*beta}==2.455),parse=TRUE,hjust=-0.1,size=lbl_text_size) +
+            label=expression(e^{100*beta}==2.455),parse=TRUE,
+            hjust=-0.1,size=lbl_text_size) +
   ## Second example
   geom_segment(aes(x=pts.shrub$elev[3],xend=pts.shrub$elev[4],
                y=pts.shrub$odds[3],yend=pts.shrub$odds[3]),
@@ -436,12 +438,15 @@ flp.odds.shrub2 <- flp.odds.shrub +
   geom_segment(aes(x=pts.shrub$elev[4],xend=pts.shrub$elev[4],
                y=pts.shrub$odds[3],yend=pts.shrub$odds[4]),
                color="red") +
-  geom_text(aes(x=mean(pts.shrub$elev[3:4]),y=pts.shrub$odds[3],label="100"),
+  geom_text(aes(x=mean(pts.shrub$elev[3:4]),y=pts.shrub$odds[3],
+                label="100"),
             vjust=1.25,size=lbl_text_size) +
   geom_text(aes(x=2525,y=mean(pts.shrub$odds[3:4])),
-            label=expression(e^{100*beta}==2.455),parse=TRUE,hjust=1.1,size=lbl_text_size) +
+            label=expression(e^{100*beta}==2.455),parse=TRUE,
+            hjust=1.1,size=lbl_text_size) +
   geom_segment(aes(x=2525,xend=2600,
-                   y=mean(pts.shrub$odds[3:4]),yend=mean(pts.shrub$odds[3:4])),
+                   y=mean(pts.shrub$odds[3:4]),
+                   yend=mean(pts.shrub$odds[3:4])),
                arrow=ARROW)
 
 flp.odds.shrub
@@ -454,7 +459,7 @@ flp.odds.shrub2
 The exponentiated $b$&times;slope for a logistic regression is the **multiplicative** change in the **odds** for a $b$ unit change in the explanatory variable.
 :::
 
-The predicted **log odds** for the presence of the shrub at an elevation of 2350 m is `r formatC(cfs.shrub[1,1],format="f",digits=3)`-`r formatC(-1*cfs.shrub[2,1],format="f",digits=4)`&times;2350 = `r formatC(pts.shrub$lodds[2],format="f",digits=3)` (values of &alpha; and &beta; from Table \@ref(tab:ShrubCoefs) and log odds prediction shown in Figure \@ref(fig:shrubLogOdds)). The **odds** of the shrub's presence at an elevation of 2350 m is e<sup>`r formatC(pts.shrub$lodds[2],format="f",digits=3)`</sup>=`r formatC(pts.shrub$odds[2],format="f",digits=3)` (Figure \@ref(fig:shrubOdds)). Thus, the probability of the shrub being present at 2350 m is `r formatC(pts.shrub$odds[2],format="f",digits=1)` times the probability that it is not present. Alternatively, the probability that the shrub is not present at 2350 m is `r formatC(1/pts.shrub$odds[2],format="f",digits=3)` times the probability that it is present at that elevation (i.e., $\frac{1}{`r formatC(pts.shrub$odds[2],format="f",digits=3)`}$). The probability that the shrub is present at 2350 m is `r formatC(pts.shrub$p[2],format="f",digits=3)` (=$\frac{`r formatC(pts.shrub$odds[2],format="f",digits=3)`}{1+`r formatC(pts.shrub$odds[2],format="f",digits=3)`}$; Figure \@ref(fig:shrubProb)). Therefore, a little more than 1 out of every 3 plots at 2350 m will have the shrub.
+The predicted **log odds** for the presence of the shrub at an elevation of 2350 m is `r formatC(cfs.shrub[1,1],format="f",digits=3)`+`r formatC(cfs.shrub[2,1],format="f",digits=4)`&times;2350 = `r formatC(pts.shrub$lodds[2],format="f",digits=3)` (values of &alpha; and &beta; from Table \@ref(tab:ShrubCoefs) and log odds prediction shown in Figure \@ref(fig:shrubLogOdds)). The **odds** of the shrub's presence at an elevation of 2350 m is e<sup>`r formatC(pts.shrub$lodds[2],format="f",digits=3)`</sup>=`r formatC(pts.shrub$odds[2],format="f",digits=3)` (Figure \@ref(fig:shrubOdds)). Thus, the probability of the shrub being present at 2350 m is `r formatC(pts.shrub$odds[2],format="f",digits=3)` times the probability that it is not present. Alternatively, the probability that the shrub is not present at 2350 m is `r formatC(1/pts.shrub$odds[2],format="f",digits=3)` times the probability that it is present at that elevation (i.e., $\frac{1}{`r formatC(pts.shrub$odds[2],format="f",digits=3)`}$). The probability that the shrub is present at 2350 m is `r formatC(pts.shrub$p[2],format="f",digits=3)` (=$\frac{`r formatC(pts.shrub$odds[2],format="f",digits=3)`}{1+`r formatC(pts.shrub$odds[2],format="f",digits=3)`}$; Figure \@ref(fig:shrubProb)). Therefore, a little more than 1 out of every 3 plots at 2350 m will have the shrub.
 
 &nbsp;
 

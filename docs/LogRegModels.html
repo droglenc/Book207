@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-19" />
+<meta name="date" content="2021-02-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -655,7 +655,7 @@ Figure 26.6: Odds of shrub presence versus elevation with best-fit line superimp
 <div class="tip">
 <p>The exponentiated <span class="math inline">\(b\)</span>×slope for a logistic regression is the <strong>multiplicative</strong> change in the <strong>odds</strong> for a <span class="math inline">\(b\)</span> unit change in the explanatory variable.</p>
 </div>
-<p>The predicted <strong>log odds</strong> for the presence of the shrub at an elevation of 2350 m is -21.604–0.0090×2350 = -0.499 (values of α and β from Table <a href="LogRegModels.html#tab:ShrubCoefs">26.3</a> and log odds prediction shown in Figure <a href="LogRegModels.html#fig:shrubLogOdds">26.5</a>). The <strong>odds</strong> of the shrub’s presence at an elevation of 2350 m is e<sup>-0.499</sup>=0.607 (Figure <a href="LogRegModels.html#fig:shrubOdds">26.6</a>). Thus, the probability of the shrub being present at 2350 m is 0.6 times the probability that it is not present. Alternatively, the probability that the shrub is not present at 2350 m is 1.647 times the probability that it is present at that elevation (i.e., <span class="math inline">\(\frac{1}{0.607}\)</span>). The probability that the shrub is present at 2350 m is 0.378 (=<span class="math inline">\(\frac{0.607}{1+0.607}\)</span>; Figure <a href="LogRegModels.html#fig:shrubProb">26.7</a>). Therefore, a little more than 1 out of every 3 plots at 2350 m will have the shrub.</p>
+<p>The predicted <strong>log odds</strong> for the presence of the shrub at an elevation of 2350 m is -21.604+0.0090×2350 = -0.499 (values of α and β from Table <a href="LogRegModels.html#tab:ShrubCoefs">26.3</a> and log odds prediction shown in Figure <a href="LogRegModels.html#fig:shrubLogOdds">26.5</a>). The <strong>odds</strong> of the shrub’s presence at an elevation of 2350 m is e<sup>-0.499</sup>=0.607 (Figure <a href="LogRegModels.html#fig:shrubOdds">26.6</a>). Thus, the probability of the shrub being present at 2350 m is 0.607 times the probability that it is not present. Alternatively, the probability that the shrub is not present at 2350 m is 1.647 times the probability that it is present at that elevation (i.e., <span class="math inline">\(\frac{1}{0.607}\)</span>). The probability that the shrub is present at 2350 m is 0.378 (=<span class="math inline">\(\frac{0.607}{1+0.607}\)</span>; Figure <a href="LogRegModels.html#fig:shrubProb">26.7</a>). Therefore, a little more than 1 out of every 3 plots at 2350 m will have the shrub.</p>
 <p> </p>
 <div class="figure" style="text-align: center"><span id="fig:shrubProb"></span>
 <img src="Book207_files/figure-html/shrubProb-1.png" alt="Probability of the shrub's presence versus elevation with best-fit line superimposed and the prediction of the probability at 2350 m." width="336" />
