@@ -194,11 +194,11 @@ Through this analysis it appears that Bay Anchovy has a less steep relationship 
 &nbsp;
 
 ```{r NRGFitPlot, echo=FALSE, fig.width=5, fig.cap="Fitted lines for the regression of energy density on percent dry weight separated by species of fish."}
-ggplot(data=nrg,mapping=aes(x=dw,y=ed,color=species)) + 
+ggplot(data=nrg,mapping=aes(x=dw,y=ed,color=species,fill=species)) + 
   geom_point() + 
   labs(x="Percent Dry Weight",y="Energy Density (J/g)") + 
   theme_NCStats() + 
-  geom_smooth(method="lm",se=FALSE)
+  geom_smooth(method="lm",alpha=0.15)
 ```
 
 &nbsp;
@@ -359,11 +359,11 @@ A positive relationship was found between log above-ground biomass and log crown
 &nbsp;
 
 ```{r ShrubFitPlot, echo=FALSE, fig.width=4.5, fig.cap="Fitted lines for the regression of log above-ground biomass on log crown area separated by habitats. Note that these lines are statistically parallel, have statistically different intercepts, and exhibit a statistically positive relationship."}
-ggplot(data=shrub,mapping=aes(x=logCA,y=logAGB,color=Habitat)) + 
+ggplot(data=shrub,mapping=aes(x=logCA,y=logAGB,color=Habitat,fill=Habitat)) + 
   geom_point() + 
   labs(x="log Crown Area",y="log Above-Ground Biomass") + 
   theme_NCStats() + 
-  geom_smooth(method="lm",se=FALSE)
+  geom_smooth(method="lm",alpha=0.15)
 ```
 
 &nbsp;

@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-25" />
+<meta name="date" content="2021-02-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -942,11 +942,11 @@ Figure 24.2: Fitted lines for the regression of energy density on percent dry we
 <span id="cb186-6"><a href="IVRSummary.html#cb186-6" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr2.nrg)</span>
 <span id="cb186-7"><a href="IVRSummary.html#cb186-7" aria-hidden="true" tabindex="-1"></a>mc2.nrg <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivr2.nrg,<span class="at">specs=</span>pairwise<span class="sc">~</span>species)</span>
 <span id="cb186-8"><a href="IVRSummary.html#cb186-8" aria-hidden="true" tabindex="-1"></a>( mc2sum.nrg <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc2.nrg,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span>
-<span id="cb186-9"><a href="IVRSummary.html#cb186-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>nrg,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>dw,<span class="at">y=</span>ed,<span class="at">color=</span>species)) <span class="sc">+</span> </span>
+<span id="cb186-9"><a href="IVRSummary.html#cb186-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>nrg,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>dw,<span class="at">y=</span>ed,<span class="at">color=</span>species,<span class="at">fill=</span>species)) <span class="sc">+</span> </span>
 <span id="cb186-10"><a href="IVRSummary.html#cb186-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb186-11"><a href="IVRSummary.html#cb186-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Percent Dry Weight&quot;</span>,<span class="at">y=</span><span class="st">&quot;Energy Density (J/g)&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb186-12"><a href="IVRSummary.html#cb186-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
-<span id="cb186-13"><a href="IVRSummary.html#cb186-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<span id="cb186-13"><a href="IVRSummary.html#cb186-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">alpha=</span><span class="fl">0.15</span>)</span></code></pre></div>
 <p> </p>
 </div>
 </div>
@@ -1256,11 +1256,11 @@ Figure 24.6: Back-transformed mean above-ground biomass of <em>Artemisia</em> (a
 <span id="cb189-5"><a href="IVRSummary.html#cb189-5" aria-hidden="true" tabindex="-1"></a>ivr2t.shrub <span class="ot">&lt;-</span> <span class="fu">lm</span>(logAGB<span class="sc">~</span>logCA<span class="sc">+</span>Habitat,<span class="at">data=</span>shrub)</span>
 <span id="cb189-6"><a href="IVRSummary.html#cb189-6" aria-hidden="true" tabindex="-1"></a>mc2t.shrub <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivr2t.shrub,<span class="at">specs=</span>pairwise<span class="sc">~</span>Habitat,<span class="at">trans=</span><span class="st">&quot;log&quot;</span>)</span>
 <span id="cb189-7"><a href="IVRSummary.html#cb189-7" aria-hidden="true" tabindex="-1"></a>( mc2tsum.shrub <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc2t.shrub,<span class="at">infer=</span><span class="cn">TRUE</span>,<span class="at">type=</span><span class="st">&quot;response&quot;</span>) )</span>
-<span id="cb189-8"><a href="IVRSummary.html#cb189-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>shrub,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>logCA,<span class="at">y=</span>logAGB,<span class="at">color=</span>Habitat)) <span class="sc">+</span> </span>
+<span id="cb189-8"><a href="IVRSummary.html#cb189-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>shrub,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>logCA,<span class="at">y=</span>logAGB,<span class="at">color=</span>Habitat,<span class="at">fill=</span>Habitat)) <span class="sc">+</span> </span>
 <span id="cb189-9"><a href="IVRSummary.html#cb189-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb189-10"><a href="IVRSummary.html#cb189-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;log Crown Area&quot;</span>,<span class="at">y=</span><span class="st">&quot;log Above-Ground Biomass&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb189-11"><a href="IVRSummary.html#cb189-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
-<span id="cb189-12"><a href="IVRSummary.html#cb189-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<span id="cb189-12"><a href="IVRSummary.html#cb189-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">alpha=</span><span class="fl">0.15</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb190"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb190-1"><a href="IVRSummary.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mc2tsum.shrub<span class="sc">$</span>emmeans,</span>
 <span id="cb190-2"><a href="IVRSummary.html#cb190-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Habitat,<span class="at">y=</span>response,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL)) <span class="sc">+</span></span>
 <span id="cb190-3"><a href="IVRSummary.html#cb190-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
