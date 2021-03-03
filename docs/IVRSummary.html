@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-02-26" />
+<meta name="date" content="2021-03-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="IVRAnalysis.html"/>
 <link rel="next" href="LogRegFoundations.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -1146,7 +1146,7 @@ Residuals
 </tbody>
 </table>
 <p> </p>
-<p>The back-transformed mean above-ground biomass at the back-transformed mean crown area differs among all habitats (p≤0.0001; Table <a href="IVRSummary.html#tab:ShrubIntercepts2">24.8</a>). The back-transformed mean above-ground biomass at the back-transformed mean crown area is between 1.055 and 1.164% greater in the soil crust (FC) than fixed dune (FD) habitats, between 1.158 and 1.277 times greater in the soil crust (FC) than semi-fixed dune (FD) habitats, and between 1.043 and 1.154 times greater in the fixed dune (FD) than semi-fixed dune habitats (Table <a href="IVRSummary.html#tab:ShrubIntercepts2">24.8</a>).</p>
+<p>The back-transformed mean above-ground biomass at the back-transformed mean crown area differs among all habitats (p≤0.0001; Table <a href="IVRSummary.html#tab:ShrubIntercepts2">24.8</a>). The back-transformed mean above-ground biomass at the back-transformed mean crown area is between 1.350 and 2.356% greater in the soil crust (FC) than fixed dune (FD) habitats, between 2.198 and 3.737 times greater in the soil crust (FC) than semi-fixed dune (FD) habitats, and between 1.241 and 2.081 times greater in the fixed dune (FD) than semi-fixed dune habitats (Table <a href="IVRSummary.html#tab:ShrubIntercepts2">24.8</a>).</p>
 <p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -1177,13 +1177,13 @@ p.value
 FC / FD
 </td>
 <td style="text-align:right;width: 0.8in; ">
-1.108
+1.783
 </td>
 <td style="text-align:right;width: 0.8in; ">
-1.055
+1.350
 </td>
 <td style="text-align:right;width: 0.8in; ">
-1.164
+2.356
 </td>
 <td style="text-align:right;width: 1.0in; ">
 0.000013
@@ -1194,13 +1194,13 @@ FC / FD
 FC / SF
 </td>
 <td style="text-align:right;width: 0.8in; ">
-1.216
+2.866
 </td>
 <td style="text-align:right;width: 0.8in; ">
-1.158
+2.198
 </td>
 <td style="text-align:right;width: 0.8in; ">
-1.277
+3.737
 </td>
 <td style="text-align:right;width: 1.0in; ">
 0.000000
@@ -1211,16 +1211,16 @@ FC / SF
 FD / SF
 </td>
 <td style="text-align:right;width: 0.8in; ">
-1.097
+1.607
 </td>
 <td style="text-align:right;width: 0.8in; ">
-1.043
+1.241
 </td>
 <td style="text-align:right;width: 0.8in; ">
-1.154
+2.081
 </td>
 <td style="text-align:right;width: 1.0in; ">
-0.000103
+0.000109
 </td>
 </tr>
 </tbody>
@@ -1254,7 +1254,7 @@ Figure 24.6: Back-transformed mean above-ground biomass of <em>Artemisia</em> (a
 <span id="cb189-3"><a href="IVRSummary.html#cb189-3" aria-hidden="true" tabindex="-1"></a>ivr1t.shrub <span class="ot">&lt;-</span> <span class="fu">lm</span>(logAGB<span class="sc">~</span>logCA<span class="sc">+</span>Habitat<span class="sc">+</span>logCA<span class="sc">:</span>Habitat,<span class="at">data=</span>shrub)</span>
 <span id="cb189-4"><a href="IVRSummary.html#cb189-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr1t.shrub)</span>
 <span id="cb189-5"><a href="IVRSummary.html#cb189-5" aria-hidden="true" tabindex="-1"></a>ivr2t.shrub <span class="ot">&lt;-</span> <span class="fu">lm</span>(logAGB<span class="sc">~</span>logCA<span class="sc">+</span>Habitat,<span class="at">data=</span>shrub)</span>
-<span id="cb189-6"><a href="IVRSummary.html#cb189-6" aria-hidden="true" tabindex="-1"></a>mc2t.shrub <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivr2t.shrub,<span class="at">specs=</span>pairwise<span class="sc">~</span>Habitat,<span class="at">trans=</span><span class="st">&quot;log&quot;</span>)</span>
+<span id="cb189-6"><a href="IVRSummary.html#cb189-6" aria-hidden="true" tabindex="-1"></a>mc2t.shrub <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivr2t.shrub,<span class="at">specs=</span>pairwise<span class="sc">~</span>Habitat,<span class="at">tran=</span><span class="st">&quot;log&quot;</span>)</span>
 <span id="cb189-7"><a href="IVRSummary.html#cb189-7" aria-hidden="true" tabindex="-1"></a>( mc2tsum.shrub <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc2t.shrub,<span class="at">infer=</span><span class="cn">TRUE</span>,<span class="at">type=</span><span class="st">&quot;response&quot;</span>) )</span>
 <span id="cb189-8"><a href="IVRSummary.html#cb189-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>shrub,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>logCA,<span class="at">y=</span>logAGB,<span class="at">color=</span>Habitat,<span class="at">fill=</span>Habitat)) <span class="sc">+</span> </span>
 <span id="cb189-9"><a href="IVRSummary.html#cb189-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>

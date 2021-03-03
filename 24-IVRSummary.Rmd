@@ -327,7 +327,7 @@ aov1.shrub %>%
 
 ```{r ShrubModel2, echo=FALSE, results="hide"}
 ivr2t.shrub <- lm(logAGB~logCA+Habitat,data=shrub)
-mc2t.shrub <- emmeans(ivr2t.shrub,specs=pairwise~Habitat,trans="log")
+mc2t.shrub <- emmeans(ivr2t.shrub,specs=pairwise~Habitat,tran="log")
 ( mc2tsum.shrub <- summary(mc2t.shrub,infer=TRUE,type="response") )
 ```
 ```{r echo=FALSE}
