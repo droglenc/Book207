@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 11 Two-Way Analytical Foundation | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 11 Two-Way Analytical Foundation | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="ANOVA2Foundations1.html"/>
 <link rel="next" href="ANOVA2Analysis.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -377,7 +380,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Two-factor studies can be visualized with the response variable on the y-axis, levels of one factor on the x-axis, and levels of the other factor shown with different colors or symbols. It does not make a difference which factor is on the x-axis, though putting the factor with more levels on the x-axis makes for a less cluttered graph.</p>
 <p>In this module, two graphs will often be shown side-by-side. These are the same data but the role of the factor variables in the plot are reversed. For example, Figure <a href="ANOVA2Foundations2.html#fig:TadpoleObs">11.1</a>-Left has tadpole density on the x-axis with different colors for the UV-B light levels and Figure <a href="ANOVA2Foundations2.html#fig:TadpoleObs">11.1</a>-Right has UV-B light intensity on the x-axis with different colors for the tadpole densities.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:TadpoleObs"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:TadpoleObs"></span>
 <img src="Book207_files/figure-html/TadpoleObs-1.png" alt="Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis." width="336" /><img src="Book207_files/figure-html/TadpoleObs-2.png" alt="Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis." width="336" />
 <p class="caption">
 Figure 11.1: Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis.
@@ -391,7 +394,7 @@ Figure 11.1: Tadpole body mass by density and UV-B light intensity factors. The 
 <p>For the sake of simplicity the same number of replicates are used in each treatment.<a href="#fn54" class="footnote-ref" id="fnref54"><sup>54</sup></a> With this <span class="math inline">\(m\)</span> is the number of replicates <em>per treatment</em>. In the tadpole example <span class="math inline">\(m\)</span>=15. We use <span class="math inline">\(k\)</span> as an index for individuals <strong>within</strong> a treatment. Thus, <span class="math inline">\(k\)</span> varies from 1 to <span class="math inline">\(m\)</span> for each treatment.</p>
 <p>With these definitions, the response variable recorded on the <span class="math inline">\(k\)</span>th individual in the treatment defined by the <span class="math inline">\(i\)</span>th level of Factor A and the <span class="math inline">\(j\)</span>th level of the Factor B is <span class="math inline">\(Y_{ijk}\)</span>. For example, the body mass of tadpoles in the seventh tank (<span class="math inline">\(k\)</span>=7) that received 1 tadpole (<span class="math inline">\(i\)</span>=1) and low UV-B light (<span class="math inline">\(j\)</span>=2) would be <span class="math inline">\(Y_{127}\)</span> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleObs2">11.2</a>).</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:TadpoleObs2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:TadpoleObs2"></span>
 <img src="Book207_files/figure-html/TadpoleObs2-1.png" alt="Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis." width="336" /><img src="Book207_files/figure-html/TadpoleObs2-2.png" alt="Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis." width="336" />
 <p class="caption">
 Figure 11.2: Tadpole body mass by density and UV-B light intensity factors. The points are jittered with respect to the x-axis so that each point can be seen. The two panels differ only in which factor variable is displayed on the x-axis.
@@ -400,7 +403,7 @@ Figure 11.2: Tadpole body mass by density and UV-B light intensity factors. The 
 <p> </p>
 <p>The mean response for the <span class="math inline">\(i\)</span>th level of Factor A and the <span class="math inline">\(j\)</span>th level of Factor B is denoted by <span class="math inline">\(\overline{Y}_{ij\cdot}\)</span>. The <span class="math inline">\(\overline{Y}_{ij\cdot}\)</span> are called <strong>treatment means</strong> in an experiment or <strong>group means</strong> in an observational study. The “dot” in <span class="math inline">\(\overline{Y}_{ij\cdot}\)</span> replaces the subscript in <span class="math inline">\(Y_{ijk}\)</span> that was summed across when computing the mean. Treatment means are calculated by summing across individuals in a treatment (the <span class="math inline">\(k\)</span> subscript), thus the <span class="math inline">\(k\)</span> subscript is replaced with a dot. As an example, the treatment mean body mass for tadpoles in the 1 tadpole density (<span class="math inline">\(i\)</span>=1) and low UV-B light intensity (<span class="math inline">\(j\)</span>=2) would be <span class="math inline">\(\overline{Y}_{12\cdot}\)</span> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleTMNS">11.3</a>).<a href="#fn55" class="footnote-ref" id="fnref55"><sup>55</sup></a></p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:TadpoleTMNS"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:TadpoleTMNS"></span>
 <img src="Book207_files/figure-html/TadpoleTMNS-1.png" alt="Same as previous figure except that six treatments means are shown with horizontal blue segments." width="336" /><img src="Book207_files/figure-html/TadpoleTMNS-2.png" alt="Same as previous figure except that six treatments means are shown with horizontal blue segments." width="336" />
 <p class="caption">
 Figure 11.3: Same as previous figure except that six treatments means are shown with horizontal blue segments.
@@ -409,7 +412,7 @@ Figure 11.3: Same as previous figure except that six treatments means are shown 
 <p> </p>
 <p>The mean response for the <span class="math inline">\(i\)</span>th level of Factor A is given by <span class="math inline">\(\overline{Y}_{i\cdot\cdot}\)</span>. These <strong>level means</strong> are calculated by first summing individuals in each treatment (the <span class="math inline">\(k\)</span> subscript) and then summing across UV-B light levels (the <span class="math inline">\(j\)</span> subscript); thus, both the <span class="math inline">\(k\)</span> and <span class="math inline">\(j\)</span> subscripts are replaced with a “dot.” For example, the mean body mass for tadpoles in the 1 tadpole density (<span class="math inline">\(i\)</span>=1) is <span class="math inline">\(\overline{Y}_{1\cdot\cdot}\)</span> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleLMNS">11.4</a>-Left).</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:TadpoleLMNS"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:TadpoleLMNS"></span>
 <img src="Book207_files/figure-html/TadpoleLMNS-1.png" alt="Same as previous figure except that three density level means are shown on the left and two UV-B light level means are shown on the right with horizontal orange segments." width="336" /><img src="Book207_files/figure-html/TadpoleLMNS-2.png" alt="Same as previous figure except that three density level means are shown on the left and two UV-B light level means are shown on the right with horizontal orange segments." width="336" />
 <p class="caption">
 Figure 11.4: Same as previous figure except that three density level means are shown on the left and two UV-B light level means are shown on the right with horizontal orange segments.
@@ -419,7 +422,7 @@ Figure 11.4: Same as previous figure except that three density level means are s
 <p>Similarly, the mean response for the <span class="math inline">\(j\)</span>th level of Factor B is given by <span class="math inline">\(\overline{Y}_{\cdot j\cdot}\)</span>. These <strong>level means</strong> are calculated by first summing individuals in each treatment (the <span class="math inline">\(k\)</span> subscript) and then summing across tadpole density levels (the <span class="math inline">\(i\)</span> subscript); thus, both the <span class="math inline">\(k\)</span> and <span class="math inline">\(i\)</span> subscripts are replaced with a “dot.” For example, the mean body mass for tadpoles in the low UV-B light intensity (<span class="math inline">\(j\)</span>=2) is <span class="math inline">\(\overline{Y}_{\cdot2\cdot}\)</span> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleLMNS">11.4</a>-Right).</p>
 <p>Finally, the mean response regardless of level of any factor is given by <span class="math inline">\(\overline{Y}_{\cdot\cdot\cdot}\)</span> and is called the <strong>grand mean</strong> (Figure <a href="ANOVA2Foundations2.html#fig:TadpoleGMN">11.5</a>). The grand mean is calculated by summing individuals in each treatment, then summing across UV-B light intensities, and then summing across tadpole densities; thus, all three subscripts are replaced with a “dot.”</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:TadpoleGMN"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:TadpoleGMN"></span>
 <img src="Book207_files/figure-html/TadpoleGMN-1.png" alt="Same as previous figure except that the grand means is shown with a horizontal red segment in each panel." width="336" /><img src="Book207_files/figure-html/TadpoleGMN-2.png" alt="Same as previous figure except that the grand means is shown with a horizontal red segment in each panel." width="336" />
 <p class="caption">
 Figure 11.5: Same as previous figure except that the grand means is shown with a horizontal red segment in each panel.
@@ -434,7 +437,7 @@ Figure 11.5: Same as previous figure except that the grand means is shown with a
 <h2><span class="header-section-number">11.2</span> Models</h2>
 <p>The total and within SS and df are effectively the same with a Two-Way ANOVA as with <a href="ANOVA1Foundations.html#ANOVA1Foundations">a One-Way ANOVA</a>, though their calculation may look more complicated. In a Two-Way ANOVA, the <em>full model</em> uses a separate mean for each treatment group and the <em>simple model</em> uses a single grand mean for all treatment groups. In essence, the simple model says that each treatment mean should be modeled by a common mean (Figure <a href="ANOVA2Foundations2.html#fig:2WayModels">11.6</a>-Left), whereas the full model says that each treatment mean should be modeled by a separate mean (Figure <a href="ANOVA2Foundations2.html#fig:2WayModels">11.6</a>-Right). It should be evident that this is the same simple and full models used in a One-Way ANOVA.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:2WayModels"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:2WayModels"></span>
 <img src="Book207_files/figure-html/2WayModels-1.png" alt="Tadpole body mass by density and UV-B light levels (different colored points) with the grand mean of the simple model (Left) and the treatments means of the full model (Right) shown." width="336" /><img src="Book207_files/figure-html/2WayModels-2.png" alt="Tadpole body mass by density and UV-B light levels (different colored points) with the grand mean of the simple model (Left) and the treatments means of the full model (Right) shown." width="336" />
 <p class="caption">
 Figure 11.6: Tadpole body mass by density and UV-B light levels (different colored points) with the grand mean of the simple model (Left) and the treatments means of the full model (Right) shown.
@@ -464,7 +467,7 @@ Figure 11.6: Tadpole body mass by density and UV-B light levels (different color
 <p><span class="math display">\[ \text{SS}_{\text{Among}} = m\sum_{i=1}^{a}\sum_{j=1}^{b}\left(\overline{Y}_{ij\cdot}-\overline{Y}_{\cdot\cdot\cdot}\right)^{2} \]</span></p>
 <p>Again focus on the part being summed, which is the square of the difference between each treatment mean (<span class="math inline">\(\overline{Y}_{ij\cdot}\)</span>) and the grand mean (<span class="math inline">\(\overline{Y}_{\cdot\cdot\cdot}\)</span>; Figure <a href="ANOVA2Foundations2.html#fig:2WayAmong">11.7</a>). Thus, as before, SS<sub>Among</sub> measures how different the treatment means are. The rest of the formula simply sums the differences in means across all treatments<a href="#fn58" class="footnote-ref" id="fnref58"><sup>58</sup></a> and then multiplies by <span class="math inline">\(m\)</span> to account for the <span class="math inline">\(m\)</span> individuals that went into calculating each treatment mean.<a href="#fn59" class="footnote-ref" id="fnref59"><sup>59</sup></a></p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:2WayAmong"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:2WayAmong"></span>
 <img src="Book207_files/figure-html/2WayAmong-1.png" alt="Mean tadpole body mass by density and UV-B light levels (not differentiated) with the grand mean of the simple model (red horizontal line) and the treatments means of the full model (blue horizontal lines) shown. Vertical dashed lines are &quot;residuals&quot; between the two types of means. Note that the y-axis scale is different than all previous plots." width="336" />
 <p class="caption">
 Figure 11.7: Mean tadpole body mass by density and UV-B light levels (not differentiated) with the grand mean of the simple model (red horizontal line) and the treatments means of the full model (blue horizontal lines) shown. Vertical dashed lines are “residuals” between the two types of means. Note that the y-axis scale is different than all previous plots.
@@ -483,7 +486,7 @@ Figure 11.7: Mean tadpole body mass by density and UV-B light levels (not differ
 <p>It can be shown that</p>
 <p><span class="math display">\[ \text{SS}_{\text{A}} = mb\sum_{i=1}^{a}\left(\overline{Y}_{i\cdot\cdot}-\overline{Y}_{\cdot\cdot\cdot}\right)^{2} \]</span></p>
 <p>Again, focus on the part that is summed, which is the square of the differences in the Factor A level means and the grand mean (Figure <a href="ANOVA2Foundations2.html#fig:2WayAB">11.8</a>-Left). Thus, SS<sub>A</sub> measures how different the Factor A level means are, just as you would expect. Note that the rest of the formula says that you must sum across the Factor A levels and then multiply by the number of individuals that went into calculating the Factor A level means (i.e., <span class="math inline">\(m\)</span> individuals across <span class="math inline">\(b\)</span> levels of Factor B).</p>
-<div class="figure" style="text-align: center"><span id="fig:2WayAB"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:2WayAB"></span>
 <img src="Book207_files/figure-html/2WayAB-1.png" alt="Mean tadpole body mass by density and UV-B light levels (not differentiated) with the grand mean of the simple model (red horizontal line) and the level means shown for the tadpole densities (Left) or UV-B light intensities (Right). Vertical dashed lines are &quot;residuals&quot; between respective level means and the grand means." width="336" /><img src="Book207_files/figure-html/2WayAB-2.png" alt="Mean tadpole body mass by density and UV-B light levels (not differentiated) with the grand mean of the simple model (red horizontal line) and the level means shown for the tadpole densities (Left) or UV-B light intensities (Right). Vertical dashed lines are &quot;residuals&quot; between respective level means and the grand means." width="336" />
 <p class="caption">
 Figure 11.8: Mean tadpole body mass by density and UV-B light levels (not differentiated) with the grand mean of the simple model (red horizontal line) and the level means shown for the tadpole densities (Left) or UV-B light intensities (Right). Vertical dashed lines are “residuals” between respective level means and the grand means.
@@ -653,7 +656,6 @@ Residuals
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -672,6 +674,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -692,11 +695,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

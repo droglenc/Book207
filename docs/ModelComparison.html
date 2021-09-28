@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 4 Model Comparison | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 4 Model Comparison | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="ModelConcepts.html"/>
 <link rel="next" href="ANOVA1Foundations.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -448,7 +451,7 @@ Alternative
 <p>Recall that H<sub>0</sub> in a two-sample t-test is that the two population means do not differ (i.e., they are equal). In this hypothesis, if the two means do not differ than a single mean would adequately represent both groups. The general model from Section <a href="ModelConcepts.html#what-is-a-model">3.1</a><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> could be specified for this situation as</p>
 <p><span class="math display">\[ Y_{ij} = \mu + \epsilon_{ij} \]</span></p>
 <p>where <span class="math inline">\(Y_{ij}\)</span> is the <span class="math inline">\(j\)</span>th observation of the response variable in the <span class="math inline">\(i\)</span>th group, <span class="math inline">\(\mu\)</span> is the population grand mean, and <span class="math inline">\(\epsilon_{ij}\)</span> is the “error” for the <span class="math inline">\(j\)</span>th observation in the <span class="math inline">\(i\)</span>th group. This model means that μ is the predicted response value for each observation and the model looks like the red line in Figure <a href="ModelComparison.html#fig:Models1">4.1</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:Models1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:Models1"></span>
 <img src="Book207_files/figure-html/Models1-1.png" alt="Biological oxygen demand versus sample location with group means shown as blue horizontal segments and the grand mean shown as a red horizontal segment." width="336" />
 <p class="caption">
 Figure 4.1: Biological oxygen demand versus sample location with group means shown as blue horizontal segments and the grand mean shown as a red horizontal segment.
@@ -474,7 +477,7 @@ Figure 4.1: Biological oxygen demand versus sample location with group means sho
 <p><span class="math display">\[ \bar{Y}_{\cdot\cdot}= \frac{\sum_{i=1}^{I}\sum_{j=1}^{n_{i}}Y_{ij}}{n} \]</span></p>
 <p>where <span class="math inline">\(n\)</span> is the sample size across all groups. The <span class="math inline">\(\bar{Y}_{\cdot\cdot}\)</span> is used here because it is an estimate of the population grand mean, <span class="math inline">\(\mu\)</span>, which is used to make predictions in this simple model.</p>
 <p>The formula for SS<sub>Total</sub> may look daunting but it is just the sum of the squared residuals computed from each observation relative to the grand mean (Figure <a href="ModelComparison.html#fig:FullModelResids1">4.2</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:FullModelResids1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:FullModelResids1"></span>
 <img src="Book207_files/figure-html/FullModelResids1-1.png" alt="Biological oxygen demand versus sample location with the grand mean shown as a red horizontal segment. Residuals from the grand mean are shown by red vertical dashed lines. The sum of these residuals is SS&lt;sub&gt;Total&lt;/sub&gt;." width="336" />
 <p class="caption">
 Figure 4.2: Biological oxygen demand versus sample location with the grand mean shown as a red horizontal segment. Residuals from the grand mean are shown by red vertical dashed lines. The sum of these residuals is SS<sub>Total</sub>.
@@ -486,7 +489,7 @@ Figure 4.2: Biological oxygen demand versus sample location with the grand mean 
 <p>where <span class="math inline">\(\bar{Y}_{i\cdot}\)</span> are the sample group means as computed with</p>
 <p><span class="math display">\[ \bar{Y}_{\cdot\cdot} = \frac{\sum_{j=1}^{n_{i}}Y_{ij}}{n_{i}} \]</span></p>
 <p>The <span class="math inline">\(\bar{Y}_{i\cdot}\)</span> are used here because they are an estimate of the population group means, <span class="math inline">\(\mu_{i}\)</span>, which are used to make predictions in this full model. Again, the formula for SS<sub>Within</sub> may look imposing but it is just the sum of the squared residuals computed from each observation to the observation’s group mean (Figure <a href="ModelComparison.html#fig:SimpleModelResids1">4.3</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:SimpleModelResids1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SimpleModelResids1"></span>
 <img src="Book207_files/figure-html/SimpleModelResids1-1.png" alt="Biological oxygen demand versus sample location with the group means shown as blue horizontal segments. Residuals from the group means are shown by blue vertical dashed lines. The sum of these residuals is SS&lt;sub&gt;Within&lt;/sub&gt;." width="336" />
 <p class="caption">
 Figure 4.3: Biological oxygen demand versus sample location with the group means shown as blue horizontal segments. Residuals from the group means are shown by blue vertical dashed lines. The sum of these residuals is SS<sub>Within</sub>.
@@ -510,13 +513,10 @@ Figure 4.3: Biological oxygen demand versus sample location with the group means
 <p>A quick re-arrangement of the partitioning of SS<sub>Total</sub> shows that</p>
 <p><span class="math display">\[ \text{SS}_{\text{Among}} = \text{SS}_{\text{Total}} - \text{SS}_{\text{Within}} \]</span></p>
 <p>Thus, SS<sub>Among</sub> records how much the lack-of-fit was reduced by using the full model rather than the simple model. In other words, SS<sub>Among</sub> records how much “better” the full model fits the data than the simple model. In our example, SS<sub>Among</sub>=25.28-4.60=20.68. Thus, the residual SS from the simple model was reduced by 20.68 when the full model was used.</p>
-<div class="tip">
-<p>SS<sub>Among</sub> is the <strong>benefit</strong> (i.e., reduction in lack-of-fit) of using the full rather than simple model</p>
-</div>
 <p>SS<sub>Among</sub> can also be thought of in a different way. It can be algebraically shown that</p>
 <p><span class="math display">\[ \text{SS}_{\text{Among}} = \sum_{i=1}^{I}n_{i}\left(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot}\right)^{2} \]</span></p>
 <p>Again, this looks complicated, but the main part to focus on is <span class="math inline">\(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot}\)</span>, which shows that SS<sub>Among</sub> is primarily concerned with measuring the distance between the group means (i.e., <span class="math inline">\(\bar{Y}_{i\cdot}\)</span>) and the grand mean (i.e., <span class="math inline">\(\bar{Y}_{\cdot\cdot}\)</span>; Figure <a href="ModelComparison.html#fig:BothModelResids">4.4</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:BothModelResids"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:BothModelResids"></span>
 <img src="Book207_files/figure-html/BothModelResids-1.png" alt="Mean biological oxygen demand versus sample location with the grand mean shown as a red horizontal segment and the group means shown as blue horizontal segments. Residuals between the group means and the grand mean are shown by black vertical dashed lines. The sum of these residuals scaled by the group sample sizes is SS&lt;sub&gt;Among&lt;/sub&gt;." width="336" />
 <p class="caption">
 Figure 4.4: Mean biological oxygen demand versus sample location with the grand mean shown as a red horizontal segment and the group means shown as blue horizontal segments. Residuals between the group means and the grand mean are shown by black vertical dashed lines. The sum of these residuals scaled by the group sample sizes is SS<sub>Among</sub>.
@@ -524,7 +524,7 @@ Figure 4.4: Mean biological oxygen demand versus sample location with the grand 
 </div>
 <p> </p>
 <p>From the figure above, it is seen that SS<sub>Among</sub> will increase as the group means become more different. This can also be seen by increasing or decreasing the difference between the group means and the grand mean in the interactive graphic below. [<em>Note how SS<sub>Among</sub> (and SS<sub>Total</sub>) change.</em>]</p>
-<iframe src="https://derek-ogle.shinyapps.io/App_SSTotal_Partitioning/?showcase=0" width="75%" height="800px">
+<iframe src="https://derek-ogle.shinyapps.io/App_SSTotal_Partitioning/?showcase=0" width="75%" height="800px" data-external="1">
 </iframe>
 <p> </p>
 <p>So, SS<sub>Among</sub> is immensely useful – it is a measure of “benefit” that will be used in a “benefit-to-cost” ratio that will ultimately be the “signal” that will be used in a “signal-to-noise” ratio. These ratios are introduced in Sections <a href="ModelComparison.html#noise-variances">4.4</a> and <a href="ModelComparison.html#signal-variance-benefit-to-cost">4.5</a>. However, next we discuss how to measure the “cost” of using the more complex full model.</p>
@@ -581,7 +581,7 @@ Figure 4.4: Mean biological oxygen demand versus sample location with the grand 
 <p>If the F-ratio is “large,” then “signal” is stronger than the “noise.” A large F-ratio also means that more variability was explained than was unexplained by the full model. Thus, large F-ratio values mean that the full model fits the data significantly better than the simple model, even considering the increased complexity of the full model.</p>
 <p>The question now becomes “when is the F-ratio considered large enough to reject the simple model and conclude that the full model is significantly better?” This question is answered by comparing the F-ratio test statistic to an F-distribution.</p>
 <p>An F-distribution<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> is right-skewed, with the exact shape of the distribution dictated by two separate df – called the numerator and denominator df, respectively. The numerator df is equal to the df used in MS<sub>Among</sub>, whereas the denominator df is equal to the df used in MS<sub>Within</sub>. The p-value is always computed as the area under the F-distribution curve to the <em>right</em> of the observed F-ratio test statistic (Figure <a href="ModelComparison.html#fig:Fpvalue">4.5</a>).<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
-<div class="figure" style="text-align: center"><span id="fig:Fpvalue"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:Fpvalue"></span>
 <img src="Book207_files/figure-html/Fpvalue-1.png" alt="An F distribution with 4 numerator and 20 denominator degrees-of-freedom. The shaded area demonstrates calculating a p-value for an F-ratio of 2.2." width="336" />
 <p class="caption">
 Figure 4.5: An F distribution with 4 numerator and 20 denominator degrees-of-freedom. The shaded area demonstrates calculating a p-value for an F-ratio of 2.2.
@@ -597,7 +597,7 @@ Figure 4.5: An F distribution with 4 numerator and 20 denominator degrees-of-fre
 <li>the means are indeed different.</li>
 </ul>
 <p>This cascade of measures can be explored with the dynamic graphic below.</p>
-<iframe src="https://derek-ogle.shinyapps.io/App_F_Meaning/?showcase=0" width="80%" height="800px">
+<iframe src="https://derek-ogle.shinyapps.io/App_F_Meaning/?showcase=0" width="80%" height="800px" data-external="1">
 </iframe>
 <div class="tip">
 <p>A <strong>small p-value</strong> results in concluding that the <strong>group means are significantly different</strong>.</p>
@@ -687,26 +687,26 @@ Residuals
 </div>
 <div id="two-sample-t-test-revisited-using-linear-models" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Two-Sample t-Test Revisited: Using Linear Models</h2>
-<p>The models for a two-sample t-test can be fit and assessed with <code>lm()</code>. This function requires the same type of formula for its first argument – <code>response~factor</code> – and a data.frame in the <code>data=</code> argument as described for <code>t.test()</code> in Section <a href="T2Review.html#T2analysis">2.2</a>. The results of <code>lm()</code> should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted with <code>anova()</code>. In addition, coefficient results<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> can be extracted with <code>coef()</code> and <code>confint()</code>, noting that I like to “column-bind” the coefficients and confidence intervals together for a more succinct representation.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb12-1"><a href="ModelComparison.html#cb12-1" aria-hidden="true" tabindex="-1"></a>aqua.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span>
-<span id="cb12-2"><a href="ModelComparison.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(aqua.lm)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
-#R&gt;   
-#R&gt;   Response: BOD
-#R&gt;             Df  Sum Sq Mean Sq F value    Pr(&gt;F)
-#R&gt;   src        1 20.6756 20.6756  80.891 4.449e-08
-#R&gt;   Residuals 18  4.6008  0.2556</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb14-1"><a href="ModelComparison.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">ests=</span><span class="fu">coef</span>(aqua.lm),<span class="fu">confint</span>(aqua.lm))</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;                 ests    2.5 %   97.5 %
-#R&gt;   (Intercept) 6.6538 6.317917 6.989683
-#R&gt;   srcoutlet   2.0335 1.558489 2.508511</code></pre>
+<p>The models for a two-sample t-test can be fit and assessed with <code class="inline">lm()</code>. This function requires the same type of formula for its first argument – <code class="inline">response~groups</code> – and a data.frame in the <code class="inline">data=</code> argument as described for <code class="inline">t.test()</code> in Section <a href="T2Review.html#T2analysis">2.2</a>. The results of <code>lm()</code> should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted with <code class="inline">anova()</code>. In addition, coefficient results<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> can be extracted with <code class="inline">coef()</code> and <code class="inline">confint()</code>, noting that I like to “column-bind” the coefficients and confidence intervals together for a more succinct representation.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb17-1"><a href="ModelComparison.html#cb17-1" aria-hidden="true" tabindex="-1"></a>aqua.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span>
+<span id="cb17-2"><a href="ModelComparison.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(aqua.lm)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  Analysis of Variance Table
+#R&gt;  
+#R&gt;  Response: BOD
+#R&gt;            Df  Sum Sq Mean Sq F value    Pr(&gt;F)
+#R&gt;  src        1 20.6756 20.6756  80.891 4.449e-08
+#R&gt;  Residuals 18  4.6008  0.2556</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb19-1"><a href="ModelComparison.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">ests=</span><span class="fu">coef</span>(aqua.lm),<span class="fu">confint</span>(aqua.lm))</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;                ests    2.5 %   97.5 %
+#R&gt;  (Intercept) 6.6538 6.317917 6.989683
+#R&gt;  srcoutlet   2.0335 1.558489 2.508511</code></pre>
 <p>From these results, note:</p>
 <ul>
-<li>The p-value in the ANOVA table is the same as that computed from <code>t.test()</code>.</li>
-<li>The coefficient for <code>srcoutlet</code> is the same as the difference in the group means computed with <code>t.test()</code>.</li>
-<li>The F test statistics in the ANOVA table equals the square of the t test statistic from <code>t.test()</code>. This is because an F with 1 numerator and v denominator df exactly equals the square of a t with v df.</li>
+<li>The p-value in the ANOVA table is the same as that computed from <code class="inline">t.test()</code>.</li>
+<li>The coefficient for <code>srcoutlet</code> is the same as the difference in the group means computed with <code class="inline">t.test()</code>.</li>
+<li>The F test statistics in the ANOVA table equals the square of the t test statistic from <code class="inline">t.test()</code>. This is because an F with 1 numerator and v denominator df exactly equals the square of a t with v df.</li>
 </ul>
-<p>Thus, the exact same results for a two-sample t-test are obtained whether the analysis is completed in the “traditional” manner (i.e., with <code>t.test()</code>) or with competing models (i.e., using <code>lm()</code>). This concept will be extended in subsequent modules.</p>
+<p>Thus, the exact same results for a two-sample t-test are obtained whether the analysis is completed in the “traditional” manner (i.e., with <code class="inline">t.test()</code>) or with competing models (i.e., using <code class="inline">lm()</code>). This concept will be extended in subsequent modules.</p>
 <p> </p>
 </div>
 <div id="one-more-look-at-ms-and-f-test" class="section level2" number="4.9">
@@ -750,7 +750,6 @@ Residuals
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -769,6 +768,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -789,11 +789,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

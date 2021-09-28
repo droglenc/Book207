@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 23 IVR Analysis | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 23 IVR Analysis | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="IVRTesting.html"/>
 <link rel="next" href="IVRSummary.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -381,7 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">23.2</span> Multiple Comparisons for Slopes</h2>
 <p>In Section <a href="IVRTesting.html#more-groups-different-slopes">22.6</a>, IVR indicated that some slopes between mirex concentration in the tissue and salmon weight differed among 1992, 1996, and 1999 (Figure <a href="IVRAnalysis.html#fig:IVRMirexYearL3a">23.1</a>). An examination of Figure <a href="IVRAnalysis.html#fig:IVRMirexYearL3a">23.1</a> suggests that the slopes for 1992, 1996, and 1999 are all likely not the same. However, an objective method is needed to determine which pairs of slopes actually differ. Parallel lines tests for IVRs taking two years at a time could be used but this is inefficient and would increase the experiment-wise error rate (recall from Section <a href="ANOVA1MultipleComparisons.html#multiple-comparison-problem">6.1</a>).</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:IVRMirexYearL3a"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:IVRMirexYearL3a"></span>
 <img src="Book207_files/figure-html/IVRMirexYearL3a-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for 1992, 1996, and 1999. Note that the IVR indicated that these lines are not parallel." width="432" />
 <p class="caption">
 Figure 23.1: Fitted regression lines for mirex in tissue by salmon weight for 1992, 1996, and 1999. Note that the IVR indicated that these lines are not parallel.
@@ -389,26 +392,26 @@ Figure 23.1: Fitted regression lines for mirex in tissue by salmon weight for 19
 </div>
 <p> </p>
 <p>The <code>emtrends()</code> function from the <code>emmeans</code> package<a href="#fn101" class="footnote-ref" id="fnref101"><sup>101</sup></a> can be used to test for differences among all pairs of slopes using a Tukey-like correction. This function requires the ultimate full model as its first argument (<code>ivrY1</code> here as fit in Section <a href="IVRTesting.html#parallel-lines-test">22.2</a>), a <code>specs=</code> argument with <code>pairwise~</code> followed by the name of the factor variable in the ultimate full model, and <code>var=</code> followed by the name of the covariate in the ultimate full model (which <strong>must</strong> be in quotes).<a href="#fn102" class="footnote-ref" id="fnref102"><sup>102</sup></a> The results of this function should be saved to an object.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb177-1"><a href="IVRAnalysis.html#cb177-1" aria-hidden="true" tabindex="-1"></a>smc <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(ivrY1,pairwise<span class="sc">~</span>year,<span class="at">var=</span><span class="st">&quot;weight&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb182-1"><a href="IVRAnalysis.html#cb182-1" aria-hidden="true" tabindex="-1"></a>smc <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(ivrY1,pairwise<span class="sc">~</span>year,<span class="at">var=</span><span class="st">&quot;weight&quot;</span>)</span></code></pre></div>
 <p>That saved object is then the first argument to <code>summary()</code>, which also includes <code>infer=TRUE</code>. The results are in sections labeled as <code>$emtrends</code> and <code>$contrasts</code>.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb178-1"><a href="IVRAnalysis.html#cb178-1" aria-hidden="true" tabindex="-1"></a>( smcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(smc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   $emtrends
-#R&gt;    year weight.trend      SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    1992      0.02653 0.00483 44  0.01679   0.0363 5.489   &lt;.0001 
-#R&gt;    1996      0.01225 0.00306 44  0.00609   0.0184 4.004   0.0002 
-#R&gt;    1999      0.00386 0.00499 44 -0.00620   0.0139 0.773   0.4434 
-#R&gt;   
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   
-#R&gt;   $contrasts
-#R&gt;    contrast    estimate      SE df  lower.CL upper.CL t.ratio p.value
-#R&gt;    1992 - 1996  0.01428 0.00572 44  0.000403   0.0282 2.496   0.0425 
-#R&gt;    1992 - 1999  0.02267 0.00695 44  0.005815   0.0395 3.262   0.0059 
-#R&gt;    1996 - 1999  0.00839 0.00586 44 -0.005813   0.0226 1.433   0.3331 
-#R&gt;   
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   Conf-level adjustment: tukey method for comparing a family of 3 estimates 
-#R&gt;   P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb183-1"><a href="IVRAnalysis.html#cb183-1" aria-hidden="true" tabindex="-1"></a>( smcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(smc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  $emtrends
+#R&gt;   year weight.trend      SE df lower.CL upper.CL t.ratio p.value
+#R&gt;   1992      0.02653 0.00483 44  0.01679   0.0363   5.489  &lt;.0001
+#R&gt;   1996      0.01225 0.00306 44  0.00609   0.0184   4.004  0.0002
+#R&gt;   1999      0.00386 0.00499 44 -0.00620   0.0139   0.773  0.4434
+#R&gt;  
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  
+#R&gt;  $contrasts
+#R&gt;   contrast    estimate      SE df  lower.CL upper.CL t.ratio p.value
+#R&gt;   1992 - 1996  0.01428 0.00572 44  0.000403   0.0282   2.496  0.0425
+#R&gt;   1992 - 1999  0.02267 0.00695 44  0.005815   0.0395   3.262  0.0059
+#R&gt;   1996 - 1999  0.00839 0.00586 44 -0.005813   0.0226   1.433  0.3331
+#R&gt;  
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+#R&gt;  P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
 <p>The <code>$contrasts</code> section contains the Tukey-corrected tests for each pair of slopes. The important columns in these results are</p>
 <ul>
 <li><code>estimate</code>: the <em>difference</em> in group sample slopes,</li>
@@ -436,7 +439,7 @@ Figure 23.1: Fitted regression lines for mirex in tissue by salmon weight for 19
 <h2><span class="header-section-number">23.3</span> Multiple Comparisons for Intercepts</h2>
 <p>In Section <a href="IVRTesting.html#more-groups-same-slopes">22.7</a> of the last module, the IVR indicated that the first three years (1977, 1982, and 1986) had the same slopes and that at least some of those years had different intercepts (Figure <a href="IVRAnalysis.html#fig:IVRMirexYearF3a">23.2</a>).<a href="#fn103" class="footnote-ref" id="fnref103"><sup>103</sup></a> An examination of Figure <a href="IVRAnalysis.html#fig:IVRMirexYearF3a">23.2</a> suggests that the intercept for 1977 may be greater than the intercepts for 1982 and 1986, which likely do not differ significantly. Again, an objective method is needed to determine which pairs of intercepts significantly differ.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:IVRMirexYearF3a"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:IVRMirexYearF3a"></span>
 <img src="Book207_files/figure-html/IVRMirexYearF3a-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. Note that the IVR indicated that these lines are parallel, there is a signficant relationship, and at least one of the lines has a different intercept." width="432" />
 <p class="caption">
 Figure 23.2: Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. Note that the IVR indicated that these lines are parallel, there is a signficant relationship, and at least one of the lines has a different intercept.
@@ -444,27 +447,27 @@ Figure 23.2: Fitted regression lines for mirex in tissue by salmon weight for on
 </div>
 <p> </p>
 <p>The <code>emmeans()</code> function from the <code>emmeans</code> package can be used to determine which pairs of intercepts differ (using a Tukey’s correction). However, before using this function a new model with the insignificant interaction term removed should be fit.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb180-1"><a href="IVRAnalysis.html#cb180-1" aria-hidden="true" tabindex="-1"></a>ivrY2_noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year,<span class="at">data=</span>MirexFirst3)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb185-1"><a href="IVRAnalysis.html#cb185-1" aria-hidden="true" tabindex="-1"></a>ivrY2_noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>year,<span class="at">data=</span>MirexFirst3)</span></code></pre></div>
 <p>The use of <code>emmeans</code> here is exactly the same as it was in Section <a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r">6.3</a>. Specifically, the model without the interaction term is the first argument and <code>pairwise~</code> is followed by the name of the factor variable in the model. The results are then submitted to <code>summary()</code> with <code>infer=TRUE</code> and the results are given in two sections labeled <code>$emmeans</code> and <code>$contrasts</code>.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb181-1"><a href="IVRAnalysis.html#cb181-1" aria-hidden="true" tabindex="-1"></a>imc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2_noint,pairwise<span class="sc">~</span>year)</span>
-<span id="cb181-2"><a href="IVRAnalysis.html#cb181-2" aria-hidden="true" tabindex="-1"></a>( imcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   $emmeans
-#R&gt;    year emmean     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    1977  0.238 0.0123 68    0.213    0.262 19.392  &lt;.0001 
-#R&gt;    1982  0.184 0.0122 68    0.159    0.208 15.091  &lt;.0001 
-#R&gt;    1986  0.172 0.0123 68    0.148    0.197 14.015  &lt;.0001 
-#R&gt;   
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   
-#R&gt;   $contrasts
-#R&gt;    contrast    estimate     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    1977 - 1982   0.0542 0.0173 68   0.0128   0.0956 3.139   0.0070 
-#R&gt;    1977 - 1986   0.0655 0.0175 68   0.0235   0.1075 3.736   0.0011 
-#R&gt;    1982 - 1986   0.0113 0.0173 68  -0.0302   0.0529 0.653   0.7913 
-#R&gt;   
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   Conf-level adjustment: tukey method for comparing a family of 3 estimates 
-#R&gt;   P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb186-1"><a href="IVRAnalysis.html#cb186-1" aria-hidden="true" tabindex="-1"></a>imc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2_noint,pairwise<span class="sc">~</span>year)</span>
+<span id="cb186-2"><a href="IVRAnalysis.html#cb186-2" aria-hidden="true" tabindex="-1"></a>( imcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  $emmeans
+#R&gt;   year emmean     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;   1977  0.238 0.0123 68    0.213    0.262  19.392  &lt;.0001
+#R&gt;   1982  0.184 0.0122 68    0.159    0.208  15.091  &lt;.0001
+#R&gt;   1986  0.172 0.0123 68    0.148    0.197  14.015  &lt;.0001
+#R&gt;  
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  
+#R&gt;  $contrasts
+#R&gt;   contrast    estimate     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;   1977 - 1982   0.0542 0.0173 68   0.0128   0.0956   3.139  0.0070
+#R&gt;   1977 - 1986   0.0655 0.0175 68   0.0235   0.1075   3.736  0.0011
+#R&gt;   1982 - 1986   0.0113 0.0173 68  -0.0302   0.0529   0.653  0.7913
+#R&gt;  
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+#R&gt;  P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
 <p>The important parts of the <code>$contrasts</code> portion are</p>
 <ul>
 <li><code>estimate</code>: the difference in sample intercepts,</li>
@@ -483,7 +486,7 @@ Figure 23.2: Fitted regression lines for mirex in tissue by salmon weight for on
 </ul>
 <p>For example, the sample mean mirex concentration in 1977 for salmon with the sample mean weight of all salmon is 0.238, one is 95% confident that the population mean mirex concentration in 1977 for a salmon with the sample mean weight of all salmon is between 0.213 and 0.262 mg/kg, and the population mean mirex concentration at the sample mean salmon weight in 1977 is not equal to 0 (p&lt;0.00005). A visual of the sample means under <code>emmeans</code> is shown in Figure <a href="IVRAnalysis.html#fig:IVRExampleIntercepts">23.3</a>.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:IVRExampleIntercepts"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:IVRExampleIntercepts"></span>
 <img src="Book207_files/figure-html/IVRExampleIntercepts-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. The mean mirex concentration at the mean salmon weight is shown for each year to demonstrate the results of the `emmeans()` function." width="432" />
 <p class="caption">
 Figure 23.3: Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. The mean mirex concentration at the mean salmon weight is shown for each year to demonstrate the results of the <code>emmeans()</code> function.
@@ -494,27 +497,27 @@ Figure 23.3: Fitted regression lines for mirex in tissue by salmon weight for on
 <p>The mean value of the response at the mean value of the covariate, along with 95% confidence intervals and p-values, are shown in the <code>$emmeans</code> section of the results.</p>
 </div>
 <p>The <code>emmeans()</code> function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extrapolation as discussed in Section <a href="SLRInference.html#intercept">15.3</a>. It is possible to compute the mean values of the response at other values of the covariate by using <code>cov.reduce=</code> in <code>emmeans()</code>. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure <a href="IVRAnalysis.html#fig:IVRExampleIntercepts2">23.4</a>).<a href="#fn104" class="footnote-ref" id="fnref104"><sup>104</sup></a> Because the lines are parallel this does not change anything in the <code>$contrasts</code> portion of the output. However, the <code>$emmeans</code> portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb183-1"><a href="IVRAnalysis.html#cb183-1" aria-hidden="true" tabindex="-1"></a>imc2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2_noint,pairwise<span class="sc">~</span>year,<span class="at">cov.reduce=</span>min)</span>
-<span id="cb183-2"><a href="IVRAnalysis.html#cb183-2" aria-hidden="true" tabindex="-1"></a>( imc2sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc2,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   $emmeans
-#R&gt;    year emmean     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    1977 0.1460 0.0143 68   0.1174    0.175 10.181  &lt;.0001 
-#R&gt;    1982 0.0918 0.0151 68   0.0617    0.122  6.097  &lt;.0001 
-#R&gt;    1986 0.0805 0.0163 68   0.0479    0.113  4.928  &lt;.0001 
-#R&gt;   
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   
-#R&gt;   $contrasts
-#R&gt;    contrast    estimate     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    1977 - 1982   0.0542 0.0173 68   0.0128   0.0956 3.139   0.0070 
-#R&gt;    1977 - 1986   0.0655 0.0175 68   0.0235   0.1075 3.736   0.0011 
-#R&gt;    1982 - 1986   0.0113 0.0173 68  -0.0302   0.0529 0.653   0.7913 
-#R&gt;   
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   Conf-level adjustment: tukey method for comparing a family of 3 estimates 
-#R&gt;   P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb188-1"><a href="IVRAnalysis.html#cb188-1" aria-hidden="true" tabindex="-1"></a>imc2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ivrY2_noint,pairwise<span class="sc">~</span>year,<span class="at">cov.reduce=</span>min)</span>
+<span id="cb188-2"><a href="IVRAnalysis.html#cb188-2" aria-hidden="true" tabindex="-1"></a>( imc2sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(imc2,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  $emmeans
+#R&gt;   year emmean     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;   1977 0.1460 0.0143 68   0.1174    0.175  10.181  &lt;.0001
+#R&gt;   1982 0.0918 0.0151 68   0.0617    0.122   6.097  &lt;.0001
+#R&gt;   1986 0.0805 0.0163 68   0.0479    0.113   4.928  &lt;.0001
+#R&gt;  
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  
+#R&gt;  $contrasts
+#R&gt;   contrast    estimate     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;   1977 - 1982   0.0542 0.0173 68   0.0128   0.0956   3.139  0.0070
+#R&gt;   1977 - 1986   0.0655 0.0175 68   0.0235   0.1075   3.736  0.0011
+#R&gt;   1982 - 1986   0.0113 0.0173 68  -0.0302   0.0529   0.653  0.7913
+#R&gt;  
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+#R&gt;  P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:IVRExampleIntercepts2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:IVRExampleIntercepts2"></span>
 <img src="Book207_files/figure-html/IVRExampleIntercepts2-1.png" alt="Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. The mean mirex concentration at the MINIMUM salmon weight is shown for each year to demonstrate the results of the `emmeans()` function." width="432" />
 <p class="caption">
 Figure 23.4: Fitted regression lines for mirex in tissue by salmon weight for only 1977, 1982, and 1986. The mean mirex concentration at the MINIMUM salmon weight is shown for each year to demonstrate the results of the <code>emmeans()</code> function.
@@ -545,7 +548,6 @@ Figure 23.4: Fitted regression lines for mirex in tissue by salmon weight for on
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -564,6 +566,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -584,11 +587,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

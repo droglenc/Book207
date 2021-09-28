@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 16 SLR Models | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 16 SLR Models | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="SLRInference.html"/>
 <link rel="next" href="SLRAssumptions.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -378,7 +381,7 @@ Y_{i} = \alpha + \epsilon_{i}
 \]</span></p>
 <p>Furthermore, it can be shown algebraically that the <span class="math inline">\(\alpha\)</span> in the simple model is <span class="math inline">\(\mu_{Y}\)</span>.<a href="#fn80" class="footnote-ref" id="fnref80"><sup>80</sup></a></p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:SLRModelsVisual"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SLRModelsVisual"></span>
 <img src="Book207_files/figure-html/SLRModelsVisual-1.png" alt="Scatterplot illustrating two competing models for describing the relationship between actual mean temperature and altitude lapse rate for Mount Everest in the winter. The horizontal red line is placed at the mean actual mean air temperatures and represents the simple model, whereas the blue line is the best-fit line and represents the full model." width="336" />
 <p class="caption">
 Figure 16.1: Scatterplot illustrating two competing models for describing the relationship between actual mean temperature and altitude lapse rate for Mount Everest in the winter. The horizontal red line is placed at the mean actual mean air temperatures and represents the simple model, whereas the blue line is the best-fit line and represents the full model.
@@ -401,7 +404,7 @@ Figure 16.1: Scatterplot illustrating two competing models for describing the re
 <p><span class="math display">\[ \text{SS}_{\text{Residual}} = \sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X}\right)^{2} = \sum_{i=1}^{n}\left(y_{i}-\left(\hat{\alpha}+\hat{\beta}x_{i}\right)\right)^{2} \]</span></p>
 <p>This is termed SS<sub>Residual</sub> in SLR, but it is exactly analogous to SS<sub>Within</sub> from Modules <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a> and (ANOVA2Foundations2).</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:SLRModelsResids"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SLRModelsResids"></span>
 <img src="Book207_files/figure-html/SLRModelsResids-1.png" alt="Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs." width="256" /><img src="Book207_files/figure-html/SLRModelsResids-2.png" alt="Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs." width="256" /><img src="Book207_files/figure-html/SLRModelsResids-3.png" alt="Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs." width="256" />
 <p class="caption">
 Figure 16.2: Scatterplots illustrating two competing models for describing the relationship between actual mean air temperature and altitude lapse rate for Mount Everest in winter. The horizontal red line is placed at the mean actual mean air temperature and represents the simple model. The blue line is the best-fit line and represents the full model. Residuals for each model are shown on the respective graphs.
@@ -499,15 +502,15 @@ Residuals
 <p> </p>
 <p>The ANOVA table for a SLR is obtained by submitting the saved <code>lm()</code> object to <code>anova()</code>. For example, Table <a href="SLRModels.html#tab:EverestSLRANOVA">16.1</a> was obtained with <code>anova(lm1.ev)</code>.</p>
 <p>Note also that the F-ratio test statistic, df<sub>Regression</sub>, df<sub>Residual</sub>, and the p-value from the ANOVA table are shown on the last line of the output from <code>summary()</code>, which was introduced in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a>. Also, as noted before, MS<sub>Residual</sub> is the square of the value following “Residual standard error:” in the <code>summary()</code> output. Thus, many of the key components of the ANOVA table are also in the <code>summary()</code> results.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb99-1"><a href="SLRModels.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1.ev)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   Coefficients:
-#R&gt;                 Estimate Std. Error t value Pr(&gt;|t|)
-#R&gt;   (Intercept) 21.3888561  1.7447131   12.26 6.42e-07
-#R&gt;   Altitude    -0.0056341  0.0005252  -10.73 1.99e-06
-#R&gt;   
-#R&gt;   Residual standard error: 1.462 on 9 degrees of freedom
-#R&gt;   Multiple R-squared: 0.9275,   Adjusted R-squared: 0.9194 
-#R&gt;   F-statistic: 115.1 on 1 and 9 DF,  p-value: 1.987e-06</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb104-1"><a href="SLRModels.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1.ev)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  Coefficients:
+#R&gt;                Estimate Std. Error t value Pr(&gt;|t|)
+#R&gt;  (Intercept) 21.3888561  1.7447131   12.26 6.42e-07
+#R&gt;  Altitude    -0.0056341  0.0005252  -10.73 1.99e-06
+#R&gt;  
+#R&gt;  Residual standard error: 1.462 on 9 degrees of freedom
+#R&gt;  Multiple R-squared: 0.9275,    Adjusted R-squared: 0.9194 
+#R&gt;  F-statistic: 115.1 on 1 and 9 DF,  p-value: 1.987e-06</code></pre>
 <p> </p>
 </div>
 <div id="coefficient-of-determination" class="section level2" number="16.3">
@@ -538,7 +541,6 @@ r^{2} = \frac{SS_{Regression}}{SS_{Total}}
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -557,6 +559,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -577,11 +580,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

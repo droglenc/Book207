@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 5 One-Way Foundations | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 5 One-Way Foundations | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="ModelComparison.html"/>
 <link rel="next" href="ANOVA1MultipleComparisons.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -379,15 +382,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A one-way analysis of variance (ANOVA) is used to determine if a significant difference exists among the means of two or more populations.</p>
 </div>
 <p>In this module, we examine the immunoglobulin<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> measurements of opossums (<code>imm</code>) during three months of the same year (<code>season</code>). The data are loaded into R and a subset of rows is shown below.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb16-1"><a href="ANOVA1Foundations.html#cb16-1" aria-hidden="true" tabindex="-1"></a>opp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Opossums.csv&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb17-1"><a href="ANOVA1Foundations.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">headtail</span>(opp)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;        imm season
-#R&gt;   1  0.640    feb
-#R&gt;   2  0.680    feb
-#R&gt;   3  0.731    feb
-#R&gt;   25 0.490    nov
-#R&gt;   26 0.333    nov
-#R&gt;   27 0.492    nov</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb21-1"><a href="ANOVA1Foundations.html#cb21-1" aria-hidden="true" tabindex="-1"></a>opp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Opossums.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb22-1"><a href="ANOVA1Foundations.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">headtail</span>(opp)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;       imm season
+#R&gt;  1  0.640    feb
+#R&gt;  2  0.680    feb
+#R&gt;  3  0.731    feb
+#R&gt;  25 0.490    nov
+#R&gt;  26 0.333    nov
+#R&gt;  27 0.492    nov</code></pre>
 <div class="tip">
 <p>Data must be stacked!!</p>
 </div>
@@ -406,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A 2-Sample t-Test is simply a special case of a One-Way ANOVA.</p>
 </div>
 <p>Figure <a href="ANOVA1Foundations.html#fig:SS">5.1</a> is a visual representation of the simple and full models of a One-Way ANOVA, along with residuals from each. Note the similarity with figures from the Module <a href="ModelComparison.html#ModelComparison">4</a>, except that there are three group means here.</p>
-<div class="figure" style="text-align: center"><span id="fig:SS"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SS"></span>
 <img src="Book207_files/figure-html/SS-1.png" alt="Immunoglobulin concentrations versus season (or month) of capture for New Zealand opposums. The grand mean is shown by a red horizontal segment, group means are shown by blue horizontal segments, residuals from the grand mean are red vertical dashed lines, residuals from the groups means are blue vertical dashed lines, and differences between the group means and the grand mean are black vertical dashed lines." width="33%" /><img src="Book207_files/figure-html/SS-2.png" alt="Immunoglobulin concentrations versus season (or month) of capture for New Zealand opposums. The grand mean is shown by a red horizontal segment, group means are shown by blue horizontal segments, residuals from the grand mean are red vertical dashed lines, residuals from the groups means are blue vertical dashed lines, and differences between the group means and the grand mean are black vertical dashed lines." width="33%" /><img src="Book207_files/figure-html/SS-3.png" alt="Immunoglobulin concentrations versus season (or month) of capture for New Zealand opposums. The grand mean is shown by a red horizontal segment, group means are shown by blue horizontal segments, residuals from the grand mean are red vertical dashed lines, residuals from the groups means are blue vertical dashed lines, and differences between the group means and the grand mean are black vertical dashed lines." width="33%" />
 <p class="caption">
 Figure 5.1: Immunoglobulin concentrations versus season (or month) of capture for New Zealand opposums. The grand mean is shown by a red horizontal segment, group means are shown by blue horizontal segments, residuals from the grand mean are red vertical dashed lines, residuals from the groups means are blue vertical dashed lines, and differences between the group means and the grand mean are black vertical dashed lines.
@@ -492,22 +495,22 @@ Residuals
 <div id="one-way-anova-in-r" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> One-Way ANOVA in R</h2>
 <p>The models for a one-way ANOVA are fit and assessed with <code>lm()</code> exactly as described for a 2-sample t-test in Section <a href="ModelComparison.html#two-sample-t-test-revisited-using-linear-models">4.8</a>.<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb19-1"><a href="ANOVA1Foundations.html#cb19-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
-<span id="cb19-2"><a href="ANOVA1Foundations.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
-#R&gt;   
-#R&gt;   Response: imm
-#R&gt;             Df  Sum Sq  Mean Sq F value    Pr(&gt;F)
-#R&gt;   season     2 0.23401 0.117005  14.449 7.609e-05
-#R&gt;   Residuals 24 0.19435 0.008098</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb24-1"><a href="ANOVA1Foundations.html#cb24-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
+<span id="cb24-2"><a href="ANOVA1Foundations.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  Analysis of Variance Table
+#R&gt;  
+#R&gt;  Response: imm
+#R&gt;            Df  Sum Sq  Mean Sq F value    Pr(&gt;F)
+#R&gt;  season     2 0.23401 0.117005  14.449 7.609e-05
+#R&gt;  Residuals 24 0.19435 0.008098</code></pre>
 <p>A graphic that illustrates the mean immunoglobulin value with 95% confidence intervals for each month is constructed below (as shown in Section <a href="T2Review.html#T2analysis">2.2</a>).</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb21-1"><a href="ANOVA1Foundations.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opp,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>imm)) <span class="sc">+</span></span>
-<span id="cb21-2"><a href="ANOVA1Foundations.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha=</span><span class="fl">0.5</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb21-3"><a href="ANOVA1Foundations.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data=</span>mean_cl_normal,<span class="at">geom=</span><span class="st">&quot;errorbar&quot;</span>,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb21-4"><a href="ANOVA1Foundations.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean,<span class="at">geom=</span><span class="st">&quot;point&quot;</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb21-5"><a href="ANOVA1Foundations.html#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Immunoglobulin Concentration&quot;</span>,<span class="at">x=</span><span class="st">&quot;Season/Month&quot;</span>) <span class="sc">+</span></span>
-<span id="cb21-6"><a href="ANOVA1Foundations.html#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-16-1.png" width="336" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb26-1"><a href="ANOVA1Foundations.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opp,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>imm)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="ANOVA1Foundations.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha=</span><span class="fl">0.5</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="ANOVA1Foundations.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data=</span>mean_cl_normal,<span class="at">geom=</span><span class="st">&quot;errorbar&quot;</span>,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="ANOVA1Foundations.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean,<span class="at">geom=</span><span class="st">&quot;point&quot;</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="ANOVA1Foundations.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Immunoglobulin Concentration&quot;</span>,<span class="at">x=</span><span class="st">&quot;Season/Month&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="ANOVA1Foundations.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-18-1.png" width="336" style="display: block; margin: auto;" /></p>
 <p> </p>
 
 </div>
@@ -534,7 +537,6 @@ Residuals
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -553,6 +555,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -573,11 +576,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

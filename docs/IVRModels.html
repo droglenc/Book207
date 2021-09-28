@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 21 IVR Models &amp; Sub-Models | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 21 IVR Models &amp; Sub-Models | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="IVRVariables.html"/>
 <link rel="next" href="IVRTesting.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -574,7 +577,7 @@ i\text{th Group&#39;s Slope} - \text{Reference Group&#39;s Slope} = (\beta+\gamm
 <li><span class="math inline">\(\gamma_{i}\)</span>: difference in slopes between the <span class="math inline">\(i\)</span>th group and the reference group.</li>
 </ul>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:IVRCoefficients"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:IVRCoefficients"></span>
 <img src="Book207_files/figure-html/IVRCoefficients-1.png" alt="Representation of two sub-models fit with the ultimate full model in an IVR with the geometric meaning of each parameter. The blue line is the sub-model for the reference group. Note that $\alpha$=2, $\beta$=0.4, $\delta_{1}$=-1.6, and $\gamma_{1}$=0.45 in this example." width="336" />
 <p class="caption">
 Figure 21.1: Representation of two sub-models fit with the ultimate full model in an IVR with the geometric meaning of each parameter. The blue line is the sub-model for the reference group. Note that <span class="math inline">\(\alpha\)</span>=2, <span class="math inline">\(\beta\)</span>=0.4, <span class="math inline">\(\delta_{1}\)</span>=-1.6, and <span class="math inline">\(\gamma_{1}\)</span>=0.45 in this example.
@@ -596,7 +599,7 @@ Figure 21.1: Representation of two sub-models fit with the ultimate full model i
 <li><em>Coincident Lines</em>: A single regression line represents the relationship between the response variable and the covariate for both groups (i.e., <span class="math inline">\(\delta_{1}=0\)</span> and <span class="math inline">\(\gamma_{1}=0\)</span>).</li>
 </ul>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:IVRSituations"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:IVRSituations"></span>
 <img src="Book207_files/figure-html/IVRSituations-1.png" alt="Hypothetical depictions of four situations that can occur for the relationship between a response variable and a covariate for two groups." width="480" />
 <p class="caption">
 Figure 21.2: Hypothetical depictions of four situations that can occur for the relationship between a response variable and a covariate for two groups.
@@ -607,28 +610,28 @@ Figure 21.2: Hypothetical depictions of four situations that can occur for the r
 <div id="ultimate-full-model-in-r" class="section level2" number="21.4">
 <h2><span class="header-section-number">21.4</span> Ultimate Full Model in R</h2>
 <p>Fitting the ultimate full model in R is straightforward because it is essentially the same as fitting a Two-Way ANOVA (see <a href="ANOVA2Analysis.html#model-fitting-in-r">12.1</a>) and R automatically creates the indicator variables behind the scenes. The ultimate full model for an IVR is fit in <code>lm()</code> with <code>response~covariate+factor+covariate:factor</code>,<a href="#fn95" class="footnote-ref" id="fnref95"><sup>95</sup></a> with the variables on the right-hand-side in that order to match what was done above.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb146-1"><a href="IVRModels.html#cb146-1" aria-hidden="true" tabindex="-1"></a>ivr1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species<span class="sc">+</span>weight<span class="sc">:</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb151-1"><a href="IVRModels.html#cb151-1" aria-hidden="true" tabindex="-1"></a>ivr1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species<span class="sc">+</span>weight<span class="sc">:</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
 <div id="extracting-parameter-estimates" class="section level4 unnumbered">
 <h4>Extracting Parameter Estimates</h4>
 <p>The parameter estimates and their confidence intervals are extractd with <code>coef()</code> and <code>confint()</code> as before.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb147-1"><a href="IVRModels.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Ests=</span><span class="fu">coef</span>(ivr1),<span class="fu">confint</span>(ivr1))</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;                        Ests  2.5 % 97.5 %
-#R&gt;   (Intercept)         0.135  0.093  0.178
-#R&gt;   weight              0.010  0.004  0.015
-#R&gt;   speciescoho        -0.051 -0.113  0.011
-#R&gt;   weight:speciescoho  0.012 -0.001  0.025</code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb152-1"><a href="IVRModels.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Ests=</span><span class="fu">coef</span>(ivr1),<span class="fu">confint</span>(ivr1))</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;                       Ests  2.5 % 97.5 %
+#R&gt;  (Intercept)         0.135  0.093  0.178
+#R&gt;  weight              0.010  0.004  0.015
+#R&gt;  speciescoho        -0.051 -0.113  0.011
+#R&gt;  weight:speciescoho  0.012 -0.001  0.025</code></pre>
 <p>Parameter estimates under the “Ests” column are in rows that are generally labeled as the variables in the ultimate full model. Note that R prepends the indicator variable with the name of the original factor variable; i.e., <em>speciescoho</em> instead of <em>COHO</em>. From this then, <span class="math inline">\(\hat{\alpha}\)</span>=0.135, <span class="math inline">\(\hat{\beta}\)</span>=0.010, <span class="math inline">\(\hat{\delta}_{1}\)</span>=-0.051, and <span class="math inline">\(\hat{\gamma}_{1}\)</span>=0.012. Thus, for example, the sample slope for Chinook Salmon (the reference groups) is 0.010 and the sample slope for Coho Salmon is 0.012 greater than the sample slope for Chinook Salmon. Furthermore, for example, one is 95% confident that <span class="math inline">\(\beta\)</span> is between 0.004 and 0.015 and <span class="math inline">\(\gamma_{1}\)</span> is between -0.001 and 0.025.</p>
 <p>Of course, inferential methods are needed to determine if these results suggest a real difference in parameters between populations. For example, a statistical test of whether <span class="math inline">\(\gamma_{1}=0\)</span> would be used to determine if the population slopes differed between Coho and Chinook salmon. These types of tests are introduced in Module <a href="IVRTesting.html#IVRTesting">22</a>.</p>
 </div>
 <div id="fitted-line-plots" class="section level4 unnumbered">
 <h4>Fitted Line Plots</h4>
 <p>A visual of the fitted IVR model is constructed the same as the visual for an SLR model except that the color of the points and the regression line for each group is mapped to the factor variable. The plotting character and colors should then be removed from <code>geom_point()</code>. For example, note the <code>color=species</code> in <code>mapping=aes()</code> and the simplicity of <code>geom_point()</code> in the code below.</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb149-1"><a href="IVRModels.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Mirex,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>weight,<span class="at">y=</span>mirex,<span class="at">color=</span>species)) <span class="sc">+</span>  </span>
-<span id="cb149-2"><a href="IVRModels.html#cb149-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  </span>
-<span id="cb149-3"><a href="IVRModels.html#cb149-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Weight (kg)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mirex Concentration (mg/kg)&quot;</span>) <span class="sc">+</span>  </span>
-<span id="cb149-4"><a href="IVRModels.html#cb149-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
-<span id="cb149-5"><a href="IVRModels.html#cb149-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-112-1.png" width="432" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb154-1"><a href="IVRModels.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Mirex,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>weight,<span class="at">y=</span>mirex,<span class="at">color=</span>species)) <span class="sc">+</span>  </span>
+<span id="cb154-2"><a href="IVRModels.html#cb154-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  </span>
+<span id="cb154-3"><a href="IVRModels.html#cb154-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Weight (kg)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mirex Concentration (mg/kg)&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb154-4"><a href="IVRModels.html#cb154-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
+<span id="cb154-5"><a href="IVRModels.html#cb154-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-114-1.png" width="432" style="display: block; margin: auto;" /></p>
 <p> </p>
 <p>From this plot, note that the intercept for Coho is less than the intercept for Chinook (as you would expect because <span class="math inline">\(\hat{\delta}_{1}\)</span>=-0.051) and the slope for Coho is greater than (i.e., steeper) than that for Chinook (as you would expect because <span class="math inline">\(\hat{\gamma}_{1}\)</span>=0.012)</p>
 </div>
@@ -636,22 +639,22 @@ Figure 21.2: Hypothetical depictions of four situations that can occur for the r
 <h4>Predictions</h4>
 <p>Predicted values for IVR models are constructed by submitting the <code>lm()</code> object and a data frame of observed values of the explanatory variables to <code>predict()</code>, as was described for SLR models (see Section <a href="SLRInference.html#predictions-in-r">15.7</a>). One must make sure, though, that the data frame contains an observed value for each explanatory variable found in the <code>lm()</code> object.</p>
 <p>For example, the predicted value, with a 95% prediction interval, for a 3 kg Coho Salmon is found with</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb150-1"><a href="IVRModels.html#cb150-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="dv">3</span>,<span class="at">species=</span><span class="st">&quot;coho&quot;</span>)</span>
-<span id="cb150-2"><a href="IVRModels.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;           fit         lwr      upr
-#R&gt;   1 0.1496893 -0.03240232 0.331781</code></pre>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb155-1"><a href="IVRModels.html#cb155-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="dv">3</span>,<span class="at">species=</span><span class="st">&quot;coho&quot;</span>)</span>
+<span id="cb155-2"><a href="IVRModels.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;          fit         lwr      upr
+#R&gt;  1 0.1496893 -0.03240232 0.331781</code></pre>
 <p>Similarly, the predicted values, with 95% prediction intervals, for a 5 kg Chinook AND a 3 kg Coho Salmon are found with</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb152-1"><a href="IVRModels.html#cb152-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">3</span>),<span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;chinook&quot;</span>,<span class="st">&quot;coho&quot;</span>))</span>
-<span id="cb152-2"><a href="IVRModels.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;           fit          lwr       upr
-#R&gt;   1 0.1834880  0.001557795 0.3654182
-#R&gt;   2 0.1496893 -0.032402319 0.3317810</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb157-1"><a href="IVRModels.html#cb157-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">3</span>),<span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;chinook&quot;</span>,<span class="st">&quot;coho&quot;</span>))</span>
+<span id="cb157-2"><a href="IVRModels.html#cb157-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;          fit          lwr       upr
+#R&gt;  1 0.1834880  0.001557795 0.3654182
+#R&gt;  2 0.1496893 -0.032402319 0.3317810</code></pre>
 <p>The results may be easier to read if you bind together the new data.frame and the prediction results.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb154-1"><a href="IVRModels.html#cb154-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">3</span>),<span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;chinook&quot;</span>,<span class="st">&quot;coho&quot;</span>))</span>
-<span id="cb154-2"><a href="IVRModels.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(nd,<span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>))</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;     weight species       fit          lwr       upr
-#R&gt;   1      5 chinook 0.1834880  0.001557795 0.3654182
-#R&gt;   2      3    coho 0.1496893 -0.032402319 0.3317810</code></pre>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb159-1"><a href="IVRModels.html#cb159-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">3</span>),<span class="at">species=</span><span class="fu">c</span>(<span class="st">&quot;chinook&quot;</span>,<span class="st">&quot;coho&quot;</span>))</span>
+<span id="cb159-2"><a href="IVRModels.html#cb159-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(nd,<span class="fu">predict</span>(ivr1,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>))</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;    weight species       fit          lwr       upr
+#R&gt;  1      5 chinook 0.1834880  0.001557795 0.3654182
+#R&gt;  2      3    coho 0.1496893 -0.032402319 0.3317810</code></pre>
 <p> </p>
 
 </div>
@@ -675,7 +678,6 @@ Figure 21.2: Hypothetical depictions of four situations that can occur for the r
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -694,6 +696,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -714,11 +717,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

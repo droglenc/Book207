@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 17 SLR Assumptions | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 17 SLR Assumptions | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="SLRModels.html"/>
 <link rel="next" href="SLRTransformations.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -380,7 +383,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A <em>residual plot</em> is a scatterplot of these residuals on the y-axis and the predicted values on the x-axis. The residual plot “transforms” the scatterplot by first “flattening” the best-fit line and placing it at 0 on the y-axis and then expanding the y-axis to remove any “dead” white space in the plot. This “transformation” effectively zooms in on the best-fit line so that you can better see how the points relate to the line.</p>
 <p>Figure <a href="SLRAssumptions.html#fig:FLPResid1">17.1</a> shows a scatterplot with the best-fit line on the left and the corresponding residual plot on the right. Four points are shown to help understand how the two plots are related. This example is fairly straightforward as the residual plot essentially flattens the best-fit line and then zooms in the y-axis scale.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:FLPResid1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:FLPResid1"></span>
 <img src="Book207_files/figure-html/FLPResid1-1.png" alt="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)." width="336" /><img src="Book207_files/figure-html/FLPResid1-2.png" alt="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)." width="336" />
 <p class="caption">
 Figure 17.1: Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right).
@@ -389,7 +392,7 @@ Figure 17.1: Scatterplot with best-fit line and four points highlighted (Left) a
 <p> </p>
 <p>Figure <a href="SLRAssumptions.html#fig:FLPResid2">17.2</a> is arranged similarly to Figure <a href="SLRAssumptions.html#fig:FLPResid1">17.1</a>. However, in this case the scatterplot exhibits a negative relationship which makes the “transformation” to the residual plot not as obvious. With a negative relationship, the “largest” predicted values correspond to points on the left side of the scatterplot, but they end up on the right side of the residual plot. Of course, vice-versa is also true. This is most obvious with the 38th and 39th points in Figure <a href="SLRAssumptions.html#fig:FLPResid2">17.2</a>.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:FLPResid2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:FLPResid2"></span>
 <img src="Book207_files/figure-html/FLPResid2-1.png" alt="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)." width="336" /><img src="Book207_files/figure-html/FLPResid2-2.png" alt="Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right)." width="336" />
 <p class="caption">
 Figure 17.2: Scatterplot with best-fit line and four points highlighted (Left) and residual plot with same four points highlighted (Right).
@@ -400,7 +403,7 @@ Figure 17.2: Scatterplot with best-fit line and four points highlighted (Left) a
 </div>
 <p> </p>
 <p>If the homoscedasticity and linear assumptions (discussed below) are adequately met then the residual plot should exhibit no discernible or obvious pattern. Most importantly no curve nor cone or funnel-shape should be evident in the plot. Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsMet">17.3</a> is an example of a residual plot where the homoscedasticity and linearity assumptions HAVE been adequately met.</p>
-<div class="figure" style="text-align: center"><span id="fig:SLRAssumptionsMet"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SLRAssumptionsMet"></span>
 <img src="Book207_files/figure-html/SLRAssumptionsMet-1.png" alt="Residual plot where the homoscedasticity and linearity assumptions HAVE been adequately met." width="336" />
 <p class="caption">
 Figure 17.3: Residual plot where the homoscedasticity and linearity assumptions HAVE been adequately met.
@@ -417,7 +420,7 @@ Figure 17.3: Residual plot where the homoscedasticity and linearity assumptions 
 <div id="homoscedasticity" class="section level2" number="17.3">
 <h2><span class="header-section-number">17.3</span> Homoscedasticity</h2>
 <p>Strictly speaking “homoscedasticity” means that the the variances of <span class="math inline">\(Y\)</span> at each given value of <span class="math inline">\(X\)</span> are equal. Seldom are there enough observations at the same value of <span class="math inline">\(X\)</span> to test this assumption explicitly. Thus, in practice, homoscedasticity translates into assessing whether the same general variance or scatter of points around the line exists for all values of <span class="math inline">\(X\)</span>. Heteroscedasticity, or non-constant variance around the line, will generally appear as a cone or funnel shape on a residual plot (Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsHetero">17.4</a>). Sometimes the funnel-shape may be difficult to see if the linearity assumption is also not met (Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsHetero">17.4</a>-Right). Make sure to compare these residual plots to Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsMet">17.3</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:SLRAssumptionsHetero"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SLRAssumptionsHetero"></span>
 <img src="Book207_files/figure-html/SLRAssumptionsHetero-1.png" alt="Residual plot where the homoscedasticity assumption has NOT been adequately met." width="672" />
 <p class="caption">
 Figure 17.4: Residual plot where the homoscedasticity assumption has NOT been adequately met.
@@ -433,7 +436,7 @@ Figure 17.4: Residual plot where the homoscedasticity assumption has NOT been ad
 <p>The no outliers assumption for SLR is assessed exactly as it was for a One- and Two-Way ANOVA; i.e., with an outlier test and a histogram of residuals (see Section <a href="ANOVA1Assumptions.html#no-outliers">7.4</a>).</p>
 <p>In SLR, some individuals may be considered <em>influential points</em> that draw the best-fit line towards them. Some very highly influential points may so strongly draw the line to them that the line will come very close to the point and the outlier test will not identify the point as an outlier (Figure <a href="SLRAssumptions.html#fig:SLRInfluentialPoint">17.5</a>-Left). Thus, I strongly urge you to look for “abnormal” points in your residual plots (Figure <a href="SLRAssumptions.html#fig:SLRInfluentialPoint">17.5</a>-Right) rather than relying solely on the outlier test to identify problem points.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:SLRInfluentialPoint"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SLRInfluentialPoint"></span>
 <img src="Book207_files/figure-html/SLRInfluentialPoint-1.png" alt="Scatterplot with a best-fit line for all points (red) and all points excluding the red point (blue) (Left) and the residual plot from the fit to all points (Right)." width="336" /><img src="Book207_files/figure-html/SLRInfluentialPoint-2.png" alt="Scatterplot with a best-fit line for all points (red) and all points excluding the red point (blue) (Left) and the residual plot from the fit to all points (Right)." width="336" />
 <p class="caption">
 Figure 17.5: Scatterplot with a best-fit line for all points (red) and all points excluding the red point (blue) (Left) and the residual plot from the fit to all points (Right).
@@ -449,7 +452,7 @@ Figure 17.5: Scatterplot with a best-fit line for all points (red) and all point
 <h2><span class="header-section-number">17.6</span> Linearity</h2>
 <p>The linearity assumption is the most important assumption in SLR; i.e., the form of the bivariate relationship must be linear in order to fit a line to it! Problems with the linearity assumption are diagnosed by examination of the residual plot. The most common departures from linearity look like parabolas on the residual plot (Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsNonlinear">17.6</a>), but more “complicated” structures may also be noted. Either way, a general curve or non-linearity will be apparent in the residual plot of the linearity assumption has been violated. A non-linearity may be difficult to diagnose if the homoscedasticity assumption is also not met (Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsNonlinear">17.6</a>-Right). Make sure to compare these residual plots to Figure <a href="SLRAssumptions.html#fig:SLRAssumptionsMet">17.3</a>.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:SLRAssumptionsNonlinear"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SLRAssumptionsNonlinear"></span>
 <img src="Book207_files/figure-html/SLRAssumptionsNonlinear-1.png" alt="Residual plot where linearity assumption has NOT been adequately met." width="672" />
 <p class="caption">
 Figure 17.6: Residual plot where linearity assumption has NOT been adequately met.
@@ -460,8 +463,8 @@ Figure 17.6: Residual plot where linearity assumption has NOT been adequately me
 <div id="testing-assumptions-in-r-1" class="section level2" number="17.7">
 <h2><span class="header-section-number">17.7</span> Testing Assumptions in R</h2>
 <p>The residual plot, histogram of residuals, Anderson-Darling test p-value, and outlier test p-value can all be constructed by submitting the saved <code>lm()</code> object to <code>assumptionCheck()</code>.<a href="#fn84" class="footnote-ref" id="fnref84"><sup>84</sup></a> For example, the results below indicate that all assumptions are adequately met for the Mount Everest air temperature and altitude lapse rate regression – i.e., there is no discernible or obvious curve or funnel-shape to the residual plot, the Anderson-Darling p-value indicates that the residuals are normally distributed, and the outlier test p-value does not indicate the presence of any outliers. It should be noted, however, that the sample size is very small in this case.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb101-1"><a href="SLRAssumptions.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.ev)</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-86-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb106-1"><a href="SLRAssumptions.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.ev)</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-88-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p> </p>
 <p>If the linearity, homoscedasticity, normality, or no outliers assumptions are not met then transformations for the response variable, explanatory variable, or both should be considered (see Module <a href="SLRTransformations.html#SLRTransformations">18</a>).</p>
 <p> </p>
@@ -486,7 +489,6 @@ Figure 17.6: Residual plot where linearity assumption has NOT been adequately me
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -505,6 +507,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -525,11 +528,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

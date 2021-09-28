@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 14 SLR Foundational Principles | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 14 SLR Foundational Principles | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="ANOVA2Summary.html"/>
 <link rel="next" href="SLRInference.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -545,7 +548,7 @@ Winter
 <h2><span class="header-section-number">14.2</span> Best-Fit Line</h2>
 <p>A line is simply a model for data and from that model we can make predictions for the response variable by plugging a value of <span class="math inline">\(x\)</span> into the line equation. For example, a prediction using the <span class="math inline">\(i\)</span>th individual’s value of <span class="math inline">\(x\)</span> is given by <span class="math inline">\(\hat{\mu}_{Y|X=x_{i}}=\hat{\alpha}+\hat{\beta}x_{i}\)</span>, where <span class="math inline">\(\hat{\mu}_{Y|X=x_{i}}\)</span> is read as “the predicted mean of <span class="math inline">\(Y\)</span> when <span class="math inline">\(X\)</span> is equal to <span class="math inline">\(x_{i}\)</span>.” Visually this prediction is found by locating the value of <span class="math inline">\(x_{i}\)</span> on the x-axis, rising vertically until the line is met, and then moving horizontally to the y-axis. This is demonstrated in Figure <a href="SLRFoundations.html#fig:SLRPredictDemo">14.1</a> for individual #2.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:SLRPredictDemo"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SLRPredictDemo"></span>
 <img src="Book207_files/figure-html/SLRPredictDemo-1.png" alt="Scatterplot of actual mean air temperature versus altitude lapse rate with the best-fit line shown and the prediction demonstrated for individual 2." width="336" />
 <p class="caption">
 Figure 14.1: Scatterplot of actual mean air temperature versus altitude lapse rate with the best-fit line shown and the prediction demonstrated for individual 2.
@@ -554,7 +557,7 @@ Figure 14.1: Scatterplot of actual mean air temperature versus altitude lapse ra
 <p> </p>
 <p>As noted in previous modules, the residual is the vertical difference between an individual’s observed value of the response variable (i.e., <span class="math inline">\(y_{i}\)</span>) and <span class="math inline">\(\hat{\mu}_{Y|X=x_{i}}\)</span>, the predicted value of the response variable using the individual’s value of the explanatory variable. Thus, a residual is <span class="math inline">\(y_{i}-\hat{\mu}_{Y|X=x_{i}}\)</span> and measures how close the line is to that point. A residual for the second individual is demonstrated in Figure <a href="SLRFoundations.html#fig:SLRResidDemo">14.2</a>.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:SLRResidDemo"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SLRResidDemo"></span>
 <img src="Book207_files/figure-html/SLRResidDemo-1.png" alt="Same as previous figure except that the residual for individual #2 is highlighted with the red vertical line." width="336" />
 <p class="caption">
 Figure 14.2: Same as previous figure except that the residual for individual #2 is highlighted with the red vertical line.
@@ -568,7 +571,7 @@ RSS = \sum_{i=1}^{n}\left(y_{i}-\hat{\mu}_{Y|X=x_{i}}\right)^{2}
 <p> </p>
 <p><strong>The</strong> best-fit line is defined by the <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> out of all possible choices<a href="#fn69" class="footnote-ref" id="fnref69"><sup>69</sup></a> for <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span> that minimize the RSS (Figure <a href="SLRFoundations.html#fig:DemoBFLandRSS">14.3</a>).<a href="#fn70" class="footnote-ref" id="fnref70"><sup>70</sup></a></p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:DemoBFLandRSS"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:DemoBFLandRSS"></span>
 <img src="Book207_files/figure-html/DemoBFLandRSS-.gif" alt="Scatterplot with the best-fit line (light gray) and candidate best-fit lines (blue line) and residuals (vertical red dashed lines) in the left pane and the residual sum-of-squares for all candidate lines (gray) with the current line highlighted with a red dot. Note how the candidate line is on the best-fit line when the RSS is smallest." width="672" />
 <p class="caption">
 Figure 14.3: Scatterplot with the best-fit line (light gray) and candidate best-fit lines (blue line) and residuals (vertical red dashed lines) in the left pane and the residual sum-of-squares for all candidate lines (gray) with the current line highlighted with a red dot. Note how the candidate line is on the best-fit line when the RSS is smallest.
@@ -594,31 +597,31 @@ Figure 14.3: Scatterplot with the best-fit line (light gray) and candidate best-
 <div id="best-fit-line-in-r" class="section level2" number="14.3">
 <h2><span class="header-section-number">14.3</span> Best-Fit Line in R</h2>
 <p>The Mount Everest temperature data is loaded and restricted to just Winter below.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb77-1"><a href="SLRFoundations.html#cb77-1" aria-hidden="true" tabindex="-1"></a>ev <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/droglenc/NCData/master/EverestTemps.csv&quot;</span>)</span>
-<span id="cb77-2"><a href="SLRFoundations.html#cb77-2" aria-hidden="true" tabindex="-1"></a>ev <span class="ot">&lt;-</span> <span class="fu">filter</span>(ev,Season<span class="sc">==</span><span class="st">&quot;Winter&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb82-1"><a href="SLRFoundations.html#cb82-1" aria-hidden="true" tabindex="-1"></a>ev <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/droglenc/NCData/master/EverestTemps.csv&quot;</span>)</span>
+<span id="cb82-2"><a href="SLRFoundations.html#cb82-2" aria-hidden="true" tabindex="-1"></a>ev <span class="ot">&lt;-</span> <span class="fu">filter</span>(ev,Season<span class="sc">==</span><span class="st">&quot;Winter&quot;</span>)</span></code></pre></div>
 <p>A best-fit regression line is obtained using <code>response~explanatory</code> with <code>data=</code>.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb78-1"><a href="SLRFoundations.html#cb78-1" aria-hidden="true" tabindex="-1"></a>lm1.ev <span class="ot">&lt;-</span> <span class="fu">lm</span>(MeanAirTemp<span class="sc">~</span>Altitude,<span class="at">data=</span>ev)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb83-1"><a href="SLRFoundations.html#cb83-1" aria-hidden="true" tabindex="-1"></a>lm1.ev <span class="ot">&lt;-</span> <span class="fu">lm</span>(MeanAirTemp<span class="sc">~</span>Altitude,<span class="at">data=</span>ev)</span></code></pre></div>
 <p>The estimated intercept and slope (i.e., the <span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span>) and corresponding 95% confidence intervals are extracted from the <code>lm()</code> object with <code>coef()</code> and <code>confint()</code>, respectively. I “column bind” these results together to make a synthetic summary table.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb79-1"><a href="SLRFoundations.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm1.ev),<span class="fu">confint</span>(lm1.ev))</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;                        Est        2.5 %       97.5 %
-#R&gt;   (Intercept) 21.388856057 17.442040728 25.335671386
-#R&gt;   Altitude    -0.005634136 -0.006822147 -0.004446125</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb84-1"><a href="SLRFoundations.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm1.ev),<span class="fu">confint</span>(lm1.ev))</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;                       Est        2.5 %       97.5 %
+#R&gt;  (Intercept) 21.388856057 17.442040728 25.335671386
+#R&gt;  Altitude    -0.005634136 -0.006822147 -0.004446125</code></pre>
 <p>These results show that the slope of the best-fit line is -0.0056 (95% CI: -0.0068 - -0.0044) and the intercept is 21.39 (95% CI: 17.44 - 25.34). Thus, the equation of the best-fit line is Mean Air Temperature = 21.39 - 0.0056×Altitude Lapse Rate. From this slope, it appears that the actual air temperature will decrease by between -0.0068 and -0.0044, on average, for each 1 C/km increase in the altitude lapse rate.</p>
 <p>Of course, the mean actual air temperature can be predicted by plugging a value of the altitude lapse rate into the equation of the line. For example, the predicted mean actual air temperature if the altitude lapse rate is 2552 is 21.39 - 0.0056×2552 = 7.10<sup>o</sup>C. This can also be found with <code>predict()</code> using the saved <code>lm()</code> object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the <code>lm()</code> object.<a href="#fn71" class="footnote-ref" id="fnref71"><sup>71</sup></a></p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb81-1"><a href="SLRFoundations.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="dv">2552</span>))</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;          1 
-#R&gt;   7.010541</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb86-1"><a href="SLRFoundations.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="dv">2552</span>))</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;         1 
+#R&gt;  7.010541</code></pre>
 <p>The coefficient of determination (<span class="math inline">\(r^{2}\)</span>) explains the proportion of the total variability in <span class="math inline">\(Y\)</span> that is explained by knowing the value of <span class="math inline">\(X\)</span>. Thus, <span class="math inline">\(r^{2}\)</span> ranges between 0 and 1, with <span class="math inline">\(r^{2}\)</span>=1 meaning that 100% of the variation in <span class="math inline">\(Y\)</span> is explained by knowing <span class="math inline">\(X\)</span>. Visually, higher <span class="math inline">\(r^{2}\)</span> values occur when the data are more tightly clustered around the best-fit line.<a href="#fn72" class="footnote-ref" id="fnref72"><sup>72</sup></a> The <span class="math inline">\(r^{2}\)</span> can be extracted from the <code>lm()</code> object with <code>rSquared()</code>.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb83-1"><a href="SLRFoundations.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm1.ev)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   [1] 0.9274753</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb88-1"><a href="SLRFoundations.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm1.ev)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  [1] 0.9274753</code></pre>
 <p>Thus, in this case, 92.7% of the variability in actual mean air temperature is explained by knowing the altitude lapse rate. This indicates a tight fit between the two variables and suggests that the actual mean air temperate will be well predicted by the altitude lapse rate.</p>
 <p>The best-fit line can be visualized by creating a scatterplot with <code>ggplot()</code> and then using <code>geom_smooth(method="lm",se=FALSE)</code> to superimpose the best-fit line.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb85-1"><a href="SLRFoundations.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>ev,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Altitude,<span class="at">y=</span>MeanAirTemp)) <span class="sc">+</span>  </span>
-<span id="cb85-2"><a href="SLRFoundations.html#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span>  </span>
-<span id="cb85-3"><a href="SLRFoundations.html#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Altitude Lapse Rate (C/km)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mean Air Temperature (C)&quot;</span>) <span class="sc">+</span>  </span>
-<span id="cb85-4"><a href="SLRFoundations.html#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
-<span id="cb85-5"><a href="SLRFoundations.html#cb85-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-75-1.png" width="336" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb90-1"><a href="SLRFoundations.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>ev,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Altitude,<span class="at">y=</span>MeanAirTemp)) <span class="sc">+</span>  </span>
+<span id="cb90-2"><a href="SLRFoundations.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb90-3"><a href="SLRFoundations.html#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Altitude Lapse Rate (C/km)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mean Air Temperature (C)&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb90-4"><a href="SLRFoundations.html#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span>  </span>
+<span id="cb90-5"><a href="SLRFoundations.html#cb90-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-77-1.png" width="336" style="display: block; margin: auto;" /></p>
 <p> </p>
 
 </div>
@@ -644,7 +647,6 @@ Figure 14.3: Scatterplot with the best-fit line (light gray) and candidate best-
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -663,6 +665,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -683,11 +686,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

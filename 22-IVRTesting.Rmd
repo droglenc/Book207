@@ -76,7 +76,7 @@ Take note that H<sub>A</sub> includes the interaction term, whereas H<sub>0</sub
 ```{r ParallelLinesTestModels, echo=FALSE, fig.width=7, fig.cap="Hypothetical depictions of the models for the null and alternative hypotheses of the parallel lines test."}
 PLT <- IVR4Sits %>%
   filter(sit %in% c("Parallel Lines","Completely Separate Lines")) %>%
-  mutate(hyps=FSA::mapvalues(sit,from=c("Parallel Lines","Completely Separate Lines"),
+  mutate(hyps=plyr::mapvalues(sit,from=c("Parallel Lines","Completely Separate Lines"),
                              to=c("H[0]: 'Parallel Lines (all '*gamma[i]==0*')'",
                                   "H[A]: 'Separate Lines (some '*gamma[i]!=0*')'")))
 ggplot(data=PLT,mapping=aes(x=x,y=y,color=group)) +
@@ -182,7 +182,7 @@ There are several important things to consider here. First, H<sub>A</sub> here w
 ```{r CoincidentLinesTestModels, echo=FALSE, fig.width=7, fig.cap="Hypothetical depictions of the models for the null and alternative hypotheses of the coincident lines test."}
 CLT <- IVR4Sits %>%
   filter(sit %in% c("Coincident Lines","Parallel Lines")) %>%
-  mutate(hyps=FSA::mapvalues(sit,from=c("Coincident Lines","Parallel Lines"),
+  mutate(hyps=plyr::mapvalues(sit,from=c("Coincident Lines","Parallel Lines"),
                              to=c("H[0]: 'Coincident Lines (all '*gamma[i]*'=0 & '*delta[i]*'=0)'",
                                   "H[A]: 'Parallel Lines (all '*gamma[i]==0*')'")))
 ggplot(data=CLT,mapping=aes(x=x,y=y,color=group)) +
@@ -338,7 +338,7 @@ At first glance, this appears to be the same models used in an SLR (Figure \@ref
 ```{r RelationshipTestModels, echo=FALSE, fig.width=7, fig.cap="Hypothetical depictions of the models for the null and alternative hypotheses of the relationships test."}
 RT <- IVR4Sits %>%
   filter(sit %in% c("Coincident Lines")) %>%
-  mutate(hyps=FSA::mapvalues(sit,from=c("Coincident Lines"),
+  mutate(hyps=plyr::mapvalues(sit,from=c("Coincident Lines"),
                              to=c("H[A]: 'Relationship ('*beta!=0*', all '*gamma[i]*'=0 & '*delta[i]*'=0)'"))) %>%
   add_row(sit="No Relationship",group="C",x=0,y=2,hyps="H[0]: 'No Relationship ('*beta*'=0)'") %>%
   add_row(sit="No Relationship",group="C",x=4,y=2,hyps="H[0]: 'No Relationship ('*beta*'=0)'") %>%

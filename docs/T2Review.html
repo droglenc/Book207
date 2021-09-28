@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 2 2-Sample t Review | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 2 2-Sample t Review | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="ModelTypes.html"/>
 <link rel="next" href="ModelConcepts.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -382,15 +385,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.2.1</span> Data Format</h3>
 <p>Data for a 2-sample t-test must be in stacked format, where measurements are in one column and a label for the populations is in another column. Each row corresponds to the measurement and population of a single individual.</p>
 <p>The data in BOD.csv (<a href="https://raw.githubusercontent.com/droglenc/NCData/master/BOD.csv">data</a>, <a href="https://github.com/droglenc/NCData/blob/master/BOD_meta.txt">meta</a>) are the <a href="https://www.usgs.gov/special-topic/water-science-school/science/biological-oxygen-demand-bod-and-water?qt-science_center_objects=0#qt-science_center_objects">biological oxygen demands (BOD)</a> at the inlet and outlet to an aquaculture facility. These data illustrate stacked data because each row is one water sample with two variables recorded – BOD and where the sample came from.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb3-1"><a href="T2Review.html#cb3-1" aria-hidden="true" tabindex="-1"></a>aqua <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;BOD.csv&quot;</span>)   <span class="co"># Loads the data</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb4-1"><a href="T2Review.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">headtail</span>(aqua)  <span class="co"># First and last three rows of the data</span></span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;        BOD    src
-#R&gt;   1  6.782  inlet
-#R&gt;   2  5.809  inlet
-#R&gt;   3  6.849  inlet
-#R&gt;   18 8.545 outlet
-#R&gt;   19 8.063 outlet
-#R&gt;   20 8.001 outlet</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb8-1"><a href="T2Review.html#cb8-1" aria-hidden="true" tabindex="-1"></a>aqua <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;BOD.csv&quot;</span>)   <span class="co"># Loads the data</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb9-1"><a href="T2Review.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">headtail</span>(aqua)  <span class="co"># First and last three rows of the data</span></span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;       BOD    src
+#R&gt;  1  6.782  inlet
+#R&gt;  2  5.809  inlet
+#R&gt;  3  6.849  inlet
+#R&gt;  18 8.545 outlet
+#R&gt;  19 8.063 outlet
+#R&gt;  20 8.001 outlet</code></pre>
 <div class="defn">
 <p><strong>Stacked Data</strong>: Data where the quantitative measurements of two or more groups are “stacked” on top of each other and a second variable is used to record to which group (or population) the measurement belongs.</p>
 </div>
@@ -403,93 +406,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.2.2</span> Assumption Checking</h3>
 <p>The <a href="https://github.com/droglenc/NCData/blob/master/BOD_meta.txt">meta</a> data suggests that measurements at the intake and outtake were taken at different times. Thus, there is no reasonable reason to think that BOD measurements are dependent across the two locations. Thus, the independence assumption is met.</p>
 <p>The sample size is less than 40 but greater than 15. The histograms shown below are not particularly informative because of the small sample size. The histogram for the inlet samples appears to be not strongly skewed, but that for the outlet appears to be strongly right-skewed. I am going to continue with this analysis, but I will be cautious with my final interpretations.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb6-1"><a href="T2Review.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>BOD)) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="T2Review.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.5</span>,<span class="at">boundary=</span><span class="dv">0</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="T2Review.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Frequency of Water Samples&quot;</span>,<span class="at">x=</span><span class="st">&quot;Biological Oxygen Demand&quot;</span>) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="T2Review.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand=</span><span class="fu">expansion</span>(<span class="at">mult=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.05</span>))) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="T2Review.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span></span>
-<span id="cb6-6"><a href="T2Review.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(src))</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r RCODE_ALONE"><code class="sourceCode r"><span id="cb11-1"><a href="T2Review.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>BOD)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="T2Review.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.5</span>,<span class="at">boundary=</span><span class="dv">0</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="T2Review.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Frequency of Water Samples&quot;</span>,<span class="at">x=</span><span class="st">&quot;Biological Oxygen Demand&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="T2Review.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand=</span><span class="fu">expansion</span>(<span class="at">mult=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.05</span>))) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="T2Review.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span></span>
+<span id="cb11-6"><a href="T2Review.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(src))</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="tip">
 <p>The <code>ggplot2</code> package is required to make plots with <code>ggplot()</code>.</p>
 </div>
-<p>Levene’s test is computed with <code>levenesTest()</code> using a formula of <code>response~groups</code> as the first argument, where <code>response</code> represents the name of the quantitative response variable and <code>groups</code> represents the name of the categorical variable that identifies the two populations. The data.frame with the variables must be in <code>data=</code>. From the results below, it is concluded that the population variances appear to be equal because the Levene’s test p-value (0.5913) is greater than α=0.05.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb7-1"><a href="T2Review.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levenesTest</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   Levene&#39;s Test for Homogeneity of Variance (center = median)
-#R&gt;         Df F value Pr(&gt;F)
-#R&gt;   group  1  0.2989 0.5913
-#R&gt;         18</code></pre>
+<p>Levene’s test is computed with <code class="inline">levenesTest()</code> using a formula of <code class="inline">response~groups</code> as the first argument, where <code class="inline">response</code> represents the name of the quantitative response variable and <code class="inline">groups</code> represents the name of the categorical variable that identifies the two populations. The data.frame with the variables must be in <code class="inline">data=</code>. From the results below, it is concluded that the population variances appear to be equal because the Levene’s test p-value (0.5913) is greater than α=0.05.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb12-1"><a href="T2Review.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levenesTest</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  Levene&#39;s Test for Homogeneity of Variance (center = median)
+#R&gt;        Df F value Pr(&gt;F)
+#R&gt;  group  1  0.2989 0.5913
+#R&gt;        18</code></pre>
 <div class="tip">
 <p>Levene’s test requires the <code>NCStats</code> package to be loaded.</p>
 </div>
 </div>
 <div id="analysis" class="section level3" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Analysis</h3>
-<p>A 2-sample t-test is constructed in R with <code>t.test()</code> using the exact same <code>response~groups</code> formula and <code>data=</code> used in <code>levenesTest()</code>. Additionally, <code>var.equal=TRUE</code> is used when the two population variances should be considered equal. By default <code>t.test()</code> uses a “not equals” H<sub>A</sub> and a 95% confidence interval. In the results below the two sample means are 6.6538 for the inlet group and 8.6873 for the outlet group such that the statistic is 6.6538-8.6873=-2.0335; the t test statistic is -8.994 with 18 df; and the p-value is &lt;0.00005 (or, more specifically, 4.449e-08).<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> Because the p-value&lt;α the H<sub>0</sub> is rejected and we conclude that the mean BOD at the inlet is lower than the mean BOD at the outlet. More specifically, the mean BOD at the inlet is between 1.558 and 2.509 units lower than the mean BOD at the outlet. Thus, it appears that the mean BOD in the water is increased from when it enters to when it leaves the aquaculture facility.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb9-1"><a href="T2Review.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua,<span class="at">var.equal=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;    Two Sample t-test with BOD by src 
-#R&gt;   t = -8.994, df = 18, p-value = 4.449e-08
-#R&gt;   alternative hypothesis: true difference in means is not equal to 0 
-#R&gt;   95 percent confidence interval:
-#R&gt;    -2.508511 -1.558489 
-#R&gt;   sample estimates:
-#R&gt;    mean in group inlet mean in group outlet 
-#R&gt;                 6.6538               8.6873</code></pre>
-<p>A graphic that illustrates the mean BOD with 95% confidence intervals for each sampling location is constructed below. In the code below you only need to change <code>data=</code> to the name of your data and <code>x=</code> and <code>y=</code> to the names of the explanatory and response variables in the first line and provide appropriate labels for the x- and y-axes in <code>labs()</code>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb11-1"><a href="T2Review.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>src,<span class="at">y=</span>BOD)) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="T2Review.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha=</span><span class="fl">0.5</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb11-3"><a href="T2Review.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data=</span>mean_cl_normal,<span class="at">geom=</span><span class="st">&quot;errorbar&quot;</span>,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb11-4"><a href="T2Review.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean,<span class="at">geom=</span><span class="st">&quot;point&quot;</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb11-5"><a href="T2Review.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Water Sample Location&quot;</span>,<span class="at">y=</span><span class="st">&quot;Biological Oxygen Demand&quot;</span>) <span class="sc">+</span></span>
-<span id="cb11-6"><a href="T2Review.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-8-1.png" width="336" style="display: block; margin: auto;" /></p>
+<p>A 2-sample t-test is constructed in R with <code class="inline">t.test()</code> using the exact same <code class="inline">response~groups</code> formula and <code class="inline">data=</code> used in <code class="inline">levenesTest()</code>. Additionally, <code class="inline">var.equal=TRUE</code> is used when the two population variances should be considered equal. By default <code class="inline">t.test()</code> uses a “not equals” H<sub>A</sub> and a 95% confidence interval. In the results below the two sample means are 6.6538 for the inlet group and 8.6873 for the outlet group such that the statistic is 6.6538-8.6873=-2.0335; the t test statistic is -8.994 with 18 df; and the p-value is &lt;0.00005 (or, more specifically, 4.449e-08).<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> Because the p-value&lt;α the H<sub>0</sub> is rejected and we conclude that the mean BOD at the inlet is lower than the mean BOD at the outlet. More specifically, the mean BOD at the inlet is between 1.558 and 2.509 units lower than the mean BOD at the outlet. Thus, it appears that the mean BOD in the water is increased from when it enters to when it leaves the aquaculture facility.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb14-1"><a href="T2Review.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua,<span class="at">var.equal=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;   Two Sample t-test with BOD by src 
+#R&gt;  t = -8.994, df = 18, p-value = 4.449e-08
+#R&gt;  alternative hypothesis: true difference in means between group inlet and group outlet is not equal to 0 
+#R&gt;  95 percent confidence interval:
+#R&gt;   -2.508511 -1.558489 
+#R&gt;  sample estimates:
+#R&gt;   mean in group inlet mean in group outlet 
+#R&gt;                6.6538               8.6873</code></pre>
+<p>A graphic that illustrates the mean BOD with 95% confidence intervals for each sampling location is constructed below. In the code below you only need to change <code class="inline">data=</code> to the name of your data and <code class="inline">x=</code> and <code class="inline">y=</code> to the names of the explanatory and response variables in the first line and provide appropriate labels for the x- and y-axes in <code class="inline">labs()</code>.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r RCODE_ALONE"><code class="sourceCode r"><span id="cb16-1"><a href="T2Review.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>src,<span class="at">y=</span>BOD)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="T2Review.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha=</span><span class="fl">0.5</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="T2Review.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data=</span>mean_cl_normal,<span class="at">geom=</span><span class="st">&quot;errorbar&quot;</span>,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="T2Review.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean,<span class="at">geom=</span><span class="st">&quot;point&quot;</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="T2Review.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Water Sample Location&quot;</span>,<span class="at">y=</span><span class="st">&quot;Biological Oxygen Demand&quot;</span>) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="T2Review.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-10-1.png" width="336" style="display: block; margin: auto;" /></p>
 <p> </p>
 </div>
 </div>
 <div id="signal-to-noise" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Signal-to-Noise</h2>
-<p>The ratio of signal to noise can be a useful metaphor for understanding hypothesis testing, as we have done here, and model comparisons, as we will do in future modules. In this metaphor, think of “signal” as how different two things are and “noise” as anything that gets in the way of you receiving the signal. For example, the lights on a care are a “signal,” but fog on the road is “noise” (Figure <a href="T2Review.html#fig:Signal2NoiseMetaphor">2.1</a>). As another example, it may be easy to see an orange kayak (the “signal”) on Lake Superior on a calm day but harder to see it on a wavy day (i.e., more “noise”; Figure <a href="T2Review.html#fig:Signal2NoiseMetaphor">2.1</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:Signal2NoiseMetaphor"></span>
-<img src="zimgs/Signal2NoiseMetaphor.jpg" alt="Signal-to-noise metahpors - seeing car lights through fog (Left) and seeing a kayak in the waves (Right)." width="75%" />
-<p class="caption">
-Figure 2.1: Signal-to-noise metahpors - seeing car lights through fog (Left) and seeing a kayak in the waves (Right).
-</p>
-</div>
+<p>The ratio of signal to noise can be a useful metaphor for understanding hypothesis testing, as we have done here, and model comparisons, as we will do in future modules. In this metaphor, think of “signal” as how different two things are and “noise” as anything that gets in the way of you receiving the signal. For example, the lights on a car are a “signal,” but fog on the road is “noise.” As another example, it may be easy to see an orange kayak (the “signal”) on Lake Superior on a calm day but harder to see it on a wavy day (i.e., more “noise”).</p>
 <p> </p>
-<p>In a 2-sample t-test, the “signal” is the difference in the two group means (Figure <a href="T2Review.html#fig:SignalNoise1">2.2</a>), which is measured by <span class="math inline">\(\bar{x}_{1}-\bar{x}_{2}\)</span>, the numerator of the t-test statistic. The bigger the difference in sample means the stronger the “signal” that the population means are different.</p>
-<div class="figure" style="text-align: center"><span id="fig:SignalNoise1"></span>
+<p>In a 2-sample t-test, the “signal” is the difference in the two group means (Figure <a href="T2Review.html#fig:SignalNoise1">2.1</a>), which is measured by <span class="math inline">\(\bar{x}_{1}-\bar{x}_{2}\)</span>, the numerator of the t-test statistic. The bigger the difference in sample means the stronger the “signal” that the population means are different.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SignalNoise1"></span>
 <img src="Book207_files/figure-html/SignalNoise1-1.png" alt="Response variable by group for each individual (points) with group means shown as horizontal segments. The difference in sample means is highlighted as the &quot;signal&quot; in these data." width="336" />
 <p class="caption">
-Figure 2.2: Response variable by group for each individual (points) with group means shown as horizontal segments. The difference in sample means is highlighted as the “signal” in these data.
+Figure 2.1: Response variable by group for each individual (points) with group means shown as horizontal segments. The difference in sample means is highlighted as the “signal” in these data.
 </p>
 </div>
 <div class="tip">
-<p>The “signal” is the difference in sample means</p>
+<p>The “signal” is the difference in sample means.</p>
 </div>
-<p>“Noise” is sampling variability, the fact that statistics (e.g., <span class="math inline">\(\bar{x}_{1}\)</span> and <span class="math inline">\(\bar{x}_{2}\)</span>) vary from sample to sample. Sampling variability in a 2-sample t-test is measured by <span class="math inline">\(SE_{\bar{x}_{1}-\bar{x}_{2}}\)</span>, which is the denominator of the t test statistic, or <span class="math inline">\(\sqrt{s_{p}^{2}\left(\frac{1}{n_{1}}+\frac{1}{n_{2}}\right)}\)</span>. This SE increases with increasing <span class="math inline">\(s_{p}^{2}\)</span> and decreases with increasing n<sub>1</sub> and n<sub>2</sub>. So the “noise” increases as the (natural) variability of individuals increases (i.e., <span class="math inline">\(s_{p}^{2}\)</span>; Figure <a href="T2Review.html#fig:SignalNoise2">2.3</a>), but decreases as the sample size increases.</p>
-<div class="figure" style="text-align: center"><span id="fig:SignalNoise2"></span>
+<p>“Noise” is sampling variability, the fact that statistics (e.g., <span class="math inline">\(\bar{x}_{1}\)</span> and <span class="math inline">\(\bar{x}_{2}\)</span>) vary from sample to sample. Sampling variability in a 2-sample t-test is measured by <span class="math inline">\(SE_{\bar{x}_{1}-\bar{x}_{2}}\)</span>, which is the denominator of the t test statistic, or <span class="math inline">\(\sqrt{s_{p}^{2}\left(\frac{1}{n_{1}}+\frac{1}{n_{2}}\right)}\)</span>. This SE increases with increasing <span class="math inline">\(s_{p}^{2}\)</span> and decreases with increasing n<sub>1</sub> and n<sub>2</sub>. So the “noise” increases as the (natural) variability of individuals increases (i.e., <span class="math inline">\(s_{p}^{2}\)</span>; Figure <a href="T2Review.html#fig:SignalNoise2">2.2</a>), but decreases as the sample size increases.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SignalNoise2"></span>
 <img src="Book207_files/figure-html/SignalNoise2-1.png" alt="Response variable by group for each individual (points) with group means shown as horizontal segments. The variability of individuals around the group means is highlighted as a part of the &quot;noise&quot; in these data." width="336" />
 <p class="caption">
-Figure 2.3: Response variable by group for each individual (points) with group means shown as horizontal segments. The variability of individuals around the group means is highlighted as a part of the “noise” in these data.
+Figure 2.2: Response variable by group for each individual (points) with group means shown as horizontal segments. The variability of individuals around the group means is highlighted as a part of the “noise” in these data.
 </p>
 </div>
 <div class="tip">
-<p>The “noise” is sampling variability</p>
+<p>The “noise” is sampling variability.</p>
 </div>
 <p>The ratio of signal to noise is related to whether we will be able to detect the difference between two things or not. If the signal is large relative to the noise then the signal will be detected. In other words, we will be able to see the car lights if the road is not foggy or we will more likely see the kayak if the lake is calm.</p>
-<p>For example, each panel in Figure <a href="T2Review.html#fig:SignalNoise3">2.4</a> has the same signal (difference in means) but the noise (i.e., SE) increases from left to right. In the left-most panel it is very clear that the sample means are different (high signal-to-noise ratio), but in the right-most panel it is less clear that the sample means are different (low signal-to-noise ratio).</p>
-<div class="figure" style="text-align: center"><span id="fig:SignalNoise3"></span>
+<p>For example, each panel in Figure <a href="T2Review.html#fig:SignalNoise3">2.3</a> has the same signal (difference in means) but the noise (i.e., SE) increases from left to right. In the left-most panel it is very clear that the sample means are different (high signal-to-noise ratio), but in the right-most panel it is less clear that the sample means are different (low signal-to-noise ratio).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SignalNoise3"></span>
 <img src="Book207_files/figure-html/SignalNoise3-1.png" alt="Response variable by group for each indiviual (points) with group means shown as horizontal segments for three different standard errors (SE; i.e., &quot;noise&quot;). Note that the group means are the same in all three panels." width="720" />
 <p class="caption">
-Figure 2.4: Response variable by group for each indiviual (points) with group means shown as horizontal segments for three different standard errors (SE; i.e., “noise”). Note that the group means are the same in all three panels.
+Figure 2.3: Response variable by group for each indiviual (points) with group means shown as horizontal segments for three different standard errors (SE; i.e., “noise”). Note that the group means are the same in all three panels.
 </p>
 </div>
 <p> </p>
 <p>The t test statistic is a measure of signal (i.e., difference in sample means) to noise (i.e., sampling variability as measured by the SE)</p>
 <p><span class="math display">\[ t=\frac{\bar{x}_{1}-\bar{x}_{2}}{\sqrt{s_{p}^{2}\left(\frac{1}{n_{1}}+\frac{1}{n_{2}} \right)}} = \frac{\text{Signal}}{\text{Noise}} \]</span></p>
-<p>Thus, larger values of the t test statistic indicate a larger signal-to-noise ratio. Larger t test statistics are further into the tail of the t distribution and result in smaller p-values. Therefore, small p-values represent larger signal-to-noise ratios and are more likely to lead to concluding that the population means differ. In other words, you were able to detect the “signal” through the “noise.”</p>
+<p>Thus, larger (absolute) values of the t test statistic indicate a larger signal-to-noise ratio (Figure <a href="T2Review.html#fig:SignalNoise4">2.4</a>). Larger t test statistics are further into the tail of the t distribution and result in smaller p-values. Therefore, small p-values represent larger signal-to-noise ratios (Figure <a href="T2Review.html#fig:SignalNoise4">2.4</a>) and are more likely to lead to concluding that the population means differ. In other words, you were able to detect the “signal” through the “noise.”</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SignalNoise4"></span>
+<img src="Book207_files/figure-html/SignalNoise4-1.png" alt="Same as Figure \@ref(fig:SignalNoise3) but with the t test statistic and corresponding p-value from the 2-sample t-test shown." width="720" />
+<p class="caption">
+Figure 2.4: Same as Figure <a href="T2Review.html#fig:SignalNoise3">2.3</a> but with the t test statistic and corresponding p-value from the 2-sample t-test shown.
+</p>
+</div>
 <div class="tip">
-<p>More signal-to-noise means smaller p-values</p>
+<p>More signal-to-noise means smaller p-values.</p>
 </div>
 <p>We will return to the signal-to-noise metaphor throughout this course.</p>
 
@@ -511,7 +514,6 @@ Figure 2.4: Response variable by group for each indiviual (points) with group me
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -530,6 +532,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -550,11 +553,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

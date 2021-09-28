@@ -33,7 +33,7 @@ knitr::include_graphics("zimgs/Meteorologist.jpg")
 
 &nbsp;
 
-A mathematical or statistical model is an equation or system of equations that is meant to characterize the general characteristics of observations. Statistical models do not represent every observation perfectly, rather they attempt to best represent the "central tendency" of the observations.  You have observed at least two statistical models in your introductory statistics course -- the mean and the regression line (Figure \@ref(fig:TwoModelsEx)).
+A mathematical or statistical model is an equation or system of equations that is meant to characterize the general characters of the observations. Statistical models do not represent every observation perfectly, rather they attempt to best represent the "central tendency" of the observations.  You have observed at least two statistical models in your introductory statistics course -- the mean and the regression line (Figure \@ref(fig:TwoModelsEx)).
 
 ```{r TwoModelsEx, echo=FALSE, fig.show="hold", fig.cap="Two examples of models seen in your introductory statistics course -- two means (Left) and regression line (Right)."}
 t2 <- ggplot(data=aqua) +
@@ -54,7 +54,7 @@ slr
 
 &nbsp;
 
-Models can predict an observation but generally not perfectly. For example, weather forecasters predict the temperature for tomorrow but will most likely be off by (hopefully only) a small amount. Thus, an observed value of the response variable can be thought of as being equal to a value predicted from a model plus some deviation, or error, from that prediction; i.e.,
+Models can predict an observation but generally not perfectly. For example, weather forecasters predict the temperature for tomorrow but it will most likely be off by (hopefully only) a small amount. Thus, an observed value of the response variable can be thought of as being equal to a value predicted from a model plus some deviation, or error, from that prediction; i.e.,
 
 $$ \text{Observed Response} = \text{Model Predicted Response} + \text{error} $$
 

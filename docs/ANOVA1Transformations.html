@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 8 One-Way Transformations | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 8 One-Way Transformations | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="ANOVA1Assumptions.html"/>
 <link rel="next" href="ANOVA1Summary.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -476,7 +479,7 @@ Inverse
 </table>
 <p> </p>
 <p>Each transformation in Table <a href="ANOVA1Transformations.html#tab:CommonTranformations">8.1</a> “spreads out” small values and “draws in” large values in a distribution. For example, in Figure <a href="ANOVA1Transformations.html#fig:OWATransformLog">8.1</a> the log function is shown as the black curved line, the original histogram of strongly right-skewed data is shown upside-down below the x-axis, and the histogram following the log-transformation is shown sideways left of the y-axis. Two “small” values are shown in red on the x-axis. The log-transformation of these two points is shown by following the two vertical lines from these points to the black log function and then moving horizontally to the y-axis. From this it is seen that these two values that were relatively close together are more spread out after the transformation. Conversely two “large” values are shown in blue on the x-axis. Following the same process it is seen that these two points are closer together following the log transformation.</p>
-<div class="figure" style="text-align: center"><span id="fig:OWATransformLog"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:OWATransformLog"></span>
 <img src="Book207_files/figure-html/OWATransformLog-1.png" alt="Demonstration of the result (upper-left) from applying the natural log transformation function (black curve in upper-right) to strongly right-skewed original values (lower-right)." width="480" />
 <p class="caption">
 Figure 8.1: Demonstration of the result (upper-left) from applying the natural log transformation function (black curve in upper-right) to strongly right-skewed original values (lower-right).
@@ -484,7 +487,7 @@ Figure 8.1: Demonstration of the result (upper-left) from applying the natural l
 </div>
 <p> </p>
 <p>As seen in Figure <a href="ANOVA1Transformations.html#fig:OWATransformLog">8.1</a>, applying the log transformation to all values in the original strongly right-skewed distribution resulted in a distribution that was approximately normal. All transformations may not achieve normality. For example, the same process shown in Figure <a href="ANOVA1Transformations.html#fig:OWATransformLog">8.1</a> is repeated in Figure <a href="ANOVA1Transformations.html#fig:OWATransformSqrt">8.2</a> for a square-root transformation. A comparison of the two figures shows that the square-root transformation function is less curved, it spreads out relatively small values less and draws in relative larger values less, and it does not transform the original strongly right-skewed distribution to an approximately normal distribution. Thus, the square-root transformation is not a “strong enough” transformation to normalize this strongly right-skewed original distribution.</p>
-<div class="figure" style="text-align: center"><span id="fig:OWATransformSqrt"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:OWATransformSqrt"></span>
 <img src="Book207_files/figure-html/OWATransformSqrt-1.png" alt="Demonstration of the result (upper-left) from applying the square root transformation function (black curve in upper-right) to strongly right-skewed original values (lower-right). The original values here are the same as those in the previous Figure." width="480" />
 <p class="caption">
 Figure 8.2: Demonstration of the result (upper-left) from applying the square root transformation function (black curve in upper-right) to strongly right-skewed original values (lower-right). The original values here are the same as those in the previous Figure.
@@ -492,7 +495,7 @@ Figure 8.2: Demonstration of the result (upper-left) from applying the square ro
 </div>
 <p> </p>
 <p>The square root transformation is more likely to be useful when the original distribution is less strongly skewed (Figure <a href="ANOVA1Transformations.html#fig:OWATransformSqrt2">8.3</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:OWATransformSqrt2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:OWATransformSqrt2"></span>
 <img src="Book207_files/figure-html/OWATransformSqrt2-1.png" alt="Demonstration of the result (upper-left) from applying the square root transformation function (black curve in upper-right) to slightly right-skewed original values (lower-right). The original values here are **not** the same as those in the previous two figures." width="480" />
 <p class="caption">
 Figure 8.3: Demonstration of the result (upper-left) from applying the square root transformation function (black curve in upper-right) to slightly right-skewed original values (lower-right). The original values here are <strong>not</strong> the same as those in the previous two figures.
@@ -575,9 +578,9 @@ Inverse Fourth Root
 <h3>Choosing a Power Transformation</h3>
 <p>There are several methods to identify the power transformation that is most likely to meet the assumptions of a one-way ANOVA.<a href="#fn43" class="footnote-ref" id="fnref43"><sup>43</sup></a> One simple method is trial-and-error – i.e., trying various powers until one is found where the assumptions of the model are most closely met.</p>
 <p>The trial-and-error method is made easier with software. For example, the <code>assumptionCheck()</code> function introduced in Section <a href="ANOVA1Assumptions.html#testing-assumptions-in-r">7.5</a> can be used to quickly compute the graphs and hypothesis tests for assumption checking <em>after</em> the data have been transformed by the power given in the <code>lambday=</code> argument. For example, the code and results below show what the assumption checking would look like if the immunoglobulin measurements for the New Zealand opossums had been log transformed.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb31-1"><a href="ANOVA1Transformations.html#cb31-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
-<span id="cb31-2"><a href="ANOVA1Transformations.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1,<span class="at">lambday=</span><span class="dv">0</span>)  <span class="co">#lambda=0 corresponds to log-transformation</span></span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb36-1"><a href="ANOVA1Transformations.html#cb36-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
+<span id="cb36-2"><a href="ANOVA1Transformations.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1,<span class="at">lambday=</span><span class="dv">0</span>)  <span class="co">#lambda=0 corresponds to log-transformation</span></span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p> </p>
 <p>Of course, it was shown in Section <a href="ANOVA1Assumptions.html#testing-assumptions-in-r">7.5</a> that the assumptions for a One-Way ANOVA with these data had been met; thus, there is no need to explore a transformation here. However, this shows how easily one can quickly test various transformations for a given set of data.</p>
 <p>Note that <code>assumptionCheck()</code> only transforms the data “behind-the-scenes.” If you want to continue with transformed data then you need to use R code like that shown in the last columns of Tables <a href="ANOVA1Transformations.html#tab:CommonTranformations">8.1</a> and <a href="ANOVA1Transformations.html#tab:CommonInvTranformations">8.2</a>.</p>
@@ -604,7 +607,7 @@ logbtcf(lm1)
 ```
 
 ```{.ROUTPUT}
-#R>   [1] 1.004057
+#R>  [1] 1.004057
 ```
 --->
 <p>Fourth, <strong>do NOT back-transform “differences” unless those differences are from a log-transformation</strong>. In a One-Way ANOVA this translates into whether or not you can back-transform <em>differences</em> in means, as would result from multiple comparisons. For example if the result is a difference in the mean square-root of the response variable between groups then do <em>NOT</em> back-transform this value as it can not be back-transformed to anything meaningful. However, if the result is a difference in mean log of the response variable between groups then this <em>difference</em> can (and should) be back-transformed to something meaningful.</p>
@@ -620,119 +623,119 @@ logbtcf(lm1)
 <div id="back-transformations-in-r" class="section level2" number="8.4">
 <h2><span class="header-section-number">8.4</span> Back-Transformations in R</h2>
 <p>The <code>emmeans()</code> function introduced in Section <a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r">6.3</a> makes back-transformations easy.<a href="#fn44" class="footnote-ref" id="fnref44"><sup>44</sup></a> While a transformation was not needed for the New Zealand opossums example, let’s suppose for illustrative purposes that a square root transformation was used. First, a square root variable is created and a new ANOVA model with this variable is used.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb32-1"><a href="ANOVA1Transformations.html#cb32-1" aria-hidden="true" tabindex="-1"></a>opp<span class="sc">$</span>sqrtimm <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(opp<span class="sc">$</span>imm)</span>
-<span id="cb32-2"><a href="ANOVA1Transformations.html#cb32-2" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(sqrtimm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
-<span id="cb32-3"><a href="ANOVA1Transformations.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm2)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
-#R&gt;   
-#R&gt;   Response: sqrtimm
-#R&gt;             Df   Sum Sq  Mean Sq F value    Pr(&gt;F)
-#R&gt;   season     2 0.099654 0.049827  14.675 6.868e-05
-#R&gt;   Residuals 24 0.081487 0.003395</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb37-1"><a href="ANOVA1Transformations.html#cb37-1" aria-hidden="true" tabindex="-1"></a>opp<span class="sc">$</span>sqrtimm <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(opp<span class="sc">$</span>imm)</span>
+<span id="cb37-2"><a href="ANOVA1Transformations.html#cb37-2" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(sqrtimm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
+<span id="cb37-3"><a href="ANOVA1Transformations.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm2)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  Analysis of Variance Table
+#R&gt;  
+#R&gt;  Response: sqrtimm
+#R&gt;            Df   Sum Sq  Mean Sq F value    Pr(&gt;F)
+#R&gt;  season     2 0.099654 0.049827  14.675 6.868e-05
+#R&gt;  Residuals 24 0.081487 0.003395</code></pre>
 <p>Multiple comparisons can be created as before, but there is an advantage to telling <code>emmeans()</code> that you used a square root transformation with <code>tran=</code> as shown below. Here we can see (see the two notes under the <code>$emmeans</code> and <code>$contrasts</code> portions of the output) that <code>summary()</code> reminds you that the results are on the square root scale. This should help you remember to interpret these results on the square root scale.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb34-1"><a href="ANOVA1Transformations.html#cb34-1" aria-hidden="true" tabindex="-1"></a>mct <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm2,<span class="at">specs=</span>pairwise<span class="sc">~</span>season,<span class="at">tran=</span><span class="st">&quot;sqrt&quot;</span>)</span>
-<span id="cb34-2"><a href="ANOVA1Transformations.html#cb34-2" aria-hidden="true" tabindex="-1"></a>( mcsumt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mct,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   $emmeans
-#R&gt;    season emmean     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    feb     0.816 0.0168 24    0.781    0.851 48.513  &lt;.0001 
-#R&gt;    may     0.849 0.0220 24    0.803    0.894 38.528  &lt;.0001 
-#R&gt;    nov     0.698 0.0206 24    0.656    0.741 33.886  &lt;.0001 
-#R&gt;   
-#R&gt;   Results are given on the sqrt (not the response) scale. 
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   
-#R&gt;   $contrasts
-#R&gt;    contrast  estimate     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    feb - may  -0.0325 0.0277 24  -0.1017   0.0367 -1.172  0.4806 
-#R&gt;    feb - nov   0.1179 0.0266 24   0.0515   0.1843  4.434  0.0005 
-#R&gt;    may - nov   0.1504 0.0302 24   0.0751   0.2257  4.988  0.0001 
-#R&gt;   
-#R&gt;   Note: contrasts are still on the sqrt scale 
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   Conf-level adjustment: tukey method for comparing a family of 3 estimates 
-#R&gt;   P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb39-1"><a href="ANOVA1Transformations.html#cb39-1" aria-hidden="true" tabindex="-1"></a>mct <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm2,<span class="at">specs=</span>pairwise<span class="sc">~</span>season,<span class="at">tran=</span><span class="st">&quot;sqrt&quot;</span>)</span>
+<span id="cb39-2"><a href="ANOVA1Transformations.html#cb39-2" aria-hidden="true" tabindex="-1"></a>( mcsumt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mct,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  $emmeans
+#R&gt;   season emmean     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;   feb     0.816 0.0168 24    0.781    0.851  48.513  &lt;.0001
+#R&gt;   may     0.849 0.0220 24    0.803    0.894  38.528  &lt;.0001
+#R&gt;   nov     0.698 0.0206 24    0.656    0.741  33.886  &lt;.0001
+#R&gt;  
+#R&gt;  Results are given on the sqrt (not the response) scale. 
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  
+#R&gt;  $contrasts
+#R&gt;   contrast  estimate     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;   feb - may  -0.0325 0.0277 24  -0.1017   0.0367  -1.172  0.4806
+#R&gt;   feb - nov   0.1179 0.0266 24   0.0515   0.1843   4.434  0.0005
+#R&gt;   may - nov   0.1504 0.0302 24   0.0751   0.2257   4.988  0.0001
+#R&gt;  
+#R&gt;  Note: contrasts are still on the sqrt scale 
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+#R&gt;  P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
 <p>More importantly if you declare your transformation with <code>tran=</code> then you can use <code>summary()</code> to <strong>appropriately</strong> back-transform the results by including <code>type="response"</code>. Here, the <code>$emmeans</code> results are back-transformed as the <em>“Intervals are back-transformed from the sqrt scale”</em> note indicates, but you are reminded that the p-values were computed on the transformed scale with the <em>“Tests are performed on the sqrt scale”</em> note. The <code>$contrasts</code> results are left on the square root scales as noted with <em>“Note: contrasts are still on the sqrt scale”</em> because <code>emmeans()</code> is smart enough to know that you should not back-transform <em>differences</em> when using a square root transformation.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb36-1"><a href="ANOVA1Transformations.html#cb36-1" aria-hidden="true" tabindex="-1"></a>( mcsumbt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mct,<span class="at">infer=</span><span class="cn">TRUE</span>,<span class="at">type=</span><span class="st">&quot;response&quot;</span>) )</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   $emmeans
-#R&gt;    season response     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    feb       0.666 0.0275 24    0.610    0.724 48.513  &lt;.0001 
-#R&gt;    may       0.720 0.0374 24    0.645    0.799 38.528  &lt;.0001 
-#R&gt;    nov       0.487 0.0288 24    0.430    0.549 33.886  &lt;.0001 
-#R&gt;   
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   Intervals are back-transformed from the sqrt scale 
-#R&gt;   Tests are performed on the sqrt scale 
-#R&gt;   
-#R&gt;   $contrasts
-#R&gt;    contrast  estimate     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    feb - may  -0.0325 0.0277 24  -0.1017   0.0367 -1.172  0.4806 
-#R&gt;    feb - nov   0.1179 0.0266 24   0.0515   0.1843  4.434  0.0005 
-#R&gt;    may - nov   0.1504 0.0302 24   0.0751   0.2257  4.988  0.0001 
-#R&gt;   
-#R&gt;   Note: contrasts are still on the sqrt scale 
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   Conf-level adjustment: tukey method for comparing a family of 3 estimates 
-#R&gt;   P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb41-1"><a href="ANOVA1Transformations.html#cb41-1" aria-hidden="true" tabindex="-1"></a>( mcsumbt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mct,<span class="at">infer=</span><span class="cn">TRUE</span>,<span class="at">type=</span><span class="st">&quot;response&quot;</span>) )</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  $emmeans
+#R&gt;   season response     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;   feb       0.666 0.0275 24    0.610    0.724  48.513  &lt;.0001
+#R&gt;   may       0.720 0.0374 24    0.645    0.799  38.528  &lt;.0001
+#R&gt;   nov       0.487 0.0288 24    0.430    0.549  33.886  &lt;.0001
+#R&gt;  
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  Intervals are back-transformed from the sqrt scale 
+#R&gt;  Tests are performed on the sqrt scale 
+#R&gt;  
+#R&gt;  $contrasts
+#R&gt;   contrast  estimate     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;   feb - may  -0.0325 0.0277 24  -0.1017   0.0367  -1.172  0.4806
+#R&gt;   feb - nov   0.1179 0.0266 24   0.0515   0.1843   4.434  0.0005
+#R&gt;   may - nov   0.1504 0.0302 24   0.0751   0.2257   4.988  0.0001
+#R&gt;  
+#R&gt;  Note: contrasts are still on the sqrt scale 
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+#R&gt;  P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
 <p> </p>
 <p>The back-transformed means in <code>$emmeans</code> can be used to construct a plot of means as before, but you must realize that the means are now labeled as “response” (look at the last output above) rather than “emmean” (thus you must change <code>y=</code> in <code>geom_errobar()</code> and <code>geom_point()</code>).</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb38-1"><a href="ANOVA1Transformations.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb38-2"><a href="ANOVA1Transformations.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">data=</span>opp,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>imm),<span class="at">alpha=</span><span class="fl">0.25</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb38-3"><a href="ANOVA1Transformations.html#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data=</span>mcsumbt<span class="sc">$</span>emmeans,</span>
-<span id="cb38-4"><a href="ANOVA1Transformations.html#cb38-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>response,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL),</span>
-<span id="cb38-5"><a href="ANOVA1Transformations.html#cb38-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb38-6"><a href="ANOVA1Transformations.html#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>mcsumbt<span class="sc">$</span>emmeans,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>response),</span>
-<span id="cb38-7"><a href="ANOVA1Transformations.html#cb38-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb38-8"><a href="ANOVA1Transformations.html#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Immunoglobulin Concentration&quot;</span>,<span class="at">x=</span><span class="st">&quot;Season/Month&quot;</span>) <span class="sc">+</span></span>
-<span id="cb38-9"><a href="ANOVA1Transformations.html#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-29-1.png" width="336" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb43-1"><a href="ANOVA1Transformations.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb43-2"><a href="ANOVA1Transformations.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">data=</span>opp,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>imm),<span class="at">alpha=</span><span class="fl">0.25</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb43-3"><a href="ANOVA1Transformations.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data=</span>mcsumbt<span class="sc">$</span>emmeans,</span>
+<span id="cb43-4"><a href="ANOVA1Transformations.html#cb43-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>response,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL),</span>
+<span id="cb43-5"><a href="ANOVA1Transformations.html#cb43-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb43-6"><a href="ANOVA1Transformations.html#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>mcsumbt<span class="sc">$</span>emmeans,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>response),</span>
+<span id="cb43-7"><a href="ANOVA1Transformations.html#cb43-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb43-8"><a href="ANOVA1Transformations.html#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Immunoglobulin Concentration&quot;</span>,<span class="at">x=</span><span class="st">&quot;Season/Month&quot;</span>) <span class="sc">+</span></span>
+<span id="cb43-9"><a href="ANOVA1Transformations.html#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-31-1.png" width="336" style="display: block; margin: auto;" /></p>
 <p> </p>
 <p>Now, look at the same results for a log transformation. Once again the results when not using <code>type="response"</code> show a note reminding you that the results are on the log scale.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb39-1"><a href="ANOVA1Transformations.html#cb39-1" aria-hidden="true" tabindex="-1"></a>opp<span class="sc">$</span>logimm <span class="ot">&lt;-</span> <span class="fu">log</span>(opp<span class="sc">$</span>imm)</span>
-<span id="cb39-2"><a href="ANOVA1Transformations.html#cb39-2" aria-hidden="true" tabindex="-1"></a>lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(logimm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
-<span id="cb39-3"><a href="ANOVA1Transformations.html#cb39-3" aria-hidden="true" tabindex="-1"></a>mct <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm2,<span class="at">specs=</span>pairwise<span class="sc">~</span>season,<span class="at">tran=</span><span class="st">&quot;log&quot;</span>)</span>
-<span id="cb39-4"><a href="ANOVA1Transformations.html#cb39-4" aria-hidden="true" tabindex="-1"></a>( mcsumt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mct,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   $emmeans
-#R&gt;    season emmean     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    feb     0.816 0.0168 24    0.781    0.851 48.513  &lt;.0001 
-#R&gt;    may     0.849 0.0220 24    0.803    0.894 38.528  &lt;.0001 
-#R&gt;    nov     0.698 0.0206 24    0.656    0.741 33.886  &lt;.0001 
-#R&gt;   
-#R&gt;   Results are given on the log (not the response) scale. 
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   
-#R&gt;   $contrasts
-#R&gt;    contrast  estimate     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    feb - may  -0.0325 0.0277 24  -0.1017   0.0367 -1.172  0.4806 
-#R&gt;    feb - nov   0.1179 0.0266 24   0.0515   0.1843  4.434  0.0005 
-#R&gt;    may - nov   0.1504 0.0302 24   0.0751   0.2257  4.988  0.0001 
-#R&gt;   
-#R&gt;   Results are given on the log (not the response) scale. 
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   Conf-level adjustment: tukey method for comparing a family of 3 estimates 
-#R&gt;   P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb44-1"><a href="ANOVA1Transformations.html#cb44-1" aria-hidden="true" tabindex="-1"></a>opp<span class="sc">$</span>logimm <span class="ot">&lt;-</span> <span class="fu">log</span>(opp<span class="sc">$</span>imm)</span>
+<span id="cb44-2"><a href="ANOVA1Transformations.html#cb44-2" aria-hidden="true" tabindex="-1"></a>lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(logimm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
+<span id="cb44-3"><a href="ANOVA1Transformations.html#cb44-3" aria-hidden="true" tabindex="-1"></a>mct <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm2,<span class="at">specs=</span>pairwise<span class="sc">~</span>season,<span class="at">tran=</span><span class="st">&quot;log&quot;</span>)</span>
+<span id="cb44-4"><a href="ANOVA1Transformations.html#cb44-4" aria-hidden="true" tabindex="-1"></a>( mcsumt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mct,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  $emmeans
+#R&gt;   season emmean     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;   feb     0.816 0.0168 24    0.781    0.851  48.513  &lt;.0001
+#R&gt;   may     0.849 0.0220 24    0.803    0.894  38.528  &lt;.0001
+#R&gt;   nov     0.698 0.0206 24    0.656    0.741  33.886  &lt;.0001
+#R&gt;  
+#R&gt;  Results are given on the log (not the response) scale. 
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  
+#R&gt;  $contrasts
+#R&gt;   contrast  estimate     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;   feb - may  -0.0325 0.0277 24  -0.1017   0.0367  -1.172  0.4806
+#R&gt;   feb - nov   0.1179 0.0266 24   0.0515   0.1843   4.434  0.0005
+#R&gt;   may - nov   0.1504 0.0302 24   0.0751   0.2257   4.988  0.0001
+#R&gt;  
+#R&gt;  Results are given on the log (not the response) scale. 
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+#R&gt;  P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
 <p>When <code>type="response"</code> is used the <code>$emmeans</code> portion of the results are back-transformed with a note again saying so. However, the <code>$contrasts</code> portion is now also back-transformed because <code>emmeans()</code> is smart enough to know that it is possible (and useful) to back-transform differences from the log scale. In fact the rows in the <code>$contrasts</code> portion are appropriately labeled as <strong>ratios</strong> to aid your interpretation.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb41-1"><a href="ANOVA1Transformations.html#cb41-1" aria-hidden="true" tabindex="-1"></a>( mcsumbt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mct,<span class="at">infer=</span><span class="cn">TRUE</span>,<span class="at">type=</span><span class="st">&quot;response&quot;</span>) )</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   $emmeans
-#R&gt;    season response     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    feb        2.26 0.0380 24     2.18     2.34 48.513  &lt;.0001 
-#R&gt;    may        2.34 0.0515 24     2.23     2.44 38.528  &lt;.0001 
-#R&gt;    nov        2.01 0.0414 24     1.93     2.10 33.886  &lt;.0001 
-#R&gt;   
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   Intervals are back-transformed from the log scale 
-#R&gt;   Tests are performed on the log scale 
-#R&gt;   
-#R&gt;   $contrasts
-#R&gt;    contrast  ratio     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    feb / may 0.968 0.0268 24    0.903     1.04 -1.172  0.4806 
-#R&gt;    feb / nov 1.125 0.0299 24    1.053     1.20  4.434  0.0005 
-#R&gt;    may / nov 1.162 0.0351 24    1.078     1.25  4.988  0.0001 
-#R&gt;   
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   Conf-level adjustment: tukey method for comparing a family of 3 estimates 
-#R&gt;   Intervals are back-transformed from the log scale 
-#R&gt;   P value adjustment: tukey method for comparing a family of 3 estimates 
-#R&gt;   Tests are performed on the log scale</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb46-1"><a href="ANOVA1Transformations.html#cb46-1" aria-hidden="true" tabindex="-1"></a>( mcsumbt <span class="ot">&lt;-</span> <span class="fu">summary</span>(mct,<span class="at">infer=</span><span class="cn">TRUE</span>,<span class="at">type=</span><span class="st">&quot;response&quot;</span>) )</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  $emmeans
+#R&gt;   season response     SE df lower.CL upper.CL null t.ratio p.value
+#R&gt;   feb        2.26 0.0380 24     2.18     2.34    1  48.513  &lt;.0001
+#R&gt;   may        2.34 0.0515 24     2.23     2.44    1  38.528  &lt;.0001
+#R&gt;   nov        2.01 0.0414 24     1.93     2.10    1  33.886  &lt;.0001
+#R&gt;  
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  Intervals are back-transformed from the log scale 
+#R&gt;  Tests are performed on the log scale 
+#R&gt;  
+#R&gt;  $contrasts
+#R&gt;   contrast  ratio     SE df lower.CL upper.CL null t.ratio p.value
+#R&gt;   feb / may 0.968 0.0268 24    0.903     1.04    1  -1.172  0.4806
+#R&gt;   feb / nov 1.125 0.0299 24    1.053     1.20    1   4.434  0.0005
+#R&gt;   may / nov 1.162 0.0351 24    1.078     1.25    1   4.988  0.0001
+#R&gt;  
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+#R&gt;  Intervals are back-transformed from the log scale 
+#R&gt;  P value adjustment: tukey method for comparing a family of 3 estimates 
+#R&gt;  Tests are performed on the log scale</code></pre>
 
 </div>
 </div>
@@ -755,7 +758,6 @@ logbtcf(lm1)
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -774,6 +776,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -794,11 +797,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

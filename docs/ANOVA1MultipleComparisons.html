@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 6 One-Way Multiple Comparisons | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 6 One-Way Multiple Comparisons | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="ANOVA1Foundations.html"/>
 <link rel="next" href="ANOVA1Assumptions.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -385,7 +388,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Experiment-wise error rate:</strong> The probability of <em>at least one</em> Type I error in a set of multiple comparisons of pairs of means. Sometimes called the family-wise error rate.</p>
 </div>
 <p>Figure <a href="ANOVA1MultipleComparisons.html#fig:MCProblem">6.1</a> demonstrates the two issues related to multiple comparisons. First, the x-axis labels show how the number of pairwise comparisons (<span class="math inline">\(k\)</span>) increases quickly with increasing number of groups (<span class="math inline">\(I\)</span>) in the study. For example, six groups (<span class="math inline">\(I\)</span>=6) is not a complicated study, but it results in fifteen pairwise comparisons (<span class="math inline">\(k\)</span>=15). More importantly the line and point labels in the figure show how the experiment-wise error rate increases quickly and dramatically with increasing number of groups. For example, the experiment-wise error rate for six (<span class="math inline">\(I\)</span>=6) groups is over 0.50.<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a> Thus, it is nearly a coin flip that at least one error will be made in all paired comparisons among six groups. Making an error more than 50% of the time in such a simple study is not acceptable and must be corrected.</p>
-<div class="figure" style="text-align: center"><span id="fig:MCProblem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:MCProblem"></span>
 <img src="Book207_files/figure-html/MCProblem-1.png" alt="Relationship between the number of groups (I) in an analysis, the number of pairs of means that would need to be tested (k), and the probability of making one or more Type I errors in all comparisons. Note that alpha=0.05." width="336" />
 <p class="caption">
 Figure 6.1: Relationship between the number of groups (I) in an analysis, the number of pairs of means that would need to be tested (k), and the probability of making one or more Type I errors in all comparisons. Note that alpha=0.05.
@@ -405,37 +408,37 @@ Figure 6.1: Relationship between the number of groups (I) in an analysis, the nu
 <h2><span class="header-section-number">6.3</span> Multiple Comparisons in R</h2>
 <p>Tukey’s procedure should only be implemented if multiple comparisons are needed!! In other words, only use this method following a significant One-Way ANOVA result; i.e., H<sub>0</sub> was rejected such that it appears that there is some difference among group means. Therefore, a One-Way ANOVA must be performed first as described in Section <a href="ANOVA1Foundations.html#one-way-anova-in-r">5.2</a>.</p>
 <p>The ANOVA table from the analysis of immunoglobulin levels in opossums across seasons that was begun in the Module <a href="ANOVA1Foundations.html#ANOVA1Foundations">5</a> is shown below.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb22-1"><a href="ANOVA1MultipleComparisons.html#cb22-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
-<span id="cb22-2"><a href="ANOVA1MultipleComparisons.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1)</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   Analysis of Variance Table
-#R&gt;   
-#R&gt;   Response: imm
-#R&gt;             Df  Sum Sq  Mean Sq F value    Pr(&gt;F)
-#R&gt;   season     2 0.23401 0.117005  14.449 7.609e-05
-#R&gt;   Residuals 24 0.19435 0.008098</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb27-1"><a href="ANOVA1MultipleComparisons.html#cb27-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
+<span id="cb27-2"><a href="ANOVA1MultipleComparisons.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1)</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  Analysis of Variance Table
+#R&gt;  
+#R&gt;  Response: imm
+#R&gt;            Df  Sum Sq  Mean Sq F value    Pr(&gt;F)
+#R&gt;  season     2 0.23401 0.117005  14.449 7.609e-05
+#R&gt;  Residuals 24 0.19435 0.008098</code></pre>
 <p>Once again, there appears to be some significant difference in the mean immunoglobulin values among the three months (0.0001&lt;α). Thus, a multiple comparisons procedure is warranted here to identify exactly which pairs of means differ.</p>
 <p>There are a number of functions and packages in R for computing Tukey’s multiple comparisons. I prefer to use functions in the <code>emmeans</code> package because those functions will generalize to other methods, some of which we will use in other modules and some of which you may use in more advanced statistics courses.<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a></p>
 <p>Tukey’s procedure is computed with a two-step process. First, use <code>emmeans()</code> with the <code>lm()</code> object as the first argument and a <code>specs=</code> argument with <code>pairwise~</code> followed by the name of the explanatory variable that identifies the groups. The results from this function should be saved to an object.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb24-1"><a href="ANOVA1MultipleComparisons.html#cb24-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1,<span class="at">specs=</span>pairwise<span class="sc">~</span>season)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb29-1"><a href="ANOVA1MultipleComparisons.html#cb29-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1,<span class="at">specs=</span>pairwise<span class="sc">~</span>season)</span></code></pre></div>
 <p>That saved object is then the first argument to <code>summary()</code>, which also uses <code>infer=TRUE</code>. This again should be saved to an object.<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a> The results are in two “sections” labeled as <code>$emmeans</code> and <code>$contrasts</code>.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb25-1"><a href="ANOVA1MultipleComparisons.html#cb25-1" aria-hidden="true" tabindex="-1"></a>( mcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
-<pre class="ROUTPUT"><code>#R&gt;   $emmeans
-#R&gt;    season emmean     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    feb     0.668 0.0260 24    0.614    0.721 25.702  &lt;.0001 
-#R&gt;    may     0.724 0.0340 24    0.654    0.795 21.299  &lt;.0001 
-#R&gt;    nov     0.491 0.0318 24    0.425    0.557 15.433  &lt;.0001 
-#R&gt;   
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   
-#R&gt;   $contrasts
-#R&gt;    contrast  estimate     SE df lower.CL upper.CL t.ratio p.value
-#R&gt;    feb - may  -0.0568 0.0428 24  -0.1636   0.0501 -1.326  0.3948 
-#R&gt;    feb - nov   0.1767 0.0411 24   0.0741   0.2792  4.301  0.0007 
-#R&gt;    may - nov   0.2334 0.0466 24   0.1171   0.3497  5.012  0.0001 
-#R&gt;   
-#R&gt;   Confidence level used: 0.95 
-#R&gt;   Conf-level adjustment: tukey method for comparing a family of 3 estimates 
-#R&gt;   P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb30-1"><a href="ANOVA1MultipleComparisons.html#cb30-1" aria-hidden="true" tabindex="-1"></a>( mcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
+<pre class="ROUTPUT"><code>#R&gt;  $emmeans
+#R&gt;   season emmean     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;   feb     0.668 0.0260 24    0.614    0.721  25.702  &lt;.0001
+#R&gt;   may     0.724 0.0340 24    0.654    0.795  21.299  &lt;.0001
+#R&gt;   nov     0.491 0.0318 24    0.425    0.557  15.433  &lt;.0001
+#R&gt;  
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  
+#R&gt;  $contrasts
+#R&gt;   contrast  estimate     SE df lower.CL upper.CL t.ratio p.value
+#R&gt;   feb - may  -0.0568 0.0428 24  -0.1636   0.0501  -1.326  0.3948
+#R&gt;   feb - nov   0.1767 0.0411 24   0.0741   0.2792   4.301  0.0007
+#R&gt;   may - nov   0.2334 0.0466 24   0.1171   0.3497   5.012  0.0001
+#R&gt;  
+#R&gt;  Confidence level used: 0.95 
+#R&gt;  Conf-level adjustment: tukey method for comparing a family of 3 estimates 
+#R&gt;  P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
 <p>The <code>$contrasts</code> section contains the actual Tukey’s test for each pair of means. In these results the difference in group sample means is under <code>estimate</code>, a 95% confidence interval for the <strong>difference</strong> in means is under <code>lower.CL</code> and <code>upper.CL</code>, and a p-value for testing that the difference in group population means is 0 is under <code>p.value</code>.<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a> For example, the difference in group <strong>sample</strong> mean immunoglobulin between February and May is -0.0568, but the p-value suggests that the <strong>population</strong> mean immunoglobulin does not differ between February and May (p=0.3948).<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a> In contrast, it appears that the population mean immunoglobulin for opossums in November differed from both those in Feb (p=0.0007) and those in May (p=0.0001).</p>
 <div class="tip">
 <p>The <strong>differences</strong> of group means with 95% confidence intervals and p-values are shown in the <code>$contrasts</code> section of the results.</p>
@@ -446,17 +449,17 @@ Figure 6.1: Relationship between the number of groups (I) in an analysis, the nu
 </div>
 <p>A plot of group means with 95% confidence intervals using the results in <code>$emmeans</code> is slightly different than shown in Sections <a href="ModelComparison.html#two-sample-t-test-revisited-using-linear-models">4.8</a> and <a href="ANOVA1Foundations.html#one-way-anova-in-r">5.2</a> because the raw data and the means with their confidence intervals are in separate data frames. While this method is slightly more complicated, it will generalize to a wider variety of situations seen throughout the course.</p>
 <p>The <code>data=</code> and <code>mapping=aes()</code> arguments are not included in the initial <code>ggplot()</code> because we will be drawing variables from two data frames. Thus, <code>geom_jitter()</code> below adds the raw data to the plot, jittered to decrease overlap; <code>geom_errorbar()</code> creates the error bars from the <code>$emmeans</code> object, and <code>geom_point()</code> simply overlays the mean from the <code>$emmeans</code> object. Note that in the code below you would only need to modify the two <code>data=</code> arguments, the three <code>x=</code> arguments (to the grouping variables), and the one <code>y=</code> argument in <code>geom_jitter()</code> (to the response variable).</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb27-1"><a href="ANOVA1MultipleComparisons.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb27-2"><a href="ANOVA1MultipleComparisons.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">data=</span>opp,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>imm),</span>
-<span id="cb27-3"><a href="ANOVA1MultipleComparisons.html#cb27-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha=</span><span class="fl">0.5</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
-<span id="cb27-4"><a href="ANOVA1MultipleComparisons.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data=</span>mcsum<span class="sc">$</span>emmeans,</span>
-<span id="cb27-5"><a href="ANOVA1MultipleComparisons.html#cb27-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL),</span>
-<span id="cb27-6"><a href="ANOVA1MultipleComparisons.html#cb27-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb27-7"><a href="ANOVA1MultipleComparisons.html#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>mcsum<span class="sc">$</span>emmeans,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>emmean),</span>
-<span id="cb27-8"><a href="ANOVA1MultipleComparisons.html#cb27-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb27-9"><a href="ANOVA1MultipleComparisons.html#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Immunoglobulin Concentration&quot;</span>,<span class="at">x=</span><span class="st">&quot;Season/Month&quot;</span>) <span class="sc">+</span></span>
-<span id="cb27-10"><a href="ANOVA1MultipleComparisons.html#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
-<p><img src="Book207_files/figure-html/unnamed-chunk-20-1.png" width="336" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb32-1"><a href="ANOVA1MultipleComparisons.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb32-2"><a href="ANOVA1MultipleComparisons.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">data=</span>opp,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>imm),</span>
+<span id="cb32-3"><a href="ANOVA1MultipleComparisons.html#cb32-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha=</span><span class="fl">0.5</span>,<span class="at">width=</span><span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="ANOVA1MultipleComparisons.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data=</span>mcsum<span class="sc">$</span>emmeans,</span>
+<span id="cb32-5"><a href="ANOVA1MultipleComparisons.html#cb32-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL),</span>
+<span id="cb32-6"><a href="ANOVA1MultipleComparisons.html#cb32-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb32-7"><a href="ANOVA1MultipleComparisons.html#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>mcsum<span class="sc">$</span>emmeans,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>season,<span class="at">y=</span>emmean),</span>
+<span id="cb32-8"><a href="ANOVA1MultipleComparisons.html#cb32-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb32-9"><a href="ANOVA1MultipleComparisons.html#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Immunoglobulin Concentration&quot;</span>,<span class="at">x=</span><span class="st">&quot;Season/Month&quot;</span>) <span class="sc">+</span></span>
+<span id="cb32-10"><a href="ANOVA1MultipleComparisons.html#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
+<p><img src="Book207_files/figure-html/unnamed-chunk-22-1.png" width="336" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
@@ -481,7 +484,6 @@ Figure 6.1: Relationship between the number of groups (I) in an analysis, the nu
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -500,6 +502,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -520,11 +523,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

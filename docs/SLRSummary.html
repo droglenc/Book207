@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 19 SLR Summary | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 19 SLR Summary | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="SLRTransformations.html"/>
 <link rel="next" href="IVRVariables.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -419,7 +422,7 @@ Climate researchers examined the relationship between <a href="https://climate.n
 \]</span></p>
 <p>Data were recorded for 32 years. The data between years is likely not independent as knowing the temperature anomaly and CO<sub>2</sub> values in any given year likely are a good indicator of the values in the next year. This temporal dependence should probably be included in the analysis. However, these data are recorded on an annual basis and it does not make much sense to include only a random sample of years. Thus, to better understand the relationship between these two variables, I will continue with this analysis assuming independence.</p>
 <p>The assumptions are met as the residual plots show no obvious curvature or funneling (Figure <a href="SLRSummary.html#fig:CCAssumptions1">19.1</a>-Right), the histogram of residuals is not strongly skewed (Figure <a href="SLRSummary.html#fig:CCAssumptions1">19.1</a>-Left; Anderson-Darling p=0.4313), and there are no obvious outliers (p&gt;1). Thus, the analysis can continue without any transformations.</p>
-<div class="figure" style="text-align: center"><span id="fig:CCAssumptions1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:CCAssumptions1"></span>
 <img src="Book207_files/figure-html/CCAssumptions1-1.png" alt="Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of temperature anomaly on CO2 data." width="672" />
 <p class="caption">
 Figure 19.1: Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of temperature anomaly on CO2 data.
@@ -548,7 +551,7 @@ CO2
 </tbody>
 </table>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:ccFitPlot"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ccFitPlot"></span>
 <img src="Book207_files/figure-html/ccFitPlot-1.png" alt="Scatterplot of temperature anomaly versuse CO2 concentration with the best-fit line and 95% confidence band superimposed." width="336" />
 <p class="caption">
 Figure 19.2: Scatterplot of temperature anomaly versuse CO2 concentration with the best-fit line and 95% confidence band superimposed.
@@ -559,20 +562,20 @@ Figure 19.2: Scatterplot of temperature anomaly versuse CO2 concentration with t
 <p>In conclusion, a significantly positive and strong relationship was found between the mean temperature anomaly and the global CO<sub>2</sub> concentration. A model was developed from this relationship that can be used to predict the temperatuare anomaly from the CO<sub>2</sub> concentration.</p>
 <div id="r-code-and-results-6" class="section level4 unnumbered">
 <h4>R Code and Results</h4>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb139-1"><a href="SLRSummary.html#cb139-1" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/NCMTH107/modules/CE/GSI_data.csv&quot;</span>)</span>
-<span id="cb139-2"><a href="SLRSummary.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cc)</span>
-<span id="cb139-3"><a href="SLRSummary.html#cb139-3" aria-hidden="true" tabindex="-1"></a>lm.cc <span class="ot">&lt;-</span> <span class="fu">lm</span>(Temp<span class="sc">~</span>CO2,<span class="at">data=</span>cc)</span>
-<span id="cb139-4"><a href="SLRSummary.html#cb139-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.cc)</span></code></pre></div>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb140-1"><a href="SLRSummary.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.cc)</span>
-<span id="cb140-2"><a href="SLRSummary.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.cc)</span>
-<span id="cb140-3"><a href="SLRSummary.html#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.cc),<span class="fu">confint</span>(lm.cc))</span>
-<span id="cb140-4"><a href="SLRSummary.html#cb140-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cc,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>CO2,<span class="at">y=</span>Temp)) <span class="sc">+</span> </span>
-<span id="cb140-5"><a href="SLRSummary.html#cb140-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb140-6"><a href="SLRSummary.html#cb140-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;CO2 Concentration (ppm)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Temperature Anomaly (1/100C)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb140-7"><a href="SLRSummary.html#cb140-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
-<span id="cb140-8"><a href="SLRSummary.html#cb140-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb141-1"><a href="SLRSummary.html#cb141-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">CO2=</span><span class="dv">360</span>)</span>
-<span id="cb141-2"><a href="SLRSummary.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm.cc,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb144-1"><a href="SLRSummary.html#cb144-1" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/NCMTH107/modules/CE/GSI_data.csv&quot;</span>)</span>
+<span id="cb144-2"><a href="SLRSummary.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cc)</span>
+<span id="cb144-3"><a href="SLRSummary.html#cb144-3" aria-hidden="true" tabindex="-1"></a>lm.cc <span class="ot">&lt;-</span> <span class="fu">lm</span>(Temp<span class="sc">~</span>CO2,<span class="at">data=</span>cc)</span>
+<span id="cb144-4"><a href="SLRSummary.html#cb144-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.cc)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb145-1"><a href="SLRSummary.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.cc)</span>
+<span id="cb145-2"><a href="SLRSummary.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.cc)</span>
+<span id="cb145-3"><a href="SLRSummary.html#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.cc),<span class="fu">confint</span>(lm.cc))</span>
+<span id="cb145-4"><a href="SLRSummary.html#cb145-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cc,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>CO2,<span class="at">y=</span>Temp)) <span class="sc">+</span> </span>
+<span id="cb145-5"><a href="SLRSummary.html#cb145-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb145-6"><a href="SLRSummary.html#cb145-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;CO2 Concentration (ppm)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Temperature Anomaly (1/100C)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb145-7"><a href="SLRSummary.html#cb145-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
+<span id="cb145-8"><a href="SLRSummary.html#cb145-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb146-1"><a href="SLRSummary.html#cb146-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">CO2=</span><span class="dv">360</span>)</span>
+<span id="cb146-2"><a href="SLRSummary.html#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm.cc,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <p> </p>
 </div>
 </div>
@@ -591,7 +594,7 @@ Understanding the <a href="https://terra.nasa.gov/science/carbon-cycle-and-ecosy
 \]</span></p>
 <p>There is some concern over independence because some of the trees presumably came from the same plot and it is possible that one tree might have an impact on another tree. That impact may have been on the overall growth of the tree through density-dependent factors, but it is hard to imagine how one tree could effect another tree with respect to the <em>relationship</em> between above ground biomass and diameter at breast height. Thus, I will continue with this analysis assuming independence.</p>
 <p>The residual plot (Figure <a href="SLRSummary.html#fig:tmAssumptions1">19.3</a>-Right) indicates a lack of linearity and homoscedasticity as there is both a clear curve and funnel present. There also appears to be a lack of normality in the residuals (Anderson-Darling p=0.0041) and the presence of outliers (outlier test p&lt;0.00005). These results all indicate that a transformation should be explored.</p>
-<div class="figure" style="text-align: center"><span id="fig:tmAssumptions1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tmAssumptions1"></span>
 <img src="Book207_files/figure-html/tmAssumptions1-1.png" alt="Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of above ground biomass on diameter at breast height for trees from the Miombo Woodlands." width="672" />
 <p class="caption">
 Figure 19.3: Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of above ground biomass on diameter at breast height for trees from the Miombo Woodlands.
@@ -600,7 +603,7 @@ Figure 19.3: Histogram of residuals (Left) and residual plot (Right) for a simpl
 <p> </p>
 <p>Allometric relationships between weights (i.e., biomass) and lengths (i.e., height) tend to follow a power function, which can be linearized by log-transforming both variables. When both variables were transformed the relationship was largely linear and homoscedastic (Figure <a href="SLRSummary.html#fig:tmAssumptions2">19.4</a>-Right), the residuals appeared to be normal (Anderson-Darling p=0.4463; Figure <a href="SLRSummary.html#fig:tmAssumptions2">19.4</a>-Left), and no outliers were present (outlier test p&gt;1). Thus, the linear regression model was fit to the log-log transformed data as all assumptions were met on this scale.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:tmAssumptions2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tmAssumptions2"></span>
 <img src="Book207_files/figure-html/tmAssumptions2-1.png" alt="Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands." width="672" />
 <p class="caption">
 Figure 19.4: Histogram of residuals (Left) and residual plot (Right) for a simple linear regression of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands.
@@ -729,7 +732,7 @@ logDBH
 </tbody>
 </table>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:tmFitPlot"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tmFitPlot"></span>
 <img src="Book207_files/figure-html/tmFitPlot-1.png" alt="Scatterplot of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands. with the best-fit line and 95% confidence band superimposed." width="336" />
 <p class="caption">
 Figure 19.5: Scatterplot of log above ground biomass on log diameter at breast height for trees from the Miombo Woodlands. with the best-fit line and 95% confidence band superimposed.
@@ -740,26 +743,26 @@ Figure 19.5: Scatterplot of log above ground biomass on log diameter at breast h
 <p>In conclusion, a significantly positive and very strong relationship was found between the natural log above-ground biomass and the natural log diameter-at-breast-height for trees in the Miombo Woodlands. A model was developed from this relationship that can be used to predict above-ground biomass of a tree from the measured DBH of the tree.</p>
 <div id="r-code-and-results-7" class="section level4 unnumbered">
 <h4>R Code and Results</h4>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb142-1"><a href="SLRSummary.html#cb142-1" aria-hidden="true" tabindex="-1"></a>tm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/droglenc/NCData/master/TreesMiombo.csv&quot;</span>)</span>
-<span id="cb142-2"><a href="SLRSummary.html#cb142-2" aria-hidden="true" tabindex="-1"></a>tm <span class="ot">&lt;-</span> <span class="fu">filterD</span>(tm,<span class="sc">!</span>outlier)   <span class="do">## data entry error removed</span></span>
-<span id="cb142-3"><a href="SLRSummary.html#cb142-3" aria-hidden="true" tabindex="-1"></a>lm.tm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(AGB<span class="sc">~</span>DBH,<span class="at">data=</span>tm)</span>
-<span id="cb142-4"><a href="SLRSummary.html#cb142-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.tm1)</span></code></pre></div>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb143-1"><a href="SLRSummary.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.tm1,<span class="at">lambday=</span><span class="dv">0</span>,<span class="at">lambdax=</span><span class="dv">0</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb144-1"><a href="SLRSummary.html#cb144-1" aria-hidden="true" tabindex="-1"></a>tm<span class="sc">$</span>logDBH <span class="ot">&lt;-</span> <span class="fu">log</span>(tm<span class="sc">$</span>DBH)</span>
-<span id="cb144-2"><a href="SLRSummary.html#cb144-2" aria-hidden="true" tabindex="-1"></a>tm<span class="sc">$</span>logAGB <span class="ot">&lt;-</span> <span class="fu">log</span>(tm<span class="sc">$</span>AGB)</span>
-<span id="cb144-3"><a href="SLRSummary.html#cb144-3" aria-hidden="true" tabindex="-1"></a>lm.tm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(logAGB<span class="sc">~</span>logDBH,<span class="at">data=</span>tm)</span>
-<span id="cb144-4"><a href="SLRSummary.html#cb144-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.tm2)</span>
-<span id="cb144-5"><a href="SLRSummary.html#cb144-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.tm2)</span>
-<span id="cb144-6"><a href="SLRSummary.html#cb144-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>tm,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>logDBH,<span class="at">y=</span>logAGB)) <span class="sc">+</span> </span>
-<span id="cb144-7"><a href="SLRSummary.html#cb144-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb144-8"><a href="SLRSummary.html#cb144-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;log Diameter at Breast Height&quot;</span>,<span class="at">y=</span><span class="st">&quot;log Above Ground Biomass&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb144-9"><a href="SLRSummary.html#cb144-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
-<span id="cb144-10"><a href="SLRSummary.html#cb144-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb145-1"><a href="SLRSummary.html#cb145-1" aria-hidden="true" tabindex="-1"></a>( cfs.tm2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.tm2),<span class="fu">confint</span>(lm.tm2)) )</span>
-<span id="cb145-2"><a href="SLRSummary.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(cfs.tm2)</span>
-<span id="cb145-3"><a href="SLRSummary.html#cb145-3" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">logDBH=</span><span class="fu">log</span>(<span class="dv">50</span>))</span>
-<span id="cb145-4"><a href="SLRSummary.html#cb145-4" aria-hidden="true" tabindex="-1"></a>( pl50 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm.tm2,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>) )</span>
-<span id="cb145-5"><a href="SLRSummary.html#cb145-5" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(pl50)</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb147-1"><a href="SLRSummary.html#cb147-1" aria-hidden="true" tabindex="-1"></a>tm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/droglenc/NCData/master/TreesMiombo.csv&quot;</span>)</span>
+<span id="cb147-2"><a href="SLRSummary.html#cb147-2" aria-hidden="true" tabindex="-1"></a>tm <span class="ot">&lt;-</span> <span class="fu">filterD</span>(tm,<span class="sc">!</span>outlier)   <span class="do">## data entry error removed</span></span>
+<span id="cb147-3"><a href="SLRSummary.html#cb147-3" aria-hidden="true" tabindex="-1"></a>lm.tm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(AGB<span class="sc">~</span>DBH,<span class="at">data=</span>tm)</span>
+<span id="cb147-4"><a href="SLRSummary.html#cb147-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.tm1)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb148-1"><a href="SLRSummary.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm.tm1,<span class="at">lambday=</span><span class="dv">0</span>,<span class="at">lambdax=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb149-1"><a href="SLRSummary.html#cb149-1" aria-hidden="true" tabindex="-1"></a>tm<span class="sc">$</span>logDBH <span class="ot">&lt;-</span> <span class="fu">log</span>(tm<span class="sc">$</span>DBH)</span>
+<span id="cb149-2"><a href="SLRSummary.html#cb149-2" aria-hidden="true" tabindex="-1"></a>tm<span class="sc">$</span>logAGB <span class="ot">&lt;-</span> <span class="fu">log</span>(tm<span class="sc">$</span>AGB)</span>
+<span id="cb149-3"><a href="SLRSummary.html#cb149-3" aria-hidden="true" tabindex="-1"></a>lm.tm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(logAGB<span class="sc">~</span>logDBH,<span class="at">data=</span>tm)</span>
+<span id="cb149-4"><a href="SLRSummary.html#cb149-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm.tm2)</span>
+<span id="cb149-5"><a href="SLRSummary.html#cb149-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rSquared</span>(lm.tm2)</span>
+<span id="cb149-6"><a href="SLRSummary.html#cb149-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>tm,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>logDBH,<span class="at">y=</span>logAGB)) <span class="sc">+</span> </span>
+<span id="cb149-7"><a href="SLRSummary.html#cb149-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb149-8"><a href="SLRSummary.html#cb149-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;log Diameter at Breast Height&quot;</span>,<span class="at">y=</span><span class="st">&quot;log Above Ground Biomass&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb149-9"><a href="SLRSummary.html#cb149-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span> </span>
+<span id="cb149-10"><a href="SLRSummary.html#cb149-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb150-1"><a href="SLRSummary.html#cb150-1" aria-hidden="true" tabindex="-1"></a>( cfs.tm2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Est=</span><span class="fu">coef</span>(lm.tm2),<span class="fu">confint</span>(lm.tm2)) )</span>
+<span id="cb150-2"><a href="SLRSummary.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(cfs.tm2)</span>
+<span id="cb150-3"><a href="SLRSummary.html#cb150-3" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">logDBH=</span><span class="fu">log</span>(<span class="dv">50</span>))</span>
+<span id="cb150-4"><a href="SLRSummary.html#cb150-4" aria-hidden="true" tabindex="-1"></a>( pl50 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm.tm2,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>) )</span>
+<span id="cb150-5"><a href="SLRSummary.html#cb150-5" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(pl50)</span></code></pre></div>
 <p> </p>
 
 </div>
@@ -778,7 +781,6 @@ Figure 19.5: Scatterplot of log above ground biomass on log diameter at breast h
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -797,6 +799,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -817,11 +820,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 25 Foundational Principles | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 25 Foundational Principles | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="IVRSummary.html"/>
 <link rel="next" href="LogRegModels.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -382,7 +385,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The binary response variable in a logistic regression will be treated as an indicator variable, where a “success” is coded as a “1” and a “failure” is coded as a “0.”<a href="#fn108" class="footnote-ref" id="fnref108"><sup>108</sup></a> Treating this variable as “quantitative” will allow us to use techniques from previous modules.</p>
 <p>However, fitting a linear regression to this response variable plotted against the quantitative explanatory variable immediately exposes two problems (Figure <a href="LogRegFoundations.html#fig:LogRegRaw">25.1</a>). First, the linearity (and homoscedasticity) assumptions of linear regression are not met. Second, predicted probabilities from this model can be less than 0 and greater than 1, even within the observed domain of the explanatory variable. Clearly, a linear regression cannot be used to model this type of data.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:LogRegRaw"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:LogRegRaw"></span>
 <img src="Book207_files/figure-html/LogRegRaw-1.png" alt="Plot of the binary response variable, as an indicator variable, versus a quantitative explanatory variable with the best-fit linear regression line super-imposed. Note that darker points have more individuals over-plotted at that coordinate." width="384" />
 <p class="caption">
 Figure 25.1: Plot of the binary response variable, as an indicator variable, versus a quantitative explanatory variable with the best-fit linear regression line super-imposed. Note that darker points have more individuals over-plotted at that coordinate.
@@ -399,7 +402,7 @@ Figure 25.1: Plot of the binary response variable, as an indicator variable, ver
 <p>In this example the mean of <span class="math inline">\(Z\)</span> is <span class="math inline">\(\frac{1+0+0+1+1}{5}\)</span>=<span class="math inline">\(\frac{3}{5}\)</span>=0.6. Lets also calculate the proportion of “successes” in <span class="math inline">\(Y\)</span> as <span class="math inline">\(\frac{\text{Number of Successes}}{\text{Total Number of Observations}}\)</span>=<span class="math inline">\(\frac{3}{5}\)</span>=0.6. Thus, because <span class="math inline">\(0\)</span>s and <span class="math inline">\(1\)</span>s are used in the indicator variable, the mean of the indicator variable is the same as the probability of success for the corresponding factor variable.</p>
 <p>In many situations it is hard to visualize the probability of success versus the explanatory variable because few values of <span class="math inline">\(X\)</span> have multiple observations of <span class="math inline">\(Y\)</span>. Thus, a visual is constructed by computing the probability of success (<span class="math inline">\(p_{i}\)</span>) within <span class="math inline">\(i\)</span> “windows” of <span class="math inline">\(X\)</span> values. For example, Figure <a href="LogRegFoundations.html#fig:LogRegProb">25.2</a> shows the probability of success calculated within “windows” of <span class="math inline">\(X\)</span> that are 2.5 units wide.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:LogRegProb"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:LogRegProb"></span>
 <img src="Book207_files/figure-html/LogRegProb-1.png" alt="Plot of the binary response variable, as an indicator variable, versus a quantitative explanatory variable with the vertical lines representing 'windows' in which the probability of 'success' (red circles) were calculated. These are the same data as in the previous figure." width="384" />
 <p class="caption">
 Figure 25.2: Plot of the binary response variable, as an indicator variable, versus a quantitative explanatory variable with the vertical lines representing ‘windows’ in which the probability of ‘success’ (red circles) were calculated. These are the same data as in the previous figure.
@@ -421,7 +424,7 @@ Figure 25.2: Plot of the binary response variable, as an indicator variable, ver
 </div>
 <p>Odds have two important characteristics. First, an odds of 1 means that the probability of “success” is the same as the probability of “failure.” Second, odds are bounded below by 0 (i.e., negative odds are impossible) but are not bounded above (i.e., odds can increase to positive infinity; Figure <a href="LogRegFoundations.html#fig:LogRegOdds">25.3</a>).</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:LogRegOdds"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:LogRegOdds"></span>
 <img src="Book207_files/figure-html/LogRegOdds-1.png" alt="Plot of the odds of 'success' for the same probabilities of 'success' in the previous figure." width="336" />
 <p class="caption">
 Figure 25.3: Plot of the odds of ‘success’ for the same probabilities of ‘success’ in the previous figure.
@@ -437,7 +440,7 @@ Figure 25.3: Plot of the odds of ‘success’ for the same probabilities of ‘
 <p> </p>
 <p>The plot of <span class="math inline">\(logit(p_{i})\)</span> versus the explanatory variable is generally linear (Figure <a href="LogRegFoundations.html#fig:LogRegLogit">25.4</a>).</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:LogRegLogit"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:LogRegLogit"></span>
 <img src="Book207_files/figure-html/LogRegLogit-1.png" alt="Plot of the log odds of 'success' (i.e., the logit transformed probability of 'success') for the same odds of 'success' in the previous figure." width="336" />
 <p class="caption">
 Figure 25.4: Plot of the log odds of ‘success’ (i.e., the logit transformed probability of ‘success’) for the same odds of ‘success’ in the previous figure.
@@ -491,7 +494,6 @@ p &amp;= \frac{\text{odds}}{1+\text{odds}}
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -510,6 +512,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -530,11 +533,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

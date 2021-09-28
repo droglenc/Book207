@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 1 Model Types &amp; Methods | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 1 Model Types &amp; Methods | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="T2Review.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -387,70 +390,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <thead>
 <tr>
 <th style="text-align:left;font-weight: bold;">
+Linear Model
+</th>
+<th style="text-align:left;font-weight: bold;">
 Response
 </th>
 <th style="text-align:left;font-weight: bold;">
 Explanatory
 </th>
-<th style="text-align:left;font-weight: bold;">
-Linear Model
-</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td style="text-align:left;font-weight: bold;font-style: italic;">
+One-Way ANOVA
+</td>
 <td style="text-align:left;">
 Quantitative
 </td>
 <td style="text-align:left;">
 Categorical (only one)
 </td>
-<td style="text-align:left;font-weight: bold;font-style: italic;">
-One-Way ANOVA
-</td>
 </tr>
 <tr>
+<td style="text-align:left;font-weight: bold;font-style: italic;">
+Two-Way ANOVA
+</td>
 <td style="text-align:left;">
 Quantitative
 </td>
 <td style="text-align:left;">
 Categorical (two)
 </td>
-<td style="text-align:left;font-weight: bold;font-style: italic;">
-Two-Way ANOVA
-</td>
 </tr>
 <tr>
+<td style="text-align:left;font-weight: bold;font-style: italic;">
+Simple Linear Regression (SLR)
+</td>
 <td style="text-align:left;">
 Quantitative
 </td>
 <td style="text-align:left;">
 Quantitative (only one)
 </td>
-<td style="text-align:left;font-weight: bold;font-style: italic;">
-Simple Linear Regression
-</td>
 </tr>
 <tr>
+<td style="text-align:left;font-weight: bold;font-style: italic;">
+Indicator Variable Regression (IVR)
+</td>
 <td style="text-align:left;">
 Quantitative
 </td>
 <td style="text-align:left;">
 Quantitative (one) &amp; Categorical (one)
 </td>
-<td style="text-align:left;font-weight: bold;font-style: italic;">
-Indicator Variable Regression
-</td>
 </tr>
 <tr>
+<td style="text-align:left;font-weight: bold;font-style: italic;">
+(Binary) Logistic Regression
+</td>
 <td style="text-align:left;">
 Binomial
 </td>
 <td style="text-align:left;">
 Quantitative (or Both)
-</td>
-<td style="text-align:left;font-weight: bold;font-style: italic;">
-(Binary) Logistic Regression
 </td>
 </tr>
 </tbody>
@@ -463,7 +466,7 @@ Quantitative (or Both)
 <p>Each example uses a data set that contains data about <a href="https://en.wikipedia.org/wiki/Mirex">mirex</a> concentrations (<code>mirex</code>) for two species of salmon (<code>species</code>) captured in six years between 1977 and 1999 (<code>year</code>) in Lake Ontario. The weight of each fish (<code>weight</code>) and whether or not the mirex concentration exceeded the EPA limit of 0.1 mg/kg (<code>exceeds_limit</code>) were also recorded.</p>
 <p> </p>
 <p>A <strong>one-way ANOVA</strong> is used to determine if the means of the quantitative response variable (<code>mirex</code>) differ among two or more groups defined by a single categorical variable (e.g., <code>year</code>).</p>
-<div class="figure" style="text-align: center"><span id="fig:OneWay"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:OneWay"></span>
 <img src="Book207_files/figure-html/OneWay-1.png" alt="Mean mirex concentration by sample year. This is an example of a One-Way ANOVA." width="336" />
 <p class="caption">
 Figure 1.1: Mean mirex concentration by sample year. This is an example of a One-Way ANOVA.
@@ -471,7 +474,7 @@ Figure 1.1: Mean mirex concentration by sample year. This is an example of a One
 </div>
 <p> </p>
 <p>A <strong>two-way ANOVA</strong> is used to determine if the means of the quantitative response variable (<code>mirex</code>) differ among groups of one categorical variable (e.g., <code>year</code>), among groups of another categorical variable (e.g., <code>species</code>), or by the interaction between the two categorical variables.</p>
-<div class="figure" style="text-align: center"><span id="fig:TwoWay"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:TwoWay"></span>
 <img src="Book207_files/figure-html/TwoWay-1.png" alt="Mean mirex concentration by sample year and salmon species. This is an example of a Two-Way ANOVA." width="336" />
 <p class="caption">
 Figure 1.2: Mean mirex concentration by sample year and salmon species. This is an example of a Two-Way ANOVA.
@@ -479,7 +482,7 @@ Figure 1.2: Mean mirex concentration by sample year and salmon species. This is 
 </div>
 <p> </p>
 <p>A <strong>simple linear regression</strong> is used to determine if there is a relationship between the quantitative response variable (e.g., <code>mirex</code>) and a single quantitative explanatory variable (e.g., <code>weight</code>).</p>
-<div class="figure" style="text-align: center"><span id="fig:SLR"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:SLR"></span>
 <img src="Book207_files/figure-html/SLR-1.png" alt="Mirex concentration by fish weight. This is an example of a Simple Linear Regression." width="336" />
 <p class="caption">
 Figure 1.3: Mirex concentration by fish weight. This is an example of a Simple Linear Regression.
@@ -487,7 +490,7 @@ Figure 1.3: Mirex concentration by fish weight. This is an example of a Simple L
 </div>
 <p> </p>
 <p>An <strong>indicator variable regression</strong> is used to determine if the relationship between a quantitative response (e.g., <code>mirex</code>) and a quantitative explanatory variable (e.g., <code>weight</code>) differs between two or more groups defined by a categorical explanatory variable (e.g., <code>species</code>). This will look like two (or more) simple linear regressions are being compared.</p>
-<div class="figure" style="text-align: center"><span id="fig:IVR"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:IVR"></span>
 <img src="Book207_files/figure-html/IVR-1.png" alt="Mirex concentration by fish weight seprated by salmon species. This is an example of an Indicator Variable Regression." width="336" />
 <p class="caption">
 Figure 1.4: Mirex concentration by fish weight seprated by salmon species. This is an example of an Indicator Variable Regression.
@@ -495,7 +498,7 @@ Figure 1.4: Mirex concentration by fish weight seprated by salmon species. This 
 </div>
 <p> </p>
 <p>A <strong>logistic regression</strong> is used to determine if there is a relationship between the probability of “success” for a binary<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> categorical response variable (e.g., <code>exceeds_limit</code>) and the quantitative explanatory variable (e.g., <code>weight</code>).</p>
-<div class="figure" style="text-align: center"><span id="fig:LogReg"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:LogReg"></span>
 <img src="Book207_files/figure-html/LogReg-1.png" alt="The probability that the mirex concentration exceeded the 0.1 mg/kg threshold by fish weight. This is an example of a Logistic Regression." width="336" />
 <p class="caption">
 Figure 1.5: The probability that the mirex concentration exceeded the 0.1 mg/kg threshold by fish weight. This is an example of a Logistic Regression.
@@ -526,7 +529,6 @@ Figure 1.5: The probability that the mirex concentration exceeded the 0.1 mg/kg 
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -545,6 +547,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -565,11 +568,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

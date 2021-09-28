@@ -209,7 +209,7 @@ dat <- data.frame(mvtnorm::rmvnorm(n=20,mean=c(5,10),
   rename(X=X1,Y=X2) %>%
   mutate(set="Original",X=scale(X,scale=FALSE)+5)
 dat2 <- dat %>%
-  mutate(set=mapvalues(set,from="Original",to="Centered"),
+  mutate(set=plyr::mapvalues(set,from="Original",to="Centered"),
          X=scale(X,scale=FALSE))
 dat <- rbind(dat,dat2)
 

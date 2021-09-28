@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 10 Two-Way Conceptual Foundation | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 10 Two-Way Conceptual Foundation | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="ANOVA1Summary.html"/>
 <link rel="next" href="ANOVA2Foundations2.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -555,7 +558,7 @@ Low
 <h2><span class="header-section-number">10.2</span> Interaction Effects</h2>
 <p>An interaction among factors is said to exist if the effect of one explanatory variable on the mean response depends on the level of the other explanatory variable. For example, if the mean body mass of the tadpoles <em>increased</em> across densities in the low light intensity treatments but <em>decreased</em> across densities in the high light intensity treatments (Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction">10.1</a>-Left), then an interaction between the density of tadpoles and UV-B light intensities is said to exist. However, if the pattern among tadpole densities is the same in both the low and high density light intensities (Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction">10.1</a>-Right), then no interaction exists between the factors.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:TadpoleInteraction"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:TadpoleInteraction"></span>
 <img src="Book207_files/figure-html/TadpoleInteraction-1.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating a hypothetical interaction effect (Left) and a lack of an interaction effect (Right)." width="336" /><img src="Book207_files/figure-html/TadpoleInteraction-2.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating a hypothetical interaction effect (Left) and a lack of an interaction effect (Right)." width="336" />
 <p class="caption">
 Figure 10.1: Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating a hypothetical interaction effect (Left) and a lack of an interaction effect (Right).
@@ -566,7 +569,7 @@ Figure 10.1: Interaction plot (mean growth rate for each treatment connected wit
 </div>
 <p>The tell-tale sign of an interaction effect is if you describe the effect of a factor on the mean response differently depending on the level of the other explanatory variable. For example, in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a>-Left the effect of tadpole density on mean body mass is increasing in the high UV-B light intensity treatments, but is neither increasing nor decreasing in the low UV-B light intensity treatments. The fact that density had a different effect on mean body mass in the different UV-B light treatments tells of an interaction effect. In Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction2">10.2</a>-Right mean body mass increases with increasing density but at a very different rate (at least for densities of 1 to 2 tadpoles per tank). Again, this is a different conclusion about the effect of density on mean body mass depending on level of UV-B light; thus this represents an interaction effect.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:TadpoleInteraction2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:TadpoleInteraction2"></span>
 <img src="Book207_files/figure-html/TadpoleInteraction2-1.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical interaction effects." width="336" /><img src="Book207_files/figure-html/TadpoleInteraction2-2.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical interaction effects." width="336" />
 <p class="caption">
 Figure 10.2: Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical interaction effects.
@@ -587,7 +590,7 @@ Figure 10.2: Interaction plot (mean growth rate for each treatment connected wit
 <p>For example, Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction">10.1</a>-Right showed no significant interaction; thus, main effects can be assessed. In that case, the main effect of density is that mean body mass decreased when density increased from 1 to 2 tadpoles per tank and continued to decrease at a slower rate when the density increased from 2 to 4 tadpoles per tank. From the same figure, the effect of UV-B light density is that mean body mass was greater at a low than at a high UV-B intensity.<a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a></p>
 <p>Main effects can also be determined for both interaction plots in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleNoInteraction2">10.3</a>. The main effect for density in Figure <a href="ANOVA2Foundations1.html#fig:TadpoleNoInteraction2">10.3</a>-Left is the same as that described for Figure <a href="ANOVA2Foundations1.html#fig:TadpoleInteraction">10.1</a>-Right. However, in this case there is no UV-B main effect because there is no separation in means by UV-B light level at each level of density. In other words the red line for low UV-B light and the blue line for high UV-B light are (nearly) directly on top of each other, so there is no difference in means due to UV-B light and thus no main effect of UV-B light.</p>
 <p> </p>
-<div class="figure" style="text-align: center"><span id="fig:TadpoleNoInteraction2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:TadpoleNoInteraction2"></span>
 <img src="Book207_files/figure-html/TadpoleNoInteraction2-1.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical lacks of interaction effects." width="336" /><img src="Book207_files/figure-html/TadpoleNoInteraction2-2.png" alt="Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical lacks of interaction effects." width="336" />
 <p class="caption">
 Figure 10.3: Interaction plot (mean growth rate for each treatment connected within the UV-B light intensity levels) for the tadpole experiment illustrating hypothetical lacks of interaction effects.
@@ -634,7 +637,6 @@ Figure 10.3: Interaction plot (mean growth rate for each treatment connected wit
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -653,6 +655,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -673,11 +676,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

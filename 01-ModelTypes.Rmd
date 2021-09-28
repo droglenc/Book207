@@ -31,20 +31,21 @@ Both general and generalIZED linear models can have a single explanatory variabl
 The five methods covered in this course can be distinguished by considering only the type of response variable and the types and number of explanatory variables (Table \@ref(tab:ModelCharacteristics)). Thus, you should review [variable types](http://derekogle.com/NCMTH107/modules/FoundationalDefns.html) and [definitions and distinctions of response and explanatory variables](http://derekogle.com/NCMTH107/modules/DataProduction.html) from your introductory statistics course.
 
 ```{r ModelCharacteristics, echo=FALSE}
-data.frame(Response=c("Quantitative","Quantitative","Quantitative",
+data.frame("Linear Model"=c("One-Way ANOVA","Two-Way ANOVA",
+                            "Simple Linear Regression (SLR)",
+                            "Indicator Variable Regression (IVR)",
+                            "(Binary) Logistic Regression"),
+           Response=c("Quantitative","Quantitative","Quantitative",
                       "Quantitative","Binomial"),
            Explanatory=c("Categorical (only one)","Categorical (two)",
                          "Quantitative (only one)",
                          "Quantitative (one) & Categorical (one)",
-                                "Quantitative (or Both)"),
-           "Linear Model"=c("One-Way ANOVA","Two-Way ANOVA",
-                            "Simple Linear Regression","Indicator Variable Regression",
-                            "(Binary) Logistic Regression"),
+                         "Quantitative (or Both)"),
            check.names=FALSE) %>%
   knitr::kable(booktabs=TRUE,caption="Response and explanatory variable types (and number) for the models considered in this course.") %>%
   kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
   kableExtra::row_spec(0,bold=TRUE) %>%
-  kableExtra::column_spec(3,bold=TRUE,italic=TRUE)
+  kableExtra::column_spec(1,bold=TRUE,italic=TRUE)
 ```
 
 &nbsp;
@@ -72,12 +73,12 @@ ggplot(data=Mirex,mapping=aes(x=year,y=mirex)) +
 
 A **two-way ANOVA** is used to determine if the means of the quantitative response variable (`mirex`) differ among groups of one categorical variable (e.g., `year`), among groups of another categorical variable (e.g., `species`), or by the interaction between the two categorical variables.
 
-
 ```{r TwoWay, echo=FALSE, fig.cap="Mean mirex concentration by sample year and salmon species. This is an example of a Two-Way ANOVA."}
 pd <- position_dodge(0.25)
 ggplot(data=Mirex,mapping=aes(x=year,y=mirex,color=species)) +
   geom_point(alpha=0.25,position=pd) +
-  stat_summary(fun.data=mean_cl_normal,geom="errorbar",width=0.25,size=1,position=pd) +
+  stat_summary(fun.data=mean_cl_normal,geom="errorbar",
+               width=0.25,size=1,position=pd) +
   stat_summary(fun=mean,geom="point",shape=19,size=2,position=pd) +
   labs(y="Mirex Concentration (mg/kg)",x="Sample Year") +
   theme_NCStats() +

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 20 IVR Variables | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 20 IVR Variables | Readings for MTH207" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-09-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="SLRSummary.html"/>
 <link rel="next" href="IVRModels.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -118,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -722,7 +725,7 @@ YEAR1986
 <p>An <strong>interaction variable</strong> is an explanatory variable that is the product of two or more other explanatory variables (see Module <a href="ANOVA2Foundations1.html#ANOVA2Foundations1">10</a>). In IVR models, interaction variables are created between the covariate and <strong>each</strong> of the indicator variables. Thus, there will always be as many interaction variables as there are indicator variables in an IVR. For example, in the example with Coho and Chinook Salmon, there would be one interaction variable – <em>COHO</em>:<em>Weight</em>. However, in the the example with the three years of data there would be two interaction variables – <em>YEAR1982</em>:<em>Weight</em> and <em>YEAR1986</em>:<em>Weight</em>.</p>
 <p>Interaction variables serve the same purpose in an IVR as they did in a Two-Way ANOVA (see Module <a href="ANOVA2Foundations1.html#ANOVA2Foundations1">10</a>). That is, the interaction variable is used to identify if the effect of one explanatory variable (here the covariate) on the response variable differs depending on the other explanatory variable (here the factor). In other words, an interaction variable will be used to determine if the effect of the covariate on the response variable differs among groups (i.e., levels of the factor). For example, the interaction variable will be used to determine if the effect of weight of the salmon on the concentration of mirex in the tissue differs by species of salmon.</p>
 <p>The interaction between two variables in an IVR model is illustrated with the examples in Figure <a href="IVRVariables.html#fig:IVRInteraction">20.1</a>. In the left panel, the effect of salmon weight (the covariate) on mirex concentration in the tissue (the response) is the same for Coho and Chinook Salmon. This is illustrated by each species having the same slope.<a href="#fn92" class="footnote-ref" id="fnref92"><sup>92</sup></a> However, different slopes in the right panel indicate that the effect of salmon weight on mirex concentration in the tissue differs between the two species. In this particular example, the relationship is “flatter” for Coho than for Chinook Salmon. Thus, an interaction exists for the situation depicted in Figure <a href="IVRVariables.html#fig:IVRInteraction">20.1</a>-Right, because the effect of the covariate on the response depends on which group is being considered. Graphically, an interaction is illustrated by non-parallel lines.</p>
-<div class="figure" style="text-align: center"><span id="fig:IVRInteraction"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:IVRInteraction"></span>
 <img src="Book207_files/figure-html/IVRInteraction-1.png" alt="Idealized fitted-line plots representing an IVR fit to two groups. The graph on the left indicates the absence of an interaction. The graph on the right indicates the presence of an interaction." width="672" />
 <p class="caption">
 Figure 20.1: Idealized fitted-line plots representing an IVR fit to two groups. The graph on the left indicates the absence of an interaction. The graph on the right indicates the presence of an interaction.
@@ -762,7 +765,6 @@ Figure 20.1: Idealized fitted-line plots representing an IVR fit to two groups. 
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -781,6 +783,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -801,11 +804,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

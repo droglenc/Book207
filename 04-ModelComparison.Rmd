@@ -174,10 +174,6 @@ $$ \text{SS}_{\text{Among}} = \text{SS}_{\text{Total}} - \text{SS}_{\text{Within
 
 Thus, SS<sub>Among</sub> records how much the lack-of-fit was reduced by using the full model rather than the simple model. In other words, SS<sub>Among</sub> records how much "better" the full model fits the data than the simple model. In our example, SS<sub>Among</sub>=`r formatC(sum(aqua$residS^2),format="f",digits=2)`-`r formatC(sum(aqua$residF^2),format="f",digits=2)`=`r formatC(sum(aqua$residS^2)-sum(aqua$residF^2),format="f",digits=2)`. Thus, the residual SS from the simple model was reduced by `r formatC(sum(aqua$residS^2)-sum(aqua$residF^2),format="f",digits=2)` when the full model was used.
 
-::: {.tip data-latex=""}
-SS<sub>Among</sub> is the **benefit** (i.e., reduction in lack-of-fit) of using the full rather than simple model
-:::
-
 SS<sub>Among</sub> can also be thought of in a different way. It can be algebraically shown that 
 
 $$ \text{SS}_{\text{Among}} = \sum_{i=1}^{I}n_{i}\left(\bar{Y}_{i\cdot}-\bar{Y}_{\cdot\cdot}\right)^{2} $$
@@ -373,7 +369,7 @@ SS and df partition, but MS do not! Do not add MS<sub>Among</sub> and MS<sub>Wit
 &nbsp;
 
 ## Two-Sample t-Test Revisited: Using Linear Models
-The models for a two-sample t-test can be fit and assessed with `lm()`. This function requires the same type of formula for its first argument -- `response~factor` -- and a data.frame in the `data=` argument as described for `t.test()` in Section \@ref(T2analysis). The results of `lm()` should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted with `anova()`. In addition, coefficient results^[The coefficient results will be discussed in more detail in Module \@ref(ANOVA1Foundations).] can be extracted with `coef()` and `confint()`, noting that I like to "column-bind" the coefficients and confidence intervals together for a more succinct representation.
+The models for a two-sample t-test can be fit and assessed with `lm()`{.inline}. This function requires the same type of formula for its first argument -- `response~groups`{.inline} -- and a data.frame in the `data=`{.inline} argument as described for `t.test()`{.inline} in Section \@ref(T2analysis). The results of `lm()` should be assigned to an object so that specific results can be selectively extracted from it. For example, the ANOVA table results are extracted with `anova()`{.inline}. In addition, coefficient results^[The coefficient results will be discussed in more detail in Module \@ref(ANOVA1Foundations).] can be extracted with `coef()`{.inline} and `confint()`{.inline}, noting that I like to "column-bind" the coefficients and confidence intervals together for a more succinct representation.
 
 ```{r echo=TRUE}
 aqua.lm <- lm(BOD~src,data=aqua)
@@ -383,11 +379,11 @@ cbind(ests=coef(aqua.lm),confint(aqua.lm))
 
 From these results, note:
 
-* The p-value in the ANOVA table is the same as that computed from `t.test()`.
-* The coefficient for `srcoutlet` is the same as the difference in the group means computed with `t.test()`.
-* The F test statistics in the ANOVA table equals the square of the t test statistic from `t.test()`. This is because an F with 1 numerator and v denominator df exactly equals the square of a t with v df.
+* The p-value in the ANOVA table is the same as that computed from `t.test()`{.inline}.
+* The coefficient for `srcoutlet` is the same as the difference in the group means computed with `t.test()`{.inline}.
+* The F test statistics in the ANOVA table equals the square of the t test statistic from `t.test()`{.inline}. This is because an F with 1 numerator and v denominator df exactly equals the square of a t with v df.
 
-Thus, the exact same results for a two-sample t-test are obtained whether the analysis is completed in the "traditional" manner (i.e., with `t.test()`) or with competing models (i.e., using `lm()`). This concept will be extended in subsequent modules.
+Thus, the exact same results for a two-sample t-test are obtained whether the analysis is completed in the "traditional" manner (i.e., with `t.test()`{.inline}) or with competing models (i.e., using `lm()`{.inline}). This concept will be extended in subsequent modules.
 
 &nbsp;
 

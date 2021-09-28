@@ -51,7 +51,7 @@ The [meta](https://github.com/droglenc/NCData/blob/master/BOD_meta.txt) data sug
 
 The sample size is less than 40 but greater than 15. The histograms shown below are not particularly informative because of the small sample size. The histogram for the inlet samples appears to be not strongly skewed, but that for the outlet appears to be strongly right-skewed. I am going to continue with this analysis, but I will be cautious with my final interpretations.
 
-```{r fig.width=7}
+```{r fig.width=7, class.source="RCODE_ALONE"}
 ggplot(data=aqua,mapping=aes(x=BOD)) +
   geom_histogram(binwidth=0.5,boundary=0,color="black",fill="lightgray") +
   labs(y="Frequency of Water Samples",x="Biological Oxygen Demand") +
@@ -61,10 +61,10 @@ ggplot(data=aqua,mapping=aes(x=BOD)) +
 ```
 
 ::: {.tip data-latex=""}
-The `ggplot2` package is required to make plots with `ggplot()`.
+The `ggplot2`{.inline} package is required to make plots with `ggplot()`{.inline}.
 :::
 
-Levene's test is computed with `levenesTest()` using a formula of `response~groups` as the first argument, where `response` represents the name of the quantitative response variable and `groups` represents the name of the categorical variable that identifies the two populations. The data.frame with the variables must be in `data=`. From the results below, it is concluded that the population variances appear to be equal because the Levene's test p-value (`r kPvalue(p.lev.aqua,include.p=FALSE,latex=FALSE)`) is greater than &alpha;=0.05.
+Levene's test is computed with `levenesTest()`{.inline} using a formula of `response~groups`{.inline} as the first argument, where `response`{.inline} represents the name of the quantitative response variable and `groups`{.inline} represents the name of the categorical variable that identifies the two populations. The data.frame with the variables must be in `data=`{.inline}. From the results below, it is concluded that the population variances appear to be equal because the Levene's test p-value (`r kPvalue(p.lev.aqua,include.p=FALSE,latex=FALSE)`) is greater than &alpha;=0.05.
 
 ```{r warning=FALSE}
 levenesTest(BOD~src,data=aqua)
@@ -75,15 +75,15 @@ Levene's test requires the `NCStats` package to be loaded.
 :::
 
 ### Analysis
-A 2-sample t-test is constructed in R with `t.test()` using the exact same `response~groups` formula and `data=` used in `levenesTest()`. Additionally, `var.equal=TRUE` is used when the two population variances should be considered equal. By default `t.test()` uses a "not equals" H<sub>A</sub> and a 95% confidence interval. In the results below the two sample means are `r formatC(aqua2t$estimate[1],format="f",digits=4)` for the inlet group and `r formatC(aqua2t$estimate[2],format="f",digits=4)` for the outlet group such that the statistic is `r formatC(aqua2t$estimate[1],format="f",digits=4)`-`r formatC(aqua2t$estimate[2],format="f",digits=4)`=`r formatC(aqua2t$estimate[1]-aqua2t$estimate[2],format="f",digits=4)`; the t test statistic is `r formatC(aqua2t$statistic[1],format="f",digits=3)` with `r aqua2t$parameter` df; and the p-value is `r kPvalue(aqua2t$p.value,include.p=FALSE,latex=FALSE)` (or, more specifically, `r formatC(aqua2t$p.value,digits=4)`).^[I usually round my p-values to four decimal places. In this case that would mean 0.0000 which is awkward. Thus, I will say p<0.00005 as the fifth position must have been less than 5 to round to 0.0000.] Because the p-value<&alpha; the H<sub>0</sub> is rejected and we conclude that the mean BOD at the inlet is lower than the mean BOD at the outlet. More specifically, the mean BOD at the inlet is between `r formatC(-1*aqua2t$conf.int[2],format="f",digits=3)` and `r formatC(-1*aqua2t$conf.int[1],format="f",digits=3)` units lower than the mean BOD at the outlet. Thus, it appears that the mean BOD in the water is increased from when it enters to when it leaves the aquaculture facility.
+A 2-sample t-test is constructed in R with `t.test()`{.inline} using the exact same `response~groups`{.inline} formula and `data=`{.inline} used in `levenesTest()`{.inline}. Additionally, `var.equal=TRUE`{.inline} is used when the two population variances should be considered equal. By default `t.test()`{.inline} uses a "not equals" H<sub>A</sub> and a 95% confidence interval. In the results below the two sample means are `r formatC(aqua2t$estimate[1],format="f",digits=4)` for the inlet group and `r formatC(aqua2t$estimate[2],format="f",digits=4)` for the outlet group such that the statistic is `r formatC(aqua2t$estimate[1],format="f",digits=4)`-`r formatC(aqua2t$estimate[2],format="f",digits=4)`=`r formatC(aqua2t$estimate[1]-aqua2t$estimate[2],format="f",digits=4)`; the t test statistic is `r formatC(aqua2t$statistic[1],format="f",digits=3)` with `r aqua2t$parameter` df; and the p-value is `r kPvalue(aqua2t$p.value,include.p=FALSE,latex=FALSE)` (or, more specifically, `r formatC(aqua2t$p.value,digits=4)`).^[I usually round my p-values to four decimal places. In this case that would mean 0.0000 which is awkward. Thus, I will say p<0.00005 as the fifth position must have been less than 5 to round to 0.0000.] Because the p-value<&alpha; the H<sub>0</sub> is rejected and we conclude that the mean BOD at the inlet is lower than the mean BOD at the outlet. More specifically, the mean BOD at the inlet is between `r formatC(-1*aqua2t$conf.int[2],format="f",digits=3)` and `r formatC(-1*aqua2t$conf.int[1],format="f",digits=3)` units lower than the mean BOD at the outlet. Thus, it appears that the mean BOD in the water is increased from when it enters to when it leaves the aquaculture facility.
 
 ```{r}
 t.test(BOD~src,data=aqua,var.equal=TRUE)
 ```
 
-A graphic that illustrates the mean BOD with 95% confidence intervals for each sampling location is constructed below. In the code below you only need to change `data=` to the name of your data and `x=` and `y=` to the names of the explanatory and response variables in the first line and provide appropriate labels for the x- and y-axes in `labs()`.
+A graphic that illustrates the mean BOD with 95% confidence intervals for each sampling location is constructed below. In the code below you only need to change `data=`{.inline} to the name of your data and `x=`{.inline} and `y=`{.inline} to the names of the explanatory and response variables in the first line and provide appropriate labels for the x- and y-axes in `labs()`{.inline}.
 
-```{r}
+```{r class.source="RCODE_ALONE"}
 ggplot(data=aqua,mapping=aes(x=src,y=BOD)) +
   geom_jitter(alpha=0.5,width=0.05) +
   stat_summary(fun.data=mean_cl_normal,geom="errorbar",size=2,width=0) +
@@ -106,12 +106,25 @@ d <- data.frame(y=y,
                 grp=rep(rep(c("A","B"),each=n),times=3),
                 sim=factor(rep(c("Small SE","Medium SE","Large SE"),each=n*2),
                            levels=c("Small SE","Medium SE","Large SE")))
+
+t1 <- t.test(y~grp,data=dplyr::filter(d,sim=="Small SE"),var.equal=TRUE)
+t1 <- paste0("t = ",formatC(t1$statistic,format="f",digits=3),", ",
+             FSA::kPvalue(t1$p.value,latex=FALSE))
+t2 <- t.test(y~grp,data=dplyr::filter(d,sim=="Medium SE"),var.equal=TRUE)
+t2 <- paste0("t = ",formatC(t2$statistic,format="f",digits=3),", ",
+             FSA::kPvalue(t2$p.value,latex=FALSE))
+t3 <- t.test(y~grp,data=dplyr::filter(d,sim=="Large SE"),var.equal=TRUE)
+t3 <- paste0("t = ",formatC(t3$statistic,format="f",digits=3),", ",
+             FSA::kPvalue(t3$p.value,latex=FALSE))
+
+d <- mutate(d,sim2=factor(rep(c(t1,t2,t3),each=n*2),levels=c(t1,t2,t3)))
+
 d1 <- filter(d,sim=="Small SE")
 ```
 
-The ratio of signal to noise can be a useful metaphor for understanding hypothesis testing, as we have done here, and model comparisons, as we will do in future modules. In this metaphor, think of "signal" as how different two things are and "noise" as anything that gets in the way of you receiving the signal. For example, the lights on a care are a "signal", but fog on the road is "noise" (Figure \@ref(fig:Signal2NoiseMetaphor)). As another example, it may be easy to see an orange kayak (the "signal") on Lake Superior on a calm day but harder to see it on a wavy day (i.e., more "noise"; Figure \@ref(fig:Signal2NoiseMetaphor)).
+The ratio of signal to noise can be a useful metaphor for understanding hypothesis testing, as we have done here, and model comparisons, as we will do in future modules. In this metaphor, think of "signal" as how different two things are and "noise" as anything that gets in the way of you receiving the signal. For example, the lights on a car are a "signal", but fog on the road is "noise". As another example, it may be easy to see an orange kayak (the "signal") on Lake Superior on a calm day but harder to see it on a wavy day (i.e., more "noise").
 
-```{r Signal2NoiseMetaphor, echo=FALSE, out.width="75%", fig.cap="Signal-to-noise metahpors - seeing car lights through fog (Left) and seeing a kayak in the waves (Right)."}
+```{r Signal2NoiseMetaphor, echo=FALSE, out.width="75%", fig.cap="Signal-to-noise metahpors - seeing car lights through fog (Left) and seeing a kayak in the waves (Right).", fig.show="hide"}
 knitr::include_graphics("zimgs/Signal2NoiseMetaphor.jpg")
 ```
 
@@ -139,7 +152,7 @@ tmp +
 ```
 
 ::: {.tip data-latex=""}
-The "signal" is the difference in sample means
+The "signal" is the difference in sample means.
 :::
 
 "Noise" is sampling variability, the fact that statistics (e.g., $\bar{x}_{1}$ and $\bar{x}_{2}$) vary from sample to sample. Sampling variability in a 2-sample t-test is measured by $SE_{\bar{x}_{1}-\bar{x}_{2}}$, which is the denominator of the t test statistic, or $\sqrt{s_{p}^{2}\left(\frac{1}{n_{1}}+\frac{1}{n_{2}}\right)}$. This SE increases with increasing $s_{p}^{2}$ and decreases with increasing n<sub>1</sub> and n<sub>2</sub>. So the "noise" increases as the (natural) variability of individuals increases (i.e., $s_{p}^{2}$; Figure \@ref(fig:SignalNoise2)), but decreases as the sample size increases.
@@ -171,7 +184,7 @@ tmp +
 ```
 
 ::: {.tip data-latex=""}
-The "noise" is sampling variability
+The "noise" is sampling variability.
 :::
 
 The ratio of signal to noise is related to whether we will be able to detect the difference between two things or not. If the signal is large relative to the noise then the signal will be detected. In other words, we will be able to see the car lights if the road is not foggy or we will more likely see the kayak if the lake is calm.
@@ -196,10 +209,22 @@ The t test statistic is a measure of signal (i.e., difference in sample means) t
 
 $$ t=\frac{\bar{x}_{1}-\bar{x}_{2}}{\sqrt{s_{p}^{2}\left(\frac{1}{n_{1}}+\frac{1}{n_{2}} \right)}} = \frac{\text{Signal}}{\text{Noise}} $$
 
-Thus, larger values of the t test statistic indicate a larger signal-to-noise ratio. Larger t test statistics are further into the tail of the t distribution and result in smaller p-values. Therefore, small p-values represent larger signal-to-noise ratios and are more likely to lead to concluding that the population means differ. In other words, you were able to detect the "signal" through the "noise."
+Thus, larger (absolute) values of the t test statistic indicate a larger signal-to-noise ratio (Figure \@ref(fig:SignalNoise4)). Larger t test statistics are further into the tail of the t distribution and result in smaller p-values. Therefore, small p-values represent larger signal-to-noise ratios (Figure \@ref(fig:SignalNoise4)) and are more likely to lead to concluding that the population means differ. In other words, you were able to detect the "signal" through the "noise."
+
+```{r SignalNoise4, echo=FALSE, fig.width=7.5, fig.height=3, fig.cap='Same as Figure \\@ref(fig:SignalNoise3) but with the t test statistic and corresponding p-value from the 2-sample t-test shown.'}
+ggplot(data=d,mapping=aes(y=y,x=grp,color=grp)) +
+  geom_point(alpha=0.5) +
+  stat_summary(geom="point",fun="mean",shape="-",size=15) +
+  labs(y="Response Variable",x="Group") +
+  scale_color_manual(values=clrs2) +
+  facet_wrap(vars(sim2),scales="free_y") +
+  theme_NCStats() +
+  theme(legend.position="none",
+        strip.text=element_text(face="bold"))
+```
 
 ::: {.tip data-latex=""}
-More signal-to-noise means smaller p-values
+More signal-to-noise means smaller p-values.
 :::
 
 We will return to the signal-to-noise metaphor throughout this course.
