@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-09-28" />
+<meta name="date" content="2021-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -435,7 +435,7 @@ Figure 22.1: Hypothetical depictions of the models for the null and alternative 
 <div class="sourceCode" id="cb161"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb161-1"><a href="IVRTesting.html#cb161-1" aria-hidden="true" tabindex="-1"></a>ivr1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species<span class="sc">+</span>weight<span class="sc">:</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
 <p>The simple model for the parallel lines test is the ultimate full model without the interaction variable(s).</p>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb162-1"><a href="IVRTesting.html#cb162-1" aria-hidden="true" tabindex="-1"></a>ivr2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight<span class="sc">+</span>species,<span class="at">data=</span>Mirex)</span></code></pre></div>
-<p>The comparison of the simple and full models can be summarized by submitting the two models to <code>anova()</code> (simple model first).</p>
+<p>The comparison of the simple and full models can be summarized by submitting the two models to <code class="inline">anova()</code> (simple model first).</p>
 <div class="sourceCode" id="cb163"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb163-1"><a href="IVRTesting.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr2,ivr1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  Analysis of Variance Table
 #R&gt;  
@@ -450,7 +450,7 @@ Figure 22.1: Hypothetical depictions of the models for the null and alternative 
 \text{F}=\frac{\frac{\text{RSS}_{\text{Simple}}-\text{RSS}_{\text{Full}}}{\text{df}_{\text{Simple}}-\text{df}_{\text{Full}}}}{\text{RMS}_{\text{Ultimate Full}}} =\frac{\frac{1.00708-0.97964}{119-118}}{\frac{0.97964}{118}} = \frac{\frac{0.027444}{1}}{0.00830} = \frac{0.02744}{0.00830} = 3.30566
 \]</span></p>
 <p> </p>
-<p>This calculation is the same (within rounding) as the value under <code>F</code> in the <code>anova()</code> results. The corresponding p-value is under the <code>Pr(&gt;F)</code> column.</p>
+<p>This calculation is the same (within rounding) as the value under <code>F</code> in the <code class="inline">anova()</code> results. The corresponding p-value is under the <code>Pr(&gt;F)</code> column.</p>
 <p>This p-value is larger than our typical rejection level of 0.05. Thus, we conclude that H<sub>0</sub> is NOT rejected, the simple model is adequate (as compared to the full model), the slopes appear to be equal, and the lines are parallel. With parallel lines, one concludes that the <em>relationship</em> between mirex concentration in the tissue and weight of the salmon is the <em>same</em> for Coho and Chinook Salmon.</p>
 <p>Two other hypothesis tests are considered in the next two sections. However, note that the parallel lines test <strong>is always considered first</strong>, because it is basically testing for an interaction effect. Thus, if the lines are not parallel (i.e., there is an interaction effect) then you will not perform the tests in the next two sections. Note that this is exactly what you did with the Two-Way ANOVA, where the significance of the interaction effect was assessed first, before deciding whether main effects could be considered.</p>
 <div class="tip">
@@ -521,7 +521,7 @@ Figure 22.4: Representation of two sub-model fits that are parallel but with dif
 <h4>Coincident Lines Test from Two Models in R</h4>
 <p>The full model for the coincident lines test was the simple model for the parallel lines test and was fit previously and saved as <code>ivr2</code>. The simple model for the coincident lines test is the simple linear regression model (i.e., no difference in slopes or intercepts); i.e.,</p>
 <div class="sourceCode" id="cb165"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb165-1"><a href="IVRTesting.html#cb165-1" aria-hidden="true" tabindex="-1"></a>ivr3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span>weight,<span class="at">data=</span>Mirex)</span></code></pre></div>
-<p>These models are compared with <code>anova()</code>; however, the ultimate full model must be included as well so that the proper residual MS (i.e., from the ultimate full model) will be used.</p>
+<p>These models are compared with <code class="inline">anova()</code>; however, the ultimate full model must be included as well so that the proper residual MS (i.e., from the ultimate full model) will be used.</p>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb166-1"><a href="IVRTesting.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr3,ivr2,ivr1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  Analysis of Variance Table
 #R&gt;  
@@ -538,7 +538,7 @@ Figure 22.4: Representation of two sub-model fits that are parallel but with dif
 \text{F}=\frac{\frac{\text{RSS}_{\text{Simple}}-\text{RSS}_{\text{Full}}}{\text{df}_{\text{Simple}}-\text{df}_{\text{Full}}}}{\text{RMS}_{\text{Ultimate Full}}} =\frac{\frac{1.00758-1.00708}{120-119}}{0.00830} = \frac{\frac{0.00050}{1}}{0.00830} = \frac{0.00050}{0.00830} = 0.06002
 \]</span></p>
 <p> </p>
-<p>Again, this is the F test-statistic (within rounding) shown in the (second row of the) <code>anova()</code> results.</p>
+<p>Again, this is the F test-statistic (within rounding) shown in the (second row of the) <code class="inline">anova()</code> results.</p>
 <p>This p-value (p=0.8087) is larger than our typical rejection level of 0.05. Thus, we conclude that H<sub>0</sub> is NOT rejected, the simple model is adequate (as compared to the full model), the intercepts appear to be equal, and the lines are coincident. With coincident lines, one can conclude, in addition to the relationship not differing between groups (i.e., parallel lines), that the mean mirex concentration in the tissue does NOT differ between Coho and Chinook Salmon of the same weight, no matter what that weight is.</p>
 <p> </p>
 </div>
@@ -585,7 +585,7 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 <h4>Relationship Test from Two Models in R</h4>
 <p>The full model for the relationship test was the simple module for the coincident lines test and was fit previously and saved as <code>ivr3</code>. The simple model for the relationship test is the so-called ultimate simple model<a href="#fn97" class="footnote-ref" id="fnref97"><sup>97</sup></a> and is fit with</p>
 <div class="sourceCode" id="cb168"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb168-1"><a href="IVRTesting.html#cb168-1" aria-hidden="true" tabindex="-1"></a>ivr4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mirex<span class="sc">~</span><span class="dv">1</span>,<span class="at">data=</span>Mirex)</span></code></pre></div>
-<p>These models are compared with <code>anova()</code>, again with the ultimate full model included so that the proper residual MS will be used.</p>
+<p>These models are compared with <code class="inline">anova()</code>, again with the ultimate full model included so that the proper residual MS will be used.</p>
 <div class="sourceCode" id="cb169"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb169-1"><a href="IVRTesting.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr4,ivr3,ivr1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  Analysis of Variance Table
 #R&gt;  
@@ -602,14 +602,14 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 \text{F}=\frac{\frac{\text{RSS}_{\text{Simple}}-\text{RSS}_{\text{Full}}}{\text{df}_{\text{Simple}}-\text{df}_{\text{Full}}}}{\text{RMS}_{\text{Ultimate Full}}} =\frac{\frac{1.23056-1.00758}{121-120}}{0.00830} = \frac{\frac{0.22298}{1}}{0.00830} = \frac{0.22298}{0.00830} = 26.8586
 \]</span></p>
 <p> </p>
-<p>Again, this is the F test-statistic (within rounding) shown in the (second row of the) <code>anova()</code> results.</p>
+<p>Again, this is the F test-statistic (within rounding) shown in the (second row of the) <code class="inline">anova()</code> results.</p>
 <p>This p-value (p&lt;0.00005) is less than our typical rejection level of 0.05. Thus, one would conclude that H<sub>0</sub> is rejected, the simple model is not adequate and the full model is needed, the slope for the coincident lines is not 0, and there is a relationship between mirex in the tissue and the weight of the salmon.</p>
 <p> </p>
 </div>
 </div>
 <div id="all-tests-in-r" class="section level2" number="22.5">
 <h2><span class="header-section-number">22.5</span> All Tests in R</h2>
-<p>The parallel lines, coincident lines, and relationship tests of an IVR appears to require fitting four models as shown in the previous three sections. However, these tests can be calculated more succinctly by submitting <strong>ONLY</strong> the ultimate full model (i.e., <code>ivr1</code>) to <code>anova()</code>.</p>
+<p>The parallel lines, coincident lines, and relationship tests of an IVR appears to require fitting four models as shown in the previous three sections. However, these tests can be calculated more succinctly by submitting <strong>ONLY</strong> the ultimate full model (i.e., <code>ivr1</code>) to <code class="inline">anova()</code>.</p>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb171-1"><a href="IVRTesting.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ivr1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  Analysis of Variance Table
 #R&gt;  
@@ -626,9 +626,9 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 <li>The <code>weight</code> (i.e., the covariate) row corresponds to the relationship test.</li>
 </ul>
 <p>Thus, as with a Two-Way ANOVA, this table should be read from the bottom to the top. If the interaction variable is significant (i.e., non-parallel lines) then the two “main effects” should not be considered. However, if no interaction effect is present (i.e., parallel lines) then the other two “effects” can be considered.</p>
-<p>So, in practice, fit the ultimate full model and submit it to <code>anova()</code> to construct this one table from which all three tests (if appropriate) can be assessed.</p>
+<p>So, in practice, fit the ultimate full model and submit it to <code class="inline">anova()</code> to construct this one table from which all three tests (if appropriate) can be assessed.</p>
 <div class="tip">
-<p>The parallel lines, coincident lines, and relationship test results are in the rows from <code>anova()</code> labeled with the interaction variable, the original factor variable, and the covariate, respectively.</p>
+<p>The parallel lines, coincident lines, and relationship test results are in the rows from <code class="inline">anova()</code> labeled with the interaction variable, the original factor variable, and the covariate, respectively.</p>
 </div>
 </div>
 <div id="more-groups-different-slopes" class="section level2" number="22.6">
@@ -641,7 +641,7 @@ Figure 22.5: Hypothetical depictions of the models for the null and alternative 
 #R&gt;   $ weight : num  0.41 0.45 1.04 1.09 1.24 1.25 1.3 1.34 1.37 1.49 ...
 #R&gt;   $ mirex  : num  0.16 0.19 0.19 0.1 0.13 0.19 0.28 0.16 0.17 0.2 ...
 #R&gt;   $ species: Factor w/ 2 levels &quot;chinook&quot;,&quot;coho&quot;: 1 1 1 2 1 1 1 2 2 2 ...</code></pre>
-<p>The IVR requires that the “grouping” variable be a factor. If it is not then <code>lm()</code> will not form indicator variables and will instead perform what is called a multiple linear regression. Thus, <code>year</code> must be converted to a factor.</p>
+<p>The IVR requires that the “grouping” variable be a factor. If it is not then <code class="inline">lm()</code> will not form indicator variables and will instead perform what is called a multiple linear regression. Thus, <code>year</code> must be converted to a factor.</p>
 <div class="sourceCode" id="cb175"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb175-1"><a href="IVRTesting.html#cb175-1" aria-hidden="true" tabindex="-1"></a>Mirex<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">factor</span>(Mirex<span class="sc">$</span>year)</span>
 <span id="cb175-2"><a href="IVRTesting.html#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Mirex)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  &#39;data.frame&#39;:  122 obs. of  4 variables:

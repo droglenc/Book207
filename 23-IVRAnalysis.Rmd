@@ -25,13 +25,13 @@ In Section \@ref(more-groups-different-slopes), IVR indicated that some slopes b
 
 &nbsp;
 
-The `emtrends()` function from the `emmeans` package^[The `emmeans` package was introduced in Section \@ref(multiple-comparisons-in-r).] can be used to test for differences among all pairs of slopes using a Tukey-like correction. This function requires the ultimate full model as its first argument (`ivrY1` here as fit in Section \@ref(parallel-lines-test)), a `specs=` argument with `pairwise~` followed by the name of the factor variable in the ultimate full model, and `var=` followed by the name of the covariate in the ultimate full model (which **must** be in quotes).^[Except for `var=` this is the same as for `emmeans()` described in Section \@ref(multiple-comparisons-in-r)] The results of this function should be saved to an object.
+The `emtrends()`{.inline} function from the `emmeans`{.inline} package^[The `emmeans`{.inline} package was introduced in Section \@ref(multiple-comparisons-in-r).] can be used to test for differences among all pairs of slopes using a Tukey-like correction. This function requires the ultimate full model as its first argument (`ivrY1` here as fit in Section \@ref(parallel-lines-test)), a `specs=`{.inline} argument with `pairwise~`{.inline} followed by the name of the factor variable in the ultimate full model, and `var=`{.inline} followed by the name of the covariate in the ultimate full model (which **must** be in quotes).^[Except for `var=`{.inline} this is the same as for `emmeans()`{.inline} described in Section \@ref(multiple-comparisons-in-r)] The results of this function should be saved to an object.
 
 ```{r}
 smc <- emtrends(ivrY1,pairwise~year,var="weight")
 ```
 
-That saved object is then the first argument to `summary()`, which also includes `infer=TRUE`. The results are in sections labeled as `$emtrends` and `$contrasts`.
+That saved object is then the first argument to `summary()`{.inline}, which also includes `infer=TRUE`{.inline}. The results are in sections labeled as `$emtrends` and `$contrasts`.
 
 ```{r}
 ( smcsum <- summary(smc,infer=TRUE) )
@@ -76,13 +76,13 @@ In Section \@ref(more-groups-same-slopes) of the last module, the IVR indicated 
 
 &nbsp;
 
-The `emmeans()` function from the `emmeans` package can be used to determine which pairs of intercepts differ (using a Tukey's correction). However, before using this function a new model with the insignificant interaction term removed should be fit.
+The `emmeans()`{.inline} function from the `emmeans`{.inline} package can be used to determine which pairs of intercepts differ (using a Tukey's correction). However, before using this function a new model with the insignificant interaction term removed should be fit.
 
 ```{r}
 ivrY2_noint <- lm(mirex~weight+year,data=MirexFirst3)
 ```
 
-The use of `emmeans` here is exactly the same as it was in Section \@ref(multiple-comparisons-in-r). Specifically, the model without the interaction term is the first argument and `pairwise~` is followed by the name of the factor variable in the model. The results are then submitted to `summary()` with `infer=TRUE` and the results are given in two sections labeled `$emmeans` and `$contrasts`.
+The use of `emmeans()`{.inline} here is exactly the same as it was in Section \@ref(multiple-comparisons-in-r). Specifically, the model without the interaction term is the first argument and `pairwise~`{.inline} is followed by the name of the factor variable in the model. The results are then submitted to `summary()`{.inline} with `infer=TRUE`{.inline} and the results are given in two sections labeled `$emmeans` and `$contrasts`.
 
 ```{r}
 imc <- emmeans(ivrY2_noint,pairwise~year)
@@ -142,7 +142,7 @@ ggplot(data=MirexFirst3,mapping=aes(x=weight,y=mirex,color=year)) +
 The mean value of the response at the mean value of the covariate, along with 95% confidence intervals and p-values, are shown in the `$emmeans` section of the results.
 :::
 
-The `emmeans()` function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extrapolation as discussed in Section \@ref(intercept). It is possible to compute the mean values of the response at other values of the covariate by using `cov.reduce=` in `emmeans()`. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure \@ref(fig:IVRExampleIntercepts2)).^[You can get the mean values of the response at a covariate of 0 (i.e., the actual y-intercepts) by using `cov.reduce=function(x) 0`.] Because the lines are parallel this does not change anything in the `$contrasts` portion of the output. However, the `$emmeans` portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.
+The `emmeans()`{.inline} function defaults to showing the mean value of the response for the mean value of the covariate because the intercept is often an extrapolation as discussed in Section \@ref(intercept). It is possible to compute the mean values of the response at other values of the covariate by using `cov.reduce=`{.inline} in `emmeans()`{.inline}. For example, the code below computes the mean values of the response at the minimum value of the covariate (and shown in Figure \@ref(fig:IVRExampleIntercepts2)).^[You can get the mean values of the response at a covariate of 0 (i.e., the actual y-intercepts) by using `cov.reduce=function(x) 0`{.inline}.] Because the lines are parallel this does not change anything in the `$contrasts` portion of the output. However, the `$emmeans` portion is changed because the mean values of the response is computed at, in this example, the minimum value rather than the mean value of the covariate. Using the default calculation at the mean of covariate is probably most appropriate for most situations in general and all situations in this course.
 
 ```{r}
 imc2 <- emmeans(ivrY2_noint,pairwise~year,cov.reduce=min)

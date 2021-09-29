@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-09-28" />
+<meta name="date" content="2021-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -494,7 +494,7 @@ Residuals
 </div>
 <div id="one-way-anova-in-r" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> One-Way ANOVA in R</h2>
-<p>The models for a one-way ANOVA are fit and assessed with <code>lm()</code> exactly as described for a 2-sample t-test in Section <a href="ModelComparison.html#two-sample-t-test-revisited-using-linear-models">4.8</a>.<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a></p>
+<p>The models for a one-way ANOVA are fit and assessed with <code class="inline">lm()</code> exactly as described for a 2-sample t-test in Section <a href="ModelComparison.html#two-sample-t-test-revisited-using-linear-models">4.8</a>.<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a></p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb24-1"><a href="ANOVA1Foundations.html#cb24-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(imm<span class="sc">~</span>season,<span class="at">data=</span>opp)</span>
 <span id="cb24-2"><a href="ANOVA1Foundations.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  Analysis of Variance Table
@@ -524,7 +524,7 @@ Residuals
 <li id="fn22"><p>Methods to identify which group means differ are in Module <a href="ANOVA1MultipleComparisons.html#ANOVA1MultipleComparisons">6</a>.<a href="ANOVA1Foundations.html#fnref22" class="footnote-back">↩︎</a></p></li>
 <li id="fn23"><p>The MS, F, and p-value are computed the same in nearly every ANOVA table encountered in this class.<a href="ANOVA1Foundations.html#fnref23" class="footnote-back">↩︎</a></p></li>
 <li id="fn24"><p>Note that MS<sub>Total</sub> <strong>must</strong> be computed from SS<sub>Total</sub> and df<sub>Total</sub> and not by summing MS<sub>Among</sub> an MS<sub>Within</sub>.<a href="ANOVA1Foundations.html#fnref24" class="footnote-back">↩︎</a></p></li>
-<li id="fn25"><p>As a reminder, <code>response~factor</code> is the first argument and a data frame is given in <code>data=</code> in <code>lm()</code>, the results of <code>lm()</code> should be assigned to an object, and the ANOVA table is extracted with <code>anova()</code>.<a href="ANOVA1Foundations.html#fnref25" class="footnote-back">↩︎</a></p></li>
+<li id="fn25"><p>As a reminder, <code class="inline">response~factor</code> is the first argument and a data frame is given in <code class="inline">data=</code> in <code class="inline">lm()</code>, the results of <code class="inline">lm()</code> should be assigned to an object, and the ANOVA table is extracted with <code class="inline">anova()</code>.<a href="ANOVA1Foundations.html#fnref25" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

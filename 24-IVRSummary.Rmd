@@ -9,32 +9,32 @@ The following is a process for fitting an IVR. Consider this process as you lear
 ---->
 1. Briefly introduce the study (i.e., provide some background for why this study is being conducted).
 1. State the hypotheses to be tested.
-1. Show the sample size per group using `xtabs()` and comment on whether the study was balanced (i.e., same sample size per group) or not.
+1. Show the sample size per group using `xtabs()`{.inline} and comment on whether the study was balanced (i.e., same sample size per group) or not.
 1. Assess the independence assumption.
     * If this assumption is not met then other analysis methods must be used.
-1. Fit the untransformed ultimate full model with `lm()`.
-1. Check the other four assumptions for the untransformed model with `assumptionCheck()`.
+1. Fit the untransformed ultimate full model with `lm()`{.inline}.
+1. Check the other four assumptions for the untransformed model with `assumptionCheck()`{.inline}.
     * Check linearity of the relationship with the residual plot.
     * Check homoscedasticity with the residual plot.
     * Check normality of residuals with an Anderson-Darling test and histogram of residuals.
     * Check outliers and influential points with the outlier test and residual plot.
 1. If an assumption or assumptions are violated, then attempt to find a transformation where the assumptions are met.
-    * Use trial-and-error with `assumptionCheck()`, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
+    * Use trial-and-error with `assumptionCheck()`{.inline}, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
         * Attempt transformations with the response variable first.
         * Generally only ever transform the explanatory variable with logarithms.
     * If only an outlier or influential observation exists (i.e., linear, homoscedastic, and normal residuals) and no transformation corrects the “problem,” then consider removing that observation from the data set.
     * Fit the ultimate full model with the transformed variable(s) or reduced data set.
-1. Construct an ANOVA table for the ultimate full model with `anova()`.
+1. Construct an ANOVA table for the ultimate full model with `anova()`{.inline}.
     * If a significant interaction exists then do NOT interpret the main effects!!
     * If a significant interaction does NOT exist then interpret the main effects (i.e., interpret the coincident lines and relationship test p-values).
 1. As appropriate, perform multiple comparisons to identify specific differences.
-    * If a significant interact exists (i.e., non-parallel lines) then use `emtrends()` and `summary()` to identify specific slopes that differ.
+    * If a significant interact exists (i.e., non-parallel lines) then use `emtrends()`{.inline} and `summary()`{.inline} to identify specific slopes that differ.
     * If a significant interaction does not exist (i.e., parallel lines) but the lines are not coincident (i.e., different slopes) ...
         * Fit a new model without the insignificant interaction term.
-        * Use `emmeans()` and `summary()` to identify specific mean values of the response at the mean value of the covariate that differ.
-1. Create a summary graphic of the fitted lines using the `ggplot()`.
+        * Use `emmeans()`{.inline} and `summary()`{.inline} to identify specific mean values of the response at the mean value of the covariate that differ.
+1. Create a summary graphic of the fitted lines using the `ggplot()`{.inline}.
     * Include the 95% confidence band and the observed data as long as the plot is not overly cluttered. If it is, just show the fitted lines.
-1. Make predictions with `predict()`, if desired.
+1. Make predictions with `predict()`{.inline}, if desired.
 1. Write a succinct conclusion of your findings. Make sure you address ...
     * whether the relationship between the response variable and the covariate differs among groups.
     * whether the mean value of the response variable at the mean value of the covariate differs among groups (if appropriate to address this).

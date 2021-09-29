@@ -97,7 +97,7 @@ A one-way ANOVA is **very sensitive** to outliers.
 :::
 
 ## Testing Assumptions in R
-All plots and tests of assumptions can be completed by submitting the saved `lm` object from when the One-Way ANOVA was computed to `assumptionCheck()`. For example, the code below fits the One-Way ANOVA for testing if the mean immunoglobulin levels of New Zealand opossums differs among seasons (the `opp` data frame was created in Module \@ref(ANOVA1MultipleComparisons)) and then performs the calculations needed to check the assumptions.
+All plots and tests of assumptions can be completed by submitting the saved `lm` object from when the One-Way ANOVA was computed to `assumptionCheck()`{.inline}. For example, the code below fits the One-Way ANOVA for testing if the mean immunoglobulin levels of New Zealand opossums differs among seasons (the `opp` data frame was created in Module \@ref(ANOVA1MultipleComparisons)) and then performs the calculations needed to check the assumptions.
 
 ```{r fig.width=7}
 lm1 <- lm(imm~season,data=opp)
@@ -106,7 +106,7 @@ assumptionCheck(lm1)
 
 &nbsp;
 
-For a One-Way ANOVA, `assumptionCheck()` produces a histogram of residuals with the Anderson-Darling and outlier test p-values on the left and a boxplot of residuals for each group with the Levene's Test p-value on the right.
+For a One-Way ANOVA, `assumptionCheck()`{.inline} produces a histogram of residuals with the Anderson-Darling and outlier test p-values on the left and a boxplot of residuals for each group with the Levene's Test p-value on the right.
 
 ```{r echo=FALSE, results="hide", warning=FALSE}
 lev.p <- levenesTest(lm1)$"Pr(>F)"[1]

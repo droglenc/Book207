@@ -280,7 +280,7 @@ ggplot(data=tmp,mapping=aes(x=p,y=r)) +
 &nbsp;
 
 ## Testing Assumptions in R
-The residual plot, histogram of residuals, Anderson-Darling test p-value, and outlier test p-value can all be constructed by submitting the saved `lm()` object to `assumptionCheck()`.^[This is exactly as you did for a One- and Two-Way ANOVA.] For example, the results below indicate that all assumptions are adequately met for the Mount Everest air temperature and altitude lapse rate regression -- i.e., there is no discernible or obvious curve or funnel-shape to the residual plot, the Anderson-Darling p-value indicates that the residuals are normally distributed, and the outlier test p-value does not indicate the presence of any outliers. It should be noted, however, that the sample size is very small in this case.
+The residual plot, histogram of residuals, Anderson-Darling test p-value, and outlier test p-value can all be constructed by submitting the saved `lm()`{.inline} object to `assumptionCheck()`{.inline}.^[This is exactly as you did for a One- and Two-Way ANOVA.] For example, the results below indicate that all assumptions are adequately met for the Mount Everest air temperature and altitude lapse rate regression -- i.e., there is no discernible or obvious curve or funnel-shape to the residual plot, the Anderson-Darling p-value indicates that the residuals are normally distributed, and the outlier test p-value does not indicate the presence of any outliers. It should be noted, however, that the sample size is very small in this case.
 
 ```{r fig.width=7,fig.height=3.75}
 assumptionCheck(lm1.ev)

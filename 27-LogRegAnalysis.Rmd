@@ -12,7 +12,7 @@ str(bliss)
 
 In this case, we want to model the probability of mortality (i.e., the beetle died) as a function of the concentration of gaseous carbon disulphide. With this objective, a "success" is a "dead" beetle. Thus, "dead" should be coded as "1" and "alive" (i.e., "not dead") as a "0". Indicator variables used as the response variable in a logistic regression model must be explicitly created by you.^[In contrast to indicator variables derived from factors behind-the-scenes as in Module \@ref(IVRVariables).]
 
-An indicator variable can be created with `ifelse()`, which takes a "condition" as its first argument, what should be returned if the condition is "yes" as the second argument, and what should be returned if the condition is "no" as the third argument. The code below creates a new `outcome01` variable in the `bliss` data frame that will be `1` if `outcome` is `dead` and `0` if `outcome` is not `dead`.^[Note that R uses `==` when asking if two things are equal. So the condition in this `ifelse()` is asking where the `oucome` variable in `bliss` is equal to `dead`.]
+An indicator variable can be created with `ifelse()`{.inline}, which takes a "condition" as its first argument, what should be returned if the condition is "yes" as the second argument, and what should be returned if the condition is "no" as the third argument. The code below creates a new `outcome01` variable in the `bliss` data frame that will be `1` if `outcome` is `dead` and `0` if `outcome` is not `dead`.^[Note that R uses `==`{.inline} when asking if two things are equal. So the condition in this `ifelse()`{.inline} is asking where the `outcome` variable in `bliss` is equal to `dead`.]
 
 ```{r}
 bliss$outcome01 <- ifelse(bliss$outcome=="dead",1,0)
@@ -25,24 +25,24 @@ head(bliss,n=8)
 ```
 
 ::: {.tip data-latex=""}
-The binary response variable must be explicitly converted to an indicator variable with `ifelse()` for constructing a logistic regression and plotting the results in R.
+The binary response variable must be explicitly converted to an indicator variable with `ifelse()`{.inline} for constructing a logistic regression and plotting the results in R.
 :::
 
 ## Fitting the Model
-The logistic regression model is fit with `glm()`, which is the **generalized linear model** function in R. The first argument to `glm()` is a formula of the form `var01~qvar` where `var01` is the indicator response variable created above and `qvar` is the quantitative explanatory variable, the data frame that contains these variables is in `data=`, and `family=binomial`. The `family=binomial` argument is critical because this tells `glm()` that the response variable should be treated as an indicator rather than quantitative variable, which signals `glm()` to fit a logistic regression model.
+The logistic regression model is fit with `glm()`{.inline}, which is the **generalized linear model** function in R. The first argument to `glm()`{.inline} is a formula of the form `var01~qvar`{.inline} where `var01` is the indicator response variable created above and `qvar` is the quantitative explanatory variable, the data frame that contains these variables is in `data=`{.inline}, and `family=binomial`{.inline}. The `family=binomial`{.inline} argument is critical because this tells `glm()`{.inline} that the response variable should be treated as an indicator rather than quantitative variable, which signals `glm()`{.inline} to fit a logistic regression model.
 
 ```{r}
 glm.bliss <- glm(outcome01~conc,data=bliss,family=binomial)
 ```
 
 ::: {.tip data-latex=""}
-Logistic regressions are fit in R with `glm()` rather than `lm()` because logistic regression is a *generalized* rather than a *general* linear model.
+Logistic regressions are fit in R with `glm()`{.inline} rather than `lm()`{.inline} because logistic regression is a *generalized* rather than a *general* linear model.
 :::
 
 ## Relationship Test
 Generalized linear models, like logistic regression, are fit with a method called *maximum likelihood (ML)* rather than least-squares (i.e,. minimizing the residual sums-of-squares) estimation. In a *very* loose sense, the "best" model with ML estimation is the model that is "most likely" (i.e., maximum) to fit the data, in contrast to the model that minimizes the lack-of-fit (i.e., sum-of-squares). Because ML estimation is different than least-squares, the usual model comparison procedure is different for the logistic regression model.
 
-A *likelihood ratio test* (LRT) is used to determine if the increased likelihood of a full model is "worth" the increased complexity of the full model. A LRT can be performed in R with `anova()`, the `glm()` object with the logistic regression fit, and `test="LRT"`. For example,
+A *likelihood ratio test* (LRT) is used to determine if the increased likelihood of a full model is "worth" the increased complexity of the full model. A LRT can be performed in R with `anova()`{.inline}, the `glm()`{.inline} object with the logistic regression fit, and `test="LRT"`{.inline}. For example,
 
 ```{r}
 anova(glm.bliss,test="LRT")
@@ -51,15 +51,15 @@ anova(glm.bliss,test="LRT")
 The p-value (under `Pr(>Chi)`) is very small in this case which indicates that the full model that has a slope parameter is a much better fit to the data than the simple model with no slope parameter. In other words, there is a significant relationship between the log odds of mortality and concentration of the calcium disulphide. By extension this means that there is a significant relationship between the probability of mortality and the concentration of calcium disulphide.
 
 ## Parameter Estimates {#LogRegParametersR}
-The estimated intercept and slope are extracted from the `glm()` object with `coef()`.
+The estimated intercept and slope are extracted from the `glm()`{.inline} object with `coef()`{.inline}.
 
-Confidence intervals constructed from bootstrap samples require bootstrap samples to be constructed first. There are many ways to construct bootstrap samples in R. We will use `Boot()` from the `car` package. This function will be called with `car::Boot()` so as to not have to load the entire `car` package. `Boot()` requires only the saved `glm()` object as its argument.^[The number of bootstrap samples defaults to 999, which is adequate for our purposes. This number of bootstrap samples can be modified with `R=`.] The results of `car::Boot()` should be saved to an object.^[`Boot()` may take many seconds to run, depending on the size of the original data frame and the number of bootstrapped samples taken.]
+Confidence intervals constructed from bootstrap samples require bootstrap samples to be constructed first. There are many ways to construct bootstrap samples in R. We will use `Boot()`{.inline} from the `car`{.inline} package. This function will be called with `car::Boot()`{.inline} so as to not have to load the entire `car`{.inline} package. `Boot()`{.inline} requires only the saved `glm()`{.inline} object as its argument.^[The number of bootstrap samples defaults to 999, which is adequate for our purposes. This number of bootstrap samples can be modified with `R=`{.inline}.] The results of `car::Boot()`{.inline} should be saved to an object.^[`Boot()`{.inline} may take many seconds to run, depending on the size of the original data frame and the number of bootstrapped samples taken.]
 
 ```{r}
 boot.bliss <- car::Boot(glm.bliss)
 ```
 
-The bootstrap confidence intervals for the intercept and slope are extracted from the `Boot()` object with `confint()`. Include `type="perc"` to perform the last step of the bootstrap steps shown in Section \@ref(variability-estimates).
+The bootstrap confidence intervals for the intercept and slope are extracted from the `Boot()`{.inline} object with `confint()`{.inline}. Include `type="perc"`{.inline} to perform the last step of the bootstrap steps shown in Section \@ref(variability-estimates).
 
 As before, I like to combine the parameter estimates and confidence intervals into one presentation.
 
@@ -69,11 +69,11 @@ cbind(Ests=coef(glm.bliss),confint(boot.bliss,type="perc"))
 
 ## Predictions {#LogRegPredictionsR}
 ### Functions for Bootstrapping
-The bootstrap method was introduced in Section \@ref(variability-estimates) as a way to estimate reliable confidence intervals for predicted probabilities and values of the explanatory variable for a given probability. Applying the bootstrap method for derived metrics like these requires specific functions to calculate the predicted probability for a given value of $X$ and the value of $X$ for a given probability. The `predProb()` below is the R version of
+The bootstrap method was introduced in Section \@ref(variability-estimates) as a way to estimate reliable confidence intervals for predicted probabilities and values of the explanatory variable for a given probability. Applying the bootstrap method for derived metrics like these requires specific functions to calculate the predicted probability for a given value of $X$ and the value of $X$ for a given probability. The `predProb()`{.inline} below is the R version of
 
 $$ p = \frac{e^{\alpha+\beta X}}{1+e^{\alpha+\beta X}} $$
 
-from Module \@ref(LogRegFoundations) and `predX()` below is the R version of
+from Module \@ref(LogRegFoundations) and `predX()`{.inline} below is the R version of
 
 $$ X = \frac{log\left(\frac{p}{1-p}\right)-\alpha}{\beta} $$
 
@@ -85,26 +85,26 @@ predX <- function(p,alpha,beta) (log(p/(1-p))-alpha)/beta
 ```
 
 ::: {.tip data-latex=""}
-Copy the code for `predProb()` and `predX()` as shown above directly into the beginning of your logistic regression script.
+Copy the code for `predProb()`{.inline} and `predX()`{.inline} as shown above directly into the beginning of your logistic regression script.
 :::
 
 ### Predictions
-The predicted log odds of mortality given a value of the concentration of calcium disulphide is found with `predict()`, similar to what was shown in previous modules. For example, the code below finds the log odds of mortality for a concentration of 70 mg/liter.
+The predicted log odds of mortality given a value of the concentration of calcium disulphide is found with `predict()`{.inline}, similar to what was shown in previous modules. For example, the code below finds the log odds of mortality for a concentration of 70 mg/liter.
 
 ```{r}
 nd <- data.frame(conc=70)
 predict(glm.bliss,newdata=nd)
 ```
 
-The probability, rather than log odds, can be found by including `type=response` in `predict()`.
+The probability, rather than log odds, can be found by including `type=response`{.inline} in `predict()`{.inline}.
 
 ```{r}
 predict(glm.bliss,newdata=nd,type="response")
 ```
 
-Unfortunately, confidence intervals for this prediction can not be constructed with `predict()`. Bootstrap confidence intervals, however, can be constructed using `predProb()` and the data frame of bootstrapped intercepts and slopes saved earlier. This is a bit of work so, lets work through this step-by-step.
+Unfortunately, confidence intervals for this prediction can not be constructed with `predict()`{.inline}. Bootstrap confidence intervals, however, can be constructed using `predProb()`{.inline} and the data frame of bootstrapped intercepts and slopes saved earlier. This is a bit of work so, lets work through this step-by-step.
 
-First, the boostrapped data is in the `t` object of the `Boot` object saved above.
+First, the bootstrapped data is in the `t=` object of the `Boot`{.inline} object saved above.
 
 ```{r}
 head(boot.bliss$t)
@@ -116,7 +116,7 @@ The intercepts are in the first column and the slopes are in the second. For exa
 round(boot.bliss$t[,2],2)
 ```
 
-Second, note that `predProb()` takes a value of $X$ at which to make the prediction as its first argument, an intercept as the second argument, and the slope as the third argument. If this function is given **all** of the bootstrapped intercepts and slopes then it will make a prediction at the supplied value of `x` for each bootstrapped sample. For example, the code below computes the predicted probability of mortality at a concentration of 70 mg/L for each bootstrapped sample (again, rounded to save space).
+Second, note that `predProb()`{.inline} takes a value of $X$ at which to make the prediction as its first argument, an intercept as the second argument, and the slope as the third argument. If this function is given **all** of the bootstrapped intercepts and slopes then it will make a prediction at the supplied value of `x` for each bootstrapped sample. For example, the code below computes the predicted probability of mortality at a concentration of 70 mg/L for each bootstrapped sample (again, rounded to save space).
 
 ```{r}
 p70 <- predProb(70,boot.bliss$t[,1],boot.bliss$t[,2])
@@ -125,7 +125,7 @@ p70 <- predProb(70,boot.bliss$t[,1],boot.bliss$t[,2])
 round(p70,2)
 ```
 
-The 95% bootstrapped confidence interval is between the two values in `p70` that have 2.5% and 97.5% of the values lower. These values are found with `quantile()` given the vector of values as the first argument, the percentages to "cut off" at as proportions in `probs=`, and `type=1` so that the quantiles computed here are the same as those in `confint()` above. For example, the 95% confidence interval for the predicted probability for a concentration of 70 mg/L is computed with
+The 95% bootstrapped confidence interval is between the two values in `p70` that have 2.5% and 97.5% of the values lower. These values are found with `quantile()`{.inline} given the vector of values as the first argument, the percentages to "cut off" at as proportions in `probs=`{.inline}, and `type=1`{.inline} so that the quantiles computed here are the same as those in `confint()`{.inline} above. For example, the 95% confidence interval for the predicted probability for a concentration of 70 mg/L is computed with
 
 ```{r}
 ( ci70 <- quantile(p70,c(0.025,0.975),type=1) )
@@ -133,7 +133,7 @@ The 95% bootstrapped confidence interval is between the two values in `p70` that
 
 Thus, one is 95% confident that the predicted probability of mortality for beetles exposed to 70 mg/l calcium disulphide is between `r formatC(ci70[1],format="f",digits=3)` and `r formatC(ci70[2],format="f",digits=3)`.
 
-A similar process is used to predict the concentration where 50%, for example, of the beetles will have died, except that `predX()` from above is used and it requires the probability of interest as a proportion as the first argument.
+A similar process is used to predict the concentration where 50%, for example, of the beetles will have died, except that `predX()`{.inline} from above is used and it requires the probability of interest as a proportion as the first argument.
 
 ```{r}
 x50 <- predX(0.5,boot.bliss$t[,1],boot.bliss$t[,2])
@@ -145,7 +145,7 @@ Thus, one is 95% confident that the predicted concentration where 50% of the bee
 &nbsp;
 
 ## Plotting Best-Fit Line
-The code below is used to construct a fitted-line plot for the logistic regression. The `alpha=` argument in `geom_point()` is used to make the points semi-transparent. This is important here because many points will be plotted on top of each other. With semi-transparency the visible "point" will become darker as more points are plotted on top of each other. You may need to try different values for `alpha=` (smaller values are more transparent). Also note that `geom_smooth` uses `method="glm"` instead of `lm`. The `method.args=` can be copied directly, but note that this just supplies the `family=` argument to `glm()` within `geom_smooth()`.
+The code below is used to construct a fitted-line plot for the logistic regression. The `alpha=`{.inline} argument in `geom_point()`{.inline} is used to make the points semi-transparent. This is important here because many points will be plotted on top of each other. With semi-transparency the visible "point" will become darker as more points are plotted on top of each other. You may need to try different values for `alpha=`{.inline} (smaller values are more transparent). Also note that `geom_smooth`{.inline} uses `method="glm"`{.inline} instead of `lm`{.inline}. The `method.args=`{.inline} can be copied directly, but note that this just supplies the `family=`{.inline} argument to `glm()`{.inline} within `geom_smooth()`{.inline}.
 
 ```{r}
 ggplot(data=bliss,mapping=aes(x=conc,y=outcome01)) +

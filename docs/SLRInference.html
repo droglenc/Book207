@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-09-28" />
+<meta name="date" content="2021-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -491,7 +491,7 @@ Figure 15.4: Example of centering the explanatory variable. The original data is
 #R&gt;  (Intercept) 21.388856057 17.442040728 25.335671386
 #R&gt;  Altitude    -0.005634136 -0.006822147 -0.004446125</code></pre>
 <p>While not discussed there, these confidence intervals were computed using <span class="math inline">\(SE_{\hat{\alpha}}\)</span> and <span class="math inline">\(SE_{\hat{\beta}}\)</span> and the confidence interval formulae discussed above.</p>
-<p>More summary information may be extracted by submitting the saved <code>lm()</code> object to <code>summary()</code>.</p>
+<p>More summary information may be extracted by submitting the saved <code class="inline">lm()</code> object to <code class="inline">summary()</code>.</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb93-1"><a href="SLRInference.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1.ev)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  Coefficients:
 #R&gt;                Estimate Std. Error t value Pr(&gt;|t|)
@@ -501,12 +501,12 @@ Figure 15.4: Example of centering the explanatory variable. The original data is
 #R&gt;  Residual standard error: 1.462 on 9 degrees of freedom
 #R&gt;  Multiple R-squared: 0.9275,    Adjusted R-squared: 0.9194 
 #R&gt;  F-statistic: 115.1 on 1 and 9 DF,  p-value: 1.987e-06</code></pre>
-<p>There are two portions of output from <code>summary()</code>. The top portion under “Coefficients:” contains information about the intercept in the row labeled “(Intercept)” and information about the slope in the row labeled with the name of the explanatory variable. Thus <span class="math inline">\(\hat{\alpha}\)</span> (=21.39) and <span class="math inline">\(\hat{\beta}\)</span> (=-0.0056) are under “Estimate” and the <span class="math inline">\(SE_{\hat{\alpha}}\)</span> (=1.74) and <span class="math inline">\(SE_{\hat{\beta}}\)</span> (=0.00053) are under “Std. Error.”</p>
+<p>There are two portions of output from <code class="inline">summary()</code>. The top portion under “Coefficients:” contains information about the intercept in the row labeled “(Intercept)” and information about the slope in the row labeled with the name of the explanatory variable. Thus <span class="math inline">\(\hat{\alpha}\)</span> (=21.39) and <span class="math inline">\(\hat{\beta}\)</span> (=-0.0056) are under “Estimate” and the <span class="math inline">\(SE_{\hat{\alpha}}\)</span> (=1.74) and <span class="math inline">\(SE_{\hat{\beta}}\)</span> (=0.00053) are under “Std. Error.”</p>
 <p>The values under “t value” and “Pr(&gt;|t|)” are the t test statistic and corresponding p-value for testing that the corresponding parameter is equal to zero or not. Because the specific value in the tests is zero, the t test statistic shown here is simply the “Estimate” divided by the “Std. Error.” For example, the test statistic for testing <span class="math inline">\(H_{0}: \beta = 0\)</span> versus <span class="math inline">\(H_{A}: \beta \ne 0\)</span> is <span class="math inline">\(t=\frac{-0.0056}{0.0005}\)</span> = -10.73. The corresponding p-value (0.000002) suggests that <span class="math inline">\(H_{0}\)</span> should be rejected and one would conclude that there is a significant relationship between the actual mean air temperature and the altitude lapse rate.</p>
 <div class="tip">
 <p>The default p-values printed by most softwares are ONLY for the specific <span class="math inline">\(H_{0}\)</span> that the corresponding parameter is equal to zero (vs. that it is not).</p>
 </div>
-<p>The remaining output from <code>summary()</code> is largely redundant with what will be discussed more thoroughly in Module <a href="SLRModels.html#SLRModels">16</a>. However, it should be noted that <span class="math inline">\(s_{Y|X}\)</span> is given after “Residual standard error:” Thus, in this case, the <strong>standard deviation</strong> of observations around the best-fit line is 1.462. The <strong>variance</strong> of the observations around the best fit line (<span class="math inline">\(s_{Y|X}^{2}\)</span>) discussed in Section <a href="SLRInference.html#variability-around-the-line">15.1</a> is this value squared or 1.462<sup>2</sup>=2.137.</p>
+<p>The remaining output from <code class="inline">summary()</code> is largely redundant with what will be discussed more thoroughly in Module <a href="SLRModels.html#SLRModels">16</a>. However, it should be noted that <span class="math inline">\(s_{Y|X}\)</span> is given after “Residual standard error:” Thus, in this case, the <strong>standard deviation</strong> of observations around the best-fit line is 1.462. The <strong>variance</strong> of the observations around the best fit line (<span class="math inline">\(s_{Y|X}^{2}\)</span>) discussed in Section <a href="SLRInference.html#variability-around-the-line">15.1</a> is this value squared or 1.462<sup>2</sup>=2.137.</p>
 <p> </p>
 </div>
 <div id="predicting-means" class="section level2" number="15.5">
@@ -515,7 +515,7 @@ Figure 15.4: Example of centering the explanatory variable. The original data is
 <p><span class="math display">\[
 \hat{\mu}_{Y|X=x_{0}} = \hat{\alpha} + \hat{\beta}x_{0}
 \]</span></p>
-<p>Example predictions were made “by hand” and using <code>predict()</code> in R in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a>.</p>
+<p>Example predictions were made “by hand” and using <code class="inline">predict()</code> in R in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a>.</p>
 <p>These predictions are the best estimate of the <strong>mean</strong> response for <strong>all</strong> individuals with an explanatory variable of <span class="math inline">\(x_{0}\)</span> – i.e., <span class="math inline">\(\hat{\mu}_{Y|X=x_{0}}\)</span> and is called a <em>fitted value</em> because the best-fit line actually “fits” the mean values of <span class="math inline">\(Y\)</span> at a given value of <span class="math inline">\(X\)</span>.</p>
 <div class="defn">
 <p><strong>Fitted value</strong>: Predicted <em>mean</em> value of the response variable for <em>all</em> individuals with a given value of the explanatory variable – i.e., <span class="math inline">\(\hat{\mu}_{Y|X=x_{0}}\)</span></p>
@@ -589,7 +589,7 @@ value of the response variable at a given value of the explanatory variable. <sp
 </div>
 <div id="predictions-in-r" class="section level2" number="15.7">
 <h2><span class="header-section-number">15.7</span> Predictions in R</h2>
-<p>As shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a> a prediction can be made in R with <code>predict()</code> using the saved <code>lm()</code> object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the <code>lm()</code> object. A confidence or prediction interval can be constructed by including <code>interval="confidence"</code> or <code>interval="prediction"</code>, respectively.</p>
+<p>As shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a> a prediction can be made in R with <code class="inline">predict()</code> using the saved <code class="inline">lm()</code> object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the <code class="inline">lm()</code> object. A confidence or prediction interval can be constructed by including <code class="inline">interval="confidence"</code> or <code class="inline">interval="prediction"</code>, respectively.</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb95-1"><a href="SLRInference.html#cb95-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="dv">2552</span>)  <span class="co"># create data.frame first to save typing</span></span>
 <span id="cb95-2"><a href="SLRInference.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;         fit      lwr     upr
@@ -598,7 +598,7 @@ value of the response variable at a given value of the explanatory variable. <sp
 <pre class="ROUTPUT"><code>#R&gt;         fit      lwr      upr
 #R&gt;  1 7.010541 3.468216 10.55287</code></pre>
 <p>Thus, one is 95% confident that the <strong>mean</strong> actual mean air temperature is between 5.74 and 8.28<sup>o</sup>C for <strong>all</strong> stations when the altitude lapse rate is 2552 C/km. In contrast one is 95% confident that the actual mean air temperature is between 3.47 and 10.55<sup>o</sup>C for <strong>a</strong> station when the altitude lapse rate is 2552 C/km.</p>
-<p>Note that multiple predictions can be made at once by including more values in the data frame given to <code>predict()</code>.</p>
+<p>Note that multiple predictions can be made at once by including more values in the data frame given to <code class="inline">predict()</code>.</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb99-1"><a href="SLRInference.html#cb99-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Altitude=</span><span class="fu">c</span>(<span class="dv">2552</span>,<span class="dv">3000</span>))</span>
 <span id="cb99-2"><a href="SLRInference.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm1.ev,<span class="at">newdata=</span>nd,<span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;         fit      lwr      upr
@@ -608,7 +608,7 @@ value of the response variable at a given value of the explanatory variable. <sp
 <pre class="ROUTPUT"><code>#R&gt;         fit      lwr       upr
 #R&gt;  1 7.010541 3.468216 10.552866
 #R&gt;  2 4.486448 1.023270  7.949626</code></pre>
-<p>The confidence band can be added to the scatterplot with the best-fit line (as shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a>) by leaving off <code>se=FALSE</code> in <code>geom_smooth()</code>. Use <code>color=</code> to change the color of the best-fit line and <code>fill=</code> to change the color of the confidence band (if so desired).</p>
+<p>The confidence band can be added to the scatterplot with the best-fit line (as shown in Section <a href="SLRFoundations.html#best-fit-line-in-r">14.3</a>) by leaving off <code class="inline">se=FALSE</code> in <code class="inline">geom_smooth()</code>. Use <code class="inline">color=</code> to change the color of the best-fit line and <code class="inline">fill=</code> to change the color of the confidence band (if so desired).</p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb103-1"><a href="SLRInference.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>ev,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>Altitude,<span class="at">y=</span>MeanAirTemp)) <span class="sc">+</span> </span>
 <span id="cb103-2"><a href="SLRInference.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">pch=</span><span class="dv">21</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb103-3"><a href="SLRInference.html#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Altitude Lapse Rate (C/km)&quot;</span>,<span class="at">y=</span><span class="st">&quot;Mean Air Temperature (C)&quot;</span>) <span class="sc">+</span> </span>
@@ -618,7 +618,7 @@ value of the response variable at a given value of the explanatory variable. <sp
 <div class="tip">
 <p>Scatterplots depicting the best-fit line should usually be augmented with the confidence band.</p>
 </div>
-<p>Adding the prediction bands is more work because it is not automatically computed within any <code>geom</code>.</p>
+<p>Adding the prediction bands is more work because it is not automatically computed within any <code class="inline">geom_</code>.</p>
 <p> </p>
 
 </div>

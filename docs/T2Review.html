@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-09-28" />
+<meta name="date" content="2021-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -414,7 +414,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-6"><a href="T2Review.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(src))</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="tip">
-<p>The <code>ggplot2</code> package is required to make plots with <code>ggplot()</code>.</p>
+<p>The <code class="inline">ggplot2</code> package is required to make plots with <code class="inline">ggplot()</code>.</p>
 </div>
 <p>Levene’s test is computed with <code class="inline">levenesTest()</code> using a formula of <code class="inline">response~groups</code> as the first argument, where <code class="inline">response</code> represents the name of the quantitative response variable and <code class="inline">groups</code> represents the name of the categorical variable that identifies the two populations. The data.frame with the variables must be in <code class="inline">data=</code>. From the results below, it is concluded that the population variances appear to be equal because the Levene’s test p-value (0.5913) is greater than α=0.05.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb12-1"><a href="T2Review.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levenesTest</span>(BOD<span class="sc">~</span>src,<span class="at">data=</span>aqua)</span></code></pre></div>

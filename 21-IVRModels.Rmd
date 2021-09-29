@@ -279,14 +279,14 @@ ggplot(data=IVR4Sits,mapping=aes(x=x,y=y,color=group)) +
 &nbsp;
 
 ## Ultimate Full Model in R
-Fitting the ultimate full model in R is straightforward because it is essentially the same as fitting a Two-Way ANOVA (see \@ref(model-fitting-in-r)) and R automatically creates the indicator variables behind the scenes. The ultimate full model for an IVR is fit in `lm()` with  `response~covariate+factor+covariate:factor`,^[Shorthand for fitting this model is `response~covariate*factor`.] with the variables on the right-hand-side in that order to match what was done above.
+Fitting the ultimate full model in R is straightforward because it is essentially the same as fitting a Two-Way ANOVA (see \@ref(model-fitting-in-r)) and R automatically creates the indicator variables behind the scenes. The ultimate full model for an IVR is fit in `lm()`{.inline} with  `response~covariate+factor+covariate:factor`{.inline},^[Shorthand for fitting this model is `response~covariate*factor`{.inline}.] with the variables on the right-hand-side in that order to match what was done above.
 
 ```{r}
 ivr1 <- lm(mirex~weight+species+weight:species,data=Mirex)
 ```
 
 #### Extracting Parameter Estimates {-}
-The parameter estimates and their confidence intervals are extractd with `coef()` and `confint()` as before.
+The parameter estimates and their confidence intervals are extracted with `coef()`{.inline} and `confint()`{.inline} as before.
 
 ```{r eval=FALSE}
 cbind(Ests=coef(ivr1),confint(ivr1))
@@ -302,7 +302,7 @@ Parameter estimates under the "Ests" column are in rows that are generally label
 Of course, inferential methods are needed to determine if these results suggest a real difference in parameters between populations. For example, a statistical test of whether $\gamma_{1}=0$ would be used to determine if the population slopes differed between Coho and Chinook salmon. These types of tests are introduced in Module \@ref(IVRTesting).
 
 #### Fitted Line Plots {-}
-A visual of the fitted IVR model is constructed the same as the visual for an SLR model except that the color of the points and the regression line for each group is mapped to the factor variable. The plotting character and colors should then be removed from `geom_point()`. For example, note the `color=species` in `mapping=aes()` and the simplicity of `geom_point()` in the code below.
+A visual of the fitted IVR model is constructed the same as the visual for an SLR model except that the color of the points and the regression line for each group is mapped to the factor variable. The plotting character and colors should then be removed from `geom_point()`{.inline}. For example, note the `color=species`{.inline} in `mapping=aes()`{.inline} and the simplicity of `geom_point()`{.inline} in the code below.
 
 ```{r fig.width=4.5}
 ggplot(data=Mirex,mapping=aes(x=weight,y=mirex,color=species)) +  
@@ -317,7 +317,7 @@ ggplot(data=Mirex,mapping=aes(x=weight,y=mirex,color=species)) +
 From this plot, note that the intercept for Coho is less than the intercept for Chinook (as you would expect because $\hat{\delta}_{1}$=`r cf.m1f[3,"Ests"]`) and the slope for Coho is greater than (i.e., steeper) than that for Chinook (as you would expect because $\hat{\gamma}_{1}$=`r cf.m1f[4,"Ests"]`)
 
 #### Predictions {-}
-Predicted values for IVR models are constructed by submitting the `lm()` object and a data frame of observed values of the explanatory variables to `predict()`, as was described for SLR models (see Section \@ref(predictions-in-r)). One must make sure, though, that the data frame contains an observed value for each explanatory variable found in the `lm()` object.
+Predicted values for IVR models are constructed by submitting the `lm()`{.inline} object and a data frame of observed values of the explanatory variables to `predict()`{.inline}, as was described for SLR models (see Section \@ref(predictions-in-r)). One must make sure, though, that the data frame contains an observed value for each explanatory variable found in the `lm()`{.inline} object.
 
 For example, the predicted value, with a 95% prediction interval, for a 3 kg Coho Salmon is found with
 

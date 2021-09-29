@@ -9,26 +9,26 @@ The following is a process for fitting a Two-Way ANOVA model. Consider this proc
 ---->
 1. Briefly introduce the study (i.e., provide some background for why this study is being conducted).
 1. State the hypotheses to be tested.
-1. Show the sample size per group using `xtabs()` and comment on whether the study was balanced (i.e., same sample size per group) or not.
+1. Show the sample size per group using `xtabs()`{.inline} and comment on whether the study was balanced (i.e., same sample size per group) or not.
 1. Address the independence assumption.
     * If this assumption is not met then other analysis methods must be used.^[This will not be the case in this course.]
-1. Fit the untransformed ultimate full model (i.e., both main effects and the interaction effect) model with `lm()`.
-1. Check the other three assumptions for the untransformed model with `assumptionCheck()`.
+1. Fit the untransformed ultimate full model (i.e., both main effects and the interaction effect) model with `lm()`{.inline}.
+1. Check the other three assumptions for the untransformed model with `assumptionCheck()`{.inline}.
     * Check equality of variances with a Levene's test and residual plot.
     * Check normality of residuals with a Anderson-Darling test and histogram of residuals.
     * Check for outliers with an outlier test, residual plot, and histogram of residuals.
 1. If an assumption or assumptions are violated, then attempt to find a transformation where the assumptions are met.
-    * Use the trial-and-error method with `assumptionCheck()`, theory, or experience to identify a possible transformation. Always try the log transformation first.
+    * Use the trial-and-error method with `assumptionCheck()`{.inline}, theory, or experience to identify a possible transformation. Always try the log transformation first.
     * If only an outlier exists (i.e., there are equal variances and normal residuals) and no transformation corrects the outlier then consider removing the outlier from the data set.
     * Fit the ultimate full model with the transformed response or reduced data set.
-1. Construct an ANOVA table for the full model with `anova()`.
+1. Construct an ANOVA table for the full model with `anova()`{.inline}.
     * If a significant interaction exists then do NOT interpret the main effects!!
     * If a significant interaction does NOT exist then interpret the main effects.
         * Fit a new model without the insignificant interaction term.
-1. If an effect exists, then use a multiple comparison technique with `emmeans()` and `summary()` to identify specific differences. Describe specific differences using confidence intervals.
+1. If an effect exists, then use a multiple comparison technique with `emmeans()`{.inline} and `summary()`{.inline} to identify specific differences. Describe specific differences using confidence intervals.
     * If a significant interaction exists then perform multiple comparisons on the interaction term using the model that contained an interaction term.
     * If a significant interaction does not exist then perform multiple comparisons for each factor for which a main effect exists using the model without an interaction term.
-1. Create a summary graphic of treatment means (i.e., an interaction plot) **on the original scale** with 95% confidence intervals using `ggplot()` and results from `emmeans()` using the model with an interaction term.
+1. Create a summary graphic of treatment means (i.e., an interaction plot) **on the original scale** with 95% confidence intervals using `ggplot()`{.inline} and results from `emmeans()`{.inline} using the model with an interaction term.
 1. Write a succinct conclusion of your findings.
 
 &nbsp;

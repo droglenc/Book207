@@ -264,7 +264,7 @@ cbind(Est=coef(lm1.ev),confint(lm1.ev))
 
 While not discussed there, these confidence intervals were computed using $SE_{\hat{\alpha}}$ and $SE_{\hat{\beta}}$ and the confidence interval formulae discussed above.
 
-More summary information may be extracted by submitting the saved `lm()` object to `summary()`.
+More summary information may be extracted by submitting the saved `lm()`{.inline} object to `summary()`{.inline}.
 
 ```{r}
 summary(lm1.ev)
@@ -274,7 +274,7 @@ coef1.ev <- summary(lm1.ev)$coefficients
 sigma.ev <- summary(lm1.ev)$sigma
 ```
 
-There are two portions of output from `summary()`. The top portion under "Coefficients:" contains information about the intercept in the row labeled "(Intercept)" and information about the slope in the row labeled with the name of the explanatory variable. Thus $\hat{\alpha}$ (=`r formatC(coef1.ev["(Intercept)","Estimate"],format="f",digits=2)`) and $\hat{\beta}$ (=`r formatC(coef1.ev["Altitude","Estimate"],format="f",digits=4)`) are under "Estimate" and the $SE_{\hat{\alpha}}$ (=`r formatC(coef1.ev["(Intercept)","Std. Error"],format="f",digits=2)`) and $SE_{\hat{\beta}}$ (=`r formatC(coef1.ev["Altitude","Std. Error"],format="f",digits=5)`) are under "Std. Error".
+There are two portions of output from `summary()`{.inline}. The top portion under "Coefficients:" contains information about the intercept in the row labeled "(Intercept)" and information about the slope in the row labeled with the name of the explanatory variable. Thus $\hat{\alpha}$ (=`r formatC(coef1.ev["(Intercept)","Estimate"],format="f",digits=2)`) and $\hat{\beta}$ (=`r formatC(coef1.ev["Altitude","Estimate"],format="f",digits=4)`) are under "Estimate" and the $SE_{\hat{\alpha}}$ (=`r formatC(coef1.ev["(Intercept)","Std. Error"],format="f",digits=2)`) and $SE_{\hat{\beta}}$ (=`r formatC(coef1.ev["Altitude","Std. Error"],format="f",digits=5)`) are under "Std. Error".
 
 The values under "t value" and "Pr(>|t|)" are the t test statistic and corresponding p-value for testing that the corresponding parameter is equal to zero or not. Because the specific value in the tests is zero, the t test statistic shown here is simply the "Estimate" divided by the "Std. Error." For example, the test statistic for testing $H_{0}: \beta = 0$ versus $H_{A}: \beta \ne 0$ is $t=\frac{`r formatC(coef1.ev["Altitude","Estimate"],format="f",digits=4)`}{`r formatC(coef1.ev["Altitude","Std. Error"],format="f",digits=4)`}$ = `r formatC(coef1.ev["Altitude","t value"],format="f",digits=2)`. The corresponding p-value (`r kPvalue(coef1.ev["Altitude","Pr(>|t|)"],digits=6,latex=FALSE,include.p=FALSE)`) suggests that $H_{0}$ should be rejected and one would conclude that there is a significant relationship between the actual mean air temperature and the altitude lapse rate.
 
@@ -282,7 +282,7 @@ The values under "t value" and "Pr(>|t|)" are the t test statistic and correspon
 The default p-values printed by most softwares are ONLY for the specific $H_{0}$ that the corresponding parameter is equal to zero (vs. that it is not).
 :::
 
-The remaining output from `summary()` is largely redundant with what will be discussed more thoroughly in Module \@ref(SLRModels). However, it should be noted that $s_{Y|X}$ is given after "Residual standard error:". Thus, in this case, the **standard deviation** of observations around the best-fit line is `r formatC(sigma.ev,format="f",digits=3)`. The **variance** of the observations around the best fit line ($s_{Y|X}^{2}$) discussed in Section \@ref(variability-around-the-line) is this value squared or `r formatC(sigma.ev,format="f",digits=3)`<sup>2</sup>=`r formatC(sigma.ev^2,format="f",digits=3)`.
+The remaining output from `summary()`{.inline} is largely redundant with what will be discussed more thoroughly in Module \@ref(SLRModels). However, it should be noted that $s_{Y|X}$ is given after "Residual standard error:". Thus, in this case, the **standard deviation** of observations around the best-fit line is `r formatC(sigma.ev,format="f",digits=3)`. The **variance** of the observations around the best fit line ($s_{Y|X}^{2}$) discussed in Section \@ref(variability-around-the-line) is this value squared or `r formatC(sigma.ev,format="f",digits=3)`<sup>2</sup>=`r formatC(sigma.ev^2,format="f",digits=3)`.
 
 &nbsp;
 
@@ -293,7 +293,7 @@ $$
 \hat{\mu}_{Y|X=x_{0}} = \hat{\alpha} + \hat{\beta}x_{0}
 $$
 
-Example predictions were made "by hand" and using `predict()` in R in Section \@ref(best-fit-line-in-r).
+Example predictions were made "by hand" and using `predict()`{.inline} in R in Section \@ref(best-fit-line-in-r).
 
 These predictions are the best estimate of the **mean** response for **all** individuals with an explanatory variable of $x_{0}$ -- i.e., $\hat{\mu}_{Y|X=x_{0}}$ and is called a *fitted value* because the best-fit line actually "fits" the mean values of $Y$ at a given value of $X$.
 
@@ -474,7 +474,7 @@ Finally, note that making a prediction (i.e., plugging a value of $X$ into the e
 &nbsp;
 
 ## Predictions in R
-As shown in Section \@ref(best-fit-line-in-r) a prediction can be made in R with `predict()` using the saved `lm()` object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the `lm()` object. A confidence or prediction interval can be constructed by including `interval="confidence"` or `interval="prediction"`, respectively.
+As shown in Section \@ref(best-fit-line-in-r) a prediction can be made in R with `predict()`{.inline} using the saved `lm()`{.inline} object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the `lm()`{.inline} object. A confidence or prediction interval can be constructed by including `interval="confidence"`{.inline} or `interval="prediction"`{.inline}, respectively.
 
 ```{r}
 nd <- data.frame(Altitude=2552)  # create data.frame first to save typing
@@ -488,7 +488,7 @@ pi1 <- predict(lm1.ev,newdata=nd,interval="prediction")
 
 Thus, one is 95% confident that the **mean** actual mean air temperature is between `r formatC(ci1[2],format="f",digits=2)` and `r formatC(ci1[3],format="f",digits=2)`<sup>o</sup>C for **all** stations when the altitude lapse rate is 2552 C/km. In contrast one is 95% confident that the actual mean air temperature is between `r formatC(pi1[2],format="f",digits=2)` and `r formatC(pi1[3],format="f",digits=2)`<sup>o</sup>C for **a** station when the altitude lapse rate is 2552 C/km.
 
-Note that multiple predictions can be made at once by including more values in the data frame given to `predict()`.
+Note that multiple predictions can be made at once by including more values in the data frame given to `predict()`{.inline}.
 
 ```{r}
 nd <- data.frame(Altitude=c(2552,3000))
@@ -496,7 +496,7 @@ predict(lm1.ev,newdata=nd,interval="confidence")
 predict(lm1.ev,newdata=nd,interval="prediction")
 ```
 
-The confidence band can be added to the scatterplot with the best-fit line (as shown in Section \@ref(best-fit-line-in-r)) by leaving off `se=FALSE` in `geom_smooth()`. Use `color=` to change the color of the best-fit line and `fill=` to change the color of the confidence band (if so desired).
+The confidence band can be added to the scatterplot with the best-fit line (as shown in Section \@ref(best-fit-line-in-r)) by leaving off `se=FALSE`{.inline} in `geom_smooth()`{.inline}. Use `color=`{.inline} to change the color of the best-fit line and `fill=`{.inline} to change the color of the confidence band (if so desired).
 
 ```{r}
 ggplot(data=ev,mapping=aes(x=Altitude,y=MeanAirTemp)) + 
@@ -506,11 +506,10 @@ ggplot(data=ev,mapping=aes(x=Altitude,y=MeanAirTemp)) +
   geom_smooth(method="lm",color="black",fill="lightgray")
 ```
 
-
 ::: {.tip data-latex=""}
 Scatterplots depicting the best-fit line should usually be augmented with the confidence band.
 :::
 
-Adding the prediction bands is more work because it is not automatically computed within any `geom`.
+Adding the prediction bands is more work because it is not automatically computed within any `geom_`{.inline}.
 
 &nbsp;

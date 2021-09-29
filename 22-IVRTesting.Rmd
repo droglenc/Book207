@@ -110,7 +110,7 @@ The simple model for the parallel lines test is the ultimate full model without 
 ivr2 <- lm(mirex~weight+species,data=Mirex)
 ```
 
-The comparison of the simple and full models can be summarized by submitting the two models to `anova()` (simple model first).
+The comparison of the simple and full models can be summarized by submitting the two models to `anova()`{.inline} (simple model first).
 
 ```{r}
 anova(ivr2,ivr1)
@@ -136,7 +136,7 @@ $$
 
 &nbsp;
 
-This calculation is the same (within rounding) as the value under `F` in the `anova()` results. The corresponding p-value is under the `Pr(>F)` column.
+This calculation is the same (within rounding) as the value under `F` in the `anova()`{.inline} results. The corresponding p-value is under the `Pr(>F)` column.
 
 This p-value is larger than our typical rejection level of 0.05. Thus, we conclude that H<sub>0</sub> is NOT rejected, the simple model is adequate (as compared to the full model), the slopes appear to be equal, and the lines are parallel. With parallel lines, one concludes that the *relationship* between mirex concentration in the tissue and weight of the salmon is the *same* for Coho and Chinook Salmon.
 
@@ -271,7 +271,7 @@ The full model for the coincident lines test was the simple model for the parall
 ivr3 <- lm(mirex~weight,data=Mirex)
 ```
 
-These models are compared with `anova()`; however, the ultimate full model must be included as well so that the proper residual MS (i.e., from the ultimate full model) will be used.
+These models are compared with `anova()`{.inline}; however, the ultimate full model must be included as well so that the proper residual MS (i.e., from the ultimate full model) will be used.
 
 ```{r}
 anova(ivr3,ivr2,ivr1)
@@ -296,7 +296,7 @@ $$
 
 &nbsp;
 
-Again, this is the F test-statistic (within rounding) shown in the (second row of the) `anova()` results.
+Again, this is the F test-statistic (within rounding) shown in the (second row of the) `anova()`{.inline} results.
 
 This p-value (`r kPvalue(aov2$"Pr(>F)"[2],latex=FALSE)`) is larger than our typical rejection level of 0.05. Thus, we conclude that H<sub>0</sub> is NOT rejected, the simple model is adequate (as compared to the full model), the intercepts appear to be equal, and the lines are coincident. With coincident lines, one can conclude, in addition to the relationship not differing between groups (i.e., parallel lines), that the mean mirex concentration in the tissue does NOT differ between Coho and Chinook Salmon of the same weight, no matter what that weight is.
 
@@ -376,7 +376,7 @@ The full model for the relationship test was the simple module for the coinciden
 ivr4 <- lm(mirex~1,data=Mirex)
 ```
 
-These models are compared with `anova()`, again with the ultimate full model included so that the proper residual MS will be used.
+These models are compared with `anova()`{.inline}, again with the ultimate full model included so that the proper residual MS will be used.
 
 ```{r}
 anova(ivr4,ivr3,ivr1)
@@ -401,14 +401,14 @@ $$
 
 &nbsp;
 
-Again, this is the F test-statistic (within rounding) shown in the (second row of the) `anova()` results.
+Again, this is the F test-statistic (within rounding) shown in the (second row of the) `anova()`{.inline} results.
 
 This p-value (`r kPvalue(aov3$"Pr(>F)"[2],latex=FALSE)`) is less than our typical rejection level of 0.05. Thus, one would conclude that H<sub>0</sub> is rejected, the simple model is not adequate and the full model is needed, the slope for the coincident lines is not 0, and there is a relationship between mirex in the tissue and the weight of the salmon.
 
 &nbsp;
 
 ## All Tests in R
-The parallel lines, coincident lines, and relationship tests of an IVR appears to require fitting four models as shown in the previous three sections. However, these tests can be calculated more succinctly by submitting **ONLY** the ultimate full model (i.e., `ivr1`) to `anova()`. 
+The parallel lines, coincident lines, and relationship tests of an IVR appears to require fitting four models as shown in the previous three sections. However, these tests can be calculated more succinctly by submitting **ONLY** the ultimate full model (i.e., `ivr1`) to `anova()`{.inline}. 
 
 ```{r}
 anova(ivr1)
@@ -422,10 +422,10 @@ A close comparison of this one set of results to the results in the three previo
 
 Thus, as with a Two-Way ANOVA, this table should be read from the bottom to the top. If the interaction variable is significant (i.e., non-parallel lines) then the two "main effects" should not be considered. However, if no interaction effect is present (i.e., parallel lines) then the other two "effects" can be considered.
 
-So, in practice, fit the ultimate full model and submit it to `anova()` to construct this one table from which all three tests (if appropriate) can be assessed.
+So, in practice, fit the ultimate full model and submit it to `anova()`{.inline} to construct this one table from which all three tests (if appropriate) can be assessed.
 
 ::: {.tip data-latex=""}
-The parallel lines, coincident lines, and relationship test results are in the rows from `anova()` labeled with the interaction variable, the original factor variable, and the covariate, respectively.
+The parallel lines, coincident lines, and relationship test results are in the rows from `anova()`{.inline} labeled with the interaction variable, the original factor variable, and the covariate, respectively.
 :::
 
 ## More Groups (Different Slopes)
@@ -437,7 +437,7 @@ Before continuing, take note that `year` in the `Mirex` data frame is considered
 str(Mirex)
 ```
 
-The IVR requires that the "grouping" variable be a factor. If it is not then `lm()` will not form indicator variables and will instead perform what is called a multiple linear regression. Thus, `year` must be converted to a factor.
+The IVR requires that the "grouping" variable be a factor. If it is not then `lm()`{.inline} will not form indicator variables and will instead perform what is called a multiple linear regression. Thus, `year` must be converted to a factor.
 
 ```{r}
 Mirex$year <- factor(Mirex$year)

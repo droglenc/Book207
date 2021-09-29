@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-09-28" />
+<meta name="date" content="2021-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -378,13 +378,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>Briefly introduce the study (i.e., provide some background for why this study is being conducted).</li>
 <li>State the hypotheses to be tested.</li>
-<li>Show the sample size per group using <code>xtabs()</code> and comment on whether the study was balanced (i.e., same sample size per group) or not.</li>
+<li>Show the sample size per group using <code class="inline">xtabs()</code> and comment on whether the study was balanced (i.e., same sample size per group) or not.</li>
 <li>Assess the independence assumption.
 <ul>
 <li>If this assumption is not met then other analysis methods must be used.</li>
 </ul></li>
-<li>Fit the untransformed ultimate full model with <code>lm()</code>.</li>
-<li>Check the other four assumptions for the untransformed model with <code>assumptionCheck()</code>.
+<li>Fit the untransformed ultimate full model with <code class="inline">lm()</code>.</li>
+<li>Check the other four assumptions for the untransformed model with <code class="inline">assumptionCheck()</code>.
 <ul>
 <li>Check linearity of the relationship with the residual plot.</li>
 <li>Check homoscedasticity with the residual plot.</li>
@@ -393,7 +393,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>If an assumption or assumptions are violated, then attempt to find a transformation where the assumptions are met.
 <ul>
-<li>Use trial-and-error with <code>assumptionCheck()</code>, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
+<li>Use trial-and-error with <code class="inline">assumptionCheck()</code>, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
 <ul>
 <li>Attempt transformations with the response variable first.</li>
 <li>Generally only ever transform the explanatory variable with logarithms.</li>
@@ -401,25 +401,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>If only an outlier or influential observation exists (i.e., linear, homoscedastic, and normal residuals) and no transformation corrects the “problem,” then consider removing that observation from the data set.</li>
 <li>Fit the ultimate full model with the transformed variable(s) or reduced data set.</li>
 </ul></li>
-<li>Construct an ANOVA table for the ultimate full model with <code>anova()</code>.
+<li>Construct an ANOVA table for the ultimate full model with <code class="inline">anova()</code>.
 <ul>
 <li>If a significant interaction exists then do NOT interpret the main effects!!</li>
 <li>If a significant interaction does NOT exist then interpret the main effects (i.e., interpret the coincident lines and relationship test p-values).</li>
 </ul></li>
 <li>As appropriate, perform multiple comparisons to identify specific differences.
 <ul>
-<li>If a significant interact exists (i.e., non-parallel lines) then use <code>emtrends()</code> and <code>summary()</code> to identify specific slopes that differ.</li>
+<li>If a significant interact exists (i.e., non-parallel lines) then use <code class="inline">emtrends()</code> and <code class="inline">summary()</code> to identify specific slopes that differ.</li>
 <li>If a significant interaction does not exist (i.e., parallel lines) but the lines are not coincident (i.e., different slopes) …
 <ul>
 <li>Fit a new model without the insignificant interaction term.</li>
-<li>Use <code>emmeans()</code> and <code>summary()</code> to identify specific mean values of the response at the mean value of the covariate that differ.</li>
+<li>Use <code class="inline">emmeans()</code> and <code class="inline">summary()</code> to identify specific mean values of the response at the mean value of the covariate that differ.</li>
 </ul></li>
 </ul></li>
-<li>Create a summary graphic of the fitted lines using the <code>ggplot()</code>.
+<li>Create a summary graphic of the fitted lines using the <code class="inline">ggplot()</code>.
 <ul>
 <li>Include the 95% confidence band and the observed data as long as the plot is not overly cluttered. If it is, just show the fitted lines.</li>
 </ul></li>
-<li>Make predictions with <code>predict()</code>, if desired.</li>
+<li>Make predictions with <code class="inline">predict()</code>, if desired.</li>
 <li>Write a succinct conclusion of your findings. Make sure you address …
 <ul>
 <li>whether the relationship between the response variable and the covariate differs among groups.</li>

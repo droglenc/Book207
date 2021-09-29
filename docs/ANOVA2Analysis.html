@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-09-28" />
+<meta name="date" content="2021-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -380,16 +380,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   $ density: Factor w/ 3 levels &quot;1&quot;,&quot;2&quot;,&quot;4&quot;: 1 1 1 1 1 1 1 1 1 1 ...
 #R&gt;   $ mass   : num  0.91 0.65 1.58 0.98 1.07 0.84 0.88 1.47 0.94 0.72 ...</code></pre>
 <div class="tip">
-<p>An explanatory (or factor) variable must be a character or factor type in R before it can be used in <code>lm()</code> for a Two-Way ANOVA.</p>
+<p>An explanatory (or factor) variable must be a character or factor type in R before it can be used in <code class="inline">lm()</code> for a Two-Way ANOVA.</p>
 </div>
-<p>When performing a Two-Way ANOVA with <code>lm()</code> the first argument must be a formula of the form <code>response~factorA+factorB+factorA:factorB</code><a href="#fn63" class="footnote-ref" id="fnref63"><sup>63</sup></a> where <code>response</code> is the response variable, <code>factorA</code> and <code>factorB</code> are the two factor variables, and <code>factorA:factorB</code> tells <code>lm()</code> to include the interaction between the two factor variables. Thus, the Two-Way ANOVA model for the tadpole experiment is fit with</p>
+<p>When performing a Two-Way ANOVA with <code class="inline">lm()</code> the first argument must be a formula of the form <code class="inline">response~factorA+factorB+factorA:factorB</code><a href="#fn63" class="footnote-ref" id="fnref63"><sup>63</sup></a> where <code>response</code> is the response variable, <code>factorA</code> and <code>factorB</code> are the two factor variables, and <code>factorA:factorB</code> tells <code class="inline">lm()</code> to include the interaction between the two factor variables. Thus, the Two-Way ANOVA model for the tadpole experiment is fit with</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb58-1"><a href="ANOVA2Analysis.html#cb58-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mass<span class="sc">~</span>density<span class="sc">+</span>uvb<span class="sc">+</span>density<span class="sc">:</span>uvb,<span class="at">data=</span>tad)</span></code></pre></div>
 <p>As usual, the results are saved to an object that will be used to check assumptions, create an ANOVA table, and make multiple comparisons.</p>
 <p> </p>
 </div>
 <div id="assumptions" class="section level2" number="12.2">
 <h2><span class="header-section-number">12.2</span> Assumptions</h2>
-<p>The assumptions for a Two-Way ANOVA are exactly the same as for a One-Way ANOVA as shown in Module <a href="ANOVA1Assumptions.html#ANOVA1Assumptions">7</a>. Thus, as described in that module, <code>assumptionCheck()</code> is used with the saved <code>lm()</code> object to compute tests and create graphics to assess the assumptions.</p>
+<p>The assumptions for a Two-Way ANOVA are exactly the same as for a One-Way ANOVA as shown in Module <a href="ANOVA1Assumptions.html#ANOVA1Assumptions">7</a>. Thus, as described in that module, <code class="inline">assumptionCheck()</code> is used with the saved <code class="inline">lm()</code> object to compute tests and create graphics to assess the assumptions.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb59-1"><a href="ANOVA2Analysis.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1)</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-45-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p> </p>
@@ -400,7 +400,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="main-and-interaction-effects-anova-table" class="section level2" number="12.3">
 <h2><span class="header-section-number">12.3</span> Main and Interaction Effects (ANOVA Table)</h2>
-<p>The ANOVA table is extracted from the <code>lm()</code> object with <code>anova()</code>.</p>
+<p>The ANOVA table is extracted from the <code class="inline">lm()</code> object with <code class="inline">anova()</code>.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb60-1"><a href="ANOVA2Analysis.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  Analysis of Variance Table
 #R&gt;  
@@ -419,10 +419,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">12.4</span> Multiple Comparisons</h2>
 <div id="main-effects-1" class="section level3" number="12.4.1">
 <h3><span class="header-section-number">12.4.1</span> Main Effects</h3>
-<p>When an interaction is not present, as is the case here, multiple comparisons are conducted for factors related to any significant main effect. However, multiple comparisons on the main effects are compromised by the interaction term in the model. This is seen by the note from <code>emmeans()</code> below, where I tried to perform multiple comparisons for the density main effect with a model (<code>lm1</code>) that contains an interaction term.</p>
+<p>When an interaction is not present, as is the case here, multiple comparisons are conducted for factors related to any significant main effect. However, multiple comparisons on the main effects are compromised by the interaction term in the model. This is seen by the note from <code class="inline">emmeans()</code> below, where I tried to perform multiple comparisons for the density main effect with a model (<code>lm1</code>) that contains an interaction term.</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb62-1"><a href="ANOVA2Analysis.html#cb62-1" aria-hidden="true" tabindex="-1"></a>mc1 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1,<span class="at">specs=</span>pairwise<span class="sc">~</span>density) <span class="co"># lm1 has an interaction term!!</span></span></code></pre></div>
 <pre class="RMESSAGE"><code>#R&gt;  NOTE: Results may be misleading due to involvement in interactions</code></pre>
-<p>This issue can be avoided by fitting a new model without the interaction term and then using that model for performing multiple comparisons. A model without an interaction term is fit using <code>response~factorA+factorB</code> in <code>lm()</code>. The ANOVA table is shown below to confirm that the interaction term is not in this new model.</p>
+<p>This issue can be avoided by fitting a new model without the interaction term and then using that model for performing multiple comparisons. A model without an interaction term is fit using <code class="inline">response~factorA+factorB</code> in <code class="inline">lm()</code>. The ANOVA table is shown below to confirm that the interaction term is not in this new model.</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb64-1"><a href="ANOVA2Analysis.html#cb64-1" aria-hidden="true" tabindex="-1"></a>lm1_noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(mass<span class="sc">~</span>density<span class="sc">+</span>uvb,<span class="at">data=</span>tad)</span>
 <span id="cb64-2"><a href="ANOVA2Analysis.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1_noint)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  Analysis of Variance Table
@@ -461,7 +461,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="interaction-effects-1" class="section level3" number="12.4.2">
 <h3><span class="header-section-number">12.4.2</span> Interaction Effects</h3>
-<p>If an interaction effect had been present in the original Two-Way ANOVA model, multiple comparisons must be carried out to determine which pairs of <strong>treatment</strong> means differ. This is easily accomplished with <code>emmeans()</code> by using the interaction variable in the <code>pairwise~</code> formula. For example, if <code>lm1</code> had had a significant interaction term, then multiple comparisons for all pairs of treatments would be computed as follows.</p>
+<p>If an interaction effect had been present in the original Two-Way ANOVA model, multiple comparisons must be carried out to determine which pairs of <strong>treatment</strong> means differ. This is easily accomplished with <code class="inline">emmeans()</code> by using the interaction variable in the <code class="inline">pairwise~</code> formula. For example, if <code>lm1</code> had had a significant interaction term, then multiple comparisons for all pairs of treatments would be computed as follows.</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb68-1"><a href="ANOVA2Analysis.html#cb68-1" aria-hidden="true" tabindex="-1"></a>mc1 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(lm1,<span class="at">specs=</span>pairwise<span class="sc">~</span>density<span class="sc">:</span>uvb)</span>
 <span id="cb68-2"><a href="ANOVA2Analysis.html#cb68-2" aria-hidden="true" tabindex="-1"></a>( mc1sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(mc1,<span class="at">infer=</span><span class="cn">TRUE</span>) )</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  $emmeans
@@ -518,16 +518,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #R&gt;   4       Low   0.786 0.0884 84    0.610    0.962   8.892  &lt;.0001
 #R&gt;  
 #R&gt;  Confidence level used: 0.95</code></pre>
-<p>Specifically, we want to plot the results in the <code>emmean</code> column with the confidence intervals in <code>lower.CL</code> and <code>upper.CL</code> against one of the factor variables. One issue that arises is that the confidence intervals overlap for the multiple treatments defined by one level of the variable on the x-axis. Thus, before plotting, a “dodge” amount is defined with <code>position_dodge()</code> that will shift the levels slightly left and right to eliminate the overlap. The <code>width=</code> argument defines the amount of shift. You may need to “play” with this value to get the exact look that you want.</p>
+<p>Specifically, we want to plot the results in the <code>emmean</code> column with the confidence intervals in <code>lower.CL</code> and <code>upper.CL</code> against one of the factor variables. One issue that arises is that the confidence intervals overlap for the multiple treatments defined by one level of the variable on the x-axis. Thus, before plotting, a “dodge” amount is defined with <code class="inline">position_dodge()</code> that will shift the levels slightly left and right to eliminate the overlap. The <code class="inline">width=</code> argument defines the amount of shift. You may need to “play” with this value to get the exact look that you want.</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb72-1"><a href="ANOVA2Analysis.html#cb72-1" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.1</span>)</span></code></pre></div>
 <p>The summary graphic is constructed with the code below. This code is similar to what was used for the summary graphic in Section <a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r">6.3</a> for a One-Way ANOVA. However, this code is somewhat simpler because the individual observations are not plotted to eliminate clutter. Further, note</p>
 <ul>
 <li>the use of <code>mc1sum$emmeans</code> as the data,</li>
-<li>the use of <code>density</code> (i.e., one of the factor variables) as <code>x=</code>,</li>
-<li>the use of <code>uvb</code> (i.e., the other factor variale) in <code>group=</code> (so it will be “dodged”) and <code>color=</code> (so it will be denoted with different colors),</li>
-<li>that <code>geom_line()</code> is placed first so that the points and confidence intervals will be on top of the connecting lines,</li>
-<li>that <code>alpha=</code> is used in <code>geom_line()</code> so that the lines are subtle, and</li>
-<li>the use of <code>pd</code> from <code>position_dodge()</code> above in <code>geom_errobar()</code> and <code>geom_point()</code>.</li>
+<li>the use of <code>density</code> (i.e., one of the factor variables) as <code class="inline">x=</code>,</li>
+<li>the use of <code>uvb</code> (i.e., the other factor variale) in <code class="inline">group=</code> (so it will be “dodged”) and <code class="inline">color=</code> (so it will be denoted with different colors),</li>
+<li>that <code class="inline">geom_line()</code> is placed first so that the points and confidence intervals will be on top of the connecting lines,</li>
+<li>that <code class="inline">alpha=</code> is used in <code class="inline">geom_line()</code> so that the lines are subtle, and</li>
+<li>the use of <code>pd</code> from <code class="inline">position_dodge()</code> above in <code class="inline">geom_errobar()</code> and <code class="inline">geom_point()</code>.</li>
 </ul>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb73-1"><a href="ANOVA2Analysis.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mc1sum<span class="sc">$</span>emmeans,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>density,<span class="at">group=</span>uvb,<span class="at">color=</span>uvb,</span>
 <span id="cb73-2"><a href="ANOVA2Analysis.html#cb73-2" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">y=</span>emmean,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL)) <span class="sc">+</span></span>
@@ -541,7 +541,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="main-effects-plot" class="section level3" number="12.5.2">
 <h3><span class="header-section-number">12.5.2</span> Main Effects Plot</h3>
-<p>Some researchers prefer to plot just the main effects when there is no significant interaction effect in the data. Such a plot is called a <strong>main effects</strong> plot and can be constructed similarly from the multiple comparison results using the model without an interaction term. Note that <code>group=1</code> must be used as shown below so that <code>geom_line()</code> will work properly.</p>
+<p>Some researchers prefer to plot just the main effects when there is no significant interaction effect in the data. Such a plot is called a <strong>main effects</strong> plot and can be constructed similarly from the multiple comparison results using the model without an interaction term. Note that <code class="inline">group=1</code> must be used as shown below so that <code class="inline">geom_line()</code> will work properly.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb74-1"><a href="ANOVA2Analysis.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mc1sum_noint<span class="sc">$</span>emmeans,</span>
 <span id="cb74-2"><a href="ANOVA2Analysis.html#cb74-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>density,<span class="at">group=</span><span class="dv">1</span>,<span class="at">y=</span>emmean,<span class="at">ymin=</span>lower.CL,<span class="at">ymax=</span>upper.CL)) <span class="sc">+</span></span>
 <span id="cb74-3"><a href="ANOVA2Analysis.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="fl">1.1</span>,<span class="at">alpha=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>

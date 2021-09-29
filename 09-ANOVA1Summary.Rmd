@@ -10,22 +10,22 @@ The process of fitting and interpreting linear models is as much an art as it is
 ---->
 1. Briefly introduce the study (i.e., provide some background for why this study is being conducted).
 1. State the hypotheses to be tested.
-1. Show the sample size per group using `xtabs()` and comment on whether the study was balanced (i.e., same sample size per group) or not.
+1. Show the sample size per group using `xtabs()`{.inline} and comment on whether the study was balanced (i.e., same sample size per group) or not.
 1. Address the independence assumption.
     * If this assumption is not met then other analysis methods should be used.^[This will not be the case in this course.]
-1. Fit the untransformed full model (i.e., separate group means) with `lm()`.
-1. Check the other three assumptions for the untransformed model with `assumptionCheck()`.
+1. Fit the untransformed full model (i.e., separate group means) with `lm()`{.inline}.
+1. Check the other three assumptions for the untransformed model with `assumptionCheck()`{.inline}.
     * Check equality of variances with a Levene's test and residual plot.
     * Check normality of residuals with an Anderson-Darling test and histogram of residuals.
     * Check for outliers with an outlier test, residual plot, and histogram of residuals.
 1. If an assumption or assumptions are violated, then attempt to find a transformation where the assumptions are met.
-    * Use the trial-and-error method with `lambday=` in `assumptionCheck()`, theory, or experience to identify a possible transformation. Always try the log transformation first.
+    * Use the trial-and-error method with `lambday=`{.inline} in `assumptionCheck()`{.inline}, theory, or experience to identify a possible transformation. Always try the log transformation first.
     * If only an outlier exists (i.e., there are equal variances and normal residuals) and no transformation corrects the outlier then *consider* removing the outlier from the data set.
     * Fit the ultimate full model with the transformed response or reduced data set.
-1. Construct an ANOVA table for the full model with `anova()` and make a conclusion about the equality of means from the p-value.
-1. If differences among group means exist, then use a multiple comparison technique with `emmeans()` and `summary()` to identify specific differences. Discuss specific differences **using confidence intervals**.
-    * If the data were log-transformed then discuss specific ratios of means using back-transformed differences (use `tran=` in `emmeans()` and `type="response"` in `summary()` to compute the back-transformations).
-1. Create a summary graphic of observations with group means **on the original scale** and 95% confidence intervals using `ggplot()` and results from `emmeans()`.
+1. Construct an ANOVA table for the full model with `anova()`{.inline} and make a conclusion about the equality of means from the p-value.
+1. If differences among group means exist, then use a multiple comparison technique with `emmeans()`{.inline} and `summary()`{.inline} to identify specific differences. Discuss specific differences **using confidence intervals**.
+    * If the data were log-transformed then discuss specific ratios of means using back-transformed differences (use `tran=`{.inline} in `emmeans()`{.inline} and `type="response"`{.inline} in `summary()`{.inline} to compute the back-transformations).
+1. Create a summary graphic of observations with group means **on the original scale** and 95% confidence intervals using `ggplot()`{.inline} and results from `emmeans()`{.inline}.
 1. Write a succinct conclusion of your findings.
 
 &nbsp;

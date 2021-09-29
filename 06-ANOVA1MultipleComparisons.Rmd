@@ -82,15 +82,15 @@ anova(lm1)
 
 Once again, there appears to be some significant difference in the mean immunoglobulin values among the three months (`r kPvalue(aov1$"Pr(>F)"[1],include.p=FALSE,latex=FALSE)`<&alpha;). Thus, a multiple comparisons procedure is warranted here to identify exactly which pairs of means differ.
 
-There are a number of functions and packages in R for computing Tukey's multiple comparisons. I prefer to use functions in the `emmeans` package because those functions will generalize to other methods, some of which we will use in other modules and some of which you may use in more advanced statistics courses.^[The `emmeans` package must be attached with `library()` before its functions can be used. If you use the template provided with this course then this is done there automatically.]
+There are a number of functions and packages in R for computing Tukey's multiple comparisons. I prefer to use functions in the `emmeans`{.inline} package because those functions will generalize to other methods, some of which we will use in other modules and some of which you may use in more advanced statistics courses.^[The `emmeans`{.inline} package must be attached with `library()`{.inline} before its functions can be used. If you use the template provided with this course then this is done there automatically.]
 
-Tukey's procedure is computed with a two-step process. First, use `emmeans()` with the `lm()` object as the first argument and a `specs=` argument with `pairwise~` followed by the name of the explanatory variable that identifies the groups. The results from this function should be saved to an object.
+Tukey's procedure is computed with a two-step process. First, use `emmeans()`{.inline} with the `lm()`{.inline} object as the first argument and a `specs=`{.inline} argument with `pairwise~`{.inline} followed by the name of the explanatory variable that identifies the groups. The results from this function should be saved to an object.
 
 ```{r}
 mc <- emmeans(lm1,specs=pairwise~season)
 ```
 
-That saved object is then the first argument to `summary()`, which also uses `infer=TRUE`. This again should be saved to an object.^[The parentheses around this function force R to print the result at the same time that the results are being saved to an object.] The results are in two "sections" labeled as `$emmeans` and `$contrasts`.
+That saved object is then the first argument to `summary()`{.inline}, which also uses `infer=TRUE`{.inline}. This again should be saved to an object.^[The parentheses around this function force R to print the result at the same time that the results are being saved to an object.] The results are in two "sections" labeled as `$emmeans` and `$contrasts`.
 
 ```{r}
 ( mcsum <- summary(mc,infer=TRUE) )
@@ -110,7 +110,7 @@ The group means with 95% confidence intervals are shown in the `$emmeans` sectio
 
 A plot of group means with 95% confidence intervals using the results in `$emmeans` is slightly different than shown in Sections \@ref(two-sample-t-test-revisited-using-linear-models) and \@ref(one-way-anova-in-r) because the raw data and the means with their confidence intervals are in separate data frames. While this method is slightly more complicated, it will generalize to a wider variety of situations seen throughout the course.
 
-The `data=` and `mapping=aes()` arguments are not included in the initial `ggplot()` because we will be drawing variables from two data frames. Thus, `geom_jitter()` below adds the raw data to the plot, jittered to decrease overlap; `geom_errorbar()` creates the error bars from the `$emmeans` object, and `geom_point()` simply overlays the mean from the `$emmeans` object. Note that in the code below you would only need to modify the two `data=` arguments, the three `x=` arguments (to the grouping variables), and the one `y=` argument in `geom_jitter()` (to the response variable).
+The `data=`{.inline} and `mapping=aes()`{.inline} arguments are not included in the initial `ggplot()`{.inline} because we will be drawing variables from two data frames. Thus, `geom_jitter()`{.inline} below adds the raw data to the plot, jittered to decrease overlap; `geom_errorbar()`{.inline} creates the error bars from the `$emmeans` object, and `geom_point()`{.inline} simply overlays the mean from the `$emmeans` object. Note that in the code below you would only need to modify the two `data=`{.inline} arguments, the three `x=`{.inline} arguments (to the grouping variables), and the one `y=`{.inline} argument in `geom_jitter()`{.inline} (to the response variable).
 
 ```{r}
 ggplot() +

@@ -174,7 +174,7 @@ In addition to the usual meanings attached to MS<sub>Among</sub>, MS<sub>Within<
 &nbsp;
 
 ## One-Way ANOVA in R
-The models for a one-way ANOVA are fit and assessed with `lm()` exactly as described for a 2-sample t-test in Section \@ref(two-sample-t-test-revisited-using-linear-models).^[As a reminder, `response~factor` is the first argument and a data frame is given in `data=` in `lm()`, the results of `lm()` should be assigned to an object, and the ANOVA table is extracted with `anova()`.]
+The models for a one-way ANOVA are fit and assessed with `lm()`{.inline} exactly as described for a 2-sample t-test in Section \@ref(two-sample-t-test-revisited-using-linear-models).^[As a reminder, `response~factor`{.inline} is the first argument and a data frame is given in `data=`{.inline} in `lm()`{.inline}, the results of `lm()`{.inline} should be assigned to an object, and the ANOVA table is extracted with `anova()`{.inline}.]
 
 ```{r echo=TRUE}
 lm1 <- lm(imm~season,data=opp)

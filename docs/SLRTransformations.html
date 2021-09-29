@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-09-28" />
+<meta name="date" content="2021-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -468,7 +468,7 @@ Figure 18.4: Same as previous figure but plotted with the y-axis on the logarith
 <li>If transforming the explanatory to logarithms alone does not meet the assumptions then leave the explanatory variable transformed to logarithms and then work through the ladder of transformations for the response.</li>
 </ol>
 <p>Note that with the above process that you will (i) try to find a transformation of just the response variable first and (ii) will only every transform the explanatory variable to the logarithm scale. Additionally, you should try hard to avoid “odd” combinations of transformations. In other words, it is better to use logs for both the response and explanatory variable if the assumptions are slightly not met then to use, for example, the square root of the response variable and the logarithm of the explanatory variable.</p>
-<p>The trial-and-error method can be completed with <code>assumptionCheck()</code> largely as descried in Section <a href="ANOVA1Transformations.html#power-transformations">8.1</a> but noting that both <code>lambday=</code> and <code>lambdax=</code> may be used for the <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> variables, respectively.</p>
+<p>The trial-and-error method can be completed with <code class="inline">assumptionCheck()</code> largely as descried in Section <a href="ANOVA1Transformations.html#power-transformations">8.1</a> but noting that both <code class="inline">lambday=</code> and <code class="inline">lambdax=</code> may be used for the <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> variables, respectively.</p>
 </div>
 <div id="back-transformation-in-slr" class="section level2" number="18.3">
 <h2><span class="header-section-number">18.3</span> Back-Transformation in SLR</h2>
@@ -520,8 +520,7 @@ Figure 18.7: Demonstration of the additive nature of the slope on the log-log-sc
 </p>
 </div>
 <div class="tip">
-<p>The slope back-transformed from a log-transformation represents the <strong>ratio</strong> of two means separated by a multiple of 2.178 units of the explanatory variable on the original
-scale when the explanatory variable <strong>was</strong> log-transformed.</p>
+<p>The slope back-transformed from a log-transformation represents the <strong>ratio</strong> of two means separated by a multiple of 2.178 units of the explanatory variable on the original scale when the explanatory variable <strong>was</strong> log-transformed.</p>
 </div>
 <div class="tip">
 <p>A slope back-transformed from the log-scale represents a <strong>multiplicative</strong> (rather than additive) change in the mean response.</p>

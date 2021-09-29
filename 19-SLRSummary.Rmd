@@ -12,22 +12,22 @@ The following is a process for fitting a SLR. Consider this process as you learn
 1. Show the overall sample size.
 1. Address the independence assumption.
     * If this assumption is not met then other analysis methods must be used.
-1. Fit the untransformed full model with `lm()`.
-1. Check the other four assumptions for the untransformed model with `assumptionCheck()`. 
+1. Fit the untransformed full model with `lm()`{.inline}.
+1. Check the other four assumptions for the untransformed model with `assumptionCheck()`{.inline}. 
     * Check the linearity of the relationship with the residual plot.
     * Check homoscedasticity with the residual plot.
     * Check normality of residuals with an Anderson-Darling test and histogram of residuals.
     * Check outliers and influential points with the outlier test and residual plot.
 1. If an assumption or assumptions are violated, then attempt to find a transformation where the assumptions are met.
-    * Use trial-and-error with `assumptionCheck()`, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
+    * Use trial-and-error with `assumptionCheck()`{.inline}, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
         * Attempt transformations with the response variable first.
         * Generally only ever transform the explanatory variable with logarithms.
     * If only an outlier or influential observation exists (i.e., linear, homoscedastic, and normal residuals) and no transformation corrects the "problem", then consider removing that observation from the data set.
     * Fit the full model with the transformed variable(s) or reduced data set.
-1. Construct an ANOVA table for the full model with `anova()` and interpret the overall F-test.
-1. Summarize findings with coefficient results and confidence intervals with `cbind(coef(),confint())`.
-1. Create a summary graphic of the fitted line with 95% confidence band using `ggplot()`.
-1. Make predictions with `predict()`, if desired.
+1. Construct an ANOVA table for the full model with `anova()`{.inline} and interpret the overall F-test.
+1. Summarize findings with coefficient results and confidence intervals with `cbind(coef(),confint())`{.inline}.
+1. Create a summary graphic of the fitted line with 95% confidence band using `ggplot()`{.inline}.
+1. Make predictions with `predict()`{.inline}, if desired.
 1. Write a succinct conclusion of your findings.
 
 &nbsp;

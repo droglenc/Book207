@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-09-28" />
+<meta name="date" content="2021-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -462,7 +462,7 @@ Figure 17.6: Residual plot where linearity assumption has NOT been adequately me
 </div>
 <div id="testing-assumptions-in-r-1" class="section level2" number="17.7">
 <h2><span class="header-section-number">17.7</span> Testing Assumptions in R</h2>
-<p>The residual plot, histogram of residuals, Anderson-Darling test p-value, and outlier test p-value can all be constructed by submitting the saved <code>lm()</code> object to <code>assumptionCheck()</code>.<a href="#fn84" class="footnote-ref" id="fnref84"><sup>84</sup></a> For example, the results below indicate that all assumptions are adequately met for the Mount Everest air temperature and altitude lapse rate regression – i.e., there is no discernible or obvious curve or funnel-shape to the residual plot, the Anderson-Darling p-value indicates that the residuals are normally distributed, and the outlier test p-value does not indicate the presence of any outliers. It should be noted, however, that the sample size is very small in this case.</p>
+<p>The residual plot, histogram of residuals, Anderson-Darling test p-value, and outlier test p-value can all be constructed by submitting the saved <code class="inline">lm()</code> object to <code class="inline">assumptionCheck()</code>.<a href="#fn84" class="footnote-ref" id="fnref84"><sup>84</sup></a> For example, the results below indicate that all assumptions are adequately met for the Mount Everest air temperature and altitude lapse rate regression – i.e., there is no discernible or obvious curve or funnel-shape to the residual plot, the Anderson-Darling p-value indicates that the residuals are normally distributed, and the outlier test p-value does not indicate the presence of any outliers. It should be noted, however, that the sample size is very small in this case.</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb106-1"><a href="SLRAssumptions.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assumptionCheck</span>(lm1.ev)</span></code></pre></div>
 <p><img src="Book207_files/figure-html/unnamed-chunk-88-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p> </p>

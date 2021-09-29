@@ -147,7 +147,7 @@ Transformations can be chosen by trying power transformations until the assumpti
 
 Note that with the above process that you will (i) try to find a transformation of just the response variable first and (ii) will only every transform the explanatory variable to the logarithm scale. Additionally, you should try hard to avoid "odd" combinations of transformations. In other words, it is better to use logs for both the response and explanatory variable if the assumptions are slightly not met then to use, for example, the square root of the response variable and the logarithm of the explanatory variable.
 
-The trial-and-error method can be completed with `assumptionCheck()` largely as descried in Section \@ref(power-transformations) but noting that both `lambday=` and `lambdax=` may be used for the $Y$ and $X$ variables, respectively.
+The trial-and-error method can be completed with `assumptionCheck()`{.inline} largely as descried in Section \@ref(power-transformations) but noting that both `lambday=`{.inline} and `lambdax=`{.inline} may be used for the $Y$ and $X$ variables, respectively.
 
 ## Back-Transformation in SLR
 Back-transformations were discussed in detail in Section \@ref(interpretations-after-transformations) and many of those details pertain here. In SLR, the y-intercept, fitted values, and predicted values are all "point estimates" and can be back-transformed from any transformation without issue. In other words, you can simply reverse the transformation for these values, no matter what transformation was used, and interpret the value directly on the original scale.
@@ -436,8 +436,7 @@ btrans3
 ```
 
 ::: {.tip data-latex=""}
-The slope back-transformed from a log-transformation represents the **ratio** of two means separated by a multiple of 2.178 units of the explanatory variable on the original
-scale when the explanatory variable **was** log-transformed.
+The slope back-transformed from a log-transformation represents the **ratio** of two means separated by a multiple of 2.178 units of the explanatory variable on the original scale when the explanatory variable **was** log-transformed.
 :::
 
 ::: {.tip data-latex=""}

@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-09-28" />
+<meta name="date" content="2021-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -383,8 +383,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>If this assumption is not met then other analysis methods must be used.</li>
 </ul></li>
-<li>Fit the untransformed full model with <code>lm()</code>.</li>
-<li>Check the other four assumptions for the untransformed model with <code>assumptionCheck()</code>.
+<li>Fit the untransformed full model with <code class="inline">lm()</code>.</li>
+<li>Check the other four assumptions for the untransformed model with <code class="inline">assumptionCheck()</code>.
 <ul>
 <li>Check the linearity of the relationship with the residual plot.</li>
 <li>Check homoscedasticity with the residual plot.</li>
@@ -393,7 +393,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>If an assumption or assumptions are violated, then attempt to find a transformation where the assumptions are met.
 <ul>
-<li>Use trial-and-error with <code>assumptionCheck()</code>, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
+<li>Use trial-and-error with <code class="inline">assumptionCheck()</code>, theory (e.g., power or exponential functions), or experience to identify possible transformations for the response variable and, possibly, for the explanatory variable.
 <ul>
 <li>Attempt transformations with the response variable first.</li>
 <li>Generally only ever transform the explanatory variable with logarithms.</li>
@@ -401,10 +401,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>If only an outlier or influential observation exists (i.e., linear, homoscedastic, and normal residuals) and no transformation corrects the “problem,” then consider removing that observation from the data set.</li>
 <li>Fit the full model with the transformed variable(s) or reduced data set.</li>
 </ul></li>
-<li>Construct an ANOVA table for the full model with <code>anova()</code> and interpret the overall F-test.</li>
-<li>Summarize findings with coefficient results and confidence intervals with <code>cbind(coef(),confint())</code>.</li>
-<li>Create a summary graphic of the fitted line with 95% confidence band using <code>ggplot()</code>.</li>
-<li>Make predictions with <code>predict()</code>, if desired.</li>
+<li>Construct an ANOVA table for the full model with <code class="inline">anova()</code> and interpret the overall F-test.</li>
+<li>Summarize findings with coefficient results and confidence intervals with <code class="inline">cbind(coef(),confint())</code>.</li>
+<li>Create a summary graphic of the fitted line with 95% confidence band using <code class="inline">ggplot()</code>.</li>
+<li>Make predictions with <code class="inline">predict()</code>, if desired.</li>
 <li>Write a succinct conclusion of your findings.</li>
 </ol>
 <p> </p>

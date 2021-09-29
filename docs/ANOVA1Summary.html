@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-09-28" />
+<meta name="date" content="2021-09-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -378,13 +378,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>Briefly introduce the study (i.e., provide some background for why this study is being conducted).</li>
 <li>State the hypotheses to be tested.</li>
-<li>Show the sample size per group using <code>xtabs()</code> and comment on whether the study was balanced (i.e., same sample size per group) or not.</li>
+<li>Show the sample size per group using <code class="inline">xtabs()</code> and comment on whether the study was balanced (i.e., same sample size per group) or not.</li>
 <li>Address the independence assumption.
 <ul>
 <li>If this assumption is not met then other analysis methods should be used.<a href="#fn45" class="footnote-ref" id="fnref45"><sup>45</sup></a></li>
 </ul></li>
-<li>Fit the untransformed full model (i.e., separate group means) with <code>lm()</code>.</li>
-<li>Check the other three assumptions for the untransformed model with <code>assumptionCheck()</code>.
+<li>Fit the untransformed full model (i.e., separate group means) with <code class="inline">lm()</code>.</li>
+<li>Check the other three assumptions for the untransformed model with <code class="inline">assumptionCheck()</code>.
 <ul>
 <li>Check equality of variances with a Levene’s test and residual plot.</li>
 <li>Check normality of residuals with an Anderson-Darling test and histogram of residuals.</li>
@@ -392,16 +392,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>If an assumption or assumptions are violated, then attempt to find a transformation where the assumptions are met.
 <ul>
-<li>Use the trial-and-error method with <code>lambday=</code> in <code>assumptionCheck()</code>, theory, or experience to identify a possible transformation. Always try the log transformation first.</li>
+<li>Use the trial-and-error method with <code class="inline">lambday=</code> in <code class="inline">assumptionCheck()</code>, theory, or experience to identify a possible transformation. Always try the log transformation first.</li>
 <li>If only an outlier exists (i.e., there are equal variances and normal residuals) and no transformation corrects the outlier then <em>consider</em> removing the outlier from the data set.</li>
 <li>Fit the ultimate full model with the transformed response or reduced data set.</li>
 </ul></li>
-<li>Construct an ANOVA table for the full model with <code>anova()</code> and make a conclusion about the equality of means from the p-value.</li>
-<li>If differences among group means exist, then use a multiple comparison technique with <code>emmeans()</code> and <code>summary()</code> to identify specific differences. Discuss specific differences <strong>using confidence intervals</strong>.
+<li>Construct an ANOVA table for the full model with <code class="inline">anova()</code> and make a conclusion about the equality of means from the p-value.</li>
+<li>If differences among group means exist, then use a multiple comparison technique with <code class="inline">emmeans()</code> and <code class="inline">summary()</code> to identify specific differences. Discuss specific differences <strong>using confidence intervals</strong>.
 <ul>
-<li>If the data were log-transformed then discuss specific ratios of means using back-transformed differences (use <code>tran=</code> in <code>emmeans()</code> and <code>type="response"</code> in <code>summary()</code> to compute the back-transformations).</li>
+<li>If the data were log-transformed then discuss specific ratios of means using back-transformed differences (use <code class="inline">tran=</code> in <code class="inline">emmeans()</code> and <code class="inline">type="response"</code> in <code class="inline">summary()</code> to compute the back-transformations).</li>
 </ul></li>
-<li>Create a summary graphic of observations with group means <strong>on the original scale</strong> and 95% confidence intervals using <code>ggplot()</code> and results from <code>emmeans()</code>.</li>
+<li>Create a summary graphic of observations with group means <strong>on the original scale</strong> and 95% confidence intervals using <code class="inline">ggplot()</code> and results from <code class="inline">emmeans()</code>.</li>
 <li>Write a succinct conclusion of your findings.</li>
 </ol>
 <p> </p>

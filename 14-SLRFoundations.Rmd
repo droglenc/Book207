@@ -206,13 +206,13 @@ ev <- read.csv("https://raw.githubusercontent.com/droglenc/NCData/master/Everest
 ev <- filter(ev,Season=="Winter")
 ```
 
-A best-fit regression line is obtained using `response~explanatory` with `data=`.
+A best-fit regression line is obtained using `response~explanatory`{.inline} with `data=`{.inline}.
 
 ```{r}
 lm1.ev <- lm(MeanAirTemp~Altitude,data=ev)
 ```
 
-The estimated intercept and slope (i.e., the $\hat{\alpha}$ and $\hat{\beta}$) and corresponding 95% confidence intervals are extracted from the `lm()` object with `coef()` and `confint()`, respectively. I "column bind" these results together to make a synthetic summary table.
+The estimated intercept and slope (i.e., the $\hat{\alpha}$ and $\hat{\beta}$) and corresponding 95% confidence intervals are extracted from the `lm()`{.inline} object with `coef()`{.inline} and `confint()`{.inline}, respectively. I "column bind" these results together to make a synthetic summary table.
 
 ```{r}
 cbind(Est=coef(lm1.ev),confint(lm1.ev))
@@ -229,13 +229,13 @@ x <- ev$Altitude[2]
 predy <- round(cf.ev[1],4)+round(cf.ev[2],4)*x
 ```
 
-Of course, the mean actual air temperature can be predicted by plugging a value of the altitude lapse rate into the equation of the line. For example, the predicted mean actual air temperature if the altitude lapse rate is `r x` is `r formatC(cf.ev[1],format="f",digits=2)` - `r formatC(-1*cf.ev[2],format="f",digits=4)`&times;`r x` = `r formatC(predy,format="f",digits=2)`<sup>o</sup>C. This can also be found with `predict()` using the saved `lm()` object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the `lm()` object.^[The difference between the two results is because the "hand-calculation" used rounded values of the intercept and slope.]
+Of course, the mean actual air temperature can be predicted by plugging a value of the altitude lapse rate into the equation of the line. For example, the predicted mean actual air temperature if the altitude lapse rate is `r x` is `r formatC(cf.ev[1],format="f",digits=2)` - `r formatC(-1*cf.ev[2],format="f",digits=4)`&times;`r x` = `r formatC(predy,format="f",digits=2)`<sup>o</sup>C. This can also be found with `predict()`{.inline} using the saved `lm()`{.inline} object as the first argument and a data.frame with the value of the explanatory variable set equal to the name of the explanatory variable in the `lm()`{.inline} object.^[The difference between the two results is because the "hand-calculation" used rounded values of the intercept and slope.]
 
 ```{r}
 predict(lm1.ev,newdata=data.frame(Altitude=2552))
 ```
 
-The coefficient of determination ($r^{2}$) explains the proportion of the total variability in $Y$ that is explained by knowing the value of $X$. Thus, $r^{2}$ ranges between 0 and 1, with $r^{2}$=1 meaning that 100% of the variation in $Y$ is explained by knowing $X$. Visually, higher $r^{2}$ values occur when the data are more tightly clustered around the best-fit line.^[It is assumed that you discussed $r^{2}$ in your introductory statistics course and, thus, it is only cursorily covered here.] The $r^{2}$ can be extracted from the `lm()` object with `rSquared()`.
+The coefficient of determination ($r^{2}$) explains the proportion of the total variability in $Y$ that is explained by knowing the value of $X$. Thus, $r^{2}$ ranges between 0 and 1, with $r^{2}$=1 meaning that 100% of the variation in $Y$ is explained by knowing $X$. Visually, higher $r^{2}$ values occur when the data are more tightly clustered around the best-fit line.^[It is assumed that you discussed $r^{2}$ in your introductory statistics course and, thus, it is only cursorily covered here.] The $r^{2}$ can be extracted from the `lm()`{.inline} object with `rSquared()`{.inline}.
 
 ```{r}
 rSquared(lm1.ev)
@@ -243,7 +243,7 @@ rSquared(lm1.ev)
 
 Thus, in this case, `r formatC(100*rSquared(lm1.ev),format="f",digits=1)`% of the variability in actual mean air temperature is explained by knowing the altitude lapse rate. This indicates a tight fit between the two variables and suggests that the actual mean air temperate will be well predicted by the altitude lapse rate.
 
-The best-fit line can be visualized by creating a scatterplot with `ggplot()` and then using `geom_smooth(method="lm",se=FALSE)` to superimpose the best-fit line.
+The best-fit line can be visualized by creating a scatterplot with `ggplot()`{.inline} and then using `geom_smooth(method="lm",se=FALSE)`{.inline} to superimpose the best-fit line.
 
 ```{r}
 ggplot(data=ev,mapping=aes(x=Altitude,y=MeanAirTemp)) +  
