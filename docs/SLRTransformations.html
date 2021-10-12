@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-09-29" />
+<meta name="date" content="2021-10-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -534,8 +534,7 @@ Figure 18.7: Demonstration of the additive nature of the slope on the log-log-sc
 <p>The following are some quick examples of transforming data, fitting new models, and interpretations of those model results. These are not full examples in the sense that all assumptions are thoroughly met, etc. Full examples will be demonstrated in Module <a href="SLRSummary.html#SLRSummary">19</a>.</p>
 <div id="petrels" class="section level3" number="18.4.1">
 <h3><span class="header-section-number">18.4.1</span> Petrels</h3>
-<p><img src="zimgs/PetrelNest.jpg" alt="Decoration" class="img-right">
-<a href="http://www.jstor.org/stable/4318?seq=1#page_scan_tab_contents">Croxall (1982)</a> examined the weight loss of adult <a href="https://en.wikipedia.org/wiki/Petrel">petrels</a> during periods of egg incubation. He examined 13 species but some had measurements for both sexes such that 19 measurements were recorded. For each measurement the mean initial weight (g) and mean weight lost (g/g/d) were recorded. The intent of this part of the study was to determine if the mean initial weight significantly explained variability in mean weight lost for the petrel species.</p>
+<p><a href="http://www.jstor.org/stable/4318?seq=1#page_scan_tab_contents">Croxall (1982)</a> examined the weight loss of adult <a href="https://en.wikipedia.org/wiki/Petrel">petrels</a> during periods of egg incubation. He examined 13 species but some had measurements for both sexes such that 19 measurements were recorded. For each measurement the mean initial weight (g) and mean weight lost (g/g/d) were recorded. The intent of this part of the study was to determine if the mean initial weight significantly explained variability in mean weight lost for the petrel species.</p>
 <p>The data are loaded below, the initial SLR is fit with weight loss as the response variable, and the assumptions are quickly checked. It is clear that the form of the relationship is not linear. The other assumptions are also not met, but these are likely affected by the non-linearity.</p>
 <p> </p>
 <div class="sourceCode" id="cb107"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb107-1"><a href="SLRTransformations.html#cb107-1" aria-hidden="true" tabindex="-1"></a>petrels <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/Petrels.csv&quot;</span>)</span>
@@ -596,8 +595,7 @@ Figure 18.7: Demonstration of the additive nature of the slope on the log-log-sc
 </div>
 <div id="bac-and-crashing" class="section level3" number="18.4.2">
 <h3><span class="header-section-number">18.4.2</span> BAC and Crashing</h3>
-<p><img src="zimgs/SobrietySign.jpg" alt="Decoration" class="img-right">
-A study was published in 2007 that investigated the relative risk of being in a crash (RRC) relative to a person’s blood alcohol content (BAC). The researchers examined data from 2871 crashes and derived a measure of the relative risk of being in a car accident. The relative risk was scaled so that individuals with a blood alcohol content of 0 had a relative risk of 1. Thus, all other relative risk values are in comparison to a driver with a BAC of 0. For example, a relative risk of 3 would mean that persons with that BAC level are three times more likely to be in a car accident than a person with a BAC of 0. The researchers wanted to explain how the relative risk of a crash was related to BAC level. [<em>Note that BAC was multiplied by 100 so that a one unit change would be within the range of the data and, thus, would be meaningful.</em>]</p>
+<p>A study was published in 2007 that investigated the relative risk of being in a crash (RRC) relative to a person’s blood alcohol content (BAC). The researchers examined data from 2871 crashes and derived a measure of the relative risk of being in a car accident. The relative risk was scaled so that individuals with a blood alcohol content of 0 had a relative risk of 1. Thus, all other relative risk values are in comparison to a driver with a BAC of 0. For example, a relative risk of 3 would mean that persons with that BAC level are three times more likely to be in a car accident than a person with a BAC of 0. The researchers wanted to explain how the relative risk of a crash was related to BAC level. [<em>Note that BAC was multiplied by 100 so that a one unit change would be within the range of the data and, thus, would be meaningful.</em>]</p>
 <p>The data are loaded below, the initial SLR is fit with relative risk of a crash as the response variable, and the assumptions are quickly checked. It is clear that the form of the relationship is not linear. The scatterplot also clearly shows that a linear model is not appropriate for these data. The other assumptions are also not met, but these are likely affected by the non-linearity.</p>
 <div class="sourceCode" id="cb125"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb125-1"><a href="SLRTransformations.html#cb125-1" aria-hidden="true" tabindex="-1"></a>cr <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://derekogle.com/Book207/data/crash.csv&quot;</span>)</span>
 <span id="cb125-2"><a href="SLRTransformations.html#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cr)</span></code></pre></div>

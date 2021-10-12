@@ -451,7 +451,6 @@ Do **NOT** back-transform slopes if other than a log transformation was used.
 The following are some quick examples of transforming data, fitting new models, and interpretations of those model results. These are not full examples in the sense that all assumptions are thoroughly met, etc. Full examples will be demonstrated in Module \@ref(SLRSummary).
 
 ### Petrels
-<img src="zimgs/PetrelNest.jpg" alt="Decoration" class="img-right">
 [Croxall (1982)](http://www.jstor.org/stable/4318?seq=1#page_scan_tab_contents) examined the weight loss of adult [petrels](https://en.wikipedia.org/wiki/Petrel) during periods of egg incubation. He examined 13 species but some had measurements for both sexes such that 19 measurements were recorded. For each measurement the mean initial weight (g) and mean weight lost (g/g/d) were recorded. The intent of this part of the study was to determine if the mean initial weight significantly explained variability in mean weight lost for the petrel species.
 
 The data are loaded below, the initial SLR is fit with weight loss as the response variable, and the assumptions are quickly checked. It is clear that the form of the relationship is not linear. The other assumptions are also not met, but these are likely affected by the non-linearity.
@@ -525,7 +524,6 @@ exp(p4000)  # back-transformed to original scale
 &nbsp;
 
 ### BAC and Crashing
-<img src="zimgs/SobrietySign.jpg" alt="Decoration" class="img-right">
 A study was published in 2007 that investigated the relative risk of being in a crash (RRC) relative to a person's blood alcohol content (BAC). The researchers examined data from 2871 crashes and derived a measure of the relative risk of being in a car accident. The relative risk was scaled so that individuals with a blood alcohol content of 0 had a relative risk of 1. Thus, all other relative risk values are in comparison to a driver with a BAC of 0. For example, a relative risk of 3 would mean that persons with that BAC level are three times more likely to be in a car accident than a person with a BAC of 0. The researchers wanted to explain how the relative risk of a crash was related to BAC level. [*Note that BAC was multiplied by 100 so that a one unit change would be within the range of the data and, thus, would be meaningful.*]
 
 The data are loaded below, the initial SLR is fit with relative risk of a crash as the response variable, and the assumptions are quickly checked. It is clear that the form of the relationship is not linear. The scatterplot also clearly shows that a linear model is not appropriate for these data. The other assumptions are also not met, but these are likely affected by the non-linearity.

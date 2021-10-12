@@ -50,7 +50,6 @@ mns.tn <- summary(mc.tn,infer=TRUE)$emmeans
 dmns.tn <- summary(mc.tn,infer=TRUE)$contrasts
 ```
 
-<img src="zimgs/RootKnotNematode.jpg" alt="Decoration" class="img-right">
 [Root-Knot Nematodes](https://www.apsnet.org/edcenter/disandpath/nematode/pdlessons/Pages/RootknotNematode.aspx) (*Meloidogyne* spp.) are microscopic worms found in soil that may negatively affect the growth of plants through their trophic dynamics. Tomatoes are a commercially important plant species that may be negatively affected by high densities of nematodes in culture situations.
 
 A science fair student designed an experiment to determine the effect of increased densities of nematodes on the growth of tomato seedlings. The student hypothesized that nematodes would negatively affect the growth of tomato seedlings -- i.e., growth of seedlings would be lower at higher nematode densities. The statistical hypotheses to be examined were
@@ -167,7 +166,6 @@ mns.afbt <- mcsum.afbt$emmeans
 dmns.afbt <- mcsum.afbt$contrasts
 ```
 
-<img src="zimgs/RedWoodAnts.jpg" alt="Decoration" class="img-right">
 [Red wood ants](https://en.wikipedia.org/wiki/Formica_rufa) (*Formica rufa*) forage for food (mainly insects and "honeydew" produced by aphids) both on the ground and in the canopies of trees. Rowan, Oak, and Sycamore trees support very different communities of insect herbivores (including aphids) and it would be interesting to know whether the foraging efficiency of ant colonies is affected by the type of trees available to them. As part of an investigation of the foraging of *Formica rufa*, observations were made of the prey being carried by ants down trunks of trees. The total biomass of prey being transported was measured over a 30-minute sampling period on different tree specimens. The results were expressed as the biomass (dry weight in mg) of prey divided by the total number of ants leaving the tree to give a rate of food collected per ant per half hour.^[This example is directly from https://dzchilds.github.io/stats-for-bio/]
 
 The statistical hypotheses to be examined are
@@ -293,7 +291,6 @@ dmns.pdt <- mcsum.pdt$contrasts
 mns.pdbt <- mcsum.pdbt$emmeans
 ```
 
-<img src="zimgs/BayfieldFlood.jpg" alt="Decoration" class="img-right">
 Mathematical models are used to predict flood flow frequency and estimates of peak discharge for the Mississippi River watershed. These models are important for forecasting potential dangers to the public. A civil engineer was interested in determining whether four different methods for estimating flood flow frequency produce equivalent estimates of peak discharge when applied to the same watershed. The statistical hypotheses to be examined are
 
 $$\begin{split}

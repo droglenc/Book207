@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-09-29" />
+<meta name="date" content="2021-10-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -371,8 +371,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Modules <a href="LogRegFoundations.html#LogRegFoundations">25</a> and <a href="LogRegModels.html#LogRegModels">26</a> described the basics of fitting a logistic regression and understanding the meanings of the parameter estimates, predicted probabilities, and predicted values of the explanatory variable for a given probability. This module will demonstrate how to perform those analyses using R.</p>
 <div id="data-preparation" class="section level2" number="27.1">
 <h2><span class="header-section-number">27.1</span> Data Preparation</h2>
-<p><img src="zimgs/Beetle.jpg" alt="Decoration" class="img-right">
-<a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1744-7348.1935.tb07713.x">Bliss (1935)</a>, in a classic study, examined the mortality response of a <a href="https://en.wikipedia.org/wiki/Confused_flour_beetle">beetle (<em>Tribolium confusum</em>)</a> to various concentrations of gaseous <a href="https://en.wikipedia.org/wiki/Carbon_disulfide">carbon disulphide</a> (mg/liter). The concentration and whether or not the beetle survived the exposure to that concentration was recorded for each beetle in Bliss.csv (<a href="https://raw.githubusercontent.com/droglenc/NCData/master/Bliss.csv">data</a>, <a href="https://github.com/droglenc/NCData/blob/master/Bliss_meta.txt">meta</a>). These data are loaded and briefly examined below.</p>
+<p><a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1744-7348.1935.tb07713.x">Bliss (1935)</a>, in a classic study, examined the mortality response of a <a href="https://en.wikipedia.org/wiki/Confused_flour_beetle">beetle (<em>Tribolium confusum</em>)</a> to various concentrations of gaseous <a href="https://en.wikipedia.org/wiki/Carbon_disulfide">carbon disulphide</a> (mg/liter). The concentration and whether or not the beetle survived the exposure to that concentration was recorded for each beetle in Bliss.csv (<a href="https://raw.githubusercontent.com/droglenc/NCData/master/Bliss.csv">data</a>, <a href="https://github.com/droglenc/NCData/blob/master/Bliss_meta.txt">meta</a>). These data are loaded and briefly examined below.</p>
 <div class="sourceCode" id="cb197"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb197-1"><a href="LogRegAnalysis.html#cb197-1" aria-hidden="true" tabindex="-1"></a>bliss <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/droglenc/NCData/master/Bliss.csv&quot;</span>)</span>
 <span id="cb197-2"><a href="LogRegAnalysis.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bliss)</span></code></pre></div>
 <pre class="ROUTPUT"><code>#R&gt;  &#39;data.frame&#39;:  481 obs. of  2 variables:

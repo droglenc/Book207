@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-09-29" />
+<meta name="date" content="2021-10-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -375,8 +375,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>where <span class="math inline">\(\alpha\)</span> is the “intercept” parameter and <span class="math inline">\(\beta\)</span> is the “slope” parameter (Module <a href="LogRegFoundations.html#LogRegFoundations">25</a>). This represents a linear model of log odds plotted against values of the explanatory variable. In this module, interpretations of the slope, back-transformed slope, predictions, and “reverse” predictions are described.</p>
 <div id="example-data-1" class="section level4 unnumbered">
 <h4>Example Data</h4>
-<p><img src="zimgs/Putting.jpg" alt="Decoration" class="img-right">
-Data collected by a student a few years ago will be used throughout this and the next module. The student putted a golf ball 10 times from every 1 foot between 1 and 25 feet from the hole. For each putt she recorded whether she made the putt or not. She wanted to model the probability of making the putt as a function of distance to the hole.</p>
+<p>Data collected by a student a few years ago will be used throughout this and the next module. The student putted a golf ball 10 times from every 1 foot between 1 and 25 feet from the hole. For each putt she recorded whether she made the putt or not. She wanted to model the probability of making the putt as a function of distance to the hole.</p>
 <p> </p>
 <p> </p>
 </div>
@@ -581,8 +580,7 @@ Figure 26.4: Probability of making a putt versus the distance of the putt with b
 </div>
 <div id="another-example" class="section level2" number="26.5">
 <h2><span class="header-section-number">26.5</span> Another Example</h2>
-<p><img src="zimgs/BryceCanyon.jpg" alt="Decoration" class="img-right">
-As another example data about the presence or absence of a <a href="http://southwestdesertflora.com/WebsiteFolders/All_Species/Berberidaceae/Berberis%20repens,%20Creeping%20Barberry.html">common shrub (<em>Berberis repens</em>)</a> in the <a href="https://www.nps.gov/brca/index.htm">Bryce Canyon National Park</a> Utah will be used. Here the researchers recorded whether the shrub was present or not in many 10m×10m plots throughout the park. They also recorded the elevation (among other things) of the plot. They wanted to model the effect of elevation on the presence of the shrub.</p>
+<p>As another example data about the presence or absence of a <a href="http://southwestdesertflora.com/WebsiteFolders/All_Species/Berberidaceae/Berberis%20repens,%20Creeping%20Barberry.html">common shrub (<em>Berberis repens</em>)</a> in the <a href="https://www.nps.gov/brca/index.htm">Bryce Canyon National Park</a> Utah will be used. Here the researchers recorded whether the shrub was present or not in many 10m×10m plots throughout the park. They also recorded the elevation (among other things) of the plot. They wanted to model the effect of elevation on the presence of the shrub.</p>
 <p>The estimated slope for the shrub data indicates that as the elevation increases by one meter, the <strong>log odds</strong> that the shrub is present <strong>in</strong>creases by 0.0090 (95% CI: 0.0063, 0.0146; Table <a href="LogRegModels.html#tab:ShrubCoefs">26.3</a>). The interpretation of the slope is made difficult by the fact that a 1 m change is a very small movement along the x-axis in this case where the elevations range from near 2000 to near 2800. However, if a 1 unit change in <span class="math inline">\(X\)</span> results in an additive change in <span class="math inline">\(Y\)</span> of the slope, then, for example, a 100 unit change in <span class="math inline">\(X\)</span> results in an additive change in <span class="math inline">\(Y\)</span> of 100 slopes. Thus, for example, if the elevation increases by 100 m then the log odds of the presence of the shrub will increase by 100×0.0090=0.90 (Figure <a href="LogRegModels.html#fig:shrubLogOdds">26.5</a>).</p>
 <p> </p>
 <table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">

@@ -20,7 +20,6 @@ In this course, we will only consider one factor, though the methods described h
 &nbsp;
 
 #### Example Data {-}
-<img src="zimgs/Salmon.jpg" alt="Decoration" class="img-right">
 Throughout this and the next few modules, we will refer to a study by [Makarewicz *et al.* (2003)](https://pubmed.ncbi.nlm.nih.gov/12731833/), who examined the relationship between the concentration of [mirex](https://en.wikipedia.org/wiki/Mirex) in the tissue and the weight of salmon.^[Mirex is a chlorinated hydrocarbon that was commercialized as an insecticide. Use of mirex was banned in 1976 because of its impact on the environment.] They collected these data on [Coho Salmon](https://en.wikipedia.org/wiki/Coho_salmon) (*Oncorhynchus kisutch*) and [Chinook Salmon](https://en.wikipedia.org/wiki/Chinook_salmon) (*Oncorhynchus tshawytscha*) in six different years. They were interested in determining if the relationship between mirex and weight differed between the two species or if it differed among years (Table \@ref(tab:MirexData)).
 
 ```{r MirexData, echo=FALSE}

@@ -10,7 +10,6 @@ $$ log\left(\frac{p_{i}}{1-p_{i}}\right) = \alpha + \beta x_{i} $$
 where $\alpha$ is the "intercept" parameter and $\beta$ is the "slope" parameter (Module \@ref(LogRegFoundations)). This represents a linear model of log odds plotted against values of the explanatory variable. In this module, interpretations of the slope, back-transformed slope, predictions, and "reverse" predictions are described.
 
 #### Example Data {-}
-<img src="zimgs/Putting.jpg" alt="Decoration" class="img-right">
 Data collected by a student a few years ago will be used throughout this and the next module. The student putted a golf ball 10 times from every 1 foot between 1 and 25 feet from the hole. For each putt she recorded whether she made the putt or not. She wanted to model the probability of making the putt as a function of distance to the hole.
 
 &nbsp;
@@ -296,7 +295,6 @@ Because $log(\left(\frac{0.5}{1-0.5}\right)$=$log(1)$=0, the equation for predic
 &nbsp;
 
 ## Another Example
-<img src="zimgs/BryceCanyon.jpg" alt="Decoration" class="img-right">
 As another example data about the presence or absence of a [common shrub (*Berberis repens*)](http://southwestdesertflora.com/WebsiteFolders/All_Species/Berberidaceae/Berberis%20repens,%20Creeping%20Barberry.html) in the [Bryce Canyon National Park](https://www.nps.gov/brca/index.htm) Utah will be used. Here the researchers recorded whether the shrub was present or not in many 10m&times;10m plots throughout the park. They also recorded the elevation (among other things) of the plot. They wanted to model the effect of elevation on the presence of the shrub.
 
 ```{r echo=FALSE}
