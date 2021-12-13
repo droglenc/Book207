@@ -1,0 +1,423 @@
+# Appendix -- R Generic Code{-}
+
+## Common Codes{-}
+The generic codes below are provided here so that you can efficiently copy and paste them into your assignment. They are generally ordered by module withing major conceptual topics. Most code that is in ALL CAPITALS should be replaced with something more specific (with the exception of `TRUE` and `FALSE`). The following are fairly common genertic codes that should be replaced. Other items are described below. All other code should be typed (preferably copied-and-pasted) as shown, though you may change the name of the assigned object to the left of the `<-`.
+
+* `DFOBJ` should be replaced with the name of your data frame.
+* `QVAR` should be replaced with the name of your quantitative variable.
+    * `QVARR` for response and `QVARE` for explanatory variables.
+* `CVAR` should be replaced with the name of your categorical variable.
+* `NUM` should be replaced with a number.
+* `XXINDIVIDUALXX` should be replaced with what an individual is.
+* `XXQVAR LABELXX` should be replaced with a descriptive label for `QVAR`.
+* `XXCVAR LABELXX` should be replaced with a descriptive label for `CVAR`.
+
+
+## Foundations{-}
+#### 2-Sample t-test{-}
+
+* `HA` is replaced with `"two.sided"` for not equals, `"less"` for less than, or `"greater"` for greater than alternative hypotheses (H<sub>A</sub>).
+* `CNFVAL` is the confidence level as a proportion (e.g., `0.95`).
+
+```{r eval=FALSE, highlight=FALSE}
+## Levene's Test
+levenesTest(QVAR~CVAR,data=DFOBJ)
+
+## 2-Sample t-test
+t.test(QVAR~CVAR,data=DFOBJ,alt=HA,conf.level=CNFVAL,var.equal=TRUE)
+
+## Histogram Separated Into Groups
+ggplot(data=DFOBJ,mapping=aes(x=QVAR)) +
+  geom_histogram(binwidth=NUM,boundary=0,color="black",fill="lightgray") +
+  labs(x="XXQVAR LABELXX",y="Frequency of XXINDIVIDUALSXX") +
+  scale_y_continuous(expand=expansion(mult=c(0,0.05))) +
+  theme_NCStats() +
+  facet_wrap(vars(CVAR))
+```
+
+#### Model Comparisons{-}
+
+```{r eval=FALSE, highlight=FALSE}
+## Fit the Linear Model
+aov1 <- lm(QVAR~CVAR,data=DFOBJ)
+
+## Extract the ANOVA Table
+anova(aov1)
+
+## Extract Table of Model Coefficients
+cbind(ests=coef(aov1),confint(aov1))
+```
+
+#### Compute p-value from F test statistic{-}
+
+* `FVAL` should be replaced with the calculated F test statistic.
+
+```{r eval=FALSE, highlight=FALSE}
+distrib(FVAL,distrib="f",df1=NUM,df2=NUM,lower.tail=FALSE)
+```
+
+&nbsp;
+
+## One-Way ANOVA{-}
+#### Basic One-Way ANOVA{-}
+
+```{r eval=FALSE, highlight=FALSE}
+## Fit the Linear Model
+aov1 <- lm(QVAR~CVAR,data=DFOBJ)
+
+## Extract the ANOVA Table
+anova(aov1)
+
+## Extract Table of Model Coefficients
+cbind(ests=coef(aov1),confint(aov1))
+
+## Construct Summary Graphic
+## !!!! Only use if no multiple comparisons or transformation !!!!
+ggplot(data=DFOBJ,mapping=aes(x=CVAR,y=QVAR)) +
+  geom_jitter(alpha=0.5,width=0.05) +
+  stat_summary(fun.data=mean_cl_normal,geom="errorbar",size=2,width=0) +
+  stat_summary(fun=mean,geom="point",pch=21,fill="white",size=2) +
+  labs(x="XXCVAR LABELXX",y="XXQVAR LABELXX") +
+  theme_NCStats()
+```
+
+#### Multiple Comparisons{-}
+This assumes that you fit a one-way ANOVA linear model using `lm()` and assigned the results to `aov1`.
+
+```{r eval=FALSE, highlight=FALSE}
+## Tukey's Results
+mc <- emmeans(aov1,specs=pairwise~CVAR)
+( mcsum <- summary(mc,infer=TRUE) )
+
+## Construct Summary Graphic
+## !!!! Only use if no transformation !!!!
+ggplot() +
+  geom_jitter(data=DFOBJ,mapping=aes(x=CVAR,y=QVAR),
+              alpha=0.5,width=0.05) +
+  geom_errorbar(data=mcsum$emmeans,
+                mapping=aes(x=CVAR,ymin=lower.CL,ymax=upper.CL),
+                size=2,width=0) +
+  geom_point(data=mcsum$emmeans,mapping=aes(x=CVAR,y=emmean),
+             size=2,pch=21,fill="white") +
+  labs(x="XXCVAR LABELXX",y="XXQVAR LABELXX") +
+  theme_NCStats()
+```
+
+#### Assumption Checking{-}
+This assumes that you fit a one-way ANOVA linear model using `lm()` and assigned the results to `aov1`.
+
+```{r eval=FALSE, highlight=FALSE}
+## Create asummption checking graphic
+assumptionCheck(aov1)
+
+## Show croup sample sizes
+xtabs(~CVAR,data=DFOBJ)
+```
+
+#### Transformations{-}
+
+```{r eval=FALSE, highlight=FALSE}
+## Create assummption checking graphic with lambda transformation
+## !!!! lambday= 0, 1/2, 1/3, 1/4, -1/2, -1/3, or -1/4
+assumptionCheck(aov1,lambday=NUM)
+```
+
+The following are codes for possible transformations of the response variable. Use **one** of these after making a decision from the previous code.
+
+```{r eval=FALSE, highlight=FALSE}
+DFOBJ$tQVAR <- log(DFOBJ$QVAR)      # natural log transformation
+DFOBJ$tQVAR <- sqrt(DFOBJ$QVAR)     # square root transformation
+DFOBJ$tQVAR <- DFOBJ$QVAR^(1/3)     # cube root transformation
+DFOBJ$tQVAR <- DFOBJ$QVAR^(1/4)     # fourth root transformation
+DFOBJ$tQVAR <- 1/DFOBJ$QVAR         # inverse (or reciprocal) transformation
+DFOBJ$tQVAR <- DFOBJ$QVAR^(-1/2)    # inverse square root transformation
+DFOBJ$tQVAR <- DFOBJ$QVAR^(-1/3)    # inverse cube root transformation
+DFOBJ$tQVAR <- DFOBJ$QVAR^(-1/4)    # inverse fourth root transformation
+```
+
+```{r eval=FALSE, highlight=FALSE}
+## Fit new linear model with transformed response variable
+aov2 <- lm(tQVAR~CVAR,data=DFOBJ)
+anova(aov2)
+```
+
+Multiple comparisons on the TRANSFORMED scale are made below. See code further below for multiple comparisons on the back-transformed scale when using a log or square root transformation.
+
+```{rr eval=FALSE, highlight=FALSE}
+## on transformed scale (must use this for non log or square root)
+mc <- emmeans(aov2,specs=pairwise~CVAR)
+( mcsum <- summary(mc,infer=TRUE) )                       # transformed scale
+
+## summary graphic on transformed scale
+ggplot() +
+  geom_jitter(data=DFOBJ,mapping=aes(x=CVAR,y=tQVAR),
+              alpha=0.5,width=0.05) +
+  geom_errorbar(data=mcsumbt$emmeans,
+                mapping=aes(x=CVAR,ymin=lower.CL,ymax=upper.CL),
+                size=2,width=0) +
+  geom_point(data=mcsumbt$emmeans,mapping=aes(x=CVAR,y=emmean),
+             size=2,pch=21,fill="white") +
+  labs(x="XXCVAR LABELXX",y="XXtQVAR LABELXX") +
+  theme_NCStats()
+```
+
+Multiple comparisons on the BACK-TRANSFORMED scale are made below (only for log and square root transformations).
+
+```{r eval=FALSE, highlight=FALSE}
+## only after log transformation
+mc <- emmeans(aov2,specs=pairwise~CVAR,tran="log")
+( mcsumbt <- summary(mct,infer=TRUE,type="response") )    # back-transformed scale
+
+## only after square root transformation
+mc <- emmeans(aov2,specs=pairwise~CVAR,tran="sqrt")
+( mcsumbt <- summary(mct,infer=TRUE,type="response") )    # back-transformed scale
+
+## summary graphic on back-transformed scale
+ggplot() +
+  geom_jitter(data=DFOBJ,mapping=aes(x=CVAR,y=QVAR),
+              alpha=0.5,width=0.05) +
+  geom_errorbar(data=mcsumbt$emmeans,
+                mapping=aes(x=CVAR,ymin=lower.CL,ymax=upper.CL),
+                size=2,width=0) +
+  geom_point(data=mcsumbt$emmeans,mapping=aes(x=CVAR,y=response),
+             size=2,pch=21,fill="white") +
+  labs(x="XXCVAR LABELXX",y="XXQVAR LABELXX") +
+  theme_NCStats()
+```
+
+&nbsp;
+
+## Two-Way ANOVA{-}
+#### Basic Two-Way ANOVA{-}
+
+```{r eval=FALSE, highlight=FALSE}
+## Fit the Linear Model
+aov2 <- lm(QVAR~CVAR1+CVAR2+CVAR1:CVAR2,data=DFOBJ)
+
+## Assumption checking
+assumptionCheck(aov2)
+
+## Extract the ANOVA Table
+anova(aov2)
+```
+
+#### Multiple Comparisons{-}
+If there IS an interaction effect then computed Tukey's results for the interaction term in `aov2` (see below for when there is no interaction effect).
+
+```{r eval=FALSE, highlight=FALSE}
+## !!!! Only if there is a significant interaction effect !!!!
+mc2 <- emmeans(aov2,specs=pairwise~CVAR1:CVAR2)
+( mc2sum <- summary(aov2,infer=TRUE) )
+```
+
+If there is NO interaction effect then fit a new model without the interaction term.
+
+```{r eval=FALSE, highlight=FALSE}
+## !!!! Only if there is no significant interaction effect !!!!
+aov2_noint <- lm(QVAR~CVAR1+CVAR2,data=DFOBJ)
+```
+
+Then compute Tukey's results for the main effect terms that are significant. Note you may need to repeat the code below, once for `CVAR1` and then again for `CVAR2`.
+
+```{r eval=FALSE, highlight=FALSE}
+## !!!! Only if there is no significant interaction effect !!!!
+mc2_noint <- emmeans(aov2_noint,specs=pairwise~CVAR1)
+( mc2sum_noint <- summary(aov2_noint,infer=TRUE) )
+```
+
+#### Interaction and Main Effects Plots{-}
+
+```{r eval=FALSE, highlight=FALSE}
+## Interaction plot ... may switch CVAR1 and CVAR2
+pd <- position_dodge(width=0.1)  ## may try different values
+ggplot(data=mc2sum$emmeans,mapping=aes(x=CVAR1,group=CVAR2,color=CVAR2,
+                                       y=emmean,ymin=lower.CL,ymax=upper.CL)) +
+  geom_line(position=pd,size=1.1,alpha=0.25) +
+  geom_errorbar(position=pd,size=2,width=0) +
+  geom_point(position=pd,size=2,pch=21,fill="white") +
+  labs(x="XXCVAR1 LABELXX",y="XXQVAR LABELXX") +
+  theme_NCStats()
+
+## Main effects plot ... may need CVAR2
+## !!!! Only use if there is no significant interaction effect !!!!
+ggplot(data=mc2sum_noint$emmeans,
+       mapping=aes(x=CVAR1,group=1,y=emmean,ymin=lower.CL,ymax=upper.CL)) +
+  geom_line(size=1.1,alpha=0.25) +
+  geom_errorbar(size=2,width=0) +
+  geom_point(size=2,pch=21,fill="white") +
+  labs(x="XXCVAR1 LABELXX",y="XXQVAR LABELXX") +
+  theme_NCStats()
+```
+
+Note that you may need to use transformations and, thus, you may need to use code similar to what was shown above for the One-Way ANOVA.
+
+&nbsp;
+
+## Simple Linear Regression{-}
+#### Basic Linear Regression{-}
+```{r eval=FALSE, highlight=FALSE}
+## Fit the linear model
+( slr <- lm(QVARR~QVARE,data=DFOBJ) )
+
+## Make a basic prediction (without confidence/prediction intervals)
+predict(slr,newdata=data.frame(QVARE=NUM))
+
+## Coefficient of determination
+rSquared(slr)
+
+## Basic best-fit line (without confidence bands)
+ggplot(data=DFOBJ,mapping=aes(x=QVARE,y=QVARR)) +  
+  geom_point(pch=21,color="black",fill="lightgray") +  
+  labs(x="XXLABEL FOR QVARE##",y="XXLABEL FOR QVARE##") +  
+  theme_NCStats() +  
+  geom_smooth(method="lm",color="black",fill="lightgray",se=FALSE)
+```
+
+#### Inferences{-}
+This assumes a linear model has been fit and assigned to `slr`.
+
+```{r eval=FALSE, highlight=FALSE}
+## Extract the coefficients table
+cbind(Est=coef(slr),confint(slr))
+
+## Extract the coefficient summary table (with default p-values)
+summary(slr)
+
+## Make a prediction with confidence/prediction intervals
+nd <- data.frame(QVARE=c(NUM,NUM,...))         # data.frame to save typing
+predict(slr,newdata=nd,interval="confidence")  # confidence intervals
+predict(slr,newdata=nd,interval="prediction")  # prediction intervals
+
+## Best-fit line with confidence band
+ggplot(data=DFOBJ,mapping=aes(x=QVARE,y=QVARR)) +  
+  geom_point(pch=21,color="black",fill="lightgray") +  
+  labs(x="XXLABEL FOR QVARE##",y="XXLABEL FOR QVARE##") +  
+  theme_NCStats() +  
+  geom_smooth(method="lm",color="black",fill="lightgray")
+```
+
+#### Assumption Checking{-}
+This assumes a linear model has been fit and assigned to `slr`.
+
+```{r eval=FALSE, highlight=FALSE}
+assumptionCheck(slr)
+```
+
+#### Transformations{-}
+This assumes a linear model has been fit and assigned to `slr`.
+
+```{r eval=FALSE, highlight=FALSE}
+## Exploring different response and explanatory transformations
+assumptionCheck(slr,lambday=NUM,lambdax=NUM)
+```
+
+See assumptions checking section for One-Way ANOVA above for codes to transform the variables.
+
+&nbsp;
+
+## Indicator Variable Regression{-}
+#### Basic Indicator Variable Regression{-}
+```{r eval=FALSE, highlight=FALSE}
+## Fit the linear model
+( ivr <- lm(QVARR~QVARE+CVAR+QVARE:CVAR,data=DFOBJ) )
+
+## Extract coefficients table
+cbind(Ests=coef(ivr),confint(ivr))
+
+## Make a prediction
+nd <- data.frame(QVARE=c(NUM,NUM),CVAR=c("VALUE","VALUE"))
+predict(ivr,newdata=nd,interval="confidence")
+predict(ivr,newdata=nd,interval="prediction")
+
+## Basic best-fit line (without confidence bands)
+ggplot(data=DFOBJ,mapping=aes(x=QVARE,y=QVARR,color=CVAR)) +  
+  geom_point() +  
+  labs(x="XXLABEL FOR QVARE##",y="XXLABEL FOR QVARE##") +  
+  theme_NCStats() +  
+  geom_smooth(method="lm",se=FALSE)
+```
+
+#### Inferences{-}
+Assumes that you have the ultimate full model fit and assigned to `ivr`.
+
+```{r eval=FALSE, highlight=FALSE}
+anova(ivr)
+```
+
+#### Multiple Comparisons{-}
+If the slopes differ among some groups (i.e., significant interaction term in the ultimate full model) then use the following.
+
+```{r eval=FALSE, highlight=FALSE}
+mcs <- emtrends(ivr,pairwise~CVAR,var="QVARE")
+( mcssum <- summary(mcs,infer=TRUE) )
+```
+
+If the slopes do not differ among some groups but there is a different in intercepts among some groups (i.e., no siginficiant interaction term but a significant factor term in the ultimate full model) then first fit a model without the interaction term.
+
+```{r eval=FALSE, highlight=FALSE}
+## !!!! Only use if slopes are equal (interaction not significant) !!!!
+( ivr_noint <- lm(QVARR~QVARE+CVAR,data=DFOBJ) )
+```
+
+Then perform Tukey's test on the factor term.
+
+```{r eval=FALSE, highlight=FALSE}
+mci <- emmeans(ivr_noint,pairwise~CVAR)
+( mcisum <- summary(mci,infer=TRUE) )
+```
+
+&nbsp;
+
+## Logistic Regression{-}
+#### Basic Logistic Regression{-}
+```{r eval=FALSE, highlight=FALSE}
+## Convert categorical response to binary variable
+## !!!! VALUE should be replaced with the name of the success outcome
+DFOBJ$CVAR01 <- ifelse(DFOBJ$CVAR=="VALUE",1,0)
+
+## Fit the linear model
+logreg <- glm(CVAR01~QVAR,data=DFOBJ,family=binomial)
+
+## Relationship test
+anova(logreg,test="LRT")
+
+## Perform bootstraps
+b_logreg <- car::Boot(logreg)
+
+## Create table of model coefficients
+cbind(Ests=coef(logreg),confint(b_logreg,type="perc"))
+```
+
+#### Predictions{-}
+Must create the following two functions first (copy these exactly).
+
+```{r eval=FALSE, highlight=FALSE}
+predProb <- function(x,alpha,beta) exp(alpha+beta*x)/(1+exp(alpha+beta*x))
+predX <- function(p,alpha,beta) (log(p/(1-p))-alpha)/beta
+```
+
+This assumes that you have bootstrapped your logistic regression model and assigned the results to `b_logreg`.
+
+```{r eval=FALSE, highlight=FALSE}
+## Predict the probability of success at a given value of QVAR
+p_prob <- predProb(NUM,b_logreg$t[,1],b_logreg$t[,2])
+( ci_prob <- quantile(p_prob,c(0.025,0.975),type=1) )
+
+## Predict the value of QVAR that has a certain probability of success
+p_x <- predX(NUM,b_logreg$t[,1],b_logreg$t[,2])
+( ci_x <- quantile(p_x,c(0.025,0.975),type=1) )
+```
+
+#### Fitted Line Plot{-}
+
+```{r eval=FALSE, highlight=FALSE}
+ggplot(data=DFOBJ,mapping=aes(x=QVAR,y=CVAR01)) +
+  geom_point(alpha=0.01) +
+  geom_smooth(method="glm",method.args=list(family=binomial)) +
+  labs(x="XXLABEL FOR QVARXX",y="Probability of XXLABEL FOR SUCCESSXX") +
+  theme_NCStats()
+```
+
+You may need to adjust the `alpha=` value higher if the points are too light.
+
+&nbsp;

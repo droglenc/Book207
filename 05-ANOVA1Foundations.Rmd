@@ -188,7 +188,7 @@ ggplot(data=opp,mapping=aes(x=season,y=imm)) +
   geom_jitter(alpha=0.5,width=0.05) +
   stat_summary(fun.data=mean_cl_normal,geom="errorbar",size=2,width=0) +
   stat_summary(fun=mean,geom="point",pch=21,fill="white",size=2) +
-  labs(y="Immunoglobulin Concentration",x="Season/Month") +
+  labs(x="Season/Month",y="Immunoglobulin Concentration") +
   theme_NCStats()
 ```
 

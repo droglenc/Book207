@@ -298,3 +298,5 @@ When `type="response"`{.inline} is used the `$emmeans` portion of the results ar
 ```{r}
 ( mcsumbt <- summary(mct,infer=TRUE,type="response") )
 ```
+
+&nbsp;

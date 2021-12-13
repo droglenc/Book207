@@ -54,7 +54,7 @@ The sample size is less than 40 but greater than 15. The histograms shown below 
 ```{r fig.width=7, class.source="RCODE_ALONE"}
 ggplot(data=aqua,mapping=aes(x=BOD)) +
   geom_histogram(binwidth=0.5,boundary=0,color="black",fill="lightgray") +
-  labs(y="Frequency of Water Samples",x="Biological Oxygen Demand") +
+  labs(x="Biological Oxygen Demand",y="Frequency of Water Samples") +
   scale_y_continuous(expand=expansion(mult=c(0,0.05))) +
   theme_NCStats() +
   facet_wrap(vars(src))
@@ -136,7 +136,7 @@ In a 2-sample t-test, the "signal" is the difference in the two group means (Fig
 tmp <- ggplot(data=d1,mapping=aes(y=y,x=grp,color=grp)) +
   geom_point(alpha=0.5) +
   stat_summary(geom="point",fun="mean",shape="-",size=15) +
-  labs(y="Response Variable",x="Group") +
+  labs(x="Group",y="Response Variable") +
   scale_color_manual(values=clrs2) +
   theme_NCStats() +
   theme(legend.position="none")
@@ -228,3 +228,5 @@ More signal-to-noise means smaller p-values.
 :::
 
 We will return to the signal-to-noise metaphor throughout this course.
+
+&nbsp;

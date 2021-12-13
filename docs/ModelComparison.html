@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-10-12" />
+<meta name="date" content="2021-11-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -343,6 +343,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.4</b> Parameter Estimates</a></li>
 <li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.5</b> Predictions</a></li>
 <li class="chapter" data-level="27.6" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.6</b> Plotting Best-Fit Line</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html"><i class="fa fa-check"></i>Appendix – R Generic Code</a>
+<ul>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#common-codes"><i class="fa fa-check"></i>Common Codes</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#foundations"><i class="fa fa-check"></i>Foundations</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#one-way-anova"><i class="fa fa-check"></i>One-Way ANOVA</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#two-way-anova"><i class="fa fa-check"></i>Two-Way ANOVA</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#simple-linear-regression"><i class="fa fa-check"></i>Simple Linear Regression</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#indicator-variable-regression"><i class="fa fa-check"></i>Indicator Variable Regression</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#logistic-regression"><i class="fa fa-check"></i>Logistic Regression</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -716,6 +726,7 @@ Residuals
 <p><span class="math display">\[ \sigma_{p}^{2} + \frac{\sum_{i=1}^{I}n_{i}\left(\mu_{i}-\mu\right)^{2}}{I-1} \]</span></p>
 <p>Thus, MS<sub>Among</sub> consists of two “sources” of variability. The first source (<span class="math inline">\(\sigma_{p}^{2}\)</span>) is the natural variability that exists among individuals (around the group means). The second source <span class="math inline">\(\left(\frac{\sum_{i=1}^{I}n_{i}\left(\mu_{i}-\mu\right)^{2}}{I-1}\right)\)</span> is related to differences among the group means. Therefore, if the group means are all equal – i.e., <span class="math inline">\(\mu_{1}\)</span>=<span class="math inline">\(\mu_{2}\)</span>= <span class="math inline">\(\cdots\)</span> = <span class="math inline">\(\mu_{I}\)</span> = <span class="math inline">\(\mu\)</span> – then the second source of variability is equal to zero and MS<sub>Among</sub> will equal MS<sub>Within</sub>. As soon as the groups begin to differ, the second source of variability will be greater than 0 and MS<sub>Among</sub> will be greater than MS<sub>Within</sub>.</p>
 <p>From this, it follows that if the null hypothesis of equal population means is true (i.e., one mean fits all groups), then the center of the sampling distribution of both MS<sub>Within</sub> and MS<sub>Among</sub> is <span class="math inline">\(\sigma_{p}^{2}\)</span>. Therefore, if the null hypothesis is true, then the F test-statistic is expected to equal 1, on average, which will always result in a large p-value and a DNR H<sub>0</sub> conclusion. However, if the null hypothesis is false (i.e., separate means are needed for all groups), then the center of the sampling distribution of MS<sub>Within</sub> is <span class="math inline">\(\sigma_{p}^{2}\)</span> but the center of the sampling distribution of MS<sub>Among</sub> is <span class="math inline">\(\sigma_{p}^{2}\)</span> + “something,” where the “something” is greater than 0 and gets larger as the means become “more different.” Thus, if the null hypothesis is false then the F test-statistic is expected to be greater than 1 and will get larger as the null hypothesis gets “more false.” This analysis of sampling distribution theory illustrates once again that (1) MS<sub>Among</sub> consists of multiple sources of variability and (2) “large” values of the F test-statistic indicate that the null hypothesis is incorrect.</p>
+<p> </p>
 
 </div>
 </div>

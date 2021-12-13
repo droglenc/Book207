@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Appendix – R Generic Code | Readings for MTH207</title>
+  <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Appendix – R Generic Code | Readings for MTH207" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://derekogle.com/Book207/" />
+  
+  <meta property="og:description" content="This book contains the readings for MTH207 at Northland College." />
+  <meta name="github-repo" content="droglenc/Book207" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Appendix – R Generic Code | Readings for MTH207" />
+  
+  <meta name="twitter:description" content="This book contains the readings for MTH207 at Northland College." />
+  
+
+<meta name="author" content="Derek H. Ogle" />
+
+
+<meta name="date" content="2021-11-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="LogRegAnalysis.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Readings for MTH207</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>FOUNDATIONS</b></span></li>
+<li class="chapter" data-level="1" data-path="ModelTypes.html"><a href="ModelTypes.html"><i class="fa fa-check"></i><b>1</b> Model Types &amp; Methods</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="ModelTypes.html"><a href="ModelTypes.html#distinguishing-methods"><i class="fa fa-check"></i><b>1.1</b> Distinguishing Methods</a></li>
+<li class="chapter" data-level="1.2" data-path="ModelTypes.html"><a href="ModelTypes.html#method-purposes"><i class="fa fa-check"></i><b>1.2</b> Method Purposes</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="T2Review.html"><a href="T2Review.html"><i class="fa fa-check"></i><b>2</b> 2-Sample t Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="T2Review.html"><a href="T2Review.html#review"><i class="fa fa-check"></i><b>2.1</b> Review</a></li>
+<li class="chapter" data-level="2.2" data-path="T2Review.html"><a href="T2Review.html#T2analysis"><i class="fa fa-check"></i><b>2.2</b> Analysis in R</a></li>
+<li class="chapter" data-level="2.3" data-path="T2Review.html"><a href="T2Review.html#signal-to-noise"><i class="fa fa-check"></i><b>2.3</b> Signal-to-Noise</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ModelConcepts.html"><a href="ModelConcepts.html"><i class="fa fa-check"></i><b>3</b> Model Concepts</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ModelConcepts.html"><a href="ModelConcepts.html#what-is-a-model"><i class="fa fa-check"></i><b>3.1</b> What is a Model</a></li>
+<li class="chapter" data-level="3.2" data-path="ModelConcepts.html"><a href="ModelConcepts.html#assessing-fit-ss"><i class="fa fa-check"></i><b>3.2</b> Assessing Fit (SS)</a></li>
+<li class="chapter" data-level="3.3" data-path="ModelConcepts.html"><a href="ModelConcepts.html#residual-degrees-of-freedom"><i class="fa fa-check"></i><b>3.3</b> Residual Degrees-of-Freedom</a></li>
+<li class="chapter" data-level="3.4" data-path="ModelConcepts.html"><a href="ModelConcepts.html#mean-squares"><i class="fa fa-check"></i><b>3.4</b> Mean-Squares</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ModelComparison.html"><a href="ModelComparison.html"><i class="fa fa-check"></i><b>4</b> Model Comparison</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ModelComparison.html"><a href="ModelComparison.html#competing-models"><i class="fa fa-check"></i><b>4.1</b> Competing Models</a></li>
+<li class="chapter" data-level="4.2" data-path="ModelComparison.html"><a href="ModelComparison.html#measuring-increase-in-fit"><i class="fa fa-check"></i><b>4.2</b> Measuring Increase in Fit</a></li>
+<li class="chapter" data-level="4.3" data-path="ModelComparison.html"><a href="ModelComparison.html#measuring-increase-in-complexity"><i class="fa fa-check"></i><b>4.3</b> Measuring Increase in Complexity</a></li>
+<li class="chapter" data-level="4.4" data-path="ModelComparison.html"><a href="ModelComparison.html#noise-variances"><i class="fa fa-check"></i><b>4.4</b> “Noise” Variances</a></li>
+<li class="chapter" data-level="4.5" data-path="ModelComparison.html"><a href="ModelComparison.html#signal-variance-benefit-to-cost"><i class="fa fa-check"></i><b>4.5</b> “Signal” Variance (Benefit-to-Cost)</a></li>
+<li class="chapter" data-level="4.6" data-path="ModelComparison.html"><a href="ModelComparison.html#ratio-of-variances-signal-to-noise"><i class="fa fa-check"></i><b>4.6</b> Ratio of Variances (Signal-to-Noise)</a></li>
+<li class="chapter" data-level="4.7" data-path="ModelComparison.html"><a href="ModelComparison.html#anova-table"><i class="fa fa-check"></i><b>4.7</b> ANOVA Table</a></li>
+<li class="chapter" data-level="4.8" data-path="ModelComparison.html"><a href="ModelComparison.html#two-sample-t-test-revisited-using-linear-models"><i class="fa fa-check"></i><b>4.8</b> Two-Sample t-Test Revisited: Using Linear Models</a></li>
+<li class="chapter" data-level="4.9" data-path="ModelComparison.html"><a href="ModelComparison.html#one-more-look-at-ms-and-f-test"><i class="fa fa-check"></i><b>4.9</b> One More Look at MS and F-test</a></li>
+</ul></li>
+<li class="part"><span><b>ONE-WAY ANOVA</b></span></li>
+<li class="chapter" data-level="5" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html"><i class="fa fa-check"></i><b>5</b> One-Way Foundations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#analytical-foundation"><i class="fa fa-check"></i><b>5.1</b> Analytical Foundation</a></li>
+<li class="chapter" data-level="5.2" data-path="ANOVA1Foundations.html"><a href="ANOVA1Foundations.html#one-way-anova-in-r"><i class="fa fa-check"></i><b>5.2</b> One-Way ANOVA in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html"><i class="fa fa-check"></i><b>6</b> One-Way Multiple Comparisons</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#multiple-comparison-problem"><i class="fa fa-check"></i><b>6.1</b> Multiple Comparison Problem</a></li>
+<li class="chapter" data-level="6.2" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#correction-methods"><i class="fa fa-check"></i><b>6.2</b> Correction Methods</a></li>
+<li class="chapter" data-level="6.3" data-path="ANOVA1MultipleComparisons.html"><a href="ANOVA1MultipleComparisons.html#multiple-comparisons-in-r"><i class="fa fa-check"></i><b>6.3</b> Multiple Comparisons in R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html"><i class="fa fa-check"></i><b>7</b> One-Way Assumptions</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#independence"><i class="fa fa-check"></i><b>7.1</b> Independence</a></li>
+<li class="chapter" data-level="7.2" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#equal-variances"><i class="fa fa-check"></i><b>7.2</b> Equal Variances</a></li>
+<li class="chapter" data-level="7.3" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#normality"><i class="fa fa-check"></i><b>7.3</b> Normality</a></li>
+<li class="chapter" data-level="7.4" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#no-outliers"><i class="fa fa-check"></i><b>7.4</b> No Outliers</a></li>
+<li class="chapter" data-level="7.5" data-path="ANOVA1Assumptions.html"><a href="ANOVA1Assumptions.html#testing-assumptions-in-r"><i class="fa fa-check"></i><b>7.5</b> Testing Assumptions in R</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html"><i class="fa fa-check"></i><b>8</b> One-Way Transformations</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#power-transformations"><i class="fa fa-check"></i><b>8.1</b> Power Transformations</a></li>
+<li class="chapter" data-level="8.2" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#transformations-from-theory"><i class="fa fa-check"></i><b>8.2</b> Transformations from Theory</a></li>
+<li class="chapter" data-level="8.3" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#interpretations-after-transformations"><i class="fa fa-check"></i><b>8.3</b> Interpretations After Transformations</a></li>
+<li class="chapter" data-level="8.4" data-path="ANOVA1Transformations.html"><a href="ANOVA1Transformations.html#back-transformations-in-r"><i class="fa fa-check"></i><b>8.4</b> Back-Transformations in R</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html"><i class="fa fa-check"></i><b>9</b> One-Way Summary</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#suggested-workflow"><i class="fa fa-check"></i><b>9.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="9.2" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#nematodes-no-transformation"><i class="fa fa-check"></i><b>9.2</b> Nematodes (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="9.3" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#ant-foraging-transformation"><i class="fa fa-check"></i><b>9.3</b> Ant Foraging (<em>Transformation</em>)</a></li>
+<li class="chapter" data-level="9.4" data-path="ANOVA1Summary.html"><a href="ANOVA1Summary.html#peak-discharge-transformation"><i class="fa fa-check"></i><b>9.4</b> Peak Discharge (<em>Transformation</em>)</a></li>
+</ul></li>
+<li class="part"><span><b>TWO-WAY ANOVA</b></span></li>
+<li class="chapter" data-level="10" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html"><i class="fa fa-check"></i><b>10</b> Two-Way Conceptual Foundation</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#two-factors"><i class="fa fa-check"></i><b>10.1</b> Two Factors</a></li>
+<li class="chapter" data-level="10.2" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#interaction-effects"><i class="fa fa-check"></i><b>10.2</b> Interaction Effects</a></li>
+<li class="chapter" data-level="10.3" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#main-effects"><i class="fa fa-check"></i><b>10.3</b> Main Effects</a></li>
+<li class="chapter" data-level="10.4" data-path="ANOVA2Foundations1.html"><a href="ANOVA2Foundations1.html#advantages-of-ccfd"><i class="fa fa-check"></i><b>10.4</b> Advantages of CCFD</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html"><i class="fa fa-check"></i><b>11</b> Two-Way Analytical Foundation</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#terminology"><i class="fa fa-check"></i><b>11.1</b> Terminology</a></li>
+<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#models"><i class="fa fa-check"></i><b>11.2</b> Models</a></li>
+<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sstotal-dftotal-and-mstotal"><i class="fa fa-check"></i><b>11.3</b> SS<sub>Total</sub>, df<sub>Total</sub>, and MS<sub>Total</sub></a></li>
+<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sswithin-dfwithin-and-mswithin"><i class="fa fa-check"></i><b>11.4</b> SS<sub>Within</sub>, df<sub>Within</sub>, and MS<sub>Within</sub></a></li>
+<li class="chapter" data-level="11.5" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#ssamong-dfamong-and-msamong"><i class="fa fa-check"></i><b>11.5</b> SS<sub>Among</sub>, df<sub>Among</sub>, and MS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.6" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#partitioning-ssamong"><i class="fa fa-check"></i><b>11.6</b> Partitioning SS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.7" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.7</b> ANOVA Table</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html"><i class="fa fa-check"></i><b>12</b> Two-Way Analysis</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#model-fitting-in-r"><i class="fa fa-check"></i><b>12.1</b> Model Fitting in R</a></li>
+<li class="chapter" data-level="12.2" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#assumptions"><i class="fa fa-check"></i><b>12.2</b> Assumptions</a></li>
+<li class="chapter" data-level="12.3" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#main-and-interaction-effects-anova-table"><i class="fa fa-check"></i><b>12.3</b> Main and Interaction Effects (ANOVA Table)</a></li>
+<li class="chapter" data-level="12.4" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#multiple-comparisons"><i class="fa fa-check"></i><b>12.4</b> Multiple Comparisons</a></li>
+<li class="chapter" data-level="12.5" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html#graphing-results"><i class="fa fa-check"></i><b>12.5</b> Graphing Results</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html"><i class="fa fa-check"></i><b>13</b> Two-Way Summary</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#suggested-workflow-1"><i class="fa fa-check"></i><b>13.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="13.2" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#expected-prices-no-transformation"><i class="fa fa-check"></i><b>13.2</b> Expected Prices (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="13.3" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#blood-pressure-no-transformation"><i class="fa fa-check"></i><b>13.3</b> Blood Pressure (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="13.4" data-path="ANOVA2Summary.html"><a href="ANOVA2Summary.html#crayfish-foraging-transformation"><i class="fa fa-check"></i><b>13.4</b> Crayfish Foraging (<em>Transformation</em>)</a></li>
+</ul></li>
+<li class="part"><span><b>SIMPLE LINEAR REGRESSION</b></span></li>
+<li class="chapter" data-level="14" data-path="SLRFoundations.html"><a href="SLRFoundations.html"><i class="fa fa-check"></i><b>14</b> SLR Foundational Principles</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="SLRFoundations.html"><a href="SLRFoundations.html#equation-of-a-line"><i class="fa fa-check"></i><b>14.1</b> Equation of a Line</a></li>
+<li class="chapter" data-level="14.2" data-path="SLRFoundations.html"><a href="SLRFoundations.html#best-fit-line"><i class="fa fa-check"></i><b>14.2</b> Best-Fit Line</a></li>
+<li class="chapter" data-level="14.3" data-path="SLRFoundations.html"><a href="SLRFoundations.html#best-fit-line-in-r"><i class="fa fa-check"></i><b>14.3</b> Best-Fit Line in R</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="SLRInference.html"><a href="SLRInference.html"><i class="fa fa-check"></i><b>15</b> SLR Inference</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="SLRInference.html"><a href="SLRInference.html#variability-around-the-line"><i class="fa fa-check"></i><b>15.1</b> Variability Around the Line</a></li>
+<li class="chapter" data-level="15.2" data-path="SLRInference.html"><a href="SLRInference.html#slope"><i class="fa fa-check"></i><b>15.2</b> Slope</a></li>
+<li class="chapter" data-level="15.3" data-path="SLRInference.html"><a href="SLRInference.html#intercept"><i class="fa fa-check"></i><b>15.3</b> Intercept</a></li>
+<li class="chapter" data-level="15.4" data-path="SLRInference.html"><a href="SLRInference.html#slope-and-intercept-in-r"><i class="fa fa-check"></i><b>15.4</b> Slope and Intercept in R</a></li>
+<li class="chapter" data-level="15.5" data-path="SLRInference.html"><a href="SLRInference.html#predicting-means"><i class="fa fa-check"></i><b>15.5</b> Predicting Means</a></li>
+<li class="chapter" data-level="15.6" data-path="SLRInference.html"><a href="SLRInference.html#predicting-individuals"><i class="fa fa-check"></i><b>15.6</b> Predicting Individuals</a></li>
+<li class="chapter" data-level="15.7" data-path="SLRInference.html"><a href="SLRInference.html#predictions-in-r"><i class="fa fa-check"></i><b>15.7</b> Predictions in R</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="SLRModels.html"><a href="SLRModels.html"><i class="fa fa-check"></i><b>16</b> SLR Models</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="SLRModels.html"><a href="SLRModels.html#models-1"><i class="fa fa-check"></i><b>16.1</b> Models</a></li>
+<li class="chapter" data-level="16.2" data-path="SLRModels.html"><a href="SLRModels.html#anova-table-2"><i class="fa fa-check"></i><b>16.2</b> ANOVA Table</a></li>
+<li class="chapter" data-level="16.3" data-path="SLRModels.html"><a href="SLRModels.html#coefficient-of-determination"><i class="fa fa-check"></i><b>16.3</b> Coefficient Of Determination</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html"><i class="fa fa-check"></i><b>17</b> SLR Assumptions</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#residual-plot"><i class="fa fa-check"></i><b>17.1</b> Residual Plot</a></li>
+<li class="chapter" data-level="17.2" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#independence-1"><i class="fa fa-check"></i><b>17.2</b> Independence</a></li>
+<li class="chapter" data-level="17.3" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#homoscedasticity"><i class="fa fa-check"></i><b>17.3</b> Homoscedasticity</a></li>
+<li class="chapter" data-level="17.4" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#SLRNormality"><i class="fa fa-check"></i><b>17.4</b> Normality</a></li>
+<li class="chapter" data-level="17.5" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#SLRNoOutliers"><i class="fa fa-check"></i><b>17.5</b> No Outliers or Influential Points</a></li>
+<li class="chapter" data-level="17.6" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#linearity"><i class="fa fa-check"></i><b>17.6</b> Linearity</a></li>
+<li class="chapter" data-level="17.7" data-path="SLRAssumptions.html"><a href="SLRAssumptions.html#testing-assumptions-in-r-1"><i class="fa fa-check"></i><b>17.7</b> Testing Assumptions in R</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="SLRTransformations.html"><a href="SLRTransformations.html"><i class="fa fa-check"></i><b>18</b> SLR Transformations</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="SLRTransformations.html"><a href="SLRTransformations.html#transformations-from-theoretical-relationships"><i class="fa fa-check"></i><b>18.1</b> Transformations from Theoretical Relationships</a></li>
+<li class="chapter" data-level="18.2" data-path="SLRTransformations.html"><a href="SLRTransformations.html#trial-and-error-method"><i class="fa fa-check"></i><b>18.2</b> Trial-and-Error Method</a></li>
+<li class="chapter" data-level="18.3" data-path="SLRTransformations.html"><a href="SLRTransformations.html#back-transformation-in-slr"><i class="fa fa-check"></i><b>18.3</b> Back-Transformation in SLR</a></li>
+<li class="chapter" data-level="18.4" data-path="SLRTransformations.html"><a href="SLRTransformations.html#examples"><i class="fa fa-check"></i><b>18.4</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="SLRSummary.html"><a href="SLRSummary.html"><i class="fa fa-check"></i><b>19</b> SLR Summary</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="SLRSummary.html"><a href="SLRSummary.html#suggested-workflow-2"><i class="fa fa-check"></i><b>19.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="19.2" data-path="SLRSummary.html"><a href="SLRSummary.html#climate-change-data-no-transformation"><i class="fa fa-check"></i><b>19.2</b> Climate Change Data (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="19.3" data-path="SLRSummary.html"><a href="SLRSummary.html#forest-allometrics-transformation"><i class="fa fa-check"></i><b>19.3</b> Forest Allometrics (Transformation)</a></li>
+</ul></li>
+<li class="part"><span><b>INDICATOR VARIABLE REGRESSION</b></span></li>
+<li class="chapter" data-level="20" data-path="IVRVariables.html"><a href="IVRVariables.html"><i class="fa fa-check"></i><b>20</b> IVR Variables</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="IVRVariables.html"><a href="IVRVariables.html#indicator-variables"><i class="fa fa-check"></i><b>20.1</b> Indicator Variables</a></li>
+<li class="chapter" data-level="20.2" data-path="IVRVariables.html"><a href="IVRVariables.html#interaction-variables"><i class="fa fa-check"></i><b>20.2</b> Interaction Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="IVRModels.html"><a href="IVRModels.html"><i class="fa fa-check"></i><b>21</b> IVR Models &amp; Sub-Models</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="IVRModels.html"><a href="IVRModels.html#ultimate-full-model"><i class="fa fa-check"></i><b>21.1</b> Ultimate Full Model</a></li>
+<li class="chapter" data-level="21.2" data-path="IVRModels.html"><a href="IVRModels.html#sub-models"><i class="fa fa-check"></i><b>21.2</b> Sub-Models</a></li>
+<li class="chapter" data-level="21.3" data-path="IVRModels.html"><a href="IVRModels.html#interpreting-parameter-estimates"><i class="fa fa-check"></i><b>21.3</b> Interpreting Parameter Estimates</a></li>
+<li class="chapter" data-level="21.4" data-path="IVRModels.html"><a href="IVRModels.html#ultimate-full-model-in-r"><i class="fa fa-check"></i><b>21.4</b> Ultimate Full Model in R</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="IVRTesting.html"><a href="IVRTesting.html"><i class="fa fa-check"></i><b>22</b> IVR Testing</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="IVRTesting.html"><a href="IVRTesting.html#f-ratio-test-statistic"><i class="fa fa-check"></i><b>22.1</b> F-ratio Test Statistic</a></li>
+<li class="chapter" data-level="22.2" data-path="IVRTesting.html"><a href="IVRTesting.html#parallel-lines-test"><i class="fa fa-check"></i><b>22.2</b> Parallel Lines Test</a></li>
+<li class="chapter" data-level="22.3" data-path="IVRTesting.html"><a href="IVRTesting.html#coincident-lines-test"><i class="fa fa-check"></i><b>22.3</b> Coincident Lines Test</a></li>
+<li class="chapter" data-level="22.4" data-path="IVRTesting.html"><a href="IVRTesting.html#relationship-test"><i class="fa fa-check"></i><b>22.4</b> Relationship Test</a></li>
+<li class="chapter" data-level="22.5" data-path="IVRTesting.html"><a href="IVRTesting.html#all-tests-in-r"><i class="fa fa-check"></i><b>22.5</b> All Tests in R</a></li>
+<li class="chapter" data-level="22.6" data-path="IVRTesting.html"><a href="IVRTesting.html#more-groups-different-slopes"><i class="fa fa-check"></i><b>22.6</b> More Groups (Different Slopes)</a></li>
+<li class="chapter" data-level="22.7" data-path="IVRTesting.html"><a href="IVRTesting.html#more-groups-same-slopes"><i class="fa fa-check"></i><b>22.7</b> More Groups (Same Slopes)</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html"><i class="fa fa-check"></i><b>23</b> IVR Analysis</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html#assumptions-transformations"><i class="fa fa-check"></i><b>23.1</b> Assumptions &amp; Transformations</a></li>
+<li class="chapter" data-level="23.2" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html#multiple-comparisons-for-slopes"><i class="fa fa-check"></i><b>23.2</b> Multiple Comparisons for Slopes</a></li>
+<li class="chapter" data-level="23.3" data-path="IVRAnalysis.html"><a href="IVRAnalysis.html#multiple-comparisons-for-intercepts"><i class="fa fa-check"></i><b>23.3</b> Multiple Comparisons for Intercepts</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="IVRSummary.html"><a href="IVRSummary.html"><i class="fa fa-check"></i><b>24</b> IVR Summary</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="IVRSummary.html"><a href="IVRSummary.html#IVRWorkflow"><i class="fa fa-check"></i><b>24.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="24.2" data-path="IVRSummary.html"><a href="IVRSummary.html#fish-energy-density-no-transformation"><i class="fa fa-check"></i><b>24.2</b> Fish Energy Density (<em>No Transformation</em>)</a></li>
+<li class="chapter" data-level="24.3" data-path="IVRSummary.html"><a href="IVRSummary.html#shrub-allometry-transformation"><i class="fa fa-check"></i><b>24.3</b> Shrub Allometry (<em>Transformation</em>)</a></li>
+</ul></li>
+<li class="part"><span><b>LOGISTIC REGRESSION</b></span></li>
+<li class="chapter" data-level="25" data-path="LogRegFoundations.html"><a href="LogRegFoundations.html"><i class="fa fa-check"></i><b>25</b> Foundational Principles</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="LogRegFoundations.html"><a href="LogRegFoundations.html#need-for-a-transformation"><i class="fa fa-check"></i><b>25.1</b> Need for a Transformation</a></li>
+<li class="chapter" data-level="25.2" data-path="LogRegFoundations.html"><a href="LogRegFoundations.html#odds"><i class="fa fa-check"></i><b>25.2</b> Odds</a></li>
+<li class="chapter" data-level="25.3" data-path="LogRegFoundations.html"><a href="LogRegFoundations.html#log-odds-and-the-logit-transformation"><i class="fa fa-check"></i><b>25.3</b> Log Odds and the Logit Transformation</a></li>
+<li class="chapter" data-level="25.4" data-path="LogRegFoundations.html"><a href="LogRegFoundations.html#back-transformation-introduction"><i class="fa fa-check"></i><b>25.4</b> Back-Transformation Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="LogRegModels.html"><a href="LogRegModels.html"><i class="fa fa-check"></i><b>26</b> Models and Predictions</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="LogRegModels.html"><a href="LogRegModels.html#LogRegSlope"><i class="fa fa-check"></i><b>26.1</b> Slope &amp; Back-Transformed Slope</a></li>
+<li class="chapter" data-level="26.2" data-path="LogRegModels.html"><a href="LogRegModels.html#back-transformed-slope"><i class="fa fa-check"></i><b>26.2</b> Back-Transformed Slope</a></li>
+<li class="chapter" data-level="26.3" data-path="LogRegModels.html"><a href="LogRegModels.html#predictions-1"><i class="fa fa-check"></i><b>26.3</b> Predictions</a></li>
+<li class="chapter" data-level="26.4" data-path="LogRegModels.html"><a href="LogRegModels.html#reverse-predictions"><i class="fa fa-check"></i><b>26.4</b> “Reverse” Predictions</a></li>
+<li class="chapter" data-level="26.5" data-path="LogRegModels.html"><a href="LogRegModels.html#another-example"><i class="fa fa-check"></i><b>26.5</b> Another Example</a></li>
+<li class="chapter" data-level="26.6" data-path="LogRegModels.html"><a href="LogRegModels.html#variability-estimates"><i class="fa fa-check"></i><b>26.6</b> Variability Estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html"><i class="fa fa-check"></i><b>27</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#data-preparation"><i class="fa fa-check"></i><b>27.1</b> Data Preparation</a></li>
+<li class="chapter" data-level="27.2" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#fitting-the-model"><i class="fa fa-check"></i><b>27.2</b> Fitting the Model</a></li>
+<li class="chapter" data-level="27.3" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#relationship-test-1"><i class="fa fa-check"></i><b>27.3</b> Relationship Test</a></li>
+<li class="chapter" data-level="27.4" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegParametersR"><i class="fa fa-check"></i><b>27.4</b> Parameter Estimates</a></li>
+<li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.5</b> Predictions</a></li>
+<li class="chapter" data-level="27.6" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.6</b> Plotting Best-Fit Line</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html"><i class="fa fa-check"></i>Appendix – R Generic Code</a>
+<ul>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#common-codes"><i class="fa fa-check"></i>Common Codes</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#foundations"><i class="fa fa-check"></i>Foundations</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#one-way-anova"><i class="fa fa-check"></i>One-Way ANOVA</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#two-way-anova"><i class="fa fa-check"></i>Two-Way ANOVA</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#simple-linear-regression"><i class="fa fa-check"></i>Simple Linear Regression</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#indicator-variable-regression"><i class="fa fa-check"></i>Indicator Variable Regression</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#logistic-regression"><i class="fa fa-check"></i>Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
+<li><a href="https://bookdown.org" target="_blank">Built with Bookdown + RStudio</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Readings for MTH207</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="appendix-r-generic-code" class="section level1 unnumbered">
+<h1>Appendix – R Generic Code</h1>
+<div id="common-codes" class="section level2 unnumbered">
+<h2>Common Codes</h2>
+<p>The generic codes below are provided here so that you can efficiently copy and paste them into your assignment. They are generally ordered by module withing major conceptual topics. Most code that is in ALL CAPITALS should be replaced with something more specific (with the exception of <code>TRUE</code> and <code>FALSE</code>). The following are fairly common genertic codes that should be replaced. Other items are described below. All other code should be typed (preferably copied-and-pasted) as shown, though you may change the name of the assigned object to the left of the <code>&lt;-</code>.</p>
+<ul>
+<li><code>DFOBJ</code> should be replaced with the name of your data frame.</li>
+<li><code>QVAR</code> should be replaced with the name of your quantitative variable.
+<ul>
+<li><code>QVARR</code> for response and <code>QVARE</code> for explanatory variables.</li>
+</ul></li>
+<li><code>CVAR</code> should be replaced with the name of your categorical variable.</li>
+<li><code>NUM</code> should be replaced with a number.</li>
+<li><code>XXINDIVIDUALXX</code> should be replaced with what an individual is.</li>
+<li><code>XXQVAR LABELXX</code> should be replaced with a descriptive label for <code>QVAR</code>.</li>
+<li><code>XXCVAR LABELXX</code> should be replaced with a descriptive label for <code>CVAR</code>.</li>
+</ul>
+</div>
+<div id="foundations" class="section level2 unnumbered">
+<h2>Foundations</h2>
+<div id="sample-t-test-1" class="section level4 unnumbered">
+<h4>2-Sample t-test</h4>
+<ul>
+<li><code>HA</code> is replaced with <code>"two.sided"</code> for not equals, <code>"less"</code> for less than, or <code>"greater"</code> for greater than alternative hypotheses (H<sub>A</sub>).</li>
+<li><code>CNFVAL</code> is the confidence level as a proportion (e.g., <code>0.95</code>).</li>
+</ul>
+<pre class="text RCODE"><code>## Levene&#39;s Test
+levenesTest(QVAR~CVAR,data=DFOBJ)
+
+## 2-Sample t-test
+t.test(QVAR~CVAR,data=DFOBJ,alt=HA,conf.level=CNFVAL,var.equal=TRUE)
+
+## Histogram Separated Into Groups
+ggplot(data=DFOBJ,mapping=aes(x=QVAR)) +
+  geom_histogram(binwidth=NUM,boundary=0,color=&quot;black&quot;,fill=&quot;lightgray&quot;) +
+  labs(x=&quot;XXQVAR LABELXX&quot;,y=&quot;Frequency of XXINDIVIDUALSXX&quot;) +
+  scale_y_continuous(expand=expansion(mult=c(0,0.05))) +
+  theme_NCStats() +
+  facet_wrap(vars(CVAR))</code></pre>
+</div>
+<div id="model-comparisons" class="section level4 unnumbered">
+<h4>Model Comparisons</h4>
+<pre class="text RCODE"><code>## Fit the Linear Model
+aov1 &lt;- lm(QVAR~CVAR,data=DFOBJ)
+
+## Extract the ANOVA Table
+anova(aov1)
+
+## Extract Table of Model Coefficients
+cbind(ests=coef(aov1),confint(aov1))</code></pre>
+</div>
+<div id="compute-p-value-from-f-test-statistic" class="section level4 unnumbered">
+<h4>Compute p-value from F test statistic</h4>
+<ul>
+<li><code>FVAL</code> should be replaced with the calculated F test statistic.</li>
+</ul>
+<pre class="text RCODE"><code>distrib(FVAL,distrib=&quot;f&quot;,df1=NUM,df2=NUM,lower.tail=FALSE)</code></pre>
+<p> </p>
+</div>
+</div>
+<div id="one-way-anova" class="section level2 unnumbered">
+<h2>One-Way ANOVA</h2>
+<div id="basic-one-way-anova" class="section level4 unnumbered">
+<h4>Basic One-Way ANOVA</h4>
+<pre class="text RCODE"><code>## Fit the Linear Model
+aov1 &lt;- lm(QVAR~CVAR,data=DFOBJ)
+
+## Extract the ANOVA Table
+anova(aov1)
+
+## Extract Table of Model Coefficients
+cbind(ests=coef(aov1),confint(aov1))
+
+## Construct Summary Graphic
+## !!!! Only use if no multiple comparisons or transformation !!!!
+ggplot(data=DFOBJ,mapping=aes(x=CVAR,y=QVAR)) +
+  geom_jitter(alpha=0.5,width=0.05) +
+  stat_summary(fun.data=mean_cl_normal,geom=&quot;errorbar&quot;,size=2,width=0) +
+  stat_summary(fun=mean,geom=&quot;point&quot;,pch=21,fill=&quot;white&quot;,size=2) +
+  labs(x=&quot;XXCVAR LABELXX&quot;,y=&quot;XXQVAR LABELXX&quot;) +
+  theme_NCStats()</code></pre>
+</div>
+<div id="multiple-comparisons-1" class="section level4 unnumbered">
+<h4>Multiple Comparisons</h4>
+<p>This assumes that you fit a one-way ANOVA linear model using <code>lm()</code> and assigned the results to <code>aov1</code>.</p>
+<pre class="text RCODE"><code>## Tukey&#39;s Results
+mc &lt;- emmeans(aov1,specs=pairwise~CVAR)
+( mcsum &lt;- summary(mc,infer=TRUE) )
+
+## Construct Summary Graphic
+## !!!! Only use if no transformation !!!!
+ggplot() +
+  geom_jitter(data=DFOBJ,mapping=aes(x=CVAR,y=QVAR),
+              alpha=0.5,width=0.05) +
+  geom_errorbar(data=mcsum$emmeans,
+                mapping=aes(x=CVAR,ymin=lower.CL,ymax=upper.CL),
+                size=2,width=0) +
+  geom_point(data=mcsum$emmeans,mapping=aes(x=CVAR,y=emmean),
+             size=2,pch=21,fill=&quot;white&quot;) +
+  labs(x=&quot;XXCVAR LABELXX&quot;,y=&quot;XXQVAR LABELXX&quot;) +
+  theme_NCStats()</code></pre>
+</div>
+<div id="assumption-checking-1" class="section level4 unnumbered">
+<h4>Assumption Checking</h4>
+<p>This assumes that you fit a one-way ANOVA linear model using <code>lm()</code> and assigned the results to <code>aov1</code>.</p>
+<pre class="text RCODE"><code>## Create asummption checking graphic
+assumptionCheck(aov1)
+
+## Show croup sample sizes
+xtabs(~CVAR,data=DFOBJ)</code></pre>
+</div>
+<div id="transformations" class="section level4 unnumbered">
+<h4>Transformations</h4>
+<pre class="text RCODE"><code>## Create assummption checking graphic with lambda transformation
+## !!!! lambday= 0, 1/2, 1/3, 1/4, -1/2, -1/3, or -1/4
+assumptionCheck(aov1,lambday=NUM)</code></pre>
+<p>The following are codes for possible transformations of the response variable. Use <strong>one</strong> of these after making a decision from the previous code.</p>
+<pre class="text RCODE"><code>DFOBJ$tQVAR &lt;- log(DFOBJ$QVAR)      # natural log transformation
+DFOBJ$tQVAR &lt;- sqrt(DFOBJ$QVAR)     # square root transformation
+DFOBJ$tQVAR &lt;- DFOBJ$QVAR^(1/3)     # cube root transformation
+DFOBJ$tQVAR &lt;- DFOBJ$QVAR^(1/4)     # fourth root transformation
+DFOBJ$tQVAR &lt;- 1/DFOBJ$QVAR         # inverse (or reciprocal) transformation
+DFOBJ$tQVAR &lt;- DFOBJ$QVAR^(-1/2)    # inverse square root transformation
+DFOBJ$tQVAR &lt;- DFOBJ$QVAR^(-1/3)    # inverse cube root transformation
+DFOBJ$tQVAR &lt;- DFOBJ$QVAR^(-1/4)    # inverse fourth root transformation</code></pre>
+<pre class="text RCODE"><code>## Fit new linear model with transformed response variable
+aov2 &lt;- lm(tQVAR~CVAR,data=DFOBJ)
+anova(aov2)</code></pre>
+<p>Multiple comparisons on the TRANSFORMED scale are made below. See code further below for multiple comparisons on the back-transformed scale when using a log or square root transformation.</p>
+<pre class="text RCODE"><code>## on transformed scale (must use this for non log or square root)
+mc &lt;- emmeans(aov2,specs=pairwise~CVAR)
+( mcsum &lt;- summary(mc,infer=TRUE) )                       # transformed scale
+
+## summary graphic on transformed scale
+ggplot() +
+  geom_jitter(data=DFOBJ,mapping=aes(x=CVAR,y=tQVAR),
+              alpha=0.5,width=0.05) +
+  geom_errorbar(data=mcsumbt$emmeans,
+                mapping=aes(x=CVAR,ymin=lower.CL,ymax=upper.CL),
+                size=2,width=0) +
+  geom_point(data=mcsumbt$emmeans,mapping=aes(x=CVAR,y=emmean),
+             size=2,pch=21,fill=&quot;white&quot;) +
+  labs(x=&quot;XXCVAR LABELXX&quot;,y=&quot;XXtQVAR LABELXX&quot;) +
+  theme_NCStats()</code></pre>
+<p>Multiple comparisons on the BACK-TRANSFORMED scale are made below (only for log and square root transformations).</p>
+<pre class="text RCODE"><code>## only after log transformation
+mc &lt;- emmeans(aov2,specs=pairwise~CVAR,tran=&quot;log&quot;)
+( mcsumbt &lt;- summary(mct,infer=TRUE,type=&quot;response&quot;) )    # back-transformed scale
+
+## only after square root transformation
+mc &lt;- emmeans(aov2,specs=pairwise~CVAR,tran=&quot;sqrt&quot;)
+( mcsumbt &lt;- summary(mct,infer=TRUE,type=&quot;response&quot;) )    # back-transformed scale
+
+## summary graphic on back-transformed scale
+ggplot() +
+  geom_jitter(data=DFOBJ,mapping=aes(x=CVAR,y=QVAR),
+              alpha=0.5,width=0.05) +
+  geom_errorbar(data=mcsumbt$emmeans,
+                mapping=aes(x=CVAR,ymin=lower.CL,ymax=upper.CL),
+                size=2,width=0) +
+  geom_point(data=mcsumbt$emmeans,mapping=aes(x=CVAR,y=response),
+             size=2,pch=21,fill=&quot;white&quot;) +
+  labs(x=&quot;XXCVAR LABELXX&quot;,y=&quot;XXQVAR LABELXX&quot;) +
+  theme_NCStats()</code></pre>
+<p> </p>
+</div>
+</div>
+<div id="two-way-anova" class="section level2 unnumbered">
+<h2>Two-Way ANOVA</h2>
+<div id="basic-two-way-anova" class="section level4 unnumbered">
+<h4>Basic Two-Way ANOVA</h4>
+<pre class="text RCODE"><code>## Fit the Linear Model
+aov2 &lt;- lm(QVAR~CVAR1+CVAR2+CVAR1:CVAR2,data=DFOBJ)
+
+## Assumption checking
+assumptionCheck(aov2)
+
+## Extract the ANOVA Table
+anova(aov2)</code></pre>
+</div>
+<div id="multiple-comparisons-2" class="section level4 unnumbered">
+<h4>Multiple Comparisons</h4>
+<p>If there IS an interaction effect then computed Tukey’s results for the interaction term in <code>aov2</code> (see below for when there is no interaction effect).</p>
+<pre class="text RCODE"><code>## !!!! Only if there is a significant interaction effect !!!!
+mc2 &lt;- emmeans(aov2,specs=pairwise~CVAR1:CVAR2)
+( mc2sum &lt;- summary(aov2,infer=TRUE) )</code></pre>
+<p>If there is NO interaction effect then fit a new model without the interaction term.</p>
+<pre class="text RCODE"><code>## !!!! Only if there is no significant interaction effect !!!!
+aov2_noint &lt;- lm(QVAR~CVAR1+CVAR2,data=DFOBJ)</code></pre>
+<p>Then compute Tukey’s results for the main effect terms that are significant. Note you may need to repeat the code below, once for <code>CVAR1</code> and then again for <code>CVAR2</code>.</p>
+<pre class="text RCODE"><code>## !!!! Only if there is no significant interaction effect !!!!
+mc2_noint &lt;- emmeans(aov2_noint,specs=pairwise~CVAR1)
+( mc2sum_noint &lt;- summary(aov2_noint,infer=TRUE) )</code></pre>
+</div>
+<div id="interaction-and-main-effects-plots" class="section level4 unnumbered">
+<h4>Interaction and Main Effects Plots</h4>
+<pre class="text RCODE"><code>## Interaction plot ... may switch CVAR1 and CVAR2
+pd &lt;- position_dodge(width=0.1)  ## may try different values
+ggplot(data=mc2sum$emmeans,mapping=aes(x=CVAR1,group=CVAR2,color=CVAR2,
+                                       y=emmean,ymin=lower.CL,ymax=upper.CL)) +
+  geom_line(position=pd,size=1.1,alpha=0.25) +
+  geom_errorbar(position=pd,size=2,width=0) +
+  geom_point(position=pd,size=2,pch=21,fill=&quot;white&quot;) +
+  labs(x=&quot;XXCVAR1 LABELXX&quot;,y=&quot;XXQVAR LABELXX&quot;) +
+  theme_NCStats()
+
+## Main effects plot ... may need CVAR2
+## !!!! Only use if there is no significant interaction effect !!!!
+ggplot(data=mc2sum_noint$emmeans,
+       mapping=aes(x=CVAR1,group=1,y=emmean,ymin=lower.CL,ymax=upper.CL)) +
+  geom_line(size=1.1,alpha=0.25) +
+  geom_errorbar(size=2,width=0) +
+  geom_point(size=2,pch=21,fill=&quot;white&quot;) +
+  labs(x=&quot;XXCVAR1 LABELXX&quot;,y=&quot;XXQVAR LABELXX&quot;) +
+  theme_NCStats()</code></pre>
+<p>Note that you may need to use transformations and, thus, you may need to use code similar to what was shown above for the One-Way ANOVA.</p>
+<p> </p>
+</div>
+</div>
+<div id="simple-linear-regression" class="section level2 unnumbered">
+<h2>Simple Linear Regression</h2>
+<div id="basic-linear-regression" class="section level4 unnumbered">
+<h4>Basic Linear Regression</h4>
+<pre class="text RCODE"><code>## Fit the linear model
+( slr &lt;- lm(QVARR~QVARE,data=DFOBJ) )
+
+## Make a basic prediction (without confidence/prediction intervals)
+predict(slr,newdata=data.frame(QVARE=NUM))
+
+## Coefficient of determination
+rSquared(slr)
+
+## Basic best-fit line (without confidence bands)
+ggplot(data=DFOBJ,mapping=aes(x=QVARE,y=QVARR)) +  
+  geom_point(pch=21,color=&quot;black&quot;,fill=&quot;lightgray&quot;) +  
+  labs(x=&quot;XXLABEL FOR QVARE##&quot;,y=&quot;XXLABEL FOR QVARE##&quot;) +  
+  theme_NCStats() +  
+  geom_smooth(method=&quot;lm&quot;,color=&quot;black&quot;,fill=&quot;lightgray&quot;,se=FALSE)</code></pre>
+</div>
+<div id="inferences" class="section level4 unnumbered">
+<h4>Inferences</h4>
+<p>This assumes a linear model has been fit and assigned to <code>slr</code>.</p>
+<pre class="text RCODE"><code>## Extract the coefficients table
+cbind(Est=coef(slr),confint(slr))
+
+## Extract the coefficient summary table (with default p-values)
+summary(slr)
+
+## Make a prediction with confidence/prediction intervals
+nd &lt;- data.frame(QVARE=c(NUM,NUM,...))         # data.frame to save typing
+predict(slr,newdata=nd,interval=&quot;confidence&quot;)  # confidence intervals
+predict(slr,newdata=nd,interval=&quot;prediction&quot;)  # prediction intervals
+
+## Best-fit line with confidence band
+ggplot(data=DFOBJ,mapping=aes(x=QVARE,y=QVARR)) +  
+  geom_point(pch=21,color=&quot;black&quot;,fill=&quot;lightgray&quot;) +  
+  labs(x=&quot;XXLABEL FOR QVARE##&quot;,y=&quot;XXLABEL FOR QVARE##&quot;) +  
+  theme_NCStats() +  
+  geom_smooth(method=&quot;lm&quot;,color=&quot;black&quot;,fill=&quot;lightgray&quot;)</code></pre>
+</div>
+<div id="assumption-checking-2" class="section level4 unnumbered">
+<h4>Assumption Checking</h4>
+<p>This assumes a linear model has been fit and assigned to <code>slr</code>.</p>
+<pre class="text RCODE"><code>assumptionCheck(slr)</code></pre>
+</div>
+<div id="transformations-1" class="section level4 unnumbered">
+<h4>Transformations</h4>
+<p>This assumes a linear model has been fit and assigned to <code>slr</code>.</p>
+<pre class="text RCODE"><code>## Exploring different response and explanatory transformations
+assumptionCheck(slr,lambday=NUM,lambdax=NUM)</code></pre>
+<p>See assumptions checking section for One-Way ANOVA above for codes to transform the variables.</p>
+<p> </p>
+</div>
+</div>
+<div id="indicator-variable-regression" class="section level2 unnumbered">
+<h2>Indicator Variable Regression</h2>
+<div id="basic-indicator-variable-regression" class="section level4 unnumbered">
+<h4>Basic Indicator Variable Regression</h4>
+<pre class="text RCODE"><code>## Fit the linear model
+( ivr &lt;- lm(QVARR~QVARE+CVAR+QVARE:CVAR,data=DFOBJ) )
+
+## Extract coefficients table
+cbind(Ests=coef(ivr),confint(ivr))
+
+## Make a prediction
+nd &lt;- data.frame(QVARE=c(NUM,NUM),CVAR=c(&quot;VALUE&quot;,&quot;VALUE&quot;))
+predict(ivr,newdata=nd,interval=&quot;confidence&quot;)
+predict(ivr,newdata=nd,interval=&quot;prediction&quot;)
+
+## Basic best-fit line (without confidence bands)
+ggplot(data=DFOBJ,mapping=aes(x=QVARE,y=QVARR,color=CVAR)) +  
+  geom_point() +  
+  labs(x=&quot;XXLABEL FOR QVARE##&quot;,y=&quot;XXLABEL FOR QVARE##&quot;) +  
+  theme_NCStats() +  
+  geom_smooth(method=&quot;lm&quot;,se=FALSE)</code></pre>
+</div>
+<div id="inferences-1" class="section level4 unnumbered">
+<h4>Inferences</h4>
+<p>Assumes that you have the ultimate full model fit and assigned to <code>ivr</code>.</p>
+<pre class="text RCODE"><code>anova(ivr)</code></pre>
+</div>
+<div id="multiple-comparisons-3" class="section level4 unnumbered">
+<h4>Multiple Comparisons</h4>
+<p>If the slopes differ among some groups (i.e., significant interaction term in the ultimate full model) then use the following.</p>
+<pre class="text RCODE"><code>mcs &lt;- emtrends(ivr,pairwise~CVAR,var=&quot;QVARE&quot;)
+( mcssum &lt;- summary(mcs,infer=TRUE) )</code></pre>
+<p>If the slopes do not differ among some groups but there is a different in intercepts among some groups (i.e., no siginficiant interaction term but a significant factor term in the ultimate full model) then first fit a model without the interaction term.</p>
+<pre class="text RCODE"><code>## !!!! Only use if slopes are equal (interaction not significant) !!!!
+( ivr_noint &lt;- lm(QVARR~QVARE+CVAR,data=DFOBJ) )</code></pre>
+<p>Then perform Tukey’s test on the factor term.</p>
+<pre class="text RCODE"><code>mci &lt;- emmeans(ivr_noint,pairwise~CVAR)
+( mcisum &lt;- summary(mci,infer=TRUE) )</code></pre>
+<p> </p>
+</div>
+</div>
+<div id="logistic-regression" class="section level2 unnumbered">
+<h2>Logistic Regression</h2>
+<div id="basic-logistic-regression" class="section level4 unnumbered">
+<h4>Basic Logistic Regression</h4>
+<pre class="text RCODE"><code>## Convert categorical response to binary variable
+## !!!! VALUE should be replaced with the name of the success outcome
+DFOBJ$CVAR01 &lt;- ifelse(DFOBJ$CVAR==&quot;VALUE&quot;,1,0)
+
+## Fit the linear model
+logreg &lt;- glm(CVAR01~QVAR,data=DFOBJ,family=binomial)
+
+## Relationship test
+anova(logreg,test=&quot;LRT&quot;)
+
+## Perform bootstraps
+b_logreg &lt;- car::Boot(logreg)
+
+## Create table of model coefficients
+cbind(Ests=coef(logreg),confint(b_logreg,type=&quot;perc&quot;))</code></pre>
+</div>
+<div id="predictions-3" class="section level4 unnumbered">
+<h4>Predictions</h4>
+<p>Must create the following two functions first (copy these exactly).</p>
+<pre class="text RCODE"><code>predProb &lt;- function(x,alpha,beta) exp(alpha+beta*x)/(1+exp(alpha+beta*x))
+predX &lt;- function(p,alpha,beta) (log(p/(1-p))-alpha)/beta</code></pre>
+<p>This assumes that you have bootstrapped your logistic regression model and assigned the results to <code>b_logreg</code>.</p>
+<pre class="text RCODE"><code>## Predict the probability of success at a given value of QVAR
+p_prob &lt;- predProb(NUM,b_logreg$t[,1],b_logreg$t[,2])
+( ci_prob &lt;- quantile(p_prob,c(0.025,0.975),type=1) )
+
+## Predict the value of QVAR that has a certain probability of success
+p_x &lt;- predX(NUM,b_logreg$t[,1],b_logreg$t[,2])
+( ci_x &lt;- quantile(p_x,c(0.025,0.975),type=1) )</code></pre>
+</div>
+<div id="fitted-line-plot" class="section level4 unnumbered">
+<h4>Fitted Line Plot</h4>
+<pre class="text RCODE"><code>ggplot(data=DFOBJ,mapping=aes(x=QVAR,y=CVAR01)) +
+  geom_point(alpha=0.01) +
+  geom_smooth(method=&quot;glm&quot;,method.args=list(family=binomial)) +
+  labs(x=&quot;XXLABEL FOR QVARXX&quot;,y=&quot;Probability of XXLABEL FOR SUCCESSXX&quot;) +
+  theme_NCStats()</code></pre>
+<p>You may need to adjust the <code>alpha=</code> value higher if the points are too light.</p>
+<p> </p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="LogRegAnalysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -121,6 +121,8 @@ ggplot() +
                 size=2,width=0) +
   geom_point(data=mcsum$emmeans,mapping=aes(x=season,y=emmean),
              size=2,pch=21,fill="white") +
-  labs(y="Immunoglobulin Concentration",x="Season/Month") +
+  labs(x="Season/Month",y="Immunoglobulin Concentration") +
   theme_NCStats()
 ```
+
+&nbsp;

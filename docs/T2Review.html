@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-10-12" />
+<meta name="date" content="2021-11-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -344,6 +344,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.5</b> Predictions</a></li>
 <li class="chapter" data-level="27.6" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.6</b> Plotting Best-Fit Line</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html"><i class="fa fa-check"></i>Appendix – R Generic Code</a>
+<ul>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#common-codes"><i class="fa fa-check"></i>Common Codes</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#foundations"><i class="fa fa-check"></i>Foundations</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#one-way-anova"><i class="fa fa-check"></i>One-Way ANOVA</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#two-way-anova"><i class="fa fa-check"></i>Two-Way ANOVA</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#simple-linear-regression"><i class="fa fa-check"></i>Simple Linear Regression</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#indicator-variable-regression"><i class="fa fa-check"></i>Indicator Variable Regression</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#logistic-regression"><i class="fa fa-check"></i>Logistic Regression</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
@@ -408,7 +418,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The sample size is less than 40 but greater than 15. The histograms shown below are not particularly informative because of the small sample size. The histogram for the inlet samples appears to be not strongly skewed, but that for the outlet appears to be strongly right-skewed. I am going to continue with this analysis, but I will be cautious with my final interpretations.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r RCODE_ALONE"><code class="sourceCode r"><span id="cb11-1"><a href="T2Review.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>aqua,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>BOD)) <span class="sc">+</span></span>
 <span id="cb11-2"><a href="T2Review.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.5</span>,<span class="at">boundary=</span><span class="dv">0</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;lightgray&quot;</span>) <span class="sc">+</span></span>
-<span id="cb11-3"><a href="T2Review.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Frequency of Water Samples&quot;</span>,<span class="at">x=</span><span class="st">&quot;Biological Oxygen Demand&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="T2Review.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Biological Oxygen Demand&quot;</span>,<span class="at">y=</span><span class="st">&quot;Frequency of Water Samples&quot;</span>) <span class="sc">+</span></span>
 <span id="cb11-4"><a href="T2Review.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand=</span><span class="fu">expansion</span>(<span class="at">mult=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.05</span>))) <span class="sc">+</span></span>
 <span id="cb11-5"><a href="T2Review.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>() <span class="sc">+</span></span>
 <span id="cb11-6"><a href="T2Review.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(src))</span></code></pre></div>
@@ -495,6 +505,7 @@ Figure 2.4: Same as Figure <a href="T2Review.html#fig:SignalNoise3">2.3</a> but 
 <p>More signal-to-noise means smaller p-values.</p>
 </div>
 <p>We will return to the signal-to-noise metaphor throughout this course.</p>
+<p> </p>
 
 </div>
 </div>
