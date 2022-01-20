@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-11-29" />
+<meta name="date" content="2022-01-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -414,7 +414,15 @@ ggplot(data=DFOBJ,mapping=aes(x=QVAR)) +
   labs(x=&quot;XXQVAR LABELXX&quot;,y=&quot;Frequency of XXINDIVIDUALSXX&quot;) +
   scale_y_continuous(expand=expansion(mult=c(0,0.05))) +
   theme_NCStats() +
-  facet_wrap(vars(CVAR))</code></pre>
+  facet_wrap(vars(CVAR))
+
+## Construct Summary Graphic of Points, Mean, and CIs
+ggplot(data=DFOBJ,mapping=aes(x=CVAR,y=QVAR)) +
+  geom_jitter(alpha=0.5,width=0.05) +
+  stat_summary(fun.data=mean_cl_normal,geom=&quot;errorbar&quot;,size=2,width=0) +
+  stat_summary(fun=mean,geom=&quot;point&quot;,pch=21,fill=&quot;white&quot;,size=2) +
+  labs(x=&quot;XXCVAR LABELXX&quot;,y=&quot;XXQVAR LABELXX&quot;) +
+  theme_NCStats()</code></pre>
 </div>
 <div id="model-comparisons" class="section level4 unnumbered">
 <h4>Model Comparisons</h4>
