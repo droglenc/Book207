@@ -124,10 +124,6 @@ d1 <- filter(d,sim=="Small SE")
 
 The ratio of signal to noise can be a useful metaphor for understanding hypothesis testing, as we have done here, and model comparisons, as we will do in future modules. In this metaphor, think of "signal" as how different two things are and "noise" as anything that gets in the way of you receiving the signal. For example, the lights on a car are a "signal", but fog on the road is "noise". As another example, it may be easy to see an orange kayak (the "signal") on Lake Superior on a calm day but harder to see it on a wavy day (i.e., more "noise").
 
-```{r Signal2NoiseMetaphor, echo=FALSE, out.width="75%", fig.cap="Signal-to-noise metahpors - seeing car lights through fog (Left) and seeing a kayak in the waves (Right).", fig.show="hide"}
-knitr::include_graphics("zimgs/Signal2NoiseMetaphor.jpg")
-```
-
 &nbsp;
 
 In a 2-sample t-test, the "signal" is the difference in the two group means (Figure \@ref(fig:SignalNoise1)), which is measured by $\bar{x}_{1}-\bar{x}_{2}$, the numerator of the t-test statistic. The bigger the difference in sample means the stronger the "signal" that the population means are different.
