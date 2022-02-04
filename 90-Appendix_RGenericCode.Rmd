@@ -76,9 +76,6 @@ aov1 <- lm(QVAR~CVAR,data=DFOBJ)
 ## Extract the ANOVA Table
 anova(aov1)
 
-## Extract Table of Model Coefficients
-cbind(ests=coef(aov1),confint(aov1))
-
 ## Construct Summary Graphic
 ## !!!! Only use if no multiple comparisons or transformation !!!!
 ggplot(data=DFOBJ,mapping=aes(x=CVAR,y=QVAR)) +
@@ -144,26 +141,26 @@ DFOBJ$tQVAR <- DFOBJ$QVAR^(-1/4)    # inverse fourth root transformation
 ```
 
 ```{r eval=FALSE, highlight=FALSE}
-## Fit new linear model with transformed response variable
+## Fit new linear model with transformed response variable (note tQVAR)
 aov2 <- lm(tQVAR~CVAR,data=DFOBJ)
 anova(aov2)
 ```
 
-Multiple comparisons on the TRANSFORMED scale are made below. See code further below for multiple comparisons on the back-transformed scale when using a log or square root transformation.
+Multiple comparisons on the TRANSFORMED scale are made below. See code further below for multiple comparisons on the back-transformed scale (when using a log or square root transformation).
 
 ```{rr eval=FALSE, highlight=FALSE}
 ## on transformed scale (must use this for non log or square root)
-mc <- emmeans(aov2,specs=pairwise~CVAR)
-( mcsum <- summary(mc,infer=TRUE) )                       # transformed scale
+mct <- emmeans(aov2,specs=pairwise~CVAR)
+( mcsumt <- summary(mct,infer=TRUE) )               # transformed scale
 
 ## summary graphic on transformed scale
 ggplot() +
   geom_jitter(data=DFOBJ,mapping=aes(x=CVAR,y=tQVAR),
               alpha=0.5,width=0.05) +
-  geom_errorbar(data=mcsumbt$emmeans,
+  geom_errorbar(data=mcsumt$emmeans,
                 mapping=aes(x=CVAR,ymin=lower.CL,ymax=upper.CL),
                 size=2,width=0) +
-  geom_point(data=mcsumbt$emmeans,mapping=aes(x=CVAR,y=emmean),
+  geom_point(data=mcsumt$emmeans,mapping=aes(x=CVAR,y=emmean),
              size=2,pch=21,fill="white") +
   labs(x="XXCVAR LABELXX",y="XXtQVAR LABELXX") +
   theme_NCStats()
@@ -173,11 +170,11 @@ Multiple comparisons on the BACK-TRANSFORMED scale are made below (only for log 
 
 ```{r eval=FALSE, highlight=FALSE}
 ## only after log transformation
-mc <- emmeans(aov2,specs=pairwise~CVAR,tran="log")
+mct <- emmeans(aov2,specs=pairwise~CVAR,tran="log")
 ( mcsumbt <- summary(mct,infer=TRUE,type="response") )    # back-transformed scale
 
 ## only after square root transformation
-mc <- emmeans(aov2,specs=pairwise~CVAR,tran="sqrt")
+mct <- emmeans(aov2,specs=pairwise~CVAR,tran="sqrt")
 ( mcsumbt <- summary(mct,infer=TRUE,type="response") )    # back-transformed scale
 
 ## summary graphic on back-transformed scale

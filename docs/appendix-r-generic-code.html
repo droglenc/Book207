@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2022-02-01" />
+<meta name="date" content="2022-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -454,9 +454,6 @@ aov1 &lt;- lm(QVAR~CVAR,data=DFOBJ)
 ## Extract the ANOVA Table
 anova(aov1)
 
-## Extract Table of Model Coefficients
-cbind(ests=coef(aov1),confint(aov1))
-
 ## Construct Summary Graphic
 ## !!!! Only use if no multiple comparisons or transformation !!!!
 ggplot(data=DFOBJ,mapping=aes(x=CVAR,y=QVAR)) +
@@ -509,32 +506,32 @@ DFOBJ$tQVAR &lt;- 1/DFOBJ$QVAR         # inverse (or reciprocal) transformation
 DFOBJ$tQVAR &lt;- DFOBJ$QVAR^(-1/2)    # inverse square root transformation
 DFOBJ$tQVAR &lt;- DFOBJ$QVAR^(-1/3)    # inverse cube root transformation
 DFOBJ$tQVAR &lt;- DFOBJ$QVAR^(-1/4)    # inverse fourth root transformation</code></pre>
-<pre class="text RCODE"><code>## Fit new linear model with transformed response variable
+<pre class="text RCODE"><code>## Fit new linear model with transformed response variable (note tQVAR)
 aov2 &lt;- lm(tQVAR~CVAR,data=DFOBJ)
 anova(aov2)</code></pre>
-<p>Multiple comparisons on the TRANSFORMED scale are made below. See code further below for multiple comparisons on the back-transformed scale when using a log or square root transformation.</p>
+<p>Multiple comparisons on the TRANSFORMED scale are made below. See code further below for multiple comparisons on the back-transformed scale (when using a log or square root transformation).</p>
 <pre class="text RCODE"><code>## on transformed scale (must use this for non log or square root)
-mc &lt;- emmeans(aov2,specs=pairwise~CVAR)
-( mcsum &lt;- summary(mc,infer=TRUE) )                       # transformed scale
+mct &lt;- emmeans(aov2,specs=pairwise~CVAR)
+( mcsumt &lt;- summary(mct,infer=TRUE) )               # transformed scale
 
 ## summary graphic on transformed scale
 ggplot() +
   geom_jitter(data=DFOBJ,mapping=aes(x=CVAR,y=tQVAR),
               alpha=0.5,width=0.05) +
-  geom_errorbar(data=mcsumbt$emmeans,
+  geom_errorbar(data=mcsumt$emmeans,
                 mapping=aes(x=CVAR,ymin=lower.CL,ymax=upper.CL),
                 size=2,width=0) +
-  geom_point(data=mcsumbt$emmeans,mapping=aes(x=CVAR,y=emmean),
+  geom_point(data=mcsumt$emmeans,mapping=aes(x=CVAR,y=emmean),
              size=2,pch=21,fill=&quot;white&quot;) +
   labs(x=&quot;XXCVAR LABELXX&quot;,y=&quot;XXtQVAR LABELXX&quot;) +
   theme_NCStats()</code></pre>
 <p>Multiple comparisons on the BACK-TRANSFORMED scale are made below (only for log and square root transformations).</p>
 <pre class="text RCODE"><code>## only after log transformation
-mc &lt;- emmeans(aov2,specs=pairwise~CVAR,tran=&quot;log&quot;)
+mct &lt;- emmeans(aov2,specs=pairwise~CVAR,tran=&quot;log&quot;)
 ( mcsumbt &lt;- summary(mct,infer=TRUE,type=&quot;response&quot;) )    # back-transformed scale
 
 ## only after square root transformation
-mc &lt;- emmeans(aov2,specs=pairwise~CVAR,tran=&quot;sqrt&quot;)
+mct &lt;- emmeans(aov2,specs=pairwise~CVAR,tran=&quot;sqrt&quot;)
 ( mcsumbt &lt;- summary(mct,infer=TRUE,type=&quot;response&quot;) )    # back-transformed scale
 
 ## summary graphic on back-transformed scale
