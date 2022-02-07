@@ -228,7 +228,7 @@ Note the careful use of the transformation name when discussing the overall ANOV
 Tukey multiple comparisons indicate that the mean foraging rate was greater for ants on Oak trees than ants on Rowan trees (`r kPvalue(dmns.afbt$p.value[1],latex=FALSE)`; Table \@ref(tab:AFTukey1)). Specifically, the mean foraging rate for ants on an Oak tree was between `r formatC(dmns.afbt$lower.CL[1],format="f",digits=3)` and `r formatC(dmns.afbt$upper.CL[1],format="f",digits=3)` **times** higher than the mean foraging rate for ants on a Rowan tree (Table \@ref(tab:AFTukey1)). However, there was no significant difference in mean foraging rate between ants on Sycamore trees and ants on Oak (`r kPvalue(dmns.afbt$p.value[2],latex=FALSE)`) or Rowan (`r kPvalue(dmns.afbt$p.value[3],latex=FALSE)`; Table \@ref(tab:AFTukey1)) trees. 
 
 ```{r AFTukey1, echo=FALSE}
-knitr::kable(dmns.afbt[,-c(3,4,7)],digits=c(NA,3,3,3,4),
+knitr::kable(dmns.afbt[,-c(3,4,7)],digits=c(NA,3,3,3,4,4),
              caption="Tukey's multiple comparisons for **ratios** of mean foraging rate of ants among tree species.") %>%
   kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont)
 ```
