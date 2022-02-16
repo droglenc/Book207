@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2022-02-07" />
+<meta name="date" content="2022-02-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -556,6 +556,7 @@ ggplot() +
 aov2 &lt;- lm(QVAR~CVAR1+CVAR2+CVAR1:CVAR2,data=DFOBJ)
 
 ## Assumption checking
+xtabs(~CVAR1+CVAR2,data=DFOBJ)
 assumptionCheck(aov2)
 
 ## Extract the ANOVA Table
@@ -565,15 +566,27 @@ anova(aov2)</code></pre>
 <h4>Multiple Comparisons</h4>
 <p>If there IS an interaction effect then computed Tukey’s results for the interaction term in <code>aov2</code> (see below for when there is no interaction effect).</p>
 <pre class="text RCODE"><code>## !!!! Only if there is a significant interaction effect !!!!
+## !!!!!! Only if no transformation !!!!
 mc2 &lt;- emmeans(aov2,specs=pairwise~CVAR1:CVAR2)
-( mc2sum &lt;- summary(aov2,infer=TRUE) )</code></pre>
+( mc2sum &lt;- summary(mc2,infer=TRUE) )
+
+## !!!!!! Only if log transformation !!!!
+mc2t &lt;- emmeans(aov2,specs=pairwise~CVAR1:CVAR2,tran=&quot;log&quot;)
+( mc2sumt &lt;- summary(mc2t,infer=TRUE) )  # still transformed
+( mc2sumbt &lt;- summary(mc2t,infer=TRUE,type=&quot;response&quot;) )  # back-transformed</code></pre>
 <p>If there is NO interaction effect then fit a new model without the interaction term.</p>
 <pre class="text RCODE"><code>## !!!! Only if there is no significant interaction effect !!!!
 aov2_noint &lt;- lm(QVAR~CVAR1+CVAR2,data=DFOBJ)</code></pre>
 <p>Then compute Tukey’s results for the main effect terms that are significant. Note you may need to repeat the code below, once for <code>CVAR1</code> and then again for <code>CVAR2</code>.</p>
 <pre class="text RCODE"><code>## !!!! Only if there is no significant interaction effect !!!!
+## !!!!!! Only if no transformation !!!!
 mc2_noint &lt;- emmeans(aov2_noint,specs=pairwise~CVAR1)
-( mc2sum_noint &lt;- summary(aov2_noint,infer=TRUE) )</code></pre>
+( mc2sum_noint &lt;- summary(aov2_noint,infer=TRUE) )
+
+## !!!!!! Only if log transformation !!!!
+mc2t_noint &lt;- emmeans(aov2_noint,specs=pairwise~CVAR1,tran=&quot;log&quot;)
+( mc2sumt_noint &lt;- summary(mc2t_noint,infer=TRUE) )  # still transformed
+( mc2sumbt_noint &lt;- summary(mc2t_noint,infer=TRUE,type=&quot;response&quot;) )  # back-trans</code></pre>
 </div>
 <div id="interaction-and-main-effects-plots" class="section level4 unnumbered">
 <h4>Interaction and Main Effects Plots</h4>
@@ -596,7 +609,7 @@ ggplot(data=mc2sum_noint$emmeans,
   geom_point(size=2,pch=21,fill=&quot;white&quot;) +
   labs(x=&quot;XXCVAR1 LABELXX&quot;,y=&quot;XXQVAR LABELXX&quot;) +
   theme_NCStats()</code></pre>
-<p>Note that you may need to use transformations and, thus, you may need to use code similar to what was shown above for the One-Way ANOVA.</p>
+<p>Note that you may need to use transformations and, thus, you may need to use code similar to what was shown above for the One-Way ANOVA (remember to replace <code>y=emmean</code> with <code>y=response</code> when using back-transformed results).</p>
 <p> </p>
 </div>
 </div>

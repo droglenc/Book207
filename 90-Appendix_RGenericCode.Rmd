@@ -200,6 +200,7 @@ ggplot() +
 aov2 <- lm(QVAR~CVAR1+CVAR2+CVAR1:CVAR2,data=DFOBJ)
 
 ## Assumption checking
+xtabs(~CVAR1+CVAR2,data=DFOBJ)
 assumptionCheck(aov2)
 
 ## Extract the ANOVA Table
@@ -211,8 +212,14 @@ If there IS an interaction effect then computed Tukey's results for the interact
 
 ```{r eval=FALSE, highlight=FALSE}
 ## !!!! Only if there is a significant interaction effect !!!!
+## !!!!!! Only if no transformation !!!!
 mc2 <- emmeans(aov2,specs=pairwise~CVAR1:CVAR2)
-( mc2sum <- summary(aov2,infer=TRUE) )
+( mc2sum <- summary(mc2,infer=TRUE) )
+
+## !!!!!! Only if log transformation !!!!
+mc2t <- emmeans(aov2,specs=pairwise~CVAR1:CVAR2,tran="log")
+( mc2sumt <- summary(mc2t,infer=TRUE) )  # still transformed
+( mc2sumbt <- summary(mc2t,infer=TRUE,type="response") )  # back-transformed
 ```
 
 If there is NO interaction effect then fit a new model without the interaction term.
@@ -226,8 +233,14 @@ Then compute Tukey's results for the main effect terms that are significant. Not
 
 ```{r eval=FALSE, highlight=FALSE}
 ## !!!! Only if there is no significant interaction effect !!!!
+## !!!!!! Only if no transformation !!!!
 mc2_noint <- emmeans(aov2_noint,specs=pairwise~CVAR1)
 ( mc2sum_noint <- summary(aov2_noint,infer=TRUE) )
+
+## !!!!!! Only if log transformation !!!!
+mc2t_noint <- emmeans(aov2_noint,specs=pairwise~CVAR1,tran="log")
+( mc2sumt_noint <- summary(mc2t_noint,infer=TRUE) )  # still transformed
+( mc2sumbt_noint <- summary(mc2t_noint,infer=TRUE,type="response") )  # back-trans
 ```
 
 #### Interaction and Main Effects Plots{-}
@@ -254,7 +267,7 @@ ggplot(data=mc2sum_noint$emmeans,
   theme_NCStats()
 ```
 
-Note that you may need to use transformations and, thus, you may need to use code similar to what was shown above for the One-Way ANOVA.
+Note that you may need to use transformations and, thus, you may need to use code similar to what was shown above for the One-Way ANOVA (remember to replace `y=emmean` with `y=response` when using back-transformed results).
 
 &nbsp;
 
