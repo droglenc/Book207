@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2022-02-16" />
+<meta name="date" content="2022-02-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -581,7 +581,7 @@ aov2_noint &lt;- lm(QVAR~CVAR1+CVAR2,data=DFOBJ)</code></pre>
 <pre class="text RCODE"><code>## !!!! Only if there is no significant interaction effect !!!!
 ## !!!!!! Only if no transformation !!!!
 mc2_noint &lt;- emmeans(aov2_noint,specs=pairwise~CVAR1)
-( mc2sum_noint &lt;- summary(aov2_noint,infer=TRUE) )
+( mc2sum_noint &lt;- summary(mc2_noint,infer=TRUE) )
 
 ## !!!!!! Only if log transformation !!!!
 mc2t_noint &lt;- emmeans(aov2_noint,specs=pairwise~CVAR1,tran=&quot;log&quot;)

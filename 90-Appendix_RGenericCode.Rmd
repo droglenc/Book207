@@ -235,7 +235,7 @@ Then compute Tukey's results for the main effect terms that are significant. Not
 ## !!!! Only if there is no significant interaction effect !!!!
 ## !!!!!! Only if no transformation !!!!
 mc2_noint <- emmeans(aov2_noint,specs=pairwise~CVAR1)
-( mc2sum_noint <- summary(aov2_noint,infer=TRUE) )
+( mc2sum_noint <- summary(mc2_noint,infer=TRUE) )
 
 ## !!!!!! Only if log transformation !!!!
 mc2t_noint <- emmeans(aov2_noint,specs=pairwise~CVAR1,tran="log")
