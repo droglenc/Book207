@@ -160,7 +160,7 @@ ggplot(data=mc1sum.d$emmeans,
   geom_line(position=pd,size=1.1,alpha=0.25) +
   geom_errorbar(position=pd,size=2,width=0) +
   geom_point(position=pd,size=2,pch=21,fill="white") +
-  labs(y="Expected Price",x="Number of Promotions") +
+  labs(y="Mean Expected Price",x="Number of Promotions") +
   theme_NCStats()
 ```
 
@@ -295,7 +295,7 @@ ggplot(data=mc1sum.nak$emmeans,
   geom_line(position=pd,size=1.1,alpha=0.25) +
   geom_errorbar(position=pd,size=2,width=0) +
   geom_point(position=pd,size=2,pch=21,fill="white") +
-  labs(y="Na-K-ATPase Activity",x="Kidney Measurement Site") +
+  labs(y="Mean Na-K-ATPase Activity",x="Kidney Measurement Site") +
   theme_NCStats()
 ```
 
@@ -455,7 +455,7 @@ ggplot(data=mc1sum.cct$emmeans,
   geom_line(position=pd,size=1.1,alpha=0.25) +
   geom_errorbar(position=pd,size=2,width=0) +
   geom_point(position=pd,size=2,pch=21,fill="white") +
-  labs(y="Active Crayfish (out of 50)",x="Time of Day") +
+  labs(y="Mean Active Crayfish (out of 50)",x="Time of Day") +
   theme_NCStats()
 ```
 

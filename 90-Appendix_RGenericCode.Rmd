@@ -253,7 +253,7 @@ ggplot(data=mc2sum$emmeans,mapping=aes(x=CVAR1,group=CVAR2,color=CVAR2,
   geom_line(position=pd,size=1.1,alpha=0.25) +
   geom_errorbar(position=pd,size=2,width=0) +
   geom_point(position=pd,size=2,pch=21,fill="white") +
-  labs(x="XXCVAR1 LABELXX",y="XXQVAR LABELXX") +
+  labs(x="XXCVAR1 LABELXX",y="Mean XXQVAR LABELXX") +
   theme_NCStats()
 
 ## Main effects plot ... may need CVAR2
@@ -263,7 +263,7 @@ ggplot(data=mc2sum_noint$emmeans,
   geom_line(size=1.1,alpha=0.25) +
   geom_errorbar(size=2,width=0) +
   geom_point(size=2,pch=21,fill="white") +
-  labs(x="XXCVAR1 LABELXX",y="XXQVAR LABELXX") +
+  labs(x="XXCVAR1 LABELXX",y="Mean XXQVAR LABELXX") +
   theme_NCStats()
 ```
 
@@ -275,7 +275,10 @@ Note that you may need to use transformations and, thus, you may need to use cod
 #### Basic Linear Regression{-}
 ```{r eval=FALSE, highlight=FALSE}
 ## Fit the linear model
-( slr <- lm(QVARR~QVARE,data=DFOBJ) )
+slr <- lm(QVARR~QVARE,data=DFOBJ)
+
+## Extract the coefficients table
+cbind(Est=coef(slr),confint(slr))
 
 ## Make a basic prediction (without confidence/prediction intervals)
 predict(slr,newdata=data.frame(QVARE=NUM))
@@ -295,9 +298,6 @@ ggplot(data=DFOBJ,mapping=aes(x=QVARE,y=QVARR)) +
 This assumes a linear model has been fit and assigned to `slr`.
 
 ```{r eval=FALSE, highlight=FALSE}
-## Extract the coefficients table
-cbind(Est=coef(slr),confint(slr))
-
 ## Extract the coefficient summary table (with default p-values)
 summary(slr)
 

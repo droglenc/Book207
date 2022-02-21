@@ -139,7 +139,7 @@ ggplot(data=mc1sum$emmeans,mapping=aes(x=density,group=uvb,color=uvb,
   geom_line(position=pd,size=1.1,alpha=0.25) +
   geom_errorbar(position=pd,size=2,width=0) +
   geom_point(position=pd,size=2,pch=21,fill="white") +
-  labs(y="Body Mass (g)",x="Density (Tadpoles per Tank)") +
+  labs(y="Mean Body Mass (g)",x="Density (Tadpoles per Tank)") +
   theme_NCStats()
 ```
 
@@ -154,7 +154,7 @@ ggplot(data=mc1sum_noint$emmeans,
   geom_line(size=1.1,alpha=0.25) +
   geom_errorbar(size=2,width=0) +
   geom_point(size=2,pch=21,fill="white") +
-  labs(y="Body Mass (g)",x="Density (Tadpoles per Tank)") +
+  labs(y="Mean Body Mass (g)",x="Density (Tadpoles per Tank)") +
   theme_NCStats()
 ```
 

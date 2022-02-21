@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2022-02-18" />
+<meta name="date" content="2022-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -965,7 +965,7 @@ Figure 13.2: Mean expected price for each combination of number of promotions an
 <span id="cb76-13"><a href="ANOVA2Summary.html#cb76-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="fl">1.1</span>,<span class="at">alpha=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
 <span id="cb76-14"><a href="ANOVA2Summary.html#cb76-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
 <span id="cb76-15"><a href="ANOVA2Summary.html#cb76-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb76-16"><a href="ANOVA2Summary.html#cb76-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Expected Price&quot;</span>,<span class="at">x=</span><span class="st">&quot;Number of Promotions&quot;</span>) <span class="sc">+</span></span>
+<span id="cb76-16"><a href="ANOVA2Summary.html#cb76-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Mean Expected Price&quot;</span>,<span class="at">x=</span><span class="st">&quot;Number of Promotions&quot;</span>) <span class="sc">+</span></span>
 <span id="cb76-17"><a href="ANOVA2Summary.html#cb76-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
 <p> </p>
 </div>
@@ -1487,7 +1487,7 @@ Figure 13.4: Mean Na-K-ATPase activity for each combination of rat strain and ki
 <span id="cb78-8"><a href="ANOVA2Summary.html#cb78-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="fl">1.1</span>,<span class="at">alpha=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
 <span id="cb78-9"><a href="ANOVA2Summary.html#cb78-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
 <span id="cb78-10"><a href="ANOVA2Summary.html#cb78-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb78-11"><a href="ANOVA2Summary.html#cb78-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Na-K-ATPase Activity&quot;</span>,<span class="at">x=</span><span class="st">&quot;Kidney Measurement Site&quot;</span>) <span class="sc">+</span></span>
+<span id="cb78-11"><a href="ANOVA2Summary.html#cb78-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Mean Na-K-ATPase Activity&quot;</span>,<span class="at">x=</span><span class="st">&quot;Kidney Measurement Site&quot;</span>) <span class="sc">+</span></span>
 <span id="cb78-12"><a href="ANOVA2Summary.html#cb78-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
 <p> </p>
 </div>
@@ -2022,7 +2022,7 @@ Figure 13.7: Mean number of active crayfish for each combination of feeding rate
 <span id="cb81-8"><a href="ANOVA2Summary.html#cb81-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="fl">1.1</span>,<span class="at">alpha=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
 <span id="cb81-9"><a href="ANOVA2Summary.html#cb81-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
 <span id="cb81-10"><a href="ANOVA2Summary.html#cb81-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span>pd,<span class="at">size=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb81-11"><a href="ANOVA2Summary.html#cb81-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Active Crayfish (out of 50)&quot;</span>,<span class="at">x=</span><span class="st">&quot;Time of Day&quot;</span>) <span class="sc">+</span></span>
+<span id="cb81-11"><a href="ANOVA2Summary.html#cb81-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">&quot;Mean Active Crayfish (out of 50)&quot;</span>,<span class="at">x=</span><span class="st">&quot;Time of Day&quot;</span>) <span class="sc">+</span></span>
 <span id="cb81-12"><a href="ANOVA2Summary.html#cb81-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
 <p> </p>
 
