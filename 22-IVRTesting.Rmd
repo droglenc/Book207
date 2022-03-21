@@ -324,7 +324,7 @@ More usefully these translate into the following models
 
 $$
 \begin{split}
-  \text{H}_{\text{0}}&: \mu_{MIREX|\cdots} = \alpha+ \\
+  \text{H}_{\text{0}}&: \mu_{MIREX|\cdots} = \alpha \\
   \text{H}_{\text{A}}&: \mu_{MIREX|\cdots} = \alpha+\beta WEIGHT \\
 \end{split}
 $$
