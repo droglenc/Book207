@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Module 28 Summary | Readings for MTH207</title>
+  <title>Module 28 Logistic Regression Summary | Readings for MTH207</title>
   <meta name="description" content="This book contains the readings for MTH207 at Northland College." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Module 28 Summary | Readings for MTH207" />
+  <meta property="og:title" content="Module 28 Logistic Regression Summary | Readings for MTH207" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://derekogle.com/Book207/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="droglenc/Book207" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Module 28 Summary | Readings for MTH207" />
+  <meta name="twitter:title" content="Module 28 Logistic Regression Summary | Readings for MTH207" />
   
   <meta name="twitter:description" content="This book contains the readings for MTH207 at Northland College." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2021-01-13" />
+<meta name="date" content="2022-03-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,11 +32,11 @@
   
   
 <link rel="prev" href="LogRegAnalysis.html"/>
-<link rel="next" href="references.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link rel="next" href="appendix-r-generic-code.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -119,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -213,9 +215,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html"><i class="fa fa-check"></i><b>11</b> Two-Way Analytical Foundation</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#terminology"><i class="fa fa-check"></i><b>11.1</b> Terminology</a></li>
-<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#total-and-within-ss-df-and-ms"><i class="fa fa-check"></i><b>11.2</b> Total and Within SS, df, and MS</a></li>
-<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#among-ss-df-and-ms"><i class="fa fa-check"></i><b>11.3</b> Among SS, df, and MS</a></li>
-<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.4</b> ANOVA Table</a></li>
+<li class="chapter" data-level="11.2" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#models"><i class="fa fa-check"></i><b>11.2</b> Models</a></li>
+<li class="chapter" data-level="11.3" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sstotal-dftotal-and-mstotal"><i class="fa fa-check"></i><b>11.3</b> SS<sub>Total</sub>, df<sub>Total</sub>, and MS<sub>Total</sub></a></li>
+<li class="chapter" data-level="11.4" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#sswithin-dfwithin-and-mswithin"><i class="fa fa-check"></i><b>11.4</b> SS<sub>Within</sub>, df<sub>Within</sub>, and MS<sub>Within</sub></a></li>
+<li class="chapter" data-level="11.5" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#ssamong-dfamong-and-msamong"><i class="fa fa-check"></i><b>11.5</b> SS<sub>Among</sub>, df<sub>Among</sub>, and MS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.6" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#partitioning-ssamong"><i class="fa fa-check"></i><b>11.6</b> Partitioning SS<sub>Among</sub></a></li>
+<li class="chapter" data-level="11.7" data-path="ANOVA2Foundations2.html"><a href="ANOVA2Foundations2.html#anova-table-1"><i class="fa fa-check"></i><b>11.7</b> ANOVA Table</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="ANOVA2Analysis.html"><a href="ANOVA2Analysis.html"><i class="fa fa-check"></i><b>12</b> Two-Way Analysis</a>
 <ul>
@@ -327,8 +332,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="26.2" data-path="LogRegModels.html"><a href="LogRegModels.html#back-transformed-slope"><i class="fa fa-check"></i><b>26.2</b> Back-Transformed Slope</a></li>
 <li class="chapter" data-level="26.3" data-path="LogRegModels.html"><a href="LogRegModels.html#predictions-1"><i class="fa fa-check"></i><b>26.3</b> Predictions</a></li>
 <li class="chapter" data-level="26.4" data-path="LogRegModels.html"><a href="LogRegModels.html#reverse-predictions"><i class="fa fa-check"></i><b>26.4</b> “Reverse” Predictions</a></li>
-<li class="chapter" data-level="26.5" data-path="LogRegModels.html"><a href="LogRegModels.html#variability-estimates"><i class="fa fa-check"></i><b>26.5</b> Variability Estimates</a></li>
-<li class="chapter" data-level="26.6" data-path="LogRegModels.html"><a href="LogRegModels.html#another-example"><i class="fa fa-check"></i><b>26.6</b> Another Example</a></li>
+<li class="chapter" data-level="26.5" data-path="LogRegModels.html"><a href="LogRegModels.html#another-example"><i class="fa fa-check"></i><b>26.5</b> Another Example</a></li>
+<li class="chapter" data-level="26.6" data-path="LogRegModels.html"><a href="LogRegModels.html#variability-estimates"><i class="fa fa-check"></i><b>26.6</b> Variability Estimates</a></li>
 </ul></li>
 <li class="chapter" data-level="27" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html"><i class="fa fa-check"></i><b>27</b> Analysis</a>
 <ul>
@@ -339,7 +344,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="27.5" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#LogRegPredictionsR"><i class="fa fa-check"></i><b>27.5</b> Predictions</a></li>
 <li class="chapter" data-level="27.6" data-path="LogRegAnalysis.html"><a href="LogRegAnalysis.html#plotting-best-fit-line"><i class="fa fa-check"></i><b>27.6</b> Plotting Best-Fit Line</a></li>
 </ul></li>
-<li class="chapter" data-level="28" data-path="LogRegSummary.html"><a href="LogRegSummary.html"><i class="fa fa-check"></i><b>28</b> Summary</a></li>
+<li class="chapter" data-level="28" data-path="LogRegSummary.html"><a href="LogRegSummary.html"><i class="fa fa-check"></i><b>28</b> Logistic Regression Summary</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="LogRegSummary.html"><a href="LogRegSummary.html#suggested-workflow-3"><i class="fa fa-check"></i><b>28.1</b> Suggested Workflow</a></li>
+<li class="chapter" data-level="28.2" data-path="LogRegSummary.html"><a href="LogRegSummary.html#slimy-salamander-occurrence"><i class="fa fa-check"></i><b>28.2</b> Slimy Salamander Occurrence</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html"><i class="fa fa-check"></i>Appendix – R Generic Code</a>
+<ul>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#common-codes"><i class="fa fa-check"></i>Common Codes</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#foundations"><i class="fa fa-check"></i>Foundations</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#one-way-anova"><i class="fa fa-check"></i>One-Way ANOVA</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#two-way-anova"><i class="fa fa-check"></i>Two-Way ANOVA</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#simple-linear-regression"><i class="fa fa-check"></i>Simple Linear Regression</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#indicator-variable-regression"><i class="fa fa-check"></i>Indicator Variable Regression</a></li>
+<li class="chapter" data-level="" data-path="appendix-r-generic-code.html"><a href="appendix-r-generic-code.html#logistic-regression"><i class="fa fa-check"></i>Logistic Regression</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></li>
@@ -363,8 +382,196 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="LogRegSummary" class="section level1" number="28">
-<h1><span class="header-section-number">Module 28</span> Summary</h1>
+<h1><span class="header-section-number">Module 28</span> Logistic Regression Summary</h1>
+<p>Specific parts of a full Logistic Regression analysis were described in Modules <a href="LogRegFoundations.html#LogRegFoundations">25</a>-<a href="LogRegAnalysis.html#LogRegAnalysis">27</a>. In this module, a workflow for a full analysis is offered and that workflow is demonstrated with an example.</p>
+<div id="suggested-workflow-3" class="section level2" number="28.1">
+<h2><span class="header-section-number">28.1</span> Suggested Workflow</h2>
+<p>The following is a process for fitting a logistic regression. Consider this process as you learn to fit logistic regression models, but don’t consider this to be a concrete process for all models.</p>
+<ol style="list-style-type: decimal">
+<li>Briefly introduce the study (i.e., provide some background for why this study is being conducted).</li>
+<li>State the hypotheses to be tested.</li>
+<li>Show the overall sample size.</li>
+<li>Address the independence assumption.
+<ul>
+<li>If this assumption is not met then other analysis methods must be used.</li>
+</ul></li>
+<li>Fit the logistic regression module with <code class="inline">glm()</code>.</li>
+<li>Create a summary graphic of the fitted line with 95% confidence band using <code class="inline">ggplot()</code>. Briefly assess if this model seems to fairly represent the raw data.</li>
+<li>Perform a relationship test with <code class="inline">anova()</code> to determine if the response and explanatory variables are significantly related.</li>
+<li>Summarize findings with coefficient results and bootstrapped confidence intervals with <code class="inline">car::Boot()</code> followed by <code class="inline">cbind(coef(),confint())</code>. Interpret the back-transformed slope (use the CI).</li>
+<li>Demonstrate how the model can be used to predict the probability of a “success” given a value of the explanatory variable and the explanatory variable where the probability of success equals some value (usually 50%) (will use <code class="inline">predict()</code>, <code class="inline">predProb()</code>, <code class="inline">predX()</code>, and <code class="inline">quantile()</code>).</li>
+<li>Write a succinct conclusion of your findings.</li>
+</ol>
+<p> </p>
+</div>
+<div id="slimy-salamander-occurrence" class="section level2" number="28.2">
+<h2><span class="header-section-number">28.2</span> Slimy Salamander Occurrence</h2>
+<p>A previous Biometry student examined the relationship between the presence/absence of <a href="https://www.nps.gov/chat/learn/nature/slimy-salamander.htm">Slimy Salamanders</a> (<em>Plethodon glutinosus</em>) in counties from around the United States and the mean elevation of those same counties. Slimy Salamanders are generally thought to inhabit higher elevation areas and, thus, the student hypothesized that the probability for the presence of Slimy Salamanders would be higher in counties with higher mean elevations. To test this hypothesis the student gathered Slimy Salamander presence/absence data by county from the iNaturalist website. She then combined these data with other summary information, including mean elevation, from the same counties. Her database is in <a href="https://raw.githubusercontent.com/droglenc/Book207/main/docs/data/SlimySalamanders.csv">SlimySalamander.csv</a>.</p>
+<p>The statistical hypotheses to be examined are</p>
+<p><span class="math display">\[
+\begin{split}
+\text{H}_{\text{0}}&amp;: ``\text{no relationship between the presence of Slimy Salamanders and the mean elevation of the county&#39;&#39;} \\
+\text{H}_{\text{A}}&amp;: ``\text{is a relationship between the presence of Slimy Salamanders and the mean elevation of the county&#39;&#39;} \\
+\end{split}
+\]</span></p>
+<p>Data were recorded for 1469 counties. The data between some counties may be related as both the elevation and presence of salamanders are probably similar for adjacent counties. However, given the exhaustive nature of the sample (the sample is most counties) these relations are unavoidable and likely mitigated by the large sample size. Thus, the independence assumption is not perfectly upheld, but it is also probably not problematic in this case.</p>
+<p>The are no specific assumptions to check in a binary logistic regression. However, the fitted line from the logistic regression (Figure <a href="LogRegSummary.html#fig:ssFitPlot">28.1</a>) seems to at least capture the general trend of few counties at low elevations having Slimy Salamanders present with a general increase as the elevation increases. The model, however, is based on very few observations for elevations greater than about 500 m.</p>
+<p> </p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ssFitPlot"></span>
+<img src="Book207_files/figure-html/ssFitPlot-1.png" alt="Best-fit logistic regression line and 95% confidence band for the probability of the presence of Slimy Salamanders in a county and the mean elevlation of the county." width="336" />
+<p class="caption">
+Figure 28.1: Best-fit logistic regression line and 95% confidence band for the probability of the presence of Slimy Salamanders in a county and the mean elevlation of the county.
+</p>
+</div>
+<p> </p>
+<p>The probability of Slimy Salamanders being present in a county appears to be significantly related to elevation of the county (LRT: p&lt;0.00005; Table <a href="LogRegSummary.html#tab:ssANOVA">28.1</a>).</p>
+<p> </p>
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:ssANOVA">Table 28.1: </span>ANOVA table for the likelihood ratio test for a relationship in the logistic regression of Slimy Salamander presence on mean elevation.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Deviance
+</th>
+<th style="text-align:right;">
+Resid. Df
+</th>
+<th style="text-align:right;">
+Resid. Dev
+</th>
+<th style="text-align:right;">
+Pr(&gt;Chi)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 0.9in; ">
+NULL
+</td>
+<td style="text-align:right;width: 0.9in; width: 0.4in; ">
+</td>
+<td style="text-align:right;width: 0.9in; ">
+</td>
+<td style="text-align:right;width: 0.9in; ">
+1468
+</td>
+<td style="text-align:right;width: 0.9in; ">
+1552.649
+</td>
+<td style="text-align:right;width: 0.9in; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 0.9in; ">
+elevation_m
+</td>
+<td style="text-align:right;width: 0.9in; width: 0.4in; ">
+1
+</td>
+<td style="text-align:right;width: 0.9in; ">
+159.1
+</td>
+<td style="text-align:right;width: 0.9in; ">
+1467
+</td>
+<td style="text-align:right;width: 0.9in; ">
+1393.508
+</td>
+<td style="text-align:right;width: 0.9in; ">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>In fact it appears that the odds of a Slimy Salamander being present in the county is between 1.0036 and 1.0054 times greater for every 1 m increase in elevation (back-transformed slopes from Table <a href="LogRegSummary.html#tab:ssCoefs">28.2</a>). As 1 m is a very small increase in elevation, note that this translates to a 1.037 and 1.055 times increase in the odds of a Slimy Salamander being present for 10 m increase in elevation (<em>these are the previous values raised to the 10th power</em>). Thus, the odds of a Slimy Salamander being present is betwen 3.7% and 5.5% greater for every 10 m increase in elevation.</p>
+<p> </p>
+<table class=" lightable-classic lightable-hover" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:ssCoefs">Table 28.2: </span>Intercept and slope, along with 95% bootstrap confidence intervals, for the logistic regression of the probability of the presence of Slimy Salamanders and the elevation of the county.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Ests
+</th>
+<th style="text-align:right;">
+2.5 %
+</th>
+<th style="text-align:right;">
+97.5 %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 0.9in; ">
+(Intercept)
+</td>
+<td style="text-align:right;width: 0.9in; ">
+-2.4136
+</td>
+<td style="text-align:right;width: 0.9in; ">
+-2.6652
+</td>
+<td style="text-align:right;width: 0.9in; ">
+-2.1951
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 0.9in; ">
+elevation_m
+</td>
+<td style="text-align:right;width: 0.9in; ">
+0.0045
+</td>
+<td style="text-align:right;width: 0.9in; ">
+0.0036
+</td>
+<td style="text-align:right;width: 0.9in; ">
+0.0054
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p>To demonstrate the utility of this model I made two predictions. First, the probability of the presence of Slimy Salamanders in a county with a mean elevation of 300 m is between 0.228 and 0.281. Second, the elevation where there is a 50% probability of Slimy Salamanders being present in the county is between 481 and 615.</p>
+<p>In conclusion, a significantly positive relationship was found between the probability of Slimy Salamanders being found in a county and the mean elevation of the county. It appears that the student’s hypothesis about increasing presence of Slimy Salamanders with increasing elevation was upheld. In addition, the fitted model can be used to predict the probability of Slimy Salamander’s being present and the mean elevation at which that probability was 50%.</p>
+<div id="r-code-and-results-10" class="section level4 unnumbered">
+<h4>R Code and Results</h4>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r RCODE"><code class="sourceCode r"><span id="cb224-1"><a href="LogRegSummary.html#cb224-1" aria-hidden="true" tabindex="-1"></a>predProb <span class="ot">&lt;-</span> <span class="cf">function</span>(x,alpha,beta) <span class="fu">exp</span>(alpha<span class="sc">+</span>beta<span class="sc">*</span>x)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(alpha<span class="sc">+</span>beta<span class="sc">*</span>x))</span>
+<span id="cb224-2"><a href="LogRegSummary.html#cb224-2" aria-hidden="true" tabindex="-1"></a>predX <span class="ot">&lt;-</span> <span class="cf">function</span>(p,alpha,beta) (<span class="fu">log</span>(p<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p))<span class="sc">-</span>alpha)<span class="sc">/</span>beta</span>
+<span id="cb224-3"><a href="LogRegSummary.html#cb224-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-4"><a href="LogRegSummary.html#cb224-4" aria-hidden="true" tabindex="-1"></a>ss <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/droglenc/Book207/main/docs/data/SlimySalamanders.csv&quot;</span>)</span>
+<span id="cb224-5"><a href="LogRegSummary.html#cb224-5" aria-hidden="true" tabindex="-1"></a>logreg <span class="ot">&lt;-</span> <span class="fu">glm</span>(salamander_presence<span class="sc">~</span>elevation_m,<span class="at">data=</span>ss,<span class="at">family=</span>binomial)</span>
+<span id="cb224-6"><a href="LogRegSummary.html#cb224-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-7"><a href="LogRegSummary.html#cb224-7" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(logreg,<span class="at">test=</span><span class="st">&quot;LRT&quot;</span>)</span>
+<span id="cb224-8"><a href="LogRegSummary.html#cb224-8" aria-hidden="true" tabindex="-1"></a>b_logreg <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">Boot</span>(logreg)</span>
+<span id="cb224-9"><a href="LogRegSummary.html#cb224-9" aria-hidden="true" tabindex="-1"></a>cfs <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">Ests=</span><span class="fu">coef</span>(logreg),<span class="fu">confint</span>(b_logreg,<span class="at">type=</span><span class="st">&quot;perc&quot;</span>))</span>
+<span id="cb224-10"><a href="LogRegSummary.html#cb224-10" aria-hidden="true" tabindex="-1"></a>p_prob <span class="ot">&lt;-</span> <span class="fu">predProb</span>(<span class="dv">300</span>,b_logreg<span class="sc">$</span>t[,<span class="dv">1</span>],b_logreg<span class="sc">$</span>t[,<span class="dv">2</span>])</span>
+<span id="cb224-11"><a href="LogRegSummary.html#cb224-11" aria-hidden="true" tabindex="-1"></a>ci_prob <span class="ot">&lt;-</span> <span class="fu">quantile</span>(p_prob,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>),<span class="at">type=</span><span class="dv">1</span>)</span>
+<span id="cb224-12"><a href="LogRegSummary.html#cb224-12" aria-hidden="true" tabindex="-1"></a>p_x <span class="ot">&lt;-</span> <span class="fu">predX</span>(<span class="fl">0.50</span>,b_logreg<span class="sc">$</span>t[,<span class="dv">1</span>],b_logreg<span class="sc">$</span>t[,<span class="dv">2</span>])</span>
+<span id="cb224-13"><a href="LogRegSummary.html#cb224-13" aria-hidden="true" tabindex="-1"></a>ci_x <span class="ot">&lt;-</span> <span class="fu">quantile</span>(p_x,<span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>),<span class="at">type=</span><span class="dv">1</span>)</span>
+<span id="cb224-14"><a href="LogRegSummary.html#cb224-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-15"><a href="LogRegSummary.html#cb224-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>ss,<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>elevation_m,<span class="at">y=</span>salamander_presence)) <span class="sc">+</span></span>
+<span id="cb224-16"><a href="LogRegSummary.html#cb224-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.025</span>) <span class="sc">+</span></span>
+<span id="cb224-17"><a href="LogRegSummary.html#cb224-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;glm&quot;</span>,<span class="at">method.args=</span><span class="fu">list</span>(<span class="at">family=</span>binomial)) <span class="sc">+</span></span>
+<span id="cb224-18"><a href="LogRegSummary.html#cb224-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Mean Elevation (m)&quot;</span>,</span>
+<span id="cb224-19"><a href="LogRegSummary.html#cb224-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">&quot;Probability of Salamander Presence&quot;</span>) <span class="sc">+</span></span>
+<span id="cb224-20"><a href="LogRegSummary.html#cb224-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_NCStats</span>()</span></code></pre></div>
 
+</div>
+</div>
 </div>
             </section>
 
@@ -372,11 +579,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="LogRegAnalysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="appendix-r-generic-code.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -395,6 +601,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
@@ -415,11 +622,14 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
-},
-"search": true
+}
 });
 });
 </script>

@@ -160,6 +160,9 @@ fig:shrubProb
 fig:shrubPredX
 fig:PuttsBootSlopeCI
 fig:PuttsBootPred50CI
+fig:ssFitPlot
+tab:ssANOVA
+tab:ssCoefs
 ModelTypes
 distinguishing-methods
 method-purposes
@@ -328,3 +331,6 @@ LogRegPredictionsR
 functions-for-bootstrapping
 predictions-2
 plotting-best-fit-line
+LogRegSummary
+suggested-workflow-3
+slimy-salamander-occurrence
