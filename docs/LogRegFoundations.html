@@ -24,7 +24,7 @@
 <meta name="author" content="Derek H. Ogle" />
 
 
-<meta name="date" content="2022-03-27" />
+<meta name="date" content="2022-03-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -426,7 +426,7 @@ Figure 25.2: Plot of the binary response variable, as an indicator variable, ver
 <p> </p>
 <p>From Figure <a href="LogRegFoundations.html#fig:LogRegProb">25.2</a>, it is obvious that a model for the probability of “success” is non-linear. As is usual, when the assumptions of a model are not met then a transformation is considered. The transformation required for a logistic regression is introduced in the next two sections.</p>
 <div class="tip">
-<p>In logistic regression the probability of success is modeled, whichi is the same as modeling the mean of <span class="math inline">\(Y\)</span> at given values of <span class="math inline">\(X\)</span>.</p>
+<p>In logistic regression the probability of success is modeled, which is the same as modeling the mean of <span class="math inline">\(Y\)</span> at given values of <span class="math inline">\(X\)</span>.</p>
 </div>
 </div>
 <div id="odds" class="section level2" number="25.2">
@@ -471,7 +471,7 @@ Figure 25.4: Plot of the log odds of ‘success’ (i.e., the logit transformed 
 <div id="back-transformation-introduction" class="section level2" number="25.4">
 <h2><span class="header-section-number">25.4</span> Back-Transformation Introduction</h2>
 <p>While it will be discussed more in the next modules, it is evident from the logistic regression model above that that model is used to predict log odds. However, log odds are largely uninterpretable and should be back-transformed to the odds by exponentiating (i.e., <span class="math inline">\(\text{odds}=e^{\text{log(odds)}}\)</span>).</p>
-<p>An equation for predicting odds can also be obtained with algebra, starting with the logistic regression equation.</p>
+<p>An equation for predicting the probability of success can also be obtained with algebra, starting with the logistic regression equation.</p>
 <p><span class="math display">\[
 \begin{split}
 log\left(\frac{p}{1-p}\right) &amp;= \alpha+\beta X \\

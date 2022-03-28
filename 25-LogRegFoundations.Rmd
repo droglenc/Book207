@@ -99,7 +99,7 @@ ggplot() +
 From Figure \@ref(fig:LogRegProb), it is obvious that a model for the probability of "success" is non-linear. As is usual, when the assumptions of a model are not met then a transformation is considered. The transformation required for a logistic regression is introduced in the next two sections.
 
 ::: {.tip data-latex=""}
-In logistic regression the probability of success is modeled, whichi is the same as modeling the mean of $Y$ at given values of $X$.
+In logistic regression the probability of success is modeled, which is the same as modeling the mean of $Y$ at given values of $X$.
 :::
 
 ## Odds
@@ -169,7 +169,7 @@ where $\alpha$ is the "intercept" parameter and $\beta$ is the "slope" parameter
 ## Back-Transformation Introduction
 While it will be discussed more in the next modules, it is evident from the logistic regression model above that that model is used to predict log odds. However, log odds are largely uninterpretable and should be back-transformed to the odds by exponentiating (i.e., $\text{odds}=e^{\text{log(odds)}}$).
 
-An equation for predicting odds can also be obtained with algebra, starting with the logistic regression equation.
+An equation for predicting the probability of success can also be obtained with algebra, starting with the logistic regression equation.
 
 $$
 \begin{split}

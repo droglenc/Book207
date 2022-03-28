@@ -1,0 +1,125 @@
+# Logistic Regression Summary {#LogRegSummary}
+Specific parts of a full Logistic Regression analysis were described in Modules \@ref(LogRegFoundations)-\@ref(LogRegAnalysis). In this module, a workflow for a full analysis is offered and that workflow is demonstrated with an example.
+
+## Suggested Workflow
+The following is a process for fitting a logistic regression. Consider this process as you learn to fit logistic regression models, but don't consider this to be a concrete process for all models.
+
+1. Briefly introduce the study (i.e., provide some background for why this study is being conducted).
+1. State the hypotheses to be tested.
+1. Show the overall sample size.
+1. Address the independence assumption.
+    * If this assumption is not met then other analysis methods must be used.
+1. Fit the logistic regression module with `glm()`{.inline}.
+1. Create a summary graphic of the fitted line with 95% confidence band using `ggplot()`{.inline}. Briefly assess if this model seems to fairly represent the raw data.
+1. Perform a relationship test with `anova()`{.inline} to determine if the response and explanatory variables are significantly related.
+1. Summarize findings with coefficient results and bootstrapped confidence intervals with `car::Boot()`{.inline} followed by `cbind(coef(),confint())`{.inline}. Interpret the back-transformed slope (use the CI).
+1. Demonstrate how the model can be used to predict the probability of a "success" given a value of the explanatory variable and the explanatory variable where the probability of success equals some value (usually 50%) (will use `predict()`{.inline}, `predProb()`{.inline}, `predX()`{.inline}, and `quantile()`{.inline}).
+1. Write a succinct conclusion of your findings.
+
+&nbsp;
+
+## Slimy Salamander Occurrence
+A previous Biometry student examined the relationship between the presence/absence of [Slimy Salamanders](https://www.nps.gov/chat/learn/nature/slimy-salamander.htm) (*Plethodon glutinosus*) in counties from around the United States and the mean elevation of those same counties. Slimy Salamanders are generally thought to inhabit higher elevation areas and, thus, the student hypothesized that the probability for the presence of Slimy Salamanders would be higher in counties with higher mean elevations. To test this hypothesis the student gathered Slimy Salamander presence/absence data by county from the iNaturalist website. She then combined these data with other summary information, including mean elevation, from the same counties. Her database is in [SlimySalamander.csv](https://raw.githubusercontent.com/droglenc/Book207/main/docs/data/SlimySalamanders.csv).
+
+The statistical hypotheses to be examined are
+
+$$
+\begin{split}
+\text{H}_{\text{0}}&: ``\text{no relationship between the presence of Slimy Salamanders and the mean elevation of the county''} \\
+\text{H}_{\text{A}}&: ``\text{is a relationship between the presence of Slimy Salamanders and the mean elevation of the county''} \\
+\end{split}
+$$
+```{r echo=FALSE}
+predProb <- function(x,alpha,beta) exp(alpha+beta*x)/(1+exp(alpha+beta*x))
+predX <- function(p,alpha,beta) (log(p/(1-p))-alpha)/beta
+
+ss <- read.csv("https://raw.githubusercontent.com/droglenc/Book207/main/docs/data/SlimySalamanders.csv")
+n <- nrow(ss)
+logreg <- glm(salamander_presence~elevation_m,data=ss,family=binomial)
+aov <- anova(logreg,test="LRT")
+aov.p <- aov$`Pr(>Chi)`[2]
+b_logreg <- car::Boot(logreg)
+cfs <- cbind(Ests=coef(logreg),confint(b_logreg,type="perc"))
+tslp <- cfs[2,]
+btslp <- exp(tslp)
+
+p_prob <- predProb(300,b_logreg$t[,1],b_logreg$t[,2])
+ci_prob <- quantile(p_prob,c(0.025,0.975),type=1)
+
+p_x <- predX(0.50,b_logreg$t[,1],b_logreg$t[,2])
+ci_x <- quantile(p_x,c(0.025,0.975),type=1)
+```
+
+Data were recorded for `r n` counties. The data between some counties may be related as both the elevation and presence of salamanders are probably similar for adjacent counties. However, given the exhaustive nature of the sample (the sample is most counties) these relations are unavoidable and likely mitigated by the large sample size. Thus, the independence assumption is not perfectly upheld, but it is also probably not problematic in this case.
+
+The are no specific assumptions to check in a binary logistic regression. However, the fitted line from the logistic regression  (Figure \@ref(fig:ssFitPlot)) seems to at least capture the general trend of few counties at low elevations having Slimy Salamanders present with a general increase as the elevation increases. The model, however, is based on very few observations for elevations greater than about 500 m.
+
+&nbsp;
+
+```{r ssFitPlot, echo=FALSE, fig.cap="Best-fit logistic regression line and 95% confidence band for the probability of the presence of Slimy Salamanders in a county and the mean elevlation of the county."}
+ggplot(data=ss,mapping=aes(x=elevation_m,y=salamander_presence)) +
+  geom_point(alpha=0.025) +
+  geom_smooth(method="glm",method.args=list(family=binomial)) +
+  labs(x="Mean Elevation (m)",
+       y="Probability of Salamander Presence") +
+  theme_NCStats()
+```
+
+&nbsp;
+
+The probability of Slimy Salamanders being present in a county appears to be significantly related to elevation of the county (LRT: `r kPvalue(aov.p,latex=FALSE)`; Table \@ref(tab:ssANOVA)).
+
+&nbsp;
+
+```{r ssANOVA, echo=FALSE}
+options(knitr.kable.NA='')
+knitr::kable(aov,booktabs=TRUE,digits=c(0,1,1,3,4),
+             caption="ANOVA table for the likelihood ratio test for a relationship in the logistic regression of Slimy Salamander presence on mean elevation.") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1:6,width="0.9in") %>%
+  kableExtra::column_spec(2,width="0.4in")
+```
+
+&nbsp;
+
+In fact it appears that the odds of a Slimy Salamander being present in the county is between `r formatC(btslp[2],format="f",digits=4)` and `r formatC(btslp[3],format="f",digits=4)` times greater for every 1 m increase in elevation (back-transformed slopes from Table \@ref(tab:ssCoefs)). As 1 m is a very small increase in elevation, note that this translates to a `r formatC(btslp[2]^10,format="f",digits=3)` and `r formatC(btslp[3]^10,format="f",digits=3)` times increase in the odds of a Slimy Salamander being present for 10 m increase in elevation (*these are the previous values raised to the 10th power*). Thus, the odds of a Slimy Salamander being present is betwen `r formatC((btslp[2]^10-1)*100,format="f",digits=1)`% and `r formatC((btslp[3]^10-1)*100,format="f",digits=1)`% greater for every 10 m increase in elevation.
+
+&nbsp;
+
+```{r ssCoefs, echo=FALSE}
+knitr::kable(cfs,booktabs=TRUE,digits=c(4,4,4),
+             caption="Intercept and slope, along with 95% bootstrap confidence intervals, for the logistic regression of the probability of the presence of Slimy Salamanders and the elevation of the county.") %>%
+  kableExtra::kable_classic("hover",full_width=FALSE,html_font=khfont) %>%
+  kableExtra::column_spec(1:4,width="0.9in")
+```
+
+&nbsp;
+
+To demonstrate the utility of this model I made two predictions. First, the probability of the presence of Slimy Salamanders in a county with a mean elevation of 300 m is between `r formatC(ci_prob[[1]],format="f",digits=3)` and  `r formatC(ci_prob[[2]],format="f",digits=3)`. Second, the elevation where there is a 50% probability of Slimy Salamanders being present in the county is between `r formatC(ci_x[[1]],format="f",digits=0)` and `r formatC(ci_x[[2]],format="f",digits=0)`.
+
+In conclusion, a significantly positive relationship was found between the probability of Slimy Salamanders being found in a county and the mean elevation of the county. It appears that the student's hypothesis about increasing presence of Slimy Salamanders with increasing elevation was upheld. In addition, the fitted model can be used to predict the probability of Slimy Salamander's being present and the mean elevation at which that probability was 50%.
+
+
+#### R Code and Results {-}
+```{r prompt=FALSE, results="hide", fig.show="hide"}
+predProb <- function(x,alpha,beta) exp(alpha+beta*x)/(1+exp(alpha+beta*x))
+predX <- function(p,alpha,beta) (log(p/(1-p))-alpha)/beta
+
+ss <- read.csv("https://raw.githubusercontent.com/droglenc/Book207/main/docs/data/SlimySalamanders.csv")
+logreg <- glm(salamander_presence~elevation_m,data=ss,family=binomial)
+
+anova(logreg,test="LRT")
+b_logreg <- car::Boot(logreg)
+cfs <- cbind(Ests=coef(logreg),confint(b_logreg,type="perc"))
+p_prob <- predProb(300,b_logreg$t[,1],b_logreg$t[,2])
+ci_prob <- quantile(p_prob,c(0.025,0.975),type=1)
+p_x <- predX(0.50,b_logreg$t[,1],b_logreg$t[,2])
+ci_x <- quantile(p_x,c(0.025,0.975),type=1)
+
+ggplot(data=ss,mapping=aes(x=elevation_m,y=salamander_presence)) +
+  geom_point(alpha=0.025) +
+  geom_smooth(method="glm",method.args=list(family=binomial)) +
+  labs(x="Mean Elevation (m)",
+       y="Probability of Salamander Presence") +
+  theme_NCStats()
+```
